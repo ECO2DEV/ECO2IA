@@ -20,3 +20,4 @@ export const callsToAction = [
 ]
 
 export const COMPANY_NAME = 'ECO²'
+export const menu_opt_1 = 'Produit'

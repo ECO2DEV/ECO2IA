@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
-import {products,callsToAction, COMPANY_NAME} from '../../data/navbar'
+import {products,callsToAction, COMPANY_NAME, menu_opt_1} from '../../data/navbar'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -37,7 +37,7 @@ export default function Header() {
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
             <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-white">
-              Product
+              {menu_opt_1}
               <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
             </Popover.Button>
 

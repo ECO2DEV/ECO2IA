@@ -2,14 +2,33 @@
 import Features from '../components/features_section/features';
 import Hero from '../components/hero_section/hero';
 import styles from '../styles/Home.module.css';
+import { signIn, signOut, useSession, getSession } from 'next-auth/react'
+import axios from 'axios'
+import Pricing from '../components/pricing_section/pricing';
 
 export default function Home() {
+  const {data:session} = useSession();
+  console.log("Session is :" + session);
   return (
 
    
     <div className={styles.container}>
      <Hero/>
     <Features/>
+    <Pricing/>
+    <h1>Auth Test</h1>
+
+<div>
+    {!session && <>
+    Not signed in <br/>
+    <button onClick={() => signIn()}>Sign in</button>
+  </>}
+  {session && <>
+    Signed in as {session.user.email} <br/>
+    El nopmnre de usuario es {session.user.name}
+    <button onClick={() => signOut()}>Sign out</button>
+  </>}
+</div>
       <main>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
@@ -114,3 +133,14 @@ export default function Home() {
     </div>
   )
 }
+// export async function getServerSideProps({req}) {
+//   let headers = {}
+//   const session = await getSession({ req });
+//   console.log("Session" + JSON.stringify(session));
+//   if (session) {
+//     headers = {Authorization: `Bearer ${session.jwt}`};
+//   }
+//   let data = 'xxx'
+//   return {props: {data: data}} ;
+
+// }
