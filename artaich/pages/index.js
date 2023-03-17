@@ -1,4 +1,5 @@
 
+import Dalle from '../components/dalle/dalle';
 import Features from '../components/features_section/features';
 import Hero from '../components/hero_section/hero';
 import styles from '../styles/Home.module.css';
@@ -16,6 +17,7 @@ export default function Home() {
      <Hero/>
     <Features/>
     <Pricing/>
+    <Dalle/>
     <h1>Auth Test</h1>
 
 <div>
