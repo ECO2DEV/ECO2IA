@@ -1,28 +1,30 @@
 import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from '@heroicons/react/24/outline'
-export const title1 = 'Everything you need to deploy your app';
+export const title = 'Les éléments-clés';
+export const title1 = '';
+export const maintext_features = '';
 export const features = [
     {
-      name: 'Push to deploy',
+      name: 'Fiabilite',
       description:
-        'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
+        'La fiabilité est l’une des plus élevées des sites proposant des intelligences artificielles... Nos serveurs sont faits pour vous servir à la demande sans limite.',
       icon: CloudArrowUpIcon,
     },
     {
-      name: 'SSL certificates',
+      name: 'Sécurité',
       description:
-        'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
+        'Notre technique utilise des serveurs et des logiciels pour assurer la meilleure sécurité possible. ',
       icon: LockClosedIcon,
     },
     {
-      name: 'Simple queues',
+      name: 'Performance',
       description:
-        'Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.',
+        'Nos intelligences artificielles sont inspirées des performances de OpenIA. Retravailler nos sommes arriver à un résultat nettement supérieur.',
       icon: ArrowPathIcon,
     },
     {
-      name: 'Advanced security',
+      name: 'SAV',
       description:
-        'Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.',
+       'Notre service après-vente est là pour répondre à toutes vos demandes les plus efficacement et rapidement possibles.',
       icon: FingerPrintIcon,
     },
   ]

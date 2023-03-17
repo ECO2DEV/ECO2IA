@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
- import {hero_title , hero_readmore , hero_maintext, hero_description} from '../../data/hero'
+ import {hero_title , hero_readmore , hero_maintext, hero_description, hero_getstarted, hero_learnmore} from '../../data/hero'
 export default function Hero() {
 
 return (
@@ -53,10 +53,10 @@ return (
                 href="#"
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Get started
+                {hero_getstarted}
               </a>
               <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-                Learn more <span aria-hidden="true">→</span>
+                {hero_learnmore} <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
