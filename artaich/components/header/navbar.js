@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
-import {products,callsToAction, COMPANY_NAME, menu_opt_1} from '../../data/navbar'
+import {products,callsToAction, COMPANY_NAME, menu_opt_1, menu_opt_2, menu_opt_3, menu_opt_4, log_in, login_option} from '../../data/navbar'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -87,18 +87,18 @@ export default function Header() {
           </Popover>
 
           <a href="#" className="text-sm font-semibold leading-6 text-white">
-            Features
+            {menu_opt_2}
           </a>
           <a href="#" className="text-sm font-semibold leading-6 text-white">
-            Marketplace
+            {menu_opt_3}
           </a>
           <a href="#" className="text-sm font-semibold leading-6 text-white">
-            Company
+            {menu_opt_4}
           </a>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <a href="#" className="text-sm font-semibold leading-6 text-white">
-            Log in <span aria-hidden="true">&rarr;</span>
+            {login_option} <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </nav>
@@ -155,19 +155,19 @@ export default function Header() {
                   href="#"
                   className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Features
+                  {menu_opt_2}
                 </a>
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Marketplace
+                  {menu_opt_3}
                 </a>
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Company
+                  {menu_opt_4}
                 </a>
               </div>
               <div className="py-6">
@@ -175,7 +175,7 @@ export default function Header() {
                   href="#"
                   className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Log in
+                  {login_option}
                 </a>
               </div>
             </div>

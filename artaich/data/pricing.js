@@ -1,0 +1,9 @@
+export const pricing_title = '';
+export const pricing_maintext = '';
+export const pricing_title2 = 'Lifetime membership';
+export const pricing_maintext2 = 'Lorem ipsum dolor sit amet consect etur adipisicing elit. Itaque amet indis perferendis blanditiis repellendus etur quidem assumenda.';
+export const pricing_whatsincluded = 'What’s included';
+export const pricing_subtitle = 'Etudiant';
+export const pricing_value = '4€';
+export const pricing_getaccess = 'Acheter';
+export const pricing_subtitle2 = 'Voici votre plan actuel';

@@ -21,3 +21,8 @@ export const callsToAction = [
 
 export const COMPANY_NAME = 'ECO²'
 export const menu_opt_1 = 'Produit'
+export const menu_opt_2 = 'Nos IA'
+export const menu_opt_3 = 'Nos abonnements'
+export const menu_opt_4 = 'Notre entreprise'
+export const login_option = 'Se Connecter'
+
