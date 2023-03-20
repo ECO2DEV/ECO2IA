@@ -30,7 +30,7 @@ export default function Home() {
     <button onClick={() => signOut()}>Sign out</button>
   </>}
 </div>
-      <main>
+      {/* <main>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -68,9 +68,9 @@ export default function Home() {
             </p>
           </a>
         </div>
-      </main>
+      </main> */}
 
-      <footer>
+      {/* <footer>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
@@ -79,7 +79,8 @@ export default function Home() {
           Powered by{' ECO2'}
           <img src="/vercel.svg" alt="Eco2" className={styles.logo} />
         </a>
-      </footer>
+      </footer> */}
+
 
       <style jsx>{`
         main {
