@@ -7,6 +7,8 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 import {products,callsToAction, COMPANY_NAME, menu_opt_1, menu_opt_2, menu_opt_3, menu_opt_4, log_in, login_option} from '../../data/navbar'
+import logo from "../../public/Mlogop.png";
+import Image from 'next/image';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -21,7 +23,7 @@ export default function Header() {
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">{COMPANY_NAME}</span>
-            <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+            <Image src={logo} alt="Mattech" width="75" height="75" />
           </a>
         </div>
         <div className="flex lg:hidden">
