@@ -5,7 +5,7 @@ import { title1,features, maintext_features, title } from '../../data/features'
 
 export default function Features() {
   return (
-    <div className="w-full relative isolate overflow-hidden bg-gray-900 px-6 pt-10 pb-14 shadow-2xl sm:rounded-3xl sm:px-16 lg:flex lg:gap-x-20 lg:px-24 ">
+    <div className="mx-auto relative isolate overflow-hidden bg-gray-900 px-6 pt-10 pb-14 shadow-2xl sm:rounded-3xl sm:px-16 lg:flex lg:gap-x-20 lg:px-24 ">
       <svg
             viewBox="0 0 1024 1024"
             className="absolute top-1/2 left-1/2 -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:translate-y-0 lg:-translate-x-1/2"
