@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   //const getLayout = Component.getLayout ?? defaultPageLayout
   const router = useRouter();
   
-  if(router.pathname =='/auth/signin')  {
+  if(router.pathname =='/auth/signin' || router.pathname =='/dashboard')  {
      return (
       <SessionProvider session={session}>
        <Component {...pageProps} />

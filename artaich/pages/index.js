@@ -22,11 +22,11 @@ export default function Home() {
 <div>
     {!session && <>
     Not signed in <br/>
-    <button onClick={() => signIn()}>Sign in</button>
+    <button>Sign in</button>
   </>}
   {session && <>
     Signed in as {session.user.email} <br/>
-    El nopmnre de usuario es {session.user.name}
+    El nombre de usuario es {session.user.name}
     <button onClick={() => signOut()}>Sign out</button>
   </>}
 </div>

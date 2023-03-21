@@ -5,7 +5,7 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-
+import { signIn, signOut, useSession, getSession } from 'next-auth/react'
 import {products,callsToAction, COMPANY_NAME, menu_opt_1, menu_opt_2, menu_opt_3, menu_opt_4, log_in, login_option} from '../../data/navbar'
 import logo from "../../public/Mlogop.png";
 import Image from 'next/image';
@@ -16,14 +16,14 @@ function classNames(...classes) {
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
+ 
   return (
     <header className="absolute top-0 z-50 inset-x-0  bg-gray-900">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">{COMPANY_NAME}</span>
-            <Image src={logo} alt="Mattech" width="75" height="75" />
+            <Image className='h-8 w-auto' src={logo} alt="Mattech"/>
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -99,9 +99,9 @@ export default function Header() {
           </a>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-white">
+          <button className="text-sm font-semibold leading-6 text-white" onClick={() => signIn()}>
             {login_option} <span aria-hidden="true">&rarr;</span>
-          </a>
+          </button>
         </div>
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -110,11 +110,7 @@ export default function Header() {
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Mattrech</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
+              <Image className='h-8 w-auto' src={logo} alt="Mattech"/>
             </a>
             <button
               type="button"
@@ -173,12 +169,12 @@ export default function Header() {
                 </a>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
+                <button
                   className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  onClick={() => signIn()}
                 >
                   {login_option}
-                </a>
+                </button>
               </div>
             </div>
           </div>
