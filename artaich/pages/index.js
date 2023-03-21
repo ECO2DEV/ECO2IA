@@ -5,7 +5,9 @@ import styles from '../styles/Home.module.css';
 import { signIn, signOut, useSession, getSession } from 'next-auth/react'
 import axios from 'axios'
 import Pricing from '../components/pricing_section/pricing';
-import Dalle from '../components/dalle_section/dalle';
+import Dalle from '../components/dalle/dalle';
+import ChatGPT from '../components/chatgpt/chatgpt';
+
 
 export default function Home() {
   const {data:session} = useSession();
@@ -16,6 +18,8 @@ export default function Home() {
      <Hero/>
     <Features/>
     <Pricing/>
+    <Dalle/>
+    <ChatGPT/>
    
     <h1>Auth Test</h1>
 
