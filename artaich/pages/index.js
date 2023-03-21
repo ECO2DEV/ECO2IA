@@ -1,4 +1,4 @@
-
+import ChatGPT from '../components/chatgpt/chatgpt';
 import Dalle from '../components/dalle/dalle';
 import Features from '../components/features_section/features';
 import Hero from '../components/hero_section/hero';
@@ -18,6 +18,7 @@ export default function Home() {
     <Features/>
     <Pricing/>
     <Dalle/>
+    <ChatGPT/>
     <h1>Auth Test</h1>
 
 <div>
