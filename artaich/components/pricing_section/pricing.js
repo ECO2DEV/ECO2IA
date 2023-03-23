@@ -1,54 +1,52 @@
 import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/20/solid'
-
+import { pricingtitle3, pricingbutton3, pricingfeatures3, pricingfeatures3_3, pricingfeatures3_4, pricingfeatutes3_2, pricingprice3, pricingtitle2, pricingbutton2, pricingdescription2, pricingfeatures2, pricingfeatures2_2, pricingfeatures2_3, pricingfeatures2_4, pricingfeatures2_5, pricingdescription1, pricingfeatures1, pricingtitle1, pricingfeatures1_2,pricingfeatures1_3,pricingfeatures1_4,pricingfeatures1_5, pricingbutton1, pricingmaintitle, pricingmaindescription } from '../../data/pricing'
 const frequencies = [
-  { value: 'monthly', label: 'Monthly', priceSuffix: '/month' },
-  { value: 'annually', label: 'Annually', priceSuffix: '/year' },
+  { value: 'monthly', label: 'Mensuel', priceSuffix: '' },
+  { value: '', label: '', priceSuffix: '' },
 ]
 const tiers = [
   {
-    name: 'Freelancer',
+    name: (pricingtitle1),
     id: 'tier-freelancer',
     href: '#',
-    price: { monthly: '$15', annually: '$144' },
-    description: 'The essentials to provide your best work for clients.',
-    features: ['5 products', 'Up to 1,000 subscribers', 'Basic analytics', '48-hour support response time'],
+    price: { monthly: '', annually: '' },
+    description: (pricingdescription1),
+    features: [(pricingfeatures1),(pricingfeatures1_2),(pricingfeatures1_3),(pricingfeatures1_4),(pricingfeatures1_5)],
     featured: false,
-    cta: 'Buy plan',
+    cta: (pricingbutton1),
   },
   {
-    name: 'Startup',
+    name: (pricingtitle2),
     id: 'tier-startup',
     href: '#',
-    price: { monthly: '$30', annually: '$288' },
-    description: 'A plan that scales with your rapidly growing business.',
+    price: { monthly: '', annually: '' },
+    description: (pricingdescription2),
     features: [
-      '25 products',
-      'Up to 10,000 subscribers',
-      'Advanced analytics',
-      '24-hour support response time',
-      'Marketing automations',
+      (pricingfeatures2),
+      (pricingfeatures2_2),
+      (pricingfeatures2_3),
+      (pricingfeatures2_4),
+      (pricingfeatures2_5),
     ],
     featured: false,
-    cta: 'Buy plan',
+    cta: (pricingbutton2),
   },
   {
-    name: 'Enterprise',
+    name: (pricingtitle3),
     id: 'tier-enterprise',
     href: '#',
-    price: 'Custom',
-    description: 'Dedicated support and infrastructure for your company.',
+    price: (pricingprice3),
+    description: '',
     features: [
-      'Unlimited products',
-      'Unlimited subscribers',
-      'Advanced analytics',
-      '1-hour, dedicated support response time',
-      'Marketing automations',
-      'Custom reporting tools',
+      (pricingfeatures3),
+      (pricingfeatutes3_2),
+      (pricingfeatures3_3),
+      (pricingfeatures3_4),
     ],
     featured: true,
-    cta: 'Contact sales',
+    cta: (pricingbutton3),
   },
 ]
 
@@ -65,12 +63,11 @@ export default function Pricing() {
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-base font-semibold leading-7 text-indigo-600">Pricing</h2>
           <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            Pricing plans for teams of all sizes
+            {pricingmaintitle}
           </p>
         </div>
         <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600">
-          Distinctio et nulla eum soluta et neque labore quibusdam. Saepe et quasi iusto modi velit ut non voluptas in.
-          Explicabo id ut laborum.
+          {pricingmaindescription}
         </p>
         <div className="mt-16 flex justify-center">
           <RadioGroup
