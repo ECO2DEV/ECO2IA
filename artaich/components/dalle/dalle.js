@@ -4,7 +4,7 @@ import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
 import buttonOption from "../buttonOption/buttonoption";
 
-export default function Dalle() {
+export default function DalleIA() {
   const [prompt, setPrompt] = useState("");
   const [imageSrc, setImageSrc] = useState("");
   const strapiToken = process.env.API_TOKEN;
@@ -68,16 +68,16 @@ export default function Dalle() {
       <div style={{ display: "flex" }}>
         <buttonOption/>
         <div style={{ flex: 1 }}>
-          <img src={imageSrc[0]}/>
+          <img src={imageSrc[0].url}/>
           
           </div>
         <br></br>
         <div style={{ flex: 1 }}>
-          {imageSrc ? <img src={imageSrc[1]} /> : null}
+          {imageSrc ? <img src={imageSrc[1].url} /> : null}
         </div>
         <br></br>
         <div style={{ flex: 1 }}>
-          {imageSrc ? <img src={imageSrc[2]} /> : null}
+          {imageSrc ? <img src={imageSrc[2].url} /> : null}
         </div>
       </div>
       <br></br>

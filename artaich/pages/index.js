@@ -18,7 +18,7 @@ export default function Home() {
     <Hero/>
     <Features/>
     <Pricing/>
-    <Dalle/>
+    {/* <Dalle/>
     <div className="relative">
       <div className="absolute inset-0 flex items-center" aria-hidden="true">
         <div className="w-full border-t border-gray-300" />
@@ -26,8 +26,8 @@ export default function Home() {
       <div className="relative flex justify-center">
         <span className="bg-white px-2 text-sm text-gray-500">Continue</span>
       </div>
-    </div>
-    <ChatGPT/>
+    </div> */}
+    {/* <ChatGPT/> */}
    
     <h1>Auth Test</h1>
 

@@ -5,7 +5,9 @@ import axios from 'axios';
 const strapiUrl = process.env.STRAPI_URL;
 
 
-const options = {
+
+
+export const authOptions = {
     providers: [
       CredentialsProvider({
         name: 'Credentials',
@@ -43,6 +45,8 @@ const options = {
     session: {
       jwt: true,
       maxAge: 30 * 24 * 60 * 60, // 30 days
+      //3600
+      // 30 * 24 * 60 * 60, // 30 days
     },
     pages: {
       signIn: '/auth/signin',
@@ -72,4 +76,4 @@ const options = {
     
   }
   
-  export default (req, res) => NextAuth(req, res, options)
+  export default NextAuth(authOptions)

@@ -3,9 +3,12 @@ import axios from 'axios';
 import DashboardSection from '../components/dashboard/dashboard';
 
 
+
 export default function Dashboard() {
     return(
-        <DashboardSection/>
+      <div className='my-10'>
+      <DashboardSection/>
+      </div>
     )
 };
 
