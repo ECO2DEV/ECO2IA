@@ -12,7 +12,11 @@ export default function Dashboard() {
     )
 };
 
-export const getServerSideProps = async (context) => {
+
+
+  Dashboard.getLayout = (page) => page;
+
+  export const getServerSideProps = async (context) => {
     //const session = await getSession(context);
     const strapiToken = process.env.API_TOKEN;
     const strapiUrl = process.env.STRAPI_URL;
@@ -21,9 +25,11 @@ export const getServerSideProps = async (context) => {
   
     let user = null;
     // Check if session exists or not, if not, redirect
-    console.log(session.id)
+  
     if (session) {
       try {
+        console.log(session.id)
+    console.log(session)
         // console.log("Entre aqui " + strapiToken);
         const { data } = await axios.get(`${strapiUrl}/api/users/` + session.id, {
           headers: {
@@ -55,5 +61,3 @@ export const getServerSideProps = async (context) => {
       }
     }
   };
-
-  Dashboard.getLayout = (page) => page;

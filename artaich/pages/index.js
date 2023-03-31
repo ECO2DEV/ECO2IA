@@ -11,7 +11,7 @@ import ChatGPT from '../components/chatgpt/chatgpt';
 
 export default function Home() {
   const {data:session} = useSession();
-  console.log("Session is :" + session);
+  //console.log("Session is :" + session);
   return (
     
     <div className={styles.container}>
@@ -33,7 +33,7 @@ export default function Home() {
 
 <div>
     {!session && <>
-    Not signed in <br/>
+    Not signed in or session expired <br/>
     <button>Sign in</button>
   </>}
   {session && <>

@@ -66,18 +66,18 @@ export default function DalleIA() {
       </div>
       <br></br>
       <div style={{ display: "flex" }}>
-        <buttonOption/>
+        
         <div style={{ flex: 1 }}>
-          <img src={imageSrc[0].url}/>
+          <img src={imageSrc && imageSrc[0].url}/>
           
           </div>
         <br></br>
         <div style={{ flex: 1 }}>
-          {imageSrc ? <img src={imageSrc[1].url} /> : null}
+          {imageSrc ? <img src={imageSrc && imageSrc[0].url} /> : null}
         </div>
         <br></br>
         <div style={{ flex: 1 }}>
-          {imageSrc ? <img src={imageSrc[2].url} /> : null}
+          {imageSrc ? <img src={imageSrc && imageSrc[0].url} /> : null}
         </div>
       </div>
       <br></br>

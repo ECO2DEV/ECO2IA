@@ -4,16 +4,15 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import axios from 'axios';
 const strapiUrl = process.env.STRAPI_URL;
 
-
-
-
 export const authOptions = {
+  
     providers: [
       CredentialsProvider({
         name: 'Credentials',
         credentials: {
           email: { label: "Email", type: "text", placeholder: "test@test.com" },
           password: {  label: "Password", type: "password" }
+          
         },
       async authorize(credentials) {
           try {
@@ -41,13 +40,19 @@ export const authOptions = {
         }
       })
     ],
-  
+    jwt:{
+       // The maximum age of the NextAuth.js issued JWT in seconds.
+  // Defaults to `session.maxAge`.
+      //maxAge: 3600,
+
+    },
     session: {
       jwt: true,
-      maxAge: 30 * 24 * 60 * 60, // 30 days
-      //3600
+      maxAge: 28800 // 8h
+      //
       // 30 * 24 * 60 * 60, // 30 days
     },
+  
     pages: {
       signIn: '/auth/signin',
       signOut: '/auth/signout',
@@ -64,11 +69,13 @@ export const authOptions = {
             return Promise.resolve(session);
           },  
           jwt: async ({ token, user }) => {
+            // Refactor
             const isSignIn = user ? true : false;
             if (isSignIn) {
               token.id = user.id;
               token.jwt = user.jwt;
             }
+           // console.log("Pasando por aqui" + JSON.stringify(token));
             return Promise.resolve(token);
           },
    

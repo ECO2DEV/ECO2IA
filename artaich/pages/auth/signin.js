@@ -21,8 +21,9 @@ export default function SignIn() {
             email,
             password,
             redirect: false,
+            //maxAge: 300
         })
-
+       
         setIsLoading(false)
         //console.log(result); 
         router.replace('/dashboard');
