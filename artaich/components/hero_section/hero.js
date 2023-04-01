@@ -2,11 +2,12 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
  import {hero_title , hero_readmore , hero_maintext, hero_description, hero_getstarted, hero_learnmore} from '../../data/hero'
+import Link from 'next/link'
 export default function Hero() {
 
 return (
 <div className="relative isolate px-6 lg:px-8">
-        <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+        <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-2xl sm:-top-80">
           <svg
             className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
             viewBox="0 0 1155 678"
@@ -32,7 +33,7 @@ return (
           </svg>
         </div>
         <div className="mx-auto max-w-3xl py-28 sm:py-46 lg:py-48">
-          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+          <div className="text-center sm:mb-8 sm:flex sm:justify-center">
           <p className="text-lg leading-8 text-gray-600">
               {hero_description}
             </p>
@@ -50,19 +51,19 @@ return (
               </a> 
             </div>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="#"
+              <Link
+                href="/auth/signin"
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 {hero_getstarted}
-              </a>
-              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-                {hero_learnmore} <span aria-hidden="true">→</span>
-              </a>
+              </Link>
+                {/* <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                  {hero_learnmore} <span aria-hidden="true">→</span>
+                </a> */}
             </div>
           </div>
         </div>
-        <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
+        <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-sm sm:top-[calc(100%-30rem)]">
           <svg
             className="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"
             viewBox="0 0 1155 678"

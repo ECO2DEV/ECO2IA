@@ -4,7 +4,7 @@ import { CheckIcon } from '@heroicons/react/20/solid'
 import { pricingtitle3, pricingbutton3, pricingfeatures3, pricingfeatures3_3, pricingfeatures3_4, pricingfeatutes3_2, pricingprice3, pricingtitle2, pricingbutton2, pricingdescription2, pricingfeatures2, pricingfeatures2_2, pricingfeatures2_3, pricingfeatures2_4, pricingfeatures2_5, pricingdescription1, pricingfeatures1, pricingtitle1, pricingfeatures1_2,pricingfeatures1_3,pricingfeatures1_4,pricingfeatures1_5, pricingbutton1, pricingmaintitle, pricingmaindescription } from '../../data/pricing'
 const frequencies = [
   { value: 'monthly', label: 'Mensuel', priceSuffix: '' },
-  { value: '', label: '', priceSuffix: '' },
+  // { value: '', label: '', priceSuffix: '' },
 ]
 const tiers = [
   {
@@ -61,7 +61,7 @@ export default function Pricing() {
     <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-base font-semibold leading-7 text-indigo-600">Pricing</h2>
+          <h2 className="text-base font-semibold leading-7 text-indigo-600">Pix</h2>
           <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             {pricingmaintitle}
           </p>
@@ -133,23 +133,12 @@ export default function Pricing() {
                   </span>
                 ) : null}
               </p>
-              <a
-                href={tier.href}
-                aria-describedby={tier.id}
-                className={classNames(
-                  tier.featured
-                    ? 'bg-white/10 text-white hover:bg-white/20 focus-visible:outline-white'
-                    : 'bg-indigo-600 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-indigo-600',
-                  'mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
-                )}
-              >
-                {tier.cta}
-              </a>
+           
               <ul
                 role="list"
                 className={classNames(
                   tier.featured ? 'text-gray-300' : 'text-gray-600',
-                  'mt-8 space-y-3 text-sm leading-6 xl:mt-10'
+                  'mt-4 space-y-3 text-sm leading-6 xl:mt-6'
                 )}
               >
                 {tier.features.map((feature) => (
@@ -162,6 +151,18 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
+              <a
+                href={tier.href}
+                aria-describedby={tier.id}
+                className={classNames(
+                  tier.featured
+                    ? 'bg-white/10 text-white hover:bg-white/20 focus-visible:outline-white'
+                    : 'bg-indigo-600 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-indigo-600',
+                  'mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
+                )}
+              >
+                {tier.cta}
+              </a>
             </div>
           ))}
         </div>

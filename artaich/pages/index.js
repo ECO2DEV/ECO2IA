@@ -11,7 +11,7 @@ import ChatGPT from '../components/chatgpt/chatgpt';
 
 export default function Home() {
   const {data:session} = useSession();
-  //console.log("Session is :" + session);
+  //gitconsole.log("Session is :" + session);
   return (
     
     <div className={styles.container}>
@@ -29,9 +29,9 @@ export default function Home() {
     </div> */}
     {/* <ChatGPT/> */}
    
-    <h1>Auth Test</h1>
+    {/* <h1>Auth Test</h1> */}
 
-<div>
+{/* <div>
     {!session && <>
     Not signed in or session expired <br/>
     <button>Sign in</button>
@@ -41,7 +41,7 @@ export default function Home() {
     El nombre de usuario es {session.user.name}
     <button onClick={() => signOut()}>Sign out</button>
   </>}
-</div>
+</div> */}
       {/* <main>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>

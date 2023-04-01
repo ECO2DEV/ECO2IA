@@ -4,6 +4,7 @@ import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { signIn } from 'next-auth/react';
 import Image from "next/image";
 import logo from "../../public/Mlogop.png";
+import login_image from "../../public/login_image.jpg"
 import Footer from "../../components/footer/footer";
 import { signintitle, signinsubtitle, signinsubtitle2, signinadress, signinconnect, signinforgot, signinpassword, signinloading, signinremember } from "../../data/signin";
 export default function SignIn() {
@@ -34,10 +35,10 @@ export default function SignIn() {
     };
 
     return (
-        <div className="flex min-h-full">
-        <div className="flex flex-1 flex-col justify-center py-20 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 bg-gray-900">
+        <div className="flex">
+        <div className="flex flex-1 flex-col justify-center py-32 px-8 pb-60 sm:px-6 lg:flex-none lg:px-20 xl:px-24 bg-gray-900">
           <div className="mx-auto w-full max-w-sm lg:w-96">
-            <div>
+          
             <Image className='h-12 w-auto' src={logo} alt="Mattech"/>
               <h2 className="mt-6 text-3xl font-bold tracking-tight text-white">{signintitle}</h2>
               <p className="mt-2 text-sm text-white">
@@ -46,7 +47,7 @@ export default function SignIn() {
                   
                 </a>
               </p>
-            </div>
+           
 
             <div className="mt-8">
               <div>
@@ -156,7 +157,7 @@ export default function SignIn() {
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
-                      <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                      <label htmlFor="remember-me" className="ml-2 block text-sm text-white">
                         {signinremember}
                       </label>
                     </div>
@@ -182,12 +183,9 @@ export default function SignIn() {
             </div>
           </div>
         </div>
-        <div className="relative hidden w-0 flex-1 lg:block">
-          <img
-            className="absolute inset-0 h-full w-full object-cover"
-            src="https://images.unsplash.com/photo-1505904267569-f02eaeb45a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"
-            alt=""
-          />
+        <div className="relative hidden w-0 flex-1 lg:block ">
+        <Image className="absolute inset-0 h-full w-full object-cover" src={login_image} alt=""/>
+         
         </div>
       </div>
     
