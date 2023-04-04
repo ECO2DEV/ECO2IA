@@ -28,7 +28,7 @@ export const getServerSideProps = async (context) => {
         console.log(session.id)
     console.log(session)
         // console.log("Entre aqui " + strapiToken);
-        const { data } = await axios.get(`${strapiUrl}/api/users/` + session.id, {
+        const { data } = await axios.get(`${strapiUrl}/api/users/` + session.id +'?populate[0]=avatar', {
           headers: {
             Authorization:
               `Bearer ${strapiToken}`,

@@ -4,7 +4,7 @@ import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { signIn } from 'next-auth/react';
 import Image from "next/image";
 import logo from "../../public/Mlogop.png";
-import login_image from "../../public/login_image.jpg"
+import login_image from "../../public/login_image.png"
 import Footer from "../../components/footer/footer";
 import { signintitle, signinsubtitle, signinsubtitle2, signinadress, signinconnect, signinforgot, signinpassword, signinloading, signinremember } from "../../data/signin";
 export default function SignIn() {

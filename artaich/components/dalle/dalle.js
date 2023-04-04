@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
-import buttonOption from "../buttonOption/buttonoption";
+
 
 export default function DalleIA() {
   const [prompt, setPrompt] = useState("");

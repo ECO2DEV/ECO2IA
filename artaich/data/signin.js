@@ -1,6 +1,6 @@
 export const signintitle= 'Connectez-vous à votre compte'
 export const signinsubtitle= 'Se connecter avec'
-export const signinsubtitle2= 'Ou continuer avec'
+export const signinsubtitle2= ''
 export const signinadress= 'Adresse e-mail'
 export const signinpassword= 'Mot de passe'
 export const signinforgot= 'Mot de passe oublié'

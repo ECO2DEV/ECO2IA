@@ -4,9 +4,9 @@ import axios from 'axios';
 
 export default function chatgpt(props) {
     return(
-        <div className='my-10'>
+       
        <ChatGpt user={props.user.id}/>
-       </div>
+       
     )
 };
 export const getServerSideProps = async (context) => {
@@ -24,7 +24,7 @@ export const getServerSideProps = async (context) => {
        // console.log(session.id)
     //console.log(session)
         // console.log("Entre aqui " + strapiToken);
-        const { data } = await axios.get(`${strapiUrl}/api/users/` + session.id, {
+        const { data } = await axios.get(`${strapiUrl}/api/users/` + session.id +'?populate[0]=avatar', {
           headers: {
             Authorization:
               `Bearer ${strapiToken}`,
