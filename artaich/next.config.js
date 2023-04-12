@@ -4,6 +4,7 @@ const nextConfig = {
     swcMinify: true,
     env: {
       STRAPI_URL: process.env.STRAPI_URL,
+      API_TOKEN: process.env.API_TOKEN
     }
   }
   

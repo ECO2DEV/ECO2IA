@@ -1,17 +1,3 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid'
 
 export default function SearchTextbox({OnChange, Fetch}) {

@@ -6,25 +6,30 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { signIn, signOut, useSession, getSession } from 'next-auth/react'
-import {products,callsToAction, COMPANY_NAME, menu_opt_1, menu_opt_2, menu_opt_3, menu_opt_4, log_in, login_option} from '../../data/navbar'
+import { products, callsToAction, COMPANY_NAME, menu_opt_1, menu_opt_2, menu_opt_3, menu_opt_4, log_in, login_option } from '../../data/navbar'
 import logo from "../../public/Mlogop.png";
 import Image from 'next/image';
+import Link from 'next/link'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Header() {
+export default function Header({router}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
- 
+  
+
   return (
-    <header className="absolute top-0 z-50 inset-x-0  bg-gray-900">
+    <div className='bg-gray-900'>
+    <header className={router != '/about' ? 'absolute inset-x-0 top-0 z-50 bg-gray-900' : 'absolute inset-x-0 top-0 z-50'}>
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+        <Link href={'/'} legacyBehavior>
+          <a className="-m-1.5 p-1.5">
             <span className="sr-only">{COMPANY_NAME}</span>
-            <Image className='h-8 w-auto' src={logo} alt="Mattech"/>
+            <Image className='h-8 w-auto' src={logo} alt="Mattech" />
           </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -91,12 +96,16 @@ export default function Header() {
           <a href="#" className="text-sm font-semibold leading-6 text-white">
             {menu_opt_2}
           </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-white">
+          <a href="#pricing" className="text-sm font-semibold leading-6 text-white">
             {menu_opt_3}
           </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-white">
-            {menu_opt_4}
-          </a>
+          <Link href={'/about'} legacyBehavior>
+            <a className="text-sm font-semibold leading-6 text-white">
+              {menu_opt_4}
+            </a>
+          </Link>
+
+
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <button className="text-sm font-semibold leading-6 text-white" onClick={() => signIn()}>
@@ -110,7 +119,7 @@ export default function Header() {
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Mattech</span>
-              <Image className='h-8 w-auto' src={logo} alt="Mattech"/>
+              <Image className='h-8 w-auto' src={logo} alt="Mattech" />
             </a>
             <button
               type="button"
@@ -142,10 +151,10 @@ export default function Header() {
                             href={item.href}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >
-                          <ChevronDownIcon
-                          className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')}
-                          aria-hidden="true"
-                        />
+                            <ChevronDownIcon
+                              className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')}
+                              aria-hidden="true"
+                            />
                             {item.name}
                           </Disclosure.Button>
                         ))}
@@ -160,17 +169,18 @@ export default function Header() {
                   {menu_opt_2}
                 </a>
                 <a
-                  href="#"
+                  href="#pricing"
                   className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   {menu_opt_3}
                 </a>
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  {menu_opt_4}
-                </a>
+                <Link href={'/about'} legacyBehavior>
+                  <a
+                    className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    {menu_opt_4}
+                  </a>
+                </Link>
               </div>
               <div className="py-6">
                 <button
@@ -185,5 +195,6 @@ export default function Header() {
         </Dialog.Panel>
       </Dialog>
     </header>
+    </div>
   )
 }

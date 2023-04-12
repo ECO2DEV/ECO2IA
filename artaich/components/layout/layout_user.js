@@ -1,15 +1,17 @@
 import { Fragment, useState } from 'react'
 import Head from 'next/head'
 import { Dialog, Transition } from '@headlessui/react'
-import { signIn, signOut, useSession, getSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 import {
   Bars3Icon,
   // CalendarIcon,
   // ChartBarIcon,
   // FolderIcon,
+  ArrowLeftOnRectangleIcon,
   HomeIcon,
   // InboxIcon,
   // UsersIcon,
+  
   XMarkIcon,
   // AcademicCapIcon,
   // BanknotesIcon,
@@ -136,23 +138,31 @@ export default function LayoutUser({children}) {
                     </nav>
                   </div>
                   <div className="flex flex-shrink-0 bg-gray-700 p-4">
-                    <a href="#" className="group block flex-shrink-0">
+                    
                       <div className="flex items-center">
-                        <div>
-                          <img
-                            className="inline-block h-10 w-10 rounded-full"
-                            src={image_url}
-                            alt=""
-                           
-                          />
-                        </div>
+                      <div>
+                  {image_url ? ( <img
+                      className="inline-block h-9 w-9 rounded-full"
+                      src={image_url}
+                    />):
+                   ( <div className="flex items-center justify-center h-full text-white bg-gray-400 rounded-full">
+          <span className="text-lg font-semibold">{children.props.user.username.charAt(0)}{children.props.user.username.charAt(1)}</span>
+        </div>)}
+                  </div>
                         <div className="ml-3">
                           <p className="text-base font-medium text-white">{children.props.user.username}</p>
+                          <Link href={'/profile'}>
                           <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">View profile</p>
+                          </Link>
                         </div>
                       </div>
-                    </a>
+                      <div className="flex-row-reverse ml-8 items-center" >
+                 <button title="Click for Logout!" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" onClick={() => signOut()} >
+                   <ArrowLeftOnRectangleIcon className="h-5 w-5" aria-hidden="true"/> 
+                </button>
+                 </div>
                   </div>
+                 
                 </Dialog.Panel>
               </Transition.Child>
               <div className="w-14 flex-shrink-0">{/* Force sidebar to shrink to fit close icon */}</div>
@@ -193,20 +203,29 @@ export default function LayoutUser({children}) {
               </nav>
             </div>
             <div className="flex flex-shrink-0 bg-gray-700 p-4">
-              <a href="#" className="group block w-full flex-shrink-0">
+        
                 <div className="flex items-center">
                   <div>
-                    <img
+                  {image_url ? ( <img
                       className="inline-block h-9 w-9 rounded-full"
                       src={image_url}
-                    />
+                    />):
+                   ( <div className="flex items-center justify-center h-full text-white bg-gray-400 rounded-full">
+          <span className="text-lg font-semibold">{children.props.user.username.charAt(0)}{children.props.user.username.charAt(1)}</span>
+        </div>)}
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-white">{children.props.user.username}</p>
-                    <p className="text-xs font-medium text-gray-300 group-hover:text-gray-200">View profile</p>
+                    <Link href={'/profile'}>
+                          <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">View profile</p>
+                    </Link>
                   </div>
                 </div>
-              </a>
+                 <div className="flex-row-reverse ml-8 items-center" >
+                 <button title="Click for Logout !" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"  onClick={() => signOut({callbackUrl:'/'})}>
+                   <ArrowLeftOnRectangleIcon className="h-5 w-5" aria-hidden="true"/>
+                </button>
+                 </div>
             </div>
           </div>
         </div>

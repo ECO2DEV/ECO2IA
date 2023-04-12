@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function Dalle(props) {
     return(
         <div className='my-10'>
- <h2>Dalle </h2>
+
         <DalleIA/>
         </div>
        

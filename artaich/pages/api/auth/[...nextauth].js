@@ -55,10 +55,10 @@ export const authOptions = {
   
     pages: {
       signIn: '/auth/signin',
-      signOut: '/auth/signout',
+      signOut: '/',
       error: '/auth/error', // Error code passed in query string as ?error=
       verifyRequest: '/auth/verify-request', // (used for check email message)
-      newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+      // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
     },
     callbacks: {
         session: async ({ session, token }) => {
@@ -78,6 +78,7 @@ export const authOptions = {
            // console.log("Pasando por aqui" + JSON.stringify(token));
             return Promise.resolve(token);
           },
+         
    
     },
     

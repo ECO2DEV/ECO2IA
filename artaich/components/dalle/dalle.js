@@ -2,28 +2,52 @@ import { useState } from "react";
 import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
+import SearchTextbox from "../searchTextbox/searchTextbox";
+import axios from "axios";
+import countTokens from "../../util/count_tokens";
+import Loader from "../loader/loader";
+
+
 
 
 export default function DalleIA() {
   const [prompt, setPrompt] = useState("");
   const [imageSrc, setImageSrc] = useState("");
+  const [prompTokens, setprompTokens] = useState(0);
+  const [loading, setIsLoading] = useState(false);
   const strapiToken = process.env.API_TOKEN;
+  const strapiUrl = process.env.STRAPI_URL;
+  
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
+  const handleChange = (e) => {
+
+    let tokens = countTokens(e.target.value);
+    setPrompt(e.target.value);
+    setprompTokens(tokens);
+}
 
   const FetchData = async () => {
-    // Realiza la llamada a la API
-    //console.log(prompt);
-    const res = await fetch("http://localhost:1337/api/openai/dalle", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${strapiToken}`,
-      },
-      //body: JSON.stringify({prompt})
-      body: JSON.stringify({ prompt: prompt }),
-    });
-    const data = await res.json();
-    setImageSrc(data.data);
-    console.log(JSON.stringify(data));
+    if (!prompt) {
+      setError('Please type something before submit')
+  }
+  else {
+      setIsLoading(true)
+      const header = {
+        headers: {
+            Authorization: `Bearer ${strapiToken}`,
+        }
+    }
+     await axios.post(`${strapiUrl}/api/openai/dalle`, { "prompt":  prompt},header)
+    .then(response => {
+      console.log('Response is:');
+      console.log(JSON.stringify(response));
+      setImageSrc(response.data.data);
+      
+  })
+    setIsLoading(false)
+  }
   };
 
   const handleInputChange = (event) => {
@@ -32,38 +56,6 @@ export default function DalleIA() {
 
   return (
     <div>
-      <div className="bg-white shadow sm:rounded-lg">
-        <div className="px-4 py-5 sm:p-6">
-          <h3 className="text-base font-semibold leading-6 text-gray-900">
-            Dall-e IA
-          </h3>
-          <div className="mt-2 max-w-xl text-sm text-gray-500">
-            <p>
-              Generate powerfull images using IA with several variation and able
-              to download quickly.
-            </p>
-          </div>
-          <form className="mt-5 sm:flex sm:items-center">
-            <div className="w-full sm:max-w-xs">
-              <label htmlFor="prompt" className="sr-only">
-                prompt
-              </label>
-              <input
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder="prompt"
-                onChange={handleInputChange}
-              />
-            </div>
-            <button
-              onClick={FetchData}
-              type="button"
-              className="mt-3 inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:mt-0 sm:ml-3 sm:w-auto"
-            >
-              Generate Image
-            </button>
-          </form>
-        </div>
-      </div>
       <br></br>
       <div style={{ display: "flex" }}>
         
@@ -73,14 +65,107 @@ export default function DalleIA() {
           </div>
         <br></br>
         <div style={{ flex: 1 }}>
-          {imageSrc ? <img src={imageSrc && imageSrc[0].url} /> : null}
+          {imageSrc ? <img src={imageSrc && imageSrc[1].url} /> : null}
         </div>
         <br></br>
         <div style={{ flex: 1 }}>
-          {imageSrc ? <img src={imageSrc && imageSrc[0].url} /> : null}
+          {imageSrc ? <img src={imageSrc && imageSrc[2].url} /> : null}
         </div>
       </div>
       <br></br>
+      <div class="relative">
+ 
+  <img src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-hKo4zatnLQOGFJyFSCL9LhU5/user-siiYEBCRytDaLBAH419XYo6s/img-FJfPO29iFhOwDlSqiyNv3J5t.png?st=2023-04-06T00%3A23%3A57Z&se=2023-04-06T02%3A23%3A57Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-04-05T20%3A50%3A03Z&ske=2023-04-06T20%3A50%3A03Z&sks=b&skv=2021-08-06&sig=tyuoEK436HL/4rI6KYbTlWO/jRzmT2hRTG/DalgDkW8%3D" alt="Your image" class="w-48 h-48 object-cover"/>
+  <Menu as="div" className="relative inline-block text-left">
+      <div>
+        <Menu.Button className="flex items-center rounded-full bg-gray-100 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+          <span className="sr-only">Open options</span>
+          <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
+        </Menu.Button>
+      </div>
+
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+      >
+        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1">
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  href="#"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  Account settings
+                </a>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  href="#"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  Support
+                </a>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  href="#"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  License
+                </a>
+              )}
+            </Menu.Item>
+            <form method="POST" action="#">
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    type="submit"
+                    className={classNames(
+                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                      'block w-full px-4 py-2 text-left text-sm'
+                    )}
+                  >
+                    Sign out
+                  </button>
+                )}
+              </Menu.Item>
+            </form>
+          </div>
+        </Menu.Items>
+      </Transition>
+    </Menu>
+  <div class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+      
+      <a href="your-image-url.jpg" download class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Download</a>
+      <a href="your-image-url.jpg" download class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Download as PNG</a>
+      <a href="your-image-url.jpg" download class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Download as PDF</a>
+    </div>
+  </div>
+</div>
+
+      <SearchTextbox OnChange={handleChange} Fetch={FetchData} /> 
+      <span className="fixed flex bottom-4 text-gray-900"> Points utilisés pour la question : {prompTokens}&nbsp;&nbsp;{loading && <Loader />} </span>
+
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { use, useState } from "react";
 import countTokens from "../../util/count_tokens";
 import Loader from "../loader/loader";
 import Counter from "../tokenCountCard/tokenCount";
-import { Suspense } from 'react';
+
 import axios from "axios";
 
 import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid'
@@ -32,7 +32,7 @@ export default function ChatGpt(props) {
                     Authorization: `Bearer ${strapiToken}`,
                 }
             }
-            await axios.post(`${strapiUrl}/api/openai/chatgpt`, { "prompt": prompt, "users_permissions_user": user }, header)
+            await axios.post(`${strapiUrl}/api/openai/chatgpt`, { "prompt":  prompt, "users_permissions_user": user }, header)
                 .then(response => {
                     console.log('Response is:');
                     console.log(JSON.stringify(response));
