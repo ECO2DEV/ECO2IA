@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
+=======
+import { aboutheadersection, aboutintroduction,aboutintroductiontext,aboutservice,aboutservicetext,aboutfounded, aboutteam, aboutusers, aboutiaavaibles, aboutnotreplateforme, aboutplateformetext, aboutworldclass, aboutsupportive, aboutlearnign, aboutshareeverything, aboutenjoy, aboutresponsibility, aboutourteam, aboutjoinourteam, aboutsalaries, aboutworkhours, aboutvacation, aboutretreats, aboutbenefits, abourtenvironment, aboutjobpostings } from '../data/about'
+>>>>>>> Stashed changes
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -13,40 +17,40 @@ import {
 
 
 const stats = [
-    { label: 'Business was founded', value: '2023' },
-    { label: 'People on the team', value: '5+' },
-    { label: 'Users on the platform', value: '250k' },
-    { label: 'IA avaliables', value: '3' },
+    { label: (aboutfounded), value: '2023' },
+    { label: (aboutteam), value: '5+' },
+    { label: (aboutusers), value: '250k' },
+    { label: (aboutiaavaibles), value: '3' },
 ]
 const values = [
     {
-        name: 'Be world-class.',
-        description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
+        name: (aboutworldclass),
+        description: '',
         icon: RocketLaunchIcon,
     },
     {
-        name: 'Take responsibility.',
-        description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+        name: (aboutresponsibility),
+        description: '',
         icon: HandRaisedIcon,
     },
     {
-        name: 'Be supportive.',
-        description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus voluptas blanditiis et.',
+        name: (aboutsupportive),
+        description: '',
         icon: UserGroupIcon,
     },
     {
-        name: 'Always learning.',
-        description: 'Iure sed ab. Aperiam optio placeat dolor facere. Officiis pariatur eveniet atque et dolor.',
+        name: (aboutlearnign),
+        description: '',
         icon: AcademicCapIcon,
     },
     {
-        name: 'Share everything you know.',
-        description: 'Laudantium tempora sint ut consectetur ratione. Ut illum ut rem numquam fuga delectus.',
+        name: (aboutshareeverything),
+        description: '',
         icon: SparklesIcon,
     },
     {
-        name: 'Enjoy downtime.',
-        description: 'Culpa dolorem voluptatem velit autem rerum qui et corrupti. Quibusdam quo placeat.',
+        name: (aboutenjoy),
+        description: '',
         icon: SunIcon,
     },
 ]
@@ -61,12 +65,12 @@ const team = [
     // More people...
 ]
 const benefits = [
-    'Competitive salaries',
-    'Flexible work hours',
-    '30 days of paid vacation',
-    'Annual team retreats',
-    'Benefits for you and your family',
-    'A great work environment',
+    (aboutsalaries),
+    (aboutworkhours),
+    (aboutvacation),
+    (aboutretreats),
+    (aboutbenefits),
+    (abourtenvironment),
 ]
 
 
@@ -119,14 +123,10 @@ export default function About() {
                             
                             </div>
                             <div>
-                               <h3 className='text-3xl font-bold tracking-tight text-white sm:text-3xl'> Notre offre de service</h3>
+                               <h3 className='text-3xl font-bold tracking-tight text-white sm:text-3xl'> {aboutservice}</h3>
                                 <br />
                                 <p>
-                                Nous proposons des solutions d&#39;IA par domaine d&#39;activité pour aider les entreprises à résoudre leurs
-problèmes et à améliorer leur productivité. En outre, nous offrons un service supplémentaire de
-création d&#39;IA personnalisées pour répondre aux besoins spécifiques de chaque entreprise. Nous
-mettons également en place des formations gratuites pour aider les particuliers et les étudiants à
-comprendre le fonctionnement des IA et leur utilisation au quotidien.
+                                {aboutservicetext}
                                 </p>
                              
                             </div>
@@ -154,13 +154,9 @@ comprendre le fonctionnement des IA et leur utilisation au quotidien.
                 {/* Values section */}
                 <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
                     <div className="mx-auto lg:mx-0">
-                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Notre plateforme d&#39;IA</h2>
+                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl"> {aboutnotreplateforme} </h2>
                         <p className="mt-6 text-lg leading-8 text-gray-300">
-                        Notre plateforme d&#39;IA est conçue pour répondre aux besoins des particuliers, des étudiants et des
-entreprises. Elle permet aux entreprises de gérer facilement leurs propres modèles d&#39;IA par domaine
-d&#39;activité, tout en offrant la possibilité de créer des IA personnalisées répondant aux besoins
-spécifiques de chaque entreprise. Elle est également conçue pour aider les particuliers et les
-étudiants à se familiariser avec les IA et à comprendre leur potentiel. 
+                        {aboutplateformetext}
                         </p>
                     </div>
                     <dl className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 text-base leading-7 text-gray-300 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:gap-x-16">
@@ -179,7 +175,7 @@ spécifiques de chaque entreprise. Elle est également conçue pour aider les pa
                 {/* Team section */}
                 <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
                     <div className="mx-auto max-w-2xl lg:mx-0">
-                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Our team</h2>
+                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl"> {aboutourteam} </h2>
                         <p className="mt-6 text-lg leading-8 text-gray-300">
                             Excepturi repudiandae alias ut. Totam aut facilis. Praesentium in neque vel omnis. Eos error odio. Qui
                             fugit voluptatibus eum culpa.
@@ -210,7 +206,7 @@ spécifiques de chaque entreprise. Elle est également conçue pour aider les pa
                                 alt=""
                             />
                             <div className="w-full flex-auto">
-                                <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Join our team</h2>
+                                <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl"> {aboutjoinourteam} </h2>
                                 <p className="mt-6 text-lg leading-8 text-gray-300">
                                     Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis
                                     in accusamus quisquam.
@@ -228,7 +224,7 @@ spécifiques de chaque entreprise. Elle est également conçue pour aider les pa
                                 </ul>
                                 <div className="mt-10 flex">
                                     <a href="#" className="text-sm font-semibold leading-6 text-indigo-400">
-                                        See our job postings <span aria-hidden="true">&rarr;</span>
+                                        {aboutjobpostings} <span aria-hidden="true">&rarr;</span>
                                     </a>
                                 </div>
                             </div>
