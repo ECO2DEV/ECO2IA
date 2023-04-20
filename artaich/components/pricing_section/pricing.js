@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/20/solid'
-import { pricingtitle3, pricingbutton3, pricingfeatures3, pricingfeatures3_3, pricingfeatures3_4, pricingfeatutes3_2, pricingprice3, pricingtitle2, pricingbutton2, pricingdescription2, pricingfeatures2, pricingfeatures2_2, pricingfeatures2_3, pricingfeatures2_4, pricingfeatures2_5, pricingdescription1, pricingfeatures1, pricingtitle1, pricingfeatures1_2,pricingfeatures1_3,pricingfeatures1_4,pricingfeatures1_5, pricingbutton1, pricingmaintitle, pricingmaindescription } from '../../data/pricing'
+import { pricingtitle3, pricingbutton3, pricingfeatures3, pricingfeatures3_3, pricingfeatures3_4, pricingfeatutes3_2, pricingprice3, pricingtitle2, pricingbutton2, pricingfeatures2, pricingfeatures2_2, pricingfeatures2_3, pricingfeatures2_4, pricingfeatures2_5, pricingfeatures1, pricingtitle1, pricingfeatures1_2,pricingfeatures1_3,pricingfeatures1_4,pricingfeatures1_5, pricingbutton1, pricingmaintitle, pricingmaindescription } from '../../data/pricing'
 import CheckoutForm from '../payment/CheckoutForm'
 import { useRouter } from 'next/router'
 
@@ -17,7 +17,7 @@ const tiers = [
     id: 'tier-freelancer',
     // href: 'https://buy.stripe.com/test_aEU6rG57i6bu3cIfYZ',
     price: { monthly: 4, annually: '' },
-    description: (pricingdescription1),
+    description:'',
     features: [(pricingfeatures1),(pricingfeatures1_2),(pricingfeatures1_3),(pricingfeatures1_4),(pricingfeatures1_5)],
     featured: false,
     cta: (pricingbutton1),
@@ -27,7 +27,7 @@ const tiers = [
     id: 'tier-startup',
     href: '#',
     price: { monthly: 10, annually: '' },
-    description: (pricingdescription2),
+    description: '',
     features: [
       (pricingfeatures2),
       (pricingfeatures2_2),
