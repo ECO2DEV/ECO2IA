@@ -28,9 +28,9 @@ function Subscribe() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          customerId: // customerId from your backend,
+          customerId: 85,
           paymentMethodId: paymentMethod.id,
-          priceId: // priceId from your frontend,
+          priceId: 1
         }),
       });
 
