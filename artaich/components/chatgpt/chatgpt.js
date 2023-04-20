@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import countTokens from '../../util/count_tokens';
+import countTokens from '../../util/helpers/count_tokens';
 import Loader from '../loader/loader';
 import { PromptContext } from '../../context/prompts/PromptContext';
 // import Counter from '../tokenCountCard/tokenCount';
