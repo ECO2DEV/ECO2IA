@@ -3,7 +3,7 @@ import axios from 'axios';
 const strapiToken = process.env.API_TOKEN;
 const strapiUrl = process.env.STRAPI_URL;
 
-export const getChatgptRes = async ({ prompt, user }) => {
+export const ChatgptResponse = async ({ prompt, user }) => {
   const header = {
     headers: {
       Authorization: `Bearer ${strapiToken}`
@@ -18,6 +18,6 @@ export const getChatgptRes = async ({ prompt, user }) => {
 
     return response;
   } catch (error) {
-    console.log(error);
+    console.error(`Error getting prompt for ${strapiUrl}:`, error);
   }
 };
