@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { aboutheadersection, aboutintroduction,aboutintroductiontext,aboutservice,aboutservicetext,aboutfounded, aboutteam, aboutusers, aboutiaavaibles, aboutnotreplateforme, aboutplateformetext, aboutworldclass, aboutsupportive, aboutlearnign, aboutshareeverything, aboutenjoy, aboutresponsibility, aboutourteam, aboutjoinourteam, aboutsalaries, aboutworkhours, aboutvacation, aboutretreats, aboutbenefits, abourtenvironment, aboutjobpostings } from '../data/about'
 import {
   AcademicCapIcon,
   CheckCircleIcon,
@@ -86,19 +87,16 @@ export default function About() {
           />
         </div>
 
-        {/* Header section */}
-        <div className="px-6 pt-14 lg:px-8">
-          <div className="mx-auto max-w-2xl pt-24 text-center sm:pt-40">
-            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-              We are Mattech !
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-gray-300">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-              lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-              fugiat aliqua.
-            </p>
-          </div>
-        </div>
+                {/* Header section */}
+                <div className="px-6 pt-14 lg:px-8">
+                    <div className="mx-auto max-w-2xl pt-24 text-center sm:pt-40">
+                        <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">We are Mattech !</h2>
+                        <p className="mt-6 text-lg leading-8 text-gray-300">
+                            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
+                            fugiat veniam occaecat fugiat aliqua.
+                        </p>
+                    </div>
+                </div>
 
         {/* Content section */}
         <div className="mx-auto mt-20 max-w-7xl px-6 lg:px-8">
