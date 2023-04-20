@@ -1,9 +1,11 @@
 import { useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
+
 import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 
 export default function SearchTextbox({ OnChange, Fetch }) {
   const { prompt } = useContext(PromptContext);
+
   return (
     <div className="fixed bottom-10 w-11/12 lg:w-4/6  xl: ">
       <label

@@ -49,8 +49,8 @@ export default function LayoutUser({ children }) {
         This example requires updating your template:
 
         ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
+        <html className="h-full bg-gray-100">
+        <body className="h-full">
         ```
       */}
       <div>
@@ -180,7 +180,7 @@ export default function LayoutUser({ children }) {
                     <div className="flex-row-reverse ml-8 items-center">
                       <button
                         title="Click for Logout!"
-                        class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"
+                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"
                         onClick={() => signOut()}
                       >
                         <ArrowLeftOnRectangleIcon
@@ -266,7 +266,7 @@ export default function LayoutUser({ children }) {
               <div className="flex-row-reverse ml-8 items-center">
                 <button
                   title="Click for Logout !"
-                  class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"
+                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"
                   onClick={() => signOut({ callbackUrl: '/' })}
                 >
                   <ArrowLeftOnRectangleIcon
