@@ -4,7 +4,7 @@ import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
 import SearchTextbox from "../searchTextbox/searchTextbox";
 import axios from "axios";
-import countTokens from "../../util/count_tokens";
+import countTokens from "../../util/helpers/count_tokens";
 import Loader from "../loader/loader";
 
 

@@ -10,6 +10,7 @@ export default function DropdownCountry() {
           autoComplete="country-name"
           className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
         >
+    <option value="FR">France</option>
     <option value="AF">Afghanistan</option>
     <option value="AX">Aland Islands</option>
     <option value="AL">Albania</option>
@@ -85,7 +86,6 @@ export default function DropdownCountry() {
     <option value="FO">Faroe Islands</option>
     <option value="FJ">Fiji</option>
     <option value="FI">Finland</option>
-    <option value="FR">France</option>
     <option value="GF">French Guiana</option>
     <option value="PF">French Polynesia</option>
     <option value="TF">French Southern Territories</option>

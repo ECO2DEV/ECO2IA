@@ -1,11 +1,11 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
+import { useState } from 'react'
+import { Dialog, Disclosure, Popover } from '@headlessui/react'
 import {
   Bars3Icon,
   XMarkIcon
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { signIn, signOut, useSession, getSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import { products, callsToAction, COMPANY_NAME, menu_opt_1, menu_opt_2, menu_opt_3, menu_opt_4, log_in, login_option } from '../../data/navbar'
 import logo from "../../public/Mlogop.png";
 import Image from 'next/image';

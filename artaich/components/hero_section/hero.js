@@ -3,7 +3,7 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
  import {hero_title , hero_readmore , hero_maintext, hero_description, hero_getstarted, hero_learnmore} from '../../data/hero'
 import Link from 'next/link'
-export default function Hero() {
+export default function Hero({user}) {
 
 return (
 <div className="relative isolate px-6 lg:px-8">
@@ -52,7 +52,7 @@ return (
             </div>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
-                href="/auth/signin"
+                href={user ? "/dashboard" : "/auth/signin"}
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 {hero_getstarted}

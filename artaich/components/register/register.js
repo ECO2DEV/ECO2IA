@@ -4,9 +4,18 @@ import { UserPlusIcon } from '@heroicons/react/24/outline'
 import Textbox from './textboxt'
 import DropDownText from './dropdowntextboxt'
 import DropdownCountry from './dropdownCountry'
+import { createUser } from '../../util/api/user'
 
 export default function Register({ onClose }) {
     const [open, setOpen] = useState(true)
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        password: '',
+        Name:'',
+        LastName:'',
+        numberTelephone:''
+      });
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,41 +26,18 @@ export default function Register({ onClose }) {
 
     const handleUsernameChange = (e) => {
         const { name, value } = e.target;
-        switch (name) {
-            case 'username':
-               setUsername(value);
-                break;
-            case 'email':
-               setEmail(value);
-               break;
-            case 'password':
-               setPassword(value);
-               break;
-            case 'lastname':
-               setLastName(value);
-            break;
-            case 'name':
-               setName(value);
-            break;
-            case 'num-tel':
-               setNumTel(value);
-            break;
-            default:
-                break;
-         }
-       
+        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit =  async (e) => {
     e.preventDefault()
-    
-    // console.log("Username", username);
-    // console.log("Email", email);
-    // console.log("Password", password);
-    // console.log("Lastname", lastname);
-    // console.log("Name", name);
-    // console.log("Num Tel", num_tel);
-    
+    try {
+        const response = await createUser(formData);
+        console.log('Response:', response);
+        
+    } catch (error) {
+        console.error('Error:', error);   
+    }
     }
 
     return (
@@ -93,12 +79,12 @@ export default function Register({ onClose }) {
                                     </div>
                                     <div className="mt-2">
                                             <form>
-                                              <Textbox id={'username'} nametx={'username'} placeholder={'JaneSmith22'} libelle={'Nom Utilisateur'} type={'text'} onChange={e => handleUsernameChange(e)} value={username} />
-                                              <Textbox id={'email'} nametx={'email'} placeholder={'JaneSmith22@mattech.com'} libelle={'Email'} type={'email'}  onChange={e => handleUsernameChange(e)} value={email} />
-                                              <Textbox id={'password'} nametx={'password'} placeholder={'*******'} libelle={'Password'} type={'password'} onChange={e => handleUsernameChange(e)} value={password}  />
-                                              <Textbox id={'lastname'} nametx={'lastname'} placeholder={'Jane Lauren'} libelle={'Nom'} type={'text'} onChange={e => handleUsernameChange(e)} value={lastname}/>
-                                              <Textbox id={'name'} nametx={'name'} placeholder={'Smith'} libelle={'Prenom'} type={'text'} onChange={e => handleUsernameChange(e)} value={name} />
-                                              <DropDownText id={'num-tel'} nametx={'num-tel'} placeholder={'+33 06 98 66 91'} libelle={'Numéro de Télephone'} type={'text'} onChange={e => handleUsernameChange(e)} value={num_tel}/>
+                                              <Textbox id={'username'} nametx={'username'} placeholder={'JaneSmith22'} libelle={'Nom Utilisateur'} type={'text'} onChange={e => handleUsernameChange(e)} value={formData.username} />
+                                              <Textbox id={'email'} nametx={'email'} placeholder={'JaneSmith22@mattech.com'} libelle={'Email'} type={'email'}  onChange={e => handleUsernameChange(e)} value={formData.email} />
+                                              <Textbox id={'password'} nametx={'password'} placeholder={'*******'} libelle={'Password'} type={'password'} onChange={e => handleUsernameChange(e)} value={formData.password}  />
+                                              <Textbox id={'LastName'} nametx={'LastName'} placeholder={'Jane Lauren'} libelle={'Nom'} type={'text'} onChange={e => handleUsernameChange(e)} value={formData.lastname}/>
+                                              <Textbox id={'Name'} nametx={'Name'} placeholder={'Smith'} libelle={'Prenom'} type={'text'} onChange={e => handleUsernameChange(e)} value={formData.name} />
+                                              <DropDownText id={'numberTelephone'} nametx={'numberTelephone'} placeholder={'+33 06 98 66 91'} libelle={'Numéro de Télephone'} type={'text'} onChange={e => handleUsernameChange(e)} value={formData.num_tel}/>
                                               <DropdownCountry/>
                                             </form>
                                         </div>

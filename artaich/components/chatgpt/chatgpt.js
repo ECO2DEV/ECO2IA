@@ -1,5 +1,5 @@
 import { use, useState } from "react";
-import countTokens from "../../util/count_tokens";
+import countTokens from "../../util/helpers/count_tokens";
 import Loader from "../loader/loader";
 import Counter from "../tokenCountCard/tokenCount";
 

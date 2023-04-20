@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const options = {
     // passing the client secret obtained from the server
     clientSecret: process.env.STRIPE_SECRET,
-    mode: 'payment',
+    mode: 'subscription',
     amount: 1099,
     currency: 'eur',
   };
@@ -44,7 +44,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     )
  }
   return (
-   
   <SessionProvider session={session}>
   <Elements stripe={stripePromise} options={options}>
   <Layout router={router.pathname}>

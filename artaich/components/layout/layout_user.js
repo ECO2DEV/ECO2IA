@@ -157,7 +157,7 @@ export default function LayoutUser({children}) {
                         </div>
                       </div>
                       <div className="flex-row-reverse ml-8 items-center" >
-                 <button title="Click for Logout!" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" onClick={() => signOut()} >
+                 <button title="Click for Logout!" className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" onClick={() => signOut()} >
                    <ArrowLeftOnRectangleIcon className="h-5 w-5" aria-hidden="true"/> 
                 </button>
                  </div>

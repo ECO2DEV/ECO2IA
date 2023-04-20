@@ -18,11 +18,8 @@ export const getServerSideProps = async (context) => {
     const strapiToken = process.env.API_TOKEN;
     const strapiUrl = process.env.STRAPI_URL;
     const session = await getSession(context);
-   // console.log("Retorne session"+ JSON.stringify(session))
-  
     let user = null;
     // Check if session exists or not, if not, redirect
-  
     if (session) {
       try {
         console.log(session.id)

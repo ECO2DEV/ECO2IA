@@ -3,6 +3,8 @@ import { RadioGroup } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { pricingtitle3, pricingbutton3, pricingfeatures3, pricingfeatures3_3, pricingfeatures3_4, pricingfeatutes3_2, pricingprice3, pricingtitle2, pricingbutton2, pricingdescription2, pricingfeatures2, pricingfeatures2_2, pricingfeatures2_3, pricingfeatures2_4, pricingfeatures2_5, pricingdescription1, pricingfeatures1, pricingtitle1, pricingfeatures1_2,pricingfeatures1_3,pricingfeatures1_4,pricingfeatures1_5, pricingbutton1, pricingmaintitle, pricingmaindescription } from '../../data/pricing'
 import CheckoutForm from '../payment/CheckoutForm'
+import { useRouter } from 'next/router'
+
 const frequencies = [
   { value: 'monthly', label: 'Mensuel', priceSuffix: '' },
   // { value: '', label: '', priceSuffix: '' },
@@ -14,7 +16,7 @@ const tiers = [
     name: (pricingtitle1),
     id: 'tier-freelancer',
     // href: 'https://buy.stripe.com/test_aEU6rG57i6bu3cIfYZ',
-    price: { monthly: '', annually: '' },
+    price: { monthly: 4, annually: '' },
     description: (pricingdescription1),
     features: [(pricingfeatures1),(pricingfeatures1_2),(pricingfeatures1_3),(pricingfeatures1_4),(pricingfeatures1_5)],
     featured: false,
@@ -24,7 +26,7 @@ const tiers = [
     name: (pricingtitle2),
     id: 'tier-startup',
     href: '#',
-    price: { monthly: '', annually: '' },
+    price: { monthly: 10, annually: '' },
     description: (pricingdescription2),
     features: [
       (pricingfeatures2),
@@ -57,24 +59,44 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Pricing() {
+export default function Pricing({user}) {
+  const router = useRouter();
+  console.log("User in pricing is:" + user);
   const [frequency, setFrequency] = useState(frequencies[0])
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [amount, setAmount]= useState(0);
   const [currency, setCurrency] = useState('eur');
-  const handleButtonClick = (amount) => {
-    // Handle button click logic here
-    
-    setAmount(amount);
-    setIsModalOpen(!isModalOpen); // Set the state to open the modal
-  };
-  
 
+  const handleButtonClick = (amount) => {
+    if(user==null){
+      router.push('/auth/signin')
+     // Set the state to open the modal
+     }
+     else{
+       // Handle button click logic here
+    setAmount(amount);
+    setIsModalOpen(!isModalOpen); 
+
+     }
+   
+  };
+
+//   const checkOut = async (e) => {
+//     const header = {
+//       headers: {
+//           Authorization: `Bearer ${strapiToken}`,
+//       }
+//   }
+//  console.log("Entre aqui ")
+//   const res = await axios.post(`${strapiUrl}/api/payment/create-checkout-session`,{"lookup_key":'plan_NeeieGD7qqOAm9'},header);
+//   console.lop(res);
+//   };
 
   return (
     <div id="pricing" className="bg-white py-24 sm:py-32">
       {/* Render the modal if isModalOpen is true */}
-      {isModalOpen && <CheckoutForm onClose={handleButtonClick} amount={amount} currency={currency} /> }
+      {isModalOpen && 
+       <CheckoutForm onClose={handleButtonClick} amount={amount} currency={currency} /> }
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           {/* <h2 className="text-base font-semibold leading-7 text-indigo-600">Pix</h2> */}
@@ -129,7 +151,7 @@ export default function Pricing() {
               <p className={classNames(tier.featured ? 'text-gray-300' : 'text-gray-600', 'mt-4 text-sm leading-6')}>
                 {tier.description}
               </p>
-              <p className="mt-6 flex items-baseline gap-x-1">
+              {/* <p className="mt-6 flex items-baseline gap-x-1">
                 <span
                   className={classNames(
                     tier.featured ? 'text-white' : 'text-gray-900',
@@ -149,7 +171,7 @@ export default function Pricing() {
                   </span>
                 ) : null}
               </p>
-           
+            */}
               <ul
                 role="list"
                 className={classNames(
@@ -169,7 +191,7 @@ export default function Pricing() {
               </ul>
               <a
                 // href={tier.href}
-                onClick={() => handleButtonClick(400)}
+                onClick={() => handleButtonClick(tier.price.monthly * 100)}
                 aria-describedby={tier.id}
                 className={classNames(
                   tier.featured
@@ -184,6 +206,7 @@ export default function Pricing() {
             </div>
           ))}
         </div>
+     
       </div>
     </div>
   )
