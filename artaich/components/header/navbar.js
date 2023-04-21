@@ -6,7 +6,8 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { signIn } from 'next-auth/react'
-import { products, callsToAction, COMPANY_NAME, menu_opt_1, menu_opt_2, menu_opt_3, menu_opt_4, log_in, login_option } from '../../data/navbar'
+import { DataNavbar } from '../../data/navbar'
+import { products, callsToAction, } from '../../data/navbar'
 import logo from "../../public/Mlogop.png";
 import Image from 'next/image';
 import Link from 'next/link'
@@ -26,7 +27,7 @@ export default function Header({router}) {
         <div className="flex lg:flex-1">
         <Link href={'/'} legacyBehavior>
           <a className="-m-1.5 p-1.5">
-            <span className="sr-only">{COMPANY_NAME}</span>
+            <span className="sr-only">{DataNavbar.COMPANY_NAME}</span>
             <Image className='h-8 w-auto' src={logo} alt="Mattech" />
           </a>
           </Link>
@@ -94,14 +95,14 @@ export default function Header({router}) {
           </Popover> */}
 
           <a href="#" className="text-sm font-semibold leading-6 text-white">
-            {menu_opt_2}
+            {DataNavbar.menu_opt_2}
           </a>
           <a href="#pricing" className="text-sm font-semibold leading-6 text-white">
-            {menu_opt_3}
+            {DataNavbar.menu_opt_3}
           </a>
           <Link href={'/about'} legacyBehavior>
             <a className="text-sm font-semibold leading-6 text-white">
-              {menu_opt_4}
+              {DataNavbar.menu_opt_4}
             </a>
           </Link>
 
@@ -109,7 +110,7 @@ export default function Header({router}) {
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <button className="text-sm font-semibold leading-6 text-white" onClick={() => signIn()}>
-            {login_option} <span aria-hidden="true">&rarr;</span>
+            {DataNavbar.login_option} <span aria-hidden="true">&rarr;</span>
           </button>
         </div>
       </nav>
@@ -166,19 +167,19 @@ export default function Header({router}) {
                   href="#"
                   className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  {menu_opt_2}
+                  {DataNavbar.menu_opt_2}
                 </a>
                 <a
                   href="#pricing"
                   className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  {menu_opt_3}
+                  {DataNavbar.menu_opt_3}
                 </a>
                 <Link href={'/about'} legacyBehavior>
                   <a
                     className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    {menu_opt_4}
+                    {DataNavbar.menu_opt_4}
                   </a>
                 </Link>
               </div>
@@ -187,7 +188,7 @@ export default function Header({router}) {
                   className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => signIn()}
                 >
-                  {login_option}
+                  {DataNavbar.login_option}
                 </button>
               </div>
             </div>

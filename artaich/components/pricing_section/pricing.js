@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/20/solid'
-import { pricingtitle3, pricingbutton3, pricingfeatures3, pricingfeatures3_3, pricingfeatures3_4, pricingfeatutes3_2, pricingprice3, pricingtitle2, pricingbutton2, pricingfeatures2, pricingfeatures2_2, pricingfeatures2_3, pricingfeatures2_4, pricingfeatures2_5, pricingfeatures1, pricingtitle1, pricingfeatures1_2,pricingfeatures1_3,pricingfeatures1_4,pricingfeatures1_5, pricingbutton1, pricingmaintitle, pricingmaindescription } from '../../data/pricing'
 import CheckoutForm from '../payment/CheckoutForm'
 import { useRouter } from 'next/router'
-
+import { DataPricing } from '../../data/pricing'
 const frequencies = [
   { value: 'monthly', label: 'Mensuel', priceSuffix: '' },
   // { value: '', label: '', priceSuffix: '' },
@@ -13,45 +12,50 @@ const frequencies = [
 
 const tiers = [
   {
-    name: (pricingtitle1),
+    name: (DataPricing.pricingtitle1),
     id: 'tier-freelancer',
     // href: 'https://buy.stripe.com/test_aEU6rG57i6bu3cIfYZ',
     price: { monthly: 4, annually: '' },
     description:'',
-    features: [(pricingfeatures1),(pricingfeatures1_2),(pricingfeatures1_3),(pricingfeatures1_4),(pricingfeatures1_5)],
+    features: [
+      (DataPricing.pricingfeatures1),
+      (DataPricing.pricingfeatures1_2),
+      (DataPricing.pricingfeatures1_3),
+      (DataPricing.pricingfeatures1_4),
+      (DataPricing.pricingfeatures1_5)],
     featured: false,
-    cta: (pricingbutton1),
+    cta: (DataPricing.pricingbutton1),
   },
   {
-    name: (pricingtitle2),
+    name: (DataPricing.pricingtitle2),
     id: 'tier-startup',
     href: '#',
     price: { monthly: 10, annually: '' },
     description: '',
     features: [
-      (pricingfeatures2),
-      (pricingfeatures2_2),
-      (pricingfeatures2_3),
-      (pricingfeatures2_4),
-      (pricingfeatures2_5),
+      (DataPricing.pricingfeatures2),
+      (DataPricing.pricingfeatures2_2),
+      (DataPricing.pricingfeatures2_3),
+      (DataPricing.pricingfeatures2_4),
+      (DataPricing.pricingfeatures2_5),
     ],
     featured: false,
-    cta: (pricingbutton2),
+    cta: (DataPricing.pricingbutton2),
   },
   {
-    name: (pricingtitle3),
+    name: (DataPricing.pricingtitle3),
     id: 'tier-enterprise',
     href: '#',
-    price: (pricingprice3),
+    price: (DataPricing.pricingprice3),
     description: '',
     features: [
-      (pricingfeatures3),
-      (pricingfeatutes3_2),
-      (pricingfeatures3_3),
-      (pricingfeatures3_4),
+      (DataPricing.pricingfeatures3),
+      (DataPricing.pricingfeatutes3_2),
+      (DataPricing.pricingfeatures3_3),
+      (DataPricing.pricingfeatures3_4),
     ],
     featured: true,
-    cta: (pricingbutton3),
+    cta: (DataPricing.pricingbutton3),
   },
 ]
 
@@ -101,11 +105,11 @@ export default function Pricing({user}) {
         <div className="mx-auto max-w-4xl text-center">
           {/* <h2 className="text-base font-semibold leading-7 text-indigo-600">Pix</h2> */}
           <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            {pricingmaintitle}
+            {DataPricing.pricingmaintitle}
           </p>
         </div>
         <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600">
-          {pricingmaindescription}
+          {DataPricing.pricingmaindescription}
         </p>
         <div className="mt-16 flex justify-center">
           <RadioGroup

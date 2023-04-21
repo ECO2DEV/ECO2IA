@@ -1,9 +1,12 @@
-export const signintitle= 'Connectez-vous à votre compte'
-export const signinsubtitle= 'Se connecter avec'
-export const signinsubtitle2= ''
-export const signinadress= 'Adresse e-mail'
-export const signinpassword= 'Mot de passe'
-export const signinforgot= 'Mot de passe oublié'
-export const signinconnect= 'Connectez-vous'
-export const signinloading= 'Chargement en cours'
-export const signinremember= 'Se souvenir de moi'
+export const DataSignin =
+{
+signintitle: 'Connectez-vous à votre compte',
+signinsubtitle: 'Se connecter avec',
+signinsubtitle2: '',
+signinadress: 'Adresse e-mail',
+signinpassword: 'Mot de passe',
+signinforgot: 'Mot de passe oublié',
+signinconnect: 'Connectez-vous',
+signinloading: 'Chargement en cours',
+signinremember: 'Se souvenir de moi',
+}
