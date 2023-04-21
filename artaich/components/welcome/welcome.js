@@ -1,23 +1,7 @@
 import { useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import { SunIcon, ZapIcon, WarningIcon } from '../icons/icons';
-const EXAMPLES = [
-  '¿Cómo iterar un array en JavaScript?',
-  'Explícame cómo funciona un coche',
-  '¿Por qué se dice que un gato tiene 7 vidas?'
-];
-
-const CAPABILITIES = [
-  '¿Cómo puedo ayudarte?',
-  '¿Qué puedo hacer por ti?',
-  '¿Qué necesitas?'
-];
-
-const LIMITATION = [
-  'No puedo hacerlo todo, pero puedo ayudarte con lo siguiente:',
-  'No puedo hacerlo todo, pero puedo ayudarte con lo siguiente:',
-  'No puedo hacerlo todo, pero puedo ayudarte con lo siguiente:'
-];
+import { EXAMPLES, CAPABILITIES, LIMITATION } from '../../data/helpers';
 
 export const Welcome = () => {
   const { setPrompt } = useContext(PromptContext);

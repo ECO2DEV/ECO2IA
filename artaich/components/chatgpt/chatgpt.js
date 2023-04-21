@@ -6,7 +6,7 @@ import { PromptContext } from '../../context/prompts/PromptContext';
 // import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 import SearchTextbox from '../searchTextbox/searchTextbox';
 import { Welcome } from '../welcome/welcome';
-import { getChatgptRes } from '../../services/getChatgptRes';
+import { ChatgptResponse } from '../../util/api/chatgptResponse';
 
 export default function ChatGpt(props) {
   const user = props.user;
@@ -29,14 +29,17 @@ export default function ChatGpt(props) {
     } else {
       setIsLoading(true);
       // Realiza la llamada a la API
-      getChatgptRes({ prompt: prompt, user: user }).then((response) => {
-        console.log('response is:');
-        console.log('response.data is:', response?.data?.data);
-        setResponse(response?.data?.data);
-        let resptokens = countTokens(response?.data.data.trim());
-        setTokensUsed(promptTokens + resptokens);
-        setIsLoading(false);
-      });
+      ChatgptResponse({ prompt: prompt, user: user })
+        .then((response) => {
+          console.log('response is:');
+          console.log('response.data is:', response?.data?.data);
+          setResponse(response?.data?.data);
+          let resptokens = countTokens(response?.data.data.trim());
+          setTokensUsed(promptTokens + resptokens);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   };
   const handleChange = (e) => {

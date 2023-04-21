@@ -3,7 +3,7 @@ import axios from 'axios';
 const strapiToken = process.env.API_TOKEN;
 const strapiUrl = process.env.STRAPI_URL;
 
-export const getChatgptRes = async ({ prompt, user }) => {
+export const DalleResponse = async ({ prompt }) => {
   const header = {
     headers: {
       Authorization: `Bearer ${strapiToken}`
@@ -11,13 +11,13 @@ export const getChatgptRes = async ({ prompt, user }) => {
   };
   try {
     const response = await axios.post(
-      `${strapiUrl}/api/openai/chatgpt`,
-      { prompt: prompt, users_permissions_user: user },
+      `${strapiUrl}/api/openai/dalle`,
+      { prompt: prompt },
       header
     );
 
     return response;
   } catch (error) {
-    console.log(error);
+    console.error(`Error getting prompt for ${strapiUrl}:`, error);
   }
 };

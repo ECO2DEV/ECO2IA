@@ -1,19 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { PromptContext } from '../../context/prompts/PromptContext';
 import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
 import SearchTextbox from '../searchTextbox/searchTextbox';
-import axios from 'axios';
+import { DalleResponse } from '../../util/api/dalleResponse';
 import countTokens from '../../util/helpers/count_tokens';
 import Loader from '../loader/loader';
 
 export default function DalleIA() {
-  const [prompt, setPrompt] = useState('');
+  const { prompt, setPrompt, promptTokens, setPromptTokens } =
+    useContext(PromptContext);
   const [imageSrc, setImageSrc] = useState('');
-  const [prompTokens, setprompTokens] = useState(0);
   const [loading, setIsLoading] = useState(false);
-  const strapiToken = process.env.API_TOKEN;
-  const strapiUrl = process.env.STRAPI_URL;
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
@@ -21,7 +20,7 @@ export default function DalleIA() {
   const handleChange = (e) => {
     let tokens = countTokens(e.target.value);
     setPrompt(e.target.value);
-    setprompTokens(tokens);
+    setPromptTokens(tokens);
   };
 
   const FetchData = async () => {
@@ -29,19 +28,13 @@ export default function DalleIA() {
       setError('Please type something before submit');
     } else {
       setIsLoading(true);
-      const header = {
-        headers: {
-          Authorization: `Bearer ${strapiToken}`
-        }
-      };
-      await axios
-        .post(`${strapiUrl}/api/openai/dalle`, { prompt: prompt }, header)
+      DalleResponse({ prompt: prompt })
         .then((response) => {
-          console.log('Response is:');
-          console.log(JSON.stringify(response));
-          setImageSrc(response.data.data);
+          setImageSrc(response?.data?.data);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
-      setIsLoading(false);
     }
   };
 
@@ -70,7 +63,7 @@ export default function DalleIA() {
         <img
           src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-hKo4zatnLQOGFJyFSCL9LhU5/user-siiYEBCRytDaLBAH419XYo6s/img-FJfPO29iFhOwDlSqiyNv3J5t.png?st=2023-04-06T00%3A23%3A57Z&se=2023-04-06T02%3A23%3A57Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-04-05T20%3A50%3A03Z&ske=2023-04-06T20%3A50%3A03Z&sks=b&skv=2021-08-06&sig=tyuoEK436HL/4rI6KYbTlWO/jRzmT2hRTG/DalgDkW8%3D"
           alt="Your image"
-          class="w-48 h-48 object-cover"
+          className="w-48 h-48 object-cover"
         />
         <Menu as="div" className="relative inline-block text-left">
           <div>
@@ -189,7 +182,7 @@ export default function DalleIA() {
       <SearchTextbox OnChange={handleChange} Fetch={FetchData} />
       <span className="fixed flex bottom-4 text-gray-900">
         {' '}
-        Points utilisés pour la question : {prompTokens}&nbsp;&nbsp;
+        Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
         {loading && <Loader />}{' '}
       </span>
     </div>
