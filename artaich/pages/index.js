@@ -1,24 +1,20 @@
-
 import Features from '../components/features_section/features';
 import Hero from '../components/hero_section/hero';
 import styles from '../styles/Home.module.css';
-import { getSession } from 'next-auth/react'
+import { getUser } from '../util/api/user';
 import Pricing from '../components/pricing_section/pricing';
-import Dalle from '../components/dalle/dalle';
-import ChatGPT from '../components/chatgpt/chatgpt';
-import axios from 'axios';
 
 export default function Home(props) {
   //console.log("User connected:" + JSON.stringify(props.user))
+  const user = props.user || null;
   return (
-    
     <div className={styles.container}>
-    <Hero user={props.user ? props.user : null} />
-    <Features/>
-    <Pricing user={props.user ? props.user : null}/>
-       {/* <h1>Auth Test</h1> */}
+      <Hero user={user ? user : null} />
+      <Features />
+      <Pricing user={user ? user : null} />
+      {/* <h1>Auth Test</h1> */}
 
-{/* <div>
+      {/* <div>
     {!session && <>
     Not signed in or session expired <br/>
     <button>Sign in</button>
@@ -29,7 +25,6 @@ export default function Home(props) {
     <button onClick={() => signOut()}>Sign out</button>
   </>}
 </div> */}
-     
 
       {/* <footer>
         <a
@@ -41,7 +36,6 @@ export default function Home(props) {
           <img src="/vercel.svg" alt="Eco2" className={styles.logo} />
         </a>
       </footer> */}
-
 
       <style jsx>{`
         main {
@@ -94,40 +88,15 @@ export default function Home(props) {
         }
       `}</style>
     </div>
-  )
+  );
 }
 
 export const getServerSideProps = async (context) => {
-
-  const strapiToken = process.env.API_TOKEN;
-  const strapiUrl = process.env.STRAPI_URL;
-  const session = await getSession(context);
-  let user = null;
-
-  console.log("Session: " + JSON.stringify(session));
-  if (session) {
-    try {
-      console.log(session.id)
-      console.log(session)
-      // console.log("Entre aqui " + strapiToken);
-      const { data } = await axios.get(`${strapiUrl}/api/users/` + session.id +'?populate[0]=avatar', {
-        headers: {
-          Authorization:
-            `Bearer ${strapiToken}`,
-        },
-      });
-      user = data;
-    //console.log(user);
-    } catch (e) {
-     // console.log(e);
-    }
-  }
- 
+  const result = await getUser(context);
   return {
     props: {
-      user,
-      session
+      user: result?.data || null,
+      session: result?.session || null
     }
-  }
-
-}
+  };
+};

@@ -19,6 +19,7 @@ export default function ChatGpt(props) {
     promptTokens,
     setPromptTokens
   } = useContext(PromptContext);
+
   const [tokensUsed, setTokensUsed] = useState(0);
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
