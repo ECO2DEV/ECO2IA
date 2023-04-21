@@ -11,6 +11,7 @@ import Loader from '../loader/loader';
 export default function DalleIA() {
   const { prompt, setPrompt, promptTokens, setPromptTokens } =
     useContext(PromptContext);
+
   const [imageSrc, setImageSrc] = useState('');
   const [loading, setIsLoading] = useState(false);
 
