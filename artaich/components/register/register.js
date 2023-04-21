@@ -16,12 +16,7 @@ export default function Register({ onClose }) {
         LastName:'',
         numberTelephone:''
       });
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [lastname, setLastName] = useState('');
-    const [num_tel, setNumTel] = useState('');
+
     const cancelButtonRef = useRef(null)
 
     const handleUsernameChange = (e) => {
