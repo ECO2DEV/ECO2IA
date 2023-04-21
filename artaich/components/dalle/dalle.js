@@ -1,19 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { PromptContext } from '../../context/prompts/PromptContext';
 import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
 import SearchTextbox from '../searchTextbox/searchTextbox';
-import axios from 'axios';
+import { DalleResponse } from '../../util/api/dalleResponse';
 import countTokens from '../../util/helpers/count_tokens';
 import Loader from '../loader/loader';
 
 export default function DalleIA() {
-  const [prompt, setPrompt] = useState('');
+  const { prompt, setPrompt, promptTokens, setPromptTokens } =
+    useContext(PromptContext);
   const [imageSrc, setImageSrc] = useState('');
-  const [prompTokens, setprompTokens] = useState(0);
   const [loading, setIsLoading] = useState(false);
-  const strapiToken = process.env.API_TOKEN;
-  const strapiUrl = process.env.STRAPI_URL;
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
@@ -21,7 +20,7 @@ export default function DalleIA() {
   const handleChange = (e) => {
     let tokens = countTokens(e.target.value);
     setPrompt(e.target.value);
-    setprompTokens(tokens);
+    setPromptTokens(tokens);
   };
 
   const FetchData = async () => {
@@ -29,19 +28,13 @@ export default function DalleIA() {
       setError('Please type something before submit');
     } else {
       setIsLoading(true);
-      const header = {
-        headers: {
-          Authorization: `Bearer ${strapiToken}`
-        }
-      };
-      await axios
-        .post(`${strapiUrl}/api/openai/dalle`, { prompt: prompt }, header)
+      DalleResponse({ prompt: prompt })
         .then((response) => {
-          console.log('Response is:');
-          console.log(JSON.stringify(response));
-          setImageSrc(response.data.data);
+          setImageSrc(response?.data?.data);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
-      setIsLoading(false);
     }
   };
 
@@ -189,7 +182,7 @@ export default function DalleIA() {
       <SearchTextbox OnChange={handleChange} Fetch={FetchData} />
       <span className="fixed flex bottom-4 text-gray-900">
         {' '}
-        Points utilisés pour la question : {prompTokens}&nbsp;&nbsp;
+        Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
         {loading && <Loader />}{' '}
       </span>
     </div>
