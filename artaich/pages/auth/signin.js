@@ -6,7 +6,7 @@ import Image from "next/image";
 import logo from "../../public/Mlogop.png";
 import login_image from "../../public/login_image.png"
 import Footer from "../../components/footer/footer";
-import { signintitle, signinsubtitle, signinsubtitle2, signinadress, signinconnect, signinforgot, signinpassword, signinloading, signinremember } from "../../data/signin";
+import { DataSignin } from "../../data/signin";
 import Head from "next/head";
 import Link from "next/link";
 import Register from "../../components/register/register";
@@ -56,7 +56,7 @@ export default function SignIn() {
           <div className="mx-auto w-full max-w-sm lg:w-96">
           
             <Image className='h-12 w-auto' src={logo} alt="Mattech"/>
-              <h2 className="mt-6 text-3xl font-bold tracking-tight text-white">{signintitle}</h2>
+              <h2 className="mt-6 text-3xl font-bold tracking-tight text-white">{DataSignin.signintitle}</h2>
               <p className="mt-2 text-sm text-white">
                 {' '}
                 <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
@@ -68,7 +68,7 @@ export default function SignIn() {
             <div className="mt-8">
               <div>
                 <div>
-                  <p className="text-sm font-medium leading-6 text-white">{signinsubtitle}</p>
+                  <p className="text-sm font-medium leading-6 text-white">{DataSignin.signinsubtitle}</p>
 
                   <div className="mt-2 grid grid-cols-3 gap-3">
                     <div>
@@ -122,7 +122,7 @@ export default function SignIn() {
                     <div className="w-full border-t border-gray-300" />
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="bg-white px-2 text-gray-500">{signinsubtitle2}</span>
+                    <span className="bg-white px-2 text-gray-500">{DataSignin.signinsubtitle2}</span>
                   </div>
                 </div>
               </div>
@@ -131,7 +131,7 @@ export default function SignIn() {
                 <form className="space-y-6"  onSubmit={onSubmit}>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-white">
-                      {signinadress}
+                      {DataSignin.signinadress}
                     </label>
                     <div className="mt-2">
                       <input
@@ -149,7 +149,7 @@ export default function SignIn() {
 
                   <div className="space-y-1">
                     <label htmlFor="password" className="block text-sm font-medium leading-6 text-white">
-                      {signinpassword}
+                      {DataSignin.signinpassword}
                     </label>
                     <div className="mt-2">
                       <input
@@ -174,13 +174,13 @@ export default function SignIn() {
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <label htmlFor="remember-me" className="ml-2 block text-sm text-white">
-                        {signinremember}
+                        {DataSignin.signinremember}
                       </label>
                     </div>
 
                     <div className="text-sm">
                       <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                        {signinforgot}
+                        {DataSignin.signinforgot}
                       </a>
                     </div>
                   </div>
@@ -191,7 +191,7 @@ export default function SignIn() {
                       className="flex w-full justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       disabled={isLoading}
                     >
-                     {isLoading ? (signinloading) : (signinconnect)}
+                     {isLoading ? (DataSignin.signinloading) : (DataSignin.signinconnect)}
                     </button>
                   </div>
                   {error && <h4 className="font-medium text-sm text-white"> {error}</h4>}
