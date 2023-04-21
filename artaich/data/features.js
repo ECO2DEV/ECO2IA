@@ -1,13 +1,16 @@
 import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from '@heroicons/react/24/outline'
-export const title = 'Les éléments-clés';
-export const title1 = '';
-export const maintext_features = '';
+export const DataFeatures =
+{
+  title: 'Les éléments-clés',
+  title1: '',
+  maintext_features: '',
+}
 export const features = [
     {
       name: 'Fiabilite',
       description:
         'La fiabilité est l’une des plus élevées des sites proposant des intelligences artificielles... Nos serveurs sont faits pour vous servir à la demande sans limite.',
-      icon: CloudArrowUpIcon,
+      icon: FingerPrintIcon,
     },
     {
       name: 'Sécurité',
@@ -25,6 +28,6 @@ export const features = [
       name: 'SAV',
       description:
        'Notre service après-vente est là pour répondre à toutes vos demandes les plus efficacement et rapidement possibles.',
-      icon: FingerPrintIcon,
+      icon: CloudArrowUpIcon,
     },
   ]

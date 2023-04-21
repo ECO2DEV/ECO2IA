@@ -1,24 +1,27 @@
-export const pricingmaintitle= 'Tarification'
-export const pricingmaindescription= 'Plans tarifaires pour tous les types de besoins'
-export const pricingtitle1= 'ETUDIANT'
-export const pricingdescription= 'Le pack comprend:'
-export const pricingfeatures1= '15 images por mois'
-export const pricingfeatures1_2= '67500 mots par mois'
-export const pricingfeatures1_3= 'SAV'
-export const pricingfeatures1_4= 'Accés á des mises á jour regulieres de I¨IA'
-export const pricingfeatures1_5= 'Prix abordable pour les etudiants'
-export const pricingbutton1= '4€'
-export const pricingtitle2= 'STANDARD'
-export const pricingfeatures2= '30 imag es por mois'
-export const pricingfeatures2_2= '112500 mots par mois'
-export const pricingfeatures2_3= 'SAV'
-export const pricingfeatures2_4= 'Accés á des mises á jour regulieres de I¨IA'
-export const pricingfeatures2_5= 'Prix compétitif pour les particuliers et les petites enterprises'
-export const pricingbutton2= '10€'
-export const pricingtitle3= 'ENTREPRISE'
-export const pricingprice3= 'Sur mesure'
-export const pricingfeatures3= 'Produits illimités'
-export const pricingfeatutes3_2= 'Abonnés illimités'
-export const pricingfeatures3_3= 'Analyses avancées'
-export const pricingfeatures3_4= 'SAV dédié'
-export const pricingbutton3='Contacter le service commercial'
+export const DataPricing =
+{
+    pricingmaintitle: 'Tarification',
+    pricingmaindescription: 'Plans tarifaires pour tous les types de besoins',
+    pricingtitle1: 'ETUDIANT',
+    pricingdescription: 'Le pack comprend:',
+    pricingfeatures1: '15 images por mois',
+    pricingfeatures1_2: '67500 mots par mois',
+    pricingfeatures1_3: 'SAV',
+    pricingfeatures1_4: "Accés á des mises á jour regulieres de I'IA",
+    pricingfeatures1_5: 'Prix abordable pour les etudiants',
+    pricingbutton1: '4€',
+    pricingtitle2: 'STANDARD',
+    pricingfeatures2: '30 imag es por mois',
+    pricingfeatures2_2: '112500 mots par mois',
+    pricingfeatures2_3: 'SAV',
+    pricingfeatures2_4: "Accés á des mises á jour regulieres de I'IA",
+    pricingfeatures2_5: 'Prix compétitif pour les particuliers et les petites enterprises',
+    pricingbutton2: '10€',
+    pricingtitle3: 'ENTREPRISE',
+    pricingprice3: 'Sur mesure',
+    pricingfeatures3: 'Produits illimités',
+    pricingfeatutes3_2: 'Abonnés illimités',
+    pricingfeatures3_3: 'Analyses avancées',
+    pricingfeatures3_4: 'SAV dédié',
+    pricingbutton3: 'Veuillez contacter le service commercial'  
+}
