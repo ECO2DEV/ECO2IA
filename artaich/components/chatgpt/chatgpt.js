@@ -29,14 +29,17 @@ export default function ChatGpt(props) {
     } else {
       setIsLoading(true);
       // Realiza la llamada a la API
-      ChatgptResponse({ prompt: prompt, user: user }).then((response) => {
-        console.log('response is:');
-        console.log('response.data is:', response?.data?.data);
-        setResponse(response?.data?.data);
-        let resptokens = countTokens(response?.data.data.trim());
-        setTokensUsed(promptTokens + resptokens);
-        setIsLoading(false);
-      });
+      ChatgptResponse({ prompt: prompt, user: user })
+        .then((response) => {
+          console.log('response is:');
+          console.log('response.data is:', response?.data?.data);
+          setResponse(response?.data?.data);
+          let resptokens = countTokens(response?.data.data.trim());
+          setTokensUsed(promptTokens + resptokens);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   };
   const handleChange = (e) => {
