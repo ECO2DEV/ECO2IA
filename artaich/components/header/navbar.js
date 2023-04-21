@@ -94,10 +94,10 @@ export default function Header({router}) {
             </Transition>
           </Popover> */}
 
-          <a href="#" className="text-sm font-semibold leading-6 text-white">
+          <a href="/nosia" className="text-sm font-semibold leading-6 text-white">
             {DataNavbar.menu_opt_2}
           </a>
-          <a href="#pricing" className="text-sm font-semibold leading-6 text-white">
+          <a href="/#pricing" className="text-sm font-semibold leading-6 text-white">
             {DataNavbar.menu_opt_3}
           </a>
           <Link href={'/about'} legacyBehavior>
