@@ -6,12 +6,14 @@ import Pricing from '../components/pricing_section/pricing';
 
 export default function Home(props) {
   //console.log("User connected:" + JSON.stringify(props.user))
-  const user = props.user || null;
+
+  const user = props?.user || null;
+
   return (
     <div className={styles.container}>
-      <Hero user={user ? user : null} />
+      <Hero user={user} />
       <Features />
-      <Pricing user={user ? user : null} />
+      <Pricing user={user} />
       {/* <h1>Auth Test</h1> */}
 
       {/* <div>
@@ -93,9 +95,11 @@ export default function Home(props) {
 
 export const getServerSideProps = async (context) => {
   const result = await getUser(context);
+
+  // console.log('User connected:' + JSON.stringify(data));
   return {
     props: {
-      user: result?.data || null,
+      user: JSON.stringify(result?.data) || null,
       session: result?.session || null
     }
   };
