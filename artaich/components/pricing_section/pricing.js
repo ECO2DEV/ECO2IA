@@ -97,7 +97,7 @@ export default function Pricing({user}) {
 //   };
 
   return (
-    <div id="pricing" className="bg-white py-24 sm:py-32">
+    <div id="pricing" className="bg-white py-10 sm:py-16">
       {/* Render the modal if isModalOpen is true */}
       {isModalOpen && 
        <CheckoutForm onClose={handleButtonClick} amount={amount} currency={currency} /> }

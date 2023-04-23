@@ -5,17 +5,19 @@ import Textbox from './textboxt'
 import DropDownText from './dropdowntextboxt'
 import DropdownCountry from './dropdownCountry'
 import { createUser } from '../../util/api/user'
+import { signIn } from 'next-auth/react'
 
 export default function Register({ onClose }) {
     const [open, setOpen] = useState(true)
+    const [error, setError] = useState(null);
     const [formData, setFormData] = useState({
         username: '',
         email: '',
         password: '',
-        Name:'',
-        LastName:'',
-        numberTelephone:''
-      });
+        Name: '',
+        LastName: '',
+        numberTelephone: ''
+    });
 
     const cancelButtonRef = useRef(null)
 
@@ -24,15 +26,27 @@ export default function Register({ onClose }) {
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     }
 
-    const handleSubmit =  async (e) => {
-    e.preventDefault()
-    try {
-        const response = await createUser(formData);
-        console.log('Response:', response);
-        
-    } catch (error) {
-        console.error('Error:', error);   
-    }
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await createUser(formData);
+            if (response.status == 200) {
+                // SignIn after successfully acccount creation
+                await signIn('credentials', {
+                    email: formData.email,
+                    password: formData.password,
+                    redirect: true,
+                    callbackUrl: '/dashboard'
+                    //maxAge: 300
+                })
+            }
+            else {
+                //Something went wrong   
+                setError(response.message)
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
 
     return (
@@ -68,21 +82,25 @@ export default function Register({ onClose }) {
                                     </div>
                                     <div className="mt-2 text-center sm:mt-2">
                                         <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                                           Création d'utilisateur
+                                            Création d'utilisateur
                                         </Dialog.Title>
-            
+
                                     </div>
                                     <div className="mt-2">
-                                            <form>
-                                              <Textbox id={'username'} nametx={'username'} placeholder={'JaneSmith22'} libelle={'Nom Utilisateur'} type={'text'} onChange={e => handleUsernameChange(e)} value={formData.username} />
-                                              <Textbox id={'email'} nametx={'email'} placeholder={'JaneSmith22@mattech.com'} libelle={'Email'} type={'email'}  onChange={e => handleUsernameChange(e)} value={formData.email} />
-                                              <Textbox id={'password'} nametx={'password'} placeholder={'*******'} libelle={'Password'} type={'password'} onChange={e => handleUsernameChange(e)} value={formData.password}  />
-                                              <Textbox id={'LastName'} nametx={'LastName'} placeholder={'Jane Lauren'} libelle={'Nom'} type={'text'} onChange={e => handleUsernameChange(e)} value={formData.lastname}/>
-                                              <Textbox id={'Name'} nametx={'Name'} placeholder={'Smith'} libelle={'Prenom'} type={'text'} onChange={e => handleUsernameChange(e)} value={formData.name} />
-                                              <DropDownText id={'numberTelephone'} nametx={'numberTelephone'} placeholder={'+33 06 98 66 91'} libelle={'Numéro de Télephone'} type={'text'} onChange={e => handleUsernameChange(e)} value={formData.num_tel}/>
-                                              <DropdownCountry/>
-                                            </form>
-                                        </div>
+                                        <form>
+                                            <Textbox id={'username'} nametx={'username'} placeholder={'JaneSmith22'} libelle={'Nom Utilisateur'} type={'text'} onChange={e => handleUsernameChange(e)} value={formData.username} />
+                                            <Textbox id={'email'} nametx={'email'} placeholder={'JaneSmith22@mattech.com'} libelle={'Email'} type={'email'} onChange={e => handleUsernameChange(e)} value={formData.email} />
+                                            <Textbox id={'password'} nametx={'password'} placeholder={'*******'} libelle={'Password'} type={'password'} onChange={e => handleUsernameChange(e)} value={formData.password} />
+                                            <Textbox id={'LastName'} nametx={'LastName'} placeholder={'Jane Lauren'} libelle={'Nom'} type={'text'} onChange={e => handleUsernameChange(e)} value={formData.lastname} />
+                                            <Textbox id={'Name'} nametx={'Name'} placeholder={'Smith'} libelle={'Prenom'} type={'text'} onChange={e => handleUsernameChange(e)} value={formData.name} />
+                                            <DropDownText id={'numberTelephone'} nametx={'numberTelephone'} placeholder={'+33 06 98 66 91'} libelle={'Numéro de Télephone'} type={'text'} onChange={e => handleUsernameChange(e)} value={formData.num_tel} />
+                                            <DropdownCountry />
+                                        </form>
+                                    </div>
+                                </div>
+                                <div className='mt-1'>
+                                    {error && <span className='text-red-900'> {error}</span>}
+
                                 </div>
                                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                                     <button

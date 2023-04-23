@@ -43,9 +43,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     return (
       <SessionProvider session={session}>
         <PromptProvider>
+         <Elements stripe={stripePromise} options={options}>
           <LayoutUser {...pageProps}>
             <Component {...pageProps} />
           </LayoutUser>
+          </Elements>
         </PromptProvider>
       </SessionProvider>
     );
