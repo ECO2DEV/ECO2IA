@@ -1,6 +1,61 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
+import { DataPricing } from '../../data/pricing'
+const frequencies = [
+  { value: 'monthly', label: 'Mensuel', priceSuffix: '' },
+  // { value: '', label: '', priceSuffix: '' },
+]
+
+
+const tiers = [
+  {
+    name: (DataPricing.pricingtitle1),
+    id: 'tier-freelancer',
+    // href: 'https://buy.stripe.com/test_aEU6rG57i6bu3cIfYZ',
+    price: { monthly: 4, annually: '' },
+    description:'',
+    features: [
+      (DataPricing.pricingfeatures1),
+      (DataPricing.pricingfeatures1_2),
+      (DataPricing.pricingfeatures1_3),
+      (DataPricing.pricingfeatures1_4),
+      (DataPricing.pricingfeatures1_5)],
+    featured: false,
+    cta: (DataPricing.pricingbutton1),
+  },
+  {
+    name: (DataPricing.pricingtitle2),
+    id: 'tier-startup',
+    href: '#',
+    price: { monthly: 10, annually: '' },
+    description: '',
+    features: [
+      (DataPricing.pricingfeatures2),
+      (DataPricing.pricingfeatures2_2),
+      (DataPricing.pricingfeatures2_3),
+      (DataPricing.pricingfeatures2_4),
+      (DataPricing.pricingfeatures2_5),
+    ],
+    featured: false,
+    cta: (DataPricing.pricingbutton2),
+  },
+  {
+    name: (DataPricing.pricingtitle3),
+    id: 'tier-enterprise',
+    href: '#',
+    price: (DataPricing.pricingprice3),
+    description: '',
+    features: [
+      (DataPricing.pricingfeatures3),
+      (DataPricing.pricingfeatutes3_2),
+      (DataPricing.pricingfeatures3_3),
+      (DataPricing.pricingfeatures3_4),
+    ],
+    featured: true,
+    cta: (DataPricing.pricingbutton3),
+  },
+]
 
 export default function Modal({children}) {
   const [open, setOpen] = useState(true)
