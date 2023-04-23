@@ -56,7 +56,10 @@ const tiers = [
     cta: (DataPricing.pricingbutton3),
   },
 ]
-
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
+  
 export default function Modal({children}) {
   const [open, setOpen] = useState(true)
 

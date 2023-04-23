@@ -3,9 +3,11 @@ import DashboardSection from '../components/dashboard/dashboard';
 import Pricing from '../components/pricing_section/pricing';
 import Modal from '../components/modal/modal';
 
+
 export default function Dashboard(props) {
 
   console.log(props.user.plan)
+  console.log(props.user)
   return (
     <div className="my-10">
       {props.user.plan ? <DashboardSection /> : <Modal/> } 
