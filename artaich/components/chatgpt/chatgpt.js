@@ -44,9 +44,12 @@ export default function ChatGpt(props) {
     }
   };
   const handleChange = (e) => {
-    let tokens = countTokens(e.target.value);
     setPrompt(e.target.value);
-    setPromptTokens(tokens);
+    if (e.target.value === '') {
+      setPromptTokens(0);
+    }
+    // let tokens = countTokens(e.target.value);
+    // setPromptTokens(tokens);
   };
   const handleChangeTextarea = (e) => {
     setResponse(e.target.value);

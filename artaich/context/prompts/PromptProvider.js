@@ -1,6 +1,7 @@
-import { useReducer } from 'react';
+import { useReducer, useEffect, useMemo } from 'react';
 import { PromptContext } from './PromptContext';
 import { promptReducer } from './promptReducer';
+import countTokens from '../../util/helpers/count_tokens';
 
 const promptInitialState = {
   prompt: null,
@@ -13,6 +14,7 @@ const promptInitialState = {
 
 export const PromptProvider = ({ children }) => {
   const [state, dispatch] = useReducer(promptReducer, promptInitialState);
+  const countTokensMemo = useMemo(() => countTokens, []);
 
   const setPrompt = (prompt) => {
     dispatch({
@@ -27,6 +29,15 @@ export const PromptProvider = ({ children }) => {
       payload: response
     });
   };
+
+  useEffect(() => {
+    if (!state.prompt) return;
+    const resptokens = countTokensMemo(state.prompt);
+    dispatch({
+      type: 'SET_PROMPT_TOKENS',
+      payload: resptokens
+    });
+  }, [state.prompt, countTokensMemo]);
 
   const setPromptTokens = (promptTokens) => {
     dispatch({

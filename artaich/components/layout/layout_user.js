@@ -290,13 +290,13 @@ export default function LayoutUser({ children }) {
             </button>
           </div>
           <main className="flex-1">
-            <div className="py-6">
+            <div className="py-6 h-screen">
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <h1 className="text-2xl text-center font-semibold text-gray-900">
                   Bienvenue sur Mattech
                 </h1>
               </div>
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="mx-auto h-full max-w-7xl px-4 sm:px-6 lg:px-8">
                 {children}
               </div>
             </div>
