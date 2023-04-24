@@ -58,3 +58,19 @@ export async function getUser(context) {
     };
   }
 }
+
+export async function updateUser({ formData, id }) {
+  try {
+    const updatedUser = await axios.put(
+      `${strapiUrl}/api/users/${id}`,
+      formData,
+      {
+        headers: { Authorization: `Bearer ${strapiToken}` }
+      }
+    );
+    return updatedUser;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
