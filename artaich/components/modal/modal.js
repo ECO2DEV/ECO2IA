@@ -1,8 +1,6 @@
-import { useState } from 'react'
-import { RadioGroup } from '@headlessui/react'
-import { CheckIcon } from '@heroicons/react/20/solid'
-import CheckoutForm from '../payment/CheckoutForm'
-import { useRouter } from 'next/router'
+import { Fragment, useState } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
+import { CheckIcon } from '@heroicons/react/24/outline'
 import { DataPricing } from '../../data/pricing'
 const frequencies = [
   { value: 'monthly', label: 'Mensuel', priceSuffix: '' },
@@ -58,83 +56,50 @@ const tiers = [
     cta: (DataPricing.pricingbutton3),
   },
 ]
-
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function Pricing({user}) {
-  const router = useRouter();
-  console.log("User in pricing is:" + user);
-  const [frequency, setFrequency] = useState(frequencies[0])
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [amount, setAmount]= useState(0);
-  const [currency, setCurrency] = useState('eur');
-
-  const handleButtonClick = (amount) => {
-    if(user==null){
-      router.push('/auth/signin')
-     // Set the state to open the modal
-     }
-     else{
-       // Handle button click logic here
-    setAmount(amount);
-    setIsModalOpen(!isModalOpen); 
-
-     }
-   
-  };
-
-//   const checkOut = async (e) => {
-//     const header = {
-//       headers: {
-//           Authorization: `Bearer ${strapiToken}`,
-//       }
-//   }
-//  console.log("Entre aqui ")
-//   const res = await axios.post(`${strapiUrl}/api/payment/create-checkout-session`,{"lookup_key":'plan_NeeieGD7qqOAm9'},header);
-//   console.lop(res);
-//   };
+    return classes.filter(Boolean).join(' ')
+  }
+  
+export default function Modal({children}) {
+  const [open, setOpen] = useState(true)
 
   return (
-    <div id="pricing" className="bg-white py-10 sm:py-16">
-      {/* Render the modal if isModalOpen is true */}
-      {isModalOpen && 
-       <CheckoutForm onClose={handleButtonClick} amount={amount} currency={currency} /> }
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl text-center">
-          {/* <h2 className="text-base font-semibold leading-7 text-indigo-600">Pix</h2> */}
-          <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            {DataPricing.pricingmaintitle}
-          </p>
-        </div>
-        <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600">
-          {DataPricing.pricingmaindescription}
-        </p>
-        <div className="mt-16 flex justify-center">
-          <RadioGroup
-            value={frequency}
-            onChange={setFrequency}
-            className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
-          >
-            <RadioGroup.Label className="sr-only">Payment frequency</RadioGroup.Label>
-            {frequencies.map((option) => (
-              <RadioGroup.Option
-                key={option.value}
-                value={option}
-                className={({ checked }) =>
-                  classNames(
-                    checked ? 'bg-indigo-600 text-white' : 'text-gray-500',
-                    'cursor-pointer rounded-full py-1 px-2.5'
-                  )
-                }
-              >
-                <span>{option.label}</span>
-              </RadioGroup.Option>
-            ))}
-          </RadioGroup>
-        </div>
-        <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+    <Transition.Root show={open} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={setOpen}>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+        </Transition.Child>
+
+        <div className="fixed inset-0 z-10 overflow-y-auto">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              enterTo="opacity-100 translate-y-0 sm:scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            >
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+                <div>
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                    <CheckIcon className="h-6 w-6 text-green-600" aria-hidden="true" />
+                  </div>
+                  <div className="mt-3 text-center sm:mt-5">
+                    <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
+                      Payment successful
+                    </Dialog.Title>
+                    <div className="mt-2">
+                    <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {tiers.map((tier) => (
             <div
               key={tier.id}
@@ -210,8 +175,23 @@ export default function Pricing({user}) {
             </div>
           ))}
         </div>
-     
-      </div>
-    </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-5 sm:mt-6">
+                  <button
+                    type="button"
+                    className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    onClick={() => setOpen(false)}
+                  >
+                    Go back to dashboard
+                  </button>
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
+        </div>
+      </Dialog>
+    </Transition.Root>
   )
 }

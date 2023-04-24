@@ -17,7 +17,7 @@ export const createUser = async (data) => {
       dataStripe,
       header
     );
-    console.log('Id usuario' + respStripe.data.id);
+    //console.log('Id usuario' + respStripe.data.id);
     const newData = { ...data, customer_id: respStripe.data.id };
 
     console.log(newData);
@@ -26,10 +26,13 @@ export const createUser = async (data) => {
       newData,
       header
     );
-    return response.data;
+    console.log("Full response")
+    console.log(response);
+    return response;
   } catch (error) {
     console.error(`Error making POST request to ${strapiUrl}:`, error);
-    throw new Error(`Failed to make POST request to ${strapiUrl}`);
+    return error.response.data.error
+   // throw new Error(`Failed to make POST request to ${strapiUrl}`);
   }
 };
 
@@ -41,7 +44,7 @@ export async function getUser(context) {
   }
   try {
     const { data } = await axios.get(
-      `${strapiUrl}/api/users/${session.id}?populate[0]=avatar`,
+      `${strapiUrl}/api/users/${session.id}?populate=%2A`,
       {
         headers: { Authorization: `Bearer ${strapiToken}` }
       }

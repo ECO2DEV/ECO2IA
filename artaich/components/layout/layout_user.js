@@ -47,7 +47,9 @@ export default function LayoutUser({ children }) {
   const strapiUrl = process.env.STRAPI_URL;
   const image_url = children.props.user.avatar
     ? strapiUrl + children.props.user.avatar.url
-    : '';
+    : 'NA';
+
+    console.log('Image_url' + image_url)
   return (
     <>
       {/*
