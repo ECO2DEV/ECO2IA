@@ -13,8 +13,8 @@ export default function EditProfile({ onClose, user }) {
     LastName: user.LastName,
     email: user.email,
     numberTelephone: user.numberTelephone,
-    country: user.country,
-    about: ''
+    country: user.country
+    // about: ''
   });
 
   const handleProfileChange = (e) => {
@@ -28,8 +28,8 @@ export default function EditProfile({ onClose, user }) {
       formData.LastName === '' ||
       formData.email === '' ||
       formData.numberTelephone === '' ||
-      formData.country === '' ||
-      formData.about === ''
+      formData.country === ''
+      // || formData.about === ''
     ) {
       alert('Please fill all the fields');
       return;
@@ -44,7 +44,7 @@ export default function EditProfile({ onClose, user }) {
       alert('Name and Last Name must be between 3 and 50 characters');
       return;
     }
-    // validacion de correo electronico valido con regex
+    // Valid email with regex
     if (!formData.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       alert('Please enter a valid email');
       return;
@@ -52,7 +52,7 @@ export default function EditProfile({ onClose, user }) {
 
     try {
       const response = await updateUser({ formData: formData, id: user.id });
-      console.log('Response:', response);
+      console.log('Response:', response.data);
       router.push('/profile');
       onClose();
     } catch (error) {
@@ -221,7 +221,7 @@ export default function EditProfile({ onClose, user }) {
                           </div>
                         </div>
 
-                        <div className="sm:col-span-2">
+                        {/* <div className="sm:col-span-2">
                           <label
                             htmlFor="about"
                             className="block text-sm font-semibold leading-6 text-gray-900"
@@ -238,7 +238,7 @@ export default function EditProfile({ onClose, user }) {
                               className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="pt-10 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                         <button

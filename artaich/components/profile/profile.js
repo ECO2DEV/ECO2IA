@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { PaperClipIcon } from '@heroicons/react/20/solid';
 import EditProfile from './editProfile';
+import { PencilIcon } from '../icons/icons';
 
 export default function Profile({ user }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,13 +12,27 @@ export default function Profile({ user }) {
   };
   return (
     <>
-      <div>
-        <h3 className="text-base font-semibold leading-6 text-gray-900">
-          Applicant Information
-        </h3>
-        <p className="mt-1 max-w-2xl text-sm text-gray-500">
-          Personal details and application.
-        </p>
+      <div className="flex">
+        <div className="flex-grow">
+          <h3 className="text-base font-semibold leading-6 text-gray-900">
+            Applicant Information
+          </h3>
+          <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            Personal details and application.
+          </p>
+        </div>
+        <div className="ml-4 flex-shrink-0 my-auto">
+          <button
+            type="button"
+            onClick={handleModalEdit}
+            className="flex justify-between rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            <span>
+              <PencilIcon />
+            </span>
+            <span>Edit profile</span>
+          </button>
+        </div>
       </div>
       <div className="mt-5 border-t border-gray-200">
         <dl className="divide-y divide-gray-200">
@@ -28,29 +42,12 @@ export default function Profile({ user }) {
               <span className="flex-grow">
                 {user.Name} {user.LastName}
               </span>
-              <span className="ml-4 flex-shrink-0">
-                <button
-                  type="button"
-                  onClick={handleModalEdit}
-                  className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  Update
-                </button>
-              </span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
             <dt className="text-sm font-medium text-gray-500">Email</dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.email}</span>
-              <span className="ml-4 flex-shrink-0">
-                <button
-                  type="button"
-                  className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  Update
-                </button>
-              </span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
@@ -59,28 +56,12 @@ export default function Profile({ user }) {
             </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.numberTelephone}</span>
-              <span className="ml-4 flex-shrink-0">
-                <button
-                  type="button"
-                  className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  Update
-                </button>
-              </span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
             <dt className="text-sm font-medium text-gray-500">Pays</dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.country}</span>
-              <span className="ml-4 flex-shrink-0">
-                <button
-                  type="button"
-                  className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  Update
-                </button>
-              </span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
@@ -92,14 +73,6 @@ export default function Profile({ user }) {
                 consequat sint. Sit id mollit nulla mollit nostrud in ea officia
                 proident. Irure nostrud pariatur mollit ad adipisicing
                 reprehenderit deserunt qui eu.
-              </span>
-              <span className="ml-4 flex-shrink-0">
-                <button
-                  type="button"
-                  className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  Update
-                </button>
               </span>
             </dd>
           </div>
