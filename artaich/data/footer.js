@@ -1,10 +1,14 @@
 import { footertitle1, footertitle2, footertitle3, footertitle4} from "../../data/footer"
+export const FooterData =
+{
+
+}
 const navigation = {
     main: [
-      { name: (footertitle1), href: '#' },
-      { name: (footertitle2), href: '#' },
-      { name: (footertitle3), href: '#' },
-      { name: (footertitle4), href: '#' },
+      { name: '', href: '#' },
+      { name: '', href: '#' },
+      { name: '', href: '#' },
+      { name: '', href: '#' },
       { name: '', href: '#' },
       { name: '', href: '#' },
     ],

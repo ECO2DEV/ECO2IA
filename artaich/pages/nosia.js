@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { DataNosIA } from '../data/nosia'
+
 
 const navigation = [
   { name: '', href: '' },
@@ -12,24 +14,6 @@ const stats = [
   { label:'', value: '' },
   { label: '', value: '' },
   { label: '', value: '' },
-]
-const values = [
-  {
-    name: '',
-    description:
-      'Grâce à son entraînement massif, MATTECH IMAGE peut également comprendre les nuances et les subtilités des descriptions textuelles et générer des images cohérentes et précises.',
-  },
-  {
-    name: '',
-    description:
-      "En plus de sa capacité à générer des images réalistes, MATTECH IMAGE offre également des fonctionnalités telles que la modification et la transformation d'images existantes, ce qui peut être très utile pour les tâches de retouche d'images et de création de variations de produits.",
-  },
-  {
-    name: '',
-    description:
-      'Aut repellendus et officiis dolor possimus. Deserunt velit quasi sunt fuga error labore quia ipsum. Commodi autem voluptatem nam. Quos voluptatem totam.',
-  },
- 
 ]
 const team = [
   {
@@ -69,7 +53,7 @@ const blogPosts = [
     date: 'Mar 16, 2020',
     datetime: '2020-03-16',
     author: {
-        name: 'Manuel FELIPE',
+        name: '',
         imageUrl: 
         'localhost.com/'
     }
@@ -85,7 +69,7 @@ const blogPosts = [
     date: 'Mar 16, 2020',
     datetime: '2020-03-16',
     author: {
-        name: 'Mariana BORGES',
+        name: '',
         imageUrl: 
         'localhost.com/'
     }
@@ -217,10 +201,10 @@ export default function Example() {
               <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
                 <div className="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
                   <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-7xl">
-                    MATTECH CHAT
+                    {DataNosIA.NosIACHATTitle1}
                   </h1>
                   <p className="relative mt-6 text-xl leading-8 text-gray-900 sm:max-w-md lg:max-w-none">
-                  L'un des principaux avantages de MATTECH CHAT est sa capacité à comprendre les nuances et les subtilités du langage naturel, ce qui lui permet de répondre à une grande variété de questions et de fournir des réponses précises et pertinentes. 
+                  {DataNosIA.NosIACHATdescription1} 
                   </p>
                 </div>
                 <div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
@@ -279,7 +263,7 @@ export default function Example() {
         {/* Content section */}
         <div className="mx-auto -mt-12 max-w-7xl px-6 sm:mt-0 lg:px-8 xl:-mt-8">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">MATTECH CHAT a également la capacité de s'adapter rapidement à de nouveaux domaines et sujets, ce qui le rend extrêmement flexible et utile dans un large éventail de situations.</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl"> {DataNosIA.NosIACHATTitle2} </h2>
             <div className="mt-6 flex flex-col gap-x-8 gap-y-20 lg:flex-row">
               <div className="lg:w-full lg:max-w-2xl lg:flex-auto">
                 <p className="text-xl leading-8 text-gray-600">
@@ -287,10 +271,10 @@ export default function Example() {
                 </p>
                 <div className="mt-10 max-w-xl text-xl leading-9 text-gray-900">
                   <p>
-                  En plus de sa capacité à comprendre et à générer du langage naturel, MATTECH CHAT offre également des fonctionnalités telles que la traduction de langues, la génération de texte et la création de résumés, ce qui en fait un outil très polyvalent et puissant pour tout type de traitement de texte.
+                  {DataNosIA.NosIACHATdescription2}
                   </p>
                   <p className="mt-10">
-                  En résumé, MATTECH CHAT est un modèle de langage de pointe capable de comprendre et de générer du langage naturel de manière autonome. Grâce à ses capacités avancées et à sa polyvalence, il offre des avantages considérables pour un large éventail d'applications de traitement de texte.
+                  {DataNosIA.NosIACHATdescription3}
                   </p>
                 </div>
               </div>
@@ -316,37 +300,65 @@ export default function Example() {
             className="aspect-[5/2] w-full object-cover xl:rounded-3xl"
           />
         </div>
-
-        {/* Values section */}
-        <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:mx-0">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-7xl">MATTECH IMAGE</h2>
-            <p className="mt-6 text-2xl leading-8 text-gray-600">
-            L'un des principaux avantages de MATTECH IMAGE est sa capacité à générer des images très réalistes à partir de descriptions textuelles détaillées, ce qui peut être très utile pour la création de contenus visuels de qualité, comme des illustrations, des conceptions de produits, etc.
-            </p>
-          </div>
-          <dl className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 text-base leading-7 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            {values.map((value) => (
-              <div key={value.name}>
-                <dt className="font-semibold text-gray-900">{value.name}</dt>
-                <dd className="text-lg mt-1 text-gray-600">{value.description}</dd>
+        <div className="mt-32 overflow-hidden sm:mt-40">
+          <div className="mx-auto max-w-7xl px-6 lg:flex lg:px-8">
+            <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
+              <div className="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">
+                <h2 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl"> {DataNosIA.NosIAIMAGETitle1} </h2>
+                <p className="mt-6 text-2xl leading-8 text-gray-600">
+                 {DataNosIA.NosIAIMAGEdescription1}
+                </p>
+                <hr className="mx-auto mt 5 grid my-2"></hr>
+                <p className="text-lg mt-1 text-gray-600">
+                  {DataNosIA.NosIAIMAGEdescription2}
+                </p>
+                <hr className="mx-auto mt 5 grid my-3"></hr>
+                <p className="text-lg mt-1 text-gray-600">
+                  {DataNosIA.NosIAIMAGEdescription3}
+                </p>
               </div>
-            ))}
-          </dl>
+              <div className="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
+                <div className="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end">
+                  <img
+                    src="https://images.unsplash.com/photo-1682099673497-b0f74a24d7ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+                    alt=""
+                    className="aspect-[14/13] w-[37rem] max-w-none rounded-2xl bg-gray-50 object-cover"
+                  />
+                </div>
+                <div className="contents lg:col-span-2 lg:col-end-2 lg:ml-auto lg:flex lg:w-[37rem] lg:items-start lg:justify-end lg:gap-x-8">
+                  <div className="order-first flex w-64 flex-none justify-end self-end lg:w-auto">
+                    <img
+                      src="https://images.unsplash.com/photo-1681277789126-1282bdf5f046?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+                      alt=""
+                      className="aspect-[4/3] w-[24rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
+                    />
+                  </div>
+                  <div className="flex w-96 flex-auto justify-end lg:w-auto lg:flex-none">
+                    <img
+                      src="https://images.unsplash.com/photo-1681801727150-24302f7c645f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=751&q=80"
+                      alt=""
+                      className="aspect-[7/5] w-[37rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
+                    />
+                  </div>
+                  <div className="hidden sm:block sm:w-0 sm:flex-auto lg:w-auto lg:flex-none">
+                    <img
+                      src="https://images.unsplash.com/photo-1682257881805-195e075c34a4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+                      alt=""
+                      className="aspect-[4/3] w-[24rem] max-w-none rounded-2xl bg-gray-50 object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        {/* Logo cloud */}
-     
-
-        {/* Team section */}
-       
 
         {/* Blog section */}
         <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">MATTECH IMAGE est un modèle d'IA de pointe capable de générer des images à partir de descriptions textuelles détaillées.</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl"> {DataNosIA.NosIAIMAGETitle2} </h2>
             <p className="mt-2 text-xl leading-8 text-gray-600">
-            Grâce à ses capacités avancées et à sa polyvalence, il offre des avantages considérables pour la création de contenus visuels de qualité et pour les tâches de retouche d'images.
+            {DataNosIA.NosIAIMAGEdescription4}
             </p>
           </div>
           <div className="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -377,13 +389,151 @@ export default function Example() {
                   </a>
                 </h3>
               </article>
-            ))}
+            ))} 
+          </div>
+         <div>
+          <hr className="mx-auto mt 16 grid my-10" />
+         </div>
+        </div>
+        
+        {/*form section */}
+        <div className="relative bg-white">
+      <div className="lg:absolute lg:inset-0 lg:left-1/2">
+        <img
+          className="h-64 w-full bg-gray-50 object-cover sm:h-80 lg:absolute lg:h-full "
+          src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+          alt=""
+        />
+      </div>
+      <div className="pb-24 pt-16 sm:pb-32 sm:pt-24 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:pt-32">
+        <div className="px-6 lg:px-8">
+          <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
+            <h2 className="text-5xl font-bold tracking-tight text-gray-900"> {DataNosIA.NosIACONTACTFORMtitle} </h2>
+            <p className="mt-2 text-lg leading-8 text-gray-600">
+              {DataNosIA.NosIACONTACTFORMdescription}
+            </p>
+            <form action="/contact" method="POST" className="mt-16">
+              <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="first-name" className="block text-lg font-semibold leading-6 text-gray-900">
+                    {DataNosIA.NosIACONTACTFORMname}
+                  </label>
+                  <div className="mt-2.5">
+                    <input
+                      type="text"
+                      name="first-name"
+                      id="first-name"
+                      autoComplete="given-name"
+                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="last-name" className="block text-lg font-semibold leading-6 text-gray-900">
+                    {DataNosIA.NosIACONTACTFORMlastname}
+                  </label>
+                  <div className="mt-2.5">
+                    <input
+                      type="text"
+                      name="last-name"
+                      id="last-name"
+                      autoComplete="family-name"
+                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+                <div className="sm:col-span-2">
+                  <label htmlFor="email" className="block text-lg font-semibold leading-6 text-gray-900">
+                    {DataNosIA.NosIACONTACTFORMemail}
+                  </label>
+                  <div className="mt-2.5">
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+                <div className="sm:col-span-2">
+                  <label htmlFor="company" className="block text-lg font-semibold leading-6 text-gray-900">
+                    {DataNosIA.NosIACONTACTFORMcompany}
+                  </label>
+                  <div className="mt-2.5">
+                    <input
+                      type="text"
+                      name="company"
+                      id="company"
+                      autoComplete="organization"
+                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+                <div className="sm:col-span-2">
+                  <div className="flex justify-between text-lg leading-6">
+                    <label htmlFor="phone" className="block font-semibold text-gray-900">
+                      {DataNosIA.NosIACONTACTFORMphone}
+                    </label>
+                    <p id="phone-description" className="text-gray-400 text-sm">
+                      {DataNosIA.NosIACONTACTFORMoptional}
+                    </p>
+                  </div>
+                  <div className="mt-2.5">
+                    <input
+                      type="tel"
+                      name="phone"
+                      id="phone"
+                      autoComplete="tel"
+                      aria-describedby="phone-description"
+                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+                <div className="sm:col-span-2">
+                  <div className="flex justify-between text-sm leading-6">
+                    <label htmlFor="message" className="block text-lg font-semibold leading-6 text-gray-900">
+                      {DataNosIA.NosIACONTACTFORMhowwecanhelpyou}
+                    </label>
+                    <p id="message-description" className="text-gray-400">
+                      {DataNosIA.NosIACONTACTFORMcharacters}
+                    </p>
+                  </div>
+                  <div className="mt-2.5">
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      aria-describedby="message-description"
+                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      defaultValue={''}
+                    />
+                  </div>
+                </div>
+                <fieldset className="sm:col-span-2">
+                </fieldset>
+              </div>
+              <div className="mt-10 flex justify-end border-t border-gray-900/10 pt-8">
+                <button
+                  type="submit"
+                  className="rounded-md bg-gray-900 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  {DataNosIA.NosIACONTACTFORMsendmessage}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
+      </div>
+    </div>
+    <div>
+          <hr className="mx-auto mt 16 grid my-10" />
+         </div>
       </main>
-
+        
       {/* Footer */}
 
     </div>
+    
   )
 }

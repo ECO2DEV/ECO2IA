@@ -2,7 +2,11 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { DataAbout } from '../data/about'
-import { aboutheadersection, aboutintroduction,aboutintroductiontext,aboutservice,aboutservicetext,aboutfounded, aboutteam, aboutusers, aboutiaavaibles, aboutnotreplateforme, aboutplateformetext, aboutworldclass, aboutsupportive, aboutlearnign, aboutshareeverything, aboutenjoy, aboutresponsibility, aboutourteam, aboutjoinourteam, aboutsalaries, aboutworkhours, aboutvacation, aboutretreats, aboutbenefits, abourtenvironment, aboutjobpostings } from '../data/about'
+import Image from 'next/image'
+import Photo1 from "../public/Photo1.jpg"
+import Photo2 from "../public/Photo2.jpg"
+import Photo3 from "../public/Photo3.jpg"
+import Photo4 from "../public/Photo4.jpg"
 import {
   AcademicCapIcon,
   CheckCircleIcon,
@@ -57,40 +61,33 @@ const team = [
   {
       name: (DataAbout.aboutteam1),
       role: (DataAbout.aboutteam1jobtitle),
-      imageUrl:
-          'http://localhost:3000/Photo1.jpg',
+      image:
+          Photo1,
       imageClass: 'centered-image'    
   },
   {
       name: (DataAbout.aboutteam2),
       role: (DataAbout.aboutteam2jobtitle),
-      imageUrl:
-          'http://localhost:3000/Photo2.jpg',
+      image:
+      Photo2,
       imageClass: 'centered-image'
   },
   {
       name: (DataAbout.aboutteam3),
       role: (DataAbout.aboutteam3jobtitle),
-      imageUrl:
-          'http://localhost:3000/Photo3.jpg',
+      image:
+      Photo3,
   },
   {
       name: (DataAbout.aboutteam4),
       role: (DataAbout.aboutteam4jobtitle),
-      imageUrl:
-          'http://localhost:3000/Photo4.jpg',
+      image:
+      Photo4,
       imageClass: 'centered-image'
   },
   // More people...
 ]
-const benefits = [
-  aboutsalaries,
-  aboutworkhours,
-  aboutvacation,
-  aboutretreats,
-  aboutbenefits,
-  abourtenvironment
-]
+
 
 export default function About() {
   return (
@@ -213,9 +210,9 @@ export default function About() {
           >
             {team.map((person) => (
               <li key={person.name}>
-                <img
+                <Image
                   className="aspect-[10/14] w-full rounded-2xl object-cover"
-                  src={person.imageUrl}
+                  src={person.image}
                   alt=""
                 />
                 <h3 className="mt-6 text-lg font-semibold leading-8 tracking-tight text-white">
