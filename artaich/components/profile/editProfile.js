@@ -2,7 +2,7 @@ import { useState, Fragment, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { Dialog, Transition } from '@headlessui/react';
 import { UserPlusIcon } from '@heroicons/react/24/outline';
-import { updateUser } from '../../util/api/user';
+import { updateUserById } from '../../util/api/user';
 export default function EditProfile({ onClose, user }) {
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
@@ -51,7 +51,10 @@ export default function EditProfile({ onClose, user }) {
     }
 
     try {
-      const response = await updateUser({ formData: formData, id: user.id });
+      const response = await updateUserById({
+        formData: formData,
+        id: user.id
+      });
       console.log('Response:', response.data);
       router.push('/profile');
       onClose();

@@ -1,7 +1,8 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useContext, useEffect } from 'react';
 import Head from 'next/head';
 import { Dialog, Transition } from '@headlessui/react';
 import { signOut } from 'next-auth/react';
+import { PromptContext } from '../../context/prompts/PromptContext';
 import {
   Bars3Icon,
   // CalendarIcon,
@@ -12,20 +13,10 @@ import {
   // InboxIcon,
   // UsersIcon,
   XMarkIcon
-  // AcademicCapIcon,
-  // BanknotesIcon,
-  // CheckBadgeIcon,
-  // ClockIcon,
-  // ReceiptRefundIcon,
 } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import logo from '../../public/Mlogop.png';
 import Link from 'next/link';
-
-const stats = [
-  { label: 'Max Words', value: '67500' },
-  { label: 'Max Images', value: '15' }
-];
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true }
@@ -41,15 +32,23 @@ function classNames(...classes) {
 }
 
 export default function LayoutUser({ children }) {
+  const { setPlan, plan } = useContext(PromptContext);
+  const { max_imagens, max_tokens } = plan;
+  useEffect(() => {
+    setPlan(children.props.user.plan.id);
+  }, []);
+
+  // const { attributes } = plan;
+  // console.log('Attributes are : ' + plan);
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   // console.log('Children props are : ' + children.props);
-  // console.log(JSON.stringify(children.props));
   const strapiUrl = process.env.STRAPI_URL;
   const image_url = children.props.user.avatar
     ? strapiUrl + children.props.user.avatar.url
     : 'NA';
 
-    console.log('Image_url' + image_url)
+  // console.log('Image_url' + image_url);
   return (
     <>
       {/*
@@ -158,23 +157,24 @@ export default function LayoutUser({ children }) {
                   </div>
                   {/* Este es el counter para pantallas pequeñas */}
                   <div className="flex flex-shrink-0 p-4">
-                    {
-                      <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12">
-                        {stats.map((stat, statIdx) => (
-                          <div
-                            key={statIdx}
-                            className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6"
-                          >
-                            <dt className="text-sm leading-3 text-gray-300">
-                              {stat.label}
-                            </dt>
-                            <dd className="text-base font-semibold tracking-tight text-white">
-                              {stat.value}
-                            </dd>
-                          </div>
-                        ))}
-                      </dl>
-                    }
+                    <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12">
+                      <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
+                        <dt className="text-sm lg:text-xs leading-3 text-gray-300">
+                          Max Words
+                        </dt>
+                        <dd className="text-base font-semibold tracking-tight text-white">
+                          {max_tokens ? max_tokens : 'NA'}
+                        </dd>
+                      </div>
+                      <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
+                        <dt className="text-sm lg:text-xs leading-3 text-gray-300">
+                          Max Images
+                        </dt>
+                        <dd className="text-base font-semibold tracking-tight text-white">
+                          {max_imagens ? max_imagens : 'NA'}
+                        </dd>
+                      </div>
+                    </dl>
                   </div>
 
                   <div className="flex flex-shrink-0 bg-gray-700 p-4">
@@ -265,23 +265,24 @@ export default function LayoutUser({ children }) {
               </nav>
             </div>
             <div className="flex flex-shrink-0 p-4">
-              {
-                <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12">
-                  {stats.map((stat, statIdx) => (
-                    <div
-                      key={statIdx}
-                      className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6"
-                    >
-                      <dt className="text-xs leading-3 text-gray-300">
-                        {stat.label}
-                      </dt>
-                      <dd className="text-base font-semibold tracking-tight text-white">
-                        {stat.value}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              }
+              <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12">
+                <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
+                  <dt className="text-sm lg:text-xs leading-3 text-gray-300 ">
+                    Max Words
+                  </dt>
+                  <dd className="text-base font-semibold tracking-tight text-white">
+                    {max_tokens ? max_tokens : 'NA'}
+                  </dd>
+                </div>
+                <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
+                  <dt className="text-sm lg:text-xs leading-3 text-gray-300">
+                    Max Images
+                  </dt>
+                  <dd className="text-base font-semibold tracking-tight text-white">
+                    {max_imagens ? max_imagens : 'NA'}
+                  </dd>
+                </div>
+              </dl>
             </div>
             <div className="flex flex-shrink-0 bg-gray-700 p-4">
               <div className="flex items-center">

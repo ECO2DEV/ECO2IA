@@ -15,6 +15,24 @@ export const promptReducer = (state, action) => {
         ...state,
         promptTokens: action.payload
       };
+    case 'LOAD_PLAN':
+      return {
+        ...state,
+        plan: action.payload
+      };
+    case 'UPDATE_PLAN_TOKENS':
+      return {
+        ...state,
+        plan: {
+          ...state.plan,
+          ...action.payload
+        }
+      };
+    case 'SET_RESPONSE_TOKENS':
+      return {
+        ...state,
+        responseTokens: action.payload
+      };
     default:
       return state;
   }
