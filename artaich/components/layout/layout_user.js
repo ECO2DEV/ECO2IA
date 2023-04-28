@@ -1,7 +1,8 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useContext, useEffect } from 'react';
 import Head from 'next/head';
 import { Dialog, Transition } from '@headlessui/react';
 import { signOut } from 'next-auth/react';
+import { PromptContext } from '../../context/prompts/PromptContext';
 import {
   Bars3Icon,
   // CalendarIcon,
@@ -12,11 +13,6 @@ import {
   // InboxIcon,
   // UsersIcon,
   XMarkIcon
-  // AcademicCapIcon,
-  // BanknotesIcon,
-  // CheckBadgeIcon,
-  // ClockIcon,
-  // ReceiptRefundIcon,
 } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import logo from '../../public/Mlogop.png';
@@ -36,15 +32,23 @@ function classNames(...classes) {
 }
 
 export default function LayoutUser({ children }) {
+  const { setPlan, plan } = useContext(PromptContext);
+  const { max_imagens, max_tokens } = plan;
+  useEffect(() => {
+    setPlan(children.props.user.plan.id);
+  }, []);
+
+  // const { attributes } = plan;
+  // console.log('Attributes are : ' + plan);
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  //console.log("Children props are : " + children.props);
-  //console.log(JSON.stringify(children.props));
+  // console.log('Children props are : ' + children.props);
   const strapiUrl = process.env.STRAPI_URL;
   const image_url = children.props.user.avatar
     ? strapiUrl + children.props.user.avatar.url
     : 'NA';
 
-    console.log('Image_url' + image_url)
+  // console.log('Image_url' + image_url);
   return (
     <>
       {/*
@@ -151,6 +155,28 @@ export default function LayoutUser({ children }) {
                       ))}
                     </nav>
                   </div>
+                  {/* Este es el counter para pantallas pequeñas */}
+                  <div className="flex flex-shrink-0 p-4">
+                    <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12">
+                      <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
+                        <dt className="text-sm lg:text-xs leading-3 text-gray-300">
+                          Max Words
+                        </dt>
+                        <dd className="text-base font-semibold tracking-tight text-white">
+                          {max_tokens ? max_tokens : 'NA'}
+                        </dd>
+                      </div>
+                      <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
+                        <dt className="text-sm lg:text-xs leading-3 text-gray-300">
+                          Max Images
+                        </dt>
+                        <dd className="text-base font-semibold tracking-tight text-white">
+                          {max_imagens ? max_imagens : 'NA'}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+
                   <div className="flex flex-shrink-0 bg-gray-700 p-4">
                     <div className="flex items-center">
                       <div>
@@ -170,7 +196,7 @@ export default function LayoutUser({ children }) {
                       </div>
                       <div className="ml-3">
                         <p className="text-base font-medium text-white">
-                          {children.props.user.username}
+                          {children.props.user.Name}
                         </p>
                         <Link href={'/profile'}>
                           <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
@@ -204,6 +230,7 @@ export default function LayoutUser({ children }) {
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
+
           <div className="flex min-h-0 flex-1 flex-col bg-gray-800">
             <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
               <div className="flex flex-shrink-0 self-center px-4">
@@ -237,6 +264,26 @@ export default function LayoutUser({ children }) {
                 ))}
               </nav>
             </div>
+            <div className="flex flex-shrink-0 p-4">
+              <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12">
+                <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
+                  <dt className="text-sm lg:text-xs leading-3 text-gray-300 ">
+                    Max Words
+                  </dt>
+                  <dd className="text-base font-semibold tracking-tight text-white">
+                    {max_tokens ? max_tokens : 'NA'}
+                  </dd>
+                </div>
+                <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
+                  <dt className="text-sm lg:text-xs leading-3 text-gray-300">
+                    Max Images
+                  </dt>
+                  <dd className="text-base font-semibold tracking-tight text-white">
+                    {max_imagens ? max_imagens : 'NA'}
+                  </dd>
+                </div>
+              </dl>
+            </div>
             <div className="flex flex-shrink-0 bg-gray-700 p-4">
               <div className="flex items-center">
                 <div>
@@ -260,7 +307,7 @@ export default function LayoutUser({ children }) {
                   </p>
                   <Link href={'/profile'}>
                     <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
-                      View profile
+                      perfil
                     </p>
                   </Link>
                 </div>
@@ -280,6 +327,7 @@ export default function LayoutUser({ children }) {
             </div>
           </div>
         </div>
+
         <div className="flex flex-1 flex-col lg:pl-64">
           <div className="sticky top-0 z-10 bg-gray-100 pl-1 pt-1 sm:pl-3 sm:pt-3 lg:hidden">
             <button

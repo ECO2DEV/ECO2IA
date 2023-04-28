@@ -26,13 +26,13 @@ export const createUser = async (data) => {
       newData,
       header
     );
-    console.log("Full response")
+    console.log('Full response');
     console.log(response);
     return response;
   } catch (error) {
     console.error(`Error making POST request to ${strapiUrl}:`, error);
-    return error.response.data.error
-   // throw new Error(`Failed to make POST request to ${strapiUrl}`);
+    return error.response.data.error;
+    // throw new Error(`Failed to make POST request to ${strapiUrl}`);
   }
 };
 
@@ -59,5 +59,21 @@ export async function getUser(context) {
       data: null,
       session: null
     };
+  }
+}
+
+export async function updateUserById({ formData, id }) {
+  try {
+    const updatedUser = await axios.put(
+      `${strapiUrl}/api/users/${id}`,
+      formData,
+      {
+        headers: { Authorization: `Bearer ${strapiToken}` }
+      }
+    );
+    return updatedUser;
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 }

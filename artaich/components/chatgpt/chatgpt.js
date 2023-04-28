@@ -1,8 +1,6 @@
 import { useState, useContext } from 'react';
-import countTokens from '../../util/helpers/count_tokens';
 import Loader from '../loader/loader';
 import { PromptContext } from '../../context/prompts/PromptContext';
-// import Counter from '../tokenCountCard/tokenCount';
 // import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 import SearchTextbox from '../searchTextbox/searchTextbox';
 import { Welcome } from '../welcome/welcome';
@@ -10,17 +8,16 @@ import { ChatgptResponse } from '../../util/api/chatgptResponse';
 
 export default function ChatGpt(props) {
   const user = props.user;
-  //console.log("props" + user);
+
   const {
     prompt,
-    setPrompt,
     response,
-    setResponse,
     promptTokens,
+    setPrompt,
+    setResponse,
     setPromptTokens
   } = useContext(PromptContext);
 
-  const [tokensUsed, setTokensUsed] = useState(0);
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -32,14 +29,13 @@ export default function ChatGpt(props) {
       // Realiza la llamada a la API
       ChatgptResponse({ prompt: prompt, user: user })
         .then((response) => {
-          console.log('response is:');
-          console.log('response.data is:', response?.data?.data);
+          // console.log('response is:');
           setResponse(response?.data?.data);
-          let resptokens = countTokens(response?.data.data.trim());
-          setTokensUsed(promptTokens + resptokens);
+          // console.log('response.data.data.trim() is:', response);
         })
         .finally(() => {
           setIsLoading(false);
+          setPrompt('');
         });
     }
   };
@@ -48,8 +44,6 @@ export default function ChatGpt(props) {
     if (e.target.value === '') {
       setPromptTokens(0);
     }
-    // let tokens = countTokens(e.target.value);
-    // setPromptTokens(tokens);
   };
   const handleChangeTextarea = (e) => {
     setResponse(e.target.value);
