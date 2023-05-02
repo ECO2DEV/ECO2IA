@@ -5,13 +5,8 @@ import { signOut } from 'next-auth/react';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import {
   Bars3Icon,
-  // CalendarIcon,
-  // ChartBarIcon,
-  // FolderIcon,
   ArrowLeftOnRectangleIcon,
   HomeIcon,
-  // InboxIcon,
-  // UsersIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
 import Image from 'next/image';
@@ -21,10 +16,6 @@ import Link from 'next/link';
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true }
   // { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  // { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  // { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  // { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  // { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
 ];
 
 function classNames(...classes) {
@@ -35,8 +26,7 @@ export default function LayoutUser({ children }) {
   const { setPlan, plan } = useContext(PromptContext);
   const { max_imagens = 0, max_tokens = 0 } = plan;
   useEffect(() => {
-    if (!children.props.user.plan) return;
-    setPlan(children.props.user.plan.id);
+    setPlan(children.props.user.plan ? children.props.user.plan.id : null);
   }, []);
 
   // const { attributes } = plan;
@@ -201,7 +191,7 @@ export default function LayoutUser({ children }) {
                         </p>
                         <Link href={'/profile'}>
                           <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
-                            View profile
+                            Mon Profile
                           </p>
                         </Link>
                       </div>
@@ -308,7 +298,7 @@ export default function LayoutUser({ children }) {
                   </p>
                   <Link href={'/profile'}>
                     <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
-                      perfil
+                      Mon Profile
                     </p>
                   </Link>
                 </div>
