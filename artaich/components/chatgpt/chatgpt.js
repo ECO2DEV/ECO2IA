@@ -5,6 +5,9 @@ import { PromptContext } from '../../context/prompts/PromptContext';
 import SearchTextbox from '../searchTextbox/searchTextbox';
 import { Welcome } from '../welcome/welcome';
 import { ChatgptResponse } from '../../util/api/chatgptResponse';
+// import { io } from 'socket.io-client';
+
+// const socket = io('http://localhost:1337');
 
 export default function ChatGpt(props) {
   const user = props.user;
@@ -32,6 +35,8 @@ export default function ChatGpt(props) {
           // console.log('response is:');
           setResponse(response?.data?.data);
           // console.log('response.data.data.trim() is:', response);
+          // conectar el socket io
+          // socket.emit('chat message', response?.data?.data.trim());
         })
         .finally(() => {
           setIsLoading(false);

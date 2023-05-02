@@ -33,8 +33,9 @@ function classNames(...classes) {
 
 export default function LayoutUser({ children }) {
   const { setPlan, plan } = useContext(PromptContext);
-  const { max_imagens, max_tokens } = plan;
+  const { max_imagens = 0, max_tokens = 0 } = plan;
   useEffect(() => {
+    if (!children.props.user.plan) return;
     setPlan(children.props.user.plan.id);
   }, []);
 
@@ -48,7 +49,7 @@ export default function LayoutUser({ children }) {
     ? strapiUrl + children.props.user.avatar.url
     : 'NA';
 
-  // console.log('Image_url' + image_url);
+  // console.log('Image_url' + children.props.user.avatar.url);
   return (
     <>
       {/*
@@ -163,7 +164,7 @@ export default function LayoutUser({ children }) {
                           Max Words
                         </dt>
                         <dd className="text-base font-semibold tracking-tight text-white">
-                          {max_tokens ? max_tokens : 'NA'}
+                          {max_tokens}
                         </dd>
                       </div>
                       <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
@@ -171,7 +172,7 @@ export default function LayoutUser({ children }) {
                           Max Images
                         </dt>
                         <dd className="text-base font-semibold tracking-tight text-white">
-                          {max_imagens ? max_imagens : 'NA'}
+                          {max_imagens}
                         </dd>
                       </div>
                     </dl>
@@ -271,7 +272,7 @@ export default function LayoutUser({ children }) {
                     Max Words
                   </dt>
                   <dd className="text-base font-semibold tracking-tight text-white">
-                    {max_tokens ? max_tokens : 'NA'}
+                    {max_tokens}
                   </dd>
                 </div>
                 <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
@@ -279,7 +280,7 @@ export default function LayoutUser({ children }) {
                     Max Images
                   </dt>
                   <dd className="text-base font-semibold tracking-tight text-white">
-                    {max_imagens ? max_imagens : 'NA'}
+                    {max_imagens}
                   </dd>
                 </div>
               </dl>

@@ -2,8 +2,10 @@ import { useState, Fragment, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { Dialog, Transition } from '@headlessui/react';
 import { UserPlusIcon } from '@heroicons/react/24/outline';
-import { updateUserById } from '../../util/api/user';
+import { updateUserById, uploadUserImage } from '../../util/api/user';
+
 export default function EditProfile({ onClose, user }) {
+  const [uploadImage, setUploadImage] = useState(null);
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const router = useRouter();
@@ -16,6 +18,27 @@ export default function EditProfile({ onClose, user }) {
     country: user.country
     // about: ''
   });
+
+  const handleImageChange = (e) => {
+    setUploadImage(e.target.files[0]);
+  };
+
+  const handleImageUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('files', uploadImage, uploadImage.name);
+
+    try {
+      const response = await uploadUserImage({ formData: formData });
+      if (response) {
+        user.avatar = response.data[0];
+        console.log(user.avatar);
+        // router.push('/profile');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleProfileChange = (e) => {
     const { name, value } = e.target;
@@ -96,20 +119,22 @@ export default function EditProfile({ onClose, user }) {
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <div>
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gray-900">
-                    <UserPlusIcon
+                  {/* <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gray-900">
+                    
+
+                     <UserPlusIcon
                       className="h-6 w-6  text-white"
                       aria-hidden="true"
-                    />
-                  </div>
-                  <div className="mt-2 text-center sm:mt-2">
+                    /> 
+                  </div>*/}
+                  {/* <div className="mt-2 text-center sm:mt-2">
                     <Dialog.Title
                       as="h3"
                       className="text-base font-semibold leading-6 text-gray-900"
                     >
                       Profile Edit
                     </Dialog.Title>
-                  </div>
+                  </div> */}
                   <div className="isolate bg-white px-6 pb-10 lg:px-8">
                     <div
                       className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
@@ -123,6 +148,22 @@ export default function EditProfile({ onClose, user }) {
                         }}
                       />
                     </div>
+                    <form onSubmit={handleImageUpload}>
+                      <label htmlFor="file"> Seleccione un archivo:</label>
+                      <input
+                        onChange={handleImageChange}
+                        type="file"
+                        id="file"
+                        className=""
+                      />
+                      <button
+                        type="submit"
+                        className="cursor-pointer bg-gray-800 text-gray-100 p-2"
+                        disabled={!uploadImage}
+                      >
+                        Upload image
+                      </button>
+                    </form>
 
                     <form
                       onSubmit={handleSubmit}

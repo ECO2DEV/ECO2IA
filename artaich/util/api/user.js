@@ -77,3 +77,15 @@ export async function updateUserById({ formData, id }) {
     return null;
   }
 }
+
+export async function uploadUserImage({ formData }) {
+  try {
+    const updatedUser = await axios.post(`${strapiUrl}/api/upload`, formData, {
+      headers: { Authorization: `Bearer ${strapiToken}` }
+    });
+    return updatedUser;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
