@@ -10,6 +10,7 @@ import { signIn } from 'next-auth/react';
 export default function Register({ onClose }) {
   const [open, setOpen] = useState(true);
   const [error, setError] = useState(null);
+  
   const [formData, setFormData] = useState({
     username: '',
     email: '',
