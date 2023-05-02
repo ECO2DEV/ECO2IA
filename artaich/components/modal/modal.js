@@ -141,45 +141,17 @@ export default function Modal({children}) {
       <>
      {isOpen && (
 
-        <div className="fixed inset-0 z-50 overflow-auto bg-gray-800 bg-opacity-50 rounded-lg shadow-xl">
-          <div className="relat ive  p-6 mx-auto w-11/12 bg-white  ">
-            <div className="absolute top-0 right-0 pt-4 pr-4">
-              <button
-                type="button"
-                className="text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500"
-                onClick={handleOnClose}
-              >
-                <span className="sr-only">Close</span>
-                <svg
-                  className="w-6 h-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-         
+        <div className="inset-0 z-50 overflow-auto bg-gray-900 rounded-lg shadow-xl">
+          
+          
      <div className="isolate overflow-hidden">
        <div className="flow-root bg-gray-900 py-16 sm:pt-32 lg:pb-0">
          <div className="mx-auto max-w-7xl px-6 lg:px-8">
            <div className="relative z-10">
-             <h1 className="mx-auto max-w-4xl text-center text-5xl font-bold tracking-tight text-white">
-               Simple pricing, no commitment
-             </h1>
-             <p className="mx-auto mt-4 max-w-2xl text-center text-lg leading-8 text-white/60">
-               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos odit doloribus
-               molestiae voluptatum quos odit doloribus.
-             </p>
-             <div className="mt-16 flex justify-center">
+             <h3 className="mx-auto max-w-4xl text-center text-4xl font-light tracking-tight text-white">
+               Please select a forfait to start 
+             </h3>
+             {/* <div clas sName="mt-16 flex justify-center">
                <RadioGroup
                  value={frequency}
                  onChange={setFrequency}
@@ -198,9 +170,9 @@ export default function Modal({children}) {
                    </RadioGroup.Option>
                  ))}
                </RadioGroup>
-             </div>
+             </div> */}
            </div>
-           <div className="relative mx-auto mt-10 grid max-w-md grid-cols-1 gap-y-8 lg:mx-0 lg:-mb-14 lg:max-w-none lg:grid-cols-3">
+           <div className="relative mx-auto mt-10 grid max-w-md grid-cols-1 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
              <svg
                viewBox="0 0 1208 1024"
                aria-hidden="true"
@@ -300,7 +272,7 @@ export default function Modal({children}) {
        </div>
 
      </div>
-        </div>
+    
      
     </div>
      )}
