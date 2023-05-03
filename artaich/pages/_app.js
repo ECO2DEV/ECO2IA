@@ -13,7 +13,7 @@ import { PromptProvider } from '../context/prompts/PromptProvider';
 const stripePromise = loadStripe(
   'pk_test_51MmF5HEZbX6Zpxv9PbTYYGR1U9d14TmcHEsxCKTPzDVpKXDcaFqz87ElscE2TRYjdV3t1r5gxVo3G8FRAlOivqKG00jMOoioNN'
 );
-console.log(stripePromise);
+// console.log(stripePromise);
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   //const getLayout = Component.getLayout ?? defaultPageLayout
@@ -43,10 +43,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     return (
       <SessionProvider session={session}>
         <PromptProvider>
-         <Elements stripe={stripePromise} options={options}>
-          <LayoutUser {...pageProps}>
-            <Component {...pageProps} />
-          </LayoutUser>
+          <Elements stripe={stripePromise} options={options}>
+            <LayoutUser {...pageProps}>
+              <Component {...pageProps} />
+            </LayoutUser>
           </Elements>
         </PromptProvider>
       </SessionProvider>

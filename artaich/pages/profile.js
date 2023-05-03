@@ -1,5 +1,6 @@
 import { getUser } from '../util/api/user';
 import Profile from '../components/profile/profile';
+
 export default function profile(props) {
   const user = props.user;
   return <Profile user={user} />;

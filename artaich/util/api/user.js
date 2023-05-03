@@ -20,7 +20,7 @@ export const createUser = async (data) => {
     //console.log('Id usuario' + respStripe.data.id);
     const newData = { ...data, customer_id: respStripe.data.id };
 
-    console.log(newData);
+    console.log('creating user', newData);
     const response = await axios.post(
       `${strapiUrl}/api/auth/local/register`,
       newData,
@@ -80,9 +80,32 @@ export async function updateUserById({ formData, id }) {
 
 export async function uploadUserImage({ formData }) {
   try {
-    const updatedUser = await axios.post(`${strapiUrl}/api/upload`, formData, {
-      headers: { Authorization: `Bearer ${strapiToken}` }
-    });
+    const uploadedImage = await axios.post(
+      `${strapiUrl}/api/upload`,
+      formData,
+      {
+        headers: { Authorization: `Bearer ${strapiToken}` }
+      }
+    );
+    return uploadedImage;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+export async function updateUserImage({ formData, id }) {
+  try {
+    const updatedUser = await axios.put(
+      `${strapiUrl}/api/users/${id}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${strapiToken}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
     return updatedUser;
   } catch (error) {
     console.error(error);
