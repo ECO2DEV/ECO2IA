@@ -1,29 +1,28 @@
-import { useState } from 'react'
-import { Dialog } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { DataNosIA } from '../data/nosia'
-
+import { useState } from 'react';
+import { Dialog } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { DataNosIA } from '../data/nosia';
 
 const navigation = [
   { name: '', href: '' },
   { name: '', href: '' },
   { name: '', href: '' },
-  { name: '', href: '' },
-]
+  { name: '', href: '' }
+];
 const stats = [
-  { label:'', value: '' },
   { label: '', value: '' },
   { label: '', value: '' },
-]
+  { label: '', value: '' }
+];
 const team = [
   {
     name: 'Michael Foster',
     role: 'Co-Founder / CTO',
     imageUrl:
-      'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-  },
+      'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80'
+  }
   // More people...
-]
+];
 const blogPosts = [
   {
     id: 1,
@@ -38,51 +37,46 @@ const blogPosts = [
     author: {
       name: 'Michael Foster',
       imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    
+        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+    }
   },
   {
-    id: 1,
+    id: 2,
     title: '',
     href: '#',
-    description:
-      '',
+    description: '',
     imageUrl:
       'https://images.unsplash.com/photo-1681299561277-ad07c08d6be5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
     date: 'Mar 16, 2020',
     datetime: '2020-03-16',
     author: {
-        name: '',
-        imageUrl: 
-        'localhost.com/'
+      name: '',
+      imageUrl: 'localhost.com/'
     }
   },
   {
     id: 3,
     title: '',
     href: '#',
-    description:
-      '',
+    description: '',
     imageUrl:
       'https://images.unsplash.com/photo-1680472139496-aec545d8392b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
     date: 'Mar 16, 2020',
     datetime: '2020-03-16',
     author: {
-        name: '',
-        imageUrl: 
-        'localhost.com/'
+      name: '',
+      imageUrl: 'localhost.com/'
     }
   }
   // More posts...
-]
+];
 const footerNavigation = {
   main: [
     { name: 'Blog', href: '#' },
     { name: 'Jobs', href: '#' },
     { name: 'Press', href: '#' },
     { name: 'Accessibility', href: '#' },
-    { name: 'Partners', href: '#' },
+    { name: 'Partners', href: '#' }
   ],
   social: [
     {
@@ -96,7 +90,7 @@ const footerNavigation = {
             clipRule="evenodd"
           />
         </svg>
-      ),
+      )
     },
     {
       name: 'Instagram',
@@ -109,7 +103,7 @@ const footerNavigation = {
             clipRule="evenodd"
           />
         </svg>
-      ),
+      )
     },
     {
       name: 'Twitter',
@@ -118,7 +112,7 @@ const footerNavigation = {
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
         </svg>
-      ),
+      )
     },
     {
       name: 'GitHub',
@@ -131,7 +125,7 @@ const footerNavigation = {
             clipRule="evenodd"
           />
         </svg>
-      ),
+      )
     },
     {
       name: 'YouTube',
@@ -144,18 +138,17 @@ const footerNavigation = {
             clipRule="evenodd"
           />
         </svg>
-      ),
-    },
-  ],
-}
+      )
+    }
+  ]
+};
 
 export default function Example() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="bg-white">
       {/* Header */}
-     
 
       <main className="isolate">
         {/* Hero section */}
@@ -182,7 +175,12 @@ export default function Example() {
                 strokeWidth={0}
               />
             </svg>
-            <rect width="100%" height="100%" strokeWidth={0} fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" />
+            <rect
+              width="100%"
+              height="100%"
+              strokeWidth={0}
+              fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)"
+            />
           </svg>
           <div
             className="absolute left-1/2 right-0 top-0 -z-10 -ml-24 transform-gpu overflow-hidden blur-3xl lg:ml-24 xl:ml-48"
@@ -192,7 +190,7 @@ export default function Example() {
               className="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
               style={{
                 clipPath:
-                  'polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)',
+                  'polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)'
               }}
             />
           </div>
@@ -204,7 +202,7 @@ export default function Example() {
                     {DataNosIA.NosIACHATTitle1}
                   </h1>
                   <p className="relative mt-6 text-xl leading-8 text-gray-900 sm:max-w-md lg:max-w-none">
-                  {DataNosIA.NosIACHATdescription1} 
+                    {DataNosIA.NosIACHATdescription1}
                   </p>
                 </div>
                 <div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
@@ -263,27 +261,28 @@ export default function Example() {
         {/* Content section */}
         <div className="mx-auto -mt-12 max-w-7xl px-6 sm:mt-0 lg:px-8 xl:-mt-8">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl"> {DataNosIA.NosIACHATTitle2} </h2>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+              {' '}
+              {DataNosIA.NosIACHATTitle2}{' '}
+            </h2>
             <div className="mt-6 flex flex-col gap-x-8 gap-y-20 lg:flex-row">
               <div className="lg:w-full lg:max-w-2xl lg:flex-auto">
-                <p className="text-xl leading-8 text-gray-600">
-                 
-                </p>
+                <p className="text-xl leading-8 text-gray-600"></p>
                 <div className="mt-10 max-w-xl text-xl leading-9 text-gray-900">
-                  <p>
-                  {DataNosIA.NosIACHATdescription2}
-                  </p>
-                  <p className="mt-10">
-                  {DataNosIA.NosIACHATdescription3}
-                  </p>
+                  <p>{DataNosIA.NosIACHATdescription2}</p>
+                  <p className="mt-10">{DataNosIA.NosIACHATdescription3}</p>
                 </div>
               </div>
               <div className="lg:flex lg:flex-auto lg:justify-center">
                 <dl className="w-64 space-y-8 xl:w-80">
-                  {stats.map((stat) => (
-                    <div key={stat.label} className="flex flex-col-reverse gap-y-4">
-                      <dt className="text-base leading-7 text-gray-600">{stat.label}</dt>
-                      <dd className="text-5xl font-semibold tracking-tight text-gray-900">{stat.value}</dd>
+                  {stats.map((stat, index) => (
+                    <div key={index} className="flex flex-col-reverse gap-y-4">
+                      <dt className="text-base leading-7 text-gray-600">
+                        {stat.label}
+                      </dt>
+                      <dd className="text-5xl font-semibold tracking-tight text-gray-900">
+                        {stat.value}
+                      </dd>
                     </div>
                   ))}
                 </dl>
@@ -304,9 +303,12 @@ export default function Example() {
           <div className="mx-auto max-w-7xl px-6 lg:flex lg:px-8">
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
               <div className="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">
-                <h2 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl"> {DataNosIA.NosIAIMAGETitle1} </h2>
+                <h2 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                  {' '}
+                  {DataNosIA.NosIAIMAGETitle1}{' '}
+                </h2>
                 <p className="mt-6 text-2xl leading-8 text-gray-600">
-                 {DataNosIA.NosIAIMAGEdescription1}
+                  {DataNosIA.NosIAIMAGEdescription1}
                 </p>
                 <hr className="mx-auto mt 5 grid my-2"></hr>
                 <p className="text-lg mt-1 text-gray-600">
@@ -356,9 +358,12 @@ export default function Example() {
         {/* Blog section */}
         <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl"> {DataNosIA.NosIAIMAGETitle2} </h2>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+              {' '}
+              {DataNosIA.NosIAIMAGETitle2}{' '}
+            </h2>
             <p className="mt-2 text-xl leading-8 text-gray-600">
-            {DataNosIA.NosIAIMAGEdescription4}
+              {DataNosIA.NosIAIMAGEdescription4}
             </p>
           </div>
           <div className="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -367,7 +372,11 @@ export default function Example() {
                 key={post.id}
                 className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80"
               >
-                <img src={post.imageUrl} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover" />
+                <img
+                  src={post.imageUrl}
+                  alt=""
+                  className="absolute inset-0 -z-10 h-full w-full object-cover"
+                />
                 <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40" />
                 <div className="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
 
@@ -376,10 +385,12 @@ export default function Example() {
                     {post.date}
                   </time>
                   <div className="-ml-4 flex items-center gap-x-4">
-                    <svg viewBox="0 0 2 2" className="-ml-0.5 h-0.5 w-0.5 flex-none fill-white/50">
+                    <svg
+                      viewBox="0 0 2 2"
+                      className="-ml-0.5 h-0.5 w-0.5 flex-none fill-white/50"
+                    >
                       <circle cx={1} cy={1} r={1} />
                     </svg>
-
                   </div>
                 </div>
                 <h3 className="mt-3 text-lg font-semibold leading-6 text-white">
@@ -389,151 +400,172 @@ export default function Example() {
                   </a>
                 </h3>
               </article>
-            ))} 
+            ))}
           </div>
-         <div>
-          <hr className="mx-auto mt 16 grid my-10" />
-         </div>
+          <div>
+            <hr className="mx-auto mt 16 grid my-10" />
+          </div>
         </div>
-        
+
         {/*form section */}
         <div className="relative bg-white">
-      <div className="lg:absolute lg:inset-0 lg:left-1/2">
-        <img
-          className="h-64 w-full bg-gray-50 object-cover sm:h-80 lg:absolute lg:h-full "
-          src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-          alt=""
-        />
-      </div>
-      <div className="pb-24 pt-16 sm:pb-32 sm:pt-24 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:pt-32">
-        <div className="px-6 lg:px-8">
-          <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
-            <h2 className="text-5xl font-bold tracking-tight text-gray-900"> {DataNosIA.NosIACONTACTFORMtitle} </h2>
-            <p className="mt-2 text-lg leading-8 text-gray-600">
-              {DataNosIA.NosIACONTACTFORMdescription}
-            </p>
-            <form action="/contact" method="POST" className="mt-16">
-              <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-                <div>
-                  <label htmlFor="first-name" className="block text-lg font-semibold leading-6 text-gray-900">
-                    {DataNosIA.NosIACONTACTFORMname}
-                  </label>
-                  <div className="mt-2.5">
-                    <input
-                      type="text"
-                      name="first-name"
-                      id="first-name"
-                      autoComplete="given-name"
-                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
+          <div className="lg:absolute lg:inset-0 lg:left-1/2">
+            <img
+              className="h-64 w-full bg-gray-50 object-cover sm:h-80 lg:absolute lg:h-full "
+              src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              alt=""
+            />
+          </div>
+          <div className="pb-24 pt-16 sm:pb-32 sm:pt-24 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:pt-32">
+            <div className="px-6 lg:px-8">
+              <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
+                <h2 className="text-5xl font-bold tracking-tight text-gray-900">
+                  {' '}
+                  {DataNosIA.NosIACONTACTFORMtitle}{' '}
+                </h2>
+                <p className="mt-2 text-lg leading-8 text-gray-600">
+                  {DataNosIA.NosIACONTACTFORMdescription}
+                </p>
+                <form action="/contact" method="POST" className="mt-16">
+                  <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                    <div>
+                      <label
+                        htmlFor="first-name"
+                        className="block text-lg font-semibold leading-6 text-gray-900"
+                      >
+                        {DataNosIA.NosIACONTACTFORMname}
+                      </label>
+                      <div className="mt-2.5">
+                        <input
+                          type="text"
+                          name="first-name"
+                          id="first-name"
+                          autoComplete="given-name"
+                          className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="last-name"
+                        className="block text-lg font-semibold leading-6 text-gray-900"
+                      >
+                        {DataNosIA.NosIACONTACTFORMlastname}
+                      </label>
+                      <div className="mt-2.5">
+                        <input
+                          type="text"
+                          name="last-name"
+                          id="last-name"
+                          autoComplete="family-name"
+                          className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label
+                        htmlFor="email"
+                        className="block text-lg font-semibold leading-6 text-gray-900"
+                      >
+                        {DataNosIA.NosIACONTACTFORMemail}
+                      </label>
+                      <div className="mt-2.5">
+                        <input
+                          id="email"
+                          name="email"
+                          type="email"
+                          autoComplete="email"
+                          className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label
+                        htmlFor="company"
+                        className="block text-lg font-semibold leading-6 text-gray-900"
+                      >
+                        {DataNosIA.NosIACONTACTFORMcompany}
+                      </label>
+                      <div className="mt-2.5">
+                        <input
+                          type="text"
+                          name="company"
+                          id="company"
+                          autoComplete="organization"
+                          className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
+                    <div className="sm:col-span-2">
+                      <div className="flex justify-between text-lg leading-6">
+                        <label
+                          htmlFor="phone"
+                          className="block font-semibold text-gray-900"
+                        >
+                          {DataNosIA.NosIACONTACTFORMphone}
+                        </label>
+                        <p
+                          id="phone-description"
+                          className="text-gray-400 text-sm"
+                        >
+                          {DataNosIA.NosIACONTACTFORMoptional}
+                        </p>
+                      </div>
+                      <div className="mt-2.5">
+                        <input
+                          type="tel"
+                          name="phone"
+                          id="phone"
+                          autoComplete="tel"
+                          aria-describedby="phone-description"
+                          className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
+                    <div className="sm:col-span-2">
+                      <div className="flex justify-between text-sm leading-6">
+                        <label
+                          htmlFor="message"
+                          className="block text-lg font-semibold leading-6 text-gray-900"
+                        >
+                          {DataNosIA.NosIACONTACTFORMhowwecanhelpyou}
+                        </label>
+                        <p id="message-description" className="text-gray-400">
+                          {DataNosIA.NosIACONTACTFORMcharacters}
+                        </p>
+                      </div>
+                      <div className="mt-2.5">
+                        <textarea
+                          id="message"
+                          name="message"
+                          rows={4}
+                          aria-describedby="message-description"
+                          className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          defaultValue={''}
+                        />
+                      </div>
+                    </div>
+                    <fieldset className="sm:col-span-2"></fieldset>
                   </div>
-                </div>
-                <div>
-                  <label htmlFor="last-name" className="block text-lg font-semibold leading-6 text-gray-900">
-                    {DataNosIA.NosIACONTACTFORMlastname}
-                  </label>
-                  <div className="mt-2.5">
-                    <input
-                      type="text"
-                      name="last-name"
-                      id="last-name"
-                      autoComplete="family-name"
-                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
+                  <div className="mt-10 flex justify-end border-t border-gray-900/10 pt-8">
+                    <button
+                      type="submit"
+                      className="rounded-md bg-gray-900 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                      {DataNosIA.NosIACONTACTFORMsendmessage}
+                    </button>
                   </div>
-                </div>
-                <div className="sm:col-span-2">
-                  <label htmlFor="email" className="block text-lg font-semibold leading-6 text-gray-900">
-                    {DataNosIA.NosIACONTACTFORMemail}
-                  </label>
-                  <div className="mt-2.5">
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div>
-                <div className="sm:col-span-2">
-                  <label htmlFor="company" className="block text-lg font-semibold leading-6 text-gray-900">
-                    {DataNosIA.NosIACONTACTFORMcompany}
-                  </label>
-                  <div className="mt-2.5">
-                    <input
-                      type="text"
-                      name="company"
-                      id="company"
-                      autoComplete="organization"
-                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div>
-                <div className="sm:col-span-2">
-                  <div className="flex justify-between text-lg leading-6">
-                    <label htmlFor="phone" className="block font-semibold text-gray-900">
-                      {DataNosIA.NosIACONTACTFORMphone}
-                    </label>
-                    <p id="phone-description" className="text-gray-400 text-sm">
-                      {DataNosIA.NosIACONTACTFORMoptional}
-                    </p>
-                  </div>
-                  <div className="mt-2.5">
-                    <input
-                      type="tel"
-                      name="phone"
-                      id="phone"
-                      autoComplete="tel"
-                      aria-describedby="phone-description"
-                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div>
-                <div className="sm:col-span-2">
-                  <div className="flex justify-between text-sm leading-6">
-                    <label htmlFor="message" className="block text-lg font-semibold leading-6 text-gray-900">
-                      {DataNosIA.NosIACONTACTFORMhowwecanhelpyou}
-                    </label>
-                    <p id="message-description" className="text-gray-400">
-                      {DataNosIA.NosIACONTACTFORMcharacters}
-                    </p>
-                  </div>
-                  <div className="mt-2.5">
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      aria-describedby="message-description"
-                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      defaultValue={''}
-                    />
-                  </div>
-                </div>
-                <fieldset className="sm:col-span-2">
-                </fieldset>
+                </form>
               </div>
-              <div className="mt-10 flex justify-end border-t border-gray-900/10 pt-8">
-                <button
-                  type="submit"
-                  className="rounded-md bg-gray-900 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  {DataNosIA.NosIACONTACTFORMsendmessage}
-                </button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div>
+        <div>
           <hr className="mx-auto mt 16 grid my-10" />
-         </div>
+        </div>
       </main>
-        
-      {/* Footer */}
 
+      {/* Footer */}
     </div>
-    
-  )
+  );
 }
