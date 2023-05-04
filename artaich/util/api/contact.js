@@ -30,3 +30,17 @@ export const createContactMessage = async ({ formData }) => {
     return error.response.data.error;
   }
 };
+
+export const sendEmail = async ({ formData }) => {
+  try {
+    const response = await axios.post(
+      `${strapiUrl}/api/email`,
+      formData,
+      header
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error.response.data.error;
+  }
+};

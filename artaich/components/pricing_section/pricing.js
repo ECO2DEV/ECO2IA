@@ -5,6 +5,7 @@ import CheckoutForm from '../payment/CheckoutForm';
 import { useRouter } from 'next/router';
 import { DataPricing } from '../../data/pricing';
 import { ContacUs } from '../contact_us/contacUs';
+import { PopUpModal } from '../modal/popUpModal';
 const frequencies = [
   { value: 'monthly', label: 'Mensuel', priceSuffix: '' }
   // { value: '', label: '', priceSuffix: '' },
@@ -112,7 +113,11 @@ export default function Pricing({ user }) {
           currency={currency}
         />
       )}
-      {isEnterpriseOpen && <ContacUs onClose={handleButtonEnterprise} />}
+      {isEnterpriseOpen && (
+        <PopUpModal isModalNeedIt={true}>
+          <ContacUs onClose={handleButtonEnterprise} />
+        </PopUpModal>
+      )}
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           {/* <h2 className="text-base font-semibold leading-7 text-indigo-600">Pix</h2> */}
