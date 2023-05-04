@@ -37,6 +37,12 @@ function ContactForm() {
   };
 }
 
+const stats = [
+  { label:'', value: '' },
+  { label: '', value: '' },
+  { label: '', value: '' },
+]
+
 const team = [
   {
     name: 'Michael Foster',
