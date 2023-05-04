@@ -1,15 +1,12 @@
-import { useState } from 'react';
-import { Dialog } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { DataNosIA } from '../data/nosia';
 import { ContacUs } from '../components/contact_us/contacUs';
 import { PopUpModal } from '../components/modal/popUpModal';
 
 const stats = [
-  { label:'', value: '' },
   { label: '', value: '' },
   { label: '', value: '' },
-]
+  { label: '', value: '' }
+];
 
 const team = [
   {
@@ -140,44 +137,7 @@ const footerNavigation = {
   ]
 };
 
-const stats = [
-  { label: '', value: '' },
-  { label: '', value: '' },
-  { label: '', value: '' }
-];
-
 export default function Nosia() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    description: ''
-  });
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const response = await fetch('/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    });
-
-    if (response.ok) {
-      console.log('Email enviado correctamente');
-      // Aquí puedes agregar código adicional para mostrar un mensaje de confirmación de envío exitoso
-    } else {
-      console.log('Error al enviar email');
-      // Aquí puedes agregar código adicional para mostrar un mensaje de error
-    }
-  };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
-  };
   return (
     <div className="bg-white">
       {/* Header */}
