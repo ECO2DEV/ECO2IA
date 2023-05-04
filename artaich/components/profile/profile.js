@@ -1,17 +1,62 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import EditProfile from './editProfile';
 import { PencilIcon } from '../icons/icons';
+import { EditAvatar } from './editAvatar';
+import { uploadUserImage, updateUserImage } from '../../util/api/user';
 
 export default function Profile({ user }) {
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [uploadImage, setUploadImage] = useState(null);
+  const [selectFile, setSelectFile] = useState(null);
 
   const handleModalEdit = () => {
-    // Handle button click logic here
-
-    setIsModalOpen(!isModalOpen); // Set the state to open the modal
+    setIsModalOpen(!isModalOpen);
   };
+  const handleImageChange = (e) => {
+    setUploadImage(e.target.files[0]);
+    const file = e.target.files[0];
+    setSelectFile(file ? file.name : null);
+  };
+
+  const handleImageUpload = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('files', uploadImage, uploadImage.name);
+
+    try {
+      const response = await uploadUserImage({ formData: formData });
+      if (response) {
+        // usar la funcion para actualizar el usuario
+
+        const updatedUser = await updateUserImage({
+          formData: { avatar: response.data[0] },
+          id: user.id
+        });
+        if (updatedUser) {
+          console.log('updated user', updatedUser);
+          router.reload();
+        }
+        console.log('avatar response in profile', response.data[0]);
+      }
+    } catch (error) {
+      console.error('error upload image', error);
+    }
+  };
+
   return (
     <>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10">
+        <EditAvatar
+          onChange={handleImageChange}
+          onSubmit={handleImageUpload}
+          uploadImage={uploadImage}
+          user={user}
+          selectFile={selectFile}
+        />
+      </div>
       <div className="flex">
         <div className="flex-grow">
           <h3 className="text-base font-semibold leading-6 text-gray-900">
@@ -76,59 +121,6 @@ export default function Profile({ user }) {
               </span>
             </dd>
           </div>
-          {/* <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500">Attachments</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <ul role="list" className="divide-y divide-gray-200 rounded-md border border-gray-200">
-                <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                  <div className="flex w-0 flex-1 items-center">
-                    <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                    <span className="ml-2 w-0 flex-1 truncate">resume_back_end_developer.pdf</span>
-                  </div>
-                  <div className="ml-4 flex flex-shrink-0 space-x-4">
-                    <button
-                      type="button"
-                      className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                      Update
-                    </button>
-                    <span className="text-gray-300" aria-hidden="true">
-                      |
-                    </span>
-                    <button
-                      type="button"
-                      className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </li>
-                <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                  <div className="flex w-0 flex-1 items-center">
-                    <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                    <span className="ml-2 w-0 flex-1 truncate">coverletter_back_end_developer.pdf</span>
-                  </div>
-                  <div className="ml-4 flex flex-shrink-0 space-x-4">
-                    <button
-                      type="button"
-                      className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                      Update
-                    </button>
-                    <span className="text-gray-300" aria-hidden="true">
-                      |
-                    </span>
-                    <button
-                      type="button"
-                      className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </li>
-              </ul>
-            </dd>
-          </div> */}
         </dl>
         {isModalOpen && <EditProfile onClose={handleModalEdit} user={user} />}
       </div>

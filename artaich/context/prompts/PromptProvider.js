@@ -1,4 +1,5 @@
 import { useReducer, useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
 import { PromptContext } from './PromptContext';
 import { promptReducer } from './promptReducer';
 import countTokens from '../../util/helpers/count_tokens';
@@ -27,6 +28,7 @@ const promptInitialState = {
 };
 
 export const PromptProvider = ({ children }) => {
+  const router = useRouter();
   const [idsUpdateMaxTokens, setIdsUpdateMaxTokens] = useState({
     userId: null,
     planId: null
@@ -43,6 +45,12 @@ export const PromptProvider = ({ children }) => {
   };
 
   const setResponse = async (response) => {
+    // Para que no pueda hacer el llamado a la API si no han escogido plan
+    if (state.plan.length === 0) {
+      // Agregar mensaje para que diga que no hay plan
+      router.push('/dashboard');
+      return;
+    }
     dispatch({
       type: 'SET_RESPONSE',
       payload: response
@@ -94,6 +102,10 @@ export const PromptProvider = ({ children }) => {
   useEffect(() => {
     if (!state.response) return;
     if (state.promptTokens === 0 || state.plan.max_tokens <= 0) return;
+    // Si no hay plan, redirigir a dashboard
+    if (state.plan.length === 0) {
+      return;
+    }
 
     let responseTokens = countTokensMemo(state.response);
 

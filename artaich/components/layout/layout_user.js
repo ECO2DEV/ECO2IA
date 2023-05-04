@@ -24,9 +24,10 @@ function classNames(...classes) {
 
 export default function LayoutUser({ children }) {
   const { setPlan, plan } = useContext(PromptContext);
-  const { max_imagens, max_tokens } = plan;
+  const { max_imagens = 0, max_tokens = 0 } = plan;
   useEffect(() => {
-     setPlan(children.props.user.plan ? children.props.user.plan.id : null);
+    if (!children.props.user.plan) return;
+    setPlan(children.props.user.plan ? children.props.user.plan.id : null);
   }, []);
 
   // const { attributes } = plan;
@@ -37,9 +38,9 @@ export default function LayoutUser({ children }) {
   const strapiUrl = process.env.STRAPI_URL;
   const image_url = children.props.user.avatar
     ? strapiUrl + children.props.user.avatar.url
-    : 'NA';
+    : '/empty_avatar.png';
 
-  // console.log('Image_url' + image_url);
+  // console.log('Image_url' + children.props.user.avatar);
   return (
     <>
       {/*
@@ -154,7 +155,7 @@ export default function LayoutUser({ children }) {
                           Max Words
                         </dt>
                         <dd className="text-base font-semibold tracking-tight text-white">
-                          {max_tokens ? max_tokens : 'NA'}
+                          {max_tokens}
                         </dd>
                       </div>
                       <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
@@ -162,7 +163,7 @@ export default function LayoutUser({ children }) {
                           Max Images
                         </dt>
                         <dd className="text-base font-semibold tracking-tight text-white">
-                          {max_imagens ? max_imagens : 'NA'}
+                          {max_imagens}
                         </dd>
                       </div>
                     </dl>
@@ -175,6 +176,7 @@ export default function LayoutUser({ children }) {
                           <img
                             className="inline-block h-9 w-9 rounded-full"
                             src={image_url}
+                            alt={children.props.user.username}
                           />
                         ) : (
                           <div className="flex items-center justify-center h-full text-white bg-gray-400 rounded-full">
@@ -262,7 +264,7 @@ export default function LayoutUser({ children }) {
                     Max Words
                   </dt>
                   <dd className="text-base font-semibold tracking-tight text-white">
-                    {max_tokens ? max_tokens : 'NA'}
+                    {max_tokens}
                   </dd>
                 </div>
                 <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
@@ -270,7 +272,7 @@ export default function LayoutUser({ children }) {
                     Max Images
                   </dt>
                   <dd className="text-base font-semibold tracking-tight text-white">
-                    {max_imagens ? max_imagens : 'NA'}
+                    {max_imagens}
                   </dd>
                 </div>
               </dl>
@@ -282,6 +284,7 @@ export default function LayoutUser({ children }) {
                     <img
                       className="inline-block h-9 w-9 rounded-full"
                       src={image_url}
+                      alt={children.props.user.username}
                     />
                   ) : (
                     <div className="flex items-center justify-center h-full text-white bg-gray-400 rounded-full">
@@ -298,7 +301,7 @@ export default function LayoutUser({ children }) {
                   </p>
                   <Link href={'/profile'}>
                     <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
-                     Mon Profile
+                      Mon Profile
                     </p>
                   </Link>
                 </div>
@@ -331,12 +334,7 @@ export default function LayoutUser({ children }) {
             </button>
           </div>
           <main className="flex-1">
-            <div className="py-6 h-screen">
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <h1 className="text-2xl text-center font-semibold text-gray-900">
-                  Bienvenue sur Mattech
-                </h1>
-              </div>
+            <div className="py-3 h-screen">
               <div className="mx-auto h-full max-w-7xl px-4 sm:px-6 lg:px-8">
                 {children}
               </div>
