@@ -1,106 +1,118 @@
-import { useState } from 'react'
-import { RadioGroup } from '@headlessui/react'
-import { CheckIcon } from '@heroicons/react/20/solid'
-import CheckoutForm from '../payment/CheckoutForm'
-import { useRouter } from 'next/router'
-import { DataPricing } from '../../data/pricing'
+import { useState } from 'react';
+import { RadioGroup } from '@headlessui/react';
+import { CheckIcon } from '@heroicons/react/20/solid';
+import CheckoutForm from '../payment/CheckoutForm';
+import { useRouter } from 'next/router';
+import { DataPricing } from '../../data/pricing';
+import { ContacUs } from '../contact_us/contacUs';
 const frequencies = [
-  { value: 'monthly', label: 'Mensuel', priceSuffix: '' },
+  { value: 'monthly', label: 'Mensuel', priceSuffix: '' }
   // { value: '', label: '', priceSuffix: '' },
-]
-
+];
 
 const tiers = [
   {
-    name: (DataPricing.pricingtitle1),
+    name: DataPricing.pricingtitle1,
     id: 'tier-freelancer',
     // href: 'https://buy.stripe.com/test_aEU6rG57i6bu3cIfYZ',
     price: { monthly: 4, annually: '' },
-    description:'',
+    description: '',
     features: [
-      (DataPricing.pricingfeatures1),
-      (DataPricing.pricingfeatures1_2),
-      (DataPricing.pricingfeatures1_3),
-      (DataPricing.pricingfeatures1_4),
-      (DataPricing.pricingfeatures1_5)],
+      DataPricing.pricingfeatures1,
+      DataPricing.pricingfeatures1_2,
+      DataPricing.pricingfeatures1_3,
+      DataPricing.pricingfeatures1_4,
+      DataPricing.pricingfeatures1_5
+    ],
     featured: false,
-    cta: (DataPricing.pricingbutton1),
+    cta: DataPricing.pricingbutton1
   },
   {
-    name: (DataPricing.pricingtitle2),
+    name: DataPricing.pricingtitle2,
     id: 'tier-startup',
     href: '#',
     price: { monthly: 10, annually: '' },
     description: '',
     features: [
-      (DataPricing.pricingfeatures2),
-      (DataPricing.pricingfeatures2_2),
-      (DataPricing.pricingfeatures2_3),
-      (DataPricing.pricingfeatures2_4),
-      (DataPricing.pricingfeatures2_5),
+      DataPricing.pricingfeatures2,
+      DataPricing.pricingfeatures2_2,
+      DataPricing.pricingfeatures2_3,
+      DataPricing.pricingfeatures2_4,
+      DataPricing.pricingfeatures2_5
     ],
     featured: false,
-    cta: (DataPricing.pricingbutton2),
+    cta: DataPricing.pricingbutton2
   },
   {
-    name: (DataPricing.pricingtitle3),
+    name: DataPricing.pricingtitle3,
     id: 'tier-enterprise',
     href: '#',
-    price: (DataPricing.pricingprice3),
+    price: DataPricing.pricingprice3,
     description: '',
     features: [
-      (DataPricing.pricingfeatures3),
-      (DataPricing.pricingfeatutes3_2),
-      (DataPricing.pricingfeatures3_3),
-      (DataPricing.pricingfeatures3_4),
+      DataPricing.pricingfeatures3,
+      DataPricing.pricingfeatutes3_2,
+      DataPricing.pricingfeatures3_3,
+      DataPricing.pricingfeatures3_4
     ],
     featured: true,
-    cta: (DataPricing.pricingbutton3),
-  },
-]
+    cta: DataPricing.pricingbutton3
+  }
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
-export default function Pricing({user}) {
+export default function Pricing({ user }) {
   const router = useRouter();
-  console.log("User in pricing is:" + user);
-  const [frequency, setFrequency] = useState(frequencies[0])
+  // console.log('User in pricing is:' + user);
+  const [frequency, setFrequency] = useState(frequencies[0]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [amount, setAmount]= useState(0);
+  const [isEnterpriseOpen, setIsEnterpriseOpen] = useState(false);
+  const [amount, setAmount] = useState(0);
   const [currency, setCurrency] = useState('eur');
 
-  const handleButtonClick = (amount) => {
-    if(user==null){
-      router.push('/auth/signin')
-     // Set the state to open the modal
-     }
-     else{
-       // Handle button click logic here
-    setAmount(amount);
-    setIsModalOpen(!isModalOpen); 
-
-     }
-   
+  const handleButtonClick = ({ amount }) => {
+    if (user == null) {
+      router.push('/auth/signin');
+      // Set the state to open the modal
+    } else {
+      setAmount(amount);
+      setIsModalOpen(!isModalOpen);
+    }
+  };
+  const handleButtonEnterprise = () => {
+    if (user == null) {
+      router.push('/auth/signin');
+      // Set the state to open the modal
+    } else {
+      setIsEnterpriseOpen(!isEnterpriseOpen);
+    }
   };
 
-//   const checkOut = async (e) => {
-//     const header = {
-//       headers: {
-//           Authorization: `Bearer ${strapiToken}`,
-//       }
-//   }
-//  console.log("Entre aqui ")
-//   const res = await axios.post(`${strapiUrl}/api/payment/create-checkout-session`,{"lookup_key":'plan_NeeieGD7qqOAm9'},header);
-//   console.lop(res);
-//   };
+  //   const checkOut = async (e) => {
+  //     const header = {
+  //       headers: {
+  //           Authorization: `Bearer ${strapiToken}`,
+  //       }
+  //   }
+  //  console.log("Entre aqui ")
+  //   const res = await axios.post(`${strapiUrl}/api/payment/create-checkout-session`,{"lookup_key":'plan_NeeieGD7qqOAm9'},header);
+  //   console.lop(res);
+  //   };
 
   return (
     <div id="pricing" className="bg-white py-10 sm:py-16">
       {/* Render the modal if isModalOpen is true */}
-      {isModalOpen && 
-       <CheckoutForm onClose={handleButtonClick} amount={amount} currency={currency} /> }
+      {isModalOpen && (
+        <CheckoutForm
+          onClose={handleButtonClick}
+          amount={amount}
+          currency={currency}
+        />
+      )}
+      {isEnterpriseOpen && <ContacUs onClose={handleButtonEnterprise} />}
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           {/* <h2 className="text-base font-semibold leading-7 text-indigo-600">Pix</h2> */}
@@ -117,7 +129,9 @@ export default function Pricing({user}) {
             onChange={setFrequency}
             className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
           >
-            <RadioGroup.Label className="sr-only">Payment frequency</RadioGroup.Label>
+            <RadioGroup.Label className="sr-only">
+              Payment frequency
+            </RadioGroup.Label>
             {frequencies.map((option) => (
               <RadioGroup.Option
                 key={option.value}
@@ -152,7 +166,12 @@ export default function Pricing({user}) {
               >
                 {tier.name}
               </h3>
-              <p className={classNames(tier.featured ? 'text-gray-300' : 'text-gray-600', 'mt-4 text-sm leading-6')}>
+              <p
+                className={classNames(
+                  tier.featured ? 'text-gray-300' : 'text-gray-600',
+                  'mt-4 text-sm leading-6'
+                )}
+              >
                 {tier.description}
               </p>
               {/* <p className="mt-6 flex items-baseline gap-x-1">
@@ -186,7 +205,10 @@ export default function Pricing({user}) {
                 {tier.features.map((feature) => (
                   <li key={feature} className="flex gap-x-3">
                     <CheckIcon
-                      className={classNames(tier.featured ? 'text-white' : 'text-indigo-600', 'h-6 w-5 flex-none')}
+                      className={classNames(
+                        tier.featured ? 'text-white' : 'text-indigo-600',
+                        'h-6 w-5 flex-none'
+                      )}
                       aria-hidden="true"
                     />
                     {feature}
@@ -195,7 +217,17 @@ export default function Pricing({user}) {
               </ul>
               <a
                 // href={tier.href}
-                onClick={() => handleButtonClick(tier.price.monthly * 100)}
+                onClick={
+                  tier.name === DataPricing.pricingtitle3
+                    ? () => {
+                        handleButtonEnterprise();
+                      }
+                    : () => {
+                        handleButtonClick({
+                          amount: tier.price.monthly * 100
+                        });
+                      }
+                }
                 aria-describedby={tier.id}
                 className={classNames(
                   tier.featured
@@ -206,12 +238,10 @@ export default function Pricing({user}) {
               >
                 {tier.cta}
               </a>
-           
             </div>
           ))}
         </div>
-     
       </div>
     </div>
-  )
+  );
 }
