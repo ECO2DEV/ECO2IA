@@ -137,8 +137,8 @@ const footerNavigation = {
   ]
 };
 
-export default function Example() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export default function Nosia() {
+
 
   return (
     <div className="bg-white">
