@@ -5,49 +5,57 @@ import { CheckIcon, XMarkIcon as XMarkIconMini } from '@heroicons/react/20/solid
 
 import { DataPricing } from '../../data/pricing'
 const frequencies = [
-  { value: 'monthly', label: 'Mensuel', priceSuffix: '' },
+  { value: '', label: '', priceSuffix: '' },
   // { value: '', label: '', priceSuffix: '' },
 ]
 
 const pricing = {
   frequencies: [
-    { value: 'monthly', label: 'Monthly' },
-    { value: 'annually', label: 'Annually' },
+    { value: '', label: '' },
+    { value: '', label: '' },
   ],
   tiers: [
     {
-      name: 'Starter',
-      id: 'tier-starter',
+      name:(DataPricing.pricingtitle1),
+      id: '',
       href: '#',
       featured: false,
-      description: 'All your essential business finances, taken care of.',
-      price: { monthly: '$15', annually: '$144' },
-      mainFeatures: ['Basic invoicing', 'Easy to use accounting', 'Mutli-accounts'],
+      description: '',
+      price: { monthly: (DataPricing.pricingbutton1), annually: '' },
+      mainFeatures: [(DataPricing.pricingfeatures1),
+                     (DataPricing.pricingfeatures1_2),
+                     (DataPricing.pricingfeatures1_3),
+                     (DataPricing.pricingfeatures1_4),
+                     (DataPricing.pricingfeatures1_5)],
     },
     {
-      name: 'Scale',
-      id: 'tier-scale',
+      name: (DataPricing.pricingtitle2),
+      id: '',
       href: '#',
       featured: true,
-      description: 'The best financial services for your thriving business.',
-      price: { monthly: '$60', annually: '$576' },
+      description: '',
+      price: { monthly: (DataPricing.pricingbutton2), annually: '' },
       mainFeatures: [
-        'Advanced invoicing',
-        'Easy to use accounting',
-        'Mutli-accounts',
-        'Tax planning toolkit',
-        'VAT & VATMOSS filing',
-        'Free bank transfers',
+        (DataPricing.pricingfeatures2),
+        (DataPricing.pricingfeatures2_2),
+        (DataPricing.pricingfeatures2_3),
+        (DataPricing.pricingfeatures2_4),
+        (DataPricing.pricingfeatures2_5)
       ],
     },
     {
-      name: 'Growth',
-      id: 'tier-growth',
+      name: (DataPricing.pricingtitle3),
+      id: '',
       href: '#',
       featured: false,
-      description: 'Convenient features to take your business to the next level.',
-      price: { monthly: '$30', annually: '$288' },
-      mainFeatures: ['Basic invoicing', 'Easy to use accounting', 'Mutli-accounts', 'Tax planning toolkit'],
+      description: '',
+      price: { monthly: '', annually: '' },
+      mainFeatures: [
+        (DataPricing.pricingfeatures3),
+        (DataPricing.pricingfeatutes3_2),
+        (DataPricing.pricingfeatures3_3),
+        (DataPricing.pricingfeatures3_4),
+      ],
     },
   ],
   sections: [
@@ -149,7 +157,7 @@ export default function Modal({children}) {
          <div className="mx-auto max-w-7xl px-6 lg:px-8">
            <div className="relative z-10">
              <h3 className="mx-auto max-w-4xl text-center text-4xl font-light tracking-tight text-white">
-               Please select a forfait to start 
+               {DataPricing.pricingmaindescription} 
              </h3>
              {/* <div clas sName="mt-16 flex justify-center">
                <RadioGroup
@@ -237,7 +245,7 @@ export default function Modal({children}) {
                          'rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
                        )}
                      >
-                       Buy this plan
+                       {DataPricing.pricingbutton3}
                      </a>
                    </div>
                    <div className="mt-8 flow-root sm:mt-10">
