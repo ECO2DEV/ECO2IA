@@ -3,17 +3,40 @@ import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { DataNosIA } from '../data/nosia';
 
-const navigation = [
-  { name: '', href: '' },
-  { name: '', href: '' },
-  { name: '', href: '' },
-  { name: '', href: '' }
-];
-const stats = [
-  { label: '', value: '' },
-  { label: '', value: '' },
-  { label: '', value: '' }
-];
+function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    description: ''
+  });
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const response = await fetch('/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (response.ok) {
+      console.log('Email enviado correctamente');
+      // Aquí puedes agregar código adicional para mostrar un mensaje de confirmación de envío exitoso
+    } else {
+      console.log('Error al enviar email');
+      // Aquí puedes agregar código adicional para mostrar un mensaje de error
+    }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
+}
+
 const team = [
   {
     name: 'Michael Foster',
@@ -426,7 +449,7 @@ export default function Example() {
                 <p className="mt-2 text-lg leading-8 text-gray-600">
                   {DataNosIA.NosIACONTACTFORMdescription}
                 </p>
-                <form action="/contact" method="POST" className="mt-16">
+                <form onSubmit={handleSubmit} className="mt-16">
                   <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                     <div>
                       <label
