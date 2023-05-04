@@ -5,6 +5,12 @@ import { DataNosIA } from '../data/nosia';
 import { ContacUs } from '../components/contact_us/contacUs';
 import { PopUpModal } from '../components/modal/popUpModal';
 
+const stats = [
+  { label:'', value: '' },
+  { label: '', value: '' },
+  { label: '', value: '' },
+]
+
 const team = [
   {
     name: 'Michael Foster',
