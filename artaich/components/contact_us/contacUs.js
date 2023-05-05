@@ -61,42 +61,35 @@ export const ContacUs = ({ onClose = () => {} }) => {
       setLoading(false);
       return;
     }
-    if (isNotHomepage) {
-      try {
-        const response = await sendEmail({ formData: formData });
-        toast.success('Message sent successfully');
-        console.log('This is the message ', response);
-      } catch (error) {
-        toast.error('Something went wrong');
-        console.log(error);
-      } finally {
-        // ToDo: clean the form is not working
-        setFormData({
-          name: ' ',
-          lastName: ' ',
-          email: ' ',
-          company: ' ',
-          telephone: ' ',
-          message: ' '
-        });
-        setLoading(false);
-        console.log('finally the formdataw', formData);
-      }
-    } else {
-      try {
-        const response = await createContactMessage({ formData: formData });
-        toast.success('Message sent successfully');
-        // need a time out to wait for the toast to finish
+
+    try {
+      const contactPromise = createContactMessage({ formData: formData });
+      const emailPromise = sendEmail({ formData: formData });
+
+      const [contactResponse, emailResponse] = await Promise.all([
+        contactPromise,
+        emailPromise
+      ]);
+
+      toast.success('Messages sent successfully');
+
+      if (!isNotHomepage) {
         setTimeout(() => {
           onClose();
         }, 1500);
-        console.log('This is the message ', response);
-      } catch (error) {
-        toast.error('Something went wrong');
-        console.log(error);
-      } finally {
-        setLoading(false);
+      } else {
+        setTimeout(() => {
+          router.reload();
+        }, 1500);
       }
+
+      console.log('This is the contact message', contactResponse);
+      console.log('This is the email message', emailResponse);
+    } catch (error) {
+      toast.error('Something went wrong');
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
