@@ -4,12 +4,15 @@ import EditProfile from './editProfile';
 import { PencilIcon } from '../icons/icons';
 import { EditAvatar } from './editAvatar';
 import { uploadUserImage, updateUserImage } from '../../util/api/user';
+import { Toaster, toast } from 'react-hot-toast';
 
 export default function Profile({ user }) {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [uploadImage, setUploadImage] = useState(null);
   const [selectFile, setSelectFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleModalEdit = () => {
     setIsModalOpen(!isModalOpen);
@@ -18,6 +21,14 @@ export default function Profile({ user }) {
     setUploadImage(e.target.files[0]);
     const file = e.target.files[0];
     setSelectFile(file ? file.name : null);
+
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+    toast.success('Image selected');
   };
 
   const handleImageUpload = async (e) => {
@@ -25,6 +36,7 @@ export default function Profile({ user }) {
 
     const formData = new FormData();
     formData.append('files', uploadImage, uploadImage.name);
+    setLoading(true);
 
     try {
       const response = await uploadUserImage({ formData: formData });
@@ -39,10 +51,14 @@ export default function Profile({ user }) {
           console.log('updated user', updatedUser);
           router.reload();
         }
-        console.log('avatar response in profile', response.data[0]);
+        toast.success('Image uploaded');
+        // console.log('avatar response in profile', response.data[0]);
       }
     } catch (error) {
       console.error('error upload image', error);
+      toast.error('Error uploading image');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,6 +71,8 @@ export default function Profile({ user }) {
           uploadImage={uploadImage}
           user={user}
           selectFile={selectFile}
+          imagePreview={imagePreview}
+          loading={loading}
         />
       </div>
       <div className="flex">
@@ -124,6 +142,7 @@ export default function Profile({ user }) {
         </dl>
         {isModalOpen && <EditProfile onClose={handleModalEdit} user={user} />}
       </div>
+      <Toaster position="top-center" />
     </>
   );
 }
