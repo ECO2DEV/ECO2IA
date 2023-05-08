@@ -1,11 +1,13 @@
 import DalleIA from '../components/dalle/dalle';
+import Modal from '../components/modal/modal';
 import { getUser } from '../util/api/user';
 
 export default function Dalle(props) {
   return (
     <div className="my-10">
-      <DalleIA />
-    </div>
+    {props.user.plan ? <DalleIA /> : <Modal />}
+   </div>
+    
   );
 }
 

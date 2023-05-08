@@ -48,7 +48,7 @@ const tiers = [
     name: DataPricing.pricingtitle3,
     id: 'tier-enterprise',
     href: '#',
-    price: DataPricing.pricingprice3,
+    price: { monthly: DataPricing.pricingbutton3, annually: '' },
     description: '',
     features: [
       DataPricing.pricingfeatures3,
