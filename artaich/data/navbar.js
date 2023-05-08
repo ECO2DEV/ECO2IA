@@ -26,6 +26,7 @@ menu_opt_1: 'Produit',
 menu_opt_2: 'Nos IA',
 menu_opt_3: 'Nos abonnements',
 menu_opt_4: 'Notre entreprise',
+menu_opt_5: "Rajouter Nous contacter",
 login_option: 'Se Connecter',
 }
 
