@@ -17,6 +17,7 @@ export function useChat() {
     {
       revalidateIfStale: false,
       revalidateOnFocus: false
+
       // revalidateOnReconnect: false
     }
   );

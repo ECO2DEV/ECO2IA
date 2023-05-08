@@ -42,6 +42,10 @@ export default function ChatGpt(props) {
           mutate({ data: [...data.data, response?.data], ...data });
           // socket.emit('chat message', response?.data?.data.trim());
         })
+        .catch((error) => {
+          console.log('error is:', error);
+          setError('An error occurred while fetching data.');
+        })
         .finally(() => {
           setIsLoading(false);
           setPrompt('');
