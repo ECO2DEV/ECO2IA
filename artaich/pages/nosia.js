@@ -138,8 +138,6 @@ const footerNavigation = {
 };
 
 export default function Nosia() {
-
-
   return (
     <div className="bg-white">
       {/* Header */}

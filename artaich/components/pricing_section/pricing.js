@@ -84,9 +84,7 @@ export default function Pricing({ user }) {
     }
   };
   const handleButtonEnterprise = () => {
- 
-      setIsEnterpriseOpen(!isEnterpriseOpen);
-    
+    setIsEnterpriseOpen(!isEnterpriseOpen);
   };
 
   //   const checkOut = async (e) => {

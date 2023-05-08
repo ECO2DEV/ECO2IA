@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { Dialog, Transition } from '@headlessui/react';
 import { UserPlusIcon } from '@heroicons/react/24/outline';
 import { updateUserById } from '../../util/api/user';
+import { toast } from 'react-hot-toast';
 
 export default function EditProfile({ onClose, user }) {
   const [open, setOpen] = useState(true);
@@ -32,7 +33,8 @@ export default function EditProfile({ onClose, user }) {
       formData.country === ''
       // || formData.about === ''
     ) {
-      alert('Please fill all the fields');
+      toast.error('Please fill all the fields');
+
       return;
     }
 
@@ -42,12 +44,14 @@ export default function EditProfile({ onClose, user }) {
       formData.LastName.length < 3 ||
       formData.LastName.length > 50
     ) {
-      alert('Name and Last Name must be between 3 and 50 characters');
+      toast.error('Name and Last Name must be between 3 and 50 characters');
+
       return;
     }
     // Valid email with regex
     if (!formData.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
-      alert('Please enter a valid email');
+      toast.error('Please enter a valid email');
+
       return;
     }
 
@@ -56,10 +60,12 @@ export default function EditProfile({ onClose, user }) {
         formData: formData,
         id: user.id
       });
-      console.log('Response:', response.data);
+      // console.log('Response:', response.data);
+      toast.success('Profile updated');
       router.push('/profile');
       onClose();
     } catch (error) {
+      toast.error('Error updating profile');
       console.error('Error:', error);
     }
   };
