@@ -48,7 +48,7 @@ const tiers = [
     name: DataPricing.pricingtitle3,
     id: 'tier-enterprise',
     href: '#',
-    price: DataPricing.pricingprice3,
+    price: { monthly: DataPricing.pricingbutton3, annually: '' },
     description: '',
     features: [
       DataPricing.pricingfeatures3,
@@ -84,12 +84,9 @@ export default function Pricing({ user }) {
     }
   };
   const handleButtonEnterprise = () => {
-    if (user == null) {
-      router.push('/auth/signin');
-      // Set the state to open the modal
-    } else {
+ 
       setIsEnterpriseOpen(!isEnterpriseOpen);
-    }
+    
   };
 
   //   const checkOut = async (e) => {
