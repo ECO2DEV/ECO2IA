@@ -84,12 +84,7 @@ export default function Pricing({ user }) {
     }
   };
   const handleButtonEnterprise = () => {
-    if (user == null) {
-      router.push('/auth/signin');
-      // Set the state to open the modal
-    } else {
-      setIsEnterpriseOpen(!isEnterpriseOpen);
-    }
+    setIsEnterpriseOpen(!isEnterpriseOpen);
   };
 
   //   const checkOut = async (e) => {
