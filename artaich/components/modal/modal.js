@@ -21,7 +21,7 @@ const pricing = {
       href: '#',
       featured: false,
       description: '',
-      price: { monthly: (DataPricing.pricingbutton1), annually: '' },
+      price: { monthly: DataPricing.pricingbutton1, annually: '' },
       mainFeatures: [(DataPricing.pricingfeatures1),
                      (DataPricing.pricingfeatures1_2),
                      (DataPricing.pricingfeatures1_3),
@@ -34,7 +34,7 @@ const pricing = {
       href: '#',
       featured: true,
       description: '',
-      price: { monthly: (DataPricing.pricingbutton2), annually: '' },
+      price: { monthly: DataPricing.pricingbutton2, annually: '' },
       mainFeatures: [
         (DataPricing.pricingfeatures2),
         (DataPricing.pricingfeatures2_2),
@@ -49,7 +49,7 @@ const pricing = {
       href: '#',
       featured: false,
       description: '',
-      price: { monthly: '', annually: '' },
+      price: { monthly: DataPricing.pricingbutton3, annually: '' },
       mainFeatures: [
         (DataPricing.pricingfeatures3),
         (DataPricing.pricingfeatutes3_2),
@@ -121,7 +121,7 @@ const tiers = [
     name: (DataPricing.pricingtitle3),
     id: 'tier-enterprise',
     href: '#',
-    price: (DataPricing.pricingprice3),
+    price: { monthly: DataPricing.pricingprice3, annually: '' },
     description: '',
     features: [
       (DataPricing.pricingfeatures3),
@@ -228,12 +228,12 @@ export default function Modal({children}) {
                        >
                          {tier.price[frequency.value]}
                        </p>
-                       <div className="text-sm leading-5">
+                       {/* <div className="text-sm leading-5">
                          <p className={tier.featured ? 'text-gray-900' : 'text-white'}>USD</p>
                          <p
                            className={tier.featured ? 'text-gray-500' : 'text-gray-400'}
                          >{`Billed ${frequency.value}`}</p>
-                       </div>
+                       </div> */}
                      </div>
                      <a
                        href={tier.href}
@@ -245,7 +245,7 @@ export default function Modal({children}) {
                          'rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
                        )}
                      >
-                       {DataPricing.pricingbutton3}
+                       {tier.price.monthly}
                      </a>
                    </div>
                    <div className="mt-8 flow-root sm:mt-10">
