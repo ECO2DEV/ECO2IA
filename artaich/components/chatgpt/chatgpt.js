@@ -5,12 +5,15 @@ import { PromptContext } from '../../context/prompts/PromptContext';
 import SearchTextbox from '../searchTextbox/searchTextbox';
 import { Welcome } from '../welcome/welcome';
 import { ChatgptResponse } from '../../util/api/chatgptResponse';
+import { Conversations } from './conversations';
 // import { io } from 'socket.io-client';
+import { useChat } from '../../hooks/useChat';
 
 // const socket = io('http://localhost:1337');
 
 export default function ChatGpt(props) {
   const user = props.user;
+  const { data, mutate } = useChat();
 
   const {
     prompt,
@@ -32,11 +35,16 @@ export default function ChatGpt(props) {
       // Realiza la llamada a la API
       ChatgptResponse({ prompt: prompt, user: user })
         .then((response) => {
-          // console.log('response is:');
+          console.log('response is:');
           setResponse(response?.data?.data);
-          // console.log('response.data.data.trim() is:', response);
+          // console.log('response.data.data.trim() is:', response?.data?.data);
           // conectar el socket io
+          mutate({ data: [...data.data, response?.data], ...data });
           // socket.emit('chat message', response?.data?.data.trim());
+        })
+        .catch((error) => {
+          console.log('error is:', error);
+          setError('An error occurred while fetching data.');
         })
         .finally(() => {
           setIsLoading(false);
@@ -50,22 +58,11 @@ export default function ChatGpt(props) {
       setPromptTokens(0);
     }
   };
-  const handleChangeTextarea = (e) => {
-    setResponse(e.target.value);
-  };
 
   return (
     <div>
-      <br></br>
       {response ? (
-        <textarea
-          rows={8}
-          name="comment"
-          id="comment"
-          className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
-          value={response ? response : ''}
-          onChange={handleChangeTextarea}
-        />
+        <Conversations />
       ) : (
         <>
           <Welcome />
