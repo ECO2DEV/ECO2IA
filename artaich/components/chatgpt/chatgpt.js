@@ -8,10 +8,14 @@ import { ChatgptResponse } from '../../util/api/chatgptResponse';
 import { Conversations } from './conversations';
 // import { io } from 'socket.io-client';
 import { useChat } from '../../hooks/useChat';
+import { ButtonHelper } from '../welcome/buttonHelper';
 
 // const socket = io('http://localhost:1337');
 
 export default function ChatGpt(props) {
+  const [openHelpers, setOpenHelpers] = useState(false);
+  const [loading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const user = props.user;
   const { data, mutate } = useChat();
 
@@ -23,9 +27,6 @@ export default function ChatGpt(props) {
     setResponse,
     setPromptTokens
   } = useContext(PromptContext);
-
-  const [loading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
 
   const FetchData = async () => {
     if (!prompt) {
@@ -61,15 +62,12 @@ export default function ChatGpt(props) {
 
   return (
     <div>
-      {response ? (
-        <Conversations />
-      ) : (
-        <>
-          <Welcome />
-        </>
-      )}
+      {openHelpers ? <Welcome /> : <Conversations />}
+      <div className="flex fixed bottom-9 w-[90%] lg:w-[73%] ">
+        <SearchTextbox OnChange={handleChange} Fetch={FetchData} />
+        <ButtonHelper onClick={() => setOpenHelpers(!openHelpers)} />
+      </div>
 
-      <SearchTextbox OnChange={handleChange} Fetch={FetchData} />
       {error && <h4 className="text-red-700"> {error}</h4>}
 
       <span className="fixed flex bottom-4 text-gray-900">
