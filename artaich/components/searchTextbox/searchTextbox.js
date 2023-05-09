@@ -7,7 +7,7 @@ export default function SearchTextbox({ OnChange, Fetch }) {
   const { prompt } = useContext(PromptContext);
 
   return (
-    <div className="fixed bottom-10 w-11/12 lg:w-4/6  xl: ">
+    <div className=" flex-1">
       <label
         htmlFor="text"
         className="block text-sm font-medium leading-6 text-gray-900"
