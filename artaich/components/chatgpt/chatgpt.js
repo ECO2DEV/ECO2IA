@@ -50,6 +50,7 @@ export default function ChatGpt(props) {
         .finally(() => {
           setIsLoading(false);
           setPrompt('');
+          setOpenHelpers(false);
         });
     }
   };
@@ -75,17 +76,6 @@ export default function ChatGpt(props) {
         Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
         {loading && <Loader />}{' '}
       </span>
-
-      {/* <div>
-                <ul role="list" className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2">
-                    <li key={'tokens_prompt'} className="col-span-1 flex rounded-md shadow-sm">
-                        <Counter tokens_quantity={prompTokens} token_libelle='Tokens used in this request' bgColor={'bg-green-500'} />
-                    </li>
-                    <li key={'total_tokens'} className="col-span-1 flex rounded-md shadow-sm">
-                        <Counter tokens_quantity={tokensUsed} token_libelle='Total Tokens used in this request' bgColor={'bg-gray-600'} />
-                    </li>
-                </ul>
-            </div> */}
     </div>
   );
 }
