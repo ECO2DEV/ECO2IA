@@ -42,6 +42,7 @@ export function ChatGPTLogo() {
   );
 }
 
+
 export function PencilIcon() {
   return (
     <svg
