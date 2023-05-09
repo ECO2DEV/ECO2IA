@@ -44,8 +44,7 @@ return (
                {DataHero.hero_maintext}
             </h1>
             <div className="mt-6 relative rounded-full py-1 px-3 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                {DataHero.hero_title}
-              <a href="#" className="font-semibold text-indigo-600">
+              <a href={'/about'} className="font-semibold text-indigo-600">
                 <span className="absolute inset-0" aria-hidden="true" />
                 {DataHero.hero_readmore}<span aria-hidden="true">&rarr;</span>
               </a> 

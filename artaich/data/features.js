@@ -7,7 +7,7 @@ export const DataFeatures =
 }
 export const features = [
     {
-      name: 'Fiabilite',
+      name: "Fiabilité",
       description:
         'Nous tenons à vous rassurer quant à la fiabilité de nos Intelligences Artificielles. Nous avons effectué des tests rigoureux et mis en place des contrôles de qualité stricts pour garantir des résultats précis et cohérents. Nous sommes confiants dans la valeur de nos IA.',
       icon: FingerPrintIcon,

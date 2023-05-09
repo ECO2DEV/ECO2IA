@@ -6,6 +6,7 @@ import DropDownText from './dropdowntextboxt';
 import DropdownCountry from './dropdownCountry';
 import { createUser } from '../../util/api/user';
 import { signIn } from 'next-auth/react';
+import { DataRegister } from '../../data/register';
 
 export default function Register({ onClose }) {
   const [open, setOpen] = useState(true);
@@ -102,7 +103,7 @@ export default function Register({ onClose }) {
                         id={'username'}
                         nametx={'username'}
                         placeholder={'JaneSmith22'}
-                        libelle={'Nom Utilisateur'}
+                        libelle={DataRegister.RegisterNickName}
                         type={'text'}
                         onChange={(e) => handleUsernameChange(e)}
                         value={formData.username}
@@ -111,7 +112,7 @@ export default function Register({ onClose }) {
                         id={'email'}
                         nametx={'email'}
                         placeholder={'JaneSmith22@mattech.com'}
-                        libelle={'Email'}
+                        libelle={DataRegister.RegisterEmail}
                         type={'email'}
                         onChange={(e) => handleUsernameChange(e)}
                         value={formData.email}
@@ -120,7 +121,7 @@ export default function Register({ onClose }) {
                         id={'password'}
                         nametx={'password'}
                         placeholder={'*******'}
-                        libelle={'Password'}
+                        libelle={DataRegister.RegisterPassword}
                         type={'password'}
                         onChange={(e) => handleUsernameChange(e)}
                         value={formData.password}
@@ -129,7 +130,7 @@ export default function Register({ onClose }) {
                         id={'LastName'}
                         nametx={'LastName'}
                         placeholder={'Jane Lauren'}
-                        libelle={'Nom'}
+                        libelle={DataRegister.RegisterLastName}
                         type={'text'}
                         onChange={(e) => handleUsernameChange(e)}
                         value={formData.Lastname}
@@ -138,7 +139,7 @@ export default function Register({ onClose }) {
                         id={'Name'}
                         nametx={'Name'}
                         placeholder={'Smith'}
-                        libelle={'Prenom'}
+                        libelle={DataRegister.RegisterName}
                         type={'text'}
                         onChange={(e) => handleUsernameChange(e)}
                         value={formData.Name}
@@ -147,7 +148,7 @@ export default function Register({ onClose }) {
                         id={'numberTelephone'}
                         nametx={'numberTelephone'}
                         placeholder={'+33 06 98 66 91'}
-                        libelle={'Numéro de Télephone'}
+                        libelle={DataRegister.RegisterPhone}
                         type={'text'}
                         onChange={(e) => handleUsernameChange(e)}
                         value={formData.num_tel}
@@ -162,7 +163,7 @@ export default function Register({ onClose }) {
                     className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
                     onClick={handleSubmit}
                   >
-                    Créer
+                    {DataRegister.RegisterCreate}
                   </button>
                   <button
                     type="button"
@@ -170,7 +171,7 @@ export default function Register({ onClose }) {
                     onClick={onClose}
                     ref={cancelButtonRef}
                   >
-                    Cancel
+                    {DataRegister.RegisterCancel}
                   </button>
                 </div>
               </Dialog.Panel>
