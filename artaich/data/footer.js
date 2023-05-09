@@ -1,4 +1,3 @@
-import { footertitle1, footertitle2, footertitle3, footertitle4} from "../../data/footer"
 export const FooterData =
 {
 

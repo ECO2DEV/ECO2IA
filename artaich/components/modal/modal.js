@@ -2,8 +2,8 @@ import { Fragment, useState } from 'react'
 import { Dialog, RadioGroup } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon as XMarkIconOutline } from '@heroicons/react/24/outline'
 import { CheckIcon, XMarkIcon as XMarkIconMini } from '@heroicons/react/20/solid'
+import { DataPricing } from '../data/pricing'
 
-import { DataPricing } from '../../data/pricing'
 const frequencies = [
   { value: '', label: '', priceSuffix: '' },
   // { value: '', label: '', priceSuffix: '' },
@@ -27,6 +27,7 @@ const pricing = {
                      (DataPricing.pricingfeatures1_3),
                      (DataPricing.pricingfeatures1_4),
                      (DataPricing.pricingfeatures1_5)],
+      cta: (DataPricing.pricingbutton1),
     },
     {
       name: (DataPricing.pricingtitle2),
@@ -42,6 +43,7 @@ const pricing = {
         (DataPricing.pricingfeatures2_4),
         (DataPricing.pricingfeatures2_5)
       ],
+      cta: (DataPricing.pricingbutton2),
     },
     {
       name: (DataPricing.pricingtitle3),
@@ -56,6 +58,7 @@ const pricing = {
         (DataPricing.pricingfeatures3_3),
         (DataPricing.pricingfeatures3_4),
       ],
+      cta: (DataPricing.pricingbutton3),
     },
   ],
   sections: [
@@ -228,12 +231,9 @@ export default function Modal({children}) {
                        >
                          {tier.price[frequency.value]}
                        </p>
-                       {/* <div className="text-sm leading-5">
-                         <p className={tier.featured ? 'text-gray-900' : 'text-white'}>USD</p>
-                         <p
-                           className={tier.featured ? 'text-gray-500' : 'text-gray-400'}
-                         >{`Billed ${frequency.value}`}</p>
-                       </div> */}
+                       <div className="text-sm leading-5">
+                         <p className={tier.featured ? 'text-gray-900' : 'text-white'}></p>
+                       </div>
                      </div>
                      <a
                        href={tier.href}
@@ -245,7 +245,7 @@ export default function Modal({children}) {
                          'rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
                        )}
                      >
-                       {tier.price.monthly}
+                    {tier.cta}
                      </a>
                    </div>
                    <div className="mt-8 flow-root sm:mt-10">
