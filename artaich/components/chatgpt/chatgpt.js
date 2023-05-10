@@ -53,7 +53,7 @@ export default function ChatGpt(props) {
   };
 
   return (
-    <div>
+    <section>
       {data?.data?.length === 0 ? (
         <Welcome />
       ) : openHelpers ? (
@@ -73,6 +73,6 @@ export default function ChatGpt(props) {
         Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
         {loading && <Loader />}{' '}
       </span>
-    </div>
+    </section>
   );
 }
