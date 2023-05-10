@@ -10,15 +10,15 @@ const fetcher = (url) =>
     .then((res) => res.data)
     .catch((err) => console.log('Error in fetcher: ' + err));
 
-export function useChat() {
+export function useChat(userId = 1) {
   const { data, error, isLoading, mutate } = useSWR(
-    `${strapiUrl}/api/requests?sort=createdAt:desc&pagination[page]=1&pagination[pageSize]=5`,
+    `${strapiUrl}/api/requests?filters[users_permissions_user][id][$eq]=${userId}&sort=createdAt:desc&pagination[page]=1&pagination[pageSize]=5`,
     fetcher,
     {
       revalidateIfStale: false,
-      revalidateOnFocus: false
-
-      // revalidateOnReconnect: false
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      refreshInterval: 0
     }
   );
 

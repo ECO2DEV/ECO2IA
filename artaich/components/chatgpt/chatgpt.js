@@ -6,27 +6,18 @@ import SearchTextbox from '../searchTextbox/searchTextbox';
 import { Welcome } from '../welcome/welcome';
 import { ChatgptResponse } from '../../util/api/chatgptResponse';
 import { Conversations } from './conversations';
-// import { io } from 'socket.io-client';
 import { useChat } from '../../hooks/useChat';
 import { ButtonHelper } from '../welcome/buttonHelper';
-
-// const socket = io('http://localhost:1337');
 
 export default function ChatGpt(props) {
   const [openHelpers, setOpenHelpers] = useState(false);
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const user = props.user;
-  const { data, mutate } = useChat();
+  const { data, mutate } = useChat(user);
 
-  const {
-    prompt,
-    response,
-    promptTokens,
-    setPrompt,
-    setResponse,
-    setPromptTokens
-  } = useContext(PromptContext);
+  const { prompt, promptTokens, setPrompt, setResponse, setPromptTokens } =
+    useContext(PromptContext);
 
   const FetchData = async () => {
     if (!prompt) {
@@ -63,7 +54,13 @@ export default function ChatGpt(props) {
 
   return (
     <div>
-      {openHelpers ? <Welcome /> : <Conversations />}
+      {data?.data?.length === 0 ? (
+        <Welcome />
+      ) : openHelpers ? (
+        <Welcome />
+      ) : (
+        <Conversations />
+      )}
       <div className="flex fixed bottom-9 w-[90%] lg:w-[73%] ">
         <SearchTextbox OnChange={handleChange} Fetch={FetchData} />
         <ButtonHelper onClick={() => setOpenHelpers(!openHelpers)} />

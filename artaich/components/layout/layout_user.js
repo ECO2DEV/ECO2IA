@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Dialog, Transition } from '@headlessui/react';
 import { signOut } from 'next-auth/react';
 import { PromptContext } from '../../context/prompts/PromptContext';
+import { UserContext } from '../../context/user/UserContext';
 import {
   Bars3Icon,
   ArrowLeftOnRectangleIcon,
@@ -24,17 +25,24 @@ function classNames(...classes) {
 
 export default function LayoutUser({ children }) {
   const { setPlan, plan } = useContext(PromptContext);
+  const { setUser } = useContext(UserContext);
   const { max_imagens = 0, max_tokens = 0 } = plan;
+
   useEffect(() => {
     if (!children.props.user.plan) return;
     setPlan(children.props.user.plan ? children.props.user.plan.id : null);
   }, []);
 
+  useEffect(() => {
+    if (!children.props.user) return;
+    setUser(children.props.user);
+  }, [children.props.user]);
+
   // const { attributes } = plan;
   // console.log('Attributes are : ' + plan);
+  // console.log(JSON.stringify(children.props.user));
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  // console.log('Children props are : ' + children.props);
   const strapiUrl = process.env.STRAPI_URL;
   const image_url = children.props.user.avatar
     ? strapiUrl + children.props.user.avatar.url
