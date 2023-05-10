@@ -7,6 +7,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { PromptProvider } from '../context/prompts/PromptProvider';
 import { SWRConfig } from 'swr';
+import { UserProvider } from '../context/user/UserProvider';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -43,15 +44,17 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   ) {
     return (
       <SessionProvider session={session}>
-        <PromptProvider>
-          <SWRConfig value={{}}>
-            <Elements stripe={stripePromise} options={options}>
-              <LayoutUser {...pageProps}>
-                <Component {...pageProps} />
-              </LayoutUser>
-            </Elements>
-          </SWRConfig>
-        </PromptProvider>
+        <UserProvider>
+          <PromptProvider>
+            <SWRConfig value={{}}>
+              <Elements stripe={stripePromise} options={options}>
+                <LayoutUser {...pageProps}>
+                  <Component {...pageProps} />
+                </LayoutUser>
+              </Elements>
+            </SWRConfig>
+          </PromptProvider>
+        </UserProvider>
       </SessionProvider>
     );
   }
