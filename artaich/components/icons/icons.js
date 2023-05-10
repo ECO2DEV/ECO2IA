@@ -64,7 +64,7 @@ export const EmptyAvatar = () => {
 export function QuestionIcon() {
   return (
     <svg
-      className="w-10 h-10 text-yellow-500"
+      className="w-9 h-9 text-gray-100 bg-gray-900 rounded-full"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"
