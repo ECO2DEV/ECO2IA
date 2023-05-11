@@ -1,14 +1,7 @@
 import { getSession } from 'next-auth/react';
 import axios from 'axios';
+import { strapiUrl, strapiToken, header } from '../../constants/constans';
 
-// Function to make a POST request
-const strapiToken = process.env.API_TOKEN;
-const strapiUrl = process.env.STRAPI_URL;
-const header = {
-  headers: {
-    Authorization: `Bearer ${strapiToken}`
-  }
-};
 export const createUser = async (data) => {
   try {
     const dataStripe = { email: data.email, name: data.Name };

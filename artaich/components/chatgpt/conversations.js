@@ -2,8 +2,7 @@ import { useRef, useEffect, useContext } from 'react';
 import { UserContext } from '../../context/user/UserContext';
 import { ChatGPTLogo, EmptyAvatar } from '../icons/icons';
 import { useChat } from '../../hooks/useChat';
-
-const strapiUrl = process.env.STRAPI_URL;
+import { strapiUrl } from '../../constants/constans';
 
 export const Conversations = () => {
   const { user } = useContext(UserContext);
