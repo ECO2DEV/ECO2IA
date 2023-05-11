@@ -1,14 +1,7 @@
 import axios from 'axios';
-
-const strapiToken = process.env.API_TOKEN;
-const strapiUrl = process.env.STRAPI_URL;
+import { strapiUrl, header } from '../../constants/constans';
 
 export const ChatgptResponse = async ({ prompt, user }) => {
-  const header = {
-    headers: {
-      Authorization: `Bearer ${strapiToken}`
-    }
-  };
   try {
     const response = await axios.post(
       `${strapiUrl}/api/openai/chatgpt`,

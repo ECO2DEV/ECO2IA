@@ -1,5 +1,6 @@
 import { Fragment, useState, useContext, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { Dialog, Transition } from '@headlessui/react';
 import { signOut } from 'next-auth/react';
 import { PromptContext } from '../../context/prompts/PromptContext';
@@ -12,7 +13,7 @@ import {
 } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import logo from '../../public/Mlogop.png';
-import Link from 'next/link';
+import { strapiUrl } from '../../constants/constans';
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true }
@@ -43,7 +44,7 @@ export default function LayoutUser({ children }) {
   // console.log(JSON.stringify(children.props.user));
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const strapiUrl = process.env.STRAPI_URL;
+
   const image_url = children.props.user.avatar
     ? strapiUrl + children.props.user.avatar.url
     : '/empty_avatar.png';

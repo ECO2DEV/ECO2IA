@@ -1,12 +1,6 @@
 import axios from 'axios';
-const strapiToken = process.env.API_TOKEN;
-const strapiUrl = process.env.STRAPI_URL;
-const header = {
-  headers: {
-    Authorization: `Bearer ${strapiToken}`,
-    'Content-Type': 'application/json'
-  }
-};
+import { strapiUrl, header } from '../../constants/constans';
+
 export const createContactMessage = async ({ formData }) => {
   const data = {
     data: {

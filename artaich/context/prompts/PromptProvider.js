@@ -4,14 +4,7 @@ import { PromptContext } from './PromptContext';
 import { promptReducer } from './promptReducer';
 import countTokens from '../../util/helpers/count_tokens';
 import axios from 'axios';
-
-const strapiToken = process.env.API_TOKEN;
-const strapiUrl = process.env.STRAPI_URL;
-const header = {
-  headers: {
-    Authorization: `Bearer ${strapiToken}`
-  }
-};
+import { strapiUrl, header } from '../../constants/constans';
 
 const promptInitialState = {
   prompt: null,

@@ -1,8 +1,6 @@
 import useSWR from 'swr';
 import axios from 'axios';
-
-const strapiToken = process.env.API_TOKEN;
-const strapiUrl = process.env.STRAPI_URL;
+import { strapiUrl, strapiToken } from '../constants/constans';
 
 const fetcher = (url) =>
   axios
