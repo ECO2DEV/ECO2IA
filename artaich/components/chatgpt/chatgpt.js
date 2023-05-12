@@ -61,7 +61,7 @@ export default function ChatGpt(props) {
       ) : (
         <Conversations />
       )}
-      <div className="flex fixed bottom-9 w-[90%] lg:w-[73%] xl:w-[76.5%]">
+      <div className="flex justify-center fixed bottom-9 w-[90%] ">
         <SearchTextbox OnChange={handleChange} Fetch={FetchData} />
         <ButtonHelper onClick={() => setOpenHelpers(!openHelpers)} />
       </div>
