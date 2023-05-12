@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import Loader from '../loader/loader';
+
 import { PromptContext } from '../../context/prompts/PromptContext';
 // import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 import SearchTextbox from '../searchTextbox/searchTextbox';
@@ -16,7 +16,7 @@ export default function ChatGpt(props) {
   const user = props.user;
   const { data, mutate } = useChat(user);
 
-  const { prompt, promptTokens, setPrompt, setResponse, setPromptTokens } =
+  const { prompt, setPrompt, setResponse, setPromptTokens } =
     useContext(PromptContext);
 
   const FetchData = async () => {
@@ -61,18 +61,16 @@ export default function ChatGpt(props) {
       ) : (
         <Conversations />
       )}
-      <div className="flex justify-center fixed bottom-9 w-[90%] ">
-        <SearchTextbox OnChange={handleChange} Fetch={FetchData} />
+      <div className="flex justify-center fixed bottom-3 w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem]">
+        <SearchTextbox
+          OnChange={handleChange}
+          Fetch={FetchData}
+          loading={loading}
+        />
         <ButtonHelper onClick={() => setOpenHelpers(!openHelpers)} />
       </div>
 
       {error && <h4 className="text-red-700"> {error}</h4>}
-
-      <span className="fixed flex bottom-4 text-gray-900">
-        {' '}
-        Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
-        {loading && <Loader />}{' '}
-      </span>
     </section>
   );
 }
