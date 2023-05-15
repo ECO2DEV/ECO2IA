@@ -99,14 +99,24 @@ export const PromptProvider = ({ children }) => {
     if (state.plan.length === 0) {
       return;
     }
+    let responseTokens;
+    let updatedMaxImages;
+    let totalTokens;
 
-    let responseTokens = countTokensMemo(state.response);
+    if (Array.isArray(state.response) && state.response.length > 0) {
+      // Si la respuesta es un array (DALL·E) y tiene imágenes
+      updatedMaxImages = state.plan.max_imagens -= 2; // Restar 2 imágenes
+      totalTokens = state.promptTokens;
+    } else {
+      // Si la respuesta es un string (GPT-3)
+      responseTokens = countTokensMemo(state.response);
+      totalTokens = responseTokens + state.promptTokens;
+    }
 
     console.log('AI Response Tokens', responseTokens);
 
-    const totalTokens = responseTokens + state.promptTokens;
     const updatedMaxTokens = (state.plan.max_tokens -= totalTokens);
-    const updatedMaxImages = (state.plan.max_imagens -= 1);
+    // const updatedMaxImages = (state.plan.max_imagens -= 1);
 
     const maxTokensUpdated = {
       data: {
