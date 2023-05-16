@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
+import { UserContext } from '../../context/user/UserContext';
 import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
@@ -8,6 +9,7 @@ import { DalleResponse } from '../../util/api/dalleResponse';
 import Loader from '../loader/loader';
 import ia_chat from '../../public/ia_chat.png';
 import Image from 'next/image';
+import { Carousel } from './carousel';
 
 export default function DalleIA() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -15,6 +17,7 @@ export default function DalleIA() {
   const [imageSrc, setImageSrc] = useState('');
   const [loading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState('');
+  const { user } = useContext(UserContext);
   const { prompt, setPrompt, promptTokens, setPromptTokens, setResponse } =
     useContext(PromptContext);
 
@@ -34,8 +37,7 @@ export default function DalleIA() {
     } else {
       setIsLoading(true);
       try {
-        const response = await DalleResponse({ prompt: prompt });
-
+        const response = await DalleResponse({ prompt: prompt, user: user });
         setImageSrc(response?.data?.data);
         console.log('response is:', response?.data?.data);
         setResponse(response?.data?.data);
@@ -73,7 +75,7 @@ export default function DalleIA() {
       <br></br>
 
       <div className="">
-        <img src="ia_chat.png" alt="Dalle" className="w-40 h-40 object-cover" />
+        <Carousel />
 
         {showDropdown && (
           <div className={`${showDropdown ? 'absolute  top-10' : 'hidden'}`}>
@@ -204,13 +206,13 @@ export default function DalleIA() {
         </Menu>
       </div>
 
-      <div className="flex-fixed bottom-9 ">
-        <SearchTextbox OnChange={handleChange} Fetch={FetchData} />
+      <div className="flex justify-center fixed bottom-3 w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem]">
+        <SearchTextbox
+          OnChange={handleChange}
+          Fetch={FetchData}
+          loading={loading}
+        />
       </div>
-
-      <span className="fixed flex bottom-4 text-gray-900">
-        {loading && <Loader />}{' '}
-      </span>
     </div>
   );
 }
