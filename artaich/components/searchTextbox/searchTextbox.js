@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
+import Loader from '../loader/loader';
 
 import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 
-export default function SearchTextbox({ OnChange, Fetch }) {
-  const { prompt } = useContext(PromptContext);
+export default function SearchTextbox({ OnChange, Fetch, loading }) {
+  const { prompt, promptTokens } = useContext(PromptContext);
 
   return (
-    <div className=" flex-1">
+    <div className="flex-1">
       <label
         htmlFor="text"
         className="block text-sm font-medium leading-6 text-gray-900"
@@ -37,6 +38,12 @@ export default function SearchTextbox({ OnChange, Fetch }) {
           <BarsArrowUpIcon className="-ml-0.5 h-5 w-5 text-white" />
           Send
         </button>
+      </div>
+      <div className="flex justify-start">
+        <span className=" bottom-4 text-gray-900">
+          Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+        </span>
+        <span>{loading && <Loader />}</span>
       </div>
     </div>
   );
