@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react';
+import Image from 'next/image';
 import { Dialog, Transition } from '@headlessui/react';
 import {
   Bars3Icon,
@@ -15,7 +16,6 @@ import {
   ClockIcon,
   ReceiptRefundIcon
 } from '@heroicons/react/24/outline';
-import Image from 'next/image';
 
 import ia_chat from '../../public/ia_chat.png';
 
@@ -39,6 +39,13 @@ const actions = [
   {
     title: 'Dalle',
     href: 'dalle',
+    icon: ia_chat,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
+  },
+  {
+    title: 'Mattraduct',
+    href: 'mattraduct',
     icon: ia_chat,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
@@ -118,7 +125,11 @@ export default function DashboardSection() {
                   'inline-flex rounded-lg p-1 ring-4 ring-white'
                 )}
               >
-                <Image className="h-12 w-12" src={action.icon} />
+                <Image
+                  className="h-12 w-12"
+                  src={action.icon}
+                  alt={action.title}
+                />
                 {/* <action.icon className="h-6 w-6" aria-hidden="true" /> */}
               </span>
             </div>

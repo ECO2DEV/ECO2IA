@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { strapiUrl, header } from '../../constants/constans';
 
-export const DalleResponse = async ({ prompt }) => {
+export const DalleResponse = async ({ prompt, user }) => {
   try {
     const response = await axios.post(
       `${strapiUrl}/api/openai/dalle`,
-      { prompt: prompt },
+      { prompt: prompt, users_permissions_user: user },
       header
     );
 

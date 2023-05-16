@@ -113,7 +113,7 @@ export const PromptProvider = ({ children }) => {
       totalTokens = responseTokens + state.promptTokens;
     }
 
-    console.log('AI Response Tokens', responseTokens);
+    // console.log('AI Response Tokens', responseTokens);
 
     const updatedMaxTokens = (state.plan.max_tokens -= totalTokens);
     // const updatedMaxImages = (state.plan.max_imagens -= 1);

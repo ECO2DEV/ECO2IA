@@ -29,10 +29,8 @@ export default function ChatGpt(props) {
         .then((response) => {
           console.log('response is:');
           setResponse(response?.data?.data);
-          // console.log('response.data.data.trim() is:', response?.data?.data);
-          // conectar el socket io
+          // console.log('response.data.data.trim() is:', response);
           mutate({ data: [...data.data, response?.data], ...data });
-          // socket.emit('chat message', response?.data?.data.trim());
         })
         .catch((error) => {
           console.log('error is:', error);
