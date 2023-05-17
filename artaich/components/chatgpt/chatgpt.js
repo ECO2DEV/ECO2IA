@@ -14,6 +14,7 @@ export default function ChatGpt(props) {
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const user = props.user;
+
   const { data, mutate } = useChat(user);
 
   const { prompt, setPrompt, setResponse, setPromptTokens } =
