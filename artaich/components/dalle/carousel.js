@@ -1,105 +1,124 @@
-export const Carousel = () => {
+import { useContext, useState } from 'react';
+import Image from 'next/image';
+import { UserContext } from '../../context/user/UserContext';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { useDalle } from '../../hooks/useDalle';
+
+const settings = {
+  style: {},
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  initialSlide: 0,
+  arrows: true,
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />
+};
+
+function NextArrow(props) {
+  const { className, style, onClick } = props;
   return (
     <div
-      id="animation-carousel"
-      className="relative w-full"
-      data-carousel="slide"
-    >
-      {/* <!-- Carousel wrapper --> */}
-      <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
-        {/* <!-- Item 1 --> */}
-        <div className="hidden duration-200 ease-linear" data-carousel-item>
-          <img
-            src="./login_image.png"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 bg-gray-700"
-            alt="..."
-          />
-        </div>
-        {/* <!-- Item 2 --> */}
-        <div className="hidden duration-200 ease-linear" data-carousel-item>
-          <img
-            src="/Photo1.jpg"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="..."
-          />
-        </div>
-        {/* <!-- Item 3 --> */}
-        <div
-          className="hidden duration-200 ease-linear"
-          data-carousel-item="active"
-        >
-          <img
-            src="/Photo1.jpg"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="..."
-          />
-        </div>
-        {/* <!-- Item 4 --> */}
-        <div className="hidden duration-200 ease-linear" data-carousel-item>
-          <img
-            src="/Photo1.jpg"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="..."
-          />
-        </div>
-        {/* <!-- Item 5 --> */}
-        <div className="hidden duration-200 ease-linear" data-carousel-item>
-          <img
-            src="/Photo1.jpg"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="..."
-          />
+      className={className}
+      style={{
+        ...style,
+
+        background: 'black',
+        borderRadius: '50%',
+        textAlign: 'center',
+        color: 'black',
+        right: '1px'
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+function PrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: 'block',
+        background: 'black',
+        borderRadius: '50%',
+        textAlign: 'center',
+        color: 'black',
+        left: '0',
+        zIndex: '1'
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+export const Carousel = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const { user } = useContext(UserContext);
+  const { data, isLoading, isError: error } = useDalle(user?.id);
+
+  // const handleImageClick = (index) => {
+  //   setSelectedImage(images[index]);
+  // };
+  console.log('data is:', data?.data);
+
+  if (isLoading)
+    return (
+      <div className=" shadow rounded-md p-4 max-w-sm w-full mx-auto">
+        <div className="animate-pulse">
+          <div className=" flex justify-center items-center gap-2">
+            <div className="w-60 h-28 rounded-lg bg-slate-500"></div>
+            <div className="w-60 h-28 rounded-lg bg-slate-500"></div>
+          </div>
         </div>
       </div>
-      {/* <!-- Slider controls --> */}
-      <button
-        type="button"
-        className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-        data-carousel-prev
-      >
-        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-          <svg
-            aria-hidden="true"
-            className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M15 19l-7-7 7-7"
-            ></path>
-          </svg>
-          <span className="sr-only">Previous</span>
-        </span>
-      </button>
-      <button
-        type="button"
-        className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-        data-carousel-next
-      >
-        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-          <svg
-            aria-hidden="true"
-            className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 5l7 7-7 7"
-            ></path>
-          </svg>
-          <span className="sr-only">Next</span>
-        </span>
-      </button>
+    );
+  if (error) return <div>{error}</div>;
+
+  return (
+    <div>
+      <div>
+        {selectedImage && (
+          <img
+            src={selectedImage}
+            alt="Selected Image"
+            className="w-80 h-40 rounded-lg object-cover"
+          />
+        )}
+      </div>
+      {data?.data && (
+        <Slider {...settings}>
+          {data?.data.map((image, index) => (
+            <div key={image?.id}>
+              <div
+                className=" flex justify-center items-center gap-2"
+                // onClick={() => handleImageClick(index)}
+              >
+                <Image
+                  src={image?.attributes?.payload_out?.resp[0]?.url}
+                  alt={`Image ${index}`}
+                  className=" rounded-lg object-cover"
+                  width={150}
+                  height={90}
+                />
+                <Image
+                  src={image?.attributes?.payload_out?.resp[1]?.url}
+                  alt={`Image ${index}`}
+                  className=" rounded-lg object-cover"
+                  width={150}
+                  height={90}
+                />
+              </div>
+            </div>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 };
