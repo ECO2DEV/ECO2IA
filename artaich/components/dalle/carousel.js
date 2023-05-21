@@ -66,7 +66,7 @@ export const Carousel = () => {
   // const handleImageClick = (index) => {
   //   setSelectedImage(images[index]);
   // };
-  console.log('data is:', data?.data);
+  // console.log('data is:', data?.data);
 
   if (isLoading)
     return (
@@ -100,15 +100,15 @@ export const Carousel = () => {
                 className=" flex justify-center items-center gap-2"
                 // onClick={() => handleImageClick(index)}
               >
-                <Image
-                  src={image?.attributes?.payload_out?.resp[0]?.url}
+                <img
+                  src={`data:image/jpeg;base64,${image?.attributes?.payload_out?.resp[0]?.b64_json}`}
                   alt={`Image ${index}`}
                   className=" rounded-lg object-cover"
                   width={150}
                   height={90}
                 />
-                <Image
-                  src={image?.attributes?.payload_out?.resp[1]?.url}
+                <img
+                  src={`data:image/jpeg;base64,${image?.attributes?.payload_out?.resp[1]?.b64_json}`}
                   alt={`Image ${index}`}
                   className=" rounded-lg object-cover"
                   width={150}
