@@ -97,7 +97,7 @@ export default function Header({router}) {
           <a href="/nosia" className="text-sm font-semibold leading-6 text-white">
             {DataNavbar.menu_opt_2}
           </a>
-          <a href="/#pricing" className="text-sm font-semibold leading-6 text-white">
+          <a href="/" className="text-sm font-semibold leading-6 text-white">
             {DataNavbar.menu_opt_3}
           </a>
           <Link href={'/about'} legacyBehavior>
@@ -170,7 +170,7 @@ export default function Header({router}) {
                   {DataNavbar.menu_opt_2}
                 </Link>
                 <Link
-                  href="/#pricing"
+                  href="/"
                   className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   {DataNavbar.menu_opt_3}
