@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import { UserContext } from '../../context/user/UserContext';
+import Image from 'next/image';
 import { useDalle } from '../../hooks/useDalle';
 import { Menu } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
@@ -9,7 +10,6 @@ import { DalleResponse } from '../../util/api/dalleResponse';
 import { WelcomeDalle } from './welcomedalle';
 import { ButtonHelper } from '../welcome/buttonHelper';
 
-import Image from 'next/image';
 import { Carousel } from './carousel';
 
 export default function DalleIA() {
@@ -20,7 +20,7 @@ export default function DalleIA() {
   const [loading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState('');
   const { user } = useContext(UserContext);
-  const { prompt, setPrompt, promptTokens, setPromptTokens, setResponse } =
+  const { prompt, setPrompt, setPromptTokens, setResponse } =
     useContext(PromptContext);
 
   const { data, mutate } = useDalle(user?.id);
@@ -31,7 +31,6 @@ export default function DalleIA() {
       setPromptTokens(0);
     }
   };
-
   const FetchData = async () => {
     if (!prompt) {
       setIsError('Please type something before submit');
@@ -39,8 +38,19 @@ export default function DalleIA() {
       setIsLoading(true);
       try {
         const response = await DalleResponse({ prompt: prompt, user: user });
-        setImageSrc(response?.data?.data);
-        console.log('response is:', response?.data?.data);
+        const decodedImage = response?.data?.data[0]?.b64_json;
+        setImageSrc(decodedImage);
+        // const imageUrl = `data:image/png;base64,${decodedImage}`;
+        // console.log('response is:', response?.data.data[0].b64_json);
+
+        // Download the image and convert it to a Blob
+        // const imageBlob = await fetch(imageUrl).then((res) => res.blob());
+
+        // const formData = new FormData();
+        // formData.append('file', new Blob([imageBlob]), 'image.png');
+
+        // const updatedRequest = uploadUserImage({ formData: formData });
+        // console.log('updatedRequest is:', updatedRequest);
         mutate({ data: [...data.data, response?.data], ...data });
         setResponse(response?.data?.data);
       } catch (error) {
@@ -56,77 +66,82 @@ export default function DalleIA() {
 
   return (
     <section className="relative">
-      {data?.data?.length === 0 ? (
+      {imageSrc === '' ? (
         <WelcomeDalle />
       ) : openHelpers ? (
         <WelcomeDalle />
       ) : (
         <div style={{ display: 'flex' }}>
           <div style={{ flex: 1 }}>
-            <img
-              src={imageSrc && imageSrc[0].url}
-              onLoad={() => setShowDropdown(true)}
-            />
-            {showDropdown && (
-              <div
-                className={`${showDropdown ? 'absolute  top-10' : 'hidden'}`}
-              >
-                <Menu>
-                  <Menu.Button className="text-gray-500 hover:text-gray-900">
-                    <EllipsisVerticalIcon
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  </Menu.Button>
-                  <Menu.Items className="absolute left-0 z-50 w-48 py-2 mt-2 bg-white rounded-md shadow-lg focus:outline-none">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          className={`${
-                            active ? 'bg-gray-100' : ''
-                          } block px-4 py-2 text-sm text-gray-700`}
-                          href="#"
-                        >
-                          Download
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          className={`${
-                            active ? 'bg-gray-100' : ''
-                          } block px-4 py-2 text-sm text-gray-700`}
-                          href="#"
-                        >
-                          Download as PNG
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          className={`${
-                            active ? 'bg-gray-100' : ''
-                          } block px-4 py-2 text-sm text-gray-700`}
-                          href="#"
-                        >
-                          Download as PDF
-                        </a>
-                      )}
-                    </Menu.Item>
-                  </Menu.Items>
-                </Menu>
-              </div>
-            )}
-          </div>
-          <br></br>
-          <div style={{ flex: 1 }}>
-            {imageSrc ? (
+            {imageSrc !== '' ? (
               <>
                 <img
-                  src={imageSrc && imageSrc[1].url}
+                  src={imageSrc && `data:image/jpeg;base64,${imageSrc}`}
                   onLoad={() => setShowDropdown(true)}
+                  alt="dalle image"
+                  className="w-auto h-auto"
+                />
+                <div
+                  className={`${showDropdown ? 'absolute  top-10 ' : 'hidden'}`}
+                >
+                  <Menu>
+                    <Menu.Button className="text-gray-500 hover:text-gray-900">
+                      <EllipsisVerticalIcon
+                        className="h-5 w-5"
+                        aria-hidden="true"
+                      />
+                    </Menu.Button>
+                    <Menu.Items className="absolute left-0 z-50 w-48 py-2 mt-2 bg-white rounded-md shadow-lg focus:outline-none">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            className={`${
+                              active ? 'bg-gray-100' : ''
+                            } block px-4 py-2 text-sm text-gray-700`}
+                            href="#"
+                          >
+                            Download
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            className={`${
+                              active ? 'bg-gray-100' : ''
+                            } block px-4 py-2 text-sm text-gray-700`}
+                            href="#"
+                          >
+                            Download as PNG
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            className={`${
+                              active ? 'bg-gray-100' : ''
+                            } block px-4 py-2 text-sm text-gray-700`}
+                            href="#"
+                          >
+                            Download as PDF
+                          </a>
+                        )}
+                      </Menu.Item>
+                    </Menu.Items>
+                  </Menu>
+                </div>
+              </>
+            ) : null}
+          </div>
+          <div style={{ flex: 1 }}>
+            {imageSrc !== '' ? (
+              <>
+                <img
+                  src={imageSrc && `data:image/jpeg;base64,${imageSrc}`}
+                  onLoad={() => setShowDropdown(true)}
+                  alt="dalle image"
+                  className="w-auto h-auto"
                 />
                 <div
                   className={`${showDropdown ? 'absolute  top-10 ' : 'hidden'}`}
