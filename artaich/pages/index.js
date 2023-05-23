@@ -14,7 +14,6 @@ export default function Home(props) {
       <Hero user={user} />
       <Features />
       <Pricing user={user} />
-      {/* <h1>Auth Test</h1> */}
 
       {/* <div>
     {!session && <>

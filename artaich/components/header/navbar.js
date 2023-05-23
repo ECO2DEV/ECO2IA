@@ -11,15 +11,19 @@ import { products, callsToAction, } from '../../data/navbar'
 import logo from "../../public/Mlogop.png";
 import Image from 'next/image';
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Header({router}) {
+export default function Header({router,user}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  
+  const router2 = useRouter();
 
+  const handleRedirectToDashboard =  () => {
+      router2.push('/dashboard')
+  }
   return (
     <div className='bg-gray-900'>
     <header className={router != '' ? 'absolute inset-x-0 top-0 z-50 bg-gray-900' : 'absolute inset-x-0 top-0 z-50'}>
@@ -109,7 +113,7 @@ export default function Header({router}) {
 
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <button className="text-sm font-semibold leading-6 text-white" onClick={() => signIn()}>
+          <button className="text-sm font-semibold leading-6 text-white"  onClick={user ? handleRedirectToDashboard : () => signIn()}>
             {DataNavbar.login_option} <span aria-hidden="true">&rarr;</span>
           </button>
         </div>
@@ -186,7 +190,7 @@ export default function Header({router}) {
               <div className="py-6">
                 <button
                   className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  onClick={() => signIn()}
+                  onClick={user ? handleRedirectToDashboard : () => signIn()}
                 >
                   {DataNavbar.login_option}
                 </button>
