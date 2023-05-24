@@ -7,3 +7,17 @@ export const header = {
     'Content-Type': 'application/json'
   }
 };
+
+export const SUPPORTED_LENGUAGES = {
+  en: 'English',
+  es: 'Español',
+  de: 'Deutsch'
+};
+
+export const VOICE_FOR_LANGUAGE = {
+  en: 'en-GB',
+  es: 'es-MX',
+  de: 'de-DE'
+};
+
+export const AUTO_LANGUAGE = 'auto';
