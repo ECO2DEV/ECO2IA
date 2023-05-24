@@ -1,4 +1,5 @@
 import { useRef, useEffect, useContext } from 'react';
+import Image from 'next/image';
 import { UserContext } from '../../context/user/UserContext';
 import { ChatGPTLogo, EmptyAvatar } from '../icons/icons';
 import { useChat } from '../../hooks/useChat';
@@ -66,10 +67,15 @@ export const Conversations = () => {
               className={`group w-full text-gray-100 border-b border-black/10 bg-gray-800 `}
             >
               <div className="flex  p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl  md:py-6 lg:px-0 m-auto">
-                <div className="flex-shrink-0 ml-1 flex flex-col relative items-end w-[30px]">
-                  <ChatGPTLogo />
+                <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
+                  <Image
+                    src="/Mlogo.ico"
+                    alt="MatTech logo"
+                    width={30}
+                    height={30}
+                  />
                 </div>
-                <div className="relative flex flex-col text-left w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
+                <div className="relative flex flex-col text-justify w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
                   {item?.attributes?.payload_out?.resp}
                 </div>
               </div>

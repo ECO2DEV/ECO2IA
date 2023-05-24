@@ -60,6 +60,38 @@ export const EmptyAvatar = () => {
     </svg>
   );
 };
+export const ArrowsIcon = () => (
+  <svg
+    className="sm:mr-14"
+    style={{ color: 'white', backgroundColor: '#4f46e5' }}
+    focusable="false"
+    width="24"
+    height="24"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"></path>
+  </svg>
+);
+export function LatestImages() {
+  return (
+    <svg
+      fill="none"
+      className="w-9 h-9 text-gray-100 bg-gray-900 rounded-full"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+      ></path>
+    </svg>
+  );
+}
 
 export function QuestionIcon() {
   return (

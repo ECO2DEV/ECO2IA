@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import Image from 'next/image';
 import { UserContext } from '../../context/user/UserContext';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -58,15 +57,19 @@ function PrevArrow(props) {
   );
 }
 
-export const Carousel = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+export const Carousel = ({ setImageSrc }) => {
   const { user } = useContext(UserContext);
-  const { data, isLoading, isError: error } = useDalle(user?.id);
+  const { data, isLoading, isError: error, mutate } = useDalle(user?.id);
 
-  // const handleImageClick = (index) => {
-  //   setSelectedImage(images[index]);
-  // };
-  // console.log('data is:', data?.data);
+  const handleImageClick = (firstImageSrc) => {
+    console.log('image clicked');
+
+    setImageSrc((prevImageSrc) => ({
+      firstImage: firstImageSrc,
+      secondImage: prevImageSrc.secondImage
+    }));
+  };
+  console.log('data is:', data?.data);
 
   if (isLoading)
     return (
@@ -82,37 +85,38 @@ export const Carousel = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div>
-      <div>
-        {selectedImage && (
-          <img
-            src={selectedImage}
-            alt="Selected Image"
-            className="w-80 h-40 rounded-lg object-cover"
-          />
-        )}
-      </div>
+    <div className="sm:mt-10 sm:mb-20 relative">
+      <h2 className="absolute hidden sm:contents left-10 top-0 sm:text-xl lg:text-1xl text-gray-800">
+        Latest images
+      </h2>
       {data?.data && (
         <Slider {...settings}>
-          {data?.data.map((image, index) => (
+          {data?.data.map((image) => (
             <div key={image?.id}>
-              <div
-                className=" flex justify-center items-center gap-2"
-                // onClick={() => handleImageClick(index)}
-              >
+              <div className=" flex justify-center items-center gap-2 ">
                 <img
                   src={`data:image/jpeg;base64,${image?.attributes?.payload_out?.resp[0]?.b64_json}`}
-                  alt={`Image ${index}`}
-                  className=" rounded-lg object-cover"
-                  width={150}
-                  height={90}
+                  alt={`Dalle Image `}
+                  className=" rounded-lg object-cover cursor-pointer hover:opacity-80"
+                  width={160}
+                  height={100}
+                  onClick={() =>
+                    handleImageClick(
+                      image?.attributes?.payload_out?.resp[0]?.b64_json
+                    )
+                  }
                 />
                 <img
                   src={`data:image/jpeg;base64,${image?.attributes?.payload_out?.resp[1]?.b64_json}`}
-                  alt={`Image ${index}`}
-                  className=" rounded-lg object-cover"
-                  width={150}
-                  height={90}
+                  alt={`Dalle Image `}
+                  className=" rounded-lg object-cover cursor-pointer hover:opacity-80"
+                  width={160}
+                  height={100}
+                  onClick={() =>
+                    handleImageClick(
+                      image?.attributes?.payload_out?.resp[1]?.b64_json
+                    )
+                  }
                 />
               </div>
             </div>

@@ -1,22 +1,25 @@
 import { useState, useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import { UserContext } from '../../context/user/UserContext';
-import Image from 'next/image';
 import { useDalle } from '../../hooks/useDalle';
-import { Menu } from '@headlessui/react';
-import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import SearchTextbox from '../searchTextbox/searchTextbox';
 import { DalleResponse } from '../../util/api/dalleResponse';
 import { WelcomeDalle } from './welcomedalle';
 import { ButtonHelper } from '../welcome/buttonHelper';
 
 import { Carousel } from './carousel';
+import { DropdownDalle } from './dropdown_dalle';
+import { ButtonLatestImg } from './buttonLatestImg';
 
 export default function DalleIA() {
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const [imageSrc, setImageSrc] = useState('');
+  const [imageSrc, setImageSrc] = useState({
+    firstImage: '',
+    secondImage: ''
+  });
   const [openHelpers, setOpenHelpers] = useState(false);
+  const [openLastestImages, setOpenLastestImages] = useState(false);
   const [loading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState('');
   const { user } = useContext(UserContext);
@@ -38,19 +41,12 @@ export default function DalleIA() {
       setIsLoading(true);
       try {
         const response = await DalleResponse({ prompt: prompt, user: user });
-        const decodedImage = response?.data?.data[0]?.b64_json;
-        setImageSrc(decodedImage);
-        // const imageUrl = `data:image/png;base64,${decodedImage}`;
-        // console.log('response is:', response?.data.data[0].b64_json);
-
-        // Download the image and convert it to a Blob
-        // const imageBlob = await fetch(imageUrl).then((res) => res.blob());
-
-        // const formData = new FormData();
-        // formData.append('file', new Blob([imageBlob]), 'image.png');
-
-        // const updatedRequest = uploadUserImage({ formData: formData });
-        // console.log('updatedRequest is:', updatedRequest);
+        const decodedFirstImage = response?.data?.data[0]?.b64_json;
+        const decodedSecondImage = response?.data?.data[1]?.b64_json;
+        setImageSrc({
+          firstImage: decodedFirstImage,
+          secondImage: decodedSecondImage
+        });
         mutate({ data: [...data.data, response?.data], ...data });
         setResponse(response?.data?.data);
       } catch (error) {
@@ -65,152 +61,80 @@ export default function DalleIA() {
   };
 
   return (
-    <section className="relative">
-      {imageSrc === '' ? (
+    <section>
+      {imageSrc.firstImage === '' ? (
         <WelcomeDalle />
       ) : openHelpers ? (
         <WelcomeDalle />
       ) : (
-        <div style={{ display: 'flex' }}>
-          <div style={{ flex: 1 }}>
-            {imageSrc !== '' ? (
-              <>
-                <img
-                  src={imageSrc && `data:image/jpeg;base64,${imageSrc}`}
-                  onLoad={() => setShowDropdown(true)}
-                  alt="dalle image"
-                  className="w-auto h-auto"
-                />
-                <div
-                  className={`${showDropdown ? 'absolute  top-10 ' : 'hidden'}`}
-                >
-                  <Menu>
-                    <Menu.Button className="text-gray-500 hover:text-gray-900">
-                      <EllipsisVerticalIcon
-                        className="h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    </Menu.Button>
-                    <Menu.Items className="absolute left-0 z-50 w-48 py-2 mt-2 bg-white rounded-md shadow-lg focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            className={`${
-                              active ? 'bg-gray-100' : ''
-                            } block px-4 py-2 text-sm text-gray-700`}
-                            href="#"
-                          >
-                            Download
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            className={`${
-                              active ? 'bg-gray-100' : ''
-                            } block px-4 py-2 text-sm text-gray-700`}
-                            href="#"
-                          >
-                            Download as PNG
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            className={`${
-                              active ? 'bg-gray-100' : ''
-                            } block px-4 py-2 text-sm text-gray-700`}
-                            href="#"
-                          >
-                            Download as PDF
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Menu>
-                </div>
-              </>
-            ) : null}
+        <div className=" flex flex-col items-center my-10 gap-2">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-2">
+            <div className="flex-1 relative">
+              {imageSrc !== '' ? (
+                <>
+                  <img
+                    src={
+                      imageSrc.firstImage &&
+                      `data:image/jpeg;base64,${imageSrc.firstImage}`
+                    }
+                    onLoad={() => setShowDropdown(true)}
+                    alt="dalle image"
+                    className="w-[380px] h-[380px]"
+                  />
+                  <div
+                    className={`${
+                      showDropdown ? 'absolute  top-10 ' : 'hidden'
+                    }`}
+                  >
+                    <DropdownDalle imageSrc={imageSrc.firstImage} />
+                  </div>
+                </>
+              ) : null}
+            </div>
+            <div className="flex-1 relative">
+              {imageSrc.secondImage !== '' ? (
+                <>
+                  <img
+                    src={
+                      imageSrc.secondImage &&
+                      `data:image/jpeg;base64,${imageSrc.secondImage}`
+                    }
+                    onLoad={() => setShowDropdown(true)}
+                    alt="dalle image"
+                    className="w-[380px] h-[380px]"
+                  />
+                  <div
+                    className={`${
+                      showDropdown ? 'absolute  top-10 ' : 'hidden'
+                    }`}
+                  >
+                    <DropdownDalle imageSrc={imageSrc.secondImage} />
+                  </div>
+                </>
+              ) : null}
+            </div>
           </div>
-          <div style={{ flex: 1 }}>
-            {imageSrc !== '' ? (
-              <>
-                <img
-                  src={imageSrc && `data:image/jpeg;base64,${imageSrc}`}
-                  onLoad={() => setShowDropdown(true)}
-                  alt="dalle image"
-                  className="w-auto h-auto"
-                />
-                <div
-                  className={`${showDropdown ? 'absolute  top-10 ' : 'hidden'}`}
-                >
-                  <Menu>
-                    <Menu.Button className="text-gray-500 hover:text-gray-900">
-                      <EllipsisVerticalIcon
-                        className="h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    </Menu.Button>
-                    <Menu.Items className="absolute left-0 z-50 w-48 py-2 mt-2 bg-white rounded-md shadow-lg focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            className={`${
-                              active ? 'bg-gray-100' : ''
-                            } block px-4 py-2 text-sm text-gray-700`}
-                            href="#"
-                          >
-                            Download
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            className={`${
-                              active ? 'bg-gray-100' : ''
-                            } block px-4 py-2 text-sm text-gray-700`}
-                            href="#"
-                          >
-                            Download as PNG
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            className={`${
-                              active ? 'bg-gray-100' : ''
-                            } block px-4 py-2 text-sm text-gray-700`}
-                            href="#"
-                          >
-                            Download as PDF
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Menu>
-                </div>
-              </>
-            ) : null}
-          </div>
-          <br></br>
         </div>
       )}
+      <div className="flex justify-center items-center">
+        {data?.data.length > 0 && openLastestImages ? (
+          <div className="w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem] mb-32 sm:mb-10">
+            <Carousel setImageSrc={setImageSrc} />
+          </div>
+        ) : null}
+      </div>
 
-      <div className="fixed bottom-3 w-full flex flex-col">
-        <div className="w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem]">
-          <Carousel />
-        </div>
+      <div className="fixed bottom-3 w-full">
         <div className="flex justify-center  w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem]">
           <SearchTextbox
             OnChange={handleChange}
             Fetch={FetchData}
             loading={loading}
           />
-          <ButtonHelper onClick={() => setOpenHelpers(!openHelpers)} />
+          <ButtonHelper onClick={() => setOpenHelpers((prev) => !prev)} />
+          <ButtonLatestImg
+            onClick={() => setOpenLastestImages((prev) => !prev)}
+          />
         </div>
       </div>
     </section>
