@@ -3,12 +3,7 @@ import Modal from '../components/modal/modal';
 import { getUser } from '../util/api/user';
 
 export default function Dalle(props) {
-  return (
-    <div className="my-10">
-    {props.user.plan ? <DalleIA /> : <Modal />}
-   </div>
-    
-  );
+  return <div className="">{props.user.plan ? <DalleIA /> : <Modal />}</div>;
 }
 
 export const getServerSideProps = async (context) => {
