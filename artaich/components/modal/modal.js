@@ -9,11 +9,11 @@ import {
   XMarkIcon as XMarkIconMini
 } from '@heroicons/react/20/solid';
 import { DataPricing } from '../../data/pricing';
+import { useRouter } from 'next/router';
+import CheckoutForm from '../payment/CheckoutForm';
+import { PopUpModal } from './popUpModal';
+import { ContacUs } from '../contact_us/contacUs';
 
-const frequencies = [
-  { value: '', label: '', priceSuffix: '' }
-  // { value: '', label: '', priceSuffix: '' },
-];
 
 const pricing = {
   frequencies: [
@@ -69,148 +69,58 @@ const pricing = {
       cta: DataPricing.pricingbutton3
     }
   ],
-  sections: [
-    {
-      name: 'Catered for business',
-      features: [
-        {
-          name: 'Tax Savings',
-          tiers: { Starter: true, Scale: true, Growth: true }
-        },
-        {
-          name: 'Easy to use accounting',
-          tiers: { Starter: true, Scale: true, Growth: true }
-        },
-        {
-          name: 'Multi-accounts',
-          tiers: {
-            Starter: '3 accounts',
-            Scale: 'Unlimited accounts',
-            Growth: '7 accounts'
-          }
-        },
-        {
-          name: 'Invoicing',
-          tiers: {
-            Starter: '3 invoices',
-            Scale: 'Unlimited invoices',
-            Growth: '10 invoices'
-          }
-        },
-        {
-          name: 'Exclusive offers',
-          tiers: { Starter: false, Scale: true, Growth: true }
-        },
-        {
-          name: '6 months free advisor',
-          tiers: { Starter: false, Scale: true, Growth: true }
-        },
-        {
-          name: 'Mobile and web access',
-          tiers: { Starter: false, Scale: true, Growth: false }
-        }
-      ]
-    },
-    {
-      name: 'Other perks',
-      features: [
-        {
-          name: '24/7 customer support',
-          tiers: { Starter: true, Scale: true, Growth: true }
-        },
-        {
-          name: 'Instant notifications',
-          tiers: { Starter: true, Scale: true, Growth: true }
-        },
-        {
-          name: 'Budgeting tools',
-          tiers: { Starter: true, Scale: true, Growth: true }
-        },
-        {
-          name: 'Digital receipts',
-          tiers: { Starter: true, Scale: true, Growth: true }
-        },
-        {
-          name: 'Pots to separate money',
-          tiers: { Starter: false, Scale: true, Growth: true }
-        },
-        {
-          name: 'Free bank transfers',
-          tiers: { Starter: false, Scale: true, Growth: false }
-        },
-        {
-          name: 'Business debit card',
-          tiers: { Starter: false, Scale: true, Growth: false }
-        }
-      ]
-    }
-  ]
+
 };
-const tiers = [
-  {
-    name: DataPricing.pricingtitle1,
-    id: 'tier-freelancer',
-    // href: 'https://buy.stripe.com/test_aEU6rG57i6bu3cIfYZ',
-    price: { monthly: 4, annually: '' },
-    description: '',
-    features: [
-      DataPricing.pricingfeatures1,
-      DataPricing.pricingfeatures1_2,
-      DataPricing.pricingfeatures1_3,
-      DataPricing.pricingfeatures1_4,
-      DataPricing.pricingfeatures1_5
-    ],
-    featured: false,
-    cta: DataPricing.pricingbutton1
-  },
-  {
-    name: DataPricing.pricingtitle2,
-    id: 'tier-startup',
-    href: '#',
-    price: { monthly: 10, annually: '' },
-    description: '',
-    features: [
-      DataPricing.pricingfeatures2,
-      DataPricing.pricingfeatures2_2,
-      DataPricing.pricingfeatures2_3,
-      DataPricing.pricingfeatures2_4,
-      DataPricing.pricingfeatures2_5
-    ],
-    featured: false,
-    cta: DataPricing.pricingbutton2
-  },
-  {
-    name: DataPricing.pricingtitle3,
-    id: 'tier-enterprise',
-    href: '#',
-    price: { monthly: DataPricing.pricingprice3, annually: '' },
-    description: '',
-    features: [
-      DataPricing.pricingfeatures3,
-      DataPricing.pricingfeatutes3_2,
-      DataPricing.pricingfeatures3_3,
-      DataPricing.pricingfeatures3_4
-    ],
-    featured: true,
-    cta: DataPricing.pricingbutton3
-  }
-];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Modal({ children }) {
+
+export default function Modal({children, user}) {
   const [isOpen, setIsOpen] = useState(true);
+  const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEnterpriseOpen, setIsEnterpriseOpen] = useState(false);
+  const [amount, setAmount] = useState(0);
+  const [currency, setCurrency] = useState('eur');
 
   const handleOnClose = () => {
     setIsOpen(false);
   };
+
+  const handleButtonClick = ({ amount }) => {
+    if (user == null) {
+      router.push('/auth/signin');
+      // Set the state to open the modal
+    } else {
+      setAmount(amount);
+      setIsModalOpen(!isModalOpen);
+    }
+  };
+  const handleButtonEnterprise = () => {
+    setIsEnterpriseOpen(!isEnterpriseOpen);
+  };
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [frequency, setFrequency] = useState(pricing.frequencies[0]);
   return (
     <>
       {isOpen && (
         <div className="inset-0 z-50 overflow-auto bg-gray-900 rounded-lg shadow-xl">
+          {/* Render the modal if isModalOpen is true */}
+          {isModalOpen && (
+            <CheckoutForm
+              onClose={handleButtonClick}
+              amount={amount}
+              currency={currency}
+            />
+          )}
+          {isEnterpriseOpen && (
+            <PopUpModal isModalNeedIt={true}>
+              <ContacUs onClose={handleButtonEnterprise} />
+            </PopUpModal>
+          )}
           <div className="isolate overflow-hidden">
             <div className="flow-root bg-gray-900 py-16 sm:pt-32 lg:pb-0">
               <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -302,7 +212,17 @@ export default function Modal({ children }) {
                             </div>
                           </div>
                           <a
-                            href={tier.href}
+                            //href={tier.href}
+                            onClick={
+                              tier.name === DataPricing.pricingtitle3
+                                ? () => {
+                                  handleButtonEnterprise();
+                                }
+                                : () => {
+                                  handleButtonClick({
+                                    amount: tier.price.monthly * 100
+                                  });
+                                }}
                             aria-describedby={tier.id}
                             className={classNames(
                               tier.featured

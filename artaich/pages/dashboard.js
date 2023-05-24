@@ -8,10 +8,10 @@ export default function Dashboard(props) {
   // console.log(props.user)
   return (
     <div className="my-10">
-      {props.user.plan ? <DashboardSection /> : <Modal />}
+      {props.user.plan ? <DashboardSection /> : <Modal user={props.user} />}
     </div>
   );
-}
+} 
 
 Dashboard.getLayout = (page) => page;
 
