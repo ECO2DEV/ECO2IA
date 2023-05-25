@@ -19,7 +19,7 @@ export const TextArea = ({ type, loading, value, onChange }) => {
       }
       ${
         type === 'from'
-          ? 'h-[160px] sm:h-[200px] lg:h-[240px] w-full bg-gray-800'
+          ? 'h-[160px] sm:h-[200px] lg:h-[240px] w-full bg-gray-800 text-gray-100'
           : 'h-[160px] w-full sm:h-[200px] lg:h-[240px] xl:h-[280px] bg-gray-200'
       }`}
       value={value}
