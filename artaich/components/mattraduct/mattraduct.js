@@ -6,7 +6,7 @@ import { LanguageSelector } from './LanguageSelector';
 import { TextArea } from './TextArea';
 import { useLangStorage } from '../../hooks/useLangStorage';
 import { ArrowsIcon, ClipboardIcon } from '../icons/icons';
-import { Dropdownmenu } from './dropdownmenu';
+import OptionsMattraduct from './optionsMattraduct';
 const MattraductAI = () => {
   const [showThirdTextarea, setShowThirdTextarea] = useState(false);
 
@@ -59,7 +59,7 @@ const MattraductAI = () => {
       });
   }, [debouncedFromText, fromLanguage, toLanguage, toThirdLanguage]);
   return (
-    <section className="flex justify-center items-center min-h-screen ">
+    <section className="flex flex-col justify-center items-center gap-2 min-h-screen ">
       <div className="w-full max-w-5xl bg-white shadow-lg rounded-md">
         <div className="flex items-center justify-between bg-indigo-600 text-gray-100 px-4 py-2 rounded-t-md">
           <LanguageSelector
@@ -112,7 +112,8 @@ const MattraductAI = () => {
           </button> */}
         </div>
       </div>
-      <Dropdownmenu
+
+      <OptionsMattraduct
         handleShowThirdTextarea={handleShowThirdTextarea}
         showThirdTextarea={showThirdTextarea}
       />
