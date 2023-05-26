@@ -5,7 +5,6 @@ import { MattraductResponse } from '../../util/api/mattraductResponse';
 import { LanguageSelector } from './LanguageSelector';
 import { TextArea } from './TextArea';
 import { useLangStorage } from '../../hooks/useLangStorage';
-import { ArrowsIcon, ClipboardIcon } from '../icons/icons';
 import OptionsMattraduct from './optionsMattraduct';
 const MattraductAI = () => {
   const [showThirdTextarea, setShowThirdTextarea] = useState(false);
@@ -18,7 +17,6 @@ const MattraductAI = () => {
     setFromLanguage,
     setToThirdLanguage,
     setToLanguage,
-    interchangeLanguages,
     fromText,
     setFromText,
     result,
@@ -30,8 +28,11 @@ const MattraductAI = () => {
 
   const debouncedFromText = useDebounce(fromText, 500);
 
-  const handleClipboard = () => {
+  const handleClipboardOne = () => {
     navigator.clipboard.writeText(result).catch(() => {});
+  };
+  const handleClipboardTwo = () => {
+    navigator.clipboard.writeText(secondResult).catch(() => {});
   };
 
   const handleShowThirdTextarea = () => {
@@ -59,57 +60,48 @@ const MattraductAI = () => {
       });
   }, [debouncedFromText, fromLanguage, toLanguage, toThirdLanguage]);
   return (
-    <section className="flex flex-col justify-center items-center gap-2 min-h-screen ">
+    <section className="flex flex-col justify-center items-center gap-6 min-h-screen ">
       <div className="w-full max-w-5xl bg-white shadow-lg rounded-md">
-        <div className="flex items-center justify-between bg-indigo-600 text-gray-100 px-4 py-2 rounded-t-md">
+        <div className="flex items-center justify-around bg-indigo-600 text-gray-100 px-4 py-2 rounded-t-md">
           <LanguageSelector
             onChange={setFromLanguage}
-            type={'from'}
+            type="from"
             value={fromLanguage}
           />
-          {/* <button
-            disabled={fromLanguage === 'auto'}
-            onClick={interchangeLanguages}
-          >
-            <ArrowsIcon />
-          </button> */}
+
           <LanguageSelector
             onChange={setToLanguage}
-            type={'to'}
+            type="to"
             value={toLanguage}
           />
           {showThirdTextarea && (
             <LanguageSelector
               onChange={setToThirdLanguage}
-              type={'to'}
+              type="to"
               value={toThirdLanguage}
             />
           )}
         </div>
-        <div className="flex gap-1 flex-col sm:flex-row relative">
+        <div className="flex gap-1 flex-col sm:flex-row ">
           <TextArea type={'from'} value={fromText} onChange={setFromText} />
 
           <TextArea
             loading={loading}
-            type={'to'}
+            type="to"
             value={result}
             onChange={setResult}
+            onClick={handleClipboardOne}
           />
-          {/* <button className="absolute bottom-2 right-64 focus:outline-none">
-            <ClipboardIcon />
-          </button> */}
+
           {showThirdTextarea && (
             <TextArea
               loading={loading}
-              type={'to'}
+              type="to"
               value={secondResult}
               onChange={setSecondResult}
+              onClick={handleClipboardTwo}
             />
           )}
-
-          {/* <button className="absolute bottom-2 right-2 focus:outline-none">
-            <ClipboardIcon />
-          </button> */}
         </div>
       </div>
 
