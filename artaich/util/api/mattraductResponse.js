@@ -5,7 +5,8 @@ export const MattraductResponse = async ({
   prompt,
   user,
   fromLanguage,
-  toLanguage
+  toLanguage,
+  toThirdLanguage
 }) => {
   try {
     const response = await axios.post(
@@ -13,8 +14,9 @@ export const MattraductResponse = async ({
       {
         prompt: prompt,
         users_permissions_user: user,
-        language1: fromLanguage,
-        language2: toLanguage
+        fromLanguage,
+        toLanguage,
+        toThirdLanguage
       },
       header
     );

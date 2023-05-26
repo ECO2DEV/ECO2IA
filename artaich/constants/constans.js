@@ -11,7 +11,10 @@ export const header = {
 export const SUPPORTED_LENGUAGES = {
   en: 'English',
   es: 'Español',
-  de: 'Deutsch'
+  de: 'Deutsch',
+  fr: 'Français',
+  it: 'Italiano',
+  pt: 'Português'
 };
 
 export const VOICE_FOR_LANGUAGE = {
