@@ -59,14 +59,14 @@ function PrevArrow(props) {
 
 export const Carousel = ({ setImageSrc }) => {
   const { user } = useContext(UserContext);
-  const { data, isLoading, isError: error, mutate } = useDalle(user?.id);
+  const { data, isLoading, isError: error } = useDalle(user?.id);
 
-  const handleImageClick = (firstImageSrc) => {
+  const handleImageClick = (firstImageSrc, secondImageSrc) => {
     console.log('image clicked');
 
-    setImageSrc((prevImageSrc) => ({
+    setImageSrc(() => ({
       firstImage: firstImageSrc,
-      secondImage: prevImageSrc.secondImage
+      secondImage: secondImageSrc
     }));
   };
   console.log('data is:', data?.data);
@@ -102,7 +102,8 @@ export const Carousel = ({ setImageSrc }) => {
                   height={100}
                   onClick={() =>
                     handleImageClick(
-                      image?.attributes?.payload_out?.resp[0]?.b64_json
+                      image?.attributes?.payload_out?.resp[0]?.b64_json,
+                      image?.attributes?.payload_out?.resp[1]?.b64_json
                     )
                   }
                 />
@@ -114,6 +115,7 @@ export const Carousel = ({ setImageSrc }) => {
                   height={100}
                   onClick={() =>
                     handleImageClick(
+                      image?.attributes?.payload_out?.resp[0]?.b64_json,
                       image?.attributes?.payload_out?.resp[1]?.b64_json
                     )
                   }
