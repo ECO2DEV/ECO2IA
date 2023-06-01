@@ -16,7 +16,7 @@ import logo from '../../public/Mlogop.png';
 import { strapiUrl } from '../../constants/constans';
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true }
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true }
   // { name: 'Team', href: '#', icon: UsersIcon, current: false },
 ];
 

@@ -1,8 +1,9 @@
+import { DataMatTraduct } from '../../data/mattraduct';
 import { ClipboardIcon } from '../icons/icons';
 const getPlaceholder = ({ type, loading }) => {
-  if (type === 'from') return 'Introducir texto';
-  if (loading === true) return 'Cargando...';
-  return 'Traducción';
+  if (type === 'from') return (DataMatTraduct.Entertext);
+  if (loading === true) return (DataMatTraduct.Loading);
+  return (DataMatTraduct.Translation);
 };
 
 export const TextArea = ({
