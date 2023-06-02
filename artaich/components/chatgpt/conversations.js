@@ -1,11 +1,14 @@
-import { useRef, useEffect, useContext } from 'react';
+import { useRef, useState, useEffect, useContext } from 'react';
 import Image from 'next/image';
 import { UserContext } from '../../context/user/UserContext';
 import { DeleteIcon, EmptyAvatar } from '../icons/icons';
 import { useChat } from '../../hooks/useChat';
 import { strapiUrl } from '../../constants/constans';
+import ModalDelete from './ModalDelete';
 
 export const Conversations = () => {
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
   const { user } = useContext(UserContext);
 
   const { data, isLoading, deleteChat } = useChat(user?.id);
@@ -20,8 +23,9 @@ export const Conversations = () => {
     }
   }, [data]);
 
-  const onHandleDelete = (id) => {
-    deleteChat(id);
+  const onHandleModalDelete = (id) => {
+    setDeleteModalOpen((prev) => !prev);
+    setDeleteId(id);
   };
 
   if (isLoading) {
@@ -67,7 +71,7 @@ export const Conversations = () => {
                 </div>
               </div>
               <button
-                onClick={() => onHandleDelete(item?.id)}
+                onClick={() => onHandleModalDelete(item?.id)}
                 className="absolute right-0 top-0 cursor-pointer"
               >
                 <DeleteIcon />
@@ -94,6 +98,12 @@ export const Conversations = () => {
         ))}
         <div ref={lastMessageRef}></div>
       </section>
+      {deleteModalOpen && (
+        <ModalDelete
+          onClose={onHandleModalDelete}
+          onHandleDelete={() => deleteChat(deleteId)}
+        />
+      )}
     </div>
   );
 };
