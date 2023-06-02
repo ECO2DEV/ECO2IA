@@ -1,12 +1,14 @@
-import { useRef, useEffect, useContext } from 'react';
+import { useRef, useEffect, useContext, useState } from 'react';
 import Image from 'next/image';
 import { UserContext } from '../../context/user/UserContext';
 import { ChatGPTLogo, EmptyAvatar } from '../icons/icons';
 import { useChat } from '../../hooks/useChat';
 import { strapiUrl } from '../../constants/constans';
+import { ClipboardIcon } from '../icons/icons';
 
 export const Conversations = () => {
   const { user } = useContext(UserContext);
+  const [copied, setCopied] = useState([]);
 
   const { data, isLoading } = useChat(user?.id);
   // console.log('Request of chatGpt user, bot', data);
@@ -19,6 +21,28 @@ export const Conversations = () => {
       lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [data]);
+
+  const handleCopy = (resp, index) => {
+    navigator.clipboard
+    .writeText(resp)
+      .then(() => {
+        setCopied((prevCopied) => {
+          const newCopied = [...prevCopied];
+          newCopied[index] = true;
+          return newCopied;
+        });
+        setTimeout(() => {
+          setCopied((prevCopied) => {
+            const newCopied = [...prevCopied];
+            newCopied[index] = false;
+            return newCopied;
+          });
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error('Error al copiar al portapapeles:', error);
+      });
+  };
 
   if (isLoading) {
     return (
@@ -43,7 +67,7 @@ export const Conversations = () => {
   return (
     <div className="h-full bg-gray-100">
       <section className="flex flex-col text-sm h-[80vh] lg:h-[85vh] overflow-y-scroll overflow-x-hidden">
-        {reversedData?.map((item) => (
+        {reversedData?.map((item, index) => (
           <div key={item.id}>
             <div className={`group w-full text-gray-800 bg-gray-100 `}>
               <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl md:py-6 lg:px-0 m-auto">
@@ -77,6 +101,17 @@ export const Conversations = () => {
                 </div>
                 <div className="relative flex flex-col text-justify w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
                   {item?.attributes?.payload_out?.resp}
+                  <button
+                    className="relative bottom-1 right-5 "
+                    onClick={() => handleCopy(item?.attributes?.payload_out?.resp, index)}
+                  >
+                    <ClipboardIcon />
+                  </button>
+                  {copied[index] && (
+                    <div className="absolute bottom-0 right-5 bg-blue-900 text-white p-2 rounded">
+                    Copié dans le presse-papiers !
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,21 +1,68 @@
-import { useState, Fragment, useRef } from 'react';
+import { useState, useEffect, Fragment, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { Dialog, Transition } from '@headlessui/react';
 import { UserPlusIcon } from '@heroicons/react/24/outline';
 import { updateUserById } from '../../util/api/user';
 import { toast } from 'react-hot-toast';
+import { educational, domain, activity, sport, transport, nacionality } from './profilecollection';
 
 export default function EditProfile({ onClose, user }) {
+  console.log('Response:', user);
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const router = useRouter();
 
+  const domainSelect = domain.map((opcion) => (
+    <option key={opcion} value={opcion}>
+      {opcion}
+    </option>
+  ));
+
+  const educationalSelect = educational.map((opcion) => (
+    <option key={opcion} value={opcion}>
+      {opcion}
+    </option>
+  ));
+
+  const activitySelect = activity.map((opcion) => (
+    <option key={opcion} value={opcion}>
+      {opcion}
+    </option>
+  ));
+
+  const sportSelect = sport.map((opcion) => (
+    <option key={opcion} value={opcion}>
+      {opcion}
+    </option>
+  ));
+
+  const transportSelect = transport.map((opcion) => (
+    <option key={opcion} value={opcion}>
+      {opcion}
+    </option>
+  ));
+
+  const nacionalitySelect = nacionality.map((opcion) => (
+    <option key={opcion} value={opcion}>
+      {opcion}
+    </option>
+  ));
   const [formData, setFormData] = useState({
     Name: user.Name,
     LastName: user.LastName,
     email: user.email,
     numberTelephone: user.numberTelephone,
-    country: user.country
+    country: user.country,
+    sex: user.sex,
+    domainofstudy: user.domainofstudy,
+    educationallevel: user.educationallevel,
+    activityarea: user.activityarea,
+    sport: user.sport,
+    transport: user.transport,
+    nacionality: user.nacionality,
+    age: user.age,
+    height:user.height,
+    weight:user.weight
     // about: ''
   });
 
@@ -60,7 +107,6 @@ export default function EditProfile({ onClose, user }) {
         formData: formData,
         id: user.id
       });
-      // console.log('Response:', response.data);
       toast.success('Profile updated');
       router.push('/profile');
       onClose();
@@ -130,7 +176,6 @@ export default function EditProfile({ onClose, user }) {
                         }}
                       />
                     </div>
-
                     <form
                       onSubmit={handleSubmit}
                       className="mx-auto mt-10 max-w-xl"
@@ -200,7 +245,6 @@ export default function EditProfile({ onClose, user }) {
                           >
                             Phone number
                           </label>
-
                           <input
                             onChange={(e) => handleProfileChange(e)}
                             value={formData.numberTelephone}
@@ -229,26 +273,181 @@ export default function EditProfile({ onClose, user }) {
                               className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                           </div>
-                        </div>
-
-                        {/* <div className="sm:col-span-2">
                           <label
-                            htmlFor="about"
+                            htmlFor="nacionality"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            About
+                            Nacionality
                           </label>
                           <div className="mt-2.5">
-                            <textarea
+                            <select
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.about}
-                              name="about"
-                              id="about"
-                              rows={4}
+                              value={formData.nacionality}
+                              name="nacionality"
+                              id="nacionality"
+                              autoComplete="nacionality"
                               className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
+                            >
+                              {nacionalitySelect}
+                            </select>
                           </div>
-                        </div> */}
+                          <label
+                            htmlFor="sex"
+                            className="block text-sm font-semibold leading-6 text-gray-900"
+                          >
+                            Sex
+                          </label>
+                          <div className="mt-2.5">
+                            <select
+                              onChange={(e) => handleProfileChange(e)}
+                              value={formData.sex}
+                              name="sex"
+                              id="sex"
+                              autoComplete="sex"
+                              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                              <option value="Homme">Homme</option>
+                              <option value="Femme">Femme</option>
+                            </select>
+                          </div>
+                          <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3">
+                            <div>
+                              <label htmlFor="age" className="block text-sm font-semibold leading-6 text-gray-900">
+                                Age
+                              </label>
+                              <div className="mt-2.5">
+                                <input
+                                  onChange={(e) => handleProfileChange(e)}
+                                  value={formData.age}
+                                  type="number"
+                                  name="age"
+                                  id="age"
+                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <label htmlFor="height" className="block text-sm font-semibold leading-6 text-gray-900">
+                                Height (m)
+                              </label>
+                              <div className="mt-2.5">
+                                <input
+                                  onChange={(e) => handleProfileChange(e)}
+                                  value={formData.height}
+                                  type="number"
+                                  name="height"
+                                  id="height"
+                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <label htmlFor="weight" className="block text-sm font-semibold leading-6 text-gray-900">
+                                Weight (kg)
+                              </label>
+                              <div className="mt-2.5">
+                                <input
+                                  onChange={(e) => handleProfileChange(e)}
+                                  value={formData.weight}
+                                  type="number"
+                                  name="weight"
+                                  id="weight"
+                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <label
+                            htmlFor="domainofstudy"
+                            className="block text-sm font-semibold leading-6 text-gray-900"
+                          >
+                            Domain of Study
+                          </label>
+                          <div className="mt-2.5">
+                            <select
+                              onChange={(e) => handleProfileChange(e)}
+                              value={formData.domainofstudy}
+                              name="domainofstudy"
+                              id="domainofstudy"
+                              autoComplete="domainofstudy"
+                              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                              {domainSelect}
+                            </select>
+                          </div>
+                          <label
+                            htmlFor="educationallevel"
+                            className="block text-sm font-semibold leading-6 text-gray-900"
+                          >
+                            Educational Level
+                          </label>
+                          <div className="mt-2.5">
+                            <select
+                              onChange={(e) => handleProfileChange(e)}
+                              value={formData.educationallevel}
+                              name="educationallevel"
+                              id="educationallevel"
+                              autoComplete="educationallevel"
+                              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                              {educationalSelect}
+                            </select>
+                          </div>
+                          <label
+                            htmlFor="activityarea"
+                            className="block text-sm font-semibold leading-6 text-gray-900"
+                          >
+                            Activity Area
+                          </label>
+                          <div className="mt-2.5">
+                            <select
+                              onChange={(e) => handleProfileChange(e)}
+                              value={formData.activityarea}
+                              name="activityarea"
+                              id="activityarea"
+                              autoComplete="activityarea"
+                              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                              {activitySelect}
+                            </select>
+                          </div>
+                          <label
+                            htmlFor="sport"
+                            className="block text-sm font-semibold leading-6 text-gray-900"
+                          >
+                            Sport
+                          </label>
+                          <div className="mt-2.5">
+                            <select
+                              onChange={(e) => handleProfileChange(e)}
+                              value={formData.sport}
+                              name="sport"
+                              id="sport"
+                              autoComplete="sport"
+                              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                              {sportSelect}
+                            </select>
+                          </div>
+                          <label
+                            htmlFor="transport"
+                            className="block text-sm font-semibold leading-6 text-gray-900"
+                          >
+                            Transport
+                          </label>
+                          <div className="mt-2.5">
+                            <select
+                              onChange={(e) => handleProfileChange(e)}
+                              value={formData.transport}
+                              name="transport"
+                              id="transport"
+                              autoComplete="transport"
+                              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                              {transportSelect}
+                            </select>
+                          </div>
+                        </div>
                       </div>
                       <div className="pt-10 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                         <button
