@@ -20,10 +20,23 @@ export function useChat(userId = 1) {
     }
   );
 
+  const deleteChat = async (chatId) => {
+    try {
+      await axios.delete(`${strapiUrl}/api/requests/${chatId}`, {
+        headers: { Authorization: `Bearer ${strapiToken}` }
+      });
+
+      mutate(); // Update the data by calling the mutate function
+    } catch (error) {
+      console.log('Error deleting chat:', error);
+    }
+  };
+
   return {
     data,
     isLoading,
     isError: error,
-    mutate
+    mutate,
+    deleteChat
   };
 }
