@@ -1,4 +1,8 @@
-import { ClipboardIcon } from '../icons/icons';
+import { useContext } from 'react';
+import { PromptContext } from '../../context/prompts/PromptContext';
+import { ClipboardIcon, SendIcon } from '../icons/icons';
+import Loader from '../loader/loader';
+
 const getPlaceholder = ({ type, loading }) => {
   if (type === 'from') return 'Introducir texto';
   if (loading === true) return 'Cargando...';
@@ -10,10 +14,14 @@ export const TextArea = ({
   loading,
   value,
   onChange,
-  onClick = () => {}
+  fetchLoading = false,
+  onClick = () => {},
+  onHandleTraduct = () => {}
 }) => {
+  const { setPrompt } = useContext(PromptContext);
   const handleChange = (event) => {
     onChange(event.target.value);
+    setPrompt(event.target.value);
   };
 
   return (
@@ -27,8 +35,8 @@ export const TextArea = ({
         }
       ${
         type === 'from'
-          ? 'h-[160px] sm:h-[200px] lg:h-[240px] w-full bg-gray-800 text-gray-100'
-          : 'h-[160px] w-full sm:h-[200px] lg:h-[240px] xl:h-[280px] bg-gray-200'
+          ? 'h-[200px] sm:h-[300px] lg:h-[400px] xl:h-[410px] w-full bg-gray-800 text-gray-100'
+          : 'h-[200px]  sm:h-[300px] lg:h-[400px] xl:h-[410px] w-full bg-gray-200'
       }`}
         value={value}
         onChange={handleChange}
@@ -39,6 +47,20 @@ export const TextArea = ({
           onClick={onClick}
         >
           <ClipboardIcon />
+        </button>
+      )}
+      {type === 'from' && (
+        <button
+          className="absolute bottom-2 right-2 focus:outline-none"
+          onClick={onHandleTraduct}
+        >
+          {fetchLoading ? (
+            <div className="mb-1">
+              <Loader />
+            </div>
+          ) : (
+            <SendIcon />
+          )}
         </button>
       )}
     </div>
