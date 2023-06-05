@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 
 import { useMattraduct } from '../../hooks/useMattraduct';
 import { UserContext } from '../../context/user/UserContext';
+import { PromptContext } from '../../context/prompts/PromptContext';
 
 export default function HistoryRequest({
   onClose,
@@ -11,16 +12,17 @@ export default function HistoryRequest({
   setFromText
 }) {
   const cancelButtonRef = useRef(null);
+
   const [open, setOpen] = useState(true);
   const { user } = useContext(UserContext);
-
+  const { setPrompt } = useContext(PromptContext);
   const { data: translationsData } = useMattraduct(user?.id);
 
   const handleModalHistory = ({ lang1, lang2, fromText }) => {
     setResult(lang1);
     setSecondResult(lang2);
-    setFromText(fromText);
-    onClose(); // Cerrar el diálogo después de seleccionar la traducción
+    setPrompt(fromText);
+    onClose(); // close the modal
     // console.log('lang1 is:', fromText, lang1, lang2);
   };
   return (

@@ -18,9 +18,12 @@ export const TextArea = ({
   onClick = () => {},
   onHandleTraduct = () => {}
 }) => {
-  const { setPrompt } = useContext(PromptContext);
+  const { setPrompt, setPromptTokens } = useContext(PromptContext);
   const handleChange = (event) => {
     onChange(event.target.value);
+    if (event.target.value === '') {
+      setPromptTokens(0);
+    }
     setPrompt(event.target.value);
   };
 

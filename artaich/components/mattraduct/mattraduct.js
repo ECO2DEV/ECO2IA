@@ -17,7 +17,7 @@ const MattraductAI = () => {
 
   const { user } = useContext(UserContext);
   const { data: translationsData, mutate } = useMattraduct(user?.id);
-  const { setResponse, setPrompt } = useContext(PromptContext);
+  const { setResponse, setPrompt, prompt } = useContext(PromptContext);
   const {
     fromLanguage,
     toLanguage,
@@ -60,10 +60,10 @@ const MattraductAI = () => {
       });
   };
   const handleMatTraduct = () => {
-    if (!fromText) return;
+    if (!prompt) return;
     setIsLoading(true);
     MattraductResponse({
-      prompt: fromText,
+      prompt: prompt,
       user,
       fromLanguage,
       toLanguage,
@@ -71,8 +71,7 @@ const MattraductAI = () => {
     })
       .then((result) => {
         if (result == null) return;
-        console.log('result.data.lang1 is:', result.data);
-        console.log('result.data.lang2 is:', result?.data?.data.lang1.length);
+        // console.log('result.data ', result.data);
         setResult(result?.data?.data.lang1);
         setSecondResult(result?.data?.data.lang2);
         // mutate
@@ -87,7 +86,7 @@ const MattraductAI = () => {
       })
       .finally(() => {
         setIsLoading(false);
-        setPrompt('');
+        // setPrompt('');
       });
   };
 
@@ -125,8 +124,8 @@ const MattraductAI = () => {
           <div className="flex gap-1 flex-col sm:flex-row ">
             <TextArea
               type="from"
-              value={fromText}
-              onChange={setFromText}
+              value={prompt ? prompt : ''}
+              onChange={setPrompt}
               onHandleTraduct={handleMatTraduct}
               fetchLoading={isLoading}
             />
