@@ -40,7 +40,7 @@ export const PromptProvider = ({ children }) => {
   const setResponse = async (response) => {
     // Para que no pueda hacer el llamado a la API si no han escogido plan
     if (state.plan.length === 0) {
-      // Agregar mensaje para que diga que no hay plan
+      // Add message to user to select a plan
       router.push('/dashboard');
       return;
     }
@@ -52,6 +52,13 @@ export const PromptProvider = ({ children }) => {
 
   useEffect(() => {
     if (!state.prompt) return;
+    // validate that the user has maxtokens to use, if not redirect to buy a plan
+    if (state.plan.length === 0) return;
+    if (state.plan.max_tokens <= 0) {
+      alert('You have no more tokens to use, please buy a new plan');
+      router.push('/dashboard');
+      return;
+    }
     const resptokens = countTokensMemo(state.prompt);
     dispatch({
       type: 'SET_PROMPT_TOKENS',
@@ -65,6 +72,11 @@ export const PromptProvider = ({ children }) => {
         `${strapiUrl}/api/plans/${id}?populate=*`,
         header
       );
+      // validate that the user has maxtokens to use, if not redirect to buy a plan
+      if (state.plan.max_tokens <= 0) {
+        router.push('/dashboard');
+        return;
+      }
 
       // console.log('Plan data', data?.data);
       const { attributes } = data?.data;
@@ -94,8 +106,9 @@ export const PromptProvider = ({ children }) => {
   // sumatoria de tokens del prompt y el response al max_tokens del plan
   useEffect(() => {
     if (!state.response) return;
-    if (state.promptTokens === 0 || state.plan.max_tokens <= 0) return;
-    // Si no hay plan, redirigir a dashboard
+    if (state?.plan?.max_tokens <= 0) return;
+
+    // if it is not a plan so return and do not update the plan
     if (state.plan.length === 0) {
       return;
     }
@@ -103,12 +116,13 @@ export const PromptProvider = ({ children }) => {
     let updatedMaxImages;
     let totalTokens;
 
+    // If the response is an array (DALL·E) and has more than 1 image
     if (Array.isArray(state.response) && state.response.length > 0) {
-      // Si la respuesta es un array (DALL·E) y tiene imágenes
       updatedMaxImages = state.plan.max_imagens -= 2; // Restar 2 imágenes
       totalTokens = state.promptTokens;
     } else {
-      // Si la respuesta es un string (GPT-3)
+      // If the response is a string (GPT-3 - mattraduct)
+
       responseTokens = countTokensMemo(state.response);
       totalTokens = responseTokens + state.promptTokens;
     }
@@ -134,7 +148,7 @@ export const PromptProvider = ({ children }) => {
         header
       )
       .then((res) => {
-        console.log('Updated plan', res.data.data);
+        // console.log('Updated plan', res.data.data);
         dispatch({
           type: 'UPDATE_PLAN_TOKENS',
           payload: res.data.data
