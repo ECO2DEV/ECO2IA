@@ -2,9 +2,9 @@ import { useReducer } from 'react';
 import { AUTO_LANGUAGE } from '../constants/constans';
 
 const initialState = {
-  fromLanguage: 'auto',
-  toLanguage: 'en',
-  toThirdLanguage: 'es',
+  fromLanguage: AUTO_LANGUAGE,
+  toLanguage: 'Fr',
+  toThirdLanguage: 'En',
   fromText: '',
   secondResult: '',
   result: '',
