@@ -6,7 +6,6 @@ export function SunIcon() {
       strokeWidth="1.5"
       viewBox="0 0 24 24"
       strokeLinecap="round"
-      strokeLinejoin="round"
       className="w-6 h-6"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -73,7 +72,22 @@ export const ArrowsIcon = () => (
     <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"></path>
   </svg>
 );
-
+export const SendIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="w-6 h-6 text-white m-1"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+    />
+  </svg>
+);
 export const ClipboardIcon = () => (
   <svg
     focusable="false"
@@ -89,6 +103,37 @@ export const ClipboardIcon = () => (
     <g>
       <path d="M16,20H5V6H3v14c0,1.1,0.9,2,2,2h11V20z M20,16V4c0-1.1-0.9-2-2-2H9C7.9,2,7,2.9,7,4v12c0,1.1,0.9,2,2,2h9 C19.1,18,20,17.1,20,16z M18,16H9V4h9V16z"></path>
     </g>
+  </svg>
+);
+
+export const DeleteIcon = () => (
+  <svg
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    className="w-7 h-7 text-gray-900 transition duration-200 m-1 group-hover:bg-red-700 group-hover:text-white rounded-full p-1"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+    ></path>
+  </svg>
+);
+
+export const HistoryIcon = () => (
+  <svg
+    width="18"
+    height="28"
+    viewBox="0 0 24 24"
+    focusable="false"
+    className="TYVfy NMm5M"
+  >
+    <path d="M4 4v2.01C5.83 3.58 8.73 2 12.01 2 17.53 2 22 6.48 22 12s-4.47 10-9.99 10C6.48 22 2 17.52 2 12h2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8C9.04 4 6.47 5.61 5.09 8H8v2H2V4h2z"></path>
+    <path d="M13 12V6h-2v7l4.97 3.49 1.26-1.55z"></path>
   </svg>
 );
 

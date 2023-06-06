@@ -9,18 +9,18 @@ export const header = {
 };
 
 export const SUPPORTED_LENGUAGES = {
-  en: 'English',
-  es: 'Español',
-  de: 'Deutsch',
-  fr: 'Français',
-  it: 'Italiano',
-  pt: 'Português'
+  En: 'English',
+  Es: 'Español',
+  De: 'Deutsch',
+  Fr: 'Français',
+  It: 'Italiano',
+  Pt: 'Português'
 };
 
 export const VOICE_FOR_LANGUAGE = {
-  en: 'en-GB',
-  es: 'es-MX',
-  de: 'de-DE'
+  En: 'en-GB',
+  Es: 'es-MX',
+  De: 'de-DE'
 };
 
-export const AUTO_LANGUAGE = 'auto';
+export const AUTO_LANGUAGE = 'Auto';

@@ -15,7 +15,7 @@ export default function Profile({ user }) {
   const [loading, setLoading] = useState(false);
 
   const handleModalEdit = () => {
-    setIsModalOpen(!isModalOpen);
+    setIsModalOpen((prev) => !prev);
   };
   const handleImageChange = (e) => {
     setUploadImage(e.target.files[0]);
