@@ -55,6 +55,13 @@ const actions = [
     icon: ia_chat,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
+  },
+  {
+    title: 'SportCoach',
+    href: 'sportcoach',
+    icon: ia_chat,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
   }
   // {
   //   title: 'Schedule a one-on-one',

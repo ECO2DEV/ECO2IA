@@ -41,7 +41,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     router.pathname == '/chatgpt' ||
     router.pathname == '/dalle' ||
     router.pathname == '/profile' ||
-    router.pathname == '/mattraduct'
+    router.pathname == '/mattraduct' ||
+    router.pathname == '/sportcoach'
   ) {
     return (
       <SessionProvider session={session}>
