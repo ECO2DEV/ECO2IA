@@ -1,4 +1,5 @@
 import { SUPPORTED_LENGUAGES, AUTO_LANGUAGE } from '../../constants/constans';
+import { DataMatTraduct } from '../../data/mattraduct';
 
 export const LanguageSelector = ({ onChange, type, value }) => {
   const handleChange = (event) => {
@@ -12,7 +13,7 @@ export const LanguageSelector = ({ onChange, type, value }) => {
       value={value}
     >
       {type === 'from' && (
-        <option value={AUTO_LANGUAGE}>Detectar idioma</option>
+        <option value={AUTO_LANGUAGE}> {DataMatTraduct.ButtonDetectLanguage} </option>
       )}
       {Object.entries(SUPPORTED_LENGUAGES).map(([key, value]) => (
         <option key={key} value={key}>

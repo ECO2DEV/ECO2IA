@@ -1,5 +1,6 @@
 import { Fragment, useState } from 'react';
 import Image from 'next/image';
+import { DataDashboard } from '../../data/dashboard';
 import { Dialog, Transition } from '@headlessui/react';
 import {
   Bars3Icon,
@@ -18,10 +19,11 @@ import {
 } from '@heroicons/react/24/outline';
 import dalle from '../../public/dalle.png';
 import ia_chat from '../../public/ia_chat.png';
+import Link from 'next/link';
 
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
+  { name: 'Dashboard', link: '#', icon: HomeIcon, current: true },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
   { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
@@ -31,22 +33,25 @@ const navigation = [
 
 const actions = [
   {
-    title: 'ChatGpt',
+    title: (DataDashboard.MattechChatTitle),
     href: 'chatgpt',
+    description: (DataDashboard.MattechChatDescription),
     icon: ia_chat,
     iconForeground: 'text-teal-700',
     iconBackground: 'bg-teal-50'
   },
   {
-    title: 'Dalle',
+    title: (DataDashboard.MattechImageTitle),
     href: 'dalle',
+    description: (DataDashboard.MattechImageDescription),
     icon: dalle,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: 'Mattraduct',
+    title: (DataDashboard.MatTranslateTitle),
     href: 'mattraduct',
+    description:(DataDashboard.MatTranslateDescription),
     icon: ia_chat,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
@@ -136,16 +141,14 @@ export default function DashboardSection() {
             </div>
             <div className="mt-8">
               <h3 className="text-base font-semibold leading-6 text-gray-900">
-                <a href={action.href} className="focus:outline-none">
+                <Link href={action.href} className="focus:outline-none">
                   {/* Extend touch target to entire panel */}
                   <span className="absolute inset-0" aria-hidden="true" />
                   {action.title}
-                </a>
+                </Link>
               </h3>
               <p className="mt-2 text-sm text-gray-500">
-                Doloribus dolores nostrum quia qui natus officia quod et
-                dolorem. Sit repellendus qui ut at blanditiis et quo et
-                molestiae.
+              {action.description}
               </p>
             </div>
             <span

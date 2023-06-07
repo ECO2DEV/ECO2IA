@@ -16,7 +16,7 @@ import logo from '../../public/Mlogop.png';
 import { strapiUrl } from '../../constants/constans';
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true }
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true }
   // { name: 'Team', href: '#', icon: UsersIcon, current: false },
 ];
 
@@ -133,7 +133,7 @@ export default function LayoutUser({ children }) {
                     </div>
                     <nav className="mt-5 space-y-1 px-2">
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
                           href={item.href}
                           className={classNames(
@@ -153,7 +153,7 @@ export default function LayoutUser({ children }) {
                             aria-hidden="true"
                           />
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </nav>
                   </div>
@@ -243,7 +243,7 @@ export default function LayoutUser({ children }) {
               </div>
               <nav className="mt-5 flex-1 space-y-1 px-2">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     className={classNames(
@@ -263,7 +263,7 @@ export default function LayoutUser({ children }) {
                       aria-hidden="true"
                     />
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </nav>
             </div>

@@ -108,6 +108,12 @@ export default function Profile({ user }) {
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+            <dt className="text-sm font-medium text-gray-500">Sex</dt>
+            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <span className="flex-grow">{user.sex}</span>
+            </dd>
+          </div>
+          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
             <dt className="text-sm font-medium text-gray-500">Email</dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.email}</span>
@@ -122,21 +128,59 @@ export default function Profile({ user }) {
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+            <dt className="text-sm font-medium text-gray-500">Nacionality</dt>
+            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <span className="flex-grow">{user.nacionality}</span>
+            </dd>
+          </div>
+          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
             <dt className="text-sm font-medium text-gray-500">Pays</dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.country}</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500">About</dt>
+            <dt className="text-sm font-medium text-gray-500">Age</dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">
-                Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim
-                incididunt cillum culpa consequat. Excepteur qui ipsum aliquip
-                consequat sint. Sit id mollit nulla mollit nostrud in ea officia
-                proident. Irure nostrud pariatur mollit ad adipisicing
-                reprehenderit deserunt qui eu.
+                {user.age}
               </span>
+            </dd>
+          </div>
+          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+            <dt className="text-sm font-medium text-gray-500">Weight</dt>
+            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <span className="flex-grow">{user.weight}</span>
+            </dd>
+          </div>
+          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+            <dt className="text-sm font-medium text-gray-500">Domain of Study</dt>
+            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <span className="flex-grow">{user.domainofstudy}</span>
+            </dd>
+          </div>
+          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+            <dt className="text-sm font-medium text-gray-500">Educational Level</dt>
+            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <span className="flex-grow">{user.educationallevel}</span>
+            </dd>
+          </div>
+          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+            <dt className="text-sm font-medium text-gray-500">Activity Area</dt>
+            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <span className="flex-grow">{user.activityarea}</span>
+            </dd>
+          </div>
+          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+            <dt className="text-sm font-medium text-gray-500">Sport</dt>
+            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <span className="flex-grow">{user.sport}</span>
+            </dd>
+          </div>
+          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+            <dt className="text-sm font-medium text-gray-500">Transport</dt>
+            <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <span className="flex-grow">{user.transport}</span>
             </dd>
           </div>
         </dl>
