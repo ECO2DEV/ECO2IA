@@ -7,14 +7,13 @@ import { strapiUrl } from '../../constants/constans';
 import { ClipboardIcon } from '../icons/icons';
 import ModalDelete from './ModalDelete';
 
-export const Conversations = () => {}
+export const Conversations = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const { user } = useContext(UserContext);
   const [copied, setCopied] = useState([]);
 
   const { data, isLoading, deleteChat } = useChat(user?.id);
-  // console.log('Request of chatGpt user, bot', data);
   const reversedData = data?.data?.slice().reverse();
 
   const lastMessageRef = useRef(null);
@@ -27,7 +26,7 @@ export const Conversations = () => {}
 
   const handleCopy = (resp, index) => {
     navigator.clipboard
-    .writeText(resp)
+      .writeText(resp)
       .then(() => {
         setCopied((prevCopied) => {
           const newCopied = [...prevCopied];
@@ -45,11 +44,12 @@ export const Conversations = () => {}
       .catch((error) => {
         console.error('Error al copiar al portapapeles:', error);
       });
+  };
+
   const onHandleModalDelete = (id) => {
     setDeleteModalOpen((prev) => !prev);
     setDeleteId(id);
   };
-
   if (isLoading) {
     return (
       <div className="border border-blue-300 shadow p-4 w-full">

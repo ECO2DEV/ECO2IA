@@ -7,7 +7,7 @@ import {
   DocumentArrowDownIcon,
   DocumentIcon
 } from '@heroicons/react/20/solid';
-
+import Transcription from './transcript';
 import { HistoryIcon } from '../icons/icons';
 
 export default function OptionsMattraduct({
@@ -126,6 +126,11 @@ export default function OptionsMattraduct({
                 </div>
               )}
             </button>
+            <div>
+               <span>
+               <Transcription />
+               </span>
+              </div>
           </li>
         </ol>
       </nav>
