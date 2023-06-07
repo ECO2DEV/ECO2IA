@@ -1,15 +1,23 @@
-import { useEffect, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../context/user/UserContext';
-import { useDebounce } from '../../hooks/useDebounce';
 import { MattraductResponse } from '../../util/api/mattraductResponse';
+import { Toaster, toast } from 'react-hot-toast';
 import { LanguageSelector } from './LanguageSelector';
 import { TextArea } from './TextArea';
 import { useLangStorage } from '../../hooks/useLangStorage';
 import OptionsMattraduct from './optionsMattraduct';
+import { PromptContext } from '../../context/prompts/PromptContext';
+import { useMattraduct } from '../../hooks/useMattraduct';
+import HistoryRequest from './HistoryRequest';
+
 const MattraductAI = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [showThirdTextarea, setShowThirdTextarea] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const { user } = useContext(UserContext);
+  const { data: translationsData, mutate } = useMattraduct(user?.id);
+  const { setResponse, setPrompt, prompt } = useContext(PromptContext);
   const {
     fromLanguage,
     toLanguage,
@@ -26,24 +34,36 @@ const MattraductAI = () => {
     loading
   } = useLangStorage();
 
-  const debouncedFromText = useDebounce(fromText, 500);
-
   const handleClipboardOne = () => {
-    navigator.clipboard.writeText(result).catch(() => {});
+    navigator.clipboard
+      .writeText(result)
+      .then(() => {
+        result.length > 0
+          ? toast.success('Text copied to clipboard!')
+          : toast.error('No text to copy!');
+      })
+      .catch(() => {
+        toast.error('Failed to copy text to clipboard!');
+      });
   };
+
   const handleClipboardTwo = () => {
-    navigator.clipboard.writeText(secondResult).catch(() => {});
+    navigator.clipboard
+      .writeText(secondResult)
+      .then(() => {
+        result.length > 0
+          ? toast.success('Text copied to clipboard!')
+          : toast.error('No text to copy!');
+      })
+      .catch(() => {
+        toast.error('Failed to copy text to clipboard!');
+      });
   };
-
-  const handleShowThirdTextarea = () => {
-    setShowThirdTextarea((prev) => !prev);
-  };
-
-  useEffect(() => {
-    if (debouncedFromText === '') return;
-
+  const handleMatTraduct = () => {
+    if (!prompt) return;
+    setIsLoading(true);
     MattraductResponse({
-      prompt: debouncedFromText,
+      prompt: prompt,
       user,
       fromLanguage,
       toLanguage,
@@ -51,65 +71,101 @@ const MattraductAI = () => {
     })
       .then((result) => {
         if (result == null) return;
-        console.log('result.data.lang1 is:', result.data);
+        // console.log('result.data ', result.data);
         setResult(result?.data?.data.lang1);
         setSecondResult(result?.data?.data.lang2);
+        // mutate
+        mutate({
+          translationsData: [...translationsData.data, result?.data?.data],
+          ...translationsData
+        });
+        setResponse(result?.data?.data.lang1 + result?.data?.data.lang2);
       })
       .catch(() => {
         setResult('Error');
+      })
+      .finally(() => {
+        setIsLoading(false);
+        // setPrompt('');
       });
-  }, [debouncedFromText, fromLanguage, toLanguage, toThirdLanguage]);
+  };
+
+  const handleShowThirdTextarea = () => {
+    setShowThirdTextarea((prev) => !prev);
+  };
+
+  const handleModalHistory = () => {
+    setModalOpen((prev) => !prev);
+  };
   return (
-    <section className="flex flex-col justify-center items-center gap-6 min-h-screen ">
-      <div className="w-full max-w-5xl bg-white shadow-lg rounded-md">
-        <div className="flex items-center justify-around bg-indigo-600 text-gray-100 px-4 py-2 rounded-t-md">
-          <LanguageSelector
-            onChange={setFromLanguage}
-            type="from"
-            value={fromLanguage}
-          />
-
-          <LanguageSelector
-            onChange={setToLanguage}
-            type="to"
-            value={toLanguage}
-          />
-          {showThirdTextarea && (
+    <>
+      <section className="flex flex-col justify-center items-center gap-6 min-h-screen ">
+        <div className="w-full max-w-5xl bg-white shadow-lg rounded-md">
+          <div className="flex items-center justify-around bg-indigo-600 text-gray-100 px-4 py-2 rounded-t-md">
             <LanguageSelector
-              onChange={setToThirdLanguage}
-              type="to"
-              value={toThirdLanguage}
+              onChange={setFromLanguage}
+              type="from"
+              value={fromLanguage}
             />
-          )}
-        </div>
-        <div className="flex gap-1 flex-col sm:flex-row ">
-          <TextArea type={'from'} value={fromText} onChange={setFromText} />
 
-          <TextArea
-            loading={loading}
-            type="to"
-            value={result}
-            onChange={setResult}
-            onClick={handleClipboardOne}
-          />
+            <LanguageSelector
+              onChange={setToLanguage}
+              type="to"
+              value={toLanguage}
+            />
+            {showThirdTextarea && (
+              <LanguageSelector
+                onChange={setToThirdLanguage}
+                type="to"
+                value={toThirdLanguage}
+              />
+            )}
+          </div>
+          <div className="flex gap-1 flex-col sm:flex-row ">
+            <TextArea
+              type="from"
+              value={prompt ? prompt : ''}
+              onChange={setPrompt}
+              onHandleTraduct={handleMatTraduct}
+              fetchLoading={isLoading}
+            />
 
-          {showThirdTextarea && (
             <TextArea
               loading={loading}
               type="to"
-              value={secondResult}
-              onChange={setSecondResult}
-              onClick={handleClipboardTwo}
+              value={result}
+              onChange={setResult}
+              onClick={handleClipboardOne}
             />
-          )}
-        </div>
-      </div>
 
-      <OptionsMattraduct
-        handleShowThirdTextarea={handleShowThirdTextarea}
-        showThirdTextarea={showThirdTextarea}
-      />
-    </section>
+            {showThirdTextarea && (
+              <TextArea
+                loading={loading}
+                type="to"
+                value={secondResult}
+                onChange={setSecondResult}
+                onClick={handleClipboardTwo}
+              />
+            )}
+          </div>
+        </div>
+
+        <OptionsMattraduct
+          handleShowThirdTextarea={handleShowThirdTextarea}
+          showThirdTextarea={showThirdTextarea}
+          onClick={handleModalHistory}
+        />
+      </section>
+      {modalOpen && (
+        <HistoryRequest
+          onClose={handleModalHistory}
+          setResult={setResult}
+          setSecondResult={setSecondResult}
+          setFromText={setFromText}
+        />
+      )}
+      <Toaster position="top-center" />
+    </>
   );
 };
 
