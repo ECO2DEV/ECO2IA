@@ -4,7 +4,9 @@ import { AUTO_LANGUAGE } from '../constants/constans';
 const initialState = {
   fromLanguage: 'auto',
   toLanguage: 'en',
+  toThirdLanguage: 'es',
   fromText: '',
+  secondResult: '',
   result: '',
   loading: false
 };
@@ -24,6 +26,7 @@ function reducer(state, action) {
       ...state,
       loading,
       result: '',
+      secondResult: '',
       fromLanguage: state.toLanguage,
       toLanguage: state.fromLanguage
     };
@@ -38,6 +41,7 @@ function reducer(state, action) {
       ...state,
       fromLanguage: action.payload,
       result: '',
+      secondResult: '',
       loading
     };
   }
@@ -50,6 +54,20 @@ function reducer(state, action) {
       ...state,
       toLanguage: action.payload,
       result: '',
+      secondResult: '',
+      loading
+    };
+  }
+
+  if (type === 'SET_TO_THIRD_LANGUAGE') {
+    if (state.toThirdLanguage === action.payload) return state;
+    const loading = state.fromText !== '';
+
+    return {
+      ...state,
+      toThirdLanguage: action.payload,
+      result: '',
+      secondResult: '',
       loading
     };
   }
@@ -61,7 +79,8 @@ function reducer(state, action) {
       ...state,
       loading,
       fromText: action.payload,
-      result: ''
+      result: '',
+      secondResult: ''
     };
   }
 
@@ -73,12 +92,30 @@ function reducer(state, action) {
     };
   }
 
+  if (type === 'SET_SECOND_RESULT') {
+    return {
+      ...state,
+      loading: false,
+      secondResult: action.payload
+    };
+  }
+
   return state;
 }
 
 export const useLangStorage = () => {
-  const [{ fromLanguage, toLanguage, fromText, result, loading }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    {
+      fromLanguage,
+      toLanguage,
+      toThirdLanguage,
+      fromText,
+      result,
+      loading,
+      secondResult
+    },
+    dispatch
+  ] = useReducer(reducer, initialState);
 
   const interchangeLanguages = () => {
     dispatch({ type: 'INTERCHANGE_LANGUAGES' });
@@ -91,6 +128,9 @@ export const useLangStorage = () => {
   const setToLanguage = (payload) => {
     dispatch({ type: 'SET_TO_LANGUAGE', payload });
   };
+  const setToThirdLanguage = (payload) => {
+    dispatch({ type: 'SET_TO_THIRD_LANGUAGE', payload });
+  };
 
   const setFromText = (payload) => {
     dispatch({ type: 'SET_FROM_TEXT', payload });
@@ -99,17 +139,24 @@ export const useLangStorage = () => {
   const setResult = (payload) => {
     dispatch({ type: 'SET_RESULT', payload });
   };
+  const setSecondResult = (payload) => {
+    dispatch({ type: 'SET_SECOND_RESULT', payload });
+  };
 
   return {
     fromLanguage,
     toLanguage,
+    toThirdLanguage,
     fromText,
     result,
     loading,
+    secondResult,
     interchangeLanguages,
     setFromLanguage,
     setToLanguage,
+    setToThirdLanguage,
     setFromText,
-    setResult
+    setResult,
+    setSecondResult
   };
 };

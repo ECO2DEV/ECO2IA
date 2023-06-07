@@ -16,8 +16,9 @@ import {
   ClockIcon,
   ReceiptRefundIcon
 } from '@heroicons/react/24/outline';
-
+import dalle from '../../public/dalle.png';
 import ia_chat from '../../public/ia_chat.png';
+
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -39,7 +40,7 @@ const actions = [
   {
     title: 'Dalle',
     href: 'dalle',
-    icon: ia_chat,
+    icon: dalle,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
