@@ -44,7 +44,10 @@ export const SportCoachIA = (props) => {
           setShowResults(true); // Mostrar los resultados generados
         })
         .catch((error) => {
-          setError("Une erreur s'est produite lors de la récupération des données.", error);
+          setError(
+            "Une erreur s'est produite lors de la récupération des données.",
+            error
+          );
         })
         .finally(() => {
           setSubmitting(false);
@@ -85,7 +88,7 @@ export const SportCoachIA = (props) => {
           Sport Coach
         </h2>
         <p className="text-sm text-gray-600 text-center mb-6">
-        Bénéficiez d'un plan de formation personnalisé
+          Bénéficiez d'un plan de formation personnalisé
         </p>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col md:flex-row gap-4">
@@ -159,18 +162,18 @@ export const SportCoachIA = (props) => {
           </div>
         </form>
       </div>
-
       {showResults && (
-        <div className="flex flex-wrap w-full max-w-xl1 rounded-lg p-8 mt-8">
-          <SportCoachResults
-            weight={weight}
-            age={age}
-            goal={goal}
-            trainingDays={trainingDays}
-          />
+        <div className="flex justify-center">
+          <div className="p-4 sm:p-8 md:mt-8 lg:max-w-xl xl:max-w-2xl">
+            <SportCoachResults
+              weight={weight}
+              age={age}
+              goal={goal}
+              trainingDays={trainingDays}
+            />
+          </div>
         </div>
       )}
-
       {error && <h4 className="text-red-500 text-center">{error}</h4>}
     </div>
   );
