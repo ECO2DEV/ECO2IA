@@ -4,7 +4,7 @@ export const DataDashboard = {
     "L'utilisateur pose une question et l'IA répond. Nous conservons l'historique des 10 dernières requêtes de l'utilisateur.",
   MattechImageTitle: 'MATTIMAGE',
   MattechImageDescription:
-    "Cette IA génère des images à partir de descriptions fournies par l'utilisateur. Elle n'est pas la priorité, mais une fonctionnalité supplémentaire.",
+    "Cette IA génère des images à partir de descriptions fournies par l'utilisateur.",
   MatTranslateTitle: 'MATTRADUCT',
   MatTranslateDescription:
     "L'utilisateur peut entrer du texte pour une traduction dans une langue choisie.",
