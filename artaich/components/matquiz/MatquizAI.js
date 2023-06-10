@@ -36,8 +36,8 @@ export const MatquizAI = () => {
       return;
     }
     if (formState.questionQuantity < 1 || formState.questionQuantity > 10) {
-      setError('Please type a number between 1 and 15');
-      alert('Please type a number between 1 and 15');
+      setError('Please type a number between 1 and 10');
+      alert('Please type a number between 1 and 10');
       return;
     }
     // Make a topic limit of 1000 characters
@@ -86,7 +86,7 @@ export const MatquizAI = () => {
             name="topic"
             rows="10"
             cols="30"
-            placeholder="Generate questions based on a topic, for example: math, history, science, digital marrketing."
+            placeholder="Generate questions quiz based on a topic, for example: math, history, science, digital marketing."
             value={formState.topic}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -175,14 +175,11 @@ export const MatquizAI = () => {
               <h3 className="text-2xl font-bold text-blue-600 mb-2">
                 Generated Questions
               </h3>
-              <ul className="flex flex-col justify-center items-center">
+              <ul className="flex flex-col justify-center items-start">
                 {submittedData.resp.map(
                   ({ question, posibleAnswers, correctAnswer }, index) => (
                     <li key={index}>
-                      <details
-                        open
-                        className="mb-1 border border-gray-300 rounded p-4"
-                      >
+                      <details open className="mb-1 p-4  ">
                         <summary className="text-lg font-bold text-blue-500 cursor-pointer transition-colors duration-300 hover:text-blue-800">
                           {question}
                         </summary>
