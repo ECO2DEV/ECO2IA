@@ -21,7 +21,6 @@ import dalle from '../../public/dalle.png';
 import ia_chat from '../../public/ia_chat.png';
 import Link from 'next/link';
 
-
 const navigation = [
   { name: 'Dashboard', link: '#', icon: HomeIcon, current: true },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
@@ -33,25 +32,25 @@ const navigation = [
 
 const actions = [
   {
-    title: (DataDashboard.MattechChatTitle),
+    title: DataDashboard.MattechChatTitle,
     href: 'chatgpt',
-    description: (DataDashboard.MattechChatDescription),
+    description: DataDashboard.MattechChatDescription,
     icon: ia_chat,
     iconForeground: 'text-teal-700',
     iconBackground: 'bg-teal-50'
   },
   {
-    title: (DataDashboard.MattechImageTitle),
+    title: DataDashboard.MattechImageTitle,
     href: 'dalle',
-    description: (DataDashboard.MattechImageDescription),
+    description: DataDashboard.MattechImageDescription,
     icon: dalle,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: (DataDashboard.MatTranslateTitle),
+    title: DataDashboard.MatTranslateTitle,
     href: 'mattraduct',
-    description:(DataDashboard.MatTranslateDescription),
+    description: DataDashboard.MatTranslateDescription,
     icon: ia_chat,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
@@ -60,6 +59,14 @@ const actions = [
     title: (DataDashboard.MattSportTitle),
     href: 'sportcoach',
     description: (DataDashboard.MattSportDescription),
+    icon: ia_chat,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
+  },
+  {
+    title: DataDashboard.MattQuizTitle,
+    href: 'matquiz',
+    description: DataDashboard.MattQuizDescription,
     icon: ia_chat,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
@@ -155,9 +162,7 @@ export default function DashboardSection() {
                   {action.title}
                 </Link>
               </h3>
-              <p className="mt-2 text-sm text-gray-500">
-              {action.description}
-              </p>
+              <p className="mt-2 text-sm text-gray-500">{action.description}</p>
             </div>
             <span
               className="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400"
