@@ -14,7 +14,6 @@ export const Conversations = () => {
   const [copied, setCopied] = useState([]);
 
   const { data, isLoading, deleteChat } = useChat(user?.id);
-  // console.log('Request of chatGpt user, bot', data);
   const reversedData = data?.data?.slice().reverse();
 
   const lastMessageRef = useRef(null);
@@ -46,6 +45,7 @@ export const Conversations = () => {
         console.error('Error al copiar al portapapeles:', error);
       });
   };
+
   const onHandleModalDelete = (id) => {
     setDeleteModalOpen((prev) => !prev);
     setDeleteId(id);

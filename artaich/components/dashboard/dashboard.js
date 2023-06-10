@@ -56,8 +56,9 @@ const actions = [
     iconBackground: 'bg-purple-50'
   },
   {
-    title: 'SportCoach',
+    title: (DataDashboard.MattSportTitle),
     href: 'sportcoach',
+    description: (DataDashboard.MattSportDescription),
     icon: ia_chat,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
