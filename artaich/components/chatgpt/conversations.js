@@ -113,7 +113,7 @@ export const Conversations = () => {
                 </div>
                 <div className="flex flex-col text-justify w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
                   {item?.attributes?.payload_out?.resp}
-                  <div className="absolute right-0 top-0 flex flex-col ">
+                  <div className="absolute right-0 top-0 flex flex-col items-end ">
                     <button
                       className=" cursor-pointer "
                       onClick={() =>
