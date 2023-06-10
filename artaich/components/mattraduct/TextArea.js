@@ -4,9 +4,9 @@ import { ClipboardIcon, SendIcon } from '../icons/icons';
 import Loader from '../loader/loader';
 
 const getPlaceholder = ({ type, loading }) => {
-  if (type === 'from') return (DataMatTraduct.Entertext);
-  if (loading === true) return (DataMatTraduct.Loading);
-  return (DataMatTraduct.Translation);
+  if (type === 'from') return 'Type your text here';
+  if (loading === true) return 'Loading...';
+  return 'Translation will appear here';
 };
 
 export const TextArea = ({
