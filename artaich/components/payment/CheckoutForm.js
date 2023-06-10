@@ -8,11 +8,13 @@ import { Dialog, Transition } from '@headlessui/react';
 import { CheckIcon, CurrencyEuroIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
 
-const CheckoutForm = ({ onClose, amount, currency }) => {
+const CheckoutForm = ({ onClose, amount, currency,user }) => {
   const stripe = useStripe();
   const elements = useElements();
   const strapiUrl = process.env.STRAPI_URL;
   const strapiToken = process.env.API_TOKEN;
+  const logged_user = user;
+  console.log(logged_user);
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -50,19 +52,15 @@ const CheckoutForm = ({ onClose, amount, currency }) => {
       clientSecret,
       elements,
       confirmParams: {
-        return_url: 'http://localhost:3000/' + transactionId
+        return_url: `${strapiToken}/${transactionId}`
       }
     });
-
-    const response = await fetch('/api/stripe/createSubscription', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        customerId: 1,
-        paymentMethodId: result.payment_method,
-        priceId: 'plan_NeeieGD7qqOAm9'
-      })
-    });
+    
+    const response = await axios.post(
+      `${strapiUrl}/api/payment/createSubscription`,
+      { customerId: logged_user.customer_id, paymentMethodId: result.payment_method,  priceId: 'plan_NeeieGD7qqOAm9' },
+      header);
+  
 
     console.log('suscription', response);
 

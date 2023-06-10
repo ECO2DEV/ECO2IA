@@ -57,7 +57,7 @@ const actions = [
     iconBackground: 'bg-purple-50'
   },
   {
-    title: 'SportCoach',
+    title: 'MATTSPORT',
     href: 'sportcoach',
     icon: ia_chat,
     iconForeground: 'text-purple-700',
