@@ -29,15 +29,15 @@ export const MatquizAI = () => {
     event.preventDefault();
     // Make form validation
 
-    if (formState.questionQuantity < 1 || formState.questionQuantity > 10) {
-      setError('Please type a number between 1 and 15');
-      alert('Please type a number between 1 and 15');
-      return;
-    }
     console.log('formState.topic is:', formState.topic);
     if (formState.topic === '') {
       setError('Please type a topic');
       alert('Please type a topic');
+      return;
+    }
+    if (formState.questionQuantity < 1 || formState.questionQuantity > 10) {
+      setError('Please type a number between 1 and 15');
+      alert('Please type a number between 1 and 15');
       return;
     }
     // Make a topic limit of 1000 characters
@@ -203,7 +203,7 @@ export const MatquizAI = () => {
                               )}
 
                               {posibleAnswer === correctAnswer && (
-                                <p className="flex justify-center ml-2 text-green-500 text-center items-center">
+                                <p className="flex font-bold justify-center ml-2 text-green-500 text-center items-center">
                                   Correct Answer
                                 </p>
                               )}
