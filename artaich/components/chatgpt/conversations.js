@@ -100,9 +100,9 @@ export const Conversations = () => {
               </button>
             </div>
             <div
-              className={`group w-full text-gray-100 border-b border-black/10 bg-gray-800 `}
+              className={`relative group w-full text-gray-100 border-b border-black/10 bg-gray-800 `}
             >
-              <div className="flex  p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl  md:py-6 lg:px-0 m-auto">
+              <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl  md:py-6 lg:px-0 m-auto">
                 <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
                   <Image
                     src="/Mlogo.ico"
@@ -111,19 +111,25 @@ export const Conversations = () => {
                     height={30}
                   />
                 </div>
-                <div className="relative flex flex-col text-justify w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
+                <div className="flex flex-col text-justify w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
                   {item?.attributes?.payload_out?.resp}
-                  <button
-                    className="relative bottom-1 right-5 "
-                    onClick={() => handleCopy(item?.attributes?.payload_out?.resp, index)}
-                  >
-                    <ClipboardIcon />
-                  </button>
-                  {copied[index] && (
-                    <div className="absolute bottom-0 right-5 bg-blue-900 text-white p-2 rounded">
-                    Copié dans le presse-papiers !
-                    </div>
-                  )}
+                  <div className="absolute right-0 top-0 flex flex-col items-end ">
+                    <button
+                      className=" cursor-pointer "
+                      onClick={() =>
+                        handleCopy(item?.attributes?.payload_out?.resp, index)
+                      }
+                    >
+                      <div className="w-7 h-7 text-gray-100 transition duration-200 m-1 group-hover:bg-cyan-700 group-hover:text-black rounded-full p-1">
+                        <ClipboardIcon />
+                      </div>
+                    </button>
+                    {copied[index] && (
+                      <div className=" bg-blue-900 text-white rounded">
+                        Copié dans le presse-papiers !
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
