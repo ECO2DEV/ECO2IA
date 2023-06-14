@@ -3,9 +3,11 @@ import { MatquizResponse } from '../../util/api/matquizResponse';
 import { UserContext } from '../../context/user/UserContext';
 import Loader from '../loader/loader';
 import { MatquizSkeleton } from './MatquizSkeleton';
+import { ShortAnswerIcon } from '../icons/icons';
 
 export const MatquizAI = () => {
   const [submittedData, setSubmittedData] = useState(null);
+  const [isAnswerVisible, setIsAnswerVisible] = useState(false);
   const { user } = useContext(UserContext);
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -171,8 +173,8 @@ export const MatquizAI = () => {
           </div>
         ) : (
           submittedData && (
-            <div className="flex flex-col justify-center items-center">
-              <h3 className="text-2xl font-bold text-blue-600 mb-2">
+            <div className="relative flex flex-col justify-center items-center">
+              <h3 className="text-2xl font-bold text-blue-600 mb-3">
                 Generated Questions
               </h3>
               <ul className="flex flex-col justify-center items-start">
@@ -199,11 +201,12 @@ export const MatquizAI = () => {
                                 </p>
                               )}
 
-                              {posibleAnswer === correctAnswer && (
+                              {posibleAnswer === correctAnswer &&
+                              isAnswerVisible ? (
                                 <p className="flex font-bold justify-center ml-2 text-green-500 text-center items-center">
                                   Correct Answer
                                 </p>
-                              )}
+                              ) : null}
                             </div>
                           ))}
                         </div>
@@ -212,6 +215,13 @@ export const MatquizAI = () => {
                   )
                 )}
               </ul>
+
+              <button
+                onClick={() => setIsAnswerVisible((prevState) => !prevState)}
+                className="absolute -bottom-5 right-10 "
+              >
+                <ShortAnswerIcon />
+              </button>
             </div>
           )
         )}
