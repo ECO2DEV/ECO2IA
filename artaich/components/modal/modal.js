@@ -27,7 +27,7 @@ const pricing = {
       href: '#',
       featured: false,
       description: '',
-      price: { monthly: DataPricing.pricingbutton1, annually: '' },
+      price: { monthly: DataPricing.amount1, annually: '' },
       mainFeatures: [
         DataPricing.pricingfeatures1,
         DataPricing.pricingfeatures1_2,
@@ -43,7 +43,7 @@ const pricing = {
       href: '#',
       featured: true,
       description: '',
-      price: { monthly: DataPricing.pricingbutton2, annually: '' },
+      price: { monthly: DataPricing.amount2, annually: '' },
       mainFeatures: [
         DataPricing.pricingfeatures2,
         DataPricing.pricingfeatures2_2,
@@ -94,6 +94,7 @@ export default function Modal({children, user}) {
       router.push('/auth/signin');
       // Set the state to open the modal
     } else {
+      console.log(amount);
       setAmount(amount);
       setIsModalOpen(!isModalOpen);
     }
@@ -114,6 +115,7 @@ export default function Modal({children, user}) {
               onClose={handleButtonClick}
               amount={amount}
               currency={currency}
+              user={user}
             />
           )}
           {isEnterpriseOpen && (

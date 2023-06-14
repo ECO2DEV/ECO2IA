@@ -9,6 +9,7 @@ export const DataPricing = {
   pricingfeatures1_4: 'Accès à des mises à jour régulières de l’IA',
   pricingfeatures1_5: 'Prix abordable pour les etudiants',
   pricingbutton1: '4€',
+  amount1:4,
   pricingtitle2: 'STANDARD',
   pricingfeatures2: '30 imag es par mois',
   pricingfeatures2_2: '112500 mots par mois',
@@ -17,6 +18,7 @@ export const DataPricing = {
   pricingfeatures2_5:
     'Prix compétitif pour les particuliers et les petites enterprises',
   pricingbutton2: '10€',
+  amount2:10,
   pricingtitle3: 'ENTREPRISE',
   pricingprice3: 'Sur mesure',
   pricingfeatures3: 'Produits illimités',
