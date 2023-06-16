@@ -11,6 +11,7 @@ export const InputField = ({ label, id, value, onChange, type = "text" }) => {
         type={type}
         value={value}
         onChange={onChange}
+        required
         className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
       />
     </div>
