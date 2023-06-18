@@ -27,7 +27,8 @@
     "react-speech-recognition": "^3.10.0",
     "slick-carousel": "^1.8.1",
     "strapi-stripe": "^3.2.1",
-    "swr": "^2.1.5"
+    "swr": "^2.1.5",
+    "voice-activity-detection": "^0.0.5"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
