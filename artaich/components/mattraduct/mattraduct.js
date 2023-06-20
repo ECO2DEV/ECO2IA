@@ -25,7 +25,6 @@ const MattraductAI = () => {
     setFromLanguage,
     setToThirdLanguage,
     setToLanguage,
-    fromText,
     setFromText,
     result,
     setResult,
