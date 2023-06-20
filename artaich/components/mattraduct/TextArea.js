@@ -1,15 +1,13 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import { ClipboardIcon, SendIcon } from '../icons/icons';
 import Loader from '../loader/loader';
-import { DataMatTraduct} from '../../data/mattraduct'
-import Transcription from './transcript';
-import { useSpeechRecognition } from 'react-speech-recognition';
+
 
 const getPlaceholder = ({ type, loading }) => {
-  if (type === 'from') return 'Type your text here';
-  if (loading === true) return 'Loading...';
-  return 'Translation will appear here';
+  if (type === 'from') return 'Tapez votre texte ici';
+  if (loading === true) return 'Chargement...';
+  return "La traduction apparaîtra ici";
 };
 
 export const TextArea = ({
@@ -21,15 +19,7 @@ export const TextArea = ({
   onClick = () => {},
   onHandleTraduct = () => {}
 }) => {
-  const [transcription, setTranscription] = useState('');
-  const {transcript, listening, startListening, stopListening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
-
-  useEffect(() => {
-    if (transcript !== '') {
-      setTranscription(transcript);
-      resetTranscript();
-    }
-  }, [transcript, resetTranscript]);
+  
 
   const { setPrompt, setPromptTokens } = useContext(PromptContext);
   const handleChange = (event) => {
@@ -55,7 +45,7 @@ export const TextArea = ({
           ? 'h-[200px] sm:h-[300px] lg:h-[400px] xl:h-[410px] w-full bg-gray-800 text-gray-100'
           : 'h-[200px]  sm:h-[300px] lg:h-[400px] xl:h-[410px] w-full bg-gray-200'
       }`}
-      value={value || transcription} 
+      value={value} 
         onChange={handleChange}
       />
       {type === 'to' && (

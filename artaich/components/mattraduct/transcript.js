@@ -1,31 +1,45 @@
-import React from 'react';
-import { MicrophoneIcon, PlusIcon, SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/outline';
+import  {useContext} from 'react';
+import { MicrophoneOpen, StopCircleIcon, MicrophoneBlue, TrashIconBlack } from '../icons/icons';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import { useState } from 'react';
+import { PromptContext } from '../../context/prompts/PromptContext';
 
 const Transcription = () => {
-    const {
-      transcript,
-      listening,
-      startListening,
-      stopListening,
-      resetTranscript,
-      browserSupportsSpeechRecognition
-    } = useSpeechRecognition();
-  
-    if (!browserSupportsSpeechRecognition) {
-      return <span>Browser doesn't support speech recognition.</span>;
-    }
-  
-    return (
-        <div>
-        <button onClick={SpeechRecognition.startListening}>
-            Micon
-        </button>
-        <button onClick={SpeechRecognition.stopListening}>MicOf</button>
-        <button onClick={resetTranscript}>D</button>
-        
-      </div>
-    );
+  const { setPrompt } = useContext(PromptContext);
+  const [isListening, setIsListening] = useState(false); 
+
+  const startListening = () => {
+    setIsListening(true);
+    SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
   };
-  
-  export default Transcription;
+
+  const stopListening = () => {
+    setIsListening(false);
+    SpeechRecognition.stopListening();
+    setPrompt(transcript);
+  };
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition();
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
+
+
+  return (
+    <div className="flex gap-4">
+      <button onClick={startListening} className="p-2">
+        {isListening ? <MicrophoneBlue /> : <MicrophoneOpen />}
+      </button>
+      <button onClick={stopListening} className="p-2">
+        <StopCircleIcon />
+      </button>
+    </div>
+  );
+};
+export default Transcription;
