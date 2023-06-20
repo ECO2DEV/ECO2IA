@@ -35,6 +35,7 @@ export const SportCoachIA = (props) => {
         weight: weight,
         age: age,
         goal: goal,
+        language: "French",
         trainingDays: trainingDays,
         user: user,
       })

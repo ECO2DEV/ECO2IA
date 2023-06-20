@@ -8,6 +8,7 @@ export const sendTrainingPlanRequest = async ({
   age,
   goal,
   trainingDays,
+  language,
   user
 }) => {
   try {
@@ -19,6 +20,7 @@ export const sendTrainingPlanRequest = async ({
         weight: weight,
         age: age,
         goal: goal,
+        language: language,
         trainingDays: trainingDays,
         users_permissions_user: user
       },
