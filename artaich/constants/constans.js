@@ -9,12 +9,13 @@ export const header = {
 };
 
 export const SUPPORTED_LENGUAGES = {
-  En: 'English',
-  Es: 'Español',
-  De: 'Deutsch',
+
+  En: 'Anglais',
+  Es: 'Espagnol',
+  De: 'Allemand',
   Fr: 'Français',
-  It: 'Italiano',
-  Pt: 'Português'
+  It: 'Italien',
+  Pt: 'Portugais'
 };
 
 export const VOICE_FOR_LANGUAGE = {
