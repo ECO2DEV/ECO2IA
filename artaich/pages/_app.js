@@ -43,7 +43,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     router.pathname == '/profile' ||
     router.pathname == '/mattraduct' ||
     router.pathname == '/sportcoach' ||
-    router.pathname == '/matquiz'
+    router.pathname == '/matquiz' ||
+    router.pathname == '/matdescription'
   ) {
     return (
       <SessionProvider session={session}>
