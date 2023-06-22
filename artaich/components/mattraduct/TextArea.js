@@ -2,12 +2,13 @@ import { useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import { ClipboardIcon, SendIcon } from '../icons/icons';
 import Loader from '../loader/loader';
+import { DataMatTraduct } from '../../data/mattraduct';
 
 
 const getPlaceholder = ({ type, loading }) => {
-  if (type === 'from') return 'Tapez votre texte ici';
-  if (loading === true) return 'Chargement...';
-  return "La traduction apparaîtra ici";
+  if (type === 'from') return (DataMatTraduct.TextArea1);
+  if (loading === true) return (DataMatTraduct.TextAreaLoading);
+  return (DataMatTraduct.TextArea2);
 };
 
 export const TextArea = ({
