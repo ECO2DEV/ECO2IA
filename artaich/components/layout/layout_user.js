@@ -1,4 +1,4 @@
-import { Fragment, useState, useContext, useEffect } from 'react';
+import { Fragment, useState, useContext, useEffect, use } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Dialog, Transition } from '@headlessui/react';
@@ -14,6 +14,7 @@ import {
 import Image from 'next/image';
 import logo from '../../public/Mlogop.png';
 import { strapiUrl } from '../../constants/constans';
+import { Toaster } from 'react-hot-toast';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true }
@@ -25,7 +26,18 @@ function classNames(...classes) {
 }
 
 export default function LayoutUser({ children }) {
-  const { setPlan, plan } = useContext(PromptContext);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [discountTokensModal, setDiscountTokensModal] = useState(0);
+
+  const {
+    setPlan,
+    plan,
+    promptTokens,
+    responseTokens,
+    response,
+    setPromptTokens,
+    setResponseTokens
+  } = useContext(PromptContext);
   const { setUser } = useContext(UserContext);
   const { max_imagens = 0, max_tokens = 0 } = plan;
 
@@ -43,7 +55,20 @@ export default function LayoutUser({ children }) {
   // console.log('Attributes are : ' + plan);
   // console.log(JSON.stringify(children.props.user));
 
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  // useEffect for discountTokensModal
+  useEffect(() => {
+    setDiscountTokensModal(promptTokens + responseTokens);
+    setTimeout(() => {
+      setDiscountTokensModal(0);
+    }, 2000);
+  }, [response, responseTokens]);
+  // useEffect for start counting the tokens in 0, after the next response
+  useEffect(() => {
+    setTimeout(() => {
+      setPromptTokens(0);
+      setResponseTokens(0);
+    }, 3000);
+  }, [response, responseTokens]);
 
   const image_url = children.props.user.avatar
     ? strapiUrl + children.props.user.avatar.url
@@ -160,10 +185,15 @@ export default function LayoutUser({ children }) {
                   {/* Este es el counter para pantallas pequeñas */}
                   <div className="flex flex-shrink-0 p-4">
                     <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12">
-                      <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
-                        <dt className="text-sm lg:text-xs leading-3 text-gray-300">
+                      <div className="relative flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
+                        <dt className="text-sm lg:text-xs leading-3 text-gray-300 z-10">
                           Max Words
                         </dt>
+                        {discountTokensModal > 0 ? (
+                          <span className="text-red-500 text-1xl absolute top-0 -mt-7 right-4 z-0">
+                            -{discountTokensModal}
+                          </span>
+                        ) : null}
                         <dd className="text-base font-semibold tracking-tight text-white">
                           {max_tokens}
                         </dd>
@@ -269,10 +299,15 @@ export default function LayoutUser({ children }) {
             </div>
             <div className="flex flex-shrink-0 p-4">
               <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12">
-                <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
-                  <dt className="text-sm lg:text-xs leading-3 text-gray-300 ">
+                <div className="relative flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6 ">
+                  <dt className="text-sm lg:text-xs leading-3 text-gray-300 z-10">
                     Max Words
                   </dt>
+                  {discountTokensModal > 0 ? (
+                    <span className="text-red-500 text-1xl absolute top-0 -mt-7 right-1 z-0">
+                      -{discountTokensModal}
+                    </span>
+                  ) : null}
                   <dd className="text-base font-semibold tracking-tight text-white">
                     {max_tokens}
                   </dd>
@@ -352,6 +387,7 @@ export default function LayoutUser({ children }) {
           </main>
         </div>
       </div>
+      <Toaster position="top-center" />
     </>
   );
 }

@@ -94,7 +94,7 @@ export const Conversations = () => {
               </div>
               <button
                 onClick={() => onHandleModalDelete(item?.id)}
-                className="absolute right-0 top-0 cursor-pointer"
+                className="absolute right-0 top-0 cursor-pointer "
               >
                 <DeleteIcon />
               </button>
@@ -115,12 +115,12 @@ export const Conversations = () => {
                   {item?.attributes?.payload_out?.resp}
                   <div className="absolute right-0 top-0 flex flex-col items-end ">
                     <button
-                      className=" cursor-pointer "
+                      className="p-1"
                       onClick={() =>
                         handleCopy(item?.attributes?.payload_out?.resp, index)
                       }
                     >
-                      <div className="w-7 h-7 text-gray-100 transition duration-200 m-1 group-hover:bg-cyan-700 group-hover:text-black rounded-full p-1">
+                      <div className="w-6 h-6 text-gray-100 bg-gray-100 transition duration-200 m-1 group-hover:bg-cyan-700 group-hover:text-black rounded-full ">
                         <ClipboardIcon />
                       </div>
                     </button>
