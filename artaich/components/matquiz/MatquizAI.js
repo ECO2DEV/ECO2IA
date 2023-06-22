@@ -1,18 +1,21 @@
 import { useState, useContext } from 'react';
 import { MatquizResponse } from '../../util/api/matquizResponse';
 import { UserContext } from '../../context/user/UserContext';
+import { PromptContext } from '../../context/prompts/PromptContext';
 import Loader from '../loader/loader';
 import { MatquizSkeleton } from './MatquizSkeleton';
-import { ShortAnswerIcon } from '../icons/icons';
+import { ClipboardIcon, ShortAnswerIcon } from '../icons/icons';
+import { toast } from 'react-hot-toast';
 
 export const MatquizAI = () => {
   const [submittedData, setSubmittedData] = useState(null);
   const [isAnswerVisible, setIsAnswerVisible] = useState(false);
   const { user } = useContext(UserContext);
+  const { setPrompt, prompt, setResponse, setPromptTokens } =
+    useContext(PromptContext);
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [formState, setFormState] = useState({
-    topic: '',
     optionChoice: 'multipleChoice',
     language: 'Auto',
     difficulty: 'easy',
@@ -27,12 +30,38 @@ export const MatquizAI = () => {
     }));
   };
 
+  const handlePropmtChange = (event) => {
+    const { value } = event.target;
+    if (value === '') {
+      setPromptTokens(0);
+    }
+    setPrompt(value);
+  };
+  const handleCopy = () => {
+    navigator.clipboard
+      // if isAnswerVisible is true, copy the questions with the answers, if is false, copy only the questions
+      .writeText(
+        isAnswerVisible
+          ? JSON.stringify(submittedData)
+          : JSON.stringify(
+              submittedData.resp.map(({ question }) => ({ question }))
+            )
+      )
+      .then(() => {
+        toast.success('Text copied to clipboard!');
+      })
+      .catch((error) => {
+        toast.error('Failed to copy text to clipboard!');
+        console.error('Error al copiar al portapapeles:', error);
+      });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Make form validation
 
-    console.log('formState.topic is:', formState.topic);
-    if (formState.topic === '') {
+    console.log('formState.topic is:', prompt);
+    if (prompt === '') {
       setError('Please type a topic');
       alert('Please type a topic');
       return;
@@ -43,7 +72,7 @@ export const MatquizAI = () => {
       return;
     }
     // Make a topic limit of 1000 characters
-    if (formState.topic.length > 1000) {
+    if (prompt.length > 1000) {
       setError('Please type a topic with less than 1000 characters');
       alert('Please type a topic with less than 1000 characters');
       return;
@@ -51,7 +80,7 @@ export const MatquizAI = () => {
     setIsLoading(true);
     // Make API call
     MatquizResponse({
-      topic: formState.topic,
+      topic: prompt,
       language: formState.language,
       difficulty: formState.difficulty,
       optionChoice: formState.optionChoice,
@@ -62,6 +91,7 @@ export const MatquizAI = () => {
         console.log('response is:');
         console.log(response?.data?.data);
         setSubmittedData(response?.data?.data);
+        setResponse(response?.data?.data);
       })
       .catch((error) => {
         console.log('error is:', error);
@@ -70,12 +100,12 @@ export const MatquizAI = () => {
       .finally(() => {
         setIsLoading(false);
         setFormState({
-          topic: '',
           optionChoice: 'multipleChoice',
           language: 'Auto',
           difficulty: 'easy',
           questionQuantity: 0
         });
+        // setPrompt('');
       });
   };
 
@@ -84,15 +114,15 @@ export const MatquizAI = () => {
       <div className="w-full max-w-md mx-4">
         <form onSubmit={handleSubmit}>
           <textarea
-            id="topic"
-            name="topic"
+            id="prompt"
+            name="prompt"
             rows="10"
             cols="30"
             placeholder="Generate questions quiz based on a topic, for example: math, history, science, digital marketing."
-            value={formState.topic}
-            onChange={handleChange}
+            value={prompt ? prompt : ''}
+            onChange={handlePropmtChange}
             className="w-full px-4 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-          ></textarea>
+          />
           <select
             name="optionChoice"
             value={formState.optionChoice}
@@ -145,11 +175,10 @@ export const MatquizAI = () => {
           <button
             disabled={loading}
             type="submit"
-            // help me with some class for disable bottom
             className={`${
               loading
                 ? 'text-white bg-gray-500 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500'
-                : 'text-white bg-blue-500 rounded-lg hover:bg-blue-600 text-center focus:outline-none focus:ring-2 focus:ring-blue-500'
+                : 'w-full  bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2 px-4 rounded-full mt-8'
             } w-full mt-4 px-4 py-2 `}
           >
             {loading ? (
@@ -174,7 +203,7 @@ export const MatquizAI = () => {
         ) : (
           submittedData && (
             <div className="relative flex flex-col justify-center items-center">
-              <h3 className="text-2xl font-bold text-blue-600 mb-3">
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
                 Generated Questions
               </h3>
               <ul className="flex flex-col justify-center items-start">
@@ -182,7 +211,7 @@ export const MatquizAI = () => {
                   ({ question, posibleAnswers, correctAnswer }, index) => (
                     <li key={index}>
                       <details open className="mb-1 p-4  ">
-                        <summary className="text-lg font-bold text-blue-500 cursor-pointer transition-colors duration-300 hover:text-blue-800">
+                        <summary className="text-lg font-bold text-indigo-600 cursor-pointer transition-colors duration-300 hover:text-indigo-700">
                           {question}
                         </summary>
                         <div className="flex flex-col justify-center">
@@ -196,14 +225,14 @@ export const MatquizAI = () => {
                                   {correctAnswer}
                                 </p>
                               ) : (
-                                <p className="text-lg font-semibold text-gray-800">
+                                <p className="text-lg font-normal text-gray-800">
                                   {posibleAnswer}
                                 </p>
                               )}
 
                               {posibleAnswer === correctAnswer &&
                               isAnswerVisible ? (
-                                <p className="flex font-bold justify-center ml-2 text-green-500 text-center items-center">
+                                <p className="flex font-mediumjustify-center ml-2 text-green-500 text-center items-center">
                                   Correct Answer
                                 </p>
                               ) : null}
@@ -215,13 +244,16 @@ export const MatquizAI = () => {
                   )
                 )}
               </ul>
-
-              <button
-                onClick={() => setIsAnswerVisible((prevState) => !prevState)}
-                className="absolute -bottom-5 right-10 "
-              >
-                <ShortAnswerIcon />
-              </button>
+              <div className="absolute -bottom-5 right-10 flex justify-between items-center gap-2">
+                <button
+                  onClick={() => setIsAnswerVisible((prevState) => !prevState)}
+                >
+                  <ShortAnswerIcon />
+                </button>
+                <button onClick={handleCopy}>
+                  <ClipboardIcon />
+                </button>
+              </div>
             </div>
           )
         )}
