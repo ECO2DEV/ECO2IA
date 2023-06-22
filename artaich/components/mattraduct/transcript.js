@@ -1,31 +1,52 @@
-import React from 'react';
-import { MicrophoneIcon, PlusIcon, SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/outline';
+import { useContext, useState, useEffect } from 'react';
+import { MicrophoneOpen, StopCircleIcon, MicrophoneBlue } from '../icons/icons';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import { PromptContext } from '../../context/prompts/PromptContext';
 
 const Transcription = () => {
-    const {
-      transcript,
-      listening,
-      startListening,
-      stopListening,
-      resetTranscript,
-      browserSupportsSpeechRecognition
-    } = useSpeechRecognition();
-  
-    if (!browserSupportsSpeechRecognition) {
-      return <span>Browser doesn't support speech recognition.</span>;
+  const { setPrompt } = useContext(PromptContext);
+  const [isListening, setIsListening] = useState(false);
+  const [currentTranscript, setCurrentTranscript] = useState('');
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition();
+
+  useEffect(() => {
+    setCurrentTranscript(transcript);
+  }, [transcript]);
+
+  useEffect(() => {
+    if (currentTranscript !== '') {
+      setPrompt(currentTranscript);
     }
-  
-    return (
-        <div>
-        <button onClick={SpeechRecognition.startListening}>
-            Micon
-        </button>
-        <button onClick={SpeechRecognition.stopListening}>MicOf</button>
-        <button onClick={resetTranscript}>D</button>
-        
-      </div>
-    );
+  }, [currentTranscript, setPrompt]);
+
+  const startListening = () => {
+    setIsListening(true);
+    SpeechRecognition.startListening({ continuous: true, language: 'en-US' });
   };
-  
-  export default Transcription;
+
+  const stopListening = () => {
+    setIsListening(false);
+    SpeechRecognition.stopListening();
+    setCurrentTranscript('');
+  };
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
+
+  return (
+    <div className="flex gap-4">
+      <button onClick={isListening ? stopListening : startListening} className="p-2">
+        {isListening ? <StopCircleIcon /> : <MicrophoneOpen />}
+      </button>
+    </div>
+  );
+};
+
+export default Transcription;

@@ -10,6 +10,8 @@ import { PromptContext } from '../../context/prompts/PromptContext';
 import { useMattraduct } from '../../hooks/useMattraduct';
 import HistoryRequest from './HistoryRequest';
 
+
+
 const MattraductAI = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showThirdTextarea, setShowThirdTextarea] = useState(false);
