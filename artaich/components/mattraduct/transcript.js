@@ -1,39 +1,33 @@
 import { useContext, useState, useEffect } from 'react';
-import { MicrophoneOpen, StopCircleIcon, MicrophoneBlue } from '../icons/icons';
+import { MicrophoneOpen, StopCircleIcon } from '../icons/icons';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { PromptContext } from '../../context/prompts/PromptContext';
 
 const Transcription = () => {
   const { setPrompt } = useContext(PromptContext);
   const [isListening, setIsListening] = useState(false);
-  const [currentTranscript, setCurrentTranscript] = useState('');
 
   const {
     transcript,
-    listening,
     resetTranscript,
     browserSupportsSpeechRecognition
   } = useSpeechRecognition();
 
   useEffect(() => {
-    setCurrentTranscript(transcript);
-  }, [transcript]);
-
-  useEffect(() => {
-    if (currentTranscript !== '') {
-      setPrompt(currentTranscript);
+    if (transcript !== '') {
+      setPrompt(transcript);
     }
-  }, [currentTranscript, setPrompt]);
+  }, [transcript]);
 
   const startListening = () => {
     setIsListening(true);
-    SpeechRecognition.startListening({ continuous: true, language: 'en-US' });
+    SpeechRecognition.startListening({ continuous: true, language: 'fr-FR' });
   };
 
   const stopListening = () => {
     setIsListening(false);
     SpeechRecognition.stopListening();
-    setCurrentTranscript('');
+    resetTranscript();
   };
 
   if (!browserSupportsSpeechRecognition) {
