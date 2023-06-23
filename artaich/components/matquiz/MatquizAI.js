@@ -4,7 +4,7 @@ import { UserContext } from '../../context/user/UserContext';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import Loader from '../loader/loader';
 import { MatquizSkeleton } from './MatquizSkeleton';
-import { ClipboardIcon, ShortAnswerIcon } from '../icons/icons';
+import { ClipboardIcon, ShowAnswerIcon } from '../icons/icons';
 import { toast } from 'react-hot-toast';
 
 export const MatquizAI = () => {
@@ -63,18 +63,20 @@ export const MatquizAI = () => {
     console.log('formState.topic is:', prompt);
     if (prompt === '') {
       setError('Veuillez saisir un sujet');
-      alert('Veuillez saisir un sujet');
+      toast.error('Veuillez saisir un sujet');
       return;
     }
     if (formState.questionQuantity < 1 || formState.questionQuantity > 10) {
       setError('Veuillez saisir un nombre entre 1 et 10');
-      alert('Veuillez saisir un nombre entre 1 et 10');
+      toast.error('Veuillez saisir un nombre entre 1 et 10');
       return;
     }
     // Make a topic limit of 1000 characters
-    if (prompt.length > 1000) {
+    if (prompt == null || prompt.length > 1000) {
       setError('Veuillez saisir un sujet contenant moins de 1000 caractères');
-      alert('Veuillez saisir un sujet contenant moins de 1000 caractères');
+      toast.error(
+        'Veuillez saisir un sujet contenant moins de 1000 caractères'
+      );
       return;
     }
     setIsLoading(true);
@@ -177,8 +179,8 @@ export const MatquizAI = () => {
             type="submit"
             className={`${
               loading
-                ? 'text-white bg-gray-500 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500'
-                : 'w-full  bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2 px-4 rounded-full mt-8'
+                ? 'text-white bg-gray-500 rounded-full text-center focus:outline-none focus:ring-2 focus:ring-blue-500'
+                : ' rounded-full  font-semibold bg-indigo-600 text-white ring-1 ring-inset ring-gray-300'
             } w-full mt-4 px-4 py-2 `}
           >
             {loading ? (
@@ -248,7 +250,7 @@ export const MatquizAI = () => {
                 <button
                   onClick={() => setIsAnswerVisible((prevState) => !prevState)}
                 >
-                  <ShortAnswerIcon />
+                  <ShowAnswerIcon />
                 </button>
                 <button onClick={handleCopy}>
                   <ClipboardIcon />
