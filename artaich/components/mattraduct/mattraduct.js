@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../context/user/UserContext';
 import { MattraductResponse } from '../../util/api/mattraductResponse';
-import { Toaster, toast } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { LanguageSelector } from './LanguageSelector';
 import { TextArea } from './TextArea';
 import { useLangStorage } from '../../hooks/useLangStorage';
@@ -87,7 +87,7 @@ const MattraductAI = () => {
       })
       .finally(() => {
         setIsLoading(false);
-        // setPrompt('');
+        setPrompt('');
       });
   };
 
@@ -165,7 +165,6 @@ const MattraductAI = () => {
           setFromText={setFromText}
         />
       )}
-      <Toaster position="top-center" />
     </>
   );
 };

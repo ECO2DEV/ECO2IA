@@ -58,7 +58,7 @@ const actions = [
   {
     title: 'MATTSPORT',
     href: 'sportcoach',
-    description: (DataDashboard.MattSportDescription),
+    description: DataDashboard.MattSportDescription,
     icon: ia_chat,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
@@ -67,6 +67,14 @@ const actions = [
     title: DataDashboard.MattQuizTitle,
     href: 'matquiz',
     description: DataDashboard.MattQuizDescription,
+    icon: ia_chat,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
+  },
+  {
+    title: DataDashboard.MattDescriptionTitle,
+    href: 'matdescription',
+    description: DataDashboard.MattDescription,
     icon: ia_chat,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'

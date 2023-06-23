@@ -4,7 +4,7 @@ import EditProfile from './editProfile';
 import { PencilIcon } from '../icons/icons';
 import { EditAvatar } from './editAvatar';
 import { uploadUserImage, updateUserImage } from '../../util/api/user';
-import { Toaster, toast } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 export default function Profile({ user }) {
   const router = useRouter();
@@ -142,9 +142,7 @@ export default function Profile({ user }) {
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
             <dt className="text-sm font-medium text-gray-500">Age</dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <span className="flex-grow">
-                {user.age}
-              </span>
+              <span className="flex-grow">{user.age}</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
@@ -154,13 +152,17 @@ export default function Profile({ user }) {
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500">Domain of Study</dt>
+            <dt className="text-sm font-medium text-gray-500">
+              Domain of Study
+            </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.domainofstudy}</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500">Educational Level</dt>
+            <dt className="text-sm font-medium text-gray-500">
+              Educational Level
+            </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.educationallevel}</span>
             </dd>
@@ -186,7 +188,6 @@ export default function Profile({ user }) {
         </dl>
         {isModalOpen && <EditProfile onClose={handleModalEdit} user={user} />}
       </div>
-      <Toaster position="top-center" />
     </>
   );
 }

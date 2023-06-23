@@ -69,7 +69,7 @@ export const Carousel = ({ setImageSrc }) => {
       secondImage: secondImageSrc
     }));
   };
-  console.log('data is:', data?.data);
+  // console.log('data is:', data?.data);
 
   if (isLoading)
     return (

@@ -1,6 +1,7 @@
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { toast } from 'react-hot-toast';
 
 export default function ModalDelete({ onClose, onHandleDelete }) {
   const [open, setOpen] = useState(true);
@@ -70,6 +71,7 @@ export default function ModalDelete({ onClose, onHandleDelete }) {
                     onClick={() => {
                       onHandleDelete();
                       onClose();
+                      toast.success('Conversation deleted successfully');
                     }}
                   >
                     Delete

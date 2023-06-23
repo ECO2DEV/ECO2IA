@@ -188,7 +188,7 @@ export const SportCoachResults = () => {
           Partager
         </button>
         {showShareButtons && (
-          <div className="flex flex-col items-center gap-2 absolute bottom-12 left-0 bg-gray-50 p-2 rounded shadow">
+          <div className="flex flex-col items-center gap-2 absolute bottom-12 right-16 bg-gray-50 p-2 rounded shadow">
             <button
               className="text-black font-bold rounded"
               onClick={shareOnFacebook}

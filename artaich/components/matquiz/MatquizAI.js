@@ -1,18 +1,21 @@
 import { useState, useContext } from 'react';
 import { MatquizResponse } from '../../util/api/matquizResponse';
 import { UserContext } from '../../context/user/UserContext';
+import { PromptContext } from '../../context/prompts/PromptContext';
 import Loader from '../loader/loader';
 import { MatquizSkeleton } from './MatquizSkeleton';
-import { ShortAnswerIcon } from '../icons/icons';
+import { ClipboardIcon, ShortAnswerIcon } from '../icons/icons';
+import { toast } from 'react-hot-toast';
 
 export const MatquizAI = () => {
   const [submittedData, setSubmittedData] = useState(null);
   const [isAnswerVisible, setIsAnswerVisible] = useState(false);
   const { user } = useContext(UserContext);
+  const { setPrompt, prompt, setResponse, setPromptTokens } =
+    useContext(PromptContext);
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [formState, setFormState] = useState({
-    topic: '',
     optionChoice: 'multipleChoice',
     language: 'Auto',
     difficulty: 'easy',
@@ -27,31 +30,57 @@ export const MatquizAI = () => {
     }));
   };
 
+  const handlePropmtChange = (event) => {
+    const { value } = event.target;
+    if (value === '') {
+      setPromptTokens(0);
+    }
+    setPrompt(value);
+  };
+  const handleCopy = () => {
+    navigator.clipboard
+      // if isAnswerVisible is true, copy the questions with the answers, if is false, copy only the questions
+      .writeText(
+        isAnswerVisible
+          ? JSON.stringify(submittedData)
+          : JSON.stringify(
+              submittedData.resp.map(({ question }) => ({ question }))
+            )
+      )
+      .then(() => {
+        toast.success('Text copied to clipboard!');
+      })
+      .catch((error) => {
+        toast.error('Failed to copy text to clipboard!');
+        console.error('Error al copiar al portapapeles:', error);
+      });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Make form validation
 
-    console.log('formState.topic is:', formState.topic);
-    if (formState.topic === '') {
-      setError('Please type a topic');
-      alert('Please type a topic');
+    console.log('formState.topic is:', prompt);
+    if (prompt === '') {
+      setError('Veuillez saisir un sujet');
+      alert('Veuillez saisir un sujet');
       return;
     }
     if (formState.questionQuantity < 1 || formState.questionQuantity > 10) {
-      setError('Please type a number between 1 and 10');
-      alert('Please type a number between 1 and 10');
+      setError('Veuillez saisir un nombre entre 1 et 10');
+      alert('Veuillez saisir un nombre entre 1 et 10');
       return;
     }
     // Make a topic limit of 1000 characters
-    if (formState.topic.length > 1000) {
-      setError('Please type a topic with less than 1000 characters');
-      alert('Please type a topic with less than 1000 characters');
+    if (prompt.length > 1000) {
+      setError('Veuillez saisir un sujet contenant moins de 1000 caractères');
+      alert('Veuillez saisir un sujet contenant moins de 1000 caractères');
       return;
     }
     setIsLoading(true);
     // Make API call
     MatquizResponse({
-      topic: formState.topic,
+      topic: prompt,
       language: formState.language,
       difficulty: formState.difficulty,
       optionChoice: formState.optionChoice,
@@ -62,6 +91,7 @@ export const MatquizAI = () => {
         console.log('response is:');
         console.log(response?.data?.data);
         setSubmittedData(response?.data?.data);
+        setResponse(response?.data?.data);
       })
       .catch((error) => {
         console.log('error is:', error);
@@ -70,12 +100,12 @@ export const MatquizAI = () => {
       .finally(() => {
         setIsLoading(false);
         setFormState({
-          topic: '',
           optionChoice: 'multipleChoice',
           language: 'Auto',
           difficulty: 'easy',
           questionQuantity: 0
         });
+        // setPrompt('');
       });
   };
 
@@ -84,24 +114,24 @@ export const MatquizAI = () => {
       <div className="w-full max-w-md mx-4">
         <form onSubmit={handleSubmit}>
           <textarea
-            id="topic"
-            name="topic"
+            id="prompt"
+            name="prompt"
             rows="10"
             cols="30"
-            placeholder="Generate questions quiz based on a topic, for example: math, history, science, digital marketing."
-            value={formState.topic}
-            onChange={handleChange}
+            placeholder="Générer des questions de quiz basées sur un sujet, par exemple : mathématiques, histoire, science, marketing digital."
+            value={prompt ? prompt : ''}
+            onChange={handlePropmtChange}
             className="w-full px-4 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-          ></textarea>
+          />
           <select
             name="optionChoice"
             value={formState.optionChoice}
             onChange={handleChange}
             className="w-full mt-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="multipleChoice">Multiple Choice</option>
-            <option value="trueFalse">True or False</option>
-            <option value="ShortAnswer">Short Answer</option>
+            <option value="multipleChoice">Choix multiple</option>
+            <option value="trueFalse">Vrai ou faux</option>
+            <option value="ShortAnswer">Réponse courte</option>
           </select>
 
           <select
@@ -112,12 +142,12 @@ export const MatquizAI = () => {
             className="w-full mt-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="Auto">Auto</option>
-            <option value="En">English</option>
-            <option value="Es">Spanish</option>
-            <option value="Fr">French</option>
-            <option value="De">German</option>
-            <option value="It">Italian</option>
-            <option value="Pt">Portuguese</option>
+            <option value="En">Anglais</option>
+            <option value="Es">Espagnol</option>
+            <option value="Fr">Français</option>
+            <option value="De">Allemand</option>
+            <option value="It">Italien</option>
+            <option value="Pt">Portugais</option>
           </select>
 
           <select
@@ -127,9 +157,9 @@ export const MatquizAI = () => {
             onChange={handleChange}
             className="w-full mt-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
+            <option value="easy">Facile</option>
+            <option value="medium">Moyen</option>
+            <option value="hard">Difficile</option>
           </select>
 
           <input
@@ -145,11 +175,10 @@ export const MatquizAI = () => {
           <button
             disabled={loading}
             type="submit"
-            // help me with some class for disable bottom
             className={`${
               loading
                 ? 'text-white bg-gray-500 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500'
-                : 'text-white bg-blue-500 rounded-lg hover:bg-blue-600 text-center focus:outline-none focus:ring-2 focus:ring-blue-500'
+                : 'w-full  bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2 px-4 rounded-full mt-8'
             } w-full mt-4 px-4 py-2 `}
           >
             {loading ? (
@@ -157,7 +186,7 @@ export const MatquizAI = () => {
                 <Loader />
               </div>
             ) : (
-              'Submit'
+              'Soumettre'
             )}
           </button>
         </form>
@@ -174,15 +203,15 @@ export const MatquizAI = () => {
         ) : (
           submittedData && (
             <div className="relative flex flex-col justify-center items-center">
-              <h3 className="text-2xl font-bold text-blue-600 mb-3">
-                Generated Questions
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                Questions Générées
               </h3>
               <ul className="flex flex-col justify-center items-start">
                 {submittedData.resp.map(
                   ({ question, posibleAnswers, correctAnswer }, index) => (
                     <li key={index}>
                       <details open className="mb-1 p-4  ">
-                        <summary className="text-lg font-bold text-blue-500 cursor-pointer transition-colors duration-300 hover:text-blue-800">
+                        <summary className="text-lg font-bold text-indigo-600 cursor-pointer transition-colors duration-300 hover:text-indigo-700">
                           {question}
                         </summary>
                         <div className="flex flex-col justify-center">
@@ -196,15 +225,15 @@ export const MatquizAI = () => {
                                   {correctAnswer}
                                 </p>
                               ) : (
-                                <p className="text-lg font-semibold text-gray-800">
+                                <p className="text-lg font-normal text-gray-800">
                                   {posibleAnswer}
                                 </p>
                               )}
 
                               {posibleAnswer === correctAnswer &&
                               isAnswerVisible ? (
-                                <p className="flex font-bold justify-center ml-2 text-green-500 text-center items-center">
-                                  Correct Answer
+                                <p className="flex font-mediumjustify-center ml-2 text-green-500 text-center items-center">
+                                  Réponse Correcte
                                 </p>
                               ) : null}
                             </div>
@@ -215,13 +244,16 @@ export const MatquizAI = () => {
                   )
                 )}
               </ul>
-
-              <button
-                onClick={() => setIsAnswerVisible((prevState) => !prevState)}
-                className="absolute -bottom-5 right-10 "
-              >
-                <ShortAnswerIcon />
-              </button>
+              <div className="absolute -bottom-5 right-10 flex justify-between items-center gap-2">
+                <button
+                  onClick={() => setIsAnswerVisible((prevState) => !prevState)}
+                >
+                  <ShortAnswerIcon />
+                </button>
+                <button onClick={handleCopy}>
+                  <ClipboardIcon />
+                </button>
+              </div>
             </div>
           )
         )}

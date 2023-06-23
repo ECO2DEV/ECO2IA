@@ -2,7 +2,7 @@ import { useReducer, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { PromptContext } from './PromptContext';
 import { promptReducer } from './promptReducer';
-import countTokens from '../../util/helpers/count_tokens';
+import { countTokens } from '../../util/helpers/count_tokens';
 import axios from 'axios';
 import { strapiUrl, header } from '../../constants/constans';
 
@@ -66,6 +66,27 @@ export const PromptProvider = ({ children }) => {
     });
   }, [state.prompt, countTokensMemo]);
 
+  // useEfect for set response tokens when the response is set
+  useEffect(() => {
+    if (!state.response) return;
+    // validate that the user has maxtokens to use, if not redirect to buy a plan
+    if (state.plan.length === 0) return;
+    if (state.plan.max_tokens <= 0) {
+      alert('You have no more tokens to use, please buy a new plan');
+      router.push('/dashboard');
+      return;
+    }
+    // validation, if is a dalle response, count only the prompt
+    if (Array.isArray(state.response) && state.response.length > 0) {
+      return;
+    }
+    const resptokens = countTokensMemo(state.response);
+    dispatch({
+      type: 'SET_RESPONSE_TOKENS',
+      payload: resptokens
+    });
+  }, [state.response, countTokensMemo]);
+
   const setPlan = async (id) => {
     try {
       const { data } = await axios.get(
@@ -112,7 +133,7 @@ export const PromptProvider = ({ children }) => {
     if (state.plan.length === 0) {
       return;
     }
-    let responseTokens;
+    let responseTokensCount;
     let updatedMaxImages;
     let totalTokens;
 
@@ -120,11 +141,12 @@ export const PromptProvider = ({ children }) => {
     if (Array.isArray(state.response) && state.response.length > 0) {
       updatedMaxImages = state.plan.max_imagens -= 2; // Restar 2 imágenes
       totalTokens = state.promptTokens;
+      console.log('DALL·E Response Tokens', totalTokens);
     } else {
       // If the response is a string (GPT-3 - mattraduct)
 
-      responseTokens = countTokensMemo(state.response);
-      totalTokens = responseTokens + state.promptTokens;
+      responseTokensCount = countTokensMemo(state.response);
+      totalTokens = responseTokensCount + state.promptTokens;
     }
 
     // console.log('AI Response Tokens', responseTokens);
@@ -172,6 +194,13 @@ export const PromptProvider = ({ children }) => {
     });
   };
 
+  const setResponseTokens = (responseTokens) => {
+    dispatch({
+      type: 'SET_RESPONSE_TOKENS',
+      payload: responseTokens
+    });
+  };
+
   return (
     <PromptContext.Provider
       value={{
@@ -179,7 +208,8 @@ export const PromptProvider = ({ children }) => {
         setPlan,
         setPrompt,
         setResponse,
-        setPromptTokens
+        setPromptTokens,
+        setResponseTokens
       }}
     >
       {children}
