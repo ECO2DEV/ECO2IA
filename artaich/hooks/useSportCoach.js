@@ -23,7 +23,8 @@ export function useSportCoach(userId = 1) {
       revalidateOnReconnect: false,
       refreshInterval: 0,
     }
-  );
+    );
+    console.log(isLoading)
 
   return {
     data,
