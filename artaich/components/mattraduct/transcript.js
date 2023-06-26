@@ -1,17 +1,16 @@
 import { useContext, useState, useEffect } from 'react';
 import { MicrophoneOpen, StopCircleIcon } from '../icons/icons';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import SpeechRecognition, {
+  useSpeechRecognition
+} from 'react-speech-recognition';
 import { PromptContext } from '../../context/prompts/PromptContext';
 
 const Transcription = () => {
   const { setPrompt } = useContext(PromptContext);
   const [isListening, setIsListening] = useState(false);
 
-  const {
-    transcript,
-    resetTranscript,
-    browserSupportsSpeechRecognition
-  } = useSpeechRecognition();
+  const { transcript, resetTranscript, browserSupportsSpeechRecognition } =
+    useSpeechRecognition();
 
   useEffect(() => {
     if (transcript !== '') {
@@ -36,7 +35,10 @@ const Transcription = () => {
 
   return (
     <div className="flex gap-4">
-      <button onClick={isListening ? stopListening : startListening} className="p-2">
+      <button
+        onClick={isListening ? stopListening : startListening}
+        className="p-2"
+      >
         {isListening ? <StopCircleIcon /> : <MicrophoneOpen />}
       </button>
     </div>

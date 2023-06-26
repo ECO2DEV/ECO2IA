@@ -10,18 +10,15 @@ import {
 } from '@heroicons/react/20/solid';
 import dynamic from 'next/dynamic';
 
-
 import { HistoryIcon } from '../icons/icons';
 
 const Transcription = dynamic(() => import('./transcript'), { ssr: false });
-
 
 export default function OptionsMattraduct({
   showThirdTextarea,
   handleShowThirdTextarea,
   onClick
 }) {
-
   const { promptTokens } = useContext(PromptContext);
   return (
     <div className="">
@@ -56,7 +53,10 @@ export default function OptionsMattraduct({
                   className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                   aria-hidden="true"
                 />
-                <span className="hidden sm:contents"> {DataMatTraduct.ButtonPDF} </span>
+                <span className="hidden sm:contents">
+                  {' '}
+                  {DataMatTraduct.ButtonPDF}{' '}
+                </span>
               </div>
             </button>
           </li>
@@ -76,7 +76,10 @@ export default function OptionsMattraduct({
                   className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                   aria-hidden="true"
                 />
-                <span className="hidden sm:contents"> {DataMatTraduct.ButtonWord} </span>
+                <span className="hidden sm:contents">
+                  {' '}
+                  {DataMatTraduct.ButtonWord}{' '}
+                </span>
               </div>
             </button>
           </li>
@@ -97,7 +100,10 @@ export default function OptionsMattraduct({
                   className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                   aria-hidden="true"
                 />
-                <span className="hidden sm:contents"> {DataMatTraduct.ButtonShare} </span>
+                <span className="hidden sm:contents">
+                  {' '}
+                  {DataMatTraduct.ButtonShare}{' '}
+                </span>
               </div>
             </button>
           </li>
@@ -121,7 +127,10 @@ export default function OptionsMattraduct({
                     className="mr-1 h-5 w-5 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                     aria-hidden="true"
                   />
-                  <span className="hidden sm:contents"> {DataMatTraduct.ButtonLanguage} </span>
+                  <span className="hidden sm:contents">
+                    {' '}
+                    {DataMatTraduct.ButtonLanguage}{' '}
+                  </span>
                 </div>
               ) : (
                 <div className="flex ">
@@ -129,7 +138,10 @@ export default function OptionsMattraduct({
                     className=" mr-1 h-5 w-5 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                     aria-hidden="true"
                   />
-                  <span className="hidden sm:contents"> {DataMatTraduct.ButtonLanguage} </span>
+                  <span className="hidden sm:contents">
+                    {' '}
+                    {DataMatTraduct.ButtonLanguage}{' '}
+                  </span>
                 </div>
               )}
             </button>
@@ -145,14 +157,14 @@ export default function OptionsMattraduct({
               <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
             </svg>
 
-            <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+            <div className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
               <div className="flex justify-center items-center">
                 <Transcription
                   className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                   aria-hidden="true"
                 />
               </div>
-            </button>
+            </div>
           </li>
         </ol>
       </nav>
