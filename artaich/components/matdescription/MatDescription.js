@@ -6,11 +6,11 @@ import { MatPosts } from './MatPosts';
 export const MatDescription = (props) => {
   const [showMatDescription, setShowMatDescription] = useState(false);
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen ">
+    <section className="flex justify-center items-center min-h-screen pb-4">
       {!showMatDescription ? (
         <DescriptionHeader setShowMatDescription={setShowMatDescription} />
       ) : (
-        <div className="flex flex-col sm:flex-row w-full gap-5 -mt-10 sm:-mt-20 lg:-mt-32 xl:-mt-44">
+        <div className="flex flex-col sm:flex-row w-full gap-5 ">
           <DescriptionForm />
           <MatPosts />
         </div>
