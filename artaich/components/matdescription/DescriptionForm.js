@@ -2,20 +2,18 @@ import { useState, useContext, use } from 'react';
 import { UserContext } from '../../context/user/UserContext';
 import { MatDescriptionResp } from '../../util/api/MatDescriptionResp';
 import { PromptContext } from '../../context/prompts/PromptContext';
-// import { useMatDescription } from '../../hooks/useMatDescription';
 import Loader from '../loader/loader';
 
 const DescriptionForm = () => {
   const { user } = useContext(UserContext);
   const { setResponse } = useContext(PromptContext);
-  // const { mutate, data: descriptionData } = useMatDescription(user?.id);
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     product: '',
     company: '',
     field: '',
-    ageRange: 30,
     socialMedia: [],
     language: ''
   });
@@ -23,7 +21,8 @@ const DescriptionForm = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === 'checkbox') {
-      // For checkboxes, create an array of selected options
+      // For checkboxes, create an array of selected options.
+
       const updatedSocialMedia = checked
         ? [...formData.socialMedia, value]
         : formData.socialMedia.filter((media) => media !== value);
@@ -43,28 +42,28 @@ const DescriptionForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (formData.socialMedia.length === 0) {
+      setError('Please select at least one social media platform.');
+      alert('Please select at least one social media platform.');
+      return;
+    }
     // Handle form submission here
     setIsLoading(true);
     MatDescriptionResp({
       productDescription: formData.product,
       company: formData.company,
       field: formData.field,
-      ageRange: formData.ageRange,
       socialMedia: formData.socialMedia,
       language: formData.language,
       user: user
     })
       .then((result) => {
-        console.log('result is:', result);
-        setResponse(result?.data?.data);
-        // mutate({
-        //   ...descriptionData,
-        //   data: [...descriptionData.data, result?.data?.data]
-        // });
-        console.log('result?.data is:', data);
+        // console.log('result is:', result?.data?.copywriting);
+        setResponse(result.data.copywriting);
       })
       .catch((error) => {
         setError('An error occurred while fetching data.');
+        console.error(error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -128,25 +127,7 @@ const DescriptionForm = () => {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="ageRange">Average customers age</label>
-        <input
-          type="range"
-          id="ageRange"
-          name="ageRange"
-          min="18"
-          max="50"
-          step="1"
-          value={formData.ageRange}
-          onChange={handleChange}
-          className="appearance-none w-full h-2 rounded bg-gray-300 outline-none"
-        />
-        <div className="flex justify-between">
-          <span>Under 18</span>
-          <span>Over 50</span>
-        </div>
-      </div>
-      <div className="mb-4">
-        <div className=" shrink [&>label]:text-xs">
+        <div className=" shrink [&>label]:text-xs ">
           <input
             type="checkbox"
             id="socialMediaFacebook"
