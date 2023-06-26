@@ -30,7 +30,7 @@ export const MatPosts = () => {
     }
   };
 
-  if (!response) {
+  if (!response || !copywritings || copywritings.length === 0) {
     return (
       <section>
         <div className="flex items-start space-x-4">
@@ -80,11 +80,11 @@ export const MatPosts = () => {
   }
 
   return (
-    <section className="flex flex-col gap-2 ">
+    <section className="flex flex-col gap-2">
       {copywritings?.map((copy, index) =>
-        copy === '' ? null : (
+        copy === '' || copy.length < 10 ? null : (
           <div className="flex items-start space-x-4 " key={index}>
-            {/* {console.log('copy', copy === '', index)} */}
+            {/* {console.log('copy', 'something' + copy.trim())} */}
             <div className="flex shrink-0">
               {copy.includes('FB') ? (
                 <FacebookIcon />
@@ -97,8 +97,9 @@ export const MatPosts = () => {
               ) : copy.includes('WA') ? (
                 <WhatsAppIcon />
               ) : (
-                copy.includes('IG') ||
-                (copy.includes('INSTA') && <InstagramIcon />)
+                (copy.includes('IG') || copy.includes('INSTA')) && (
+                  <InstagramIcon />
+                )
               )}
             </div>
             <div className="w-[20rem] md:w-[25rem] xl:w-[35rem] flex-1">
