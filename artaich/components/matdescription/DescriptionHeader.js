@@ -1,4 +1,4 @@
-import Typed from 'react-typed';
+import Typewriter from 'typewriter-effect';
 
 export const DescriptionHeader = ({ setShowMatDescription }) => {
   return (
@@ -11,23 +11,25 @@ export const DescriptionHeader = ({ setShowMatDescription }) => {
         <br />
         platform enables you to
       </h1>
+
       <div className="text-xl">
         Effortlessly craft captivating
-        <br /> content that {''}
-        <Typed
-          strings={[
-            'hooks your target audience',
-            'drives conversions',
-            'generates leads',
-            'increases revenue'
-          ]}
-          typeSpeed={70}
-          backSpeed={70}
-          loop
-          style={{ color: '#4f46e5', fontWeight: 'bold', fontSize: '1.25rem' }}
-          className="bg-"
+        <Typewriter
+          options={{
+            strings: [
+              'Content that hooks your target audience',
+              'Content that drives conversions',
+              'Content that generates leads',
+              'Content that increases revenue'
+            ],
+            autoStart: true,
+            cursor: '|',
+            loop: true,
+            delay: 35,
+            wrapperClassName:
+              'text-transparent bg-clip-text bg-gradient-to-r text-xl from-indigo-900 to-indigo-600'
+          }}
         />
-        <br />
         Enjoy and Share !!
       </div>
 
