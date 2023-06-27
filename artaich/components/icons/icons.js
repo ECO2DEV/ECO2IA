@@ -317,11 +317,7 @@ export function ShowAnswerIcon() {
   return (
     <svg
       // help me create a class when i hover this icon change the color
-<<<<<<< HEAD
       className="w-6 h-6 rounded-full  bg-gray-200 text-gray-700 hover:bg-sky-700 hover:text-sky-200 hover:-scale-110 transition-colors duration-150"
-=======
-      className="w-6 h-6 text-gray-900  rounded-full  bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-sky-200 hover:-scale-110 transition-colors duration-150"
->>>>>>> 2cd2d9f31aabcf21200b490e4e2fe16851db8944
       fill="none"
       stroke="currentColor"
       strokeWidth={1.5}
