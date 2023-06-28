@@ -8,7 +8,7 @@ const fetcher = (url) =>
     .then((res) => res.data)
     .catch((err) => console.log('Error in fetcher: ' + err));
 
-export function useMatDescription(userId = 1) {
+export function useMatResume(userId = 1) {
   const { data, error, isLoading, mutate } = useSWR(
     `${strapiUrl}/api/requests?filters[users_permissions_user][id][$eq]=${userId}&filters[source][$eq]=MatResume&sort=createdAt:desc&pagination[page]=1&pagination[pageSize]=1`,
     fetcher,

@@ -224,88 +224,82 @@ export const SportCoachResults = () => {
           </ol>
         </div>
       ))}
-      <div className="w-96">
-        <nav className="flex" aria-label="Breadcrumb">
-          <ol
-            role="list"
-            className="flex space-x-4 rounded-md bg-gray-50 px-6 shadow relative"
-          >
-            <li className="flex">
-              <div className="flex items-center">
-                <PDFDownloadLink
-                  document={<PlanEntrenamientoPDF />}
-                  fileName="plan_entrenamiento.pdf"
-                >
-                  <button className="text-gray-500 hover:text-gray-500">
-                    <DocumentArrowDownIcon className="w-6 h-6 inline-block" />{" "}
-                    PDF
+      <nav className="" aria-label="Breadcrumb">
+        <ol
+          role="list"
+          className="flex justify-center space-x-4 rounded-md bg-gray-50 px-6 shadow relative"
+        >
+          <li className="flex items-center w-auto">
+            <div className="flex items-center">
+              <PDFDownloadLink
+                document={<PlanEntrenamientoPDF />}
+                fileName="plan_entrenamiento.pdf"
+              >
+                <button className="text-gray-500 hover:text-gray-500">
+                  <DocumentArrowDownIcon className="w-6 h-6 inline-block" /> PDF
+                </button>
+              </PDFDownloadLink>
+            </div>
+          </li>
+          <li className="flex space-x-4 items-center w-auto text-gray-500 hover:text-gray-500">
+            <svg
+              className="h-full text-xs w-5 flex-shrink-0 text-gray-400"
+              viewBox="0 0 24 44"
+              preserveAspectRatio="none"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+            </svg>
+            <DocumentIcon className="h-6 w-6" /> Word
+          </li>
+          <li className="flex space-x-4 items-center w-auto">
+            <svg
+              className="h-full text-xs w-5 flex-shrink-0 text-gray-400"
+              viewBox="0 0 24 44"
+              preserveAspectRatio="none"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+            </svg>
+            <button className="flex gap-2 text-gray-500 hover:text-gray-500 py-2 rounded">
+              <ShareIcon
+                onClick={handleShareClick}
+                className="w-6 h-6 cursor-pointer text-gray-500"
+              />
+              Partager
+              {showShareButtons && (
+                <div className="flex flex-col items-center gap-2 absolute bottom-9 right-20 bg-gray-50 p-2 rounded shadow">
+                  <button
+                    className="text-black font-bold rounded"
+                    onClick={shareOnFacebook}
+                  >
+                    <FacebookIcon className="w-12 h-12 hover:bg-blue-700 rounded inline-block" />
                   </button>
-                </PDFDownloadLink>
-              </div>
-            </li>
-            <li className="flex items-center text-gray-500 hover:text-gray-500">
-              <svg
-                className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
-                viewBox="0 0 24 44"
-                preserveAspectRatio="none"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-              </svg>
-              <DocumentIcon class="h-6 w-6" /> Word
-            </li>
-            <li className="flex items-center">
-              <svg
-                className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
-                viewBox="0 0 24 44"
-                preserveAspectRatio="none"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-              </svg>
-              <button
-                className="flex gap-2 
-              text-gray-500 hover:text-gray-500 py-2 rounded"
-              >
-                <ShareIcon
-                  onClick={handleShareClick}
-                  className="w-6 h-6 cursor-pointer text-gray-500"
-                />
-                Partager
-                {showShareButtons && (
-                  <div className="flex flex-col items-center gap-2 absolute bottom-9 right-20 bg-gray-50 p-2 rounded shadow">
-                    <button
-                      className="text-black font-bold rounded"
-                      onClick={shareOnFacebook}
-                    >
-                      <FacebookIcon className="w-12 h-12 hover:bg-blue-700 rounded inline-block" />
-                    </button>
-                    <button
-                      className="text-black font-bold rounded"
-                      onClick={shareOnWhatsApp}
-                    >
-                      <WhatsappIcon className="w-12 h-12 inline-block" />
-                    </button>
-                    <button
-                      className="text-black font-bold rounded"
-                      onClick={shareByEmail}
-                    >
-                      <EmailIcon className="w-12 h-12 inline-block" />
-                    </button>
-                  </div>
-                )}
-              </button>
-            </li>
-          </ol>
-        </nav>
-        <div className="flex justify-center items-center my-2">
-          <span className=" bottom-4 text-gray-900">
-            Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
-            {console.log(promptTokens)}
-          </span>
-        </div>
+                  <button
+                    className="text-black font-bold rounded"
+                    onClick={shareOnWhatsApp}
+                  >
+                    <WhatsappIcon className="w-12 h-12 inline-block" />
+                  </button>
+                  <button
+                    className="text-black font-bold rounded"
+                    onClick={shareByEmail}
+                  >
+                    <EmailIcon className="w-12 h-12 inline-block" />
+                  </button>
+                </div>
+              )}
+            </button>
+          </li>
+        </ol>
+      </nav>
+      <div className="flex justify-center items-center my-2">
+        <span className=" bottom-4 text-gray-900">
+          Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+          {console.log(promptTokens)}
+        </span>
       </div>
     </>
   );

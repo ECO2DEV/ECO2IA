@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { strapiUrl, header } from '../../constants/constans';
 
-export const MatResum = async ({
-  text,
+export const MattResumResp = async ({
+  prompt,
   language,
   user
 }) => {
@@ -10,8 +10,8 @@ export const MatResum = async ({
     const response = await axios.post(
       `${strapiUrl}/api/openai/matresume`,
       {
-        text,
-        language,
+        prompt: prompt,
+        language: language,
         users_permissions_user: user
       },
       header

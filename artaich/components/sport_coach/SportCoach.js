@@ -65,7 +65,6 @@ export const SportCoachIA = (props) => {
     setPrompt(e.target.value);
     if (e.target.value === "") {
       setPromptTokens(0);
-      console.log(setPromptTokens);
     }
     const { name, value } = e.target;
     if (name === "weight") {
