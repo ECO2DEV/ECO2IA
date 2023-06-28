@@ -78,6 +78,14 @@ const actions = [
     icon: ia_chat,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
+  },
+  {
+    title: DataDashboard.MattResumTitle,
+    href: 'mattresum',
+    description: DataDashboard.MattResum,
+    icon: ia_chat,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
   }
   // {
   //   title: 'Schedule a one-on-one',

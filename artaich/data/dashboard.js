@@ -16,5 +16,8 @@ export const DataDashboard = {
     "L'utilisateur peut choisir un sujet, une langue et une difficulté pour générer un quiz. L'IA génère des questions et des réponses.",
   MattDescriptionTitle: 'MATTDESCRIPTION',
   MattDescription:
+    "MattDescription Autonomiser les spécialistes du marketing et les rédacteurs grâce à la rédaction publicitaire basée sur l'IA de nouvelle génération.",
+  MattResumTitle: 'MATTRESUM',
+  MattResum:
     "MattDescription Autonomiser les spécialistes du marketing et les rédacteurs grâce à la rédaction publicitaire basée sur l'IA de nouvelle génération."
 };

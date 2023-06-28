@@ -102,7 +102,7 @@ export const SendIcon = () => (
 );
 export const ClipboardIcon = () => (
   <svg
-    className="w-7 h-7 text-gray-900  rounded-full  bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-indigo-200 hover:-scale-110 transition-colors duration-200 p-1"
+    className="w-7 h-7 rounded-full  bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-indigo-200 hover:-scale-110 transition-colors duration-200 p-1"
     focusable="false"
     xmlns="http://www.w3.org/2000/svg"
     height="24"
@@ -317,7 +317,7 @@ export function ShowAnswerIcon() {
   return (
     <svg
       // help me create a class when i hover this icon change the color
-      className="w-6 h-6 text-gray-900  rounded-full  bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-sky-200 hover:-scale-110 transition-colors duration-150"
+      className="w-6 h-6 rounded-full  bg-gray-200 text-gray-700 hover:bg-sky-700 hover:text-sky-200 hover:-scale-110 transition-colors duration-150"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.5}
