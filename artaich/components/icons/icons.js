@@ -342,7 +342,7 @@ export function FacebookIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
+      fill="#1877F2"
       className="bi bi-facebook w-6 h-6"
       viewBox="0 0 16 16"
     >
@@ -356,7 +356,7 @@ export function TwitterIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
+      fill="#1DA1F2"
       className="bi bi-twitter w-6 h-6"
       viewBox="0 0 16 16"
     >
@@ -370,7 +370,7 @@ export function TelegramIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
+      fill="#0088cc"
       className="bi bi-telegram w-6 h-6"
       viewBox="0 0 16 16"
     >
@@ -384,7 +384,7 @@ export function WhatsAppIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
+      fill="#25D366"
       className="bi bi-whatsapp w-6 h-6"
       viewBox="0 0 16 16"
     >
@@ -398,8 +398,8 @@ export function InstagramIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      className="bi bi-instagram w-6 h-6"
+      fill="#E1306C" // Replace this with the desired color
+      className="bi bi-instagram w-6 h-6 "
       viewBox="0 0 16 16"
     >
       {' '}
@@ -412,7 +412,7 @@ export function DefaultSocialIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="w-7 h-7 icon icon-tabler icon-tabler-world"
+      className="w-7 h-7 icon icon-tabler icon-tabler-world "
       viewBox="0 0 24 24"
       strokeWidth="2"
       stroke="currentColor"

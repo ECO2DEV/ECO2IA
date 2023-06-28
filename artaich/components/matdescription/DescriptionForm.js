@@ -3,6 +3,7 @@ import { UserContext } from '../../context/user/UserContext';
 import { MatDescriptionResp } from '../../util/api/MatDescriptionResp';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import Loader from '../loader/loader';
+import { toast } from 'react-hot-toast';
 
 const DescriptionForm = () => {
   const { user } = useContext(UserContext);
@@ -44,7 +45,7 @@ const DescriptionForm = () => {
     e.preventDefault();
     if (formData.socialMedia.length === 0) {
       setError('Please select at least one social media platform.');
-      alert('Please select at least one social media platform.');
+      toast.error('Please select at least one social media platform.');
       return;
     }
     // Handle form submission here
@@ -63,6 +64,7 @@ const DescriptionForm = () => {
       })
       .catch((error) => {
         setError('An error occurred while fetching data.');
+        toast.error('An error occurred while fetching data.');
         console.error(error);
       })
       .finally(() => {
