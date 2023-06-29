@@ -2,7 +2,7 @@ import Typewriter from 'typewriter-effect';
 
 export const DescriptionHeader = ({ setShowMatDescription }) => {
   return (
-    <header className="text-start -mt-20">
+    <header className="text-start mt-20">
       <h1 className="text-2xl sm:text-4xl xl:text-6xl font-bold mb-8">
         Our{' '}
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-700 to-indigo-500">
