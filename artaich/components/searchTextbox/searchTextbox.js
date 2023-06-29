@@ -9,12 +9,6 @@ export default function SearchTextbox({ OnChange, Fetch, loading }) {
 
   return (
     <div className="flex-1">
-      <label
-        htmlFor="text"
-        className="block text-sm font-medium leading-6 text-gray-900"
-      >
-        Demander Quelque chose
-      </label>
       <div className="mt-2 flex rounded-md shadow-sm">
         <div className="relative flex flex-grow items-stretch focus-within:z-10">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
