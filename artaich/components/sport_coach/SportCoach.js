@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { InputField } from "./InputField";
+import { SportButtonHelper } from "./SportCoach_Helper";
 import { PromptContext } from "../../context/prompts/PromptContext";
 import { sendTrainingPlanRequest } from "../../util/api/sendTrainingPlanRequest";
 import { SportCoachResults } from "./SportCoachResults";
@@ -104,34 +105,33 @@ export const SportCoachIA = (props) => {
           </div>
         </div>
       )}
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8"
-      >
-        <div className="flex sm:grid-cols-2 gap-4">
-          <div>
-            <fieldset className="my-4">
+      <form onSubmit={handleSubmit} className="w-full mx-auto md:flex-wrap">
+        <div className="flex gap-2 flex-row items-center">
+          <div className="w-full sm:w-1/2 md:w-1/4 my-4">
+            <fieldset>
               <InputField
                 label="Poids"
                 name="weight"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
                 type="text"
+                className="w-full"
               />
             </fieldset>
           </div>
-          <div>
-            <fieldset className="my-4">
+          <div className="w-full sm:w-1/2 md:w-1/4 my-4">
+            <fieldset>
               <InputField
                 label="Âge"
                 name="age"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
                 type="text"
+                className="w-full"
               />
             </fieldset>
           </div>
-          <div className="my-4">
+          <div className="w-full sm:w-1/2 md:w-1/4 my-4">
             <label
               htmlFor="goal"
               className="block text-sm font-medium text-gray-700"
@@ -152,7 +152,7 @@ export const SportCoachIA = (props) => {
               <option value="dry">Sèche</option>
             </select>
           </div>
-          <div className="my-4">
+          <div className="w-full sm:w-1/2 md:w-1/4 my-4">
             <label
               htmlFor="trainingDays"
               className="block text-sm font-medium text-gray-700"
@@ -175,17 +175,21 @@ export const SportCoachIA = (props) => {
               <option value="7">7 jours</option>
             </select>
           </div>
-        </div>
-        <div className="flex mt-8 justify-center">
-          <button
-            type="submit"
-            disabled={submitting}
-            className="inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            {submitting ? "Chargement..." : "Obtenir un plan d'entraînement"}
-          </button>
+          <div className="flex sm:w-full">
+            <button
+              type="submit"
+              disabled={submitting}
+              className="inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-full"
+            >
+              {submitting ? "Chargement..." : "Envoyer"}
+            </button>
+            <div className="flex items-center bottom-2 relative">
+              <SportButtonHelper />
+            </div>
+          </div>
         </div>
       </form>
+
       {error && <h4 className="text-red-500 text-center">{error}</h4>}
     </div>
   );
