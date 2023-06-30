@@ -1,26 +1,26 @@
 import Typewriter from 'typewriter-effect';
-
+import { DataMattDescription } from "../../data/mattdescription"
 export const DescriptionHeader = ({ setShowMatDescription }) => {
   return (
     <header className="text-start mt-20">
       <h1 className="text-2xl sm:text-4xl xl:text-6xl font-bold mb-8">
-        Our{' '}
+        {DataMattDescription.Our} {' '}
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-700 to-indigo-500">
-          MatDescription AI-powered
+          {DataMattDescription.MattDescriptionIA}
         </span>
         <br />
-        platform enables you to
+        {DataMattDescription.PlatformEnable}
       </h1>
 
       <div className="text-xl">
-        Effortlessly craft captivating
+        {DataMattDescription.Captivanting}
         <Typewriter
           options={{
             strings: [
-              'Content that hooks your target audience',
-              'Content that drives conversions',
-              'Content that generates leads',
-              'Content that increases revenue'
+              (DataMattDescription.TargetAudience),
+              (DataMattDescription.Conversions),
+              (DataMattDescription.Leads),
+              (DataMattDescription.Revenue)
             ],
             autoStart: true,
             cursor: '|',
@@ -30,14 +30,14 @@ export const DescriptionHeader = ({ setShowMatDescription }) => {
               'text-transparent bg-clip-text bg-gradient-to-r text-xl from-indigo-900 to-indigo-600'
           }}
         />
-        Enjoy and Share !!
+        {DataMattDescription.EnjoyShare}
       </div>
 
       <button
         onClick={() => setShowMatDescription((prev) => !prev)}
         className="w-full md:w-10/12 bg-indigo-600 hover:bg-indigo-800 text-white font-semibold py-2 px-4 rounded-full mt-8"
       >
-        Start
+        {DataMattDescription.Start}
       </button>
     </header>
   );

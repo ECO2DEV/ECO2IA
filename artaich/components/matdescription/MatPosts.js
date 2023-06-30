@@ -17,6 +17,7 @@ import {
 } from 'next-share';
 import { toast } from 'react-hot-toast';
 import { EnterCard } from './EnterCard';
+import { DataMattDescription } from "../../data/mattdescription";
 
 export const MatPosts = () => {
   const { response } = useContext(PromptContext);
@@ -27,13 +28,13 @@ export const MatPosts = () => {
       navigator.clipboard
         .writeText(copywritings[index])
         .then(() => {
-          toast.success('Text copied to clipboard!');
+          toast.success(DataMattDescription.CopiedSuccess);
         })
         .catch(() => {
-          toast.error('Failed to copy text to clipboard!');
+          toast.error(DataMattDescription.CopiedFailed);
         });
     } else {
-      toast.error('No text to copy!');
+      toast.error(DataMattDescription.NoText);
     }
   };
 
@@ -74,7 +75,7 @@ export const MatPosts = () => {
                     name="response"
                     id="response"
                     className="overflow-y-hidden block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 text-[0.750rem] leading-2 md:text-[0.750rem] lg:leading-6 "
-                    placeholder="Example: Discover innovation with Mattech. With our software solutions you will discover a world of possibilities to improve your productivity and performance. Our latest technologies allow you to leap into the future with unprecedented efficiency."
+                    placeholder={DataMattDescription.ResponseExample}
                   />
 
                   {/* Spacer element to match the height of the toolbar */}
@@ -95,6 +96,7 @@ export const MatPosts = () => {
                         className="-m-2.5 flex h-10 w-10 items-center justify-center rounded-full text-gray-400 hover:text-gray-500"
                       >
                         <ClipboardIcon />
+                        <span className="sr-only"> {DataMattDescription.AttachFile} </span>
                       </button>
                     </div>
                     <div className="flex items-center relative group">

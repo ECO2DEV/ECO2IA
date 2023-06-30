@@ -1,4 +1,6 @@
-export const DataMatSport = {
+export const DataMattSport = {
+  Title:"Matt Sport",
+  SubTitle:"Obtenez un plan d'entraînement personnalisé",
   Weight: "Poids",
   Age: "Âge",
   Goal: "Objectif",
@@ -7,7 +9,7 @@ export const DataMatSport = {
   Mass: "Prise de masse",
   Crossfit: "Crossfit",
   Dry: "Séche",
-  NumberofTrainigns: "Nombre d'entraînements par semaine",
+  NumberofTrainigns: "Entraînements par semaine",
   OneDay: "1 jour",
   TwoDays: "2 jours",
   ThreeDays: "3 jours",
@@ -15,6 +17,6 @@ export const DataMatSport = {
   FiveDays: "5 jours",
   SixDays: "6 jours",
   SevenDays: "7 jours",
-  GetButton: "Obtenir un plan d'entraînement",
+  GetButton: "Envoyer",
   LoadingButton: "Chargement...",
 };

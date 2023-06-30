@@ -6,6 +6,7 @@ import Loader from '../loader/loader';
 import { MatquizSkeleton } from './MatquizSkeleton';
 import { ClipboardIcon, ShowAnswerIcon } from '../icons/icons';
 import { toast } from 'react-hot-toast';
+import { DataMattQuiz } from "../../data/mattquiz";
 
 export const MatquizAI = () => {
   const [submittedData, setSubmittedData] = useState(null);
@@ -48,10 +49,10 @@ export const MatquizAI = () => {
             )
       )
       .then(() => {
-        toast.success('Text copied to clipboard!');
+        toast.success(DataMattQuiz.CopiedSuccess);
       })
       .catch((error) => {
-        toast.error('Failed to copy text to clipboard!');
+        toast.error(DataMattQuiz.CopiedFailed);
         console.error('Error al copiar al portapapeles:', error);
       });
   };
@@ -62,20 +63,20 @@ export const MatquizAI = () => {
 
     console.log('formState.topic is:', prompt);
     if (prompt === '') {
-      setError('Veuillez saisir un sujet');
-      toast.error('Veuillez saisir un sujet');
+      setError(DataMattQuiz.ProvideTopic);
+      toast.error(DataMattQuiz.ProvideTopic);
       return;
     }
     if (formState.questionQuantity < 1 || formState.questionQuantity > 10) {
-      setError('Veuillez saisir un nombre entre 1 et 10');
-      toast.error('Veuillez saisir un nombre entre 1 et 10');
+      setError(DataMattQuiz.ProvideNumber);
+      toast.error(DataMattQuiz.ProvideNumber);
       return;
     }
     // Make a topic limit of 1000 characters
     if (prompt == null || prompt.length > 1000) {
-      setError('Veuillez saisir un sujet contenant moins de 1000 caractères');
+      setError(DataMattQuiz.ProvideSubject);
       toast.error(
-        'Veuillez saisir un sujet contenant moins de 1000 caractères'
+        DataMattQuiz.ProvideSubject
       );
       return;
     }
@@ -120,7 +121,7 @@ export const MatquizAI = () => {
             name="prompt"
             rows="10"
             cols="30"
-            placeholder="Générer des questions de quiz basées sur un sujet, par exemple : mathématiques, histoire, science, marketing digital."
+            placeholder={DataMattQuiz.PromptMain}
             value={prompt ? prompt : ''}
             onChange={handlePropmtChange}
             className="w-full px-4 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -131,9 +132,9 @@ export const MatquizAI = () => {
             onChange={handleChange}
             className="w-full mt-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="multipleChoice">Choix multiple</option>
-            <option value="trueFalse">Vrai ou faux</option>
-            <option value="ShortAnswer">Réponse courte</option>
+            <option value="multipleChoice"> {DataMattQuiz.MultipleChoise} </option>
+            <option value="trueFalse"> {DataMattQuiz.TrueFalse} </option>
+            <option value="ShortAnswer"> {DataMattQuiz.TrueFalse} </option>
           </select>
 
           <select
@@ -143,13 +144,13 @@ export const MatquizAI = () => {
             onChange={handleChange}
             className="w-full mt-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="Auto">Auto</option>
-            <option value="En">Anglais</option>
-            <option value="Es">Espagnol</option>
-            <option value="Fr">Français</option>
-            <option value="De">Allemand</option>
-            <option value="It">Italien</option>
-            <option value="Pt">Portugais</option>
+            <option value="Auto"> {DataMattQuiz.Auto} </option>
+            <option value="En"> {DataMattQuiz.English} </option>
+            <option value="Es"> {DataMattQuiz.Spanish} </option>
+            <option value="Fr"> {DataMattQuiz.French} </option>
+            <option value="De"> {DataMattQuiz.Deutsch} </option>
+            <option value="It"> {DataMattQuiz.Italian} </option>
+            <option value="Pt"> {DataMattQuiz.Portuguese} </option>
           </select>
 
           <select
@@ -159,16 +160,16 @@ export const MatquizAI = () => {
             onChange={handleChange}
             className="w-full mt-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="easy">Facile</option>
-            <option value="medium">Moyen</option>
-            <option value="hard">Difficile</option>
+            <option value="easy"> {DataMattQuiz.Easy} </option>
+            <option value="medium"> {DataMattQuiz.Medium} </option>
+            <option value="hard"> {DataMattQuiz.Hard} </option>
           </select>
 
           <input
             type="number"
             id="questionQuantity"
             name="questionQuantity"
-            placeholder="Number of questions you want"
+            placeholder={DataMattQuiz.NumberQuestions}
             value={formState.questionQuantity}
             onChange={handleChange}
             className="w-full mt-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -188,7 +189,7 @@ export const MatquizAI = () => {
                 <Loader />
               </div>
             ) : (
-              'Soumettre'
+              'Submit'
             )}
           </button>
         </form>
@@ -206,7 +207,7 @@ export const MatquizAI = () => {
           submittedData && (
             <div className="relative flex flex-col justify-center items-center">
               <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                Questions Générées
+                {DataMattQuiz.QuestionGenerated}
               </h3>
               <ul className="flex flex-col justify-center items-start">
                 {submittedData.resp.map(
