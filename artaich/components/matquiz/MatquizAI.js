@@ -11,7 +11,7 @@ export const MatquizAI = () => {
   const [submittedData, setSubmittedData] = useState(null);
   const [isAnswerVisible, setIsAnswerVisible] = useState(false);
   const { user } = useContext(UserContext);
-  const { setPrompt, prompt, setResponse, setPromptTokens } =
+  const { setPrompt, prompt, setResponse, setPromptTokens, promptTokens } =
     useContext(PromptContext);
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -107,7 +107,7 @@ export const MatquizAI = () => {
           difficulty: 'easy',
           questionQuantity: 0
         });
-        // setPrompt('');
+        setPrompt('');
       });
   };
 
@@ -191,6 +191,9 @@ export const MatquizAI = () => {
               'Soumettre'
             )}
           </button>
+          <span className=" flex justify-center items-center text-gray-900 my-2">
+            Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+          </span>
         </form>
       </div>
 
