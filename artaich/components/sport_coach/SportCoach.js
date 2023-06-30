@@ -6,7 +6,7 @@ import { sendTrainingPlanRequest } from "../../util/api/sendTrainingPlanRequest"
 import { SportCoachResults } from "./SportCoachResults";
 import { useSportCoach } from "../../hooks/useSportCoach";
 import { WelcomeSport } from "./welcomesport";
-import { DataMatTraining } from "../../data/mattraining";
+import { DataMattSport} from "../../data/mattsport";
 
 export const SportCoachIA = (props) => {
   // Estados para almacenar los datos del formulario
@@ -88,9 +88,9 @@ export const SportCoachIA = (props) => {
   return (
     <div className="flex flex-col items-center w-full min-h-screen mt-0">
       <h1 className="text-2xl font-bold text-center mb-8">
-        {DataMatTraining.Title}
+        {DataMattSport.Title}
       </h1>
-      <p>{DataMatTraining.SubTitle}</p>
+      <p>{DataMattSport.SubTitle}</p>
       {!showResults ? (
         <WelcomeSport className="mb-8" />
       ) : (
@@ -110,7 +110,7 @@ export const SportCoachIA = (props) => {
           <div className="w-full sm:w-1/2 md:w-1/4 my-4">
             <fieldset>
               <InputField
-                label="Poids"
+                label={DataMattSport.Weight}
                 name="weight"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
@@ -122,7 +122,7 @@ export const SportCoachIA = (props) => {
           <div className="w-full sm:w-1/2 md:w-1/4 my-4">
             <fieldset>
               <InputField
-                label="Âge"
+                label={DataMattSport.Age}
                 name="age"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
@@ -136,7 +136,7 @@ export const SportCoachIA = (props) => {
               htmlFor="goal"
               className="block text-sm font-medium text-gray-700"
             >
-              Objectif
+              {DataMattSport.Goal}
             </label>
             <select
               id="goal"
@@ -145,11 +145,11 @@ export const SportCoachIA = (props) => {
               onChange={handleChange}
               className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
-              <option value="weight loss">Perte de poids</option>
-              <option value="muscle building">Renforcement musculaire</option>
-              <option value="mass">Prise de masse</option>
-              <option value="crossfit">Crossfit</option>
-              <option value="dry">Sèche</option>
+              <option value="weight loss"> {DataMattSport.WeightLoss} </option>
+              <option value="muscle building"> {DataMattSport.MuscleBuilding} </option>
+              <option value="mass"> {DataMattSport.Mass} </option>
+              <option value="crossfit"> {DataMattSport.Crossfit} </option>
+              <option value="dry"> {DataMattSport.Dry} </option>
             </select>
           </div>
           <div className="w-full sm:w-1/2 md:w-1/4 my-4">
@@ -157,7 +157,7 @@ export const SportCoachIA = (props) => {
               htmlFor="trainingDays"
               className="block text-sm font-medium text-gray-700"
             >
-              N° d'entraînements
+              {DataMattSport.NumberofTrainigns}
             </label>
             <select
               id="trainingDays"
@@ -166,13 +166,13 @@ export const SportCoachIA = (props) => {
               onChange={handleChange}
               className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
-              <option value="1">1 jour</option>
-              <option value="2">2 jours</option>
-              <option value="3">3 jours</option>
-              <option value="4">4 jours</option>
-              <option value="5">5 jours</option>
-              <option value="6">6 jours</option>
-              <option value="7">7 jours</option>
+              <option value="1"> {DataMattSport.OneDay} </option>
+              <option value="2"> {DataMattSport.TwoDays} </option>
+              <option value="3"> {DataMattSport.ThreeDays} </option>
+              <option value="4"> {DataMattSport.FourDays} </option>
+              <option value="5"> {DataMattSport.FiveDays} </option>
+              <option value="6"> {DataMattSport.SixDays} </option>
+              <option value="7"> {DataMattSport.SevenDays} </option>
             </select>
           </div>
           <div className="flex sm:w-full">
@@ -181,7 +181,7 @@ export const SportCoachIA = (props) => {
               disabled={submitting}
               className="inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-full"
             >
-              {submitting ? "Chargement..." : "Envoyer"}
+              {submitting ? (DataMattSport.LoadingButton) : (DataMattSport.GetButton)}
             </button>
             <div className="flex items-center bottom-2 relative">
               <SportButtonHelper />
@@ -194,3 +194,4 @@ export const SportCoachIA = (props) => {
     </div>
   );
 };
+

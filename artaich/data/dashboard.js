@@ -11,13 +11,12 @@ export const DataDashboard = {
   MattSportTitle: 'MATTSPORT',
   MattSportDescription:
     "L'IA génère des programmes de fitness basés sur les objectifs de l'utilisateur, comme la perte de poids ou le renforcement musculaire.",
-  MattQuizTitle: 'MATTQUIZ',
+  MattQuizTitle: 'MATTQCM',
   MattQuizDescription:
-    "L'utilisateur peut choisir un sujet, une langue et une difficulté pour générer un quiz. L'IA génère des questions et des réponses.",
-  MattDescriptionTitle: 'MATTDESCRIPTION',
+    "Sur la base d'un sujet donné par l'utilisateur, l'IA génère un questionnaire à choix multiples de 10 questions, chacune avec deux options de réponse.",
+  MattDescriptionTitle: 'MATTDESC',
   MattDescription:
-    "MattDescription Autonomiser les spécialistes du marketing et les rédacteurs grâce à la rédaction publicitaire basée sur l'IA de nouvelle génération.",
-  MattResumTitle: 'MATTRESUM',
-  MattResum:
-    "MattDescription Autonomiser les spécialistes du marketing et les rédacteurs grâce à la rédaction publicitaire basée sur l'IA de nouvelle génération."
+    "L'IA fournit une description détaillée d'un produit spécifique entré par l'utilisateur.",
+  MattResumeTitle: "MATRESUM",
+  MattResume:"L'IA prend un texte long et le résume en quelques lignes."
 };
