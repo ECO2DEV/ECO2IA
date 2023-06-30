@@ -73,7 +73,10 @@ const DescriptionForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full sm:fixed sm:top-44 lg:top-32 sm:w-[40%] lg:w-[30%]"
+    >
       <div className="mb-4">
         <input
           type="text"
@@ -192,8 +195,8 @@ const DescriptionForm = () => {
         type="submit"
         className={`${
           isLoading || !formData.product
-            ? 'text-white bg-gray-500 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500'
-            : 'w-full  bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full mt-8'
+            ? 'text-white bg-gray-500 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500 my-8'
+            : 'w-full  bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full my-8'
         } w-full mt-4 px-4 py-2 `}
       >
         {isLoading ? (
