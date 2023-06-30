@@ -27,7 +27,6 @@ import matsport from '../../public/matsport.png';
 import qcm from '../../public/qcm.png';
 import matdesc from '../../public/matdesc.png';
 import matresume from '../../public/matresume.png';
-import Link from 'next/link';
 
 const navigation = [
   { name: 'Dashboard', link: '#', icon: HomeIcon, current: true },
