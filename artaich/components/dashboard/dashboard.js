@@ -1,5 +1,7 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect, useContext } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
+import { PromptContext } from '../../context/prompts/PromptContext';
 import { DataDashboard } from '../../data/dashboard';
 import { Dialog, Transition } from '@headlessui/react';
 import {
@@ -19,7 +21,6 @@ import {
 } from '@heroicons/react/24/outline';
 import dalle from '../../public/dalle.png';
 import ia_chat from '../../public/ia_chat.png';
-import Link from 'next/link';
 
 const navigation = [
   { name: 'Dashboard', link: '#', icon: HomeIcon, current: true },
@@ -122,6 +123,13 @@ function classNames(...classes) {
 }
 
 export default function DashboardSection() {
+  const { setResponse } = useContext(PromptContext);
+  useEffect(() => {
+    return () => {
+      // console.log('cleaning response');
+      setResponse('');
+    };
+  }, []);
   return (
     <>
       {/*
