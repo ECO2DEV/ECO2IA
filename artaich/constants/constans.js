@@ -21,7 +21,8 @@ export const SUPPORTED_LENGUAGES = {
 export const VOICE_FOR_LANGUAGE = {
   En: 'en-GB',
   Es: 'es-MX',
-  De: 'de-DE'
+  De: 'de-DE',
+  Fr: 'fr-FR'
 };
 
 export const AUTO_LANGUAGE = 'Auto';

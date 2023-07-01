@@ -16,9 +16,11 @@ const Transcription = dynamic(() => import('./transcript'), { ssr: false });
 
 export default function OptionsMattraduct({
   showThirdTextarea,
+  language,
   handleShowThirdTextarea,
   onClick
 }) {
+  console.log("language" + language)
   const { promptTokens } = useContext(PromptContext);
   return (
     <div className="">
@@ -162,6 +164,7 @@ export default function OptionsMattraduct({
                 <Transcription
                   className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                   aria-hidden="true"
+                  language={language}
                 />
               </div>
             </div>

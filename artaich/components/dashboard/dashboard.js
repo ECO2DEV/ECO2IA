@@ -19,6 +19,11 @@ import {
 } from '@heroicons/react/24/outline';
 import dalle from '../../public/dalle.png';
 import ia_chat from '../../public/ia_chat.png';
+import mattranslate from '../../public/mattranslate.png';
+import matsport from '../../public/matsport.png';
+import qcm from '../../public/qcm.png';
+import matdesc from '../../public/matdesc.png';
+import matresume from '../../public/matresume.png';
 import Link from 'next/link';
 
 const navigation = [
@@ -51,7 +56,7 @@ const actions = [
     title: DataDashboard.MatTranslateTitle,
     href: 'mattraduct',
     description: DataDashboard.MatTranslateDescription,
-    icon: ia_chat,
+    icon: mattranslate,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
@@ -59,7 +64,7 @@ const actions = [
     title: 'MATTSPORT',
     href: 'sportcoach',
     description: DataDashboard.MattSportDescription,
-    icon: ia_chat,
+    icon: matsport,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
@@ -67,7 +72,7 @@ const actions = [
     title: DataDashboard.MattQuizTitle,
     href: 'matquiz',
     description: DataDashboard.MattQuizDescription,
-    icon: ia_chat,
+    icon: qcm,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
@@ -75,15 +80,15 @@ const actions = [
     title: DataDashboard.MattDescriptionTitle,
     href: 'matdescription',
     description: DataDashboard.MattDescription,
-    icon: ia_chat,
+    icon: matdesc,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MattResumTitle,
+    title: DataDashboard.MattResumeTitle,
     href: 'mattresum',
-    description: DataDashboard.MattResum,
-    icon: ia_chat,
+    description: DataDashboard.MattResume,
+    icon: matresume,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   }

@@ -4,6 +4,7 @@ import { MatDescriptionResp } from '../../util/api/MatDescriptionResp';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import Loader from '../loader/loader';
 import { toast } from 'react-hot-toast';
+import { DataMattDescription } from "../../data/mattdescription"
 
 const DescriptionForm = () => {
   const { user } = useContext(UserContext);
@@ -44,8 +45,8 @@ const DescriptionForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.socialMedia.length === 0) {
-      setError('Please select at least one social media platform.');
-      toast.error('Please select at least one social media platform.');
+      setError(DataMattDescription.socialMedia);
+      toast.error(DataMattDescription.socialMedia);
       return;
     }
     // Handle form submission here
@@ -73,7 +74,10 @@ const DescriptionForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full sm:fixed sm:top-44 lg:top-32 sm:w-[40%] lg:w-[30%]"
+    >
       <div className="mb-4">
         <input
           type="text"
@@ -82,7 +86,7 @@ const DescriptionForm = () => {
           value={formData.company}
           onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded"
-          placeholder="Company Name"
+          placeholder={DataMattDescription.CompanyName}
           required
         />
       </div>
@@ -94,7 +98,7 @@ const DescriptionForm = () => {
           value={formData.field}
           onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded"
-          placeholder="Field of Business"
+          placeholder={DataMattDescription.FieldBusinnes}
           required
         />
       </div>
@@ -107,12 +111,12 @@ const DescriptionForm = () => {
           className="w-full p-2 border border-gray-300 rounded"
           required
         >
-          <option value="">Select Language</option>
-          <option value="english">English</option>
-          <option value="spanish">Spanish</option>
-          <option value="french">French</option>
-          <option value="german">German</option>
-          <option value="italian">Italian</option>
+          <option value=""> {DataMattDescription.SelectLanguage} </option>
+          <option value="english"> {DataMattDescription.English} </option>
+          <option value="spanish"> {DataMattDescription.Spanish} </option>
+          <option value="french"> {DataMattDescription.French} </option>
+          <option value="german">  {DataMattDescription.Deutsch} </option>
+          <option value="italian"> {DataMattDescription.Italian} </option>
         </select>
       </div>
       <div className="mb-4">
@@ -124,7 +128,7 @@ const DescriptionForm = () => {
           value={formData.product}
           onChange={handleChange}
           className="w-full text-xs p-2 border border-gray-300 rounded resize-none focus:ring-0"
-          placeholder="Tell us about the product, example: X-Boost, The solution to your low battery worries, keeping you connected anytime, anywhere."
+          placeholder={DataMattDescription.ProductText}
           required
         />
       </div>
@@ -192,8 +196,8 @@ const DescriptionForm = () => {
         type="submit"
         className={`${
           isLoading || !formData.product
-            ? 'text-white bg-gray-500 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500'
-            : 'w-full  bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full mt-8'
+            ? 'text-white bg-gray-500 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500 my-8'
+            : 'w-full  bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full my-8'
         } w-full mt-4 px-4 py-2 `}
       >
         {isLoading ? (
