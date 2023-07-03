@@ -26,9 +26,11 @@ export const SportCoachIA = (props) => {
   const { prompt, setPrompt, setResponse, setPromptTokens } =
     useContext(PromptContext);
 
+
   // Función para enviar la solicitud de plan de entrenamiento
   const fetchData = async () => {
     if (!prompt) {
+      console.log(setPromptTokens)
       setError("Veuillez taper quelque chose avant de soumettre");
     } else {
       setSubmitting(true);
@@ -86,7 +88,7 @@ export const SportCoachIA = (props) => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full min-h-screen mt-0">
+    <div className="flex flex-col items-center w-full min-h-screen">
       <h1 className="text-2xl font-bold text-center mb-8">
         {DataMattSport.Title}
       </h1>
@@ -94,8 +96,8 @@ export const SportCoachIA = (props) => {
       {!showResults ? (
         <WelcomeSport className="mb-8" />
       ) : (
-        <div className="flex justify-center mt-8">
-          <div className="p-4 sm:p-8 md:mt-8 lg:max-w-xl xl:max-w-2xl">
+        <div className="flex justify-center">
+          <div className="mb-40 md:mt-8 lg:max-w-xl xl:max-w-2xl">
             <SportCoachResults
               weight={weight}
               age={age}
@@ -105,7 +107,10 @@ export const SportCoachIA = (props) => {
           </div>
         </div>
       )}
-      <form onSubmit={handleSubmit} className="w-full mx-auto md:flex-wrap">
+      <form
+        onSubmit={handleSubmit}
+        className="flex border-t-4 justify-center fixed bottom-3 w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem] sm:flex-wrap sm:flex-col"
+      >
         <div className="flex gap-2 flex-row items-center">
           <div className="w-full sm:w-1/2 md:w-1/4 my-4">
             <fieldset>
@@ -175,7 +180,7 @@ export const SportCoachIA = (props) => {
               <option value="7"> {DataMattSport.SevenDays} </option>
             </select>
           </div>
-          <div className="flex sm:w-full">
+          <div className="flex sm:w-1/2 w-7">
             <button
               type="submit"
               disabled={submitting}
