@@ -2,8 +2,6 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../../context/user/UserContext";
 import { useSportCoach } from "../../hooks/useSportCoach";
 import { LoadingIndicator } from "./LoadingIndicator";
-import { PromptContext } from "../../context/prompts/PromptContext";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 import { generatePDFDocument } from "../../util/helpers/SharePdf";
 import { PDFDocument } from "pdf-lib";
 import {
@@ -12,6 +10,11 @@ import {
   DocumentIcon,
   CheckIcon,
 } from "@heroicons/react/24/solid";
+import {
+  FacebookShareButton,
+  WhatsappShareButton,
+  EmailShareButton,
+} from "next-share";
 import { FacebookIcon, WhatsappIcon, EmailIcon } from "react-share";
 
 export const SportCoachResults = () => {
@@ -39,14 +42,17 @@ export const SportCoachResults = () => {
   const handleExerciseClick = (dayIndex, exerciseIndex) => {
     const updatedCompletedExercises = [...completedExercises];
     if (!updatedCompletedExercises[dayIndex]?.exercises) {
-      updatedCompletedExercises[dayIndex] =
-        updatedCompletedExercises[dayIndex] || {};
+      updatedCompletedExercises[dayIndex] = updatedCompletedExercises[dayIndex] || {};
       updatedCompletedExercises[dayIndex].exercises = [];
+    }
+    if (!updatedCompletedExercises[dayIndex].exercises[exerciseIndex]) {
+      updatedCompletedExercises[dayIndex].exercises[exerciseIndex] = {};
     }
     updatedCompletedExercises[dayIndex].exercises[exerciseIndex].completed =
       !updatedCompletedExercises[dayIndex].exercises[exerciseIndex]?.completed;
     setCompletedExercises(updatedCompletedExercises);
   };
+  
 
   const handleShareClick = () => {
     setShowShareButtons(!showShareButtons);
@@ -61,48 +67,43 @@ export const SportCoachResults = () => {
     return <LoadingIndicator />;
   }
 
-  // Función para compartir el plan de entrenamiento en Facebook
+  const generateTrainingPlanContent = () => {
+    let content = "Salut! Je partage mon plan d'entraînement :\n\n";
+    responseObj.resp.forEach((day) => {
+      content += `${day.day}:\n`;
+      day.exercises.forEach((exercise) => {
+        content += `${exercise.name}: ${exercise.description}\n`;
+      });
+      content += "\n";
+    });
+    return content;
+  };
+
   const shareOnFacebook = () => {
-    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-      window.location.href
-    )}`;
+    const content = generateTrainingPlanContent();
+    const shareContent = encodeURIComponent(content);
+    const url = `https://www.facebook.com/sharer/share${shareContent}`;
     window.open(url, "_blank");
   };
 
-  // Función para compartir el plan de entrenamiento en WhatsApp
   const shareOnWhatsApp = () => {
-    const text = `¡Hola! Te comparto mi plan de entrenamiento:\n\n`;
-    const exercises = responseObj.resp.flatMap((day) =>
-      day.exercises?.map(
-        (exercise) => `${exercise.name}: ${exercise.description}`
-      )
-    );
-    const plan = exercises?.join("\n");
-    const body = encodeURIComponent(text + plan);
-    const url = `https://wa.me/?text=${body}`;
+    const content = generateTrainingPlanContent();
+    const shareText = encodeURIComponent(content);
+    const url = `https://wa.me/?text=${shareText}`;
     window.open(url, "_blank");
   };
 
-  // Función para compartir el plan de entrenamiento por correo electrónico
   const shareByEmail = () => {
     const subject = "Plan de Entrenamiento";
-    const body = "Salut! Je partage mon plan d'entraînement:\n\n";
-    const exercises = responseObj.resp.flatMap((day) =>
-      day.exercises?.map(
-        (exercise) => `${exercise.name}: ${exercise.description}`
-      )
-    );
-    const plan = exercises.join("\n");
+    const content = generateTrainingPlanContent();
     const mailtoUrl = `mailto:?subject=${encodeURIComponent(
       subject
-    )}&body=${encodeURIComponent(body + plan)}`;
+    )}&body=${encodeURIComponent(content)}`;
     window.location.href = mailtoUrl;
   };
 
-  const { promptTokens } = useContext(PromptContext)?.responseTokens ?? {};
-  // Renderizar los resultados una vez que la carga haya finalizado
   return (
-    <>
+    <div className="p-6">
       {responseObj.resp.map((day, index) => (
         <div
           key={index}
@@ -113,49 +114,58 @@ export const SportCoachResults = () => {
           <ol
             className={`${
               activeIndex !== index ? "hidden" : ""
-            } list-disc ml-4 whitespace-normal`}
+            } ml-4 whitespace-normal`}
           >
-            {day.exercises?.map((exercise, exerciseIndex) => (
+            {day.exercises.map((exercise, exerciseIndex) => (
               <li
                 key={exerciseIndex}
-                className="cursor-pointer"
+                className={classNames(
+                  completedExercises[index]?.exercises[exerciseIndex]?.completed
+                    ? "text-indigo-600"
+                    : "text-gray-500",
+                  "flex items-center"
+                )}
                 onClick={() => handleExerciseClick(index, exerciseIndex)}
               >
-                <span
-                  className={classNames(
-                    "inline-flex items-center justify-center h-6 w-6 mr-2 rounded-full",
-                    completedExercises[index]?.exercises &&
-                      completedExercises[index].exercises[exerciseIndex]
-                        ?.completed
-                      ? "bg-green-500"
-                      : "bg-gray-500"
+                <span className="flex h-9 items-center">
+                  {completedExercises[index]?.exercises[exerciseIndex]
+                    .completed ? (
+                    <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
+                      <CheckIcon
+                        className="h-5 w-5 text-white"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  ) : (
+                    <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
+                      <span className="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" />
+                    </span>
                   )}
-                >
-                  <CheckIcon
-                    className="h-4 w-4 text-white"
-                    aria-hidden="true"
-                  />
                 </span>
-                <span>{exercise.name}</span>
+                <span className="ml-4 flex min-w-0 flex-col">
+                  <span className="text-sm font-medium">{exercise.name}</span>
+                  <span className="text-sm text-gray-500">
+                    {exercise.description}
+                  </span>
+                </span>
               </li>
             ))}
           </ol>
         </div>
       ))}
+
       <nav aria-label="Breadcrumb">
         <ol
           role="list"
-          className="flex justify-center w-96 space-x-4 rounded-md bg-gray-50 px-6 shadow relative"
+          className="flex justify-center w-96 space-x-4 rounded-md bg-gray-50 px-6 shadow absolute"
         >
-          <li className="flex items-center w-auto">
-            <div className="flex items-center">
-              <button
-                onClick={handleShareClick}
-                className="bg-gray-100 text-gray-700 rounded-md p-2 flex items-center mr-2"
-              >
-                <ShareIcon className="w-5 h-5 mr-2" /> Partager
-              </button>
-            </div>
+          <li className="flex items-center w-auto text-gray-500 hover:text-gray-500">
+            <button
+              onClick={handleShareClick}
+              className="flex items-center p-2 rounded-md hover:bg-gray-100"
+            >
+              <ShareIcon className="w-5 h-5 mr-1" /> Partager
+            </button>
           </li>
           <li className="flex space-x-4 items-center w-auto text-gray-500 hover:text-gray-500">
             <svg
@@ -167,11 +177,11 @@ export const SportCoachResults = () => {
             >
               <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
             </svg>
-            <button className="bg-gray-100 text-gray-700 rounded-md p-2 flex items-center mr-2">
-              <DocumentIcon className="w-5 h-5 mr-2" /> World"
+            <button className="flex items-center p-2 rounded-md hover:bg-gray-100">
+              <DocumentIcon className="w-5 h-5 mr-1" /> Word
             </button>
           </li>
-          <li className="flex space-x-4 items-center w-auto relative">
+          <li className="flex space-x-4 items-center w-auto text-gray-500 hover:text-gray-500">
             <svg
               className="h-full text-xs w-5 flex-shrink-0 text-gray-400"
               viewBox="0 0 24 44"
@@ -183,29 +193,40 @@ export const SportCoachResults = () => {
             </svg>
             <button
               onClick={handleExportToPDF}
-              className="bg-gray-100 text-gray-700 rounded-md p-2 flex items-center relative"
+              className="flex items-center p-2 rounded-md hover:bg-gray-100"
             >
-              <DocumentArrowDownIcon className="w-5 h-5 mr-2" /> PDF
-              {showShareButtons && (
-                <div className="flex flex-col gap-1 absolute right-[21em] bottom-8">
-                  <FacebookIcon
-                    className="w-8 h-8 mr-2 cursor-pointer"
-                    onClick={shareOnFacebook}
-                  />
-                  <WhatsappIcon
-                    className="w-8 h-8 mr-2 cursor-pointer"
-                    onClick={shareOnWhatsApp}
-                  />
-                  <EmailIcon
-                    className="w-8 h-8 mr-2 cursor-pointer"
-                    onClick={shareByEmail}
-                  />
-                </div>
-              )}
+              <DocumentArrowDownIcon className="w-5 h-5 mr-1" /> Pdf
             </button>
           </li>
         </ol>
       </nav>
-    </>
+
+      {showShareButtons && (
+        <div className="relative w-4 bottom-[8rem] left-4 gap-2 z-10 flex flex-col justify-center">
+          <FacebookShareButton
+            className="h-4 w-4"
+            // url={window.location.href}
+            quote={generateTrainingPlanContent()}
+          >
+            <FacebookIcon size={38} round />
+          </FacebookShareButton>
+          <WhatsappShareButton
+            className="h-4 w-4"
+            url={window.location.href}
+            title={generateTrainingPlanContent()}
+          >
+            <WhatsappIcon size={38} round />
+          </WhatsappShareButton>
+          <EmailShareButton
+            className="h-4 w-4"
+            url={window.location.href}
+            subject="plan de formation"
+            body={generateTrainingPlanContent()}
+          >
+            <EmailIcon size={38} round />
+          </EmailShareButton>
+        </div>
+      )}
+    </div>
   );
 };
