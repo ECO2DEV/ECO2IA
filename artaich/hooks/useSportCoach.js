@@ -24,7 +24,6 @@ export function useSportCoach(userId = 1) {
       refreshInterval: 0,
     }
     );
-    console.log(isLoading)
 
   return {
     data,
