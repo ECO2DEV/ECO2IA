@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
-import { ClipboardIcon, SendIcon } from '../icons/icons';
+import { ClipboardIcon, SendIcon, VolumenSpeakerIcon } from '../icons/icons';
 import Loader from '../loader/loader';
 import { DataMatTraduct } from '../../data/mattraduct';
+
 
 
 const getPlaceholder = ({ type, loading }) => {
@@ -18,7 +19,8 @@ export const TextArea = ({
   onChange,
   fetchLoading = false,
   onClick = () => {},
-  onHandleTraduct = () => {}
+  onHandleTraduct = () => {},
+  handlePlayAudio = () => {},
 }) => {
   
 
@@ -57,9 +59,17 @@ export const TextArea = ({
           <ClipboardIcon />
         </button>
       )}
+      {type === 'to' && (
+        <button
+          className="absolute bottom-3 right-9 focus:outline-none"
+          onClick={handlePlayAudio}
+        >
+          <VolumenSpeakerIcon />
+        </button>
+      )}
       {type === 'from' && (
         <button
-          className="absolute bottom-2 right-2 focus:outline-none"
+          className="absolute bottom-2 right-1 focus:outline-none"
           onClick={onHandleTraduct}
         >
           {fetchLoading ? (
