@@ -4,23 +4,46 @@ import SpeechRecognition, {
   useSpeechRecognition
 } from 'react-speech-recognition';
 import { PromptContext } from '../../context/prompts/PromptContext';
+import { VOICE_FOR_LANGUAGE } from '../../constants/constans';
 
-const Transcription = () => {
+const Transcription = ({language}) => {
+  console.log("me pinte otra vez ");
   const { setPrompt } = useContext(PromptContext);
   const [isListening, setIsListening] = useState(false);
-
+ 
   const { transcript, resetTranscript, browserSupportsSpeechRecognition } =
     useSpeechRecognition();
 
   useEffect(() => {
+    let timer;
     if (transcript !== '') {
       setPrompt(transcript);
+     
+
+      setIsListening(false);
+      SpeechRecognition.stopListening();
+      resetTranscript();
+      
+    }
+    else{
+       timer = setTimeout(() => {
+        if (transcript ==='') {
+          setPrompt(transcript);
+          console.log('entre aqui pa parar esta monda');
+          setIsListening(false);
+          SpeechRecognition.stopListening();
+          resetTranscript();
+          
+        }
+      }, 5000); // 5000 milliseconds = 5 seconds
+  
+      return () => clearTimeout(timer); // Cleanup the timer on component unmount
     }
   }, [transcript]);
 
   const startListening = () => {
     setIsListening(true);
-    SpeechRecognition.startListening({ continuous: true, language: 'fr-FR' });
+    SpeechRecognition.startListening({ continuous: true, language:  VOICE_FOR_LANGUAGE[language] });
   };
 
   const stopListening = () => {

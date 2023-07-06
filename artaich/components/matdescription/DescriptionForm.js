@@ -8,7 +8,8 @@ import { DataMattDescription } from "../../data/mattdescription"
 
 const DescriptionForm = () => {
   const { user } = useContext(UserContext);
-  const { setResponse } = useContext(PromptContext);
+  const { setResponse, setPrompt, setPromptTokens, prompt, promptTokens } =
+    useContext(PromptContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -42,6 +43,13 @@ const DescriptionForm = () => {
     }
   };
 
+  const handlePromptChange = (e) => {
+    setPrompt(e.target.value);
+    if (e.target.value === '') {
+      setPromptTokens(0);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.socialMedia.length === 0) {
@@ -70,6 +78,7 @@ const DescriptionForm = () => {
       })
       .finally(() => {
         setIsLoading(false);
+        setPrompt('');
       });
   };
 
@@ -123,10 +132,10 @@ const DescriptionForm = () => {
         <textarea
           rows={4}
           type="text"
-          id="product"
-          name="product"
-          value={formData.product}
-          onChange={handleChange}
+          id="prompt"
+          name="prompt"
+          value={prompt ? prompt : ''}
+          onChange={handlePromptChange}
           className="w-full text-xs p-2 border border-gray-300 rounded resize-none focus:ring-0"
           placeholder={DataMattDescription.ProductText}
           required
@@ -192,11 +201,11 @@ const DescriptionForm = () => {
       </div>
 
       <button
-        disabled={isLoading || !formData.product}
+        disabled={isLoading || !prompt}
         type="submit"
         className={`${
-          isLoading || !formData.product
-            ? 'text-white bg-gray-500 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500 my-8'
+          isLoading || !prompt
+            ? 'text-white bg-gray-500 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500 mt-8'
             : 'w-full  bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full my-8'
         } w-full mt-4 px-4 py-2 `}
       >
@@ -208,6 +217,9 @@ const DescriptionForm = () => {
           'Submit'
         )}
       </button>
+      <span className=" flex justify-center items-center text-gray-900 my-2">
+        Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+      </span>
     </form>
   );
 };

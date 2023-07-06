@@ -243,6 +243,7 @@ const MattraductAI = () => {
           handleShowThirdTextarea={handleShowThirdTextarea}
           showThirdTextarea={showThirdTextarea}
           onClick={handleModalHistory}
+          language={fromLanguage}
         />
       </section>
       {modalOpen && (

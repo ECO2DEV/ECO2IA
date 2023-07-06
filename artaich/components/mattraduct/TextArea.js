@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
-import { ClipboardIcon, SendIcon, VolumenSpeakerIcon } from '../icons/icons';
+import { ClipboardIcon, DeleteIconWhite, SendIcon, VolumenSpeakerIcon } from '../icons/icons';
 import Loader from '../loader/loader';
 import { DataMatTraduct } from '../../data/mattraduct';
 
@@ -25,6 +25,11 @@ export const TextArea = ({
   
 
   const { setPrompt, setPromptTokens } = useContext(PromptContext);
+  const onHandleClean = () =>{
+    onChange('');
+    setPrompt('');
+    setPromptTokens(0);
+  }
   const handleChange = (event) => {
     onChange(event.target.value);
     if (event.target.value === '') {
@@ -32,7 +37,7 @@ export const TextArea = ({
     }
     setPrompt(event.target.value);
   };
-
+ 
 
   return (
     <div className="relative w-full">
@@ -51,6 +56,7 @@ export const TextArea = ({
       value={value} 
         onChange={handleChange}
       />
+    
       {type === 'to' && (
         <button
           className="absolute bottom-2 right-2 focus:outline-none"
@@ -58,6 +64,7 @@ export const TextArea = ({
         >
           <ClipboardIcon />
         </button>
+        
       )}
       {type === 'to' && (
         <button
@@ -68,6 +75,13 @@ export const TextArea = ({
         </button>
       )}
       {type === 'from' && (
+        <>
+        <button
+          className="absolute bottom-2 right-10 focus:outline-none"
+          onClick={onHandleClean}
+        >
+          <DeleteIconWhite />
+        </button>
         <button
           className="absolute bottom-2 right-1 focus:outline-none"
           onClick={onHandleTraduct}
@@ -79,7 +93,9 @@ export const TextArea = ({
           ) : (
             <SendIcon />
           )}
+
         </button>
+        </>
       )}
     </div>
   );

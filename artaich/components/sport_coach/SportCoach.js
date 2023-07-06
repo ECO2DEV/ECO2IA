@@ -6,13 +6,13 @@ import { sendTrainingPlanRequest } from "../../util/api/sendTrainingPlanRequest"
 import { SportCoachResults } from "./SportCoachResults";
 import { useSportCoach } from "../../hooks/useSportCoach";
 import { WelcomeSport } from "./welcomesport";
-import { DataMattSport} from "../../data/mattsport";
+import { DataMattSport } from "../../data/mattsport";
 
 export const SportCoachIA = (props) => {
   // Estados para almacenar los datos del formulario
   const [weight, setWeight] = useState("");
   const [age, setAge] = useState("");
-  const [goal, setGoal] = useState("");
+  // const [goal, setGoal] = useState("");
   const [trainingDays, setTrainingDays] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -23,12 +23,13 @@ export const SportCoachIA = (props) => {
   // Obtener los datos del entrenador deportivo personalizado
   const { data, mutate } = useSportCoach(user);
   // Obtener los datos y funciones del contexto de prompts
-  const { prompt, setPrompt, setResponse, setPromptTokens } =
+  const { prompt, setPrompt, setResponse, setPromptTokens, promptTokens } =
     useContext(PromptContext);
 
   // Función para enviar la solicitud de plan de entrenamiento
   const fetchData = async () => {
     if (!prompt) {
+      console.log(setPromptTokens);
       setError("Veuillez taper quelque chose avant de soumettre");
     } else {
       setSubmitting(true);
@@ -37,7 +38,7 @@ export const SportCoachIA = (props) => {
         prompt: prompt,
         weight: weight,
         age: age,
-        goal: goal,
+        goal: prompt,
         language: "French",
         trainingDays: trainingDays,
         user: user,
@@ -55,24 +56,27 @@ export const SportCoachIA = (props) => {
         })
         .finally(() => {
           setSubmitting(false);
-          setPrompt("");
+          setPrompt("select an option");
         });
+    }
+  };
+
+  const handlePromptChange = (e) => {
+    setPrompt(e.target.value);
+    if (e.target.value === "") {
+      setPromptTokens(0);
     }
   };
 
   // Manejar cambios en los campos del formulario
   const handleChange = (e) => {
-    setPrompt(e.target.value);
-    if (e.target.value === "") {
-      setPromptTokens(0);
-    }
     const { name, value } = e.target;
     if (name === "weight") {
       setWeight(value);
     } else if (name === "age") {
       setAge(value);
     } else if (name === "goal") {
-      setGoal(value);
+      setPrompt(value);
     } else if (name === "trainingDays") {
       setTrainingDays(value);
     }
@@ -86,7 +90,7 @@ export const SportCoachIA = (props) => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full min-h-screen mt-0">
+    <div className="flex flex-col items-center w-full min-h-screen">
       <h1 className="text-2xl font-bold text-center mb-8">
         {DataMattSport.Title}
       </h1>
@@ -94,18 +98,21 @@ export const SportCoachIA = (props) => {
       {!showResults ? (
         <WelcomeSport className="mb-8" />
       ) : (
-        <div className="flex justify-center mt-8">
-          <div className="p-4 sm:p-8 md:mt-8 lg:max-w-xl xl:max-w-2xl">
+        <div className="flex justify-center">
+          <div className="mb-40 md:mt-8 lg:max-w-xl xl:max-w-2xl">
             <SportCoachResults
               weight={weight}
               age={age}
-              goal={goal}
+              goal={prompt}
               trainingDays={trainingDays}
             />
           </div>
         </div>
       )}
-      <form onSubmit={handleSubmit} className="w-full mx-auto md:flex-wrap">
+      <form
+        onSubmit={handleSubmit}
+        className="flex sm:flex-wrap border-t-4 justify-evenly fixed bottom-3 w-[92%] lg:w-[72.5%] xl:w-[77%] "
+      >
         <div className="flex gap-2 flex-row items-center">
           <div className="w-full sm:w-1/2 md:w-1/4 my-4">
             <fieldset>
@@ -133,20 +140,24 @@ export const SportCoachIA = (props) => {
           </div>
           <div className="w-full sm:w-1/2 md:w-1/4 my-4">
             <label
-              htmlFor="goal"
+              htmlFor="prompt"
               className="block text-sm font-medium text-gray-700"
             >
               {DataMattSport.Goal}
             </label>
             <select
-              id="goal"
-              name="goal"
-              value={goal}
-              onChange={handleChange}
+              id="prompt"
+              name="prompt"
+              value={prompt}
+              onChange={handlePromptChange}
               className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
+              <option value="">Select an option </option>
               <option value="weight loss"> {DataMattSport.WeightLoss} </option>
-              <option value="muscle building"> {DataMattSport.MuscleBuilding} </option>
+              <option value="muscle building">
+                {" "}
+                {DataMattSport.MuscleBuilding}{" "}
+              </option>
               <option value="mass"> {DataMattSport.Mass} </option>
               <option value="crossfit"> {DataMattSport.Crossfit} </option>
               <option value="dry"> {DataMattSport.Dry} </option>
@@ -175,23 +186,25 @@ export const SportCoachIA = (props) => {
               <option value="7"> {DataMattSport.SevenDays} </option>
             </select>
           </div>
-          <div className="flex sm:w-full">
             <button
               type="submit"
               disabled={submitting}
-              className="inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-full"
+              className="w-6 h-10 items-center justify-center border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-24"
             >
-              {submitting ? (DataMattSport.LoadingButton) : (DataMattSport.GetButton)}
+              {submitting
+                ? DataMattSport.LoadingButton
+                : DataMattSport.GetButton}
             </button>
-            <div className="flex items-center bottom-2 relative">
+            <div className="">
               <SportButtonHelper />
             </div>
-          </div>
         </div>
       </form>
+      <span className=" flex justify-center items-center text-gray-900 my-2">
+        Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+      </span>
 
       {error && <h4 className="text-red-500 text-center">{error}</h4>}
     </div>
   );
 };
-
