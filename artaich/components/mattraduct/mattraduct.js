@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../context/user/UserContext';
 import { MattraductResponse } from '../../util/api/mattraductResponse';
 import { toast } from 'react-hot-toast';
@@ -16,6 +16,7 @@ const MattraductAI = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showThirdTextarea, setShowThirdTextarea] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false); // Se añade la variable isPlaying
 
   const { user } = useContext(UserContext);
   const { data: translationsData, mutate } = useMattraduct(user?.id);
@@ -32,9 +33,10 @@ const MattraductAI = () => {
     setResult,
     secondResult,
     setSecondResult,
-    loading
+    loading,
   } = useLangStorage();
 
+  
   const handleClipboardOne = () => {
     navigator.clipboard
       .writeText(result)
@@ -68,17 +70,15 @@ const MattraductAI = () => {
       user,
       fromLanguage,
       toLanguage,
-      toThirdLanguage
+      toThirdLanguage,
     })
       .then((result) => {
         if (result == null) return;
-        // console.log('result.data ', result.data);
         setResult(result?.data?.data.lang1);
         setSecondResult(result?.data?.data.lang2);
-        // mutate
         mutate({
           translationsData: [...translationsData.data, result?.data?.data],
-          ...translationsData
+          ...translationsData,
         });
         setResponse(result?.data?.data.lang1 + result?.data?.data.lang2);
       })
@@ -98,6 +98,92 @@ const MattraductAI = () => {
   const handleModalHistory = () => {
     setModalOpen((prev) => !prev);
   };
+ 
+  const getLangCode = (language) => {
+    // Mapeo de idiomas a códigos de idioma
+    const langMap = {
+      'en': 'en-US', // Inglés
+    'fr': 'fr-FR', // Francés
+    'it': 'it-IT', // Italiano
+    'de': 'de-DE', // Alemán
+    'pt': 'pt-PT', // Portugués
+    'es': 'es-ES'  //Español
+      // Agrega más mapeos de idiomas según sea necesario
+    };
+  
+    // Verifica si el idioma está en el mapa
+    if (language in langMap) {
+      return langMap[language];
+    }
+  
+    // Si el idioma no está en el mapa, devuelve un valor predeterminado
+    return 'fr-FR'; // Código de idioma predeterminado en caso de que no se encuentre en el mapa
+  };
+
+  const handlePlayAudio = () => {
+    if (!isPlaying) {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = result;
+        // Obtén el código de idioma basado en el idioma seleccionado en toLanguage
+      const langCode = getLangCode(toLanguage);
+      utterance.lang = langCode;
+        
+        if (result.trim() !== '') {
+          window.speechSynthesis.speak(utterance);
+          setIsPlaying(true);
+        }
+      }
+    } else {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        setIsPlaying(false);
+      }
+    }
+  };
+  
+  useEffect(() => {
+    return () => {
+      if (isPlaying) {
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          setIsPlaying(false);
+        }
+      }
+    };
+  }, [isPlaying]);
+
+  const handlePlayAudioTwo = () => {
+    if (!isPlaying) {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = secondResult;
+
+        if (secondResult.trim() !== '') {
+          window.speechSynthesis.speak(utterance);
+          setIsPlaying(true);
+        }
+      }
+    } else {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        setIsPlaying(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (isPlaying) {
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          setIsPlaying(false);
+        }
+      }
+    };
+  }, [isPlaying]);
+  
+  
   return (
     <>
       <section className="flex flex-col justify-center items-center gap-6 min-h-screen ">
@@ -137,6 +223,7 @@ const MattraductAI = () => {
               value={result}
               onChange={setResult}
               onClick={handleClipboardOne}
+              handlePlayAudio={handlePlayAudio}
             />
 
             {showThirdTextarea && (
@@ -146,6 +233,7 @@ const MattraductAI = () => {
                 value={secondResult}
                 onChange={setSecondResult}
                 onClick={handleClipboardTwo}
+                handlePlayAudio={handlePlayAudioTwo}
               />
             )}
           </div>
