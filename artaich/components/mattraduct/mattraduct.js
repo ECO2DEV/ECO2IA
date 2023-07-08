@@ -9,6 +9,7 @@ import OptionsMattraduct from './optionsMattraduct';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import { useMattraduct } from '../../hooks/useMattraduct';
 import HistoryRequest from './HistoryRequest';
+import { VOICE_FOR_LANGUAGE } from '../../constants/constans';
 
 
 
@@ -99,35 +100,14 @@ const MattraductAI = () => {
     setModalOpen((prev) => !prev);
   };
  
-  const getLangCode = (language) => {
-    // Mapeo de idiomas a códigos de idioma
-    const langMap = {
-      'en': 'en-US', // Inglés
-    'fr': 'fr-FR', // Francés
-    'it': 'it-IT', // Italiano
-    'de': 'de-DE', // Alemán
-    'pt': 'pt-PT', // Portugués
-    'es': 'es-ES'  //Español
-      // Agrega más mapeos de idiomas según sea necesario
-    };
-  
-    // Verifica si el idioma está en el mapa
-    if (language in langMap) {
-      return langMap[language];
-    }
-  
-    // Si el idioma no está en el mapa, devuelve un valor predeterminado
-    return 'fr-FR'; // Código de idioma predeterminado en caso de que no se encuentre en el mapa
-  };
+
 
   const handlePlayAudio = () => {
     if (!isPlaying) {
       if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance();
         utterance.text = result;
-        // Obtén el código de idioma basado en el idioma seleccionado en toLanguage
-      const langCode = getLangCode(toLanguage);
-      utterance.lang = langCode;
+      utterance.lang = VOICE_FOR_LANGUAGE[toLanguage];
         
         if (result.trim() !== '') {
           window.speechSynthesis.speak(utterance);
@@ -158,7 +138,7 @@ const MattraductAI = () => {
       if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance();
         utterance.text = secondResult;
-
+        utterance.lang = VOICE_FOR_LANGUAGE[toThirdLanguage];
         if (secondResult.trim() !== '') {
           window.speechSynthesis.speak(utterance);
           setIsPlaying(true);
@@ -185,7 +165,9 @@ const MattraductAI = () => {
   
   
   return (
+   
     <>
+    
       <section className="flex flex-col justify-center items-center gap-6 min-h-screen ">
         <div className="w-full max-w-5xl bg-white shadow-lg rounded-md">
           <div className="flex items-center justify-around bg-indigo-600 text-gray-100 px-4 py-2 rounded-t-md">
@@ -254,7 +236,7 @@ const MattraductAI = () => {
           setFromText={setFromText}
         />
       )}
-    </>
+    </> 
   );
 };
 

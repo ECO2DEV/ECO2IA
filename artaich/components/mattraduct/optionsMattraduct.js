@@ -20,7 +20,7 @@ export default function OptionsMattraduct({
   handleShowThirdTextarea,
   onClick
 }) {
-  console.log("language" + language)
+ // console.log("language" + language)
   const { promptTokens } = useContext(PromptContext);
   return (
     <div className="">
