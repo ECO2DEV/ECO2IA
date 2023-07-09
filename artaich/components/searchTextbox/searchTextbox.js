@@ -4,8 +4,8 @@ import Loader from '../loader/loader';
 
 import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 
-export default function SearchTextbox({ OnChange, Fetch, loading }) {
-  const { prompt, promptTokens } = useContext(PromptContext);
+export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
+  // const { prompt, promptTokens } = useContext(PromptContext);
 
   return (
     <div className="flex-1">
@@ -41,7 +41,7 @@ export default function SearchTextbox({ OnChange, Fetch, loading }) {
       </div>
       <div className="flex justify-start">
         <span className=" bottom-4 text-gray-900">
-          Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+          {/* Points utilisés pour la question : {promptTokens}&nbsp;&nbsp; */}
         </span>
         <span>{loading && <Loader />}</span>
       </div>
