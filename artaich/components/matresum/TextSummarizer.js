@@ -4,6 +4,8 @@ import { MattResumResp } from "../../util/api/MattResumResp";
 import { UserContext } from "../../context/user/UserContext";
 import { PromptContext } from "../../context/prompts/PromptContext";
 import { useMatResume } from "../../hooks/useMattResume";
+import { DocumentArrowDownIcon,DocumentIcon,ShareIcon } from "@heroicons/react/20/solid";
+import {  HistoryIcon, VolumenSpeakerIcon } from '../icons/icons';
 
 // Página del componente TextSummarizerPage
 function TextSummarizerPage() {
@@ -30,7 +32,7 @@ function TextSummarizerPage() {
     event.target.style.height = `${event.target.scrollHeight}px`;
 
     // Limitar la altura máxima del textarea
-    const maxHeight = 400; // Establece el valor máximo de altura deseado en píxeles
+    const maxHeight = 350; // Establece el valor máximo de altura deseado en píxeles
     if (event.target.scrollHeight > maxHeight) {
       event.target.style.height = `${maxHeight}px`;
       event.target.style.overflowY = "scroll";
@@ -99,6 +101,109 @@ function TextSummarizerPage() {
             ) : (
               <p className="text-gray-500">Glissez et déposez les fichiers ici.</p>
             )}
+          </div>
+          <div className="my-4">
+          <nav className="flex" aria-label="Breadcrumb">
+        <ol
+          role="list"
+          className="flex space-x-4 rounded-md bg-gray-50 px-6 shadow"
+        >
+          <li className="flex items-center">
+            <svg
+              className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
+              viewBox="0 0 24 44"
+              preserveAspectRatio="none"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+            </svg>
+
+            <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+              <div className="flex justify-center items-center">
+                <HistoryIcon
+                  className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                  aria-hidden="true"
+                />
+                <span className="hidden sm:contents">
+                  {' '}
+                  {' '}
+                </span>
+              </div>
+            </button>
+          </li>
+          <li className="flex items-center">
+            <svg
+              className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
+              viewBox="0 0 24 44"
+              preserveAspectRatio="none"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+            </svg>
+            <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+              <div className="flex justify-center items-center">
+                <DocumentArrowDownIcon
+                  className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                  aria-hidden="true"
+                />
+                <span className="hidden sm:contents">
+                  {' '}
+                  PDF{' '}
+                </span>
+              </div>
+            </button>
+          </li>
+          <li className="flex items-center">
+            <svg
+              className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
+              viewBox="0 0 24 44"
+              preserveAspectRatio="none"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+            </svg>
+            <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+              <div className="flex justify-center items-center">
+                <DocumentIcon
+                  className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                  aria-hidden="true"
+                />
+                <span className="hidden sm:contents">
+                  {' '}
+                  Word{' '}
+                </span>
+              </div>
+            </button>
+          </li>
+          <li className="flex items-center">
+            <svg
+              className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
+              viewBox="0 0 24 44"
+              preserveAspectRatio="none"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+            </svg>
+
+            <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+              <div className="flex justify-center items-center">
+                <ShareIcon
+                  className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                  aria-hidden="true"
+                />
+                <span className="hidden sm:contents">
+                  {' '}
+                  Partager{' '}
+                </span>
+              </div>
+            </button>
+          </li>
+        </ol>
+      </nav>
           </div>
           <button
             className="mt-auto w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"

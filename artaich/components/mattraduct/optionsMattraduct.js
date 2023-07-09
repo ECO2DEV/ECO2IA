@@ -10,7 +10,7 @@ import {
 } from '@heroicons/react/20/solid';
 import dynamic from 'next/dynamic';
 
-import { HistoryIcon } from '../icons/icons';
+import { HistoryIcon, VolumenSpeakerIcon } from '../icons/icons';
 
 const Transcription = dynamic(() => import('./transcript'), { ssr: false });
 
@@ -20,7 +20,7 @@ export default function OptionsMattraduct({
   handleShowThirdTextarea,
   onClick
 }) {
-  console.log("language" + language)
+ // console.log("language" + language)
   const { promptTokens } = useContext(PromptContext);
   return (
     <div className="">

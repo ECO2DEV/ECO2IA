@@ -8,7 +8,6 @@ import { ChatgptResponse } from '../../util/api/chatgptResponse';
 import { Conversations } from './conversations';
 import { useChat } from '../../hooks/useChat';
 import { ButtonHelper } from '../welcome/buttonHelper';
-import { toast } from 'react-hot-toast';
 
 import { useChat as useChatReact } from 'ai/react';
 import axios from 'axios';

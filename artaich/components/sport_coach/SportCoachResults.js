@@ -2,50 +2,20 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../../context/user/UserContext";
 import { useSportCoach } from "../../hooks/useSportCoach";
 import { LoadingIndicator } from "./LoadingIndicator";
-import { PromptContext } from "../../context/prompts/PromptContext";
-import { saveAs } from "file-saver";
-import {
-  Page,
-  Text,
-  View,
-  Document,
-  PDFDownloadLink,
-  StyleSheet,
-} from "@react-pdf/renderer";
+import { generatePDFDocument } from "../../util/helpers/SharePdf";
+import { PDFDocument } from "pdf-lib";
 import {
   ShareIcon,
   DocumentArrowDownIcon,
   DocumentIcon,
   CheckIcon,
 } from "@heroicons/react/24/solid";
+import {
+  FacebookShareButton,
+  WhatsappShareButton,
+  EmailShareButton,
+} from "next-share";
 import { FacebookIcon, WhatsappIcon, EmailIcon } from "react-share";
-
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: "column",
-    backgroundColor: "#ffffff",
-    padding: 20,
-  },
-  section: {
-    marginBottom: 20,
-  },
-  dayHeader: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
-    color: "blue",
-    textTransform: "uppercase",
-    textAlign: "center",
-  },
-  exerciseItem: {
-    marginBottom: 5,
-  },
-  completedExercise: {
-    backgroundColor: "#e6f2ff",
-    paddingLeft: 10,
-    borderRadius: 5,
-  },
-});
 
 export const SportCoachResults = () => {
   const { user } = useContext(UserContext);
@@ -53,25 +23,36 @@ export const SportCoachResults = () => {
   const response = data?.data[0]?.attributes?.payload_out?.resp;
   const responseObj = JSON.parse(response);
 
+  const handleExportToPDF = async () => {
+    const pdfBlob = await generatePDFDocument(responseObj, completedExercises);
+    const url = URL.createObjectURL(pdfBlob);
+    window.open(url, "_blank");
+  };
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [showShareButtons, setShowShareButtons] = useState(false);
   const [completedExercises, setCompletedExercises] = useState(() =>
-    responseObj.resp.map((day) => ({
-      exercises: day.exercises?.map(() => ({ completed: false })),
-    }))
+    responseObj.resp.length > 0
+      ? responseObj.resp.map((day) => ({
+          exercises: day.exercises?.map(() => ({ completed: false })),
+        }))
+      : []
   );
 
   const handleExerciseClick = (dayIndex, exerciseIndex) => {
     const updatedCompletedExercises = [...completedExercises];
     if (!updatedCompletedExercises[dayIndex]?.exercises) {
-      updatedCompletedExercises[dayIndex] =
-        updatedCompletedExercises[dayIndex] || {};
+      updatedCompletedExercises[dayIndex] = updatedCompletedExercises[dayIndex] || {};
       updatedCompletedExercises[dayIndex].exercises = [];
+    }
+    if (!updatedCompletedExercises[dayIndex].exercises[exerciseIndex]) {
+      updatedCompletedExercises[dayIndex].exercises[exerciseIndex] = {};
     }
     updatedCompletedExercises[dayIndex].exercises[exerciseIndex].completed =
       !updatedCompletedExercises[dayIndex].exercises[exerciseIndex]?.completed;
     setCompletedExercises(updatedCompletedExercises);
   };
+  
 
   const handleShareClick = () => {
     setShowShareButtons(!showShareButtons);
@@ -86,95 +67,43 @@ export const SportCoachResults = () => {
     return <LoadingIndicator />;
   }
 
-  // Componente PDF del plan de entrenamiento
-  const PlanEntrenamientoPDF = () => (
-    <Document>
-      <Page style={styles.page}>
-        <Text style={styles.dayHeader}>plan de formation</Text>
-        {responseObj.resp.map(
-          (
-            day,
-            dayIndex // Añadir dayIndex como segundo parámetro
-          ) => (
-            <View key={day.day} style={styles.section}>
-              <Text style={styles.dayHeader}>{day.day}</Text>
-              {day.exercises?.map(
-                (
-                  exercise,
-                  exerciseIndex // Añadir exerciseIndex como segundo parámetro
-                ) => (
-                  <View
-                    key={exercise.name}
-                    style={[
-                      styles.exerciseItem,
-                      completedExercises[dayIndex]?.exercises[exerciseIndex]
-                        ?.completed
-                        ? styles.completedExercise
-                        : null,
-                    ]}
-                  >
-                    <Text>{exercise.name}</Text>
-                    <Text>{exercise.description}</Text>
-                  </View>
-                )
-              )}
-            </View>
-          )
-        )}
-      </Page>
-    </Document>
-  );
-
-  // Función para exportar el plan de entrenamiento a PDF
-  const exportToPDF = () => {
-    const asPdf = <PlanEntrenamientoPDF />;
-    const blob = new Blob([asPdf], { type: "application/pdf" });
-    saveAs(blob, "plan_entrenamiento.pdf");
+  const generateTrainingPlanContent = () => {
+    let content = "Salut! Je partage mon plan d'entraînement :\n\n";
+    responseObj.resp.forEach((day) => {
+      content += `${day.day}:\n`;
+      day.exercises.forEach((exercise) => {
+        content += `${exercise.name}: ${exercise.description}\n`;
+      });
+      content += "\n";
+    });
+    return content;
   };
 
-  // Función para compartir el plan de entrenamiento en Facebook
   const shareOnFacebook = () => {
-    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-      window.location.href
-    )}`;
+    const content = generateTrainingPlanContent();
+    const shareContent = encodeURIComponent(content);
+    const url = `https://www.facebook.com/sharer/share${shareContent}`;
     window.open(url, "_blank");
   };
 
-  // Función para compartir el plan de entrenamiento en WhatsApp
   const shareOnWhatsApp = () => {
-    const text = `¡Hola! Te comparto mi plan de entrenamiento:\n\n`;
-    const exercises = responseObj.resp.flatMap((day) =>
-      day.exercises?.map(
-        (exercise) => `${exercise.name}: ${exercise.description}`
-      )
-    );
-    const plan = exercises?.join("\n");
-    const body = encodeURIComponent(text + plan);
-    const url = `https://wa.me/?text=${body}`;
+    const content = generateTrainingPlanContent();
+    const shareText = encodeURIComponent(content);
+    const url = `https://wa.me/?text=${shareText}`;
     window.open(url, "_blank");
   };
 
-  // Función para compartir el plan de entrenamiento por correo electrónico
   const shareByEmail = () => {
     const subject = "Plan de Entrenamiento";
-    const body = "¡Hola! Te comparto mi plan de entrenamiento:\n\n";
-    const exercises = responseObj.resp.flatMap((day) =>
-      day.exercises?.map(
-        (exercise) => `${exercise.name}: ${exercise.description}`
-      )
-    );
-    const plan = exercises.join("\n");
+    const content = generateTrainingPlanContent();
     const mailtoUrl = `mailto:?subject=${encodeURIComponent(
       subject
-    )}&body=${encodeURIComponent(body + plan)}`;
+    )}&body=${encodeURIComponent(content)}`;
     window.location.href = mailtoUrl;
   };
 
-  const { promptTokens } = useContext(PromptContext);
-  console.log(promptTokens);
-  // Renderizar los resultados una vez que la carga haya finalizado
   return (
-    <>
+    <div className="p-6">
       {responseObj.resp.map((day, index) => (
         <div
           key={index}
@@ -185,9 +114,9 @@ export const SportCoachResults = () => {
           <ol
             className={`${
               activeIndex !== index ? "hidden" : ""
-            } list-disc ml-4 whitespace-normal`}
+            } ml-4 whitespace-normal`}
           >
-            {day.exercises?.map((exercise, exerciseIndex) => (
+            {day.exercises.map((exercise, exerciseIndex) => (
               <li
                 key={exerciseIndex}
                 className={classNames(
@@ -224,22 +153,19 @@ export const SportCoachResults = () => {
           </ol>
         </div>
       ))}
-      <nav className="" aria-label="Breadcrumb">
+
+      <nav aria-label="Breadcrumb">
         <ol
           role="list"
-          className="flex justify-center space-x-4 rounded-md bg-gray-50 px-6 shadow relative"
+          className="flex justify-center w-96 space-x-4 rounded-md bg-gray-50 px-6 shadow absolute"
         >
-          <li className="flex items-center w-auto">
-            <div className="flex items-center">
-              <PDFDownloadLink
-                document={<PlanEntrenamientoPDF />}
-                fileName="plan_entrenamiento.pdf"
-              >
-                <button className="text-gray-500 hover:text-gray-500">
-                  <DocumentArrowDownIcon className="w-6 h-6 inline-block" /> PDF
-                </button>
-              </PDFDownloadLink>
-            </div>
+          <li className="flex items-center w-auto text-gray-500 hover:text-gray-500">
+            <button
+              onClick={handleShareClick}
+              className="flex items-center p-2 rounded-md hover:bg-gray-100"
+            >
+              <ShareIcon className="w-5 h-5 mr-1" /> Partager
+            </button>
           </li>
           <li className="flex space-x-4 items-center w-auto text-gray-500 hover:text-gray-500">
             <svg
@@ -251,9 +177,11 @@ export const SportCoachResults = () => {
             >
               <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
             </svg>
-            <DocumentIcon className="h-6 w-6" /> Word
+            <button className="flex items-center p-2 rounded-md hover:bg-gray-100">
+              <DocumentIcon className="w-5 h-5 mr-1" /> Word
+            </button>
           </li>
-          <li className="flex space-x-4 items-center w-auto">
+          <li className="flex space-x-4 items-center w-auto text-gray-500 hover:text-gray-500">
             <svg
               className="h-full text-xs w-5 flex-shrink-0 text-gray-400"
               viewBox="0 0 24 44"
@@ -263,44 +191,42 @@ export const SportCoachResults = () => {
             >
               <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
             </svg>
-            <button className="flex gap-2 text-gray-500 hover:text-gray-500 py-2 rounded">
-              <ShareIcon
-                onClick={handleShareClick}
-                className="w-6 h-6 cursor-pointer text-gray-500"
-              />
-              Partager
-              {showShareButtons && (
-                <div className="flex flex-col items-center gap-2 absolute bottom-9 right-20 bg-gray-50 p-2 rounded shadow">
-                  <button
-                    className="text-black font-bold rounded"
-                    onClick={shareOnFacebook}
-                  >
-                    <FacebookIcon className="w-12 h-12 hover:bg-blue-700 rounded inline-block" />
-                  </button>
-                  <button
-                    className="text-black font-bold rounded"
-                    onClick={shareOnWhatsApp}
-                  >
-                    <WhatsappIcon className="w-12 h-12 inline-block" />
-                  </button>
-                  <button
-                    className="text-black font-bold rounded"
-                    onClick={shareByEmail}
-                  >
-                    <EmailIcon className="w-12 h-12 inline-block" />
-                  </button>
-                </div>
-              )}
+            <button
+              onClick={handleExportToPDF}
+              className="flex items-center p-2 rounded-md hover:bg-gray-100"
+            >
+              <DocumentArrowDownIcon className="w-5 h-5 mr-1" /> Pdf
             </button>
           </li>
         </ol>
       </nav>
-      <div className="flex justify-center items-center my-2">
-        <span className=" bottom-4 text-gray-900">
-          Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
-          {console.log(promptTokens)}
-        </span>
-      </div>
-    </>
+
+      {showShareButtons && (
+        <div className="relative w-4 bottom-[8rem] left-4 gap-2 z-10 flex flex-col justify-center">
+          <FacebookShareButton
+            className="h-4 w-4"
+            // url={window.location.href}
+            quote={generateTrainingPlanContent()}
+          >
+            <FacebookIcon size={38} round />
+          </FacebookShareButton>
+          <WhatsappShareButton
+            className="h-4 w-4"
+            url={window.location.href}
+            title={generateTrainingPlanContent()}
+          >
+            <WhatsappIcon size={38} round />
+          </WhatsappShareButton>
+          <EmailShareButton
+            className="h-4 w-4"
+            url={window.location.href}
+            subject="plan de formation"
+            body={generateTrainingPlanContent()}
+          >
+            <EmailIcon size={38} round />
+          </EmailShareButton>
+        </div>
+      )}
+    </div>
   );
 };
