@@ -9,6 +9,16 @@ import { Conversations } from './conversations';
 import { useChat } from '../../hooks/useChat';
 import { ButtonHelper } from '../welcome/buttonHelper';
 
+import { useChat as useChatReact } from 'ai/react';
+import axios from 'axios';
+import { header, strapiUrl } from '../../constants/constans';
+
+export const config = {
+  runtime: 'edge'
+};
+function removeObjectWithId(arr, id) {
+  return arr.filter((obj) => obj.id !== id);
+}
 
 export default function ChatGpt(props) {
   const [openHelpers, setOpenHelpers] = useState(false);
@@ -18,54 +28,53 @@ export default function ChatGpt(props) {
 
   const { data, mutate } = useChat(user);
 
-  const { prompt, setPrompt, setResponse, setPromptTokens } =
-    useContext(PromptContext);
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+    setMessages
+  } = useChatReact({
+    api: '/api/chat',
+    onFinish: async (message) => {
+      const resId = await axios.post(
+        `${strapiUrl}/api/openai/chatgpt`,
+        {
+          prompt: input,
+          aiResponse: message.content,
+          users_permissions_user: 2
+        },
+        header
+      );
+      const updatedMessage = { ...message, reqId: resId.data.reqId };
+      console.log('updatedMessage:', updatedMessage);
+      console.log('messages :', messages);
+      const filterMessages = removeObjectWithId(messages, updatedMessage.id);
 
-  const FetchData = async () => {
-    if (!prompt) {
-      setError('Please type something before submit');
-    } else {
-      setIsLoading(true);
-      // Realiza la llamada a la API
-      ChatgptResponse({ prompt: prompt, user: user })
-        .then((response) => {
-          console.log('response is:');
-          setResponse(response?.data?.data);
-          // console.log('response.data.data.trim() is:', response);
-          mutate({ data: [...data.data, response?.data], ...data });
-        })
-        .catch((error) => {
-          console.log('error is:', error);
-          setError('An error occurred while fetching data.');
-        })
-        .finally(() => {
-          setIsLoading(false);
-          setPrompt('');
-          setOpenHelpers(false);
-        });
+      console.log('filterMessages:', filterMessages);
+      const uniqueMessages = [...filterMessages, updatedMessage];
+      setMessages((messages) => [...messages, uniqueMessages]);
+
+      // console.log('Json.stringify(message):', JSON.stringify(message));
     }
-  };
-  const handleChange = (e) => {
-    setPrompt(e.target.value);
-    if (e.target.value === '') {
-      setPromptTokens(0);
-    }
-  };
+  });
 
   return (
     <section>
-      {data?.data?.length === 0 ? (
+      {messages.length === 0 ? (
         <Welcome />
       ) : openHelpers ? (
         <Welcome />
       ) : (
-        <Conversations />
+        <Conversations messages={messages} />
       )}
       <div className="flex justify-center fixed bottom-3 w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem]">
         <SearchTextbox
-          OnChange={handleChange}
-          Fetch={FetchData}
-          loading={loading}
+          OnChange={handleInputChange}
+          Fetch={handleSubmit}
+          loading={isLoading}
+          prompt={input}
         />
         <ButtonHelper onClick={() => setOpenHelpers(!openHelpers)} />
       </div>
