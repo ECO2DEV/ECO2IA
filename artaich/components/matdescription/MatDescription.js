@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { PromptContext } from '../../context/prompts/PromptContext';
 import DescriptionForm from './DescriptionForm';
 import { DescriptionHeader } from './DescriptionHeader';
-import { MatPosts } from './MatPosts';
+import { MatCards } from './MatCards';
 
 export const MatDescription = (props) => {
+  const { setResponse } = useContext(PromptContext);
+  useEffect(() => {
+    setResponse('');
+  }, []);
+
   const [showMatDescription, setShowMatDescription] = useState(false);
   return (
     <section className="flex justify-center min-h-screen pb-4">
@@ -12,7 +19,7 @@ export const MatDescription = (props) => {
       ) : (
         <div className="flex flex-col sm:flex-row w-full gap-2 relative">
           <DescriptionForm />
-          <MatPosts />
+          <MatCards />
         </div>
       )}
     </section>
