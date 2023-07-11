@@ -5,7 +5,7 @@ import Loader from '../loader/loader';
 import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 
 export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
-  // const { prompt, promptTokens } = useContext(PromptContext);
+  const { promptTokens } = useContext(PromptContext);
 
   return (
     <div className="flex-1">

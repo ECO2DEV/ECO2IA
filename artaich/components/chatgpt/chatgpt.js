@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 import { PromptContext } from '../../context/prompts/PromptContext';
 // import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
@@ -16,14 +16,12 @@ import { header, strapiUrl } from '../../constants/constans';
 export const config = {
   runtime: 'edge'
 };
-function removeObjectWithId(arr, id) {
-  return arr.filter((obj) => obj.id !== id);
-}
 
 export default function ChatGpt(props) {
   const [openHelpers, setOpenHelpers] = useState(false);
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { setResponse, setPromptTokens } = useContext(PromptContext);
   const user = props.user;
 
   const { data, mutate } = useChat(user);
@@ -38,7 +36,7 @@ export default function ChatGpt(props) {
   } = useChatReact({
     api: '/api/chat',
     onFinish: async (message) => {
-      const resId = await axios.post(
+      const res = await axios.post(
         `${strapiUrl}/api/openai/chatgpt`,
         {
           prompt: input,
@@ -47,14 +45,22 @@ export default function ChatGpt(props) {
         },
         header
       );
-      const updatedMessage = { ...message, reqId: resId.data.reqId };
-      console.log('updatedMessage:', updatedMessage);
-      console.log('messages :', messages);
-      const filterMessages = removeObjectWithId(messages, updatedMessage.id);
+      const reqId = res.data.reqId; // Assuming the response from the backend contains the reqId
 
-      console.log('filterMessages:', filterMessages);
-      const uniqueMessages = [...filterMessages, updatedMessage];
-      setMessages((messages) => [...messages, uniqueMessages]);
+      setMessages((prevMessages) => {
+        const updatedMessages = prevMessages.map((msg) => {
+          if (msg.role === 'assistant') {
+            if (msg.reqId === message.reqId) {
+              return { ...msg, reqId };
+            }
+          }
+          return msg;
+        });
+
+        return updatedMessages;
+      });
+      // setPromptTokens(input);
+      setResponse(message.content);
 
       // console.log('Json.stringify(message):', JSON.stringify(message));
     }

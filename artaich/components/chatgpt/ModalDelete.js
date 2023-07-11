@@ -1,4 +1,5 @@
 import { Fragment, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
@@ -7,7 +8,7 @@ export default function ModalDelete({ onClose, onHandleDelete }) {
   const [open, setOpen] = useState(true);
 
   const cancelButtonRef = useRef(null);
-
+  const router = useRouter();
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -71,6 +72,7 @@ export default function ModalDelete({ onClose, onHandleDelete }) {
                     onClick={() => {
                       onHandleDelete();
                       onClose();
+                      router.reload();
                       toast.success('Conversation deleted successfully');
                     }}
                   >

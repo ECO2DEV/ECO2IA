@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect, useContext } from 'react';
+import { Fragment, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PromptContext } from '../../context/prompts/PromptContext';
@@ -129,13 +129,6 @@ function classNames(...classes) {
 }
 
 export default function DashboardSection() {
-  const { setResponse } = useContext(PromptContext);
-  useEffect(() => {
-    return () => {
-      // console.log('cleaning response');
-      setResponse('');
-    };
-  }, []);
   return (
     <>
       {/*

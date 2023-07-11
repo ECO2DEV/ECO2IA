@@ -21,6 +21,7 @@ export function useChat(userId = 1) {
   );
 
   const deleteChat = async (chatId) => {
+    console.log('que tipo es el reqId qie llega a deleteChat:', typeof chatId);
     try {
       await axios.delete(`${strapiUrl}/api/requests/${chatId}`, {
         headers: { Authorization: `Bearer ${strapiToken}` }
