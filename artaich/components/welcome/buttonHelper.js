@@ -3,7 +3,7 @@ import { QuestionIcon } from '../icons/icons';
 export const ButtonHelper = ({ onClick }) => {
   return (
     <>
-      <button className="mt-4 ml-4 " onClick={onClick}>
+      <button className=" ml-4 " onClick={onClick}>
         <QuestionIcon />
       </button>
       {/* <span className="relative flex h-3 w-3 mt-6">
