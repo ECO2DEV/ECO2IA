@@ -21,6 +21,7 @@
     "fs": "^0.0.1-security",
     "gpt-3-encoder": "^1.1.4",
     "heroicons": "^2.0.16",
+    "mammoth": "^1.6.0",
     "next": "latest",
     "next-auth": "^4.20.1",
     "next-share": "^0.20.0",

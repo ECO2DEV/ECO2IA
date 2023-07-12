@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 
 import { PromptContext } from '../../context/prompts/PromptContext';
+import { UserContext } from '../../context/user/UserContext';
 import axios from 'axios';
 // import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 import SearchTextbox from '../searchTextbox/searchTextbox';
@@ -19,10 +20,11 @@ export const config = {
   runtime: 'edge'
 };
 
-export default function ChatGpt(props) {
+export default function ChatGpt() {
   const [openHelpers, setOpenHelpers] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [error, setError] = useState('');
+  const { user } = useContext(UserContext)
   const { setResponse, setPromptTokens } = useContext(PromptContext);
   const user = props.user;
 
