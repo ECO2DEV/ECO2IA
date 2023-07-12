@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 
 import { PromptContext } from '../../context/prompts/PromptContext';
+import { UserContext } from '../../context/user/UserContext';
 // import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 import SearchTextbox from '../searchTextbox/searchTextbox';
 import { Welcome } from '../welcome/welcome';
@@ -10,11 +11,11 @@ import { useChat } from '../../hooks/useChat';
 import { ButtonHelper } from '../welcome/buttonHelper';
 
 
-export default function ChatGpt(props) {
+export default function ChatGpt() {
   const [openHelpers, setOpenHelpers] = useState(false);
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const user = props.user;
+  const { user } = useContext(UserContext)
 
   const { data, mutate } = useChat(user);
 
