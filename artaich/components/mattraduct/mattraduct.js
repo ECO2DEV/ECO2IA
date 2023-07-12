@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../context/user/UserContext';
 import { MattraductResponse } from '../../util/api/mattraductResponse';
 import { toast } from 'react-hot-toast';
@@ -9,6 +9,7 @@ import OptionsMattraduct from './optionsMattraduct';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import { useMattraduct } from '../../hooks/useMattraduct';
 import HistoryRequest from './HistoryRequest';
+import { VOICE_FOR_LANGUAGE } from '../../constants/constans';
 
 
 
@@ -16,6 +17,7 @@ const MattraductAI = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showThirdTextarea, setShowThirdTextarea] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false); // Se añade la variable isPlaying
 
   const { user } = useContext(UserContext);
   const { data: translationsData, mutate } = useMattraduct(user?.id);
@@ -32,9 +34,10 @@ const MattraductAI = () => {
     setResult,
     secondResult,
     setSecondResult,
-    loading
+    loading,
   } = useLangStorage();
 
+  
   const handleClipboardOne = () => {
     navigator.clipboard
       .writeText(result)
@@ -68,17 +71,15 @@ const MattraductAI = () => {
       user,
       fromLanguage,
       toLanguage,
-      toThirdLanguage
+      toThirdLanguage,
     })
       .then((result) => {
         if (result == null) return;
-        // console.log('result.data ', result.data);
         setResult(result?.data?.data.lang1);
         setSecondResult(result?.data?.data.lang2);
-        // mutate
         mutate({
           translationsData: [...translationsData.data, result?.data?.data],
-          ...translationsData
+          ...translationsData,
         });
         setResponse(result?.data?.data.lang1 + result?.data?.data.lang2);
       })
@@ -98,8 +99,75 @@ const MattraductAI = () => {
   const handleModalHistory = () => {
     setModalOpen((prev) => !prev);
   };
+ 
+
+
+  const handlePlayAudio = () => {
+    if (!isPlaying) {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = result;
+      utterance.lang = VOICE_FOR_LANGUAGE[toLanguage];
+        
+        if (result.trim() !== '') {
+          window.speechSynthesis.speak(utterance);
+          setIsPlaying(true);
+        }
+      }
+    } else {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        setIsPlaying(false);
+      }
+    }
+  };
+  
+  useEffect(() => {
+    return () => {
+      if (isPlaying) {
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          setIsPlaying(false);
+        }
+      }
+    };
+  }, [isPlaying]);
+
+  const handlePlayAudioTwo = () => {
+    if (!isPlaying) {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = secondResult;
+        utterance.lang = VOICE_FOR_LANGUAGE[toThirdLanguage];
+        if (secondResult.trim() !== '') {
+          window.speechSynthesis.speak(utterance);
+          setIsPlaying(true);
+        }
+      }
+    } else {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        setIsPlaying(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (isPlaying) {
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          setIsPlaying(false);
+        }
+      }
+    };
+  }, [isPlaying]);
+  
+  
   return (
+   
     <>
+    
       <section className="flex flex-col justify-center items-center gap-6 min-h-screen ">
         <div className="w-full max-w-5xl bg-white shadow-lg rounded-md">
           <div className="flex items-center justify-around bg-indigo-600 text-gray-100 px-4 py-2 rounded-t-md">
@@ -137,6 +205,7 @@ const MattraductAI = () => {
               value={result}
               onChange={setResult}
               onClick={handleClipboardOne}
+              handlePlayAudio={handlePlayAudio}
             />
 
             {showThirdTextarea && (
@@ -146,6 +215,7 @@ const MattraductAI = () => {
                 value={secondResult}
                 onChange={setSecondResult}
                 onClick={handleClipboardTwo}
+                handlePlayAudio={handlePlayAudioTwo}
               />
             )}
           </div>
@@ -166,7 +236,7 @@ const MattraductAI = () => {
           setFromText={setFromText}
         />
       )}
-    </>
+    </> 
   );
 };
 
