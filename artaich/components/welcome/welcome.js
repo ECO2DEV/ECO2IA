@@ -1,11 +1,7 @@
-import { useContext } from 'react';
-import { PromptContext } from '../../context/prompts/PromptContext';
 import { SunIcon, ZapIcon, WarningIcon } from '../icons/icons';
 import { EXAMPLES, CAPABILITIES, LIMITATION } from '../../data/helpers';
 
-export const Welcome = () => {
-  const { setPrompt } = useContext(PromptContext);
-
+export const Welcome = ({ setInput }) => {
   return (
     <div className="md:flex items-start text-center gap-3.5 md:mt-16 xl:mt-24">
       <div className="flex flex-col mb-2 md:mb-auto gap-3.5 flex-1">
@@ -16,7 +12,7 @@ export const Welcome = () => {
           {EXAMPLES.map((example, index) => (
             <button
               key={index}
-              onClick={() => setPrompt(example)}
+              onClick={() => setInput(example)}
               className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-gray-800  hover:bg-gray-900"
             >
               {example} →

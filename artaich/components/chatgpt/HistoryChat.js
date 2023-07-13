@@ -66,87 +66,93 @@ export default function HistoryChat({ onClose }) {
                   <div className="mt-2 mb-4 text-center">
                     <Dialog.Title
                       as="h3"
-                      className="text-2xl font-semibold leading-6 text-gray-900"
+                      className="text-3xl font-semibold leading-6 text-gray-900"
                     >
                       History
                     </Dialog.Title>
                   </div>
                   <div className="h-full bg-gray-100">
                     <section className="flex flex-col text-sm h-[80vh] lg:h-[85vh] overflow-y-scroll overflow-x-hidden">
-                      {data?.data.map((item, index) => {
-                        return (
-                          <div key={item.id}>
-                            <div
-                              className={`group w-full text-gray-800 bg-gray-100 relative`}
-                            >
-                              <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl md:py-6 lg:px-0 m-auto">
-                                <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
-                                  {user?.avatar ? (
-                                    <img
-                                      className="w-7 h-7 rounded-full object-cover"
-                                      src={strapiUrl + user.avatar.url}
-                                      alt="user_avatar"
-                                    />
-                                  ) : (
-                                    <EmptyAvatar />
-                                  )}
+                      {data?.data.length === 0 ? (
+                        <p className="text-center text-2xl pt-4 text-gray-500">
+                          No hay historial disponible.
+                        </p>
+                      ) : (
+                        data?.data.map((item, index) => {
+                          return (
+                            <div key={item.id}>
+                              <div
+                                className={`group w-full text-gray-800 bg-gray-100 relative`}
+                              >
+                                <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl md:py-6 lg:px-0 m-auto">
+                                  <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
+                                    {user?.avatar ? (
+                                      <img
+                                        className="w-7 h-7 rounded-full object-cover"
+                                        src={strapiUrl + user.avatar.url}
+                                        alt="user_avatar"
+                                      />
+                                    ) : (
+                                      <EmptyAvatar />
+                                    )}
+                                  </div>
+                                  <div className="relative flex flex-col text-left w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
+                                    {item.attributes.payload_in.prompt}
+                                  </div>
                                 </div>
-                                <div className="relative flex flex-col text-left w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
-                                  {item.attributes.payload_in.prompt}
-                                </div>
+
+                                <button
+                                  onClick={() => {
+                                    onHandleModalDelete(item.id);
+                                    setDeleteId(item.id);
+                                  }}
+                                  className="absolute right-0 top-0 cursor-pointer "
+                                >
+                                  <DeleteIcon />
+                                </button>
                               </div>
 
-                              <button
-                                onClick={() => {
-                                  onHandleModalDelete(item.id);
-                                  setDeleteId(item.id);
-                                }}
-                                className="absolute right-0 top-0 cursor-pointer "
+                              <div
+                                className={`relative group w-full text-gray-100 border-b border-black/10 bg-gray-800 `}
                               >
-                                <DeleteIcon />
-                              </button>
-                            </div>
-
-                            <div
-                              className={`relative group w-full text-gray-100 border-b border-black/10 bg-gray-800 `}
-                            >
-                              <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl  md:py-6 lg:px-0 m-auto">
-                                <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
-                                  <Image
-                                    src="/Mlogo.ico"
-                                    alt="MatTech logo"
-                                    width={30}
-                                    height={30}
-                                  />
-                                </div>
-                                <div className="flex flex-col text-justify w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
-                                  {item.attributes.payload_out.resp}
-                                  <div className="absolute right-0 top-0 flex flex-col items-end ">
-                                    <button
-                                      className="p-1"
-                                      onClick={() =>
-                                        handleCopy(
-                                          item.attributes.payload_out.resp,
-                                          index
-                                        )
-                                      }
-                                    >
-                                      <div className="w-6 h-6 text-gray-100 bg-gray-100 transition duration-200 m-1 group-hover:bg-cyan-700 group-hover:text-black rounded-full ">
-                                        <ClipboardIcon />
-                                      </div>
-                                    </button>
-                                    {/* {copied[index] && (
-                                      <div className=" bg-blue-900 text-white rounded">
-                                        Copié dans le presse-papiers !
-                                      </div>
-                                    )} */}
+                                <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl  md:py-6 lg:px-0 m-auto">
+                                  <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
+                                    <Image
+                                      src="/Mlogo.ico"
+                                      alt="MatTech logo"
+                                      width={30}
+                                      height={30}
+                                    />
+                                  </div>
+                                  <div className="flex flex-col text-justify w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
+                                    {item.attributes.payload_out.resp}
+                                    <div className="absolute right-0 top-0 flex flex-col items-end ">
+                                      <button
+                                        className="p-1"
+                                        onClick={() =>
+                                          handleCopy(
+                                            item.attributes.payload_out.resp,
+                                            index
+                                          )
+                                        }
+                                      >
+                                        <div className="w-6 h-6 text-gray-100 bg-gray-100 transition duration-200 m-1 group-hover:bg-cyan-700 group-hover:text-black rounded-full ">
+                                          <ClipboardIcon />
+                                        </div>
+                                      </button>
+                                      {/* {copied[index] && (
+                                        <div className=" bg-blue-900 text-white rounded">
+                                          Copié dans le presse-papiers !
+                                        </div>
+                                      )} */}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })
+                      )}
                     </section>
                     {deleteModalOpen && (
                       <ModalDelete
