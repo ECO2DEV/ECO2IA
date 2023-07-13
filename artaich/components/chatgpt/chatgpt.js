@@ -25,7 +25,7 @@ export default function ChatGpt(props) {
   const user = props.user;
 
   const { data, mutate } = useChat(user);
-
+   console.log(user);
   const {
     messages,
     input,
@@ -41,7 +41,7 @@ export default function ChatGpt(props) {
         {
           prompt: input,
           aiResponse: message.content,
-          users_permissions_user: 2
+          users_permissions_user: user
         },
         header
       );

@@ -12,8 +12,6 @@ export const createUser = async (data) => {
     );
     //console.log('Id usuario' + respStripe.data.id);
     const newData = { ...data, customer_id: respStripe.data.id };
-
-    console.log('creating user', newData);
     const response = await axios.post(
       `${strapiUrl}/api/auth/local/register`,
       newData,
