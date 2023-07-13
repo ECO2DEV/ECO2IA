@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
+
 import axios from 'axios';
 import SearchTextbox from '../searchTextbox/searchTextbox';
 import { Welcome } from '../welcome/welcome';
@@ -19,6 +20,7 @@ export const config = {
 export default function ChatGpt(props) {
   const [openHelpers, setOpenHelpers] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+
   const { setResponse, setPromptTokens } = useContext(PromptContext);
   const user = props.user;
 

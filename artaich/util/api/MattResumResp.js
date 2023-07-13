@@ -20,5 +20,6 @@ export const MattResumResp = async ({
     return response;
   } catch (error) {
     console.error(`Error getting prompt for ${strapiUrl}:`, error);
+    throw error;
   }
 };
