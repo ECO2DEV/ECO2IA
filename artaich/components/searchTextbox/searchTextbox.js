@@ -41,7 +41,7 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
       </div>
       <div className="flex justify-start">
         <span className=" bottom-4 text-gray-900">
-          {/* Points utilisés pour la question : {promptTokens}&nbsp;&nbsp; */}
+          Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
         </span>
         <span>{loading && <Loader />}</span>
       </div>
