@@ -1,4 +1,3 @@
-// components/matresum/TextSummarizer.js
 import React, { useContext, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "react-hot-toast";
@@ -9,8 +8,12 @@ import { useMatResume } from "../../hooks/useMattResume";
 import { MattResumResp } from "../../util/api/MattResumResp";
 import { ClipboardIcon } from "../icons/icons";
 import mammoth from "mammoth";
-import { DocumentArrowDownIcon,DocumentIcon,ShareIcon } from "@heroicons/react/20/solid";
-import {  HistoryIcon, VolumenSpeakerIcon } from '../icons/icons';
+import {
+  DocumentArrowDownIcon,
+  DocumentIcon,
+  ShareIcon,
+} from "@heroicons/react/20/solid";
+import { HistoryIcon, VolumenSpeakerIcon } from "../icons/icons";
 
 function TextSummarizerPage() {
   // Estados del componente
@@ -37,8 +40,6 @@ function TextSummarizerPage() {
     event.target.style.height = "auto";
     event.target.style.height = `${event.target.scrollHeight}px`;
 
-    const maxHeight = 400;
-    // Limitar la altura máxima del textarea
     const maxHeight = 350; // Establece el valor máximo de altura deseado en píxeles
     if (event.target.scrollHeight > maxHeight) {
       event.target.style.height = `${maxHeight}px`;
@@ -58,6 +59,12 @@ function TextSummarizerPage() {
 
     try {
       const file = acceptedFiles[0];
+
+      // Verificar el tipo de archivo antes de procesarlo
+      if (file.type !== "application/pdf") {
+        throw new Error("Only PDF files are allowed"); // Lanzar un error personalizado si el archivo no es un PDF
+      }
+
       const reader = new FileReader();
 
       reader.onload = async (event) => {
@@ -69,7 +76,7 @@ function TextSummarizerPage() {
       reader.readAsArrayBuffer(file);
     } catch (error) {
       console.error("Error:", error);
-      setError("An error occurred");
+      setError(error.message); // Establecer el mensaje de error personalizado en el estado "error"
     } finally {
       setIsUploading(false);
     }
@@ -100,7 +107,7 @@ function TextSummarizerPage() {
     if (!prompt && !fileContent) {
       setError("Please type something before submit"); // Verifica que se haya ingresado texto antes de enviar la solicitud
     } else {
-      setIsLoading(true);
+      setIsLoading(true); // Activar el loader
       try {
         const response = await MattResumResp({
           prompt: inputText || fileContent,
@@ -108,13 +115,12 @@ function TextSummarizerPage() {
           user: user,
         });
         setResponse(response?.data?.data);
-        console.log(response?.data?.data);
         setSummaryText(response?.data?.data); // Establece el resumen recibido en el estado summaryText
       } catch (error) {
         console.error("Error:", error);
         setError("An error occurred");
       } finally {
-        setIsLoading(false);
+        setIsLoading(false); // Desactivar el loader
       }
     }
   };
@@ -132,7 +138,6 @@ function TextSummarizerPage() {
         });
     } else {
       toast.error(DataMattDescription.NoText);
-      console.log(handleCopy);
     }
   };
 
@@ -140,9 +145,9 @@ function TextSummarizerPage() {
   const { getRootProps, getInputProps } = useDropzone({ onDrop: handleDrop });
 
   return (
-    <div className="container mx-auto py-5 h-screen">
+    <div className="container mx-auto py-5 min-h-screen">
       <div className="flex flex-col md:flex-row h-full">
-        <div className="w-full md:w-6/10 h-full flex-grow -mr-1">
+        <div className="w-full md:w-6/12 h-full flex-grow -mr-1">
           <div className="bg-white rounded-lg shadow-lg p-6 h-full">
             <textarea
               className="w-full p-4 rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-20"
@@ -168,7 +173,7 @@ function TextSummarizerPage() {
                 </p>
               )}
             </div>
-            <div className="mb-4">
+            <div className="my-4">
               <select
                 id="language"
                 name="language"
@@ -177,194 +182,138 @@ function TextSummarizerPage() {
                 className="w-full p-2 border border-gray-300 rounded"
                 required
               >
-                <option value=""> {DataMattDescription.SelectLanguage} </option>
-                <option value="english"> {DataMattDescription.English} </option>
-                <option value="spanish"> {DataMattDescription.Spanish} </option>
-                <option value="french"> {DataMattDescription.French} </option>
-                <option value="german"> {DataMattDescription.Deutsch} </option>
-                <option value="italian"> {DataMattDescription.Italian} </option>
+                <option value="">{DataMattDescription.SelectLanguage}</option>
+                <option value="english">{DataMattDescription.English}</option>
+                <option value="spanish">{DataMattDescription.Spanish}</option>
+                <option value="french">{DataMattDescription.French}</option>
+                <option value="german">{DataMattDescription.Deutsch}</option>
+                <option value="italian">{DataMattDescription.Italian}</option>
               </select>
             </div>
-  <div className="flex flex-col md:flex-row h-full">
-      <div className="w-full md:w-6/10 h-full flex-grow -mr-1">
-        <div className="bg-white rounded-lg shadow-lg p-6 h-full">
-          <textarea
-            className="w-full p-4 rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-20"
-            value={fileContent || inputText}
-            onChange={handleTextChange}
-            placeholder="Écrivez votre texte ici"
-            style={{
-              resize: "none",
-              overflow: "hidden",
-            }}
-          />
-          <div
-            className={`w-full h-40 flex items-center justify-center border border-dashed rounded mt-4 ${
-              isUploading ? "bg-gray-200" : ""
-            }`}
-            {...getRootProps()}
-          >
-            {isUploading ? (
-              <p className="text-gray-500">Cargando archivo...</p>
-            ) : (
-              <p className="text-gray-500">Glissez et déposez les fichiers ici.</p>
-            )}
-          </div>
-          <div className="my-4">
-          <nav className="flex" aria-label="Breadcrumb">
-        <ol
-          role="list"
-          className="flex space-x-4 rounded-md bg-gray-50 px-6 shadow"
-        >
-          <li className="flex items-center">
-            <svg
-              className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
-              viewBox="0 0 24 44"
-              preserveAspectRatio="none"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
-
-            <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
-              <div className="flex justify-center items-center">
-                <HistoryIcon
-                  className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
-                  aria-hidden="true"
-                />
-                <span className="hidden sm:contents">
-                  {' '}
-                  {' '}
-                </span>
-              </div>
-            </button>
-          </li>
-          <li className="flex items-center">
-            <svg
-              className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
-              viewBox="0 0 24 44"
-              preserveAspectRatio="none"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
-            <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
-              <div className="flex justify-center items-center">
-                <DocumentArrowDownIcon
-                  className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
-                  aria-hidden="true"
-                />
-                <span className="hidden sm:contents">
-                  {' '}
-                  PDF{' '}
-                </span>
-              </div>
-            </button>
-          </li>
-          <li className="flex items-center">
-            <svg
-              className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
-              viewBox="0 0 24 44"
-              preserveAspectRatio="none"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
-            <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
-              <div className="flex justify-center items-center">
-                <DocumentIcon
-                  className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
-                  aria-hidden="true"
-                />
-                <span className="hidden sm:contents">
-                  {' '}
-                  Word{' '}
-                </span>
-              </div>
-            </button>
-          </li>
-          <li className="flex items-center">
-            <svg
-              className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
-              viewBox="0 0 24 44"
-              preserveAspectRatio="none"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
-
-            <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
-              <div className="flex justify-center items-center">
-                <ShareIcon
-                  className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
-                  aria-hidden="true"
-                />
-                <span className="hidden sm:contents">
-                  {' '}
-                  Partager{' '}
-                </span>
-              </div>
-            </button>
-          </li>
-        </ol>
-      </nav>
-          </div>
-          <button
-            className="mt-auto w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-            onClick={handleRequestSummary}
-          >
-            Créer un résumé
-          </button>
-        </div>
-      </div>
-      <div className="w-screen md:w-6/10 px-4 mt-4 md:mt-0 h-full flex-grow">
-        <div className="bg-white rounded-lg shadow-lg p-4 h-full -ml-2">
-          <textarea
-            className="w-full p-4 rounded border-none focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-center placeholder-gray-400"
-            style={{ height: "calc(100% - 2.5rem)" }}
-            value={summaryText}
-            readOnly
-            placeholder="Votre résumé créé par MattResum apparaîtra ici."
-          />
-          {summaryText && (
+            <div className="my-4">
+              <nav className="flex" aria-label="Breadcrumb">
+                <ol
+                  role="list"
+                  className="flex w-full justify-around space-x-4 rounded-md bg-gray-50 px-6 shadow"
+                >
+                  <li className="flex items-center">
+                    <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+                      <div className="flex justify-center items-center">
+                        <HistoryIcon
+                          className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                          aria-hidden="true"
+                        />
+                        <span className="hidden sm:contents"> </span>
+                      </div>
+                    </button>
+                  </li>
+                  <li className="flex items-center">
+                    <svg
+                      className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
+                      viewBox="0 0 24 44"
+                      preserveAspectRatio="none"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                    </svg>
+                    <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+                      <div className="flex justify-center items-center">
+                        <DocumentArrowDownIcon
+                          className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                          aria-hidden="true"
+                        />
+                        <span className="hidden sm:contents"> PDF </span>
+                      </div>
+                    </button>
+                  </li>
+                  <li className="flex items-center">
+                    <svg
+                      className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
+                      viewBox="0 0 24 44"
+                      preserveAspectRatio="none"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                    </svg>
+                    <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+                      <div className="flex justify-center items-center">
+                        <DocumentIcon
+                          className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                          aria-hidden="true"
+                        />
+                        <span className="hidden sm:contents"> Word </span>
+                      </div>
+                    </button>
+                  </li>
+                  <li className="flex items-center">
+                    <svg
+                      className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
+                      viewBox="0 0 24 44"
+                      preserveAspectRatio="none"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                    </svg>
+                    <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+                      <div className="flex justify-center items-center">
+                        <ShareIcon
+                          className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                          aria-hidden="true"
+                        />
+                        <span className="hidden sm:contents"> Partager </span>
+                      </div>
+                    </button>
+                  </li>
+                </ol>
+              </nav>
+            </div>
             <button
-              type="submit"
-              disabled={isLoading}
-              className="mt-auto w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              className="mt-auto w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 relative"
               onClick={handleRequestSummary}
+              disabled={isLoading} // Deshabilita el botón mientras isLoading sea true
             >
-              {isLoading ? "cargando" : "Créer un résumé"}
+              {isLoading ? (
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.309-2.691 6-6 6-3.309 0-6-2.691-6-6H6c0 4.411 3.589 8 8 8v-2.709z"
+                    ></path>
+                  </svg>
+                </span>
+              ) : null}
+              Créer un résumé
             </button>
-            {error && <p className="text-red-500">{error}</p>}
-            {data && data.length > 0 && (
-              <>
-                {data.map((item) => (
-                    <p className="text-center">
-                      {item.summary}
-                    </p>
-                ))}
-              </>
-            )}
           </div>
         </div>
-        <div className="w-screen md:w-6/10 px-4 mt-4 md:mt-0 h-full flex-grow">
-          <div className="bg-white rounded-lg shadow-lg p-4 h-full -ml-2 relative">
+        <div className="w-full md:w-6/12 px-4 mt-4 md:mt-0">
+          <div className="bg-white rounded-lg shadow-lg p-4">
             <textarea
-              className="w-full p-4 rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              style={{ height: "calc(100% - 2.5rem)" }}
+              className="w-full p-4 rounded border-none focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-center placeholder-gray-400"
+              style={{ minHeight: "41rem" }}
               value={summaryText}
-              onChange={(e) => setSummaryText(e.target.value)}
+              readOnly
               placeholder="Votre résumé créé par MattResum apparaîtra ici."
             />
             {summaryText && (
-              <button
-                className="absolute bottom-2 right-2 px-4 text-white rounded"
-                onClick={handleCopy}
-              >
+              <button className="mt-4 text-white rounded" onClick={handleCopy}>
                 <ClipboardIcon />
               </button>
             )}
