@@ -9,7 +9,7 @@ import ModalDelete from './ModalDelete';
 import { LoadingChatgpt } from './LoadingChatgpt';
 
 export const Conversations = ({ messages }) => {
-  console.log(' Otra cosa message', messages);
+  // console.log(' Otra cosa message', messages);
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -91,14 +91,14 @@ export const Conversations = ({ messages }) => {
                       {item.content}
                     </div>
                   </div>
-                  {latestReqId && (
+                  {/* {latestReqId && (
                     <button
                       onClick={() => onHandleModalDelete(latestReqId)}
                       className="absolute right-0 top-0 cursor-pointer "
                     >
                       <DeleteIcon />
                     </button>
-                  )}
+                  )} */}
                 </div>
               ) : null}
               {item.role === 'assistant' ? (

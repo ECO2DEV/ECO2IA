@@ -1,3 +1,4 @@
+import { toast } from 'react-hot-toast';
 import { DefaultSocialIcon, ClipboardIcon } from '../icons/icons';
 
 export const EnterCard = ({ response, handleCopy }) => {
@@ -29,10 +30,11 @@ export const EnterCard = ({ response, handleCopy }) => {
               </div>
             </div>
 
-            <div className="absolute inset-x-0 bottom-0 flex justify-between py-2 pl-3 pr-2">
+            <div className="absolute inset-x-0 bottom-0 flex justify-end py-2 pl-3 pr-2">
               <div className="flex items-center space-x-5">
                 <div className="flex items-center">
                   <button
+                    disabled={!response}
                     type="button"
                     onClick={handleCopy}
                     className="-m-2.5 flex h-10 w-10 items-center justify-center rounded-full text-gray-400 hover:text-gray-500"

@@ -1,11 +1,19 @@
-import TextSummarizerPage from '../components/matresum/TextSummarizer';
-import Modal from '../components/modal/modal';
+import TextSummarizerPage from "../components/matresum/TextSummarizer";
+import Modal from "../components/modal/modal";
+import { getUser } from "../util/api/user";
 
-import { getUser } from '../util/api/user';
-
-const Matquiz = (props) => {
-  return <div>{props.user.plan ? <TextSummarizerPage /> : <Modal />}</div>;
-};
+export default function MatResume(props) {
+  return (
+    <div className="my-10">
+      {props.user.plan ? (
+        <TextSummarizerPage user={props.user.id} />
+      ) : (
+        <Modal />
+      )}
+      ;
+    </div>
+  );
+}
 
 export const getServerSideProps = async (context) => {
   const result = await getUser(context);
@@ -14,17 +22,15 @@ export const getServerSideProps = async (context) => {
     return {
       redirect: {
         permanent: false,
-        destination: '/'
-      }
+        destination: "/",
+      },
     };
   }
 
   return {
     props: {
       user: result?.data,
-      session: result?.session
-    }
+      session: result?.session,
+    },
   };
 };
-
-export default Matquiz;
