@@ -4,8 +4,8 @@ import Loader from '../loader/loader';
 
 import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 
-export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
-  const { promptTokens } = useContext(PromptContext);
+export default function SearchTextboxDalle({ OnChange, Fetch, loading }) {
+  const { promptTokens, prompt } = useContext(PromptContext);
 
   return (
     <div className="flex-1">
@@ -20,6 +20,7 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <UsersIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
           </div>
+
           <input
             type="text"
             name="prompt"
