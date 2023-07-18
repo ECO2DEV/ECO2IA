@@ -1,24 +1,8 @@
-import { Fragment, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { PromptContext } from '../../context/prompts/PromptContext';
+
 import { DataDashboard } from '../../data/dashboard';
-import { Dialog, Transition } from '@headlessui/react';
-import {
-  Bars3Icon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  UsersIcon,
-  XMarkIcon,
-  AcademicCapIcon,
-  BanknotesIcon,
-  CheckBadgeIcon,
-  ClockIcon,
-  ReceiptRefundIcon
-} from '@heroicons/react/24/outline';
+
 import dalle from '../../public/dalle.png';
 import ia_chat from '../../public/ia_chat.png';
 
@@ -27,15 +11,6 @@ import matsport from '../../public/matsport.png';
 import qcm from '../../public/qcm.png';
 import matdesc from '../../public/matdesc.png';
 import matresume from '../../public/matresume.png';
-
-const navigation = [
-  { name: 'Dashboard', link: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false }
-];
 
 const actions = [
   {
@@ -91,6 +66,14 @@ const actions = [
     href: 'mattresum',
     description: DataDashboard.MattResume,
     icon: matresume,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
+  },
+  {
+    title: DataDashboard.MatCVTitle,
+    href: 'matcv',
+    description: DataDashboard.MatCVDescription,
+    icon: matdesc,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   }
