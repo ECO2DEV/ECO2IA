@@ -10,7 +10,7 @@ export default function Checkout({price}) {
         const checkoutSession = await axios.post("/api/create-subscription", {
           price,
         });
-       console.log(checkoutSession);
+       //console.log(checkoutSession);
 
      //  window.location.href = 
 
