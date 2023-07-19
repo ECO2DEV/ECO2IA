@@ -2,7 +2,6 @@ import { useState, useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import { UserContext } from '../../context/user/UserContext';
 import { useDalle } from '../../hooks/useDalle';
-import SearchTextbox from '../searchTextbox/searchTextbox';
 import { DalleResponse } from '../../util/api/dalleResponse';
 import { WelcomeDalle } from './welcomedalle';
 import { ButtonHelper } from '../welcome/buttonHelper';
@@ -10,6 +9,7 @@ import { ButtonHelper } from '../welcome/buttonHelper';
 import { Carousel } from './carousel';
 import { DropdownDalle } from './dropdown_dalle';
 import { ButtonLatestImg } from './buttonLatestImg';
+import SearchTextboxDalle from '../searchTextbox/searchTextboxDalle';
 
 export default function DalleIA() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -34,7 +34,8 @@ export default function DalleIA() {
       setPromptTokens(0);
     }
   };
-  const FetchData = async () => {
+  const FetchData = async (e) => {
+    e.preventDefault();
     if (!prompt) {
       setIsError('Please type something before submit');
     } else {
@@ -126,15 +127,17 @@ export default function DalleIA() {
 
       <div className="fixed bottom-3 w-full">
         <div className="flex justify-center  w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem]">
-          <SearchTextbox
+          <SearchTextboxDalle
             OnChange={handleChange}
             Fetch={FetchData}
             loading={loading}
           />
-          <ButtonHelper onClick={() => setOpenHelpers((prev) => !prev)} />
-          <ButtonLatestImg
-            onClick={() => setOpenLastestImages((prev) => !prev)}
-          />
+          <div className="flex justify-center items-center gap-2 mb-4">
+            <ButtonHelper onClick={() => setOpenHelpers((prev) => !prev)} />
+            <ButtonLatestImg
+              onClick={() => setOpenLastestImages((prev) => !prev)}
+            />
+          </div>
         </div>
       </div>
     </section>

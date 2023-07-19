@@ -53,7 +53,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     router.pathname == '/sportcoach' ||
     router.pathname == '/matquiz' ||
     router.pathname == '/matdescription' ||
-    router.pathname == '/mattresum'
+    router.pathname == '/mattresum' ||
+    router.pathname == '/matcv'
   ) {
     return (
       <SessionProvider session={session}>
@@ -61,9 +62,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           <PromptProvider>
             <SWRConfig value={{}}>
               {/* <Elements stripe={stripePromise} options={options}> */}
-                <LayoutUser {...pageProps}>
-                  <Component {...pageProps} />
-                </LayoutUser>
+              <LayoutUser {...pageProps}>
+                <Component {...pageProps} />
+              </LayoutUser>
               {/* </Elements> */}
             </SWRConfig>
           </PromptProvider>
@@ -74,9 +75,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       {/* <Elements stripe={stripePromise} options={options}> */}
-        <Layout router={router.pathname}>
-          <Component {...pageProps} />
-        </Layout>
+      <Layout router={router.pathname}>
+        <Component {...pageProps} />
+      </Layout>
       {/* </Elements> */}
     </SessionProvider>
   );
