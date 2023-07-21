@@ -170,7 +170,7 @@ export function LatestImages() {
   return (
     <svg
       fill="none"
-      className="w-9 h-9 text-gray-100 bg-gray-900 rounded-full"
+      className="w-8 h-8 text-gray-100 bg-gray-900 rounded-full"
       stroke="currentColor"
       strokeWidth="1.5"
       viewBox="0 0 24 24"

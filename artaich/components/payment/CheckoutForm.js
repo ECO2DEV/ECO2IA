@@ -8,11 +8,13 @@ import { Dialog, Transition } from '@headlessui/react';
 import { CheckIcon, CurrencyEuroIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
 
+
 const CheckoutForm = ({ onClose, amount, currency,user }) => {
   const stripe = useStripe();
   const elements = useElements();
   const strapiUrl = process.env.STRAPI_URL;
   const strapiToken = process.env.API_TOKEN;
+  const nextUrl = process.env.NEXTAUTH_URL;
   const logged_user = user;
   console.log(logged_user);
   const handleSubmit = async (event) => {
@@ -44,25 +46,31 @@ const CheckoutForm = ({ onClose, amount, currency,user }) => {
       { amount: amount, currency: currency },
       header
     );
+    
     const { client_secret: clientSecret, transactionId: transactionId } =
       res.data;
+    
+    
+
     //console.log("Entre aqui confirmar payment" + clientSecret);
     const result = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
       clientSecret,
       elements,
       confirmParams: {
-        return_url: `${strapiToken}/${transactionId}`
+        return_url:   `http://localhost:3000/${transactionId}`
       }
     });
+
+    console.log("Entre aqui result confirm payment" + JSON.stringify(result));
     
-    const response = await axios.post(
-      `${strapiUrl}/api/payment/createSubscription`,
-      { customerId: logged_user.customer_id, paymentMethodId: result.payment_method,  priceId: 'plan_NeeieGD7qqOAm9' },
-      header);
+    // const response = await axios.post(
+    //   `${strapiUrl}/api/payment/createSubscription`,
+    //   { customerId: logged_user.customer_id, paymentMethodId: result.payment_method,  priceId: 'plan_NeeieGD7qqOAm9' },
+    //   header);
   
 
-    console.log('suscription', response);
+   // console.log('suscription', response);
 
     if (result.error) {
       // Show error to your customer (for example, payment details incomplete)

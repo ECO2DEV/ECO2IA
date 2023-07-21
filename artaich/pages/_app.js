@@ -12,23 +12,31 @@ import { UserProvider } from '../context/user/UserProvider';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 
-const stripePromise = loadStripe(
-  'pk_test_51MmF5HEZbX6Zpxv9PbTYYGR1U9d14TmcHEsxCKTPzDVpKXDcaFqz87ElscE2TRYjdV3t1r5gxVo3G8FRAlOivqKG00jMOoioNN'
-);
+// const stripePromise = loadStripe(
+//   'pk_test_51MmF5HEZbX6Zpxv9PbTYYGR1U9d14TmcHEsxCKTPzDVpKXDcaFqz87ElscE2TRYjdV3t1r5gxVo3G8FRAlOivqKG00jMOoioNN'
+// );
 // console.log(stripePromise);
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   //const getLayout = Component.getLayout ?? defaultPageLayout
   const router = useRouter();
-  const options = {
-    // passing the client secret obtained from the server
-    clientSecret: process.env.STRIPE_SECRET,
-    mode: 'subscription',
-    amount: 1099,
-    currency: 'eur'
-  };
+  // const options = {
+  //   // passing the client secret obtained from the server
+  //   clientSecret: process.env.STRIPE_SECRET,
+  //   mode: 'payment',
+  //  // amount: 1099,
+  //   currency: 'eur'
+  // };
 
   if (router.pathname == '/auth/signin') {
+    return (
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
+    );
+  }
+
+  if (router.pathname == '/suscribe') {
     return (
       <SessionProvider session={session}>
         <Component {...pageProps} />
@@ -45,18 +53,19 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     router.pathname == '/sportcoach' ||
     router.pathname == '/matquiz' ||
     router.pathname == '/matdescription' ||
-    router.pathname == '/mattresum'
+    router.pathname == '/mattresum' ||
+    router.pathname == '/matcv'
   ) {
     return (
       <SessionProvider session={session}>
         <UserProvider>
           <PromptProvider>
             <SWRConfig value={{}}>
-              <Elements stripe={stripePromise} options={options}>
-                <LayoutUser {...pageProps}>
-                  <Component {...pageProps} />
-                </LayoutUser>
-              </Elements>
+              {/* <Elements stripe={stripePromise} options={options}> */}
+              <LayoutUser {...pageProps}>
+                <Component {...pageProps} />
+              </LayoutUser>
+              {/* </Elements> */}
             </SWRConfig>
           </PromptProvider>
         </UserProvider>
@@ -65,11 +74,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   }
   return (
     <SessionProvider session={session}>
-      <Elements stripe={stripePromise} options={options}>
-        <Layout router={router.pathname}>
-          <Component {...pageProps} />
-        </Layout>
-      </Elements>
+      {/* <Elements stripe={stripePromise} options={options}> */}
+      <Layout router={router.pathname}>
+        <Component {...pageProps} />
+      </Layout>
+      {/* </Elements> */}
     </SessionProvider>
   );
 }
