@@ -59,12 +59,6 @@ function TextSummarizerPage() {
 
     try {
       const file = acceptedFiles[0];
-
-      // Verificar el tipo de archivo antes de procesarlo
-      if (file.type !== "application/pdf") {
-        throw new Error("Only PDF files are allowed"); // Lanzar un error personalizado si el archivo no es un PDF
-      }
-
       const reader = new FileReader();
 
       reader.onload = async (event) => {
@@ -76,7 +70,7 @@ function TextSummarizerPage() {
       reader.readAsArrayBuffer(file);
     } catch (error) {
       console.error("Error:", error);
-      setError(error.message); // Establecer el mensaje de error personalizado en el estado "error"
+      setError("An error occurred");
     } finally {
       setIsUploading(false);
     }
@@ -190,6 +184,49 @@ function TextSummarizerPage() {
                 <option value="italian">{DataMattDescription.Italian}</option>
               </select>
             </div>
+            <button
+              className="mt-auto w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 relative"
+              onClick={handleRequestSummary}
+              disabled={isLoading} // Deshabilita el botón mientras isLoading sea true
+            >
+              {isLoading ? (
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.309-2.691 6-6 6-3.309 0-6-2.691-6-6H6c0 4.411 3.589 8 8 8v-2.709z"
+                    ></path>
+                  </svg>
+                </span>
+              ) : null}
+              Créer un résumé
+            </button>
+          </div>
+        </div>
+        <div className="w-full md:w-6/12 px-4 mt-4 md:mt-0">
+          <div className="bg-white rounded-lg shadow-lg p-4 relative">
+            <textarea
+              className="w-full p-4 rounded border-none focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-center placeholder-gray-400"
+              style={{ minHeight: "44rem" }}
+              value={summaryText}
+              readOnly
+              placeholder="Votre résumé créé par MattResum apparaîtra ici."
+            />
+            <>
             <div className="my-4">
               <nav className="flex" aria-label="Breadcrumb">
                 <ol
@@ -270,53 +307,15 @@ function TextSummarizerPage() {
                 </ol>
               </nav>
             </div>
-            <button
-              className="mt-auto w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 relative"
-              onClick={handleRequestSummary}
-              disabled={isLoading} // Deshabilita el botón mientras isLoading sea true
-            >
-              {isLoading ? (
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <svg
-                    className="animate-spin h-5 w-5 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.309-2.691 6-6 6-3.309 0-6-2.691-6-6H6c0 4.411 3.589 8 8 8v-2.709z"
-                    ></path>
-                  </svg>
-                </span>
-              ) : null}
-              Créer un résumé
-            </button>
-          </div>
-        </div>
-        <div className="w-full md:w-6/12 px-4 mt-4 md:mt-0">
-          <div className="bg-white rounded-lg shadow-lg p-4">
-            <textarea
-              className="w-full p-4 rounded border-none focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-center placeholder-gray-400"
-              style={{ minHeight: "41rem" }}
-              value={summaryText}
-              readOnly
-              placeholder="Votre résumé créé par MattResum apparaîtra ici."
-            />
-            {summaryText && (
-              <button className="mt-4 text-white rounded" onClick={handleCopy}>
-                <ClipboardIcon />
-              </button>
-            )}
+              {summaryText && (
+                <div className="absolute bottom-4 right-[1rem]">
+                  <button className="text-white rounded" onClick={handleCopy}>
+                    <ClipboardIcon />
+                  </button>
+                </div>
+              )}
+
+            </>
           </div>
         </div>
       </div>
