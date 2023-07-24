@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
 
 import axios from 'axios';

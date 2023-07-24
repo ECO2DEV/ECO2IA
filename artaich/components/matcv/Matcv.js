@@ -1,5 +1,8 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, Fragment } from 'react';
 import { UserContext } from '../../context/user/UserContext';
+import { TextAreaProfile } from './TextAreaProfile';
+import { TextAreaExperience } from './TextAreaExperience';
+import TextAreaEducation from './TextAreaEducation';
 import dynamic from 'next/dynamic';
 
 import {
@@ -25,25 +28,54 @@ const styles = StyleSheet.create({
     backgroundColor: '#E4E4E4',
     padding: '10mm'
   },
-  FirstColumn: {
-    flexBasis: '60%',
+  firstColumn: {
+    flexBasis: '70%',
     marginRight: '10mm'
   },
-  SecondColumn: {
-    flexBasis: '40%'
+  secondColumn: {
+    flexBasis: '30%'
   },
   heading: {
-    marginBottom: '5mm',
-    fontWeight: 'bold'
+    fontWeight: 'ultrabold',
+    fontSize: '15pt'
+  },
+  subtitle: {
+    fontWeight: 'medium',
+    fontSize: '12pt',
+    marginBottom: '1mm'
+  },
+  thirdTitle: {
+    fontWeight: 'light',
+    fontSize: '10pt',
+    marginTop: '2mm',
+    marginBottom: '1mm'
   },
   profileText: {
+    marginBottom: '5mm',
+    fontSize: '10pt',
+    textAlign: 'justify',
+    fontWeight: 'light',
+    color: '#474b4e'
+  },
+  phoneDetail: {
+    marginBottom: '5mm',
+    marginTop: '-4mm',
+    fontSize: '10pt',
+    textAlign: 'justify',
+    fontWeight: 'light',
+    color: '#474b4e'
+  },
+  spacing: {
     marginBottom: '5mm'
   },
   pictureContainer: {
-    width: '40mm',
+    objectFit: 'fill',
     height: '40mm',
     marginBottom: '5mm',
-    backgroundColor: '#DDD'
+    backgroundColor: '#DDD',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   skillsText: {
     marginBottom: '5mm'
@@ -53,56 +85,106 @@ const styles = StyleSheet.create({
   }
 });
 
-const MyDocument = ({ titleText, paragraphText }) => {
+const MyDocument = ({
+  formData,
+  setFormData,
+  formExperienceFields,
+  setFormExperienceFields
+}) => {
   const { user } = useContext(UserContext);
-  console.log(
-    'avatar1',
-    `http://localhost:1337${user?.avatar?.formats?.thumbnail?.url}`
-  );
+  const [textProfile, setTextProfile] = useState('');
+  const [textExperience, setTextExperience] = useState('');
+  const [educationFields, setEducationFields] = useState([]);
+
   return (
-    <div className="flex flex-col md:flex-row h-screen gap-2">
-      <div className="md:w-[55%]">
-        <h1>Personal details</h1>
-        <p>
+    <div className="flex flex-col md:flex-row h-screen gap-2 relative">
+      <div className="md:w-[50%] md:absolute md:left-0">
+        <h1 className="text-xl font-bold">Personal details</h1>
+        <p className="text-xs">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
           quasi sint soluta aliquam nam culpa ad similique blanditiis eius
           voluptatem.
         </p>
-        <FormCV />
+        <FormCV formData={formData} setFormData={setFormData} />
+        <TextAreaProfile
+          textProfile={textProfile}
+          setTextProfile={setTextProfile}
+        />
+        <TextAreaEducation setEducationFields={setEducationFields} />
+        <TextAreaExperience
+          formExperienceFields={formExperienceFields}
+          setFormExperienceFields={setFormExperienceFields}
+          textExperience={textExperience}
+          setTextExperience={setTextExperience}
+        />
       </div>
-      <div className="w-full md:w-[45%] h-full">
+      <div className="w-full md:w-[40%] md:fixed md:right-0 h-full">
         <DynamicPDFViewer style={{ width: '100%', height: '100%' }}>
           <Document>
             <Page size="A4" style={styles.page}>
-              <View style={styles.FirstColumn}>
-                <Text style={styles.heading}>Profile</Text>
-                <Text style={styles.profileText}>
-                  <Text style={styles.heading}>Full Name: </Text> John Doe{'\n'}
-                  <Text style={styles.heading}>Profile: </Text> Software
-                  Engineer with a passion for web development and
-                  problem-solving.{'\n'}
-                  <Text style={styles.heading}>Employment History: </Text>-
-                  Software Engineer at XYZ Company (2019 - Present){'\n'}- Web
-                  Developer at ABC Agency (2016 - 2019){'\n'}
-                  <Text style={styles.heading}>Education: </Text>- Bachelor's
-                  Degree in Computer Science, XYZ University (2015 - 2019){'\n'}
-                  - Online Web Development Course, Udemy (2015)
+              <View style={styles.firstColumn}>
+                <Text style={styles.heading}>{formData.fullName}</Text>
+                <Text style={styles.spacing}>
+                  <Text style={styles.subtitle}>{formData.jobTitle}</Text>
                 </Text>
+                {textProfile.length > 0 && (
+                  <>
+                    <Text style={styles.subtitle}>Profile: </Text>
+                    <Text style={styles.profileText}>{textProfile}</Text>
+                  </>
+                )}
+                {(formExperienceFields.jobTitleXp ||
+                  textExperience.length > 0) && (
+                  <>
+                    <Text style={styles.subtitle}>Employment History:</Text>
+                    <Text style={styles.thirdTitle}>
+                      {`${formExperienceFields.jobTitleXp} at ${formExperienceFields.employer}, ${formExperienceFields.cityXp}`}
+                    </Text>
+                    <Text style={styles.profileText}>
+                      {`${formExperienceFields.startDate} - ${formExperienceFields.endDate}`}
+                    </Text>
+                    <Text style={styles.profileText}>{textExperience}</Text>
+                  </>
+                )}
+                {educationFields.length > 0 && (
+                  <>
+                    <Text style={styles.subtitle}>Education: </Text>
+                    {educationFields.map((education, index) => (
+                      <Fragment key={index}>
+                        <Text style={styles.thirdTitle}>
+                          {`${education.degree}, ${education.institution}, ${education.city}`}
+                        </Text>
+                        <Text style={styles.profileText}>
+                          {`${education.startDate} - ${education.endDate}`}
+                        </Text>
+                      </Fragment>
+                    ))}
+                  </>
+                )}
               </View>
-              <View style={styles.SecondColumn}>
+              <View style={styles.secondColumn}>
                 <View style={styles.pictureContainer}>
                   <Image
                     src={`http://localhost:1337${user?.avatar?.formats?.thumbnail?.url}`}
                   />
                 </View>
-                <Text style={styles.heading}>Skills</Text>
-                <Text style={styles.skillsText}>
-                  Leadership, Adaptability,Time Management
-                </Text>
-                <Text style={styles.heading}>Languages</Text>
-                <Text style={styles.languagesText}>
-                  English advanced, Spanish native, French advanced
-                </Text>
+                {formData.fullName && formData.domainOfStudy && (
+                  <>
+                    <Text style={styles.subtitle}>Details</Text>
+                    <Text style={styles.profileText}>
+                      {formData.domainOfStudy}
+                    </Text>
+
+                    <Text style={styles.phoneDetail}>{formData.phone}</Text>
+                    <Text style={styles.subtitle}>E-mail: </Text>
+                    <Text style={styles.profileText}>{formData.email}</Text>
+                    {/* Add other customer info based on the formData */}
+                    <Text style={styles.subtitle}>Nationality: </Text>
+                    <Text style={styles.profileText}>
+                      {formData.nationality}
+                    </Text>
+                  </>
+                )}
               </View>
             </Page>
           </Document>
@@ -113,14 +195,33 @@ const MyDocument = ({ titleText, paragraphText }) => {
 };
 
 const MatcvIA = () => {
-  const [titleText, setTitleText] = useState('mundo cruel');
-  const [paragraphText, setParagraphText] = useState(
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
-  );
+  const [formData, setFormData] = useState({
+    fullName: '',
+    jobTitle: '',
+    domainOfStudy: '',
+    nationality: '',
+    email: '',
+    phone: '',
+    country: '',
+    city: ''
+  });
+  const [formExperienceFields, setFormExperienceFields] = useState({
+    jobTitleXp: '',
+    employer: '',
+    startDate: '',
+    endDate: '',
+    cityXp: '',
+    presentWorking: false
+  });
 
   return (
     <div>
-      <MyDocument titleText={titleText} paragraphText={paragraphText} />
+      <MyDocument
+        formData={formData}
+        setFormData={setFormData}
+        formExperienceFields={formExperienceFields}
+        setFormExperienceFields={setFormExperienceFields}
+      />
     </div>
   );
 };
