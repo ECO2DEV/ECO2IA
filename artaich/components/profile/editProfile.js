@@ -5,6 +5,7 @@ import { UserPlusIcon } from '@heroicons/react/24/outline';
 import { updateUserById } from '../../util/api/user';
 import { toast } from 'react-hot-toast';
 import { educational, domain, activity, sport, transport, nacionality } from './profilecollection';
+import {DataProfile} from '../../data/profile';
 
 export default function EditProfile({ onClose, user }) {
   console.log('Response:', user);
@@ -160,7 +161,7 @@ export default function EditProfile({ onClose, user }) {
                       as="h3"
                       className="text-base font-semibold leading-6 text-gray-900"
                     >
-                      Profile Edit
+                      {DataProfile.EditProfile}
                     </Dialog.Title>
                   </div>
                   <div className="isolate bg-white px-6 pb-10 lg:px-8">
@@ -186,7 +187,7 @@ export default function EditProfile({ onClose, user }) {
                             htmlFor="Name"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            First name
+                            {DataProfile.FirstName}
                           </label>
                           <div className="mt-2.5">
                             <input
@@ -205,7 +206,7 @@ export default function EditProfile({ onClose, user }) {
                             htmlFor="LastName"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            Last name
+                            {DataProfile.LastName}
                           </label>
                           <div className="mt-2.5">
                             <input
@@ -224,7 +225,7 @@ export default function EditProfile({ onClose, user }) {
                             htmlFor="email"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            Email
+                            {DataProfile.Email}
                           </label>
                           <div className="mt-2.5">
                             <input
@@ -243,7 +244,7 @@ export default function EditProfile({ onClose, user }) {
                             htmlFor="numberTelephone"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            Phone number
+                            {DataProfile.Telephone}
                           </label>
                           <input
                             onChange={(e) => handleProfileChange(e)}
@@ -260,7 +261,7 @@ export default function EditProfile({ onClose, user }) {
                             htmlFor="country"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            Country
+                            {DataProfile.Country}
                           </label>
                           <div className="mt-2.5">
                             <input
@@ -277,7 +278,7 @@ export default function EditProfile({ onClose, user }) {
                             htmlFor="nacionality"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            Nacionality
+                            {DataProfile.Nationality}
                           </label>
                           <div className="mt-2.5">
                             <select
@@ -295,7 +296,7 @@ export default function EditProfile({ onClose, user }) {
                             htmlFor="sex"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            Sex
+                            {DataProfile.Sex}
                           </label>
                           <div className="mt-2.5">
                             <select
@@ -313,7 +314,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3">
                             <div>
                               <label htmlFor="age" className="block text-sm font-semibold leading-6 text-gray-900">
-                                Age
+                                {DataProfile.Age}
                               </label>
                               <div className="mt-2.5">
                                 <input
@@ -328,7 +329,7 @@ export default function EditProfile({ onClose, user }) {
                             </div>
                             <div>
                               <label htmlFor="height" className="block text-sm font-semibold leading-6 text-gray-900">
-                                Height (m)
+                                {DataProfile.Height} (m)
                               </label>
                               <div className="mt-2.5">
                                 <input
@@ -343,7 +344,7 @@ export default function EditProfile({ onClose, user }) {
                             </div>
                             <div>
                               <label htmlFor="weight" className="block text-sm font-semibold leading-6 text-gray-900">
-                                Weight (kg)
+                                {DataProfile.Weight} (kg)
                               </label>
                               <div className="mt-2.5">
                                 <input
@@ -361,7 +362,7 @@ export default function EditProfile({ onClose, user }) {
                             htmlFor="domainofstudy"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            Domain of Study
+                            {DataProfile.DomainofStudy}
                           </label>
                           <div className="mt-2.5">
                             <select
@@ -379,7 +380,7 @@ export default function EditProfile({ onClose, user }) {
                             htmlFor="educationallevel"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            Educational Level
+                            {DataProfile.EducationLevel}
                           </label>
                           <div className="mt-2.5">
                             <select
@@ -397,7 +398,7 @@ export default function EditProfile({ onClose, user }) {
                             htmlFor="activityarea"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            Activity Area
+                            {DataProfile.ActivityArea}
                           </label>
                           <div className="mt-2.5">
                             <select
@@ -415,7 +416,7 @@ export default function EditProfile({ onClose, user }) {
                             htmlFor="sport"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            Sport
+                            {DataProfile.Sport}
                           </label>
                           <div className="mt-2.5">
                             <select
@@ -433,7 +434,7 @@ export default function EditProfile({ onClose, user }) {
                             htmlFor="transport"
                             className="block text-sm font-semibold leading-6 text-gray-900"
                           >
-                            Transport
+                            {DataProfile.Transport}
                           </label>
                           <div className="mt-2.5">
                             <select
@@ -454,7 +455,7 @@ export default function EditProfile({ onClose, user }) {
                           type="submit"
                           className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
                         >
-                          Créer
+                          {DataProfile.Creer}
                         </button>
                         <button
                           type="button"
@@ -462,7 +463,7 @@ export default function EditProfile({ onClose, user }) {
                           onClick={onClose}
                           ref={cancelButtonRef}
                         >
-                          Cancel
+                          {DataProfile.Cancel}
                         </button>
                       </div>
                     </form>

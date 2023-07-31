@@ -4,7 +4,7 @@ import { TextAreaProfile } from './TextAreaProfile';
 import { TextAreaExperience } from './TextAreaExperience';
 import TextAreaEducation from './TextAreaEducation';
 import dynamic from 'next/dynamic';
-
+import { DataMattCV } from '../../data/mattcv';
 import {
   Page,
   Text,
@@ -99,11 +99,9 @@ const MyDocument = ({
   return (
     <div className="flex flex-col md:flex-row h-screen gap-2 relative">
       <div className="md:w-[50%] md:absolute md:left-0">
-        <h1 className="text-xl font-bold">Personal details</h1>
+        <h1 className="text-xl font-bold"> {DataMattCV.PersonalDetails} </h1>
         <p className="text-xs">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-          quasi sint soluta aliquam nam culpa ad similique blanditiis eius
-          voluptatem.
+          {DataMattCV.PersonalDetailsText}
         </p>
         <FormCV formData={formData} setFormData={setFormData} />
         <TextAreaProfile

@@ -1,5 +1,5 @@
 import Loader from '../loader/loader';
-
+import { DataProfile } from '../../data/profile';
 const strapiUrl = process.env.STRAPI_URL;
 
 export const EditAvatar = ({
@@ -51,7 +51,7 @@ export const EditAvatar = ({
           selectFile ? ' hidden' : ''
         } text-xs font-medium text-gray-600 flex justify-center items-center mx-auto mt-2`}
       >
-        Select file
+        {DataProfile.SelectFile}
       </span>
       {loading ? (
         <div className="flex justify-center items-center mx-auto px-3 py-2 mt-6">
@@ -63,7 +63,7 @@ export const EditAvatar = ({
           className="bg-gray-800 text-gray-100 rounded-md px-3 py-2 mt-4 disabled:opacity-50 flex justify-center items-center mx-auto"
           disabled={!uploadImage}
         >
-          Update
+          {DataProfile.Update}
         </button>
       )}
     </form>

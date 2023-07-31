@@ -1,3 +1,4 @@
+import { DataMattCV } from "../../data/mattcv";
 export const FormCV = ({ formData, setFormData }) => {
   // Initialize state to hold the form data
 
@@ -16,7 +17,7 @@ export const FormCV = ({ formData, setFormData }) => {
         <input
           className="flex-1 p-2 border rounded"
           type="text"
-          placeholder="Full name"
+          placeholder={DataMattCV.FullName}
           name="fullName"
           value={formData.fullName}
           onChange={handleChange}
@@ -26,7 +27,7 @@ export const FormCV = ({ formData, setFormData }) => {
         <input
           className="flex-1 p-2 border rounded"
           type="text"
-          placeholder="Job Title"
+          placeholder={DataMattCV.JobTitle}
           name="jobTitle"
           value={formData.jobTitle}
           onChange={handleChange}
@@ -37,7 +38,7 @@ export const FormCV = ({ formData, setFormData }) => {
         <input
           className="flex-1 p-2 border rounded"
           type="text"
-          placeholder="Domain of Study"
+          placeholder={DataMattCV.DomainofStudy}
           name="domainOfStudy"
           value={formData.domainOfStudy}
           onChange={handleChange}
@@ -45,7 +46,7 @@ export const FormCV = ({ formData, setFormData }) => {
         <input
           className="flex-1 p-2 border rounded"
           type="text"
-          placeholder="Nationality"
+          placeholder={DataMattCV.Nationality}
           name="nationality"
           value={formData.nationality}
           onChange={handleChange}
@@ -56,7 +57,7 @@ export const FormCV = ({ formData, setFormData }) => {
         <input
           className="flex-1 p-2 border rounded"
           type="email"
-          placeholder="Email"
+          placeholder={DataMattCV.Email}
           name="email"
           value={formData.email}
           onChange={handleChange}
@@ -64,7 +65,7 @@ export const FormCV = ({ formData, setFormData }) => {
         <input
           className="flex-1 p-2 border rounded"
           type="text"
-          placeholder="Phone"
+          placeholder={DataMattCV.Telephone}
           name="phone"
           value={formData.phone}
           onChange={handleChange}
@@ -75,7 +76,7 @@ export const FormCV = ({ formData, setFormData }) => {
         <input
           className="flex-1 p-2 border rounded"
           type="text"
-          placeholder="Country"
+          placeholder={DataMattCV.Country}
           name="country"
           value={formData.country}
           onChange={handleChange}
@@ -83,7 +84,7 @@ export const FormCV = ({ formData, setFormData }) => {
         <input
           className="flex-1 p-2 border rounded"
           type="text"
-          placeholder="City"
+          placeholder={DataMattCV.City}
           name="city"
           value={formData.city}
           onChange={handleChange}

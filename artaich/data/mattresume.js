@@ -1,0 +1,15 @@
+export const DataMattResume ={
+    SelectLanguage:"Sélectionner la langue",
+    English: "Anglais",
+    Spanish: "Espagnol",
+    French: "Français",
+    Deutsch: "Allemand",
+    Italian: "Italien",
+    WriteText:"Écrivez votre texte ici",
+    DropField:"Glissez et déposez les fichiers ici.",
+    PDFButton:"PDF",
+    ShareButton:"Partager",
+    CreateResume:"Créer un résumé",
+    ResumeHere:"Votre résumé créé par MattResum apparaîtra ici.",
+    LoadingField:"Chargement...",
+}
