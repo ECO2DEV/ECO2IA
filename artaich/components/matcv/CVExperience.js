@@ -3,7 +3,10 @@ import { UserContext } from '../../context/user/UserContext';
 import { Dialog, Transition } from '@headlessui/react';
 import { toast } from 'react-hot-toast';
 import { MatCVResponseXP } from '../../util/api/MatCVResponseXP';
+
 import TagsInput from './TagsInput';
+
+import { DataMattCV } from '../../data/mattcv';
 
 export default function CVExperience({
   onClose,
@@ -103,19 +106,11 @@ export default function CVExperience({
                       as="h3"
                       className="text-xl font-semibold leading-6 text-gray-900"
                     >
-                      Work experience
+                      {DataMattCV.WorkExperience}
                     </Dialog.Title>
                   </div>
                   <div>
-                    <h3>
-                      Showcase your professional expertise through concise
-                      bullet points, emphasizing your notable achievements.
-                      Whenever feasible, include quantifiable data or facts to
-                      substantiate your impact (e.g., 'Achieved X goal by
-                      implementing Z strategy, resulting in Y measurable
-                      outcome'). Demonstrate your value through tangible
-                      contributions and make your work experience stand out.
-                    </h3>
+                    <h3>{DataMattCV.WorkExperienceBox}</h3>
                     <form onSubmit={handleSubmit}>
                       <div className="flex space-x-2 mt-2">
                         <input

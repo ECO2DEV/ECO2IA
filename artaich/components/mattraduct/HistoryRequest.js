@@ -1,6 +1,6 @@
 import { useContext, Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-
+import { DataHistory } from '../../data/history';
 import { useMattraduct } from '../../hooks/useMattraduct';
 import { UserContext } from '../../context/user/UserContext';
 import { PromptContext } from '../../context/prompts/PromptContext';
@@ -63,7 +63,7 @@ export default function HistoryRequest({
                       as="h3"
                       className="text-2xl font-semibold leading-6 text-gray-900"
                     >
-                      History
+                      {DataHistory.History}
                     </Dialog.Title>
                   </div>
                   <section className="bg-white">

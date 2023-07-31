@@ -3,7 +3,7 @@ import { useDropzone } from "react-dropzone";
 import { toast } from "react-hot-toast";
 import { PromptContext } from "../../context/prompts/PromptContext";
 import { UserContext } from "../../context/user/UserContext";
-import { DataMattDescription } from "../../data/mattdescription";
+import { DataMattResume } from "../../data/mattresume";
 import { useMatResume } from "../../hooks/useMattResume";
 import { MattResumResp } from "../../util/api/MattResumResp";
 import { ClipboardIcon } from "../icons/icons";
@@ -153,7 +153,7 @@ function TextSummarizerPage() {
               className="w-full p-4 rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-20"
               value={fileContent || inputText}
               onChange={handleTextChange}
-              placeholder="Écrivez votre texte ici"
+              placeholder={DataMattResume.WriteText}
               style={{
                 resize: "none",
                 overflow: "hidden",
@@ -166,10 +166,10 @@ function TextSummarizerPage() {
               {...getRootProps()}
             >
               {isUploading ? (
-                <p className="text-gray-500">Cargando archivo...</p>
+                <p className="text-gray-500"> {DataMattResume.LoadingField} </p>
               ) : (
                 <p className="text-gray-500">
-                  Glissez et déposez les fichiers ici.
+                  {DataMattResume.DropField}
                 </p>
               )}
             </div>
@@ -182,12 +182,12 @@ function TextSummarizerPage() {
                 className="w-full p-2 border border-gray-300 rounded"
                 required
               >
-                <option value="">{DataMattDescription.SelectLanguage}</option>
-                <option value="english">{DataMattDescription.English}</option>
-                <option value="spanish">{DataMattDescription.Spanish}</option>
-                <option value="french">{DataMattDescription.French}</option>
-                <option value="german">{DataMattDescription.Deutsch}</option>
-                <option value="italian">{DataMattDescription.Italian}</option>
+                <option value="">{DataMattResume.SelectLanguage}</option>
+                <option value="english">{DataMattResume.English}</option>
+                <option value="spanish">{DataMattResume.Spanish}</option>
+                <option value="french">{DataMattResume.French}</option>
+                <option value="german">{DataMattResume.Deutsch}</option>
+                <option value="italian">{DataMattResume.Italian}</option>
               </select>
             </div>
             <div className="my-4">
@@ -223,27 +223,7 @@ function TextSummarizerPage() {
                           className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                           aria-hidden="true"
                         />
-                        <span className="hidden sm:contents"> PDF </span>
-                      </div>
-                    </button>
-                  </li>
-                  <li className="flex items-center">
-                    <svg
-                      className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
-                      viewBox="0 0 24 44"
-                      preserveAspectRatio="none"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-                    </svg>
-                    <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
-                      <div className="flex justify-center items-center">
-                        <DocumentIcon
-                          className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
-                          aria-hidden="true"
-                        />
-                        <span className="hidden sm:contents"> Word </span>
+                        <span className="hidden sm:contents"> {DataMattResume.PDFButton} </span>
                       </div>
                     </button>
                   </li>
@@ -263,7 +243,7 @@ function TextSummarizerPage() {
                           className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                           aria-hidden="true"
                         />
-                        <span className="hidden sm:contents"> Partager </span>
+                        <span className="hidden sm:contents"> {DataMattResume.ShareButton} </span>
                       </div>
                     </button>
                   </li>
@@ -299,7 +279,7 @@ function TextSummarizerPage() {
                   </svg>
                 </span>
               ) : null}
-              Créer un résumé
+              {DataMattResume.CreateResume}
             </button>
           </div>
         </div>
@@ -310,7 +290,7 @@ function TextSummarizerPage() {
               style={{ minHeight: "41rem" }}
               value={summaryText}
               readOnly
-              placeholder="Votre résumé créé par MattResum apparaîtra ici."
+              placeholder={DataMattResume.ResumeHere}
             />
             {summaryText && (
               <button className="mt-4 text-white rounded" onClick={handleCopy}>

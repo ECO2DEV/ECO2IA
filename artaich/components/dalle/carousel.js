@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useDalle } from '../../hooks/useDalle';
+import { DataHistory } from '../../data/history';
 
 const settings = {
   style: {},
@@ -87,7 +88,7 @@ export const Carousel = ({ setImageSrc }) => {
   return (
     <div className="sm:mt-10 sm:mb-20 relative">
       <h2 className="absolute hidden sm:contents left-10 top-0 sm:text-xl lg:text-1xl text-gray-800">
-        Latest images
+        {DataHistory.LatestImages}
       </h2>
       {data?.data && (
         <Slider {...settings}>

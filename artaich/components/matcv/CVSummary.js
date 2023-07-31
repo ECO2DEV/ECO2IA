@@ -3,7 +3,10 @@ import { UserContext } from '../../context/user/UserContext';
 import { Dialog, Transition } from '@headlessui/react';
 import { MatCVResponse } from '../../util/api/MatCVResponse';
 import { toast } from 'react-hot-toast';
+
 import TagsInput from './TagsInput';
+
+import { DataMattCV } from '../../data/mattcv';
 
 export default function CVSummary({ onClose, setTextProfile }) {
   const cancelButtonRef = useRef(null);
@@ -95,15 +98,11 @@ export default function CVSummary({ onClose, setTextProfile }) {
                       as="h3"
                       className="text-xl font-semibold leading-6 text-gray-900"
                     >
-                      Professional Summary
+                      {DataMattCV.ProfessionalSummary}
                     </Dialog.Title>
                   </div>
                   <div>
-                    <h3>
-                      Complete the form with your role, market, and keywords to
-                      get a tailored CV summary. Boost your chances of landing
-                      your dream job!
-                    </h3>
+                    <h3>{DataMattCV.ProffesionalSummaryText}</h3>
                     <form onSubmit={handleSubmit}>
                       <div className="flex space-x-2 mt-2">
                         <input
