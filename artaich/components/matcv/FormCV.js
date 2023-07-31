@@ -11,14 +11,14 @@ export const FormCV = ({ formData, setFormData }) => {
   };
 
   return (
-    <form className="w-full md:max-w-md mx-auto mt-8">
+    <form className="w-full mt-8">
       <div className="flex mb-4 space-x-4">
         <input
           className="flex-1 p-2 border rounded"
           type="text"
           placeholder="Full name"
           name="fullName"
-          value={formData.fullName}
+          value={formData?.fullName ? formData.fullName : ''}
           onChange={handleChange}
         />
       </div>
@@ -28,7 +28,7 @@ export const FormCV = ({ formData, setFormData }) => {
           type="text"
           placeholder="Job Title"
           name="jobTitle"
-          value={formData.jobTitle}
+          value={formData?.jobTitle ? formData.jobTitle : ''}
           onChange={handleChange}
         />
       </div>
@@ -39,7 +39,7 @@ export const FormCV = ({ formData, setFormData }) => {
           type="text"
           placeholder="Domain of Study"
           name="domainOfStudy"
-          value={formData.domainOfStudy}
+          value={formData?.domainOfStudy ? formData.domainOfStudy : ''}
           onChange={handleChange}
         />
         <input
@@ -47,7 +47,7 @@ export const FormCV = ({ formData, setFormData }) => {
           type="text"
           placeholder="Nationality"
           name="nationality"
-          value={formData.nationality}
+          value={formData?.nationality ? formData.nationality : ''}
           onChange={handleChange}
         />
       </div>
@@ -58,7 +58,7 @@ export const FormCV = ({ formData, setFormData }) => {
           type="email"
           placeholder="Email"
           name="email"
-          value={formData.email}
+          value={formData?.email ? formData.email : ''}
           onChange={handleChange}
         />
         <input
@@ -66,7 +66,7 @@ export const FormCV = ({ formData, setFormData }) => {
           type="text"
           placeholder="Phone"
           name="phone"
-          value={formData.phone}
+          value={formData?.phone ? formData.phone : ''}
           onChange={handleChange}
         />
       </div>
@@ -77,7 +77,7 @@ export const FormCV = ({ formData, setFormData }) => {
           type="text"
           placeholder="Country"
           name="country"
-          value={formData.country}
+          value={formData?.country ? formData.country : ''}
           onChange={handleChange}
         />
         <input
@@ -85,7 +85,7 @@ export const FormCV = ({ formData, setFormData }) => {
           type="text"
           placeholder="City"
           name="city"
-          value={formData.city}
+          value={formData?.city ? formData.city : ''}
           onChange={handleChange}
         />
       </div>

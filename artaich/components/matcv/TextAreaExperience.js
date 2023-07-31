@@ -2,16 +2,35 @@ import { useState } from 'react';
 import Dropdown from './Dropdown';
 
 export const TextAreaExperience = ({
-  textExperience,
+  setWorkExperienceFields,
   setTextExperience,
-  formExperienceFields,
-  setFormExperienceFields
+  textExperience
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [formExperienceFields, setFormExperienceFields] = useState({
+    jobTitleXp: '',
+    employer: '',
+    startDate: '',
+    endDate: '',
+    cityXp: '',
+    presentWorking: false
+  });
 
-  function handleModalOpen() {
-    setModalOpen((prev) => !prev);
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormExperienceFields((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  function handleAddExperience() {
+    setWorkExperienceFields((prevFields) => [
+      ...prevFields,
+      formExperienceFields
+    ]);
   }
+
   return (
     <>
       <h2 className="text-xl font-bold">Work experience:</h2>
@@ -24,12 +43,12 @@ export const TextAreaExperience = ({
       </p>
       <Dropdown
         formExperienceFields={formExperienceFields}
-        setFormExperienceFields={setFormExperienceFields}
         textExperience={textExperience}
         setTextExperience={setTextExperience}
+        handleAddExperience={handleAddExperience}
+        handleInputChange={handleInputChange}
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
-        handleModalOpen={handleModalOpen}
       />
     </>
   );

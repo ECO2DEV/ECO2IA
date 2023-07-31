@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const TextAreaEducation = ({ setEducationFields }) => {
   const [education, setEducation] = useState({
@@ -72,6 +72,13 @@ const TextAreaEducation = ({ setEducationFields }) => {
       />
       <button
         onClick={handleAddEducation}
+        disabled={
+          !education.degree ||
+          !education.institution ||
+          !education.startDate ||
+          !education.endDate ||
+          !education.city
+        }
         className="gap-x-1.5 rounded-md px-3 py-2 mb-2 text-sm font-semibold bg-indigo-600 text-white ring-1 ring-inset ring-gray-30"
       >
         Add Education

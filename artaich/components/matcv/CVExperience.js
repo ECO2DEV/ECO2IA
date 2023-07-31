@@ -3,30 +3,35 @@ import { UserContext } from '../../context/user/UserContext';
 import { Dialog, Transition } from '@headlessui/react';
 import { toast } from 'react-hot-toast';
 import { MatCVResponseXP } from '../../util/api/MatCVResponseXP';
+import TagsInput from './TagsInput';
 
-export default function CVExperience({ onClose, setTextExperience }) {
+export default function CVExperience({
+  onClose,
+  handleAddExperience,
+  setTextExperience
+}) {
   const cancelButtonRef = useRef(null);
-  const [open, setOpen] = useState(true);
+  const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
   const [formProfile, setFormProfile] = useState({
     role: '',
     market: '',
-    keywords: ''
+    keywords: tags
   });
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!formProfile.role || !formProfile.market || !formProfile.keywords) {
+    if (!formProfile.role || !formProfile.market) {
       toast.error('Please fill all the fields');
       return;
     }
-    if (
-      formProfile.role.length < 3 ||
-      formProfile.market.length < 3 ||
-      formProfile.keywords.length < 3
-    ) {
+    if (formProfile.role.length < 3 || formProfile.market.length < 3) {
       toast.error('Please fill all the fields');
+      return;
+    }
+    if (tags.length === 0) {
+      toast.error('Please add at least one keyword');
       return;
     }
     try {
@@ -41,6 +46,8 @@ export default function CVExperience({ onClose, setTextExperience }) {
         ? result.data.data.split('\n').map((item) => `• ${item.trim()}\n`)
         : '';
       setTextExperience(bulletPoints);
+      handleAddExperience();
+
       console.log('result is:', result.data);
       setLoading(false);
       toast.success('CV profile generated');
@@ -49,6 +56,9 @@ export default function CVExperience({ onClose, setTextExperience }) {
       console.error('Error:', error);
       setLoading(false);
       toast.error('Error generating CV summary');
+    } finally {
+      setLoading(false);
+      setTags([]);
     }
   }
   function handleChange(e) {
@@ -56,12 +66,12 @@ export default function CVExperience({ onClose, setTextExperience }) {
   }
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root show={true} as={Fragment}>
       <Dialog
         as="div"
         className="relative z-10"
         initialFocus={cancelButtonRef}
-        onClose={setOpen}
+        onClose={onClose}
       >
         <Transition.Child
           as={Fragment}
@@ -107,7 +117,6 @@ export default function CVExperience({ onClose, setTextExperience }) {
                       contributions and make your work experience stand out.
                     </h3>
                     <form onSubmit={handleSubmit}>
-                      {' '}
                       <div className="flex space-x-2 mt-2">
                         <input
                           type="text"
@@ -126,14 +135,7 @@ export default function CVExperience({ onClose, setTextExperience }) {
                           onChange={handleChange}
                         />
                       </div>
-                      <input
-                        type="text"
-                        name="keywords"
-                        className="w-full px-4 py-2 my-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-                        placeholder="Keywords"
-                        value={formProfile.keywords ? formProfile.keywords : ''}
-                        onChange={handleChange}
-                      />
+                      <TagsInput tags={tags} setTags={setTags} />
                       <div className="flex justify-end items-center gap-2 m-2">
                         <button
                           disabled={loading}
