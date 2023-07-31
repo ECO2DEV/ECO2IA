@@ -6,18 +6,14 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { DataMattCV } from '../../data/mattcv';
 
 export default function Dropdown({
-  formExperienceFields,
-  setFormExperienceFields,
   textExperience,
   setTextExperience,
+  formExperienceFields,
+  handleAddExperience,
+  handleInputChange,
   modalOpen,
   setModalOpen
 }) {
-  const handleGenerateClick = (event) => {
-    event.stopPropagation();
-    setModalOpen(true);
-  };
-
   useEffect(() => {
     const closeModalOnOutsideClick = (event) => {
       if (!event.target.closest('.cv-experience-modal')) {
@@ -35,13 +31,13 @@ export default function Dropdown({
   }, [modalOpen]);
 
   const handleModalClose = () => {
-    setModalOpen(false);
-  };
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormExperienceFields((prev) => ({ ...prev, [name]: value }));
+    setModalOpen((prev) => !prev);
   };
 
+  const handleGenerateClick = (event) => {
+    event.stopPropagation();
+    setModalOpen(true);
+  };
   return (
     <Popover className="relative w-full mb-5">
       <Popover.Button className="flex items-center gap-x-1 text-base font-bold leading-6 text-gray-700">
@@ -59,7 +55,7 @@ export default function Dropdown({
         leaveTo="opacity-0 translate-y-1"
       >
         <Popover.Panel className="absolute left-1/2 z-10 mt-4 flex items-start w-screen max-w-max -translate-x-1/2">
-          <div className="w-screen max-w-md flex-auto overflow-hidden  text-sm leading-6">
+          <div className="w-screen max-w-sm  xl:max-w-lg flex-auto overflow-hidden  text-sm leading-6">
             <input
               type="text"
               name="jobTitleXp"
@@ -103,8 +99,14 @@ export default function Dropdown({
             <form>
               <textarea
                 placeholder={DataMattCV.WorkExperienceBox}
-                value={textExperience ? textExperience : ''}
-                onChange={(e) => setTextExperience(e.target.value)}
+                value={
+                  textExperience.length > 0
+                    ? textExperience
+                    : formExperienceFields.textExperience
+                }
+                onChange={(event) => {
+                  setTextExperience(event.target.value);
+                }}
                 className="w-full h-36 text-xs p-2 border rounded resize-none border focus:border-indigo-600"
               ></textarea>
             </form>
@@ -126,6 +128,7 @@ export default function Dropdown({
         >
           <CVExperience
             onClose={handleModalClose}
+            handleAddExperience={handleAddExperience}
             setTextExperience={setTextExperience}
           />
         </div>
