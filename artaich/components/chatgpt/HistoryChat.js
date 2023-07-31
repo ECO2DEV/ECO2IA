@@ -7,6 +7,7 @@ import { strapiUrl } from '../../constants/constans';
 import { DeleteIcon, ClipboardIcon, EmptyAvatar } from '../icons/icons';
 import ModalDelete from './ModalDelete';
 import { toast } from 'react-hot-toast';
+import { DataHistory } from '../../data/history';
 
 export default function HistoryChat({ onClose }) {
   const cancelButtonRef = useRef(null);
@@ -68,14 +69,14 @@ export default function HistoryChat({ onClose }) {
                       as="h3"
                       className="text-3xl font-semibold leading-6 text-gray-900"
                     >
-                      History
+                      {DataHistory.History}
                     </Dialog.Title>
                   </div>
                   <div className="h-full bg-gray-100">
                     <section className="flex flex-col text-sm h-[80vh] lg:h-[85vh] overflow-y-scroll overflow-x-hidden">
                       {data?.data.length === 0 ? (
                         <p className="text-center text-2xl pt-4 text-gray-500">
-                          No hay historial disponible.
+                          {DataHistory.HistoryNotAvaible}
                         </p>
                       ) : (
                         data?.data.map((item, index) => {

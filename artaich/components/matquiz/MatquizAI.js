@@ -134,7 +134,7 @@ export const MatquizAI = () => {
           >
             <option value="multipleChoice"> {DataMattQuiz.MultipleChoise} </option>
             <option value="trueFalse"> {DataMattQuiz.TrueFalse} </option>
-            <option value="ShortAnswer"> {DataMattQuiz.TrueFalse} </option>
+            <option value="ShortAnswer"> {DataMattQuiz.ShortAnswer} </option>
           </select>
 
           <select
