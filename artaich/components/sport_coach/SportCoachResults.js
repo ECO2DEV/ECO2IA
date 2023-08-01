@@ -103,7 +103,7 @@ export const SportCoachResults = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 min-h-[60rem]">
       {responseObj.resp.map((day, index) => (
         <div
           key={index}
