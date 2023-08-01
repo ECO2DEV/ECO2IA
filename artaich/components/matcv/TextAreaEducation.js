@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { DataMattCV } from '../../data/mattcv';
 
 const TextAreaEducation = ({ setEducationFields }) => {
   const [education, setEducation] = useState({
@@ -29,13 +30,13 @@ const TextAreaEducation = ({ setEducationFields }) => {
 
   return (
     <div className="w-full">
-      <h1 className="text-xl font-bold">Education Background</h1>
+      <h1 className="text-xl font-bold"> {DataMattCV.EducationBackground} </h1>
       <input
         type="text"
         name="degree"
         value={education.degree ? education.degree : ''}
         onChange={handleInputChange}
-        placeholder="Degree"
+        placeholder={DataMattCV.Degree}
         className="w-full mb-2 p-2 border rounded"
       />
       <input
@@ -43,7 +44,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
         name="institution"
         value={education.institution ? education.institution : ''}
         onChange={handleInputChange}
-        placeholder="Institution"
+        placeholder={DataMattCV.Institution}
         className="w-full mb-2 p-2 border rounded"
       />
       <input
@@ -51,7 +52,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
         name="startDate"
         value={education.startDate ? education.startDate : ''}
         onChange={handleInputChange}
-        placeholder="Start Date"
+        placeholder={DataMattCV.StartDate}
         className="w-full mb-2 p-2 border rounded"
       />
       <input
@@ -59,7 +60,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
         name="endDate"
         value={education.endDate ? education.endDate : ''}
         onChange={handleInputChange}
-        placeholder="End Date"
+        placeholder={DataMattCV.EndDate}
         className="w-full mb-2 p-2 border rounded"
       />
       <input
@@ -67,14 +68,21 @@ const TextAreaEducation = ({ setEducationFields }) => {
         name="city"
         value={education.city ? education.city : ''}
         onChange={handleInputChange}
-        placeholder="City"
+        placeholder={DataMattCV.City}
         className="w-full mb-2 p-2 border rounded"
       />
       <button
         onClick={handleAddEducation}
+        disabled={
+          !education.degree ||
+          !education.institution ||
+          !education.startDate ||
+          !education.endDate ||
+          !education.city
+        }
         className="gap-x-1.5 rounded-md px-3 py-2 mb-2 text-sm font-semibold bg-indigo-600 text-white ring-1 ring-inset ring-gray-30"
       >
-        Add Education
+        {DataMattCV.AddEducation}
       </button>
     </div>
   );

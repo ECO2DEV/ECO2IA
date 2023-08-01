@@ -4,28 +4,33 @@ import { Dialog, Transition } from '@headlessui/react';
 import { MatCVResponse } from '../../util/api/MatCVResponse';
 import { toast } from 'react-hot-toast';
 
+import TagsInput from './TagsInput';
+
+import { DataMattCV } from '../../data/mattcv';
+
 export default function CVSummary({ onClose, setTextProfile }) {
   const cancelButtonRef = useRef(null);
   const [open, setOpen] = useState(true);
+  const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
   const [formProfile, setFormProfile] = useState({
     role: '',
     market: '',
-    keywords: ''
+    keywords: tags
   });
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!formProfile.role || !formProfile.market || !formProfile.keywords) {
+    if (!formProfile.role || !formProfile.market) {
       toast.error('Please fill all the fields');
       return;
     }
-    if (
-      formProfile.role.length < 3 ||
-      formProfile.market.length < 3 ||
-      formProfile.keywords.length < 3
-    ) {
+    if (tags.length === 0) {
+      toast.error('Please add at least one keyword');
+      return;
+    }
+    if (formProfile.role.length < 3 || formProfile.market.length < 3) {
       toast.error('Please fill all the fields');
       return;
     }
@@ -46,6 +51,9 @@ export default function CVSummary({ onClose, setTextProfile }) {
       console.error('Error:', error);
       setLoading(false);
       toast.error('Error generating CV summary');
+    } finally {
+      setLoading(false);
+      setTags([]);
     }
   }
   function handleChange(e) {
@@ -90,17 +98,12 @@ export default function CVSummary({ onClose, setTextProfile }) {
                       as="h3"
                       className="text-xl font-semibold leading-6 text-gray-900"
                     >
-                      Professional Summary
+                      {DataMattCV.ProfessionalSummary}
                     </Dialog.Title>
                   </div>
                   <div>
-                    <h3>
-                      Complete the form with your role, market, and keywords to
-                      get a tailored CV summary. Boost your chances of landing
-                      your dream job!
-                    </h3>
+                    <h3>{DataMattCV.ProffesionalSummaryText}</h3>
                     <form onSubmit={handleSubmit}>
-                      {' '}
                       <div className="flex space-x-2 mt-2">
                         <input
                           type="text"
@@ -119,14 +122,15 @@ export default function CVSummary({ onClose, setTextProfile }) {
                           onChange={handleChange}
                         />
                       </div>
-                      <input
+                      {/* <input
                         type="text"
                         name="keywords"
                         className="w-full px-4 py-2 my-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
                         placeholder="Keywords"
                         value={formProfile.keywords ? formProfile.keywords : ''}
                         onChange={handleChange}
-                      />
+                      /> */}
+                      <TagsInput tags={tags} setTags={setTags} />
                       <div className="flex justify-end items-center gap-2 m-2">
                         <button
                           type="submit"
