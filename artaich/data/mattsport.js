@@ -18,5 +18,5 @@ export const DataMattSport = {
   SixDays: "6 jours",
   SevenDays: "7 jours",
   GetButton: "Envoyer",
-  LoadingButton: "Chargement...",
+  LoadingButton: "Chargement",
 };

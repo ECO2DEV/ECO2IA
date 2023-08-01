@@ -1,3 +1,4 @@
+// components/matresum/TextSummarizer.js
 import React, { useContext, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "react-hot-toast";
@@ -14,6 +15,11 @@ import {
   ShareIcon,
 } from "@heroicons/react/20/solid";
 import { HistoryIcon, VolumenSpeakerIcon } from "../icons/icons";
+import dynamic from 'next/dynamic';
+const PDFDownloadLinkDynamic = dynamic(() => import('@react-pdf/renderer').then((mod) => mod.PDFDownloadLink), {
+  ssr: false,
+});
+import ExportPDF from "./exportPDF";
 
 function TextSummarizerPage() {
   // Estados del componente
@@ -59,12 +65,6 @@ function TextSummarizerPage() {
 
     try {
       const file = acceptedFiles[0];
-
-      // Verificar el tipo de archivo antes de procesarlo
-      if (file.type !== "application/pdf") {
-        throw new Error("Only PDF files are allowed"); // Lanzar un error personalizado si el archivo no es un PDF
-      }
-
       const reader = new FileReader();
 
       reader.onload = async (event) => {
@@ -76,7 +76,7 @@ function TextSummarizerPage() {
       reader.readAsArrayBuffer(file);
     } catch (error) {
       console.error("Error:", error);
-      setError(error.message); // Establecer el mensaje de error personalizado en el estado "error"
+      setError("An error occurred");
     } finally {
       setIsUploading(false);
     }
@@ -190,16 +190,7 @@ function TextSummarizerPage() {
                 <option value="italian">{DataMattResume.Italian}</option>
               </select>
             </div>
-            <div className="my-4">
-              <nav className="flex" aria-label="Breadcrumb">
-                <ol
-                  role="list"
-                  className="flex w-full justify-around space-x-4 rounded-md bg-gray-50 px-6 shadow"
-                >
-                  <li className="flex items-center">
-                    <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
-                      <div className="flex justify-center items-center">
-                        <HistoryIcon
+            <div className="my-4">                      <HistoryIcon
                           className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                           aria-hidden="true"
                         />
@@ -284,19 +275,108 @@ function TextSummarizerPage() {
           </div>
         </div>
         <div className="w-full md:w-6/12 px-4 mt-4 md:mt-0">
-          <div className="bg-white rounded-lg shadow-lg p-4">
+          <div className="bg-white rounded-lg shadow-lg p-4 relative">
             <textarea
-              className="w-full p-4 rounded border-none focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-center placeholder-gray-400"
-              style={{ minHeight: "41rem" }}
+              className="w-full text-justify p-4 rounded border-none focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none placeholder-gray-400"
+              style={{ minHeight: "44rem" }}
               value={summaryText}
               readOnly
               placeholder={DataMattResume.ResumeHere}
             />
-            {summaryText && (
-              <button className="mt-4 text-white rounded" onClick={handleCopy}>
-                <ClipboardIcon />
-              </button>
-            )}
+            <>
+              <div className="my-4">
+                <nav className="flex" aria-label="Breadcrumb">
+                  <ol
+                    role="list"
+                    className="flex w-full justify-around space-x-4 rounded-md bg-gray-50 px-6 shadow"
+                  >
+                    <li className="flex items-center">
+                      <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+                        <div className="flex justify-center items-center">
+                          <HistoryIcon
+                            className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                            aria-hidden="true"
+                          />
+                          <span className="hidden sm:contents"> </span>
+                        </div>
+                      </button>
+                    </li>
+                    <PDFDownloadLinkDynamic
+                      document={<ExportPDF summaryText={summaryText} />} // Pasa el summaryText como prop al componente ExportPDF
+                      fileName="TextSumarizer.pdf"
+                    >
+                      <li className="flex items-center">
+                        <svg
+                          className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
+                          viewBox="0 0 24 44"
+                          preserveAspectRatio="none"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                        </svg>
+                        <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+                          <div className="flex justify-center items-center">
+                            <DocumentArrowDownIcon
+                              className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                              aria-hidden="true"
+                            />
+                            <span className="hidden sm:contents"> PDF </span>
+                          </div>
+                        </button>
+                      </li>
+                    </PDFDownloadLinkDynamic>
+                    <li className="flex items-center">
+                      <svg
+                        className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
+                        viewBox="0 0 24 44"
+                        preserveAspectRatio="none"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                      </svg>
+                      <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+                        <div className="flex justify-center items-center">
+                          <DocumentIcon
+                            className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                            aria-hidden="true"
+                          />
+                          <span className="hidden sm:contents"> Word </span>
+                        </div>
+                      </button>
+                    </li>
+                    <li className="flex items-center">
+                      <svg
+                        className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
+                        viewBox="0 0 24 44"
+                        preserveAspectRatio="none"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                      </svg>
+                      <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+                        <div className="flex justify-center items-center">
+                          <ShareIcon
+                            className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                            aria-hidden="true"
+                          />
+                          <span className="hidden sm:contents"> Partager </span>
+                        </div>
+                      </button>
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+              {summaryText && (
+                <div className="absolute bottom-[6rem] right-[1.5rem]">
+                  <button className="text-white rounded" onClick={handleCopy}>
+                    <ClipboardIcon />
+                  </button>
+                </div>
+              )}
+            </>
           </div>
         </div>
       </div>

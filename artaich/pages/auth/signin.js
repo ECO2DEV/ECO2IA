@@ -1,3 +1,4 @@
+// pages/auth/signin.js
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { LockClosedIcon } from '@heroicons/react/20/solid';
@@ -143,12 +144,11 @@ export default function SignIn() {
                   </div>
 
                   <div className="text-sm">
-                    <a
-                      href="#"
+                    <Link href="/forgot-password"
                       className="font-medium text-indigo-600 hover:text-indigo-500"
                     >
                       {DataSignin.signinforgot}
-                    </a>
+                    </Link>
                   </div>
                 </div>
 

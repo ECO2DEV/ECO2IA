@@ -1,9 +1,13 @@
-import { QuestionIcon } from '../icons/icons';
+// components/SportCoach_Helper/SportCoach_Helper.js
+import { QuestionIcon } from "../icons/icons";
 
 export const SportButtonHelper = ({ onClick }) => {
+  const handleClick = () => {
+    onClick();
+  };
   return (
     <>
-      <button className="mt-4 ml-4 " onClick={onClick}>
+      <button className="mt-4 ml-4" onClick={handleClick}>
         <QuestionIcon />
       </button>
       {/* <span className="relative flex h-3 w-3 mt-6">
