@@ -1,4 +1,5 @@
 export const DataMattResume ={
+    Title:"MattResum",
     SelectLanguage:"Sélectionner la langue",
     English: "Anglais",
     Spanish: "Espagnol",
@@ -12,4 +13,8 @@ export const DataMattResume ={
     CreateResume:"Créer un résumé",
     ResumeHere:"Votre résumé créé par MattResum apparaîtra ici.",
     LoadingField:"Chargement...",
+    // data history chat
+    History:"Histoire",
+    HistoryNotAvaible:"Aucun historique disponible",
+    LatestImages:"Dernières images",
 }
