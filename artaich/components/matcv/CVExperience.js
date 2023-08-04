@@ -26,15 +26,15 @@ export default function CVExperience({
   async function handleSubmit(e) {
     e.preventDefault();
     if (!formProfile.role || !formProfile.market) {
-      toast.error('Please fill all the fields');
+      toast.error(DataMattCV.PleaseFill);
       return;
     }
     if (formProfile.role.length < 3 || formProfile.market.length < 3) {
-      toast.error('Please fill all the fields');
+      toast.error(DataMattCV.PleaseFill);
       return;
     }
     if (tags.length === 0) {
-      toast.error('Please add at least one keyword');
+      toast.error(DataMattCV.PleaseAdd);
       return;
     }
     try {
@@ -53,12 +53,12 @@ export default function CVExperience({
 
       console.log('result is:', result.data);
       setLoading(false);
-      toast.success('CV profile generated');
+      toast.success(DataMattCV.CVGenerated);
       onClose();
     } catch (error) {
       console.error('Error:', error);
       setLoading(false);
-      toast.error('Error generating CV summary');
+      toast.error(DataMattCV.ErrorGenerating);
     } finally {
       setLoading(false);
       setTags([]);
@@ -116,7 +116,7 @@ export default function CVExperience({
                         <input
                           type="text"
                           className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-                          placeholder="Role"
+                          placeholder={DataMattCV.Role}
                           value={formProfile.role ? formProfile.role : ''}
                           name="role"
                           onChange={handleChange}
@@ -125,7 +125,7 @@ export default function CVExperience({
                           type="text"
                           name="market"
                           className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-                          placeholder="Market"
+                          placeholder={DataMattCV.Market}
                           value={formProfile.market ? formProfile.market : ''}
                           onChange={handleChange}
                         />
@@ -137,14 +137,14 @@ export default function CVExperience({
                           type="submit"
                           className="px-4 py-2 bg-indigo-600 text-white rounded-lg"
                         >
-                          {loading ? 'Loading...' : 'Generate'}
+                          {loading ? (DataMattCV.Loading) : (DataMattCV.Generate)}
                         </button>
                         <button
                           disabled={loading}
                           onClick={onClose}
                           className="px-4 py-2 bg-red-500 text-white rounded-lg"
                         >
-                          Cancel
+                          {DataMattCV.Cancel}
                         </button>
                       </div>
                     </form>

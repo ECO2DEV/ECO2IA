@@ -3,6 +3,7 @@ import { TextAreaExperience } from './TextAreaExperience';
 import { FormCV } from './FormCV';
 import TextAreaEducation from './TextAreaEducation';
 import ToggleProfileOpt from './ToggleProfileOpt';
+import { DataMattCV } from '../../data/mattcv';
 
 export const LeftSectionCV = ({
   formData,
@@ -16,10 +17,14 @@ export const LeftSectionCV = ({
 }) => {
   return (
     <section className="md-w-[45%] lg:w-[50%] lg:absolute lg:-left-4">
-      <h1 className="text-xl font-bold">Personal details</h1>
+      <div className="text-left">
+        <h1 className="text-3xl  font-bold mb-8">
+          Matt CV
+        </h1>
+      </div>
+      <h1 className="text-xl font-bold"> {DataMattCV.PersonalDetails} </h1>
       <p className="text-xs">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam quasi
-        sint soluta aliquam nam culpa ad similique blanditiis eius voluptatem.
+        {DataMattCV.PersonalDetailsText}
       </p>
       <FormCV formData={formData} setFormData={setFormData} />
       <ToggleProfileOpt setFormData={setFormData} />

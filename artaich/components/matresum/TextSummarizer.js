@@ -140,13 +140,13 @@ function TextSummarizerPage() {
       navigator.clipboard
         .writeText(summaryText)
         .then(() => {
-          toast.success("Copied successfully");
+          toast.success(DataMattResume.CopiedSuccess);
         })
         .catch(() => {
-          toast.error("Copy failed");
+          toast.error(DataMattResume.CopiedFailed);
         });
     } else {
-      toast.error("No text to copy");
+      toast.error(DataMattResume.NoText);
     }
   };
 
@@ -155,17 +155,17 @@ function TextSummarizerPage() {
 
   return (
     <div className="container mx-auto py-5 min-h-screen">
-    <h1 className="text-2xl font-bold text-center mb-8">
-        {DataMattResume.Title}
-      </h1>
       <div className="flex flex-col md:flex-row h-full">
         <div className="w-full md:w-6/12 h-full flex-grow -mr-1">
           <div className="bg-white rounded-lg shadow-lg p-6 h-full">
+          <h1 className="text-3xl font-bold text-center mb-8">
+        {DataMattResume.Title}
+      </h1>
             <textarea
               className="w-full p-4 rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-20"
               value={fileContent || inputText}
               onChange={handleTextChange}
-              placeholder="Write your text here..."
+              placeholder={DataMattResume.WriteText}
               style={{
                 resize: "none",
                 overflow: "hidden",
@@ -240,7 +240,7 @@ function TextSummarizerPage() {
               style={{ minHeight: "44rem" }}
               value={summaryText}
               readOnly
-              placeholder="Your summarized text will appear here..."
+              placeholder={DataMattResume.ResumeHere}
             />
             <div className="my-4">
               <nav className="flex" aria-label="Breadcrumb">
@@ -276,7 +276,7 @@ function TextSummarizerPage() {
                             className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                             aria-hidden="true"
                           />
-                          <span className="hidden sm:contents"> PDF </span>
+                          <span className="hidden sm:contents"> {DataMattResume.PDFButton} </span>
                         </div>
                       </button>
                     </li>
@@ -297,7 +297,7 @@ function TextSummarizerPage() {
                           className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                           aria-hidden="true"
                         />
-                        <span className="hidden sm:contents"> Word </span>
+                        <span className="hidden sm:contents"> {DataMattResume.WordButton} </span>
                       </div>
                     </button>
                   </li>
@@ -317,7 +317,7 @@ function TextSummarizerPage() {
                           className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                           aria-hidden="true"
                         />
-                        <span className="hidden sm:contents"> Share </span>
+                        <span className="hidden sm:contents"> {DataMattResume.ShareButton} </span>
                       </div>
                     </button>
                   </li>
