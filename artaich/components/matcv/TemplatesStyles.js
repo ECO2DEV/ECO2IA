@@ -59,14 +59,22 @@ export const stylesOne = StyleSheet.create({
     marginBottom: '5mm'
   },
   pictureContainer: {
+    position: 'relative', // Required for positioning the overlay
     objectFit: 'fill',
-    height: '40mm',
     marginBottom: '5mm',
-    backgroundColor: '#DDD',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: '5mm'
+    borderRadius: '5mm',
+    overflow: 'hidden'
+  },
+  picture: {
+    objectFit: 'cover',
+    filter: 'sepia(0.2) grayscale(0.4) contrast(1.2)' // Adjust filters as needed
+  },
+  vintageOverlay: {
+    position: 'absolute',
+
+    backgroundColor: '#c0c0c0', // Replace with the desired vintage overlay color
+    opacity: 0.4, // Adjust the opacity as needed for the desired vintage effect
+    zIndex: -1
   },
   skillsText: {
     marginBottom: '5mm'
