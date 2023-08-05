@@ -115,6 +115,11 @@ export const MatquizAI = () => {
   return (
     <section className="flex flex-col sm:flex-row justify-center items-center py-10 gap-2">
       <div className="w-full max-w-md mx-4">
+      <div className="text-center">
+        <h1 className="text-xl  font-bold mb-8">
+          MATTQCM
+        </h1>
+      </div>  
         <form onSubmit={handleSubmit}>
           <textarea
             id="prompt"
