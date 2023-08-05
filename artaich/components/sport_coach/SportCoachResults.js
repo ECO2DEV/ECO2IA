@@ -1,9 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context/user/UserContext";
 import { useSportCoach } from "../../hooks/useSportCoach";
 import { LoadingIndicator } from "./LoadingIndicator";
-import { generatePDFDocument } from "../../util/helpers/SharePdf";
-import { PDFDocument } from "pdf-lib";
+import ExportPDF from "./ExportPDF";
+import dynamic from "next/dynamic";
+
+// Import PDFDownloadLink separately before the component definition
+const PDFDownloadLinkDynamic = dynamic(
+  () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
+  {
+    ssr: false,
+  }
+);
 import {
   ShareIcon,
   DocumentArrowDownIcon,
@@ -23,26 +31,21 @@ export const SportCoachResults = () => {
   const response = data?.data[0]?.attributes?.payload_out?.resp;
   const responseObj = JSON.parse(response);
 
-  const handleExportToPDF = async () => {
-    const pdfBlob = await generatePDFDocument(responseObj, completedExercises);
-    const url = URL.createObjectURL(pdfBlob);
-    window.open(url, "_blank");
-  };
-
   const [activeIndex, setActiveIndex] = useState(0);
   const [showShareButtons, setShowShareButtons] = useState(false);
-  const [completedExercises, setCompletedExercises] = useState(() =>
-    responseObj.resp.length > 0
-      ? responseObj.resp.map((day) => ({
-          exercises: day.exercises?.map(() => ({ completed: false })),
-        }))
-      : []
-  );
+  const [completedExercises, setCompletedExercises] = useState(() => {
+    if (!responseObj?.resp?.length) return [];
+
+    return responseObj.resp.map((day) => ({
+      exercises: day.exercises?.map(() => ({ completed: false })),
+    }));
+  });
 
   const handleExerciseClick = (dayIndex, exerciseIndex) => {
     const updatedCompletedExercises = [...completedExercises];
     if (!updatedCompletedExercises[dayIndex]?.exercises) {
-      updatedCompletedExercises[dayIndex] = updatedCompletedExercises[dayIndex] || {};
+      updatedCompletedExercises[dayIndex] =
+        updatedCompletedExercises[dayIndex] || {};
       updatedCompletedExercises[dayIndex].exercises = [];
     }
     if (!updatedCompletedExercises[dayIndex].exercises[exerciseIndex]) {
@@ -52,7 +55,6 @@ export const SportCoachResults = () => {
       !updatedCompletedExercises[dayIndex].exercises[exerciseIndex]?.completed;
     setCompletedExercises(updatedCompletedExercises);
   };
-  
 
   const handleShareClick = () => {
     setShowShareButtons(!showShareButtons);
@@ -116,40 +118,42 @@ export const SportCoachResults = () => {
               activeIndex !== index ? "hidden" : ""
             } ml-4 whitespace-normal`}
           >
-            {day.exercises.map((exercise, exerciseIndex) => (
-              <li
-                key={exerciseIndex}
-                className={classNames(
-                  completedExercises[index]?.exercises[exerciseIndex]?.completed
-                    ? "text-indigo-600"
-                    : "text-gray-500",
-                  "flex items-center"
-                )}
-                onClick={() => handleExerciseClick(index, exerciseIndex)}
-              >
-                <span className="flex h-9 items-center">
-                  {completedExercises[index]?.exercises[exerciseIndex]
-                    .completed ? (
-                    <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
-                      <CheckIcon
-                        className="h-5 w-5 text-white"
-                        aria-hidden="true"
-                      />
-                    </span>
-                  ) : (
-                    <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
-                      <span className="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" />
-                    </span>
+            {day &&
+              day.exercises.map((exercise, exerciseIndex) => (
+                <li
+                  key={exerciseIndex}
+                  className={classNames(
+                    completedExercises[index]?.exercises[exerciseIndex]
+                      ?.completed
+                      ? "text-indigo-600"
+                      : "text-gray-500",
+                    "flex items-center"
                   )}
-                </span>
-                <span className="ml-4 flex min-w-0 flex-col">
-                  <span className="text-sm font-medium">{exercise.name}</span>
-                  <span className="text-sm text-gray-500">
-                    {exercise.description}
+                  onClick={() => handleExerciseClick(index, exerciseIndex)}
+                >
+                  <span className="flex h-9 items-center">
+                    {completedExercises[index]?.exercises[exerciseIndex]
+                      .completed ? (
+                      <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
+                        <CheckIcon
+                          className="h-5 w-5 text-white"
+                          aria-hidden="true"
+                        />
+                      </span>
+                    ) : (
+                      <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
+                        <span className="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" />
+                      </span>
+                    )}
                   </span>
-                </span>
-              </li>
-            ))}
+                  <span className="ml-4 flex min-w-0 flex-col">
+                    <span className="text-sm font-medium">{exercise.name}</span>
+                    <span className="text-sm text-gray-500">
+                      {exercise.description}
+                    </span>
+                  </span>
+                </li>
+              ))}
           </ol>
         </div>
       ))}
@@ -181,23 +185,27 @@ export const SportCoachResults = () => {
               <DocumentIcon className="w-5 h-5 mr-1" /> Word
             </button>
           </li>
-          <li className="flex space-x-4 items-center w-auto text-gray-500 hover:text-gray-500">
-            <svg
-              className="h-full text-xs w-5 flex-shrink-0 text-gray-400"
-              viewBox="0 0 24 44"
-              preserveAspectRatio="none"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
-            <button
-              onClick={handleExportToPDF}
-              className="flex items-center p-2 rounded-md hover:bg-gray-100"
-            >
-              <DocumentArrowDownIcon className="w-5 h-5 mr-1" /> Pdf
-            </button>
-          </li>
+          <PDFDownloadLinkDynamic
+            document={<ExportPDF generateTrainingPlanContent={generateTrainingPlanContent} />}
+            fileName="SportCoach.pdf"
+          >
+            <li className="flex space-x-4 items-center w-auto text-gray-500 hover:text-gray-500">
+              <svg
+                className="h-full text-xs w-5 flex-shrink-0 text-gray-400"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <button
+                className="flex items-center p-2 rounded-md hover:bg-gray-100"
+              >
+                <DocumentArrowDownIcon className="w-5 h-5 mr-1" /> Pdf
+              </button>
+            </li>
+          </PDFDownloadLinkDynamic>
         </ol>
       </nav>
 

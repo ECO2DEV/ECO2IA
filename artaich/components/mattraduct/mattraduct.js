@@ -18,6 +18,7 @@ const MattraductAI = () => {
   const [showThirdTextarea, setShowThirdTextarea] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false); // Se añade la variable isPlaying
+  const [translationResponse, setTranslationResponse] = useState('');
 
   const { user } = useContext(UserContext);
   const { data: translationsData, mutate } = useMattraduct(user?.id);
@@ -82,6 +83,9 @@ const MattraductAI = () => {
           ...translationsData,
         });
         setResponse(result?.data?.data.lang1 + result?.data?.data.lang2);
+
+        // Set the translation response to the state variable
+        setTranslationResponse(result?.data?.data.lang1 + result?.data?.data.lang2);
       })
       .catch(() => {
         setResult('Error');
@@ -226,6 +230,7 @@ const MattraductAI = () => {
           showThirdTextarea={showThirdTextarea}
           onClick={handleModalHistory}
           language={fromLanguage}
+          translationResponse={translationResponse}
         />
       </section>
       {modalOpen && (
