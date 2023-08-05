@@ -11,7 +11,8 @@ import { DataMattCV } from '../../data/mattcv';
 export default function CVExperience({
   onClose,
   handleAddExperience,
-  setTextExperience
+  setTextExperience,
+  formExperienceFields
 }) {
   const cancelButtonRef = useRef(null);
   const [tags, setTags] = useState([]);
@@ -25,6 +26,17 @@ export default function CVExperience({
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (
+      !formExperienceFields.jobTitleXp ||
+      !formExperienceFields.employer ||
+      !formExperienceFields.startDate ||
+      !formExperienceFields.endDate ||
+      !formExperienceFields.cityXp
+    ) {
+      toast.error('Please fill all the formation fields');
+      onClose();
+      return;
+    }
     if (!formProfile.role || !formProfile.market) {
       toast.error('Please fill all the fields');
       return;

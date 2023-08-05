@@ -1,7 +1,7 @@
 import { useState, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
-export const MobilePopUp = ({ children, isModalNeedIt }) => {
+export const MobilePopUp = ({ children, isModalNeedIt, onClose }) => {
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
 
