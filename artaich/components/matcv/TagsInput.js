@@ -1,3 +1,4 @@
+import { DataMattCV } from "../../data/mattcv";
 function TagsInput({ tags, setTags }) {
   function handleKeyDown(e) {
     if (e.key === ',') {
@@ -27,7 +28,7 @@ function TagsInput({ tags, setTags }) {
         onKeyDown={handleKeyDown}
         type="text"
         className="tags-input"
-        placeholder="Type a tag and use comma to create"
+        placeholder={DataMattCV.TypeaTag}
       />
     </div>
   );

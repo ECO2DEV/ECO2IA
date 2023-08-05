@@ -1,5 +1,5 @@
 export const DataMattResume ={
-    Title:"MattResum",
+    Title:"Matt Resume",
     SelectLanguage:"Sélectionner la langue",
     English: "Anglais",
     Spanish: "Espagnol",
@@ -9,6 +9,7 @@ export const DataMattResume ={
     WriteText:"Écrivez votre texte ici",
     DropField:"Glissez et déposez les fichiers ici.",
     PDFButton:"PDF",
+    WordButton:"Word",
     ShareButton:"Partager",
     CreateResume:"Créer un résumé",
     ResumeHere:"Votre résumé créé par MattResum apparaîtra ici.",
@@ -17,4 +18,7 @@ export const DataMattResume ={
     History:"Histoire",
     HistoryNotAvaible:"Aucun historique disponible",
     LatestImages:"Dernières images",
+    CopiedSuccess:"Texte copié dans le presse-papiers !",
+    CopiedFailed:"Échec de la copie du texte dans le presse-papiers !",
+    NoText:"Pas de texte à copier"
 }
