@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Dropdown from './Dropdown';
 import { DataMattCV } from '../../data/mattcv';
+import { toast } from 'react-hot-toast';
 
 export const TextAreaExperience = ({
   setWorkExperienceFields,
@@ -30,6 +31,15 @@ export const TextAreaExperience = ({
       ...prevFields,
       formExperienceFields
     ]);
+    // Clear form fields
+    setFormExperienceFields({
+      jobTitleXp: '',
+      employer: '',
+      startDate: '',
+      endDate: '',
+      cityXp: '',
+      presentWorking: false
+    });
   }
 
   return (

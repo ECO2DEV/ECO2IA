@@ -3,21 +3,17 @@ import MyDocument from './MyDocument';
 
 const MatcvIA = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
-    jobTitle: '',
-    domainOfStudy: '',
-    nationality: '',
-    email: '',
-    phone: '',
-    country: '',
-    city: ''
+    fullName: ' ',
+    jobTitle: ' ',
+    domainOfStudy: ' ',
+    nationality: ' ',
+    email: ' ',
+    phone: ' ',
+    country: ' ',
+    city: ' '
   });
 
-  return (
-    <div>
-      <MyDocument formData={formData} setFormData={setFormData} />
-    </div>
-  );
+  return <MyDocument formData={formData} setFormData={setFormData} />;
 };
 
 export default MatcvIA;
