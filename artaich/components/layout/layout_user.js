@@ -1,4 +1,4 @@
-import { Fragment, useState, useContext, useEffect, use } from 'react';
+import { Fragment, useState, useContext, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Dialog, Transition } from '@headlessui/react';
@@ -36,7 +36,9 @@ export default function LayoutUser({ children }) {
     responseTokens,
     response,
     setPromptTokens,
-    setResponseTokens
+    setResponseTokens,
+    activeAI,
+    setActiveAI
   } = useContext(PromptContext);
   const { setUser } = useContext(UserContext);
   const { max_imagens = 0, max_tokens = 0 } = plan;
@@ -58,15 +60,24 @@ export default function LayoutUser({ children }) {
   // useEffect for discountTokensModal
   useEffect(() => {
     setDiscountTokensModal(promptTokens + responseTokens);
-    setTimeout(() => {
-      setDiscountTokensModal(0);
-    }, 2000);
-  }, [response, responseTokens]);
+    if (response && (activeAI === 'ChatGPT' || activeAI === 'DalleIA')) {
+      setTimeout(() => {
+        setDiscountTokensModal(0);
+      }, 2000);
+    }
+  }, [response, responseTokens, activeAI]);
   // useEffect for start counting the tokens in 0, after the next response
   useEffect(() => {
     setTimeout(() => {
-      setPromptTokens(0);
+      if (
+        activeAI === 'ChatGPT' ||
+        activeAI === 'DalleIA' ||
+        activeAI === 'MatquizAI'
+      ) {
+        setPromptTokens(0);
+      }
       setResponseTokens(0);
+      setDiscountTokensModal(0);
     }, 3000);
   }, [response, responseTokens]);
 
@@ -189,11 +200,11 @@ export default function LayoutUser({ children }) {
                         <dt className="text-sm lg:text-xs leading-3 text-gray-300 z-10">
                           Max Words
                         </dt>
-                        {discountTokensModal > 0 ? (
+                        {discountTokensModal > 0 && (
                           <span className="text-red-500 text-1xl absolute top-0 -mt-7 right-4 z-0">
                             -{discountTokensModal}
                           </span>
-                        ) : null}
+                        )}
                         <dd className="text-base font-semibold tracking-tight text-white">
                           {max_tokens}
                         </dd>
@@ -303,11 +314,11 @@ export default function LayoutUser({ children }) {
                   <dt className="text-sm lg:text-xs leading-3 text-gray-300 z-10">
                     Max Words
                   </dt>
-                  {discountTokensModal > 0 ? (
+                  {discountTokensModal > 0 && (
                     <span className="text-red-500 text-1xl absolute top-0 -mt-7 right-1 z-0">
                       -{discountTokensModal}
                     </span>
-                  ) : null}
+                  )}
                   <dd className="text-base font-semibold tracking-tight text-white">
                     {max_tokens}
                   </dd>

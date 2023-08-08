@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../context/user/UserContext';
 import { MattraductResponse } from '../../util/api/mattraductResponse';
 import { toast } from 'react-hot-toast';
@@ -12,8 +12,6 @@ import HistoryRequest from './HistoryRequest';
 import { VOICE_FOR_LANGUAGE } from '../../constants/constans';
 import { DataMatTraduct } from '../../data/mattraduct';
 
-
-
 const MattraductAI = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showThirdTextarea, setShowThirdTextarea] = useState(false);
@@ -23,7 +21,14 @@ const MattraductAI = () => {
 
   const { user } = useContext(UserContext);
   const { data: translationsData, mutate } = useMattraduct(user?.id);
-  const { setResponse, setPrompt, prompt } = useContext(PromptContext);
+  const {
+    setResponse,
+    setPrompt,
+    setPromptTokens,
+    prompt,
+    activeAI,
+    setActiveAI
+  } = useContext(PromptContext);
   const {
     fromLanguage,
     toLanguage,
@@ -36,10 +41,17 @@ const MattraductAI = () => {
     setResult,
     secondResult,
     setSecondResult,
-    loading,
+    loading
   } = useLangStorage();
 
-  
+  useEffect(() => {
+    if (activeAI !== 'MattraductAI') {
+      setPrompt('');
+      setPromptTokens(0);
+    }
+    setActiveAI('MattraductAI');
+  }, []);
+
   const handleClipboardOne = () => {
     navigator.clipboard
       .writeText(result)
@@ -66,14 +78,14 @@ const MattraductAI = () => {
       });
   };
   const handleMatTraduct = () => {
-    if (!prompt) return;
+    if (!prompt || activeAI !== 'MattraductAI') return;
     setIsLoading(true);
     MattraductResponse({
       prompt: prompt,
       user,
       fromLanguage,
       toLanguage,
-      toThirdLanguage,
+      toThirdLanguage
     })
       .then((result) => {
         if (result == null) return;
@@ -81,7 +93,7 @@ const MattraductAI = () => {
         setSecondResult(result?.data?.data.lang2);
         mutate({
           translationsData: [...translationsData.data, result?.data?.data],
-          ...translationsData,
+          ...translationsData
         });
         setResponse(result?.data?.data.lang1 + result?.data?.data.lang2);
 
@@ -93,7 +105,7 @@ const MattraductAI = () => {
       })
       .finally(() => {
         setIsLoading(false);
-        setPrompt('');
+        // setPrompt('');
       });
   };
 
@@ -104,16 +116,14 @@ const MattraductAI = () => {
   const handleModalHistory = () => {
     setModalOpen((prev) => !prev);
   };
- 
-
 
   const handlePlayAudio = () => {
     if (!isPlaying) {
       if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance();
         utterance.text = result;
-      utterance.lang = VOICE_FOR_LANGUAGE[toLanguage];
-        
+        utterance.lang = VOICE_FOR_LANGUAGE[toLanguage];
+
         if (result.trim() !== '') {
           window.speechSynthesis.speak(utterance);
           setIsPlaying(true);
@@ -126,7 +136,7 @@ const MattraductAI = () => {
       }
     }
   };
-  
+
   useEffect(() => {
     return () => {
       if (isPlaying) {
@@ -167,17 +177,13 @@ const MattraductAI = () => {
       }
     };
   }, [isPlaying]);
-  
-  
+
   return (
-   
     <>
       <section className="flex flex-col justify-center items-center gap-6 min-h-screen ">
-      <div className="text-center">
-        <h1 className="text-4xl  font-bold mb-8">
-          MatTraduct
-        </h1>
-      </div>
+        <div className="text-center">
+          <h1 className="text-4xl  font-bold mb-8">MatTraduct</h1>
+        </div>
         <div className="w-full max-w-5xl bg-white shadow-lg rounded-md">
           <div className="flex items-center justify-around bg-indigo-600 text-gray-100 px-4 py-2 rounded-t-md">
             <LanguageSelector
@@ -246,7 +252,7 @@ const MattraductAI = () => {
           setFromText={setFromText}
         />
       )}
-    </> 
+    </>
   );
 };
 

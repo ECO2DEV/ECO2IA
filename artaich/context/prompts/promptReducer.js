@@ -1,5 +1,10 @@
 export const promptReducer = (state, action) => {
   switch (action.type) {
+    case 'SET_ACTIVE_AI':
+      return {
+        ...state,
+        activeAI: action.payload
+      };
     case 'SET_PROMPT':
       return {
         ...state,

@@ -1,15 +1,22 @@
-import { useState, useContext, use } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../../context/user/UserContext';
 import { MatDescriptionResp } from '../../util/api/MatDescriptionResp';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import Loader from '../loader/loader';
 import { toast } from 'react-hot-toast';
-import { DataMattDescription } from "../../data/mattdescription"
+import { DataMattDescription } from '../../data/mattdescription';
 
 const DescriptionForm = () => {
   const { user } = useContext(UserContext);
-  const { setResponse, setPrompt, setPromptTokens, prompt, promptTokens } =
-    useContext(PromptContext);
+  const {
+    setResponse,
+    setPrompt,
+    setPromptTokens,
+    activeAI,
+    setActiveAI,
+    prompt,
+    promptTokens
+  } = useContext(PromptContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -20,6 +27,14 @@ const DescriptionForm = () => {
     socialMedia: [],
     language: ''
   });
+
+  useEffect(() => {
+    if (activeAI !== 'MatDescriptionAI') {
+      setPrompt('');
+      setPromptTokens(0);
+    }
+    setActiveAI('MatDescriptionAI');
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -124,7 +139,7 @@ const DescriptionForm = () => {
           <option value="english"> {DataMattDescription.English} </option>
           <option value="spanish"> {DataMattDescription.Spanish} </option>
           <option value="french"> {DataMattDescription.French} </option>
-          <option value="german">  {DataMattDescription.Deutsch} </option>
+          <option value="german"> {DataMattDescription.Deutsch} </option>
           <option value="italian"> {DataMattDescription.Italian} </option>
         </select>
       </div>

@@ -1,46 +1,60 @@
-import React, { useContext, useState } from "react";
-import { AUTO_LANGUAGE } from "../../constants/constans";
-import { useDropzone } from "react-dropzone";
-import { toast } from "react-hot-toast";
-import { PromptContext } from "../../context/prompts/PromptContext";
-import { UserContext } from "../../context/user/UserContext";
-import { DataMattResume } from "../../data/mattresume";
-// import { useMatResume } from "../../hooks/useMattResume";
-import { MattResumResp } from "../../util/api/MattResumResp";
-import { ClipboardIcon } from "../icons/icons";
-import { ButtonHistory } from "./ButtonHistory";
-import HistoryResum from "./HistoryResum";
-import ExportPDF from "./ExportPDF";
-import mammoth from "mammoth";
+import { useContext, useEffect, useState } from 'react';
+import { AUTO_LANGUAGE } from '../../constants/constans';
+import { useDropzone } from 'react-dropzone';
+import { toast } from 'react-hot-toast';
+import { PromptContext } from '../../context/prompts/PromptContext';
+import { UserContext } from '../../context/user/UserContext';
+import { DataMattResume } from '../../data/mattresume';
+import { MattResumResp } from '../../util/api/MattResumResp';
+import { ClipboardIcon } from '../icons/icons';
+import { ButtonHistory } from './ButtonHistory';
+import HistoryResum from './HistoryResum';
+import ExportPDF from './ExportPDF';
+import mammoth from 'mammoth';
+
 import {
   DocumentArrowDownIcon,
   DocumentIcon,
-  ShareIcon,
-} from "@heroicons/react/20/solid";
-import dynamic from "next/dynamic";
+  ShareIcon
+} from '@heroicons/react/20/solid';
+import dynamic from 'next/dynamic';
 
 // Import PDFDownloadLink separately before the component definition
 const PDFDownloadLinkDynamic = dynamic(
-  () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
+  () => import('@react-pdf/renderer').then((mod) => mod.PDFDownloadLink),
   {
-    ssr: false,
+    ssr: false
   }
 );
 
 function TextSummarizerPage() {
   // Estados del componente
-  const [inputText, setInputText] = useState(""); // Texto de entrada
-  const [language, setLanguage] = useState(""); // Estado del idioma seleccionado
-  const [summaryText, setSummaryText] = useState(""); // Texto de resumen
+  const [inputText, setInputText] = useState(''); // Texto de entrada
+  const [language, setLanguage] = useState(''); // Estado del idioma seleccionado
+  const [summaryText, setSummaryText] = useState(''); // Texto de resumen
   const [isUploading, setIsUploading] = useState(false); // Estado de carga de archivos
-  const [fileContent, setFileContent] = useState(""); // Contenido del archivo cargado
+  const [fileContent, setFileContent] = useState(''); // Contenido del archivo cargado
   const [isLoading, setIsLoading] = useState(false); // Estado de carga de la solicitud
   const [modalOpen, setModalOpen] = useState(false); // Estado de abrir el modal de historial
 
   // Contextos utilizados
-  const { setPrompt, prompt, setResponse, setPromptTokens } =
-    useContext(PromptContext);
+  const {
+    setPrompt,
+    prompt,
+    setResponse,
+    setPromptTokens,
+    activeAI,
+    setActiveAI
+  } = useContext(PromptContext);
   const { user } = useContext(UserContext); // Contexto del usuario
+
+  useEffect(() => {
+    if (activeAI !== 'TextSummarizerAI') {
+      setPrompt('');
+      setPromptTokens(0);
+    }
+    setActiveAI('TextSummarizerAI');
+  }, []);
 
   // Custom hooks utilizados
   // const { data } = useMatResume(user); // Custom hook para manejar datos relacionados con el usuario
@@ -49,13 +63,13 @@ function TextSummarizerPage() {
   const handleTextChange = (event) => {
     const text = event.target.value;
     setInputText(text);
-    event.target.style.height = "auto";
+    event.target.style.height = 'auto';
     event.target.style.height = `${event.target.scrollHeight}px`;
 
     const maxHeight = 350; // Establece el valor máximo de altura deseado en píxeles
     if (event.target.scrollHeight > maxHeight) {
       event.target.style.height = `${maxHeight}px`;
-      event.target.style.overflowY = "scroll";
+      event.target.style.overflowY = 'scroll';
     }
     setPrompt(text);
   };
@@ -81,7 +95,7 @@ function TextSummarizerPage() {
 
       reader.readAsArrayBuffer(file);
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
     } finally {
       setIsUploading(false);
     }
@@ -92,8 +106,8 @@ function TextSummarizerPage() {
     return new Promise((resolve, reject) => {
       const options = {
         convertImage: mammoth.images.imgElement(function (image) {
-          return image.read("base64");
-        }),
+          return image.read('base64');
+        })
       };
 
       mammoth
@@ -110,20 +124,20 @@ function TextSummarizerPage() {
   // Manejador de la solicitud de resumen
   const handleRequestSummary = async () => {
     if (!prompt && !fileContent) {
-      toast.error("Please type something before submit"); // Verifica que se haya ingresado texto antes de enviar la solicitud
+      toast.error('Please type something before submit'); // Verifica que se haya ingresado texto antes de enviar la solicitud
     } else {
       setIsLoading(true); // Activar el loader
       try {
         const response = await MattResumResp({
           prompt: inputText || fileContent,
           language: language,
-          user: user,
+          user: user
         });
         setResponse(response?.data?.data);
         setSummaryText(response?.data?.data); // Establece el resumen recibido en el estado summaryText
       } catch (error) {
-        console.error("Error:", error);
-        toast.error("An error occurred");
+        console.error('Error:', error);
+        toast.error('An error occurred');
       } finally {
         setIsLoading(false); // Desactivar el loader
       }
@@ -158,22 +172,22 @@ function TextSummarizerPage() {
       <div className="flex flex-col md:flex-row h-full">
         <div className="w-full md:w-6/12 h-full flex-grow -mr-1">
           <div className="bg-white rounded-lg shadow-lg p-6 h-full">
-          <h1 className="text-3xl font-bold text-center mb-8">
-        {DataMattResume.Title}
-      </h1>
+            <h1 className="text-3xl font-bold text-center mb-8">
+              {DataMattResume.Title}
+            </h1>
             <textarea
               className="w-full p-4 rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-20"
               value={fileContent || inputText}
               onChange={handleTextChange}
               placeholder={DataMattResume.WriteText}
               style={{
-                resize: "none",
-                overflow: "hidden",
+                resize: 'none',
+                overflow: 'hidden'
               }}
             />
             <div
               className={`w-full h-40 flex items-center justify-center border border-dashed rounded mt-4 ${
-                isUploading ? "bg-gray-200" : ""
+                isUploading ? 'bg-gray-200' : ''
               }`}
               {...getRootProps()}
             >
@@ -192,7 +206,9 @@ function TextSummarizerPage() {
                 className="w-full p-2 border border-gray-300 rounded"
                 required
               >
-                <option value={AUTO_LANGUAGE}>{DataMattResume.SelectLanguage}</option>
+                <option value={AUTO_LANGUAGE}>
+                  {DataMattResume.SelectLanguage}
+                </option>
                 <option value="english">{DataMattResume.English}</option>
                 <option value="spanish">{DataMattResume.Spanish}</option>
                 <option value="french">{DataMattResume.French}</option>
@@ -237,7 +253,7 @@ function TextSummarizerPage() {
           <div className="bg-white rounded-lg shadow-lg p-4 relative">
             <textarea
               className="w-full text-justify p-4 rounded border-none focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none placeholder-gray-400"
-              style={{ minHeight: "44rem" }}
+              style={{ minHeight: '44rem' }}
               value={summaryText}
               readOnly
               placeholder={DataMattResume.ResumeHere}
@@ -276,7 +292,10 @@ function TextSummarizerPage() {
                             className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                             aria-hidden="true"
                           />
-                          <span className="hidden sm:contents"> {DataMattResume.PDFButton} </span>
+                          <span className="hidden sm:contents">
+                            {' '}
+                            {DataMattResume.PDFButton}{' '}
+                          </span>
                         </div>
                       </button>
                     </li>
@@ -297,7 +316,10 @@ function TextSummarizerPage() {
                           className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                           aria-hidden="true"
                         />
-                        <span className="hidden sm:contents"> {DataMattResume.WordButton} </span>
+                        <span className="hidden sm:contents">
+                          {' '}
+                          {DataMattResume.WordButton}{' '}
+                        </span>
                       </div>
                     </button>
                   </li>
@@ -317,7 +339,10 @@ function TextSummarizerPage() {
                           className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                           aria-hidden="true"
                         />
-                        <span className="hidden sm:contents"> {DataMattResume.ShareButton} </span>
+                        <span className="hidden sm:contents">
+                          {' '}
+                          {DataMattResume.ShareButton}{' '}
+                        </span>
                       </div>
                     </button>
                   </li>
