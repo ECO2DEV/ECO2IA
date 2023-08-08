@@ -7,6 +7,7 @@ import axios from 'axios';
 import { strapiUrl, header } from '../../constants/constans';
 
 const promptInitialState = {
+  activeAI: null,
   prompt: null,
   response: null,
   plan: [],
@@ -29,6 +30,13 @@ export const PromptProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(promptReducer, promptInitialState);
   const countTokensMemo = useMemo(() => countTokens, []);
+
+  const setActiveAI = (aiName) => {
+    dispatch({
+      type: 'SET_ACTIVE_AI',
+      payload: aiName
+    });
+  };
 
   const setPrompt = (prompt) => {
     dispatch({
@@ -64,7 +72,7 @@ export const PromptProvider = ({ children }) => {
       type: 'SET_PROMPT_TOKENS',
       payload: resptokens
     });
-  }, [state.prompt, countTokensMemo]);
+  }, [state.prompt]);
 
   // useEfect for set response tokens when the response is set
   useEffect(() => {
@@ -85,7 +93,7 @@ export const PromptProvider = ({ children }) => {
       type: 'SET_RESPONSE_TOKENS',
       payload: resptokens
     });
-  }, [state.response, countTokensMemo]);
+  }, [state.response]);
 
   const setPlan = async (id) => {
     try {
@@ -177,13 +185,19 @@ export const PromptProvider = ({ children }) => {
         });
       })
       .catch((error) => {
-        console.log('Error updating plan', error);
+        console.error('Error updating plan', error);
       })
       .finally(() => {
-        dispatch({
-          type: 'SET_PROMPT_TOKENS',
-          payload: 0
-        });
+        if (
+          state.activeAI === 'ChatGpt' ||
+          state.activeAI === 'DalleIA' ||
+          state.activeAI === 'MatquizAI'
+        ) {
+          dispatch({
+            type: 'SET_PROMPT_TOKENS',
+            payload: 0
+          });
+        }
       });
   }, [state.response]);
 
@@ -205,6 +219,7 @@ export const PromptProvider = ({ children }) => {
     <PromptContext.Provider
       value={{
         ...state,
+        setActiveAI,
         setPlan,
         setPrompt,
         setResponse,

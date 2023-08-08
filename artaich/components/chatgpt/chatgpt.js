@@ -21,11 +21,15 @@ export default function ChatGpt(props) {
   const [openHelpers, setOpenHelpers] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const { setResponse, setPromptTokens } = useContext(PromptContext);
+  const { setResponse, setPromptTokens, setActiveAI, activeAI } =
+    useContext(PromptContext);
   const user = props.user;
 
   const { mutate } = useChat(user);
 
+  useEffect(() => {
+    setActiveAI('ChatGpt');
+  }, []);
   const {
     messages,
     input,
@@ -61,7 +65,9 @@ export default function ChatGpt(props) {
 
           return updatedMessages;
         });
+
         setResponse(message.content + input);
+
         mutate();
       } catch (error) {
         // Handle error here
@@ -93,11 +99,9 @@ export default function ChatGpt(props) {
   return (
     <>
       <section>
-      <div className="text-center">
-        <h1 className="text-4xl  font-bold mb-8">
-          MattChat
-        </h1>
-      </div>
+        <div className="text-center">
+          <h1 className="text-4xl  font-bold mb-8">MattChat</h1>
+        </div>
         {messages.length === 0 ? (
           <Welcome setInput={setInput} />
         ) : openHelpers ? (

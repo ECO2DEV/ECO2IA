@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { MatquizResponse } from '../../util/api/matquizResponse';
 import { UserContext } from '../../context/user/UserContext';
 import { PromptContext } from '../../context/prompts/PromptContext';
@@ -6,14 +6,21 @@ import Loader from '../loader/loader';
 import { MatquizSkeleton } from './MatquizSkeleton';
 import { ClipboardIcon, ShowAnswerIcon } from '../icons/icons';
 import { toast } from 'react-hot-toast';
-import { DataMattQuiz } from "../../data/mattquiz";
+import { DataMattQuiz } from '../../data/mattquiz';
 
 export const MatquizAI = () => {
   const [submittedData, setSubmittedData] = useState(null);
   const [isAnswerVisible, setIsAnswerVisible] = useState(false);
   const { user } = useContext(UserContext);
-  const { setPrompt, prompt, setResponse, setPromptTokens, promptTokens } =
-    useContext(PromptContext);
+  const {
+    setPrompt,
+    prompt,
+    setResponse,
+    activeAI,
+    setActiveAI,
+    setPromptTokens,
+    promptTokens
+  } = useContext(PromptContext);
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [formState, setFormState] = useState({
@@ -22,6 +29,14 @@ export const MatquizAI = () => {
     difficulty: 'easy',
     questionQuantity: 0
   });
+
+  useEffect(() => {
+    if (activeAI !== 'MatquizAI') {
+      setPrompt('');
+      setPromptTokens(0);
+    }
+    setActiveAI('MatquizAI');
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -75,9 +90,7 @@ export const MatquizAI = () => {
     // Make a topic limit of 1000 characters
     if (prompt == null || prompt.length > 1000) {
       setError(DataMattQuiz.ProvideSubject);
-      toast.error(
-        DataMattQuiz.ProvideSubject
-      );
+      toast.error(DataMattQuiz.ProvideSubject);
       return;
     }
     setIsLoading(true);
@@ -115,11 +128,9 @@ export const MatquizAI = () => {
   return (
     <section className="flex flex-col sm:flex-row justify-center items-center py-10 gap-2">
       <div className="w-full max-w-md mx-4">
-      <div className="text-center">
-        <h1 className="text-xl  font-bold mb-8">
-          MATTQCM
-        </h1>
-      </div>  
+        <div className="text-center">
+          <h1 className="text-xl  font-bold mb-8">MATTQCM</h1>
+        </div>
         <form onSubmit={handleSubmit}>
           <textarea
             id="prompt"
@@ -137,7 +148,10 @@ export const MatquizAI = () => {
             onChange={handleChange}
             className="w-full mt-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="multipleChoice"> {DataMattQuiz.MultipleChoise} </option>
+            <option value="multipleChoice">
+              {' '}
+              {DataMattQuiz.MultipleChoise}{' '}
+            </option>
             <option value="trueFalse"> {DataMattQuiz.TrueFalse} </option>
             <option value="ShortAnswer"> {DataMattQuiz.ShortAnswer} </option>
           </select>
