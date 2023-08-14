@@ -99,10 +99,7 @@ export const SportCoachIA = (props) => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <h1 className="text-4xl font-bold text-center mb-8">
-        {DataMattSport.Title}
-      </h1>
-      <p className="text-center">{DataMattSport.SubTitle}</p>
+      
       <div className="flex justify-center items-center text-gray-900 mb-4">
         <span>
           Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;

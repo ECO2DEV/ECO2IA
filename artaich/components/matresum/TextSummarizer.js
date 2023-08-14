@@ -172,9 +172,7 @@ function TextSummarizerPage() {
       <div className="flex flex-col md:flex-row h-full">
         <div className="w-full md:w-6/12 h-full flex-grow -mr-1">
           <div className="bg-white rounded-lg shadow-lg p-6 h-full">
-            <h1 className="text-3xl font-bold text-center mb-8">
-              {DataMattResume.Title}
-            </h1>
+        
             <textarea
               className="w-full p-4 rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-20"
               value={fileContent || inputText}

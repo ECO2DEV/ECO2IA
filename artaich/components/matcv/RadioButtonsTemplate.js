@@ -1,3 +1,5 @@
+import { DataMattCV } from "../../data/mattcv";
+
 export const RadioButtonsTemplate = ({
   selectedTemplate,
   handleTemplateChange
@@ -5,7 +7,7 @@ export const RadioButtonsTemplate = ({
   return (
     <div className="main flex border rounded-full overflow-hidden m-4 select-none">
       <div className="title py-2 my-auto px-5 bg-gray-800 text-white text-sm font-semibold mr-3">
-        Templates
+        {DataMattCV.Template}
       </div>
       <label className="flex radio p-2 cursor-pointer">
         <input
@@ -15,7 +17,7 @@ export const RadioButtonsTemplate = ({
           checked={selectedTemplate === 'template1'}
           onChange={handleTemplateChange}
         />
-        <div className="title px-2">Default</div>
+        <div className="title px-2"> {DataMattCV.Default} </div>
       </label>
 
       <label className="flex radio p-2 cursor-pointer">
@@ -26,7 +28,7 @@ export const RadioButtonsTemplate = ({
           checked={selectedTemplate === 'template2'}
           onChange={handleTemplateChange}
         />
-        <div className="title px-2">Classic </div>
+        <div className="title px-2"> {DataMattCV.Classic} </div>
       </label>
     </div>
   );

@@ -38,4 +38,12 @@ export const DataMattCV ={
     CVGenerated:"Profil de CV généré",
     ErrorGenerating:"Erreur lors de la génération du résumé du CV",
     Loading:"Chargement...",
+    CompleteInfo:"Complétez avec vos informations de profil",
+    AddProfileInfo:"Ajoutez vos informations de profil",
+    Template:"Modèle",
+    Default:"Par défaut",
+    Classic:"Classique",
+    Details:"Détails",
+    Profile:"Profil",
+    EmploymentHistory:"Historique professionnel",
 }
