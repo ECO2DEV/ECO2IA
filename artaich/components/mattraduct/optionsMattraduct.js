@@ -1,3 +1,4 @@
+// components/mattraduct/optionsMattraduct.js
 import { useContext } from "react";
 import { DataMatTraduct } from "../../data/mattraduct";
 import { PromptContext } from "../../context/prompts/PromptContext";
@@ -27,7 +28,8 @@ export default function OptionsMattraduct({
   language,
   handleShowThirdTextarea,
   onClick,
-  translationResponse
+  translationResponse,
+  prompt
 }) {
   // console.log("language" + language)
   const { promptTokens } = useContext(PromptContext);
@@ -49,7 +51,12 @@ export default function OptionsMattraduct({
             </div>
           </li>
           <PDFDownloadLinkDynamic
-            document={<ExportPDF translationResponse={translationResponse} />}
+            document={
+              <ExportPDF 
+                prompt={prompt} 
+                translationResponse={translationResponse}
+              />
+            }
             fileName="MatTraduct.pdf"
           >
             <li className="flex items-center">
