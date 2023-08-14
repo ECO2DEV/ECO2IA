@@ -240,6 +240,7 @@ const MattraductAI = () => {
           onClick={handleModalHistory}
           language={fromLanguage}
           translationResponse={translationResponse}
+          prompt={prompt}
         />
       </section>
       {modalOpen && (

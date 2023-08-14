@@ -1,8 +1,8 @@
 // pages/forgot-password.js
-import { useState } from "react";
-import { useForm, Controller } from "react-hook-form"; // Import useForm and Controller
-import axios from "axios";
-import { strapiUrl } from "../constants/constans";
+import { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form'; // Import useForm and Controller
+import axios from 'axios';
+import { strapiUrl, header } from '../constants/constans';
 
 export default function ForgotPassword() {
   const [message, setMessage] = useState(null);
@@ -10,15 +10,20 @@ export default function ForgotPassword() {
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors }
   } = useForm();
 
   const onSubmit = async ({ email }) => {
     try {
-      await axios.post(`${strapiUrl}/api/auth/forgot-password`, { email });
-      setMessage("Reset password link sent. Please check your email.");
+      const response = await axios.post(
+        `${strapiUrl}/api/forgot`,
+        { email: email },
+        header
+      );
+      console.log('response', response);
+      setMessage('Reset password link sent. Please check your email.');
     } catch (error) {
-      setMessage("Something went wrong. Please try again later.");
+      setMessage('Something went wrong. Please try again later.');
     }
   };
 
@@ -35,11 +40,11 @@ export default function ForgotPassword() {
               control={control} // Control prop from useForm
               defaultValue="" // Initial value of the input (empty in this case)
               rules={{
-                required: "Email is required", // Validate if the email field is empty
+                required: 'Email is required', // Validate if the email field is empty
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, // Validate email format
-                  message: "Invalid email address",
-                },
+                  message: 'Invalid email address'
+                }
               }}
               render={({ field }) => (
                 <input
@@ -50,7 +55,7 @@ export default function ForgotPassword() {
               )}
             />
           </label>
-          {errors.email && <p>{errors.email.message}</p>}{" "}
+          {errors.email && <p>{errors.email.message}</p>}{' '}
           {/* Display the validation error message */}
         </div>
         <button

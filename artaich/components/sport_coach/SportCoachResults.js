@@ -5,7 +5,6 @@ import { LoadingIndicator } from "./LoadingIndicator";
 import ExportPDF from "./ExportPDF";
 import dynamic from "next/dynamic";
 
-// Import PDFDownloadLink separately before the component definition
 const PDFDownloadLinkDynamic = dynamic(
   () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
   {

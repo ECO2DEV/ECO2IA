@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import {
   ClipboardIcon,
@@ -19,9 +19,28 @@ import { toast } from 'react-hot-toast';
 import { EnterCard } from './EnterCard';
 import { DataMattDescription } from '../../data/mattdescription';
 
+const socialMediaIdentifiers = [
+  { keyword: 'FB', icon: <FacebookIconSVG /> },
+  { keyword: 'TW', icon: <TwitterIconSVG /> },
+  { keyword: 'TE', icon: <TelegramIconSVG /> },
+  { keyword: 'TL', icon: <TelegramIconSVG /> },
+  { keyword: 'TG', icon: <TelegramIconSVG /> },
+  { keyword: 'WA', icon: <WhatsAppIconSVG /> },
+  { keyword: 'IG', icon: <InstagramIconSVG /> },
+  { keyword: 'INSTA', icon: <InstagramIconSVG /> }
+];
 export const MatCards = () => {
-  const { response } = useContext(PromptContext);
-  const copywritings = response?.split('\n');
+  const { response, setResponse, activeAI, setActiveAI } =
+    useContext(PromptContext);
+
+  useEffect(() => {
+    if (activeAI !== 'MatDescriptionAI') {
+      setResponse(null);
+    }
+    setActiveAI('MatDescriptionAI');
+  }, []);
+  const copywritings =
+    typeof response === 'string' ? response.split('\n') : null;
 
   const handleCopy = (index) => {
     if (copywritings) {
@@ -45,24 +64,18 @@ export const MatCards = () => {
   return (
     <section className="flex flex-col gap-2 sm:absolute sm:top-[4.7rem] right-0 pb-11">
       {copywritings?.map((copy, index) =>
-        copy === '' || copy.length < 10 ? null : (
+        copy === '' || copy.trim().length < 10 ? null : (
           <div className="flex space-x-2 h-full" key={index}>
             {/* {console.log('copy', 'something' + copy.trim())} */}
             <div className="flex shrink-0">
-              {copy.includes('FB') ? (
-                <FacebookIconSVG />
-              ) : copy.includes('TW') ? (
-                <TwitterIconSVG />
-              ) : copy.includes('TE') ||
-                copy.includes('TL') ||
-                copy.includes('TG') ? (
-                <TelegramIconSVG />
-              ) : copy.includes('WA') ? (
-                <WhatsAppIconSVG />
+              {socialMediaIdentifiers.some(({ keyword }) =>
+                copy.includes(keyword)
+              ) ? (
+                socialMediaIdentifiers.find(({ keyword }) =>
+                  copy.includes(keyword)
+                )?.icon
               ) : (
-                (copy.includes('IG') || copy.includes('INSTA')) && (
-                  <InstagramIconSVG />
-                )
+                <GlobalShareIcon />
               )}
             </div>
             <div className="w-[20rem] md:w-[25rem] xl:w-[35rem] flex-1 ">

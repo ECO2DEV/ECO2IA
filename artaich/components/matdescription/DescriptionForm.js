@@ -93,7 +93,7 @@ const DescriptionForm = () => {
       })
       .finally(() => {
         setIsLoading(false);
-        setPrompt('');
+        // setPrompt('');
       });
   };
 
@@ -220,8 +220,8 @@ const DescriptionForm = () => {
         type="submit"
         className={`${
           isLoading || !prompt
-            ? 'text-white bg-gray-500 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500 mt-8'
-            : 'w-full  bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full my-8'
+            ? 'text-white bg-gray-500  text-center focus:outline-none focus:ring-2 focus:ring-blue-500 py-2 px-4 rounded-full'
+            : '  bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full my-8'
         } w-full mt-4 px-4 py-2 `}
       >
         {isLoading ? (
@@ -232,7 +232,7 @@ const DescriptionForm = () => {
           'Submit'
         )}
       </button>
-      <span className=" flex justify-center items-center text-gray-900 my-2">
+      <span className=" flex justify-center items-center text-gray-900">
         Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
       </span>
     </form>

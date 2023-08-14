@@ -21,15 +21,15 @@ export const SportCoachIA = (props) => {
   // estado para mostrar o no el componente de ayuda
   const [openHelpers, setOpenHelpers] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
-
+  
   const user = props.user;
-
+  
   // Obtener los datos del entrenador deportivo personalizado
   const { data, mutate } = useSportCoach(user);
-  // Obtener los datos y funciones del contexto de prompts
+  // inicializamos el estado del prompt con el valor "Select an option"
   const { prompt, setPrompt, setResponse, setPromptTokens, promptTokens } =
-    useContext(PromptContext);
-
+  useContext(PromptContext);
+  
   // Manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -162,21 +162,16 @@ export const SportCoachIA = (props) => {
               <select
                 id="prompt"
                 name="prompt"
-                value={prompt}
+                // value={""}
+                defaultValue=""
                 onChange={handlePromptChange}
                 className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               >
-                <option value="" disabled selected>
-                  Select an option{" "}
+                <option disabled value={prompt}>
+                  Select an option
                 </option>
-                <option value="weight loss">
-                  {" "}
-                  {DataMattSport.WeightLoss}{" "}
-                </option>
-                <option value="muscle building">
-                  {" "}
-                  {DataMattSport.MuscleBuilding}{" "}
-                </option>
+                <option value="weight loss"> {DataMattSport.WeightLoss}</option>
+                <option value="muscle building"> {DataMattSport.MuscleBuilding} </option>
                 <option value="mass"> {DataMattSport.Mass} </option>
                 <option value="crossfit"> {DataMattSport.Crossfit} </option>
                 <option value="dry"> {DataMattSport.Dry} </option>
