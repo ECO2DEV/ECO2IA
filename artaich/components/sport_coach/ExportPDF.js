@@ -21,20 +21,29 @@ const styles = StyleSheet.create({
 });
 
 function ExportPDF({ generateTrainingPlanContent }) {
-  const trainingPlanContent = generateTrainingPlanContent(); // Get the training plan content using the prop
+  const trainingPlanContent = generateTrainingPlanContent();
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text style={styles.title}>
-            SportCoach
-          </Text>
-          <Text>{trainingPlanContent}</Text> {/* Display the training plan content */}
+          <Text style={styles.title}>SportCoach</Text>
+          <Text>{trainingPlanContent}</Text>
         </View>
       </Page>
     </Document>
   );
 }
+
+// const ExportPDF = ({ generateTrainingPlanContent }) => (
+//   <Document>
+//     <Page size="A4" style={styles.page}>
+//       <View style={styles.section}>
+//         <Text style={styles.title}>SportCoach</Text>
+//         <Text>{generateTrainingPlanContent}</Text>
+//       </View>
+//     </Page>
+//   </Document>
+// );
 
 export default ExportPDF;
