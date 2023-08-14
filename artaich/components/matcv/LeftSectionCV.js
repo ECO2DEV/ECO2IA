@@ -31,15 +31,12 @@ export const LeftSectionCV = ({
 
   return (
     <section className="md-w-[45%] lg:w-[50%] lg:absolute lg:-left-4">
-      <div className="text-left">
-        <h1 className="text-3xl  font-bold mb-8">Matt CV</h1>
-      </div>
       <h1 className="text-xl font-bold"> {DataMattCV.PersonalDetails} </h1>
       <p className="text-xs">{DataMattCV.PersonalDetailsText}</p>
       <FormCV formData={formData} setFormData={setFormData} />
       <div className="flex justify-start items-center relative">
         <div
-          title="Add your profile info"
+          title={DataMattCV.AddProfileInfo}
           onMouseEnter={() => handleToggleHover(true)}
           onMouseLeave={() => handleToggleHover(false)}
         >
@@ -47,7 +44,7 @@ export const LeftSectionCV = ({
         </div>
         {toggleHovered && (
           <p className="absolute top-[-40px] left-0 bg-white p-1 rounded border border-gray-300 shadow">
-            Complete with your profile info
+            {DataMattCV.CompleteInfo}
           </p>
         )}
       </div>

@@ -15,7 +15,7 @@ export const FormCV = ({ formData, setFormData }) => {
     <form className="w-full mt-8">
       <div className="mb-4 space-x-4 w-full">
         <div className="flex-1 flex flex-col">
-          <label htmlFor="fullName">Full Name:</label>
+          <label htmlFor="fullName"> {DataMattCV.FullName} </label>
           <input
             className="flex-1 p-2 border rounded"
             type="text"
@@ -28,7 +28,7 @@ export const FormCV = ({ formData, setFormData }) => {
       </div>
       <div className="mb-4 space-x-4 w-full">
         <div className="flex-1 flex flex-col">
-          <label htmlFor="jobTitle">Job Title:</label>
+          <label htmlFor="jobTitle"> {DataMattCV.JobTitle} </label>
           <input
             className="flex-1 p-2 border rounded"
             type="text"
@@ -42,7 +42,7 @@ export const FormCV = ({ formData, setFormData }) => {
 
       <div className="flex mb-4 space-x-4">
         <div className="flex-1 flex flex-col">
-          <label htmlFor="domainOfStudy">Domain of Study:</label>
+          <label htmlFor="domainOfStudy"> {DataMattCV.DomainofStudy} </label>
           <input
             className="p-2 border rounded w-full"
             type="text"
@@ -53,7 +53,7 @@ export const FormCV = ({ formData, setFormData }) => {
           />
         </div>
         <div className="flex-1 flex flex-col">
-          <label htmlFor="nationality">Nationality:</label>
+          <label htmlFor="nationality"> {DataMattCV.Nationality} </label>
           <input
             className="p-2 border rounded w-full"
             type="text"
@@ -67,7 +67,7 @@ export const FormCV = ({ formData, setFormData }) => {
 
       <div className="flex mb-4 space-x-4">
         <div className="flex-1 flex flex-col">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email"> {DataMattCV.Email} </label>
           <input
             className="p-2 border rounded w-full"
             type="email"
@@ -78,7 +78,7 @@ export const FormCV = ({ formData, setFormData }) => {
           />
         </div>
         <div className="flex-1 flex flex-col">
-          <label htmlFor="phone">Phone:</label>
+          <label htmlFor="phone"> {DataMattCV.Telephone} </label>
           <input
             className="p-2 border rounded w-full"
             type="text"
@@ -92,7 +92,7 @@ export const FormCV = ({ formData, setFormData }) => {
 
       <div className="flex mb-4 space-x-4">
         <div className="flex-1 flex flex-col">
-          <label htmlFor="country">Country:</label>
+          <label htmlFor="country"> {DataMattCV.Country} </label>
           <input
             className="p-2 border rounded w-full"
             type="text"
@@ -103,7 +103,7 @@ export const FormCV = ({ formData, setFormData }) => {
           />
         </div>
         <div className="flex-1 flex flex-col">
-          <label htmlFor="city">City:</label>
+          <label htmlFor="city"> {DataMattCV.City} </label>
           <input
             className="p-2 border rounded w-full"
             type="text"

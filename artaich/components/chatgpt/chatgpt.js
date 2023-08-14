@@ -99,9 +99,7 @@ export default function ChatGpt(props) {
   return (
     <>
       <section>
-        <div className="text-center">
-          <h1 className="text-4xl  font-bold mb-8">MattChat</h1>
-        </div>
+       
         {messages.length === 0 ? (
           <Welcome setInput={setInput} />
         ) : openHelpers ? (
