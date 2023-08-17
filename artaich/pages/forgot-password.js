@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form'; // Import useForm and Controller
 import axios from 'axios';
 import { strapiUrl, header } from '../constants/constans';
+import { DataForgotPassword } from '../data/forgotpassword';
 
 export default function ForgotPassword() {
   const [message, setMessage] = useState(null);
@@ -21,51 +22,57 @@ export default function ForgotPassword() {
         header
       );
       console.log('response', response);
-      setMessage('Reset password link sent. Please check your email.');
+      setMessage(DataForgotPassword.ResetPassWord);
     } catch (error) {
-      setMessage('Something went wrong. Please try again later.');
+      setMessage(DataForgotPassword.SomethingWrong);
     }
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
-      <h2 className="text-2xl mb-4">Forgot Password</h2>
-      <p className="mb-4">Insert your email address to reset your password</p>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-96">
-        <div className="grid grid-cols-1 gap-6">
-          <label className="block">
-            Email address:
+    <div className="bg-gray-900 py-16 sm:py-24">
+      <div ClassName="mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-24 shadow-2xl sm:rounded-3xl sm:px-24 xl:py-32">
+      <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-5xl">{DataForgotPassword.ForgotPassword}</h2>
+      <p className="mx-auto mt-2 max-w-xl text-center text-2xl leading-8 text-gray-300">{DataForgotPassword.ForgotPasswordInstructions}</p>
+      <form onSubmit={handleSubmit(onSubmit)} className="mx-auto mt-10 flex max-w-md gap-x-8">
+          <label className="w-full">
+            
             <Controller
               name="email" // Name of the field in the form values object
               control={control} // Control prop from useForm
               defaultValue="" // Initial value of the input (empty in this case)
               rules={{
-                required: 'Email is required', // Validate if the email field is empty
+                required: (DataForgotPassword.EmailRequired), // Validate if the email field is empty
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, // Validate email format
-                  message: 'Invalid email address'
+                  message: (DataForgotPassword.InvalidEmail)
                 }
               }}
               render={({ field }) => (
                 <input
                   {...field}
-                  className="mt-1 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-slate-600"
+                  className="w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6"
                   type="email"
+                  placeholder= {DataForgotPassword.EnterEmail}
                 />
               )}
             />
           </label>
           {errors.email && <p>{errors.email.message}</p>}{' '}
           {/* Display the validation error message */}
-        </div>
+       
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-600 rounded-md mt-4 p-2 w-full text-white text-xl font-bold uppercase disabled:bg-slate-200 transition-all duration-300 ease-in-out"
+          className="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-          Send Reset Link
+         {DataForgotPassword.ResetLink}
         </button>
       </form>
       {message && <p>{message}</p>}
+     </div>
+      </div>
+      
     </div>
   );
 }
+

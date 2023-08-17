@@ -1,5 +1,6 @@
 import { toast } from 'react-hot-toast';
 import { DefaultSocialIcon, ClipboardIcon } from '../icons/icons';
+import { DataMattDescription } from '../../data/mattdescription';
 
 export const EnterCard = ({ response, handleCopy }) => {
   return (
@@ -18,7 +19,7 @@ export const EnterCard = ({ response, handleCopy }) => {
                 name="response"
                 id="response"
                 className="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                placeholder="Example: Discover innovation with Mattech. With our software solutions you will discover a world of possibilities to improve your productivity and performance. Our latest technologies allow you to leap into the future with unprecedented efficiency."
+                placeholder={DataMattDescription.ResponseExample}
               />
 
               {/* Spacer element to match the height of the toolbar */}

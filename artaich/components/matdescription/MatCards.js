@@ -155,7 +155,7 @@ export const MatCards = () => {
                         )
                       )}
                       <div className="opacity-0 group-hover:opacity-100 absolute left-0 bottom-10 right-0 z-10 flex justify-center items-end text-xl text-black font-semibold rounded-full">
-                        Share
+                        {DataMattDescription.Share}
                       </div>
                     </div>
                   </div>

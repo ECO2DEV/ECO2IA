@@ -256,7 +256,7 @@ export const MatquizAI = () => {
                               {posibleAnswer === correctAnswer &&
                               isAnswerVisible ? (
                                 <p className="flex font-mediumjustify-center ml-2 text-green-500 text-center items-center">
-                                  Réponse Correcte
+                                  {DataMattQuiz.CorrectAnswer}
                                 </p>
                               ) : null}
                             </div>

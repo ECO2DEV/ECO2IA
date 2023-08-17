@@ -186,7 +186,7 @@ export const SportCoachResults = () => {
           </li>
           <PDFDownloadLinkDynamic
             document={<ExportPDF generateTrainingPlanContent={generateTrainingPlanContent} />}
-            fileName="SportCoach.pdf"
+            fileName="MattSport_Programme.pdf"
           >
             <li className="flex space-x-4 items-center w-auto text-gray-500 hover:text-gray-500">
               <svg

@@ -8,6 +8,7 @@ export const DataMattDescription = {
     French: "Français",
     Deutsch: "Allemand",
     Italian: "Italien",
+    Portuguese: "Portugais",
     ProductText:"Décrivez-nous le produit, par exemple : X-Boost, la solution à vos soucis de batterie faible, vous permettant de rester connecté(e) à tout moment, n'importe où.",
     Submit: "Submit",
     MattDescriptionIA:"MatDescription alimenté par l'IA",
@@ -24,5 +25,6 @@ export const DataMattDescription = {
     NoText:"Aucun texte à copier !",
     ResponseExample: "Exemple : Découvrez l'innovation avec Mattech. Grâce à nos solutions logicielles, vous découvrirez un monde de possibilités pour améliorer votre productivité et vos performances. Nos dernières technologies vous permettent de sauter dans le futur avec une efficacité sans précédent.",
     AttachFile:"Joindre un fichier",
-    Our:"Notre"
+    Our:"Notre",
+    Share:"Partager"
 }

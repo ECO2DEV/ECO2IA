@@ -1,5 +1,6 @@
 import React from "react";
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import { DataMatTraduct } from "../../data/mattraduct";
 
 const styles = StyleSheet.create({
   page: { 
@@ -43,16 +44,16 @@ const ExportPDF = ({ translationResponse, prompt }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.header}>
-        <Text style={styles.title}> MatTraduct </Text>
+        <Text style={styles.title}> {DataMatTraduct.MatTraduct} </Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.label}>Usuario:</Text>
+        <Text style={styles.label}>{DataMatTraduct.YourText}</Text>
         <Text style={styles.text}>{prompt}</Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.label}>Traducción:</Text>
+        <Text style={styles.label}>{DataMatTraduct.Translation}</Text>
         <Text style={styles.text}>{translationResponse}</Text>
       </View>
     </Page>

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { DataResetPassword } from '../../data/resetpassword';
 
 export default function ResetPassword() {
   const router = useRouter();
@@ -15,9 +16,9 @@ export default function ResetPassword() {
     e.preventDefault();
     try {
       await axios.post('/reset-password', { token, password });
-      setMessage('Password reset successfully.');
+      setMessage(DataResetPassword.PasswordReset);
     } catch (error) {
-      setMessage('Error resetting password.');
+      setMessage(DataResetPassword.ErrorPassword);
     }
   };
 
@@ -25,12 +26,12 @@ export default function ResetPassword() {
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h1 className="text-3xl font-bold text-center text-gray-900">Reset Password</h1>
+          <h1 className="text-3xl font-bold text-center text-gray-900"> {DataResetPassword.ResetPasswordTitle} </h1>
         </div>
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="password" className="sr-only">New Password</label>
+              <label htmlFor="password" className="sr-only"> {DataResetPassword.NewPassword} </label>
               <input id="password" name="password" type="password" value={password} onChange={handlePasswordChange} className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="New Password" />
             </div>
           </div>
@@ -41,7 +42,7 @@ export default function ResetPassword() {
                   <path fillRule="evenodd" d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 011.414 1.414L11.414 10l2.293 2.293a1 1 0 01-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10 6.293 7.707a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </span>
-              Reset Password
+              {DataResetPassword.ResentPassword}
             </button>
           </div>
         </form>
