@@ -83,7 +83,7 @@ export default function OptionsMattraduct({
               </button>
             </li>
           </PDFDownloadLinkDynamic>
-          <li className="flex items-center">
+          {/* <li className="flex items-center">
             <svg
               className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
               viewBox="0 0 24 44"
@@ -105,7 +105,7 @@ export default function OptionsMattraduct({
                 </span>
               </div>
             </button>
-          </li>
+          </li> */}
           <li className="flex items-center">
             <svg
               className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
