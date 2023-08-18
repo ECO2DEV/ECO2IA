@@ -35,15 +35,4 @@ function ExportPDF({ generateTrainingPlanContent }) {
   );
 }
 
-// const ExportPDF = ({ generateTrainingPlanContent }) => (
-//   <Document>
-//     <Page size="A4" style={styles.page}>
-//       <View style={styles.section}>
-//         <Text style={styles.title}>SportCoach</Text>
-//         <Text>{generateTrainingPlanContent}</Text>
-//       </View>
-//     </Page>
-//   </Document>
-// );
-
 export default ExportPDF;
