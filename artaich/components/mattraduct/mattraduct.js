@@ -70,11 +70,11 @@ const MattraductAI = () => {
       .writeText(secondResult)
       .then(() => {
         result.length > 0
-          ? toast.success('Text copied to clipboard!')
-          : toast.error('No text to copy!');
+          ? toast.success(DataMatTraduct.CopiedSuccess)
+          : toast.error(DataMatTraduct.NoText);
       })
       .catch(() => {
-        toast.error('Failed to copy text to clipboard!');
+        toast.error(DataMatTraduct.CopiedFailed);
       });
   };
   const handleMatTraduct = () => {

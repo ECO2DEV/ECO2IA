@@ -35,10 +35,10 @@ export default function OptionsMattraduct({
   const { promptTokens } = useContext(PromptContext);
   return (
     <div className="">
-      <nav className="flex" aria-label="Breadcrumb">
+      <nav className="flex justify-center" aria-label="Breadcrumb">
         <ol
           role="list"
-          className="flex space-x-4 rounded-md bg-gray-50 px-6 shadow"
+          className="flex space-x-2 rounded-md bg-gray-50 px-3 py-2 sm:px-6 shadow"
         >
           <li className="flex">
             <div className="flex items-center">
@@ -57,7 +57,7 @@ export default function OptionsMattraduct({
                 translationResponse={translationResponse}
               />
             }
-            fileName="MatTraduct.pdf"
+            fileName="MattResume.pdf"
           >
             <li className="flex items-center">
               <svg
