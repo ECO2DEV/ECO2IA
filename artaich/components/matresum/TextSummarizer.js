@@ -56,9 +56,6 @@ function TextSummarizerPage() {
     setActiveAI('TextSummarizerAI');
   }, []);
 
-  // Custom hooks utilizados
-  // const { data } = useMatResume(user); // Custom hook para manejar datos relacionados con el usuario
-
   // Manejador de cambios en el texto de entrada
   const handleTextChange = (event) => {
     const text = event.target.value;
@@ -84,9 +81,16 @@ function TextSummarizerPage() {
     setIsUploading(true);
 
     try {
+      if (acceptedFiles.length === 0) {
+        throw new Error('No se ha seleccionado ningun archivo.')
+      }
+      
       const file = acceptedFiles[0];
-      const reader = new FileReader();
+      if (file.type !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+        throw new Error('El archivo debe ser de tipo docx');
+      }
 
+      const reader = new FileReader();
       reader.onload = async (event) => {
         const arrayBuffer = event.target.result;
         const result = await convertDocToPlainText(arrayBuffer);
@@ -95,7 +99,8 @@ function TextSummarizerPage() {
 
       reader.readAsArrayBuffer(file);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error:', error.message);
+      toast.error('El archivo debe ser de tipo Docx')
     } finally {
       setIsUploading(false);
     }
@@ -165,7 +170,10 @@ function TextSummarizerPage() {
   };
 
   // Configuración del useDropzone
-  const { getRootProps, getInputProps } = useDropzone({ onDrop: handleDrop });
+  const { getRootProps, getInputProps } = useDropzone({ 
+    onDrop: handleDrop,
+    accept: 'application/doc',
+  });
 
   return (
     <div className="container mx-auto py-5 min-h-screen">
