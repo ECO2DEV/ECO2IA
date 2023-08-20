@@ -2,7 +2,7 @@ import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
-
+import { DataMattResume } from '../../data/mattresume';
 export default function ModalDelete({ onClose, onHandleDelete }) {
   const [open, setOpen] = useState(true);
 
@@ -53,12 +53,11 @@ export default function ModalDelete({ onClose, onHandleDelete }) {
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
-                        Are you sure you want to delete this conversation?
+                        {DataMattResume.YouWantDelete}
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          All of your data will be permanently removed from our
-                          servers forever. This action cannot be undone.
+                          {DataMattResume.DataWillBeRemoved}
                         </p>
                       </div>
                     </div>
@@ -71,10 +70,10 @@ export default function ModalDelete({ onClose, onHandleDelete }) {
                     onClick={() => {
                       onHandleDelete();
                       onClose();
-                      toast.success('Conversation deleted successfully');
+                      toast.success(DataMattResume.ConversationDeleted);
                     }}
                   >
-                    Delete
+                    {DataMattResume.Delete}
                   </button>
                   <button
                     type="button"
@@ -82,7 +81,7 @@ export default function ModalDelete({ onClose, onHandleDelete }) {
                     onClick={() => setOpen(false)}
                     ref={cancelButtonRef}
                   >
-                    Cancel
+                    {DataMattResume.Cancel}
                   </button>
                 </div>
               </Dialog.Panel>

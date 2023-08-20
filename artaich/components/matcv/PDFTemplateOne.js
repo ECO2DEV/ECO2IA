@@ -1,3 +1,4 @@
+import { DataMattCV } from '../../data/mattcv';
 import { Fragment } from 'react';
 import { Page, Text, View, Document, Image } from '@react-pdf/renderer';
 import dynamic from 'next/dynamic';
@@ -31,7 +32,7 @@ export const PDFTemplateOne = ({
             </View>
             {textProfile.length > 0 && (
               <View>
-                <Text style={stylesOne.subtitle}>Profile:</Text>
+                <Text style={stylesOne.subtitle}>{DataMattCV.Profile}</Text>
                 <Text style={stylesOne.profileText}>
                   {debouncedTextProfile}
                 </Text>
@@ -39,7 +40,7 @@ export const PDFTemplateOne = ({
             )}
             {workExperienceFields.length > 0 && (
               <View>
-                <Text style={stylesOne.subtitle}>Employment History:</Text>
+                <Text style={stylesOne.subtitle}>{DataMattCV.EmploymentHistory}</Text>
                 {workExperienceFields.map((experience, index) => (
                   <View key={index}>
                     <Text style={stylesOne.thirdTitle}>
@@ -65,7 +66,7 @@ export const PDFTemplateOne = ({
             )}
             {educationFields.length > 0 && (
               <View>
-                <Text style={stylesOne.subtitle}>Education: </Text>
+                <Text style={stylesOne.subtitle}>{DataMattCV.EducationBackground} </Text>
                 {educationFields.map((education, index) => (
                   <Fragment key={index}>
                     <Text style={stylesOne.thirdTitle}>
@@ -87,7 +88,7 @@ export const PDFTemplateOne = ({
             </View>
             {debouncedFormData.fullName && debouncedFormData.domainOfStudy && (
               <View>
-                <Text style={stylesOne.subtitle}>Details</Text>
+                <Text style={stylesOne.subtitle}>{DataMattCV.Details}</Text>
                 <Text style={stylesOne.profileText}>
                   {debouncedFormData.domainOfStudy}
                 </Text>
@@ -95,12 +96,12 @@ export const PDFTemplateOne = ({
                 <Text style={stylesOne.phoneDetail}>
                   {debouncedFormData.phone}
                 </Text>
-                <Text style={stylesOne.subtitle}>E-mail:</Text>
+                <Text style={stylesOne.subtitle}>{DataMattCV.Email}</Text>
                 <Text style={stylesOne.profileText}>
                   {debouncedFormData.email}
                 </Text>
                 {/* Add other customer info based on the formData */}
-                <Text style={stylesOne.subtitle}>Nationality:</Text>
+                <Text style={stylesOne.subtitle}>{DataMattCV.Nationality}</Text>
                 <Text style={stylesOne.profileText}>
                   {debouncedFormData.nationality}
                 </Text>

@@ -1,3 +1,4 @@
+// components/mattraduct/optionsMattraduct.js
 import { useContext } from "react";
 import { DataMatTraduct } from "../../data/mattraduct";
 import { PromptContext } from "../../context/prompts/PromptContext";
@@ -27,16 +28,17 @@ export default function OptionsMattraduct({
   language,
   handleShowThirdTextarea,
   onClick,
-  translationResponse
+  translationResponse,
+  prompt
 }) {
   // console.log("language" + language)
   const { promptTokens } = useContext(PromptContext);
   return (
     <div className="">
-      <nav className="flex" aria-label="Breadcrumb">
+      <nav className="flex justify-center" aria-label="Breadcrumb">
         <ol
           role="list"
-          className="flex space-x-4 rounded-md bg-gray-50 px-6 shadow"
+          className="flex space-x-2 rounded-md bg-gray-50 px-3 py-2 sm:px-6 shadow"
         >
           <li className="flex">
             <div className="flex items-center">
@@ -49,8 +51,13 @@ export default function OptionsMattraduct({
             </div>
           </li>
           <PDFDownloadLinkDynamic
-            document={<ExportPDF translationResponse={translationResponse} />}
-            fileName="MatTraduct.pdf"
+            document={
+              <ExportPDF 
+                prompt={prompt} 
+                translationResponse={translationResponse}
+              />
+            }
+            fileName="MattResume.pdf"
           >
             <li className="flex items-center">
               <svg
@@ -76,7 +83,7 @@ export default function OptionsMattraduct({
               </button>
             </li>
           </PDFDownloadLinkDynamic>
-          <li className="flex items-center">
+          {/* <li className="flex items-center">
             <svg
               className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
               viewBox="0 0 24 44"
@@ -98,7 +105,7 @@ export default function OptionsMattraduct({
                 </span>
               </div>
             </button>
-          </li>
+          </li> */}
           <li className="flex items-center">
             <svg
               className="h-full text-xs w-5 flex-shrink-0 text-gray-200"

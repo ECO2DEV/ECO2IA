@@ -128,9 +128,7 @@ export const MatquizAI = () => {
   return (
     <section className="flex flex-col sm:flex-row justify-center items-center py-10 gap-2">
       <div className="w-full max-w-md mx-4">
-        <div className="text-center">
-          <h1 className="text-xl  font-bold mb-8">MATTQCM</h1>
-        </div>
+        
         <form onSubmit={handleSubmit}>
           <textarea
             id="prompt"
@@ -258,7 +256,7 @@ export const MatquizAI = () => {
                               {posibleAnswer === correctAnswer &&
                               isAnswerVisible ? (
                                 <p className="flex font-mediumjustify-center ml-2 text-green-500 text-center items-center">
-                                  Réponse Correcte
+                                  {DataMattQuiz.CorrectAnswer}
                                 </p>
                               ) : null}
                             </div>

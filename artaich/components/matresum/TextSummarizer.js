@@ -56,9 +56,6 @@ function TextSummarizerPage() {
     setActiveAI('TextSummarizerAI');
   }, []);
 
-  // Custom hooks utilizados
-  // const { data } = useMatResume(user); // Custom hook para manejar datos relacionados con el usuario
-
   // Manejador de cambios en el texto de entrada
   const handleTextChange = (event) => {
     const text = event.target.value;
@@ -84,9 +81,16 @@ function TextSummarizerPage() {
     setIsUploading(true);
 
     try {
+      if (acceptedFiles.length === 0) {
+        throw new Error('No se ha seleccionado ningun archivo.')
+      }
+      
       const file = acceptedFiles[0];
-      const reader = new FileReader();
+      if (file.type !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+        throw new Error('El archivo debe ser de tipo docx');
+      }
 
+      const reader = new FileReader();
       reader.onload = async (event) => {
         const arrayBuffer = event.target.result;
         const result = await convertDocToPlainText(arrayBuffer);
@@ -95,7 +99,8 @@ function TextSummarizerPage() {
 
       reader.readAsArrayBuffer(file);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error:', error.message);
+      toast.error('El archivo debe ser de tipo Docx')
     } finally {
       setIsUploading(false);
     }
@@ -165,16 +170,17 @@ function TextSummarizerPage() {
   };
 
   // Configuración del useDropzone
-  const { getRootProps, getInputProps } = useDropzone({ onDrop: handleDrop });
+  const { getRootProps, getInputProps } = useDropzone({ 
+    onDrop: handleDrop,
+    accept: 'application/doc',
+  });
 
   return (
     <div className="container mx-auto py-5 min-h-screen">
       <div className="flex flex-col md:flex-row h-full">
         <div className="w-full md:w-6/12 h-full flex-grow -mr-1">
           <div className="bg-white rounded-lg shadow-lg p-6 h-full">
-            <h1 className="text-3xl font-bold text-center mb-8">
-              {DataMattResume.Title}
-            </h1>
+        
             <textarea
               className="w-full p-4 rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-20"
               value={fileContent || inputText}
@@ -274,7 +280,7 @@ function TextSummarizerPage() {
                   </li>
                   <PDFDownloadLinkDynamic
                     document={<ExportPDF summaryText={summaryText} />}
-                    fileName="TextSumarizer.pdf"
+                    fileName="MattResume.pdf"
                   >
                     <li className="flex items-center">
                       <svg
@@ -300,7 +306,7 @@ function TextSummarizerPage() {
                       </button>
                     </li>
                   </PDFDownloadLinkDynamic>
-                  <li className="flex items-center">
+                  {/* <li className="flex items-center">
                     <svg
                       className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
                       viewBox="0 0 24 44"
@@ -322,7 +328,7 @@ function TextSummarizerPage() {
                         </span>
                       </div>
                     </button>
-                  </li>
+                  </li> */}
                   <li className="flex items-center">
                     <svg
                       className="h-full text-xs w-5 flex-shrink-0 text-gray-200"

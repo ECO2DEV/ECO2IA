@@ -70,11 +70,11 @@ const MattraductAI = () => {
       .writeText(secondResult)
       .then(() => {
         result.length > 0
-          ? toast.success('Text copied to clipboard!')
-          : toast.error('No text to copy!');
+          ? toast.success(DataMatTraduct.CopiedSuccess)
+          : toast.error(DataMatTraduct.NoText);
       })
       .catch(() => {
-        toast.error('Failed to copy text to clipboard!');
+        toast.error(DataMatTraduct.CopiedFailed);
       });
   };
   const handleMatTraduct = () => {
@@ -181,9 +181,7 @@ const MattraductAI = () => {
   return (
     <>
       <section className="flex flex-col justify-center items-center gap-6 min-h-screen ">
-        <div className="text-center">
-          <h1 className="text-4xl  font-bold mb-8">MatTraduct</h1>
-        </div>
+       
         <div className="w-full max-w-5xl bg-white shadow-lg rounded-md">
           <div className="flex items-center justify-around bg-indigo-600 text-gray-100 px-4 py-2 rounded-t-md">
             <LanguageSelector
@@ -242,6 +240,7 @@ const MattraductAI = () => {
           onClick={handleModalHistory}
           language={fromLanguage}
           translationResponse={translationResponse}
+          prompt={prompt}
         />
       </section>
       {modalOpen && (

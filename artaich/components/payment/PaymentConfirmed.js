@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link';
+import { DataPayment } from '../../data/payment';
 
 export default function PaymentConfirmed({paymentIntent, redirect}) {
   const [open, setOpen] = useState(true)
@@ -41,11 +42,11 @@ export default function PaymentConfirmed({paymentIntent, redirect}) {
                   </div>
                   <div className="mt-3 text-center sm:mt-5">
                     <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                      Payment successful {paymentIntent}
+                      {DataPayment.PaymentSucessful} {paymentIntent}
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        You can now access our awesome IA plateform. Thanks for Subscribing ! 
+                        {DataPayment.YouCanAccess} 
                       </p>
                     </div>
                   </div>
@@ -56,7 +57,7 @@ export default function PaymentConfirmed({paymentIntent, redirect}) {
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
-                    Go back to dashboard
+                    {DataPayment.GoDashboard}
                   </button>
                   </Link>
                 </div>

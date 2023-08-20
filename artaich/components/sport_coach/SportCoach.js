@@ -8,7 +8,7 @@ import { SportCoachResults } from "./SportCoachResults";
 import { useSportCoach } from "../../hooks/useSportCoach";
 import { WelcomeSport } from "./welcomesport";
 import { DataMattSport } from "../../data/mattsport";
-import Loader from '../loader/loader';
+import Loader from "../loader/loader";
 export const SportCoachIA = (props) => {
   // Estados para almacenar los datos del formulario
   const [weight, setWeight] = useState("");
@@ -26,7 +26,7 @@ export const SportCoachIA = (props) => {
 
   // Obtener los datos del entrenador deportivo personalizado
   const { data, mutate } = useSportCoach(user);
-  // Obtener los datos y funciones del contexto de prompts
+  // inicializamos el estado del prompt con el valor "Select an option"
   const { prompt, setPrompt, setResponse, setPromptTokens, promptTokens } =
     useContext(PromptContext);
 
@@ -99,10 +99,7 @@ export const SportCoachIA = (props) => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <h1 className="text-4xl font-bold text-center mb-8">
-        {DataMattSport.Title}
-      </h1>
-      <p className="text-center">{DataMattSport.SubTitle}</p>
+      
       <div className="flex justify-center items-center text-gray-900 mb-4">
         <span>
           Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
@@ -125,13 +122,10 @@ export const SportCoachIA = (props) => {
           </div>
         ) && <SportCoachResults />
       )}
-      <div className="flex flex-col fixed bottom-3 w-[80%] md:flex-row md:space-x-8 bg-gray-200 justify-center">
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col md:flex-row md:items-center md:w-auto w-full md:max-w-[72.5%] px-4 sm:flex-wrap py-3 md:py-0"
-        >
-          <div className="flex gap-2 sm:flex-row items-center">
-            <div className="w-full sm:w-1/2 md:w-1/4 my-4">
+      <div className="bottom-3 z-20 sticky grid xl:grid-cols-[minmax(auto,_1fr)_100px] md:fixed xl:fixed p-4 bg-gray-200">
+        <form onSubmit={handleSubmit} className="">
+          <div className="grid xl:grid-cols-5 md:grid-cols-5 items-center gap-4 grid-cols-2">
+            <div className="sm:w-1/2 md:w-1/4 my-4">
               <fieldset>
                 <InputField
                   label={DataMattSport.Weight}
@@ -139,7 +133,6 @@ export const SportCoachIA = (props) => {
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
                   type="text"
-                  className="w-full"
                 />
               </fieldset>
             </div>
@@ -151,11 +144,10 @@ export const SportCoachIA = (props) => {
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
                   type="text"
-                  className="w-full"
                 />
               </fieldset>
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/4 my-4">
+            <div className="w-full my-4">
               <label
                 htmlFor="prompt"
                 className="block text-sm font-medium text-gray-700"
@@ -165,17 +157,15 @@ export const SportCoachIA = (props) => {
               <select
                 id="prompt"
                 name="prompt"
-                value={prompt}
+                // value={""}
+                defaultValue=""
                 onChange={handlePromptChange}
-                className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 px-4 py-2 border w-full border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               >
-                <option value="" disabled selected>
-                  Select an option{" "}
+                <option disabled value={prompt}>
+                  Select an option
                 </option>
-                <option value="weight loss">
-                  {" "}
-                  {DataMattSport.WeightLoss}{" "}
-                </option>
+                <option value="weight loss"> {DataMattSport.WeightLoss}</option>
                 <option value="muscle building">
                   {" "}
                   {DataMattSport.MuscleBuilding}{" "}
@@ -185,7 +175,7 @@ export const SportCoachIA = (props) => {
                 <option value="dry"> {DataMattSport.Dry} </option>
               </select>
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/4 my-4">
+            <div className="w-full my-4">
               <label
                 htmlFor="trainingDays"
                 className="block text-sm font-medium text-gray-700"
@@ -208,15 +198,13 @@ export const SportCoachIA = (props) => {
                 <option value="7"> {DataMattSport.SevenDays} </option>
               </select>
             </div>
-            <div className="flex md:ml-2">
+            <div className="md:ml-2 w-full grid-cols-1">
               <button
                 type="submit"
                 disabled={submitting}
-                className="mt-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-7 py-2 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                className="mt-5 h-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-7 py-2 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                {submitting
-                  ? <Loader/>
-                  : DataMattSport.GetButton}
+                {submitting ? <Loader /> : DataMattSport.GetButton}
               </button>
             </div>
           </div>
