@@ -2,13 +2,14 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 const stripePromise =  loadStripe('pk_test_51MmF5HEZbX6Zpxv9PbTYYGR1U9d14TmcHEsxCKTPzDVpKXDcaFqz87ElscE2TRYjdV3t1r5gxVo3G8FRAlOivqKG00jMOoioNN');
 
-export default function Checkout({price}) {
+export default function Checkout({price, customerid}) {
     const handleCheckout = async () => {
       try {
         const stripe = await stripePromise;
-  
+       
         const checkoutSession = await axios.post("/api/create-subscription", {
           price,
+          customerid
         });
        //console.log(checkoutSession);
 
