@@ -5,7 +5,7 @@ const stripe = require('stripe')('sk_test_51MmF5HEZbX6Zpxv9cu17vK5ZbcYrLIWRB9F1b
 export default async function handler(req, res) {
   
   if (req.method === 'POST') {
-    const { price } = req.body;
+    const { price, customerid } = req.body;
 
     try {
       const session = await stripe.checkout.sessions.create({
@@ -16,10 +16,10 @@ export default async function handler(req, res) {
         },
           
         ],
-        customer: 'cus_OEB4HLV91e5FSn',
+        customer: customerid, //'cus_OEB4HLV91e5FSn',
         //mode: 'payment',
-        success_url: `${req.headers.origin}/success`,
-        cancel_url: `${req.headers.origin}/cancele`,
+        success_url: `${req.headers.origin}/pairoll/success`,
+        cancel_url: `${req.headers.origin}/pairoll/cancele`,
       });
     
       res.send({url: session.url, sessionId : session.id})

@@ -6,9 +6,10 @@ export default function Checkout({price}) {
     const handleCheckout = async () => {
       try {
         const stripe = await stripePromise;
-  
+       
         const checkoutSession = await axios.post("/api/create-subscription", {
           price,
+          customerid
         });
        //console.log(checkoutSession);
 
