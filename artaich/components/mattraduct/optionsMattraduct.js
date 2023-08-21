@@ -1,33 +1,44 @@
-import { useContext } from 'react';
-import { DataMatTraduct } from '../../data/mattraduct';
-import { PromptContext } from '../../context/prompts/PromptContext';
+// components/mattraduct/optionsMattraduct.js
+import { useContext } from "react";
+import { DataMatTraduct } from "../../data/mattraduct";
+import { PromptContext } from "../../context/prompts/PromptContext";
 import {
   MinusIcon,
   PlusIcon,
   ShareIcon,
   DocumentArrowDownIcon,
-  DocumentIcon
-} from '@heroicons/react/20/solid';
-import dynamic from 'next/dynamic';
+  DocumentIcon,
+} from "@heroicons/react/20/solid";
+import dynamic from "next/dynamic";
+// Import PDFDownloadLink separately before the component definition
+const PDFDownloadLinkDynamic = dynamic(
+  () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
+  {
+    ssr: false,
+  }
+);
 
-import { HistoryIcon, VolumenSpeakerIcon } from '../icons/icons';
+import { HistoryIcon, VolumenSpeakerIcon } from "../icons/icons";
+import ExportPDF from "./ExportPDF";
 
-const Transcription = dynamic(() => import('./transcript'), { ssr: false });
+const Transcription = dynamic(() => import("./transcript"), { ssr: false });
 
 export default function OptionsMattraduct({
   showThirdTextarea,
   language,
   handleShowThirdTextarea,
-  onClick
+  onClick,
+  translationResponse,
+  prompt
 }) {
- // console.log("language" + language)
+  // console.log("language" + language)
   const { promptTokens } = useContext(PromptContext);
   return (
     <div className="">
-      <nav className="flex" aria-label="Breadcrumb">
+      <nav className="flex justify-center" aria-label="Breadcrumb">
         <ol
           role="list"
-          className="flex space-x-4 rounded-md bg-gray-50 px-6 shadow"
+          className="flex space-x-2 rounded-md bg-gray-50 px-3 py-2 sm:px-6 shadow"
         >
           <li className="flex">
             <div className="flex items-center">
@@ -39,30 +50,40 @@ export default function OptionsMattraduct({
               </button>
             </div>
           </li>
-          <li className="flex items-center">
-            <svg
-              className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
-              viewBox="0 0 24 44"
-              preserveAspectRatio="none"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
-            <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
-              <div className="flex justify-center items-center">
-                <DocumentArrowDownIcon
-                  className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
-                  aria-hidden="true"
-                />
-                <span className="hidden sm:contents">
-                  {' '}
-                  {DataMatTraduct.ButtonPDF}{' '}
-                </span>
-              </div>
-            </button>
-          </li>
-          <li className="flex items-center">
+          <PDFDownloadLinkDynamic
+            document={
+              <ExportPDF 
+                prompt={prompt} 
+                translationResponse={translationResponse}
+              />
+            }
+            fileName="MattResume.pdf"
+          >
+            <li className="flex items-center">
+              <svg
+                className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+                <div className="flex justify-center items-center">
+                  <DocumentArrowDownIcon
+                    className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                    aria-hidden="true"
+                  />
+                  <span className="hidden sm:contents">
+                    {" "}
+                    {DataMatTraduct.ButtonPDF}{" "}
+                  </span>
+                </div>
+              </button>
+            </li>
+          </PDFDownloadLinkDynamic>
+          {/* <li className="flex items-center">
             <svg
               className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
               viewBox="0 0 24 44"
@@ -79,12 +100,12 @@ export default function OptionsMattraduct({
                   aria-hidden="true"
                 />
                 <span className="hidden sm:contents">
-                  {' '}
-                  {DataMatTraduct.ButtonWord}{' '}
+                  {" "}
+                  {DataMatTraduct.ButtonWord}{" "}
                 </span>
               </div>
             </button>
-          </li>
+          </li> */}
           <li className="flex items-center">
             <svg
               className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
@@ -103,8 +124,8 @@ export default function OptionsMattraduct({
                   aria-hidden="true"
                 />
                 <span className="hidden sm:contents">
-                  {' '}
-                  {DataMatTraduct.ButtonShare}{' '}
+                  {" "}
+                  {DataMatTraduct.ButtonShare}{" "}
                 </span>
               </div>
             </button>
@@ -130,8 +151,8 @@ export default function OptionsMattraduct({
                     aria-hidden="true"
                   />
                   <span className="hidden sm:contents">
-                    {' '}
-                    {DataMatTraduct.ButtonLanguage}{' '}
+                    {" "}
+                    {DataMatTraduct.ButtonLanguage}{" "}
                   </span>
                 </div>
               ) : (
@@ -141,8 +162,8 @@ export default function OptionsMattraduct({
                     aria-hidden="true"
                   />
                   <span className="hidden sm:contents">
-                    {' '}
-                    {DataMatTraduct.ButtonLanguage}{' '}
+                    {" "}
+                    {DataMatTraduct.ButtonLanguage}{" "}
                   </span>
                 </div>
               )}

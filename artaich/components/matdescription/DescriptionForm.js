@@ -1,15 +1,22 @@
-import { useState, useContext, use } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../../context/user/UserContext';
 import { MatDescriptionResp } from '../../util/api/MatDescriptionResp';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import Loader from '../loader/loader';
 import { toast } from 'react-hot-toast';
-import { DataMattDescription } from "../../data/mattdescription"
+import { DataMattDescription } from '../../data/mattdescription';
 
 const DescriptionForm = () => {
   const { user } = useContext(UserContext);
-  const { setResponse, setPrompt, setPromptTokens, prompt, promptTokens } =
-    useContext(PromptContext);
+  const {
+    setResponse,
+    setPrompt,
+    setPromptTokens,
+    activeAI,
+    setActiveAI,
+    prompt,
+    promptTokens
+  } = useContext(PromptContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -20,6 +27,14 @@ const DescriptionForm = () => {
     socialMedia: [],
     language: ''
   });
+
+  useEffect(() => {
+    if (activeAI !== 'MatDescriptionAI') {
+      setPrompt('');
+      setPromptTokens(0);
+    }
+    setActiveAI('MatDescriptionAI');
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -78,7 +93,7 @@ const DescriptionForm = () => {
       })
       .finally(() => {
         setIsLoading(false);
-        setPrompt('');
+        // setPrompt('');
       });
   };
 
@@ -124,8 +139,9 @@ const DescriptionForm = () => {
           <option value="english"> {DataMattDescription.English} </option>
           <option value="spanish"> {DataMattDescription.Spanish} </option>
           <option value="french"> {DataMattDescription.French} </option>
-          <option value="german">  {DataMattDescription.Deutsch} </option>
+          <option value="german"> {DataMattDescription.Deutsch} </option>
           <option value="italian"> {DataMattDescription.Italian} </option>
+          <option value="portuguese">{DataMattDescription.Portuguese} </option>
         </select>
       </div>
       <div className="mb-4">
@@ -205,8 +221,8 @@ const DescriptionForm = () => {
         type="submit"
         className={`${
           isLoading || !prompt
-            ? 'text-white bg-gray-500 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500 mt-8'
-            : 'w-full  bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full my-8'
+            ? 'text-white bg-gray-500  text-center focus:outline-none focus:ring-2 focus:ring-blue-500 py-2 px-4 rounded-full'
+            : '  bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full my-8'
         } w-full mt-4 px-4 py-2 `}
       >
         {isLoading ? (
@@ -217,7 +233,7 @@ const DescriptionForm = () => {
           'Submit'
         )}
       </button>
-      <span className=" flex justify-center items-center text-gray-900 my-2">
+      <span className=" flex justify-center items-center text-gray-900">
         Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
       </span>
     </form>

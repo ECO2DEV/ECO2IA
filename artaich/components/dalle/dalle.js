@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import { UserContext } from '../../context/user/UserContext';
 import { useDalle } from '../../hooks/useDalle';
@@ -23,10 +23,23 @@ export default function DalleIA() {
   const [loading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState('');
   const { user } = useContext(UserContext);
-  const { prompt, setPrompt, setPromptTokens, setResponse } =
-    useContext(PromptContext);
+  const {
+    prompt,
+    setPrompt,
+    setPromptTokens,
+    setResponse,
+    activeAI,
+    setActiveAI
+  } = useContext(PromptContext);
 
   const { data, mutate } = useDalle(user?.id);
+
+  useEffect(() => {
+    if (activeAI !== 'DalleIA') {
+      setPrompt('');
+    }
+    setActiveAI('DalleIA');
+  }, []);
 
   const handleChange = (e) => {
     setPrompt(e.target.value);
@@ -63,6 +76,7 @@ export default function DalleIA() {
 
   return (
     <section>
+      
       {imageSrc.firstImage === '' ? (
         <WelcomeDalle />
       ) : openHelpers ? (

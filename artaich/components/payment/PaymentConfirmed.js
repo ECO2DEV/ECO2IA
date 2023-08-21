@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link';
+import { DataPayment } from '../../data/payment';
 
 export default function PaymentConfirmed({paymentIntent, redirect}) {
   const [open, setOpen] = useState(true)
