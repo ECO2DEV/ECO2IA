@@ -7,6 +7,7 @@ import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { CheckIcon, CurrencyEuroIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
+import { DataPayment } from '../../data/payment';
 
 
 const CheckoutForm = ({ onClose, amount, currency,user }) => {
@@ -131,7 +132,7 @@ const CheckoutForm = ({ onClose, amount, currency,user }) => {
                       as="h3"
                       className="text-base font-semibold leading-6 text-gray-900"
                     >
-                      Payment Checkout
+                      {DataPayment.PaymentCheckout}
                     </Dialog.Title>
                     <div className="mt-2">
                       <form onSubmit={handleSubmit}>
@@ -142,7 +143,7 @@ const CheckoutForm = ({ onClose, amount, currency,user }) => {
                             className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
                             disabled={!stripe}
                           >
-                            Submit
+                            {DataPayment.Submit}
                           </button>
                           <button
                             type="button"
@@ -150,7 +151,7 @@ const CheckoutForm = ({ onClose, amount, currency,user }) => {
                             onClick={onClose}
                             ref={cancelButtonRef}
                           >
-                            Cancel
+                            {DataPayment.Cancel}
                           </button>
                         </div>
                       </form>

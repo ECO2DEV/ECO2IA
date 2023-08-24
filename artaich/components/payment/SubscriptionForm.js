@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { DataPayment } from '../../data/payment';
 
 const SubscriptionForm = () => {
   const stripe = useStripe();
@@ -50,7 +51,7 @@ const SubscriptionForm = () => {
   return (
     <div>
       {success ? (
-        <p>Subscription created successfully!</p>
+        <p> {DataPayment.SubscriptionCreated} </p>
       ) : (
         <form onSubmit={handleSubmit}>
           <CardElement options={{ style: { base: { fontSize: '16px' } } }} />
@@ -58,7 +59,7 @@ const SubscriptionForm = () => {
           {error && <p style={{ color: 'red' }}>{error}</p>}
 
           <button type="submit" disabled={!stripe || !elements || loading}>
-            {loading ? 'Processing...' : 'Subscribe'}
+            {loading ? (DataPayment.Processing) : (DataPayment.Suscribe)}
           </button>
         </form>
       )}

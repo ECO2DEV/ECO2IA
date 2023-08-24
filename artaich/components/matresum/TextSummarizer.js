@@ -280,7 +280,7 @@ function TextSummarizerPage() {
                   </li>
                   <PDFDownloadLinkDynamic
                     document={<ExportPDF summaryText={summaryText} />}
-                    fileName="TextSumarizer.pdf"
+                    fileName="MattResume.pdf"
                   >
                     <li className="flex items-center">
                       <svg

@@ -141,6 +141,7 @@ const DescriptionForm = () => {
           <option value="french"> {DataMattDescription.French} </option>
           <option value="german"> {DataMattDescription.Deutsch} </option>
           <option value="italian"> {DataMattDescription.Italian} </option>
+          <option value="portuguese">{DataMattDescription.Portuguese} </option>
         </select>
       </div>
       <div className="mb-4">

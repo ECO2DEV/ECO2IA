@@ -20,5 +20,10 @@ export const DataMattResume ={
     LatestImages:"Dernières images",
     CopiedSuccess:"Texte copié dans le presse-papiers !",
     CopiedFailed:"Échec de la copie du texte dans le presse-papiers !",
-    NoText:"Pas de texte à copier"
+    NoText:"Pas de texte à copier",
+    YouWantDelete:"Êtes-vous sûr(e) de vouloir supprimer cette conversation ?",
+    DataWillBeRemoved:"Toutes vos données seront définitivement supprimées de nos serveurs pour toujours. Cette action ne peut pas être annulée.",
+    ConversationDeleted:"Conversation supprimée avec succès",
+    Delete:"Supprimer",
+    Cancel:"Annuler"
 }
