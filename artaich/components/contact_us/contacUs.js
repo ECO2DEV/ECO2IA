@@ -35,7 +35,7 @@ export const ContacUs = ({ onClose = () => {} }) => {
       formData.telephone === '' ||
       formData.message === ''
     ) {
-      toast.error('Please fill all the fields');
+      toast.error(DataNosIA.NosIAPleaseFill);
       setLoading(false);
       return;
     }
@@ -46,18 +46,18 @@ export const ContacUs = ({ onClose = () => {} }) => {
       formData.lastName.length < 3 ||
       formData.lastName.length > 50
     ) {
-      toast.error('Name and Last Name must be between 3 and 50 characters');
+      toast.error(DataNosIA.NosIANameLastName);
       setLoading(false);
       return;
     }
 
     if (!formData.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
-      toast.error('Please enter a valid email');
+      toast.error(DataNosIA.NosIAValidEmail);
       setLoading(false);
       return;
     }
     if (!formData.email) {
-      toast.error('Please enter a valid email');
+      toast.error(DataNosIA.NosIAValidEmail);
       setLoading(false);
       return;
     }
@@ -71,7 +71,7 @@ export const ContacUs = ({ onClose = () => {} }) => {
         emailPromise
       ]);
 
-      toast.success('Messages sent successfully');
+      toast.success(DataNosIA.NosIAMessageSent);
 
       if (!isNotHomepage) {
         setTimeout(() => {
@@ -83,10 +83,10 @@ export const ContacUs = ({ onClose = () => {} }) => {
         }, 1500);
       }
 
-      console.log('This is the contact message', contactResponse);
-      console.log('This is the email message', emailResponse);
+      console.log(DataNosIA.NosIAContactMessage, contactResponse);
+      console.log(DataNosIA.NosIAEmailMessage, emailResponse);
     } catch (error) {
-      toast.error('Something went wrong');
+      toast.error(DataNosIA.NosIASomethingWrong);
       console.log(error);
     } finally {
       setLoading(false);

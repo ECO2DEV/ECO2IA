@@ -22,4 +22,11 @@ export const DataNosIA =
     NosIACONTACTFORMsendmessage:"Envoyer le message",
     NosIACONTACTFORMoptional:"Optionnel",
     NosIACONTACTFORMcharacters:"Maximum 500 caractères",
+    NosIAPleaseFill:"Veuillez remplir tous les champs",
+    NosIANameLastName:"Le prénom et le nom doivent comporter entre 3 et 50 caractères",
+    NosIAValidEmail:"Veuillez entrer une adresse e-mail valide",
+    NosIAMessageSent:"Messages envoyés avec succès",
+    NosIAContactMessage:"Ceci est le message de contact",
+    NosIAEmailMessage:"Ceci est le message par e-mail",
+    NosIASomethingWrong:"Quelque chose s'est mal passé"
 }
