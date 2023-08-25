@@ -5,6 +5,7 @@ import { promptReducer } from './promptReducer';
 import { countTokens } from '../../util/helpers/count_tokens';
 import axios from 'axios';
 import { strapiUrl, header } from '../../constants/constans';
+import { toast } from 'react-hot-toast';
 
 const promptInitialState = {
   activeAI: null,
@@ -45,6 +46,19 @@ export const PromptProvider = ({ children }) => {
     });
   };
 
+  const updateUserPlanToNull = async (userId) => {
+    try {
+      await axios.put(
+        `${strapiUrl}/api/users/${userId}?populate=*`,
+        { plan: null },
+        header
+      );
+      console.log('Updated user plan to null');
+    } catch (error) {
+      console.log('Error updating user plan', error);
+    }
+  };
+
   const setResponse = async (response) => {
     // Para que no pueda hacer el llamado a la API si no han escogido plan
     if (state.plan.length === 0) {
@@ -63,7 +77,8 @@ export const PromptProvider = ({ children }) => {
     // validate that the user has maxtokens to use, if not redirect to buy a plan
     if (state.plan.length === 0) return;
     if (state.plan.max_tokens <= 0) {
-      alert('You have no more tokens to use, please buy a new plan');
+      toast.error('You have no more tokens to use, please buy a new plan');
+
       router.push('/dashboard');
       return;
     }
@@ -80,7 +95,8 @@ export const PromptProvider = ({ children }) => {
     // validate that the user has maxtokens to use, if not redirect to buy a plan
     if (state.plan.length === 0) return;
     if (state.plan.max_tokens <= 0) {
-      alert('You have no more tokens to use, please buy a new plan');
+      toast.error('You have no more tokens to use, please buy a new plan');
+      updateUserPlanToNull(idsUpdateMaxTokens.userId);
       router.push('/dashboard');
       return;
     }
@@ -101,7 +117,7 @@ export const PromptProvider = ({ children }) => {
         `${strapiUrl}/api/plans/${id}?populate=*`,
         header
       );
-      // validate that the user has maxtokens to use, if not redirect to buy a plan
+      // validate that the user has maxtokens to use, if not, redirect to buy a plan
       if (state.plan.max_tokens <= 0) {
         router.push('/dashboard');
         return;
