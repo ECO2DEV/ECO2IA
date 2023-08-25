@@ -17,7 +17,7 @@ export default function Loader(params) {
           fill="currentFill"
         />
       </svg>
-      <span className="sr-only">Loading...</span>
+      <span className="sr-only">Chargement...</span>
     </div>
   );
 }

@@ -3,31 +3,35 @@ import { UserContext } from '../../context/user/UserContext';
 import { Dialog, Transition } from '@headlessui/react';
 import { MatCVResponse } from '../../util/api/MatCVResponse';
 import { toast } from 'react-hot-toast';
+
+import TagsInput from './TagsInput';
+
 import { DataMattCV } from '../../data/mattcv';
 
 export default function CVSummary({ onClose, setTextProfile }) {
   const cancelButtonRef = useRef(null);
   const [open, setOpen] = useState(true);
+  const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
   const [formProfile, setFormProfile] = useState({
     role: '',
     market: '',
-    keywords: ''
+    keywords: tags
   });
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!formProfile.role || !formProfile.market || !formProfile.keywords) {
-      toast.error('Please fill all the fields');
+    if (!formProfile.role || !formProfile.market) {
+      toast.error(DataMattCV.PleaseFill);
       return;
     }
-    if (
-      formProfile.role.length < 3 ||
-      formProfile.market.length < 3 ||
-      formProfile.keywords.length < 3
-    ) {
-      toast.error('Please fill all the fields');
+    if (tags.length === 0) {
+      toast.error(DataMattCV.PleaseAdd);
+      return;
+    }
+    if (formProfile.role.length < 3 || formProfile.market.length < 3) {
+      toast.error(DataMattCV.PleaseFill);
       return;
     }
     try {
@@ -41,12 +45,15 @@ export default function CVSummary({ onClose, setTextProfile }) {
       setTextProfile(result?.data?.data);
       setLoading(false);
       console.log('result is:', result.data);
-      toast.success('CV profile generated');
+      toast.success(DataMattCV.CVGenerated);
       onClose();
     } catch (error) {
       console.error('Error:', error);
       setLoading(false);
-      toast.error('Error generating CV summary');
+      toast.error(DataMattCV.ErrorGenerating);
+    } finally {
+      setLoading(false);
+      setTags([]);
     }
   }
   function handleChange(e) {
@@ -95,16 +102,13 @@ export default function CVSummary({ onClose, setTextProfile }) {
                     </Dialog.Title>
                   </div>
                   <div>
-                    <h3>
-                      {DataMattCV.ProffesionalSummaryText}
-                    </h3>
+                    <h3>{DataMattCV.ProffesionalSummaryText}</h3>
                     <form onSubmit={handleSubmit}>
-                      {' '}
                       <div className="flex space-x-2 mt-2">
                         <input
                           type="text"
                           className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-                          placeholder="Role"
+                          placeholder={DataMattCV.Role}
                           value={formProfile.role ? formProfile.role : ''}
                           name="role"
                           onChange={handleChange}
@@ -113,31 +117,32 @@ export default function CVSummary({ onClose, setTextProfile }) {
                           type="text"
                           name="market"
                           className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-                          placeholder="Market"
+                          placeholder={DataMattCV.Market}
                           value={formProfile.market ? formProfile.market : ''}
                           onChange={handleChange}
                         />
                       </div>
-                      <input
+                      {/* <input
                         type="text"
                         name="keywords"
                         className="w-full px-4 py-2 my-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
                         placeholder="Keywords"
                         value={formProfile.keywords ? formProfile.keywords : ''}
                         onChange={handleChange}
-                      />
+                      /> */}
+                      <TagsInput tags={tags} setTags={setTags} />
                       <div className="flex justify-end items-center gap-2 m-2">
                         <button
                           type="submit"
                           className="px-4 py-2 bg-indigo-600 text-white rounded-lg "
                         >
-                          {loading ? 'Loading...' : 'Generate'}
+                          {loading ? (DataMattCV.Loading) : (DataMattCV.Generate)}
                         </button>
                         <button
                           onClick={onClose}
                           className="px-4 py-2 bg-red-500 text-white rounded-lg"
                         >
-                          Cancel
+                          {DataMattCV.Cancel}
                         </button>
                       </div>
                     </form>

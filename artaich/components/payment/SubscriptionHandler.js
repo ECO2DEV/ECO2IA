@@ -1,14 +1,15 @@
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 const stripePromise =  loadStripe('pk_test_51MmF5HEZbX6Zpxv9PbTYYGR1U9d14TmcHEsxCKTPzDVpKXDcaFqz87ElscE2TRYjdV3t1r5gxVo3G8FRAlOivqKG00jMOoioNN');
-
+import { DataPayment } from "../../data/payment";
 export default function Checkout({price}) {
     const handleCheckout = async () => {
       try {
         const stripe = await stripePromise;
-  
+       
         const checkoutSession = await axios.post("/api/create-subscription", {
           price,
+          customerid
         });
        //console.log(checkoutSession);
 
@@ -28,7 +29,7 @@ export default function Checkout({price}) {
     return (
       <div>
       <button onClick={handleCheckout}>
-    Checkout
+    {DataPayment.Checkout}
 </button>
       </div>
     );

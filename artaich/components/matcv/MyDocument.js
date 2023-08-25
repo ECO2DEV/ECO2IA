@@ -1,31 +1,126 @@
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { useContext, useState } from 'react';
+import { UserContext } from '../../context/user/UserContext';
 
+import { useDebounce } from '../../hooks/useDebounce';
+import { MobilePopUp } from './MobilePopUp';
+
+import { LeftSectionCV } from './LeftSectionCV';
+import { PDFTemplateOne } from './PDFTemplateOne';
+import { PDFTemplateTwo } from './PDFTemplateTwo';
 // Create styles
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: 'row',
-    backgroundColor: '#E4E4E4'
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1
-  }
-});
 
 // Create Document Component
-const MyDocument = () => {
+const MyDocument = ({ formData, setFormData }) => {
+  const { user } = useContext(UserContext);
+
+  const [textProfile, setTextProfile] = useState('');
+  const [educationFields, setEducationFields] = useState([]);
+  const [workExperienceFields, setWorkExperienceFields] = useState([]);
+  const [textExperience, setTextExperience] = useState([]);
+  const [selectedTemplate, setSelectedTemplate] = useState('template1');
+
+  const debouncedFormData = useDebounce(formData, 700);
+  const debouncedTextProfile = useDebounce(textProfile, 700);
+
+  const [showPreview, setShowPreview] = useState(false);
+
+  const togglePreview = () => {
+    setShowPreview(!showPreview);
+  };
   return (
-    <Document >
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text>cOMO TE ATREVES #1</Text>
-        </View>
-        <View style={styles.section}>
-          <Text>Section experiemnt #2</Text>
-        </View>
-      </Page>
-    </Document>
+    <div className="flex flex-col lg:flex-row h-screen gap-2 relative">
+      {selectedTemplate === 'template2' ? (
+        <>
+          {/* Left section Forms - inputs*/}
+          <LeftSectionCV
+            selectedTemplate={selectedTemplate}
+            setSelectedTemplate={setSelectedTemplate}
+            formData={formData}
+            setFormData={setFormData}
+            textProfile={textProfile}
+            setTextProfile={setTextProfile}
+            setEducationFields={setEducationFields}
+            setTextExperience={setTextExperience}
+            textExperience={textExperience}
+            setWorkExperienceFields={setWorkExperienceFields}
+          />
+          {/* Right section PDF viewer*/}
+
+          {showPreview && (
+            <MobilePopUp isModalNeedIt={true} onClose={togglePreview}>
+              <PDFTemplateTwo
+                debouncedFormData={debouncedFormData}
+                debouncedTextProfile={debouncedTextProfile}
+                textProfile={textProfile}
+                workExperienceFields={workExperienceFields}
+                educationFields={educationFields}
+                textExperience={textExperience}
+                user={user}
+              />
+            </MobilePopUp>
+          )}
+          <section className="w-full hidden lg:block md:w-[35%] lg:w-[41%] lg:fixed lg:right-0 h-full">
+            <PDFTemplateTwo
+              debouncedFormData={debouncedFormData}
+              debouncedTextProfile={debouncedTextProfile}
+              textProfile={textProfile}
+              workExperienceFields={workExperienceFields}
+              educationFields={educationFields}
+              textExperience={textExperience}
+              user={user}
+            />
+          </section>
+        </>
+      ) : (
+        <>
+          <section className="w-full hidden lg:block md:w-[35%] lg:w-[41%] lg:fixed lg:right-0 h-full">
+            {showPreview && (
+              <MobilePopUp isModalNeedIt={true}>
+                <PDFTemplateOne
+                  debouncedFormData={debouncedFormData}
+                  debouncedTextProfile={debouncedTextProfile}
+                  textProfile={textProfile}
+                  workExperienceFields={workExperienceFields}
+                  educationFields={educationFields}
+                  textExperience={textExperience}
+                  user={user}
+                />
+              </MobilePopUp>
+            )}
+            <PDFTemplateOne
+              debouncedFormData={debouncedFormData}
+              debouncedTextProfile={debouncedTextProfile}
+              textProfile={textProfile}
+              workExperienceFields={workExperienceFields}
+              educationFields={educationFields}
+              textExperience={textExperience}
+              user={user}
+            />
+          </section>
+          {/* Left section Forms - inputs*/}
+          <LeftSectionCV
+            selectedTemplate={selectedTemplate}
+            setSelectedTemplate={setSelectedTemplate}
+            formData={formData}
+            setFormData={setFormData}
+            textProfile={textProfile}
+            setTextProfile={setTextProfile}
+            setEducationFields={setEducationFields}
+            setTextExperience={setTextExperience}
+            textExperience={textExperience}
+            setWorkExperienceFields={setWorkExperienceFields}
+          />
+        </>
+      )}
+      {/* Mobile button section */}
+
+      <button
+        className="fixed bottom-5 right-4 bg-indigo-500 text-white px-4 py-2 rounded-md lg:hidden"
+        onClick={togglePreview}
+      >
+        Preview
+      </button>
+    </div>
   );
 };
 

@@ -17,9 +17,9 @@ export const DataDashboard = {
   MattDescriptionTitle: 'MATTDESC',
   MattDescription:
     "L'IA fournit une description détaillée d'un produit spécifique entré par l'utilisateur.",
-  MattResumeTitle: 'MATRESUM',
+  MattResumeTitle: 'MATTRESUME',
   MattResume: "L'IA prend un texte long et le résume en quelques lignes.",
-  MatCVTitle: 'MATCV',
+  MatCVTitle: 'MATTCV',
   MatCVDescription:
     "L'IA génère un CV à partir des informations fournies par l'utilisateur."
 };

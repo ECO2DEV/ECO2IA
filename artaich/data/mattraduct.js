@@ -15,5 +15,10 @@ SelectItalian: "Italien",
 SelectPortuguese: "Portugais",
     TextArea1:"Tapez votre texte ici",
     TextAreaLoading:"Chargement...",
-    TextArea2:"La traduction apparaîtra ici"
+    TextArea2:"La traduction apparaîtra ici",
+    CopiedSuccess:"Texte copié dans le presse-papiers !",
+    CopiedFailed:"Échec de la copie du texte dans le presse-papiers !",
+    NoText:"Pas de texte à copier",
+    MatTraduct:"Mat Traduct",
+    YourText:"Votre texte"
 }
