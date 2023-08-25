@@ -122,7 +122,7 @@ export const SportCoachIA = (props) => {
           </div>
         ) && <SportCoachResults />
       )}
-      <div className="bottom-3 z-20 sticky grid xl:grid-cols-[minmax(auto,_1fr)_100px] md:fixed xl:fixed p-4 bg-gray-200">
+      <div className="bottom-3 z-20 sticky grid xl:grid-cols-[minmax(auto,_1fr)_100px] md:sticky xl:fixed p-4 bg-gray-200">
         <form onSubmit={handleSubmit} className="">
           <div className="grid xl:grid-cols-5 md:grid-cols-5 items-center gap-4 grid-cols-2">
             <div className="sm:w-1/2 md:w-1/4 my-4">

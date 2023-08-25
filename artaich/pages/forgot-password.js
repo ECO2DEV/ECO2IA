@@ -1,5 +1,6 @@
 // pages/forgot-password.js
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useForm, Controller } from 'react-hook-form'; // Import useForm and Controller
 import axios from 'axios';
 import { header, strapiUrl } from '../constants/constans';
@@ -10,6 +11,7 @@ import { DataForgotPassword } from '../data/forgotpassword';
 export default function ForgotPassword() {
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const {
     handleSubmit,
@@ -21,13 +23,14 @@ export default function ForgotPassword() {
     try {
       setIsLoading(true);
       const response = await axios.post(
-        `${strapiUrl}/api/auth/reset-password`,
+        `${strapiUrl}/api/auth/forgot-password`,
         { email },
         header
       );
       console.log('response', response);
       setMessage(DataForgotPassword.ResetPassWord);
       toast.success('Reset password link sent. Please check your email.');
+      // router.push('/auth/signin');
     } catch (error) {
       setMessage(DataForgotPassword.SomethingWrong);
       toast.error(' Error sending reset password link. Please try again.');
@@ -64,17 +67,28 @@ export default function ForgotPassword() {
                     }
                   }}
                   render={({ field }) => (
-                    <input
-                      {...field}
-                      className="w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6"
-                      type="email"
-                      placeholder={DataForgotPassword.EnterEmail}
-                    />
+                    <>
+                      <input
+                        {...field}
+                        className="w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6"
+                        type="email"
+                        placeholder={DataForgotPassword.EnterEmail}
+                      />
+                      {errors.email && (
+                        <p className="text-red-500 text-sm mt-1 ml-3">
+                          {errors.email.message}
+                        </p>
+                      )}
+                      {message && (
+                        <p className="text-gray-100 text-sm mt-1 ml-3">
+                          {message}
+                        </p>
+                      )}
+                    </>
                   )}
                 />
               </label>
-              {errors.email && <p>{errors.email.message}</p>}{' '}
-              {/* Display the validation error message */}
+
               <button
                 type="submit"
                 className="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -88,7 +102,6 @@ export default function ForgotPassword() {
                 )}
               </button>
             </form>
-            {message && <p>{message}</p>}
           </div>
         </div>
       </div>

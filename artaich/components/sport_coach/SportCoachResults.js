@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useReducer } from "react";
 import { UserContext } from "../../context/user/UserContext";
 import { useSportCoach } from "../../hooks/useSportCoach";
 import { LoadingIndicator } from "./LoadingIndicator";
@@ -24,53 +24,71 @@ import {
 } from "next-share";
 import { FacebookIcon, WhatsappIcon, EmailIcon } from "react-share";
 
+const exercisesReducer = (state, action) => {
+  if (!state[action.dayIndex]?.exercises) {
+    return state;
+  } 
+  switch (action.type) {
+    case "TOGGLE_EXERCISE":
+      return {
+        ...state,
+        [action.dayIndex]: {
+          ...state[action.dayIndex],
+          exercises: state[action.dayIndex].exercises.map((completed, index) =>
+            index === action.exerciseIndex ? !completed : completed
+          ),
+        },
+      };
+
+    default:
+      return state;
+  }
+};
+
 export const SportCoachResults = () => {
   const { user } = useContext(UserContext);
-  const { data, isLoading } = useSportCoach(user?.id);
+  const { data, isLoading, error } = useSportCoach(user?.id);
   const response = data?.data[0]?.attributes?.payload_out?.resp;
-  const responseObj = JSON.parse(response);
+  const responseObj = JSON.parse(response) || [];
 
   // Estado para controlar el índice del día activo
   const [activeIndex, setActiveIndex] = useState(0);
   // Estado para mostrar u ocultar los botones de compartir
   const [showShareButtons, setShowShareButtons] = useState(false);
   // Estado para realizar un seguimiento de los ejercicios completados
-  const [completedExercises, setCompletedExercises] = useState(() => {
-    if (!responseObj?.resp?.length) return [];
-
-    return responseObj.resp.map((day) => ({
-      exercises: day.exercises?.map(() => ({ completed: false })),
-    }));
+  const initialState = responseObj?.resp?.map((day) => {
+    if (day.exercises) {
+      return {
+        exercises: new Array(day.exercises.length).fill(false),
+      };
+    } else {
+      return {
+        exercises: [],
+      };
+    }
   });
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  const [completedExercises, dispatch] = useReducer(
+    exercisesReducer,
+    initialState
+  );
 
   // Maneja el clic en un ejercicio para marcarlo como completado
   const handleExerciseClick = (dayIndex, exerciseIndex) => {
-    // Actualiza el estado de los ejercicios completados
-     // según el índice del día y el ejercicio
-    const updatedCompletedExercises = [...completedExercises];
-    if (!updatedCompletedExercises[dayIndex]?.exercises) {
-      updatedCompletedExercises[dayIndex] =
-        updatedCompletedExercises[dayIndex] || {};
-      updatedCompletedExercises[dayIndex].exercises = [];
-    }
-    // Cambia el estado de completado de true a false y viceversa
-    // Actualiza el estado con los ejercicios modificados
-    if (!updatedCompletedExercises[dayIndex].exercises[exerciseIndex]) {
-      updatedCompletedExercises[dayIndex].exercises[exerciseIndex] = {};
-    }
-    updatedCompletedExercises[dayIndex].exercises[exerciseIndex].completed =
-      !updatedCompletedExercises[dayIndex].exercises[exerciseIndex]?.completed;
-    setCompletedExercises(updatedCompletedExercises);
+    dispatch({
+      type: "TOGGLE_EXERCISE",
+      dayIndex,
+      exerciseIndex,
+    });
   };
 
   // Maneja el clic en el botón de compartir
   const handleShareClick = () => {
     setShowShareButtons(!showShareButtons);
-  };
-
-  // Función de utilidad para generar nombres de clases con valores no nulos
-  const classNames = (...classes) => {
-    return classes.filter(Boolean).join(" ");
   };
 
   if (isLoading) {
@@ -84,11 +102,13 @@ export const SportCoachResults = () => {
     let content = "Salut! Je partage mon plan d'entraînement :\n\n";
     responseObj.resp.forEach((day) => {
       content += `${day.day}:\n`;
-      day.exercises.forEach((exercise) => {
-        content += `${exercise.name}: ${exercise.description}\n`;
-      });
-      // Genera el contenido del plan de entrenamiento en un formato específico
-      content += "\n";
+      if (day.exercises) {
+        day.exercises.forEach((exercise) => {
+          content += `${exercise.name}: ${exercise.description}\n`;
+        });
+        // Genera el contenido del plan de entrenamiento en un formato específico
+        content += "\n";
+      }
     });
     return content;
   };
@@ -120,7 +140,7 @@ export const SportCoachResults = () => {
     <div className="p-6 min-h-[60rem]">
       {responseObj.resp.map((day, index) => (
         <div
-          key={index}
+          key={`day-${index}`}
           className="border p-4 cursor-pointer w-96 grid"
           onClick={() => setActiveIndex(index)}
         >
@@ -130,42 +150,34 @@ export const SportCoachResults = () => {
               activeIndex !== index ? "hidden" : ""
             } ml-4 whitespace-normal`}
           >
-            {day &&
-              day?.exercises?.map((exercise, exerciseIndex) => (
-                <li
-                  key={exerciseIndex}
-                  className={classNames(
-                    completedExercises[index]?.exercises[exerciseIndex]
-                      ?.completed
-                      ? "text-indigo-600"
-                      : "text-gray-500",
-                    "flex items-center"
-                  )}
-                  onClick={() => handleExerciseClick(index, exerciseIndex)}
-                >
-                  <span className="flex h-9 items-center">
-                    {completedExercises[index]?.exercises[exerciseIndex]
-                      .completed ? (
-                      <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
-                        <CheckIcon
-                          className="h-5 w-5 text-white"
-                          aria-hidden="true"
-                        />
-                      </span>
-                    ) : (
-                      <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
-                        <span className="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" />
-                      </span>
-                    )}
-                  </span>
-                  <span className="ml-4 flex min-w-0 flex-col">
-                    <span className="text-sm font-medium">{exercise.name}</span>
-                    <span className="text-sm text-gray-500">
-                      {exercise.description}
+            {day?.exercises?.map((exercise, exerciseIndex) => (
+              <li
+                key={`${day.id}-${exerciseIndex}`}
+                className="flex items-center"
+                onClick={() => handleExerciseClick(index, exerciseIndex)}
+              >
+                <span className="flex h-9 items-center">
+                  {completedExercises[index]?.exercises[exerciseIndex] ? (
+                    <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
+                      <CheckIcon
+                        className="h-5 w-5 text-white"
+                        aria-hidden="true"
+                      />
                     </span>
+                  ) : (
+                    <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
+                      <span className="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" />
+                    </span>
+                  )}
+                </span>
+                <span className="ml-4 flex min-w-0 flex-col">
+                  <span className="text-sm font-medium">{exercise.name}</span>
+                  <span className="text-sm text-gray-500">
+                    {exercise.description}
                   </span>
-                </li>
-              ))}
+                </span>
+              </li>
+            ))}
           </ol>
         </div>
       ))}
@@ -198,8 +210,12 @@ export const SportCoachResults = () => {
             </button>
           </li> */}
           <PDFDownloadLinkDynamic
-            document={<ExportPDF generateTrainingPlanContent={generateTrainingPlanContent} />}
-            fileName="MattSport_Programme.pdf"
+            document={
+              <ExportPDF
+                generateTrainingPlanContent={generateTrainingPlanContent}
+              />
+            }
+            fileName="SportCoach.pdf"
           >
             <li className="flex space-x-4 items-center w-auto text-gray-500 hover:text-gray-500">
               <svg
@@ -211,9 +227,7 @@ export const SportCoachResults = () => {
               >
                 <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
               </svg>
-              <button
-                className="flex items-center p-2 rounded-md hover:bg-gray-100"
-              >
+              <button className="flex items-center p-2 rounded-md hover:bg-gray-100">
                 <DocumentArrowDownIcon className="w-5 h-5 mr-1" /> Pdf
               </button>
             </li>

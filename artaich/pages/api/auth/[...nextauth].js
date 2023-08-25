@@ -4,6 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import axios from 'axios';
 const strapiUrl = process.env.STRAPI_URL;
 
+
 export const authOptions = {
   providers: [
     CredentialsProvider({
