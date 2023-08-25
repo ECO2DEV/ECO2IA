@@ -7,6 +7,7 @@ import { strapiUrl } from '../../constants/constans';
 import { ClipboardIcon } from '../icons/icons';
 import ModalDelete from './ModalDelete';
 import { LoadingChatgpt } from './LoadingChatgpt';
+import { DataMattChat } from '../../data/mattchat';
 
 export const Conversations = ({ messages }) => {
   // console.log(' Otra cosa message', messages);
@@ -127,7 +128,7 @@ export const Conversations = ({ messages }) => {
                         </button>
                         {copied[index] && (
                           <div className=" bg-blue-900 text-white rounded">
-                            Copié dans le presse-papiers !
+                            {DataMattChat.CopiedSuccess}
                           </div>
                         )}
                       </div>

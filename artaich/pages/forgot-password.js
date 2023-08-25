@@ -98,7 +98,7 @@ export default function ForgotPassword() {
                     <Loader />
                   </div>
                 ) : (
-                  'Send Reset Link'
+                  (DataForgotPassword.ResetLink)
                 )}
               </button>
             </form>

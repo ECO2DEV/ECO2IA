@@ -1,4 +1,5 @@
 export const DataDashboard = {
+  DashboardTitle:"Bienvenue sur MATTECH",
   MattechChatTitle: 'MATTCHAT',
   MattechChatDescription:
     "L'utilisateur pose une question et l'IA répond. Nous conservons l'historique des 10 dernières requêtes de l'utilisateur.",

@@ -82,12 +82,12 @@ function TextSummarizerPage() {
 
     try {
       if (acceptedFiles.length === 0) {
-        throw new Error('No se ha seleccionado ningun archivo.')
+        throw new Error(DataMattResume.NoFileSelected)
       }
       
       const file = acceptedFiles[0];
       if (file.type !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-        throw new Error('El archivo debe ser de tipo docx');
+        throw new Error(DataMattResume.FileDoc);
       }
 
       const reader = new FileReader();
@@ -129,7 +129,7 @@ function TextSummarizerPage() {
   // Manejador de la solicitud de resumen
   const handleRequestSummary = async () => {
     if (!prompt && !fileContent) {
-      toast.error('Please type something before submit'); // Verifica que se haya ingresado texto antes de enviar la solicitud
+      toast.error(DataMattResume.PleaseTypeSomething); // Verifica que se haya ingresado texto antes de enviar la solicitud
     } else {
       setIsLoading(true); // Activar el loader
       try {
@@ -142,7 +142,7 @@ function TextSummarizerPage() {
         setSummaryText(response?.data?.data); // Establece el resumen recibido en el estado summaryText
       } catch (error) {
         console.error('Error:', error);
-        toast.error('An error occurred');
+        toast.error(DataMattResume.AnErrorOcurred);
       } finally {
         setIsLoading(false); // Desactivar el loader
       }
