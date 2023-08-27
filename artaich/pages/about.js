@@ -193,41 +193,7 @@ export default function About() {
           </dl>
         </div>
 
-        {/* Team section */}
-        <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:mx-0">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              {' '}
-              {DataAbout.aboutourteam}{' '}
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-gray-300">
-              {DataAbout.aboutourteamdescription}
-            </p>
-          </div>
-          <ul
-            role="list"
-            className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 xl:grid-cols-4"
-          >
-            {team.map((person) => (
-              <li key={person.name}>
-                <Image
-                  className="aspect-[10/14] w-full rounded-2xl object-cover"
-                  src={person.image}
-                  alt=""
-                />
-                <h3 className="mt-6 text-lg font-semibold leading-8 tracking-tight text-white">
-                  {person.name}
-                </h3>
-                <p className="text-base leading-7 text-gray-300">
-                  {person.role}
-                </p>
-                <p className="text-sm leading-6 text-gray-500">
-                  {person.location}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
+    
 
         {/* CTA section */}
       </main>

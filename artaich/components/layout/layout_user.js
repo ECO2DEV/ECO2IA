@@ -19,14 +19,14 @@ import { useRouter } from 'next/router';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-  { name: "Matt Chat", href: '/chatgpt', icon: HomeIcon, current: true },
-  { name: "Matt Image", href: '/dalle', icon: HomeIcon, current: true },
-  { name: "MatTranslate", href: '/mattraduct', icon: HomeIcon, current: true },
-  { name: "Matt Sport", href: '/sportcoach', icon: HomeIcon, current: true },
+  { name: "MATTCHAT", href: '/chatgpt', icon: HomeIcon, current: true },
+  { name: "MATTIMAGE", href: '/dalle', icon: HomeIcon, current: true },
+  { name: "MATTRANSLATE", href: '/mattraduct', icon: HomeIcon, current: true },
+  { name: "MATTSPORT", href: '/sportcoach', icon: HomeIcon, current: true },
   { name: "MATTQCM", href: '/matquiz', icon: HomeIcon, current: true },
-  { name: "Matt Desc", href: '/matdescription', icon: HomeIcon, current: true },
-  { name: "Matt Resume", href: '/mattresum', icon: HomeIcon, current: true },
-  { name: "Matt CV", href: '/matcv', icon: HomeIcon, current: true }
+  { name: "MATTDESC", href: '/matdescription', icon: HomeIcon, current: true },
+  { name: "MATTRESUME", href: '/mattresum', icon: HomeIcon, current: true },
+  { name: "MATTCV", href: '/matcv', icon: HomeIcon, current: true }
   // { name: 'Team', href: '#', icon: UsersIcon, current: false },
 ];
 
@@ -208,7 +208,7 @@ export default function LayoutUser({ children }) {
                     <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12">
                       <div className="relative flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
                         <dt className="text-sm lg:text-xs leading-3 text-gray-300 z-10">
-                          Max Words
+                        Mots restants
                         </dt>
                         {discountTokensModal > 0 && (
                           <span className="text-red-500 text-1xl absolute top-0 -mt-7 right-4 z-0">
@@ -221,7 +221,7 @@ export default function LayoutUser({ children }) {
                       </div>
                       <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
                         <dt className="text-sm lg:text-xs leading-3 text-gray-300">
-                          Max Images
+                        Images restantes
                         </dt>
                         <dd className="text-base font-semibold tracking-tight text-white">
                           {max_imagens}
@@ -254,7 +254,7 @@ export default function LayoutUser({ children }) {
                         </p>
                         <Link href={'/profile'}>
                           <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
-                            Mon Profile
+                            Mon Profil
                           </p>
                         </Link>
                       </div>
@@ -316,7 +316,7 @@ export default function LayoutUser({ children }) {
               <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12">
                 <div className="relative flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6 ">
                   <dt className="text-sm lg:text-xs leading-3 text-gray-300 z-10">
-                    Max Words
+                  Mots restants
                   </dt>
                   {discountTokensModal > 0 && (
                     <span className="text-red-500 text-1xl absolute top-0 -mt-7 right-1 z-0">
@@ -329,7 +329,7 @@ export default function LayoutUser({ children }) {
                 </div>
                 <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
                   <dt className="text-sm lg:text-xs leading-3 text-gray-300">
-                    Max Images
+                    Images restants
                   </dt>
                   <dd className="text-base font-semibold tracking-tight text-white">
                     {max_imagens}
@@ -361,7 +361,7 @@ export default function LayoutUser({ children }) {
                   </p>
                   <Link href={'/profile'}>
                     <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
-                      Mon Profile
+                      Mon Profil
                     </p>
                   </Link>
                 </div>

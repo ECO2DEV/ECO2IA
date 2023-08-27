@@ -163,7 +163,7 @@ export const SportCoachIA = (props) => {
                 className="mt-1 px-4 py-2 border w-full border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               >
                 <option disabled value={prompt}>
-                  Select an option
+                Sélectionnez une option
                 </option>
                 <option value="weight loss"> {DataMattSport.WeightLoss}</option>
                 <option value="muscle building">

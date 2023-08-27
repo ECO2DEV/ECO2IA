@@ -17,6 +17,7 @@ export default function HistoryResum({ onClose }) {
   const { data, deleteChat } = useMatResume(user?.id);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
+
   const onHandleModalDelete = (id) => {
     setDeleteModalOpen((prev) => !prev);
   };
@@ -24,10 +25,10 @@ export default function HistoryResum({ onClose }) {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        toast.success("Text copied to clipboard!");
+        toast.success(DataMattResume.CopiedSuccessop);
       })
       .catch(() => {
-        toast.error("Failed to copy text to clipboard!");
+        toast.error(DataMattResume.CopiedFailed);
       });
   };
 

@@ -8,6 +8,7 @@ import { DeleteIcon, ClipboardIcon, EmptyAvatar } from '../icons/icons';
 import ModalDelete from './ModalDelete';
 import { toast } from 'react-hot-toast';
 import { DataHistory } from '../../data/history';
+import { DataMattChat } from '../../data/mattchat';
 
 export default function HistoryChat({ onClose }) {
   const cancelButtonRef = useRef(null);
@@ -24,10 +25,10 @@ export default function HistoryChat({ onClose }) {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        toast.success('Text copied to clipboard!');
+        toast.success(DataMattChat.CopiedSuccess);
       })
       .catch(() => {
-        toast.error('Failed to copy text to clipboard!');
+        toast.error(DataMattChat.CopiedFailed);
       });
   };
 
