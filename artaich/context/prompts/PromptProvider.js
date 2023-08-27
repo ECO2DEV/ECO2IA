@@ -1,4 +1,5 @@
-import { useReducer, useEffect, useMemo, useState } from 'react';
+import { useReducer, useEffect, useMemo, useState, useContext } from 'react';
+import { UserContext } from '../user/UserContext';
 import { useRouter } from 'next/router';
 import { PromptContext } from './PromptContext';
 import { promptReducer } from './promptReducer';
@@ -23,6 +24,7 @@ const promptInitialState = {
 };
 
 export const PromptProvider = ({ children }) => {
+  const { user } = useContext(UserContext);
   const router = useRouter();
   const [idsUpdateMaxTokens, setIdsUpdateMaxTokens] = useState({
     userId: null,
@@ -47,6 +49,11 @@ export const PromptProvider = ({ children }) => {
   };
 
   const updateUserPlanToNull = async (userId) => {
+    // si el userId es undefined o null, utilice el userid del contexto de usuario
+    if (!userId) {
+      userId = user.id;
+    }
+
     try {
       await axios.put(
         `${strapiUrl}/api/users/${userId}?populate=*`,
@@ -78,9 +85,12 @@ export const PromptProvider = ({ children }) => {
     if (state.plan.length === 0) return;
     if (state.plan.max_tokens <= 0) {
       toast.error('You have no more tokens to use, please buy a new plan');
-
-      router.push('/dashboard');
-      return;
+      //setTimer(5);
+      setTimeout(() => {
+        updateUserPlanToNull(idsUpdateMaxTokens.userId);
+        router.push('/dashboard');
+        return;
+      }, 500);
     }
     const resptokens = countTokensMemo(state.prompt);
     dispatch({

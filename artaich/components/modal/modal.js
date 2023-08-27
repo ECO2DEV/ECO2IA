@@ -13,11 +13,12 @@ import { useRouter } from 'next/router';
 import CheckoutForm from '../payment/CheckoutForm';
 import { PopUpModal } from './popUpModal';
 import { ContacUs } from '../contact_us/contacUs';
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
 
-const stripePromise =  loadStripe('pk_test_51MmF5HEZbX6Zpxv9PbTYYGR1U9d14TmcHEsxCKTPzDVpKXDcaFqz87ElscE2TRYjdV3t1r5gxVo3G8FRAlOivqKG00jMOoioNN');
-
+const stripePromise = loadStripe(
+  'pk_test_51MmF5HEZbX6Zpxv9PbTYYGR1U9d14TmcHEsxCKTPzDVpKXDcaFqz87ElscE2TRYjdV3t1r5gxVo3G8FRAlOivqKG00jMOoioNN'
+);
 
 const pricing = {
   frequencies: [
@@ -32,7 +33,7 @@ const pricing = {
       featured: false,
       description: '',
       price: { monthly: DataPricing.amount1, annually: '' },
-      priceid : DataPricing.priceid1,
+      priceid: DataPricing.priceid1,
       mainFeatures: [
         DataPricing.pricingfeatures1,
         DataPricing.pricingfeatures1_2,
@@ -49,7 +50,7 @@ const pricing = {
       featured: true,
       description: '',
       price: { monthly: DataPricing.amount2, annually: '' },
-      priceid : DataPricing.priceid2,
+      priceid: DataPricing.priceid2,
       mainFeatures: [
         DataPricing.pricingfeatures2,
         DataPricing.pricingfeatures2_2,
@@ -74,24 +75,22 @@ const pricing = {
       ],
       cta: DataPricing.pricingbutton3
     }
-  ],
-
+  ]
 };
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-
-export default function Modal({children, user}) {
+export default function Modal({ children, user }) {
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEnterpriseOpen, setIsEnterpriseOpen] = useState(false);
   const [amount, setAmount] = useState(0);
   const [currency, setCurrency] = useState('eur');
-  console.log("User is " + user.customer_id);
-  
+  console.log('User is ' + user?.customer_id);
+
   const handleOnClose = () => {
     setIsOpen(false);
   };
@@ -114,31 +113,31 @@ export default function Modal({children, user}) {
       router.push('/auth/signin');
       // Set the state to open the modal
     } else {
-    try {
-      const stripe = await stripePromise;
-      const customerid = user.customer_id;
-      
-     console.log("User is " + customerid + "Prix is" + price);
+      try {
+        const stripe = await stripePromise;
+        const customerid = user.customer_id;
 
-      const checkoutSession = await axios.post("/api/create-subscription", {
-        price,
-        customerid
-      });
-     //console.log(checkoutSession);
+        console.log('User is ' + customerid + 'Prix is' + price);
 
-   //  window.location.href = 
+        const checkoutSession = await axios.post('/api/create-subscription', {
+          price,
+          customerid
+        });
+        //console.log(checkoutSession);
 
-      const result = await stripe.redirectToCheckout({
-        sessionId: checkoutSession.data.sessionId,
-      });
+        //  window.location.href =
 
-      if (result.error) {
-        alert(result.error.message);
+        const result = await stripe.redirectToCheckout({
+          sessionId: checkoutSession.data.sessionId
+        });
+
+        if (result.error) {
+          alert(result.error.message);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
-  }
   };
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [frequency, setFrequency] = useState(pricing.frequencies[0]);
@@ -255,13 +254,14 @@ export default function Modal({children, user}) {
                             onClick={
                               tier.name === DataPricing.pricingtitle3
                                 ? () => {
-                                  handleButtonEnterprise();
-                                }
+                                    handleButtonEnterprise();
+                                  }
                                 : () => {
-                                  handleCheckout({
-                                    price: tier.priceid
-                                  });
-                                }}
+                                    handleCheckout({
+                                      price: tier.priceid
+                                    });
+                                  }
+                            }
                             aria-describedby={tier.id}
                             className={classNames(
                               tier.featured

@@ -6,6 +6,7 @@ import { DalleResponse } from '../../util/api/dalleResponse';
 import { WelcomeDalle } from './welcomedalle';
 import { ButtonHelper } from '../welcome/buttonHelper';
 
+import { toast } from 'react-hot-toast';
 import { Carousel } from './carousel';
 import { DropdownDalle } from './dropdown_dalle';
 import { ButtonLatestImg } from './buttonLatestImg';
@@ -29,7 +30,8 @@ export default function DalleIA() {
     setPromptTokens,
     setResponse,
     activeAI,
-    setActiveAI
+    setActiveAI,
+    plan
   } = useContext(PromptContext);
 
   const { data, mutate } = useDalle(user?.id);
@@ -49,6 +51,10 @@ export default function DalleIA() {
   };
   const FetchData = async (e) => {
     e.preventDefault();
+    if (plan.max_imagens <= 0) {
+      toast.error('You have reached the limit of images for this plan');
+      return;
+    }
     if (!prompt) {
       setIsError('Please type something before submit');
     } else {
@@ -76,7 +82,6 @@ export default function DalleIA() {
 
   return (
     <section>
-      
       {imageSrc.firstImage === '' ? (
         <WelcomeDalle />
       ) : openHelpers ? (

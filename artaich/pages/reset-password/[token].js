@@ -43,7 +43,7 @@ export default function ResetPassword() {
       // add a timeout before redirecting to signin
       setTimeout(() => {
         router.push('/auth/signin');
-      }, 3000);
+      }, 1000);
     } catch (error) {
       setMessage(DataResetPassword.ErrorPassword);
       toast.error('Error resetting password. Please try again.');
