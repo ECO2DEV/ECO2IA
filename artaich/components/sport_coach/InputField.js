@@ -1,5 +1,3 @@
-import React from "react";
-
 export const InputField = ({ label, id, value, onChange, type = "text" }) => {
   return (
     <div>
@@ -12,8 +10,7 @@ export const InputField = ({ label, id, value, onChange, type = "text" }) => {
         value={value}
         onChange={onChange}
         required
-        // className="mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        className="block w-fill xl:w-auto flex-1 border-gray-300 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+        className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
       />
     </div>
   );
