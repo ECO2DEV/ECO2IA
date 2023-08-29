@@ -9,7 +9,7 @@ export const DataMattSport = {
   Mass: "Prise de masse",
   Crossfit: "Crossfit",
   Dry: "Séche",
-  NumberofTrainigns: "Entraînements par semaine",
+  NumberofTrainigns: "Jours",
   OneDay: "1 jour",
   TwoDays: "2 jours",
   ThreeDays: "3 jours",

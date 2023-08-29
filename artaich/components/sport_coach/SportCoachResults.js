@@ -185,7 +185,7 @@ export const SportCoachResults = () => {
       <nav aria-label="Breadcrumb">
         <ol
           role="list"
-          className="flex justify-center items-center w-96 space-x-4 rounded-md bg-gray-50 px-6 shadow absolute"
+          className="flex justify-evenly w-96 space-x-4 rounded-md bg-gray-50 shadow absolute"
         >
           <li className="flex items-center w-auto text-gray-500 hover:text-gray-500">
             <button
@@ -236,7 +236,7 @@ export const SportCoachResults = () => {
       </nav>
 
       {showShareButtons && (
-        <div className="relative w-4 bottom-[8rem] left-4 gap-2 z-10 flex flex-col justify-center">
+        <div className="relative w-4 bottom-[8rem] left-14 gap-2 z-10 flex flex-col justify-center">
           <FacebookShareButton
             className="h-4 w-4"
             // url={window.location.href}
