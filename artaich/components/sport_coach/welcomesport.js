@@ -29,7 +29,7 @@ export const WelcomeSport = () => {
       </div>
       <div className="flex flex-col mb-2 md:mb-auto gap-3.5 flex-1">
         <h2 className="flex gap-3 items-center m-auto text-lg font-normal md:flex-col md:gap-2">
-          <ZapIcon /> Capabilities
+          <ZapIcon /> Capacités
         </h2>
         <ul className="flex flex-col gap-1 w-full sm:max-w-md m-auto ">
           {DataSportHelpCapabilities.map((DataSportHelpCapabilities, index) => (

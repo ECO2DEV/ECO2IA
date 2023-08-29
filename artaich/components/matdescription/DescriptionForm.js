@@ -230,7 +230,7 @@ const DescriptionForm = () => {
             <Loader />
           </div>
         ) : (
-          'Submit'
+          'Envoyer'
         )}
       </button>
       <span className=" flex justify-center items-center text-gray-900">

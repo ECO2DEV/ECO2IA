@@ -4,6 +4,7 @@ import { strapiUrl, strapiToken, header } from '../../constants/constans';
 
 export const createUser = async (data) => {
   try {
+    console.log('Data to create user' + data.email);
     const dataStripe = { email: data.email, name: data.Name };
     const respStripe = await axios.post(
       `${strapiUrl}/api/payment/createUser`,
@@ -24,6 +25,30 @@ export const createUser = async (data) => {
     console.error(`Error making POST request to ${strapiUrl}:`, error);
     return error.response.data.error;
     // throw new Error(`Failed to make POST request to ${strapiUrl}`);
+  }
+};
+
+export const setTrialPlan = async () => {
+  try {
+    const response = await axios.post(
+      `${strapiUrl}/api/plans`,
+      {
+        data: {
+          typo: 'FreeTier',
+          max_tokens: '500',
+          max_imagens: 10,
+          value: 50
+        }
+      },
+      header
+    );
+    return response;
+  } catch (error) {
+    console.error(
+      `Error creating freetrial plan POST request to ${strapiUrl}:`,
+      error
+    );
+    return error.response.data.error;
   }
 };
 

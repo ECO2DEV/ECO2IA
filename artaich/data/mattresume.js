@@ -12,7 +12,7 @@ export const DataMattResume ={
     WordButton:"Word",
     ShareButton:"Partager",
     CreateResume:"Créer un résumé",
-    ResumeHere:"Votre résumé créé par MattResum apparaîtra ici.",
+    ResumeHere:"Votre résumé créé par MATTRESUME apparaîtra ici.",
     LoadingField:"Chargement...",
     // data history chat
     History:"Histoire",
@@ -25,5 +25,9 @@ export const DataMattResume ={
     DataWillBeRemoved:"Toutes vos données seront définitivement supprimées de nos serveurs pour toujours. Cette action ne peut pas être annulée.",
     ConversationDeleted:"Conversation supprimée avec succès",
     Delete:"Supprimer",
-    Cancel:"Annuler"
+    Cancel:"Annuler",
+    NoFileSelected:"Aucun fichier sélectionné",
+    FileDoc:"Le fichier doit être de type docx.",
+    PleaseTypeSomething:"Veuillez taper quelque chose avant de soumettre",
+    AnErrorOcurred:"Une erreur s'est produite"
 }

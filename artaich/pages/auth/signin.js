@@ -174,7 +174,7 @@ export default function SignIn() {
                     className="font-medium text-sm text-indigo-600 hover:text-indigo-500 cursor-pointer"
                     onClick={() => handleModalRegister()}
                   >
-                    Créer une compte
+                    créer un compte pas une
                   </a>
                 </div>
               </form>

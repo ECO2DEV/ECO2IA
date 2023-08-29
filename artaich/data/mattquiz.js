@@ -16,7 +16,7 @@ export const DataMattQuiz = {
     Easy: "Facile",
     Medium: "Moyen",
     Hard: "Difficile",
-    Submit: "Submit",
+    Submit: "Envoyer",
     QuestionGenerated:"Questions Générées",
     CorrectAnswer:"Réponse Correcte",
     NumberQuestions:"Nombre de questions souhaité",

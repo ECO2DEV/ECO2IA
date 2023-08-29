@@ -124,7 +124,7 @@ export default function DashboardSection() {
       */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10">
         <h1 className="text-2xl text-center font-semibold text-gray-900">
-          Bienvenue sur Mattech
+          {DataDashboard.DashboardTitle}
         </h1>
       </div>
 

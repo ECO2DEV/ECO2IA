@@ -12,7 +12,7 @@ export const DataPricing = {
   amount1:4,
   priceid1:'plan_NeeieGD7qqOAm9',
   pricingtitle2: 'STANDARD',
-  pricingfeatures2: '30 imag es par mois',
+  pricingfeatures2: '30 images par mois',
   pricingfeatures2_2: '112500 mots par mois',
   pricingfeatures2_3: 'SAV',
   pricingfeatures2_4: 'Accès à des mises à jour régulières de l’IA',
