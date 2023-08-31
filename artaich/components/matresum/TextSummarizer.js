@@ -81,24 +81,20 @@ function TextSummarizerPage() {
     setIsUploading(true);
 
     try {
-<<<<<<< HEAD
       if (!acceptedFiles.length) {
         throw new Error("No se ha seleccionado ningun archivo.");
-=======
+      }
       if (acceptedFiles.length === 0) {
         throw new Error(DataMattResume.NoFileSelected)
->>>>>>> 71946ddf5aef714ef9fd7c21c4cd0966aa231322
       }
 
       const file = acceptedFiles[0];
-<<<<<<< HEAD
       const isValidDocx = /\.docx$/i.test(file.name);
       if (!isValidDocx) {
         throw new Error("File must be .docx");
-=======
+      }
       if (file.type !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
         throw new Error(DataMattResume.FileDoc);
->>>>>>> 71946ddf5aef714ef9fd7c21c4cd0966aa231322
       }
 
       const reader = new FileReader();
@@ -140,11 +136,8 @@ function TextSummarizerPage() {
   // Manejador de la solicitud de resumen
   const handleRequestSummary = async () => {
     if (!prompt && !fileContent) {
-<<<<<<< HEAD
       toast.error("Please type something before submit"); // Verifica que se haya ingresado texto antes de enviar la solicitud
-=======
       toast.error(DataMattResume.PleaseTypeSomething); // Verifica que se haya ingresado texto antes de enviar la solicitud
->>>>>>> 71946ddf5aef714ef9fd7c21c4cd0966aa231322
     } else {
       setIsLoading(true); // Activar el loader
       try {
@@ -156,13 +149,10 @@ function TextSummarizerPage() {
         setResponse(response?.data?.data);
         setSummaryText(response?.data?.data); // Establece el resumen recibido en el estado summaryText
       } catch (error) {
-<<<<<<< HEAD
         console.error("Error:", error);
         toast.error("An error occurred");
-=======
         console.error('Error:', error);
         toast.error(DataMattResume.AnErrorOcurred);
->>>>>>> 71946ddf5aef714ef9fd7c21c4cd0966aa231322
       } finally {
         setIsLoading(false); // Desactivar el loader
       }

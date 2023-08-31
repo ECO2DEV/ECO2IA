@@ -481,7 +481,6 @@ export function VolumenSpeakerIcon() {
     </svg>
   );
 }
-<<<<<<< HEAD
 
 export function EmailIconSVG() {
   return (
@@ -517,7 +516,6 @@ export function EmailIconSVG() {
     </svg>
   );
 }
-=======
 export function LinkedinIcon() {
   const iconStyle = {
     color: 'white', // Agrega cualquier estilo adicional aquí si es necesario
@@ -529,4 +527,3 @@ export function LinkedinIcon() {
     </svg>
   );
 }
->>>>>>> 71946ddf5aef714ef9fd7c21c4cd0966aa231322
