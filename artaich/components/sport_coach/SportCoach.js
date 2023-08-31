@@ -14,7 +14,7 @@ export const SportCoachIA = (props) => {
   const [weight, setWeight] = useState("");
   const [age, setAge] = useState("");
   // const [goal, setGoal] = useState("");
-  const [trainingDays, setTrainingDays] = useState("");
+  const [trainingDays, setTrainingDays] = useState("1");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [showResults, setShowResults] = useState(false);
