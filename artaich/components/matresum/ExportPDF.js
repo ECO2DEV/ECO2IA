@@ -26,7 +26,7 @@ function ExportPDF({ summaryText }) {
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <Text style={styles.title}>
-            MattResume
+            MATTRESUME
           </Text>
           <Text>{summaryText}</Text>
         </View>

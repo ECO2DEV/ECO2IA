@@ -1,10 +1,12 @@
-import { useReducer, useEffect, useMemo, useState } from 'react';
+import { useReducer, useEffect, useMemo, useState, useContext } from 'react';
+import { UserContext } from '../user/UserContext';
 import { useRouter } from 'next/router';
 import { PromptContext } from './PromptContext';
 import { promptReducer } from './promptReducer';
 import { countTokens } from '../../util/helpers/count_tokens';
 import axios from 'axios';
 import { strapiUrl, header } from '../../constants/constans';
+import { toast } from 'react-hot-toast';
 
 const promptInitialState = {
   activeAI: null,
@@ -22,6 +24,7 @@ const promptInitialState = {
 };
 
 export const PromptProvider = ({ children }) => {
+  const { user } = useContext(UserContext);
   const router = useRouter();
   const [idsUpdateMaxTokens, setIdsUpdateMaxTokens] = useState({
     userId: null,
@@ -45,6 +48,24 @@ export const PromptProvider = ({ children }) => {
     });
   };
 
+  const updateUserPlanToNull = async (userId) => {
+    // si el userId es undefined o null, utilice el userid del contexto de usuario
+    if (!userId) {
+      userId = user.id;
+    }
+
+    try {
+      await axios.put(
+        `${strapiUrl}/api/users/${userId}?populate=*`,
+        { plan: null },
+        header
+      );
+      console.log('Updated user plan to null');
+    } catch (error) {
+      console.log('Error updating user plan', error);
+    }
+  };
+
   const setResponse = async (response) => {
     // Para que no pueda hacer el llamado a la API si no han escogido plan
     if (state.plan.length === 0) {
@@ -63,9 +84,13 @@ export const PromptProvider = ({ children }) => {
     // validate that the user has maxtokens to use, if not redirect to buy a plan
     if (state.plan.length === 0) return;
     if (state.plan.max_tokens <= 0) {
-      alert('You have no more tokens to use, please buy a new plan');
-      router.push('/dashboard');
-      return;
+      toast.error('You have no more tokens to use, please buy a new plan');
+      //setTimer(5);
+      setTimeout(() => {
+        updateUserPlanToNull(idsUpdateMaxTokens.userId);
+        router.push('/dashboard');
+        return;
+      }, 500);
     }
     const resptokens = countTokensMemo(state.prompt);
     dispatch({
@@ -80,7 +105,8 @@ export const PromptProvider = ({ children }) => {
     // validate that the user has maxtokens to use, if not redirect to buy a plan
     if (state.plan.length === 0) return;
     if (state.plan.max_tokens <= 0) {
-      alert('You have no more tokens to use, please buy a new plan');
+      toast.error('You have no more tokens to use, please buy a new plan');
+      updateUserPlanToNull(idsUpdateMaxTokens.userId);
       router.push('/dashboard');
       return;
     }
@@ -101,7 +127,7 @@ export const PromptProvider = ({ children }) => {
         `${strapiUrl}/api/plans/${id}?populate=*`,
         header
       );
-      // validate that the user has maxtokens to use, if not redirect to buy a plan
+      // validate that the user has maxtokens to use, if not, redirect to buy a plan
       if (state.plan.max_tokens <= 0) {
         router.push('/dashboard');
         return;

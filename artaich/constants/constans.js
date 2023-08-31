@@ -10,9 +10,9 @@ export const header = {
 
 export const SUPPORTED_LENGUAGES = {
 
+  De: 'Allemand',
   En: 'Anglais',
   Es: 'Espagnol',
-  De: 'Allemand',
   Fr: 'Français',
   It: 'Italien',
   Pt: 'Portugais'

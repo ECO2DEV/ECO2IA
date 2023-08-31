@@ -60,7 +60,7 @@ export const EditAvatar = ({
       ) : (
         <button
           type="submit"
-          className="bg-gray-800 text-gray-100 rounded-md px-3 py-2 mt-4 disabled:opacity-50 flex justify-center items-center mx-auto"
+          className="bg-gray-800 text-gray-100 rounded-full px-3 py-2 mt-4 disabled:opacity-50 flex justify-center items-center mx-auto"
           disabled={!uploadImage}
         >
           {DataProfile.Update}

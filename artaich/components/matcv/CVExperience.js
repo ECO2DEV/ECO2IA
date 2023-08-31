@@ -33,7 +33,7 @@ export default function CVExperience({
       !formExperienceFields.endDate ||
       !formExperienceFields.cityXp
     ) {
-      toast.error('Please fill all the formation fields');
+      toast.error(DataMattCV.PleaseFill);
       onClose();
       return;
     }
