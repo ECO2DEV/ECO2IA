@@ -81,7 +81,7 @@ export default function EditProfile({ onClose, user }) {
       formData.country === ''
       // || formData.about === ''
     ) {
-      toast.error('Please fill all the fields');
+      toast.error(DataProfile.PleaseFill);
 
       return;
     }
@@ -92,13 +92,13 @@ export default function EditProfile({ onClose, user }) {
       formData.LastName.length < 3 ||
       formData.LastName.length > 50
     ) {
-      toast.error('Name and Last Name must be between 3 and 50 characters');
+      toast.error(DataProfile.NameMustBe);
 
       return;
     }
     // Valid email with regex
     if (!formData.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
-      toast.error('Please enter a valid email');
+      toast.error(DataProfile.EnterValidEmail);
 
       return;
     }
@@ -108,11 +108,11 @@ export default function EditProfile({ onClose, user }) {
         formData: formData,
         id: user.id
       });
-      toast.success('Profile updated');
+      toast.success(DataProfile.ProfileUpdated);
       router.push('/profile');
       onClose();
     } catch (error) {
-      toast.error('Error updating profile');
+      toast.error(DataProfile.ErrorUpdating);
       console.error('Error:', error);
     }
   };

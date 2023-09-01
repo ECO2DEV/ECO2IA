@@ -3,21 +3,21 @@ import Image from 'next/image';
 
 import { DataDashboard } from '../../data/dashboard';
 
-import dalle from '../../public/dalle.png';
-import ia_chat from '../../public/ia_chat.png';
-
-import mattranslate from '../../public/mattranslate.png';
-import matsport from '../../public/matsport.png';
-import qcm from '../../public/qcm.png';
-import matdesc from '../../public/matdesc.png';
-import matresume from '../../public/matresume.png';
+import mattchat from '../../public/mattchat.png'
+import mattresume from '../../public/mattresume.png'
+import mattimage from '../../public/mattimage.png'
+import mattrad from '../../public/mattrad.png'
+import mattsport from '../../public/mattsport.png'
+import mattquiz from '../../public/mattquiz.png'
+import mattdesc from '../../public/mattdesc.png'
+import mattcv from '../../public/mattcv.png'
 
 const actions = [
   {
     title: DataDashboard.MattechChatTitle,
     href: 'chatgpt',
     description: DataDashboard.MattechChatDescription,
-    icon: ia_chat,
+    icon: mattchat,
     iconForeground: 'text-teal-700',
     iconBackground: 'bg-teal-50'
   },
@@ -25,7 +25,7 @@ const actions = [
     title: DataDashboard.MattechImageTitle,
     href: 'dalle',
     description: DataDashboard.MattechImageDescription,
-    icon: dalle,
+    icon: mattimage,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
@@ -33,15 +33,15 @@ const actions = [
     title: DataDashboard.MatTranslateTitle,
     href: 'mattraduct',
     description: DataDashboard.MatTranslateDescription,
-    icon: mattranslate,
+    icon: mattrad,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: 'MATTSPORT',
+    title: DataDashboard.MattSportTitle,
     href: 'sportcoach',
     description: DataDashboard.MattSportDescription,
-    icon: matsport,
+    icon: mattsport,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
@@ -49,7 +49,7 @@ const actions = [
     title: DataDashboard.MattQuizTitle,
     href: 'matquiz',
     description: DataDashboard.MattQuizDescription,
-    icon: qcm,
+    icon: mattquiz,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
@@ -57,7 +57,7 @@ const actions = [
     title: DataDashboard.MattDescriptionTitle,
     href: 'matdescription',
     description: DataDashboard.MattDescription,
-    icon: matdesc,
+    icon: mattdesc,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
@@ -65,7 +65,7 @@ const actions = [
     title: DataDashboard.MattResumeTitle,
     href: 'mattresum',
     description: DataDashboard.MattResume,
-    icon: matresume,
+    icon: mattresume,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
@@ -73,7 +73,7 @@ const actions = [
     title: DataDashboard.MatCVTitle,
     href: 'matcv',
     description: DataDashboard.MatCVDescription,
-    icon: matdesc,
+    icon: mattcv,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   }

@@ -27,7 +27,7 @@ function ExportPDF({ generateTrainingPlanContent }) {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text style={styles.title}>Matt Sport</Text>
+          <Text style={styles.title}>MATTSPORT</Text>
           <Text>{trainingPlanContent}</Text>
         </View>
       </Page>

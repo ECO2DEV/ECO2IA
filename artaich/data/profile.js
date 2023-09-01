@@ -21,5 +21,13 @@ FirstName: "Prénom",
 LastName: "Nom",
 Height: "Taille",
 Cancel: "Annuler",
-Creer: "Créer"
+Creer: "Créer",
+EnterValidEmail:"Veuillez entrer une adresse e-mail valide",
+ProfileUpdated:"Profil mis à jour",
+ErrorUpdating:"Erreur lors de la mise à jour du profil",
+PleaseFill:"Veuillez remplir tous les champs",
+NameMustBe:"Le prénom et le nom doivent comporter entre 3 et 50 caractères",
+ImageSelected:"Image sélectionnée",
+ErrorUploadingImage:"Erreur lors du téléchargement de l'image",
+ImageUploaded:"Image téléchargée"
 }

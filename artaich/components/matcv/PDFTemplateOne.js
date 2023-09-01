@@ -1,6 +1,6 @@
 import { DataMattCV } from '../../data/mattcv';
 import { Fragment } from 'react';
-import { Page, Text, View, Document, Image } from '@react-pdf/renderer';
+import { Page, Text, View, Document, Image, PDFDownloadLink } from '@react-pdf/renderer';
 import dynamic from 'next/dynamic';
 import { stylesOne } from './TemplatesStyles';
 const DynamicPDFViewer = dynamic(
@@ -112,4 +112,5 @@ export const PDFTemplateOne = ({
       </Document>
     </DynamicPDFViewer>
   );
+
 };
