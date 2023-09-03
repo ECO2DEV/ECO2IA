@@ -11,10 +11,11 @@ const PDFDownloadLinkDynamic = dynamic(
     ssr: false,
   }
 );
+import { FacebookIconSVG, WhatsAppIconSVG, EmailIconSVG } from "../icons/icons";
 import {
   ShareIcon,
   DocumentArrowDownIcon,
-  DocumentIcon,
+  // DocumentIcon,
   CheckIcon,
 } from "@heroicons/react/24/solid";
 import {
@@ -22,12 +23,11 @@ import {
   WhatsappShareButton,
   EmailShareButton,
 } from "next-share";
-import { FacebookIcon, WhatsappIcon, EmailIcon } from "react-share";
 
 const exercisesReducer = (state, action) => {
   if (!state[action.dayIndex]?.exercises) {
     return state;
-  } 
+  }
   switch (action.type) {
     case "TOGGLE_EXERCISE":
       return {
@@ -97,7 +97,6 @@ export const SportCoachResults = () => {
   }
 
   // formato para compartir el plan de entrenamiento a pdf y a las redes sociales
-  // Genera el contenido del plan de entrenamiento para compartir
   const generateTrainingPlanContent = () => {
     let content = "Salut! Je partage mon plan d'entraînement :\n\n";
     responseObj.resp.forEach((day) => {
@@ -111,29 +110,6 @@ export const SportCoachResults = () => {
       }
     });
     return content;
-  };
-
-  const shareOnFacebook = () => {
-    const content = generateTrainingPlanContent();
-    const shareContent = encodeURIComponent(content);
-    const url = `https://www.facebook.com/sharer/share${shareContent}`;
-    window.open(url, "_blank");
-  };
-
-  const shareOnWhatsApp = () => {
-    const content = generateTrainingPlanContent();
-    const shareText = encodeURIComponent(content);
-    const url = `https://wa.me/?text=${shareText}`;
-    window.open(url, "_blank");
-  };
-
-  const shareByEmail = () => {
-    const subject = "Plan de Entrenamiento";
-    const content = generateTrainingPlanContent();
-    const mailtoUrl = `mailto:?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(content)}`;
-    window.location.href = mailtoUrl;
   };
 
   return (
@@ -185,9 +161,9 @@ export const SportCoachResults = () => {
       <nav aria-label="Breadcrumb">
         <ol
           role="list"
-          className="flex justify-center items-center w-96 space-x-4 rounded-md bg-gray-50 px-6 shadow absolute"
+          className="flex justify-evenly w-96 space-x-4 rounded-md bg-gray-50 shadow absolute"
         >
-          <li className="flex items-center w-auto text-gray-500 hover:text-gray-500">
+          <li className="flex items-center w-auto text-gray-500">
             <button
               onClick={handleShareClick}
               className="flex items-center p-2 rounded-md hover:bg-gray-100"
@@ -236,28 +212,28 @@ export const SportCoachResults = () => {
       </nav>
 
       {showShareButtons && (
-        <div className="relative w-4 bottom-[8rem] left-4 gap-2 z-10 flex flex-col justify-center">
+        <div className="relative w-10 h-fit bottom-[6rem] left-14 gap-2 z-10 flex flex-col items-center bg-gray-100 shadow">
           <FacebookShareButton
             className="h-4 w-4"
-            // url={window.location.href}
+            url={"https://next-mattech.vercel.app"}
+            title={generateTrainingPlanContent()}
             quote={generateTrainingPlanContent()}
+            hashtag={"#SportCoach"}
           >
-            <FacebookIcon size={38} round />
+            <FacebookIconSVG />
           </FacebookShareButton>
           <WhatsappShareButton
-            className="h-4 w-4"
-            url={window.location.href}
+            url={"https://next-mattech.vercel.app"}
             title={generateTrainingPlanContent()}
           >
-            <WhatsappIcon size={38} round />
+            <WhatsAppIconSVG />
           </WhatsappShareButton>
           <EmailShareButton
-            className="h-4 w-4"
-            url={window.location.href}
+            url={"https://next-mattech.vercel.app"}
             subject="plan de formation"
             body={generateTrainingPlanContent()}
           >
-            <EmailIcon size={38} round />
+            <EmailIconSVG className='w-6' />
           </EmailShareButton>
         </div>
       )}
