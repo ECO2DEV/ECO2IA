@@ -13,7 +13,7 @@ export default function CVSummary({ onClose, setTextProfile }) {
   const [open, setOpen] = useState(true);
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user, language } = useContext(UserContext);
   const [formProfile, setFormProfile] = useState({
     role: '',
     market: '',
@@ -40,6 +40,7 @@ export default function CVSummary({ onClose, setTextProfile }) {
         role: formProfile.role,
         market: formProfile.market,
         keywords: formProfile.keywords,
+        language: language,
         user: user
       });
       setTextProfile(result?.data?.data);
@@ -136,7 +137,7 @@ export default function CVSummary({ onClose, setTextProfile }) {
                           type="submit"
                           className="px-4 py-2 bg-indigo-600 text-white rounded-lg "
                         >
-                          {loading ? (DataMattCV.Loading) : (DataMattCV.Generate)}
+                          {loading ? DataMattCV.Loading : DataMattCV.Generate}
                         </button>
                         <button
                           onClick={onClose}

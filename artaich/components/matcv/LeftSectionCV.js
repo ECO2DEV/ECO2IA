@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { TextAreaProfile } from './TextAreaProfile';
-import { TextAreaExperience } from './TextAreaExperience';
 import { FormCV } from './FormCV';
 import TextAreaEducation from './TextAreaEducation';
 import ToggleProfileOpt from './ToggleProfileOpt';
 import { RadioButtonsTemplate } from './RadioButtonsTemplate';
 import { DataMattCV } from '../../data/mattcv';
+import ExperienceForm from './ExperienceForm';
 
 export const LeftSectionCV = ({
   formData,
@@ -15,9 +15,8 @@ export const LeftSectionCV = ({
   textProfile,
   setTextProfile,
   setEducationFields,
-  setTextExperience,
-  textExperience,
-  setWorkExperienceFields
+  dropdowns,
+  setDropdowns
 }) => {
   const [toggleHovered, setToggleHovered] = useState(false);
 
@@ -60,11 +59,7 @@ export const LeftSectionCV = ({
         selectedTemplate={selectedTemplate}
       />
 
-      <TextAreaExperience
-        setTextExperience={setTextExperience}
-        textExperience={textExperience}
-        setWorkExperienceFields={setWorkExperienceFields}
-      />
+      <ExperienceForm dropdowns={dropdowns} setDropdowns={setDropdowns} />
     </section>
   );
 };

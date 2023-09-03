@@ -8,16 +8,11 @@ import TagsInput from './TagsInput';
 
 import { DataMattCV } from '../../data/mattcv';
 
-export default function CVExperience({
-  onClose,
-  handleAddExperience,
-  setTextExperience,
-  formExperienceFields
-}) {
+export default function CVExperience({ onClose, setDescriptionResponse }) {
   const cancelButtonRef = useRef(null);
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user, language } = useContext(UserContext);
   const [formProfile, setFormProfile] = useState({
     role: '',
     market: '',
@@ -26,17 +21,6 @@ export default function CVExperience({
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (
-      !formExperienceFields.jobTitleXp ||
-      !formExperienceFields.employer ||
-      !formExperienceFields.startDate ||
-      !formExperienceFields.endDate ||
-      !formExperienceFields.cityXp
-    ) {
-      toast.error(DataMattCV.PleaseFill);
-      onClose();
-      return;
-    }
     if (!formProfile.role || !formProfile.market) {
       toast.error(DataMattCV.PleaseFill);
       return;
@@ -55,13 +39,14 @@ export default function CVExperience({
         role: formProfile.role,
         market: formProfile.market,
         keywords: formProfile.keywords,
+        language: language,
         user: user
       });
       const bulletPoints = result?.data?.data
         ? result.data.data.split('\n').map((item) => `• ${item.trim()}\n`)
         : '';
-      setTextExperience(bulletPoints);
-      handleAddExperience();
+
+      setDescriptionResponse(bulletPoints);
 
       console.log('result is:', result.data);
       setLoading(false);
@@ -149,7 +134,7 @@ export default function CVExperience({
                           type="submit"
                           className="px-4 py-2 bg-indigo-600 text-white rounded-lg"
                         >
-                          {loading ? (DataMattCV.Loading) : (DataMattCV.Generate)}
+                          {loading ? DataMattCV.Loading : DataMattCV.Generate}
                         </button>
                         <button
                           disabled={loading}

@@ -71,7 +71,6 @@ export const FormCV = ({ formData, setFormData }) => {
           <input
             className="p-2 border rounded w-full"
             type="email"
-            placeholder={DataMattCV.Email}
             name="email"
             value={formData?.email ? formData.email : ''}
             onChange={handleChange}

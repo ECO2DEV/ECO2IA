@@ -15,9 +15,12 @@ const MyDocument = ({ formData, setFormData }) => {
 
   const [textProfile, setTextProfile] = useState('');
   const [educationFields, setEducationFields] = useState([]);
-  const [workExperienceFields, setWorkExperienceFields] = useState([]);
-  const [textExperience, setTextExperience] = useState([]);
+
+  const [dropdowns, setDropdowns] = useState([{ isOpen: false }]); // Inicializa con un dropdown cerrado, componente add experience
+
   const [selectedTemplate, setSelectedTemplate] = useState('template1');
+
+  // debounce for the dropdowns
 
   const debouncedFormData = useDebounce(formData, 700);
   const debouncedTextProfile = useDebounce(textProfile, 700);
@@ -33,6 +36,8 @@ const MyDocument = ({ formData, setFormData }) => {
         <>
           {/* Left section Forms - inputs*/}
           <LeftSectionCV
+            dropdowns={dropdowns}
+            setDropdowns={setDropdowns}
             selectedTemplate={selectedTemplate}
             setSelectedTemplate={setSelectedTemplate}
             formData={formData}
@@ -40,33 +45,28 @@ const MyDocument = ({ formData, setFormData }) => {
             textProfile={textProfile}
             setTextProfile={setTextProfile}
             setEducationFields={setEducationFields}
-            setTextExperience={setTextExperience}
-            textExperience={textExperience}
-            setWorkExperienceFields={setWorkExperienceFields}
           />
           {/* Right section PDF viewer*/}
 
           {showPreview && (
             <MobilePopUp isModalNeedIt={true} onClose={togglePreview}>
               <PDFTemplateTwo
+                dropdowns={dropdowns}
                 debouncedFormData={debouncedFormData}
                 debouncedTextProfile={debouncedTextProfile}
                 textProfile={textProfile}
-                workExperienceFields={workExperienceFields}
                 educationFields={educationFields}
-                textExperience={textExperience}
                 user={user}
               />
             </MobilePopUp>
           )}
           <section className="w-full hidden lg:block md:w-[35%] lg:w-[41%] lg:fixed lg:right-0 h-full">
             <PDFTemplateTwo
+              dropdowns={dropdowns}
               debouncedFormData={debouncedFormData}
               debouncedTextProfile={debouncedTextProfile}
               textProfile={textProfile}
-              workExperienceFields={workExperienceFields}
               educationFields={educationFields}
-              textExperience={textExperience}
               user={user}
             />
           </section>
@@ -77,28 +77,28 @@ const MyDocument = ({ formData, setFormData }) => {
             {showPreview && (
               <MobilePopUp isModalNeedIt={true}>
                 <PDFTemplateOne
+                  dropdowns={dropdowns}
                   debouncedFormData={debouncedFormData}
                   debouncedTextProfile={debouncedTextProfile}
                   textProfile={textProfile}
-                  workExperienceFields={workExperienceFields}
                   educationFields={educationFields}
-                  textExperience={textExperience}
                   user={user}
                 />
               </MobilePopUp>
             )}
             <PDFTemplateOne
+              dropdowns={dropdowns}
               debouncedFormData={debouncedFormData}
               debouncedTextProfile={debouncedTextProfile}
               textProfile={textProfile}
-              workExperienceFields={workExperienceFields}
               educationFields={educationFields}
-              textExperience={textExperience}
               user={user}
             />
           </section>
           {/* Left section Forms - inputs*/}
           <LeftSectionCV
+            dropdowns={dropdowns}
+            setDropdowns={setDropdowns}
             selectedTemplate={selectedTemplate}
             setSelectedTemplate={setSelectedTemplate}
             formData={formData}
@@ -106,9 +106,6 @@ const MyDocument = ({ formData, setFormData }) => {
             textProfile={textProfile}
             setTextProfile={setTextProfile}
             setEducationFields={setEducationFields}
-            setTextExperience={setTextExperience}
-            textExperience={textExperience}
-            setWorkExperienceFields={setWorkExperienceFields}
           />
         </>
       )}

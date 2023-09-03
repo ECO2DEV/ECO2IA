@@ -1,7 +1,13 @@
 import axios from 'axios';
 import { strapiUrl, header } from '../../constants/constans';
 
-export const MatCVResponseXP = async ({ role, market, keywords, user }) => {
+export const MatCVResponseXP = async ({
+  role,
+  market,
+  keywords,
+  language,
+  user
+}) => {
   try {
     const response = await axios.post(
       `${strapiUrl}/api/openai/matcvExperience`,
@@ -9,6 +15,7 @@ export const MatCVResponseXP = async ({ role, market, keywords, user }) => {
         role: role,
         market: market,
         keywords: keywords,
+        language: language,
         users_permissions_user: user
       },
       header
