@@ -15,8 +15,9 @@ const MyDocument = ({ formData, setFormData }) => {
 
   const [textProfile, setTextProfile] = useState('');
   const [educationFields, setEducationFields] = useState([]);
+  const [spokenLanguages, setSpokenLanguages] = useState([]);
 
-  const [dropdowns, setDropdowns] = useState([{ isOpen: false }]); // Inicializa con un dropdown cerrado, componente add experience
+  const [dropdowns, setDropdowns] = useState([]); // Inicializa con un dropdown cerrado, componente add experience
 
   const [selectedTemplate, setSelectedTemplate] = useState('template1');
 
@@ -30,12 +31,15 @@ const MyDocument = ({ formData, setFormData }) => {
   const togglePreview = () => {
     setShowPreview(!showPreview);
   };
+  const isBisScreen = typeof window !== 'undefined' && window.innerWidth > 1024;
+
   return (
     <div className="flex flex-col lg:flex-row h-screen gap-2 relative">
       {selectedTemplate === 'template2' ? (
         <>
           {/* Left section Forms - inputs*/}
           <LeftSectionCV
+            setSpokenLanguages={setSpokenLanguages}
             dropdowns={dropdowns}
             setDropdowns={setDropdowns}
             selectedTemplate={selectedTemplate}
@@ -48,9 +52,10 @@ const MyDocument = ({ formData, setFormData }) => {
           />
           {/* Right section PDF viewer*/}
 
-          {showPreview && (
+          {showPreview && !isBisScreen && (
             <MobilePopUp isModalNeedIt={true} onClose={togglePreview}>
               <PDFTemplateTwo
+                spokenLanguages={spokenLanguages}
                 dropdowns={dropdowns}
                 debouncedFormData={debouncedFormData}
                 debouncedTextProfile={debouncedTextProfile}
@@ -62,6 +67,7 @@ const MyDocument = ({ formData, setFormData }) => {
           )}
           <section className="w-full hidden lg:block md:w-[35%] lg:w-[41%] lg:fixed lg:right-0 h-full">
             <PDFTemplateTwo
+              spokenLanguages={spokenLanguages}
               dropdowns={dropdowns}
               debouncedFormData={debouncedFormData}
               debouncedTextProfile={debouncedTextProfile}
@@ -74,9 +80,10 @@ const MyDocument = ({ formData, setFormData }) => {
       ) : (
         <>
           <section className="w-full hidden lg:block md:w-[35%] lg:w-[41%] lg:fixed lg:right-0 h-full">
-            {showPreview && (
+            {showPreview && !isBisScreen && (
               <MobilePopUp isModalNeedIt={true}>
                 <PDFTemplateOne
+                  spokenLanguages={spokenLanguages}
                   dropdowns={dropdowns}
                   debouncedFormData={debouncedFormData}
                   debouncedTextProfile={debouncedTextProfile}
@@ -87,6 +94,7 @@ const MyDocument = ({ formData, setFormData }) => {
               </MobilePopUp>
             )}
             <PDFTemplateOne
+              spokenLanguages={spokenLanguages}
               dropdowns={dropdowns}
               debouncedFormData={debouncedFormData}
               debouncedTextProfile={debouncedTextProfile}
@@ -97,6 +105,7 @@ const MyDocument = ({ formData, setFormData }) => {
           </section>
           {/* Left section Forms - inputs*/}
           <LeftSectionCV
+            setSpokenLanguages={setSpokenLanguages}
             dropdowns={dropdowns}
             setDropdowns={setDropdowns}
             selectedTemplate={selectedTemplate}

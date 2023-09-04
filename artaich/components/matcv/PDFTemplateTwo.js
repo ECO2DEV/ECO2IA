@@ -11,6 +11,7 @@ const DynamicPDFViewer = dynamic(
 );
 
 export const PDFTemplateTwo = ({
+  spokenLanguages,
   debouncedFormData,
   debouncedTextProfile,
   dropdowns,
@@ -108,6 +109,18 @@ export const PDFTemplateTwo = ({
                 <Text style={stylesTwo.profileText}>
                   {debouncedFormData.nationality}
                 </Text>
+              </View>
+            )}
+            {spokenLanguages.length > 0 && (
+              <View>
+                <Text style={stylesTwo.heading}>Languages</Text>
+                {spokenLanguages.map((language, index) => (
+                  <Fragment key={index}>
+                    <Text style={stylesTwo.thirdTitle}>
+                      {`${language.name} - ${language.proficiency}`}
+                    </Text>
+                  </Fragment>
+                ))}
               </View>
             )}
           </View>

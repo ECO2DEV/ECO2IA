@@ -11,6 +11,7 @@ const DynamicPDFViewer = dynamic(
 );
 
 export const PDFTemplateOne = ({
+  spokenLanguages,
   debouncedFormData,
   debouncedTextProfile,
   user,
@@ -108,6 +109,18 @@ export const PDFTemplateOne = ({
                 <Text style={stylesOne.profileText}>
                   {debouncedFormData.nationality}
                 </Text>
+              </View>
+            )}
+            {spokenLanguages.length > 0 && (
+              <View>
+                <Text style={stylesOne.heading}>Languages</Text>
+                {spokenLanguages.map((language, index) => (
+                  <Fragment key={index}>
+                    <Text style={stylesOne.thirdTitle}>
+                      {`${language.name} - ${language.proficiency}`}
+                    </Text>
+                  </Fragment>
+                ))}
               </View>
             )}
           </View>

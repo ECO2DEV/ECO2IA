@@ -6,8 +6,10 @@ import ToggleProfileOpt from './ToggleProfileOpt';
 import { RadioButtonsTemplate } from './RadioButtonsTemplate';
 import { DataMattCV } from '../../data/mattcv';
 import ExperienceForm from './ExperienceForm';
+import SpokenLanguagesForm from './SpokenLanguagesForm';
 
 export const LeftSectionCV = ({
+  setSpokenLanguages,
   formData,
   selectedTemplate,
   setSelectedTemplate,
@@ -33,6 +35,7 @@ export const LeftSectionCV = ({
       <h1 className="text-xl font-bold"> {DataMattCV.PersonalDetails} </h1>
       <p className="text-xs">{DataMattCV.PersonalDetailsText}</p>
       <FormCV formData={formData} setFormData={setFormData} />
+
       <div className="flex justify-start items-center relative">
         <div
           title={DataMattCV.AddProfileInfo}
@@ -58,8 +61,8 @@ export const LeftSectionCV = ({
         handleTemplateChange={handleTemplateChange}
         selectedTemplate={selectedTemplate}
       />
-
       <ExperienceForm dropdowns={dropdowns} setDropdowns={setDropdowns} />
+      <SpokenLanguagesForm setSpokenLanguages={setSpokenLanguages} />
     </section>
   );
 };
