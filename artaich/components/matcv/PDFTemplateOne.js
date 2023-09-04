@@ -11,12 +11,12 @@ const DynamicPDFViewer = dynamic(
 );
 
 export const PDFTemplateOne = ({
+  spokenLanguages,
   debouncedFormData,
   debouncedTextProfile,
   user,
   textProfile,
-  workExperienceFields,
-  textExperience,
+  dropdowns,
   educationFields
 }) => {
   return (
@@ -38,10 +38,12 @@ export const PDFTemplateOne = ({
                 </Text>
               </View>
             )}
-            {workExperienceFields.length > 0 && (
+            {dropdowns.length > 0 && (
               <View>
-                <Text style={stylesOne.subtitle}>{DataMattCV.EmploymentHistory}</Text>
-                {workExperienceFields.map((experience, index) => (
+                <Text style={stylesOne.subtitle}>
+                  {DataMattCV.EmploymentHistory}
+                </Text>
+                {dropdowns.map((experience, index) => (
                   <View key={index}>
                     <Text style={stylesOne.thirdTitle}>
                       {`${experience.jobTitleXp} at ${experience.employer}, ${experience.cityXp}`}
@@ -49,9 +51,9 @@ export const PDFTemplateOne = ({
                     <Text style={stylesOne.thirdTitle}>
                       {`${experience.startDate} - ${experience.endDate}`}
                     </Text>
-                    {textExperience?.length > 0 && (
+                    {experience?.description?.length > 0 && (
                       <View>
-                        {textExperience?.map((bullet, bulletIndex) => (
+                        {experience?.description?.map((bullet, bulletIndex) => (
                           <View key={bulletIndex}>
                             <Text
                               style={stylesOne.bulletPoint}
@@ -66,7 +68,9 @@ export const PDFTemplateOne = ({
             )}
             {educationFields.length > 0 && (
               <View>
-                <Text style={stylesOne.subtitle}>{DataMattCV.EducationBackground} </Text>
+                <Text style={stylesOne.subtitle}>
+                  {DataMattCV.EducationBackground}{' '}
+                </Text>
                 {educationFields.map((education, index) => (
                   <Fragment key={index}>
                     <Text style={stylesOne.thirdTitle}>
@@ -105,6 +109,18 @@ export const PDFTemplateOne = ({
                 <Text style={stylesOne.profileText}>
                   {debouncedFormData.nationality}
                 </Text>
+              </View>
+            )}
+            {spokenLanguages.length > 0 && (
+              <View>
+                <Text style={stylesOne.heading}>Languages</Text>
+                {spokenLanguages.map((language, index) => (
+                  <Fragment key={index}>
+                    <Text style={stylesOne.thirdTitle}>
+                      {`${language.name} - ${language.proficiency}`}
+                    </Text>
+                  </Fragment>
+                ))}
               </View>
             )}
           </View>
