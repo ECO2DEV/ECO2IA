@@ -11,12 +11,12 @@ const DynamicPDFViewer = dynamic(
 );
 
 export const PDFTemplateTwo = ({
+  spokenLanguages,
   debouncedFormData,
   debouncedTextProfile,
+  dropdowns,
   user,
   textProfile,
-  workExperienceFields,
-  textExperience,
   educationFields
 }) => {
   return (
@@ -38,10 +38,12 @@ export const PDFTemplateTwo = ({
                 </Text>
               </View>
             )}
-            {workExperienceFields.length > 0 && (
+            {dropdowns.length > 0 && (
               <View>
-                <Text style={stylesTwo.subtitle}>{DataMattCV.EmploymentHistory}</Text>
-                {workExperienceFields.map((experience, index) => (
+                <Text style={stylesTwo.subtitle}>
+                  {DataMattCV.EmploymentHistory}
+                </Text>
+                {dropdowns.map((experience, index) => (
                   <View key={index}>
                     <Text style={stylesTwo.thirdTitle}>
                       {`${experience.jobTitleXp} at ${experience.employer}, ${experience.cityXp}`}
@@ -49,9 +51,9 @@ export const PDFTemplateTwo = ({
                     <Text style={stylesTwo.thirdTitle}>
                       {`${experience.startDate} - ${experience.endDate}`}
                     </Text>
-                    {textExperience?.length > 0 && (
+                    {experience?.description?.length > 0 && (
                       <View>
-                        {textExperience?.map((bullet, bulletIndex) => (
+                        {experience?.description?.map((bullet, bulletIndex) => (
                           <View key={bulletIndex}>
                             <Text
                               style={stylesTwo.bulletPoint}
@@ -66,7 +68,9 @@ export const PDFTemplateTwo = ({
             )}
             {educationFields.length > 0 && (
               <View>
-                <Text style={stylesTwo.subtitle}>{DataMattCV.EducationBackgrounde}</Text>
+                <Text style={stylesTwo.subtitle}>
+                  {DataMattCV.EducationBackgrounde}
+                </Text>
                 {educationFields.map((education, index) => (
                   <Fragment key={index}>
                     <Text style={stylesTwo.thirdTitle}>
@@ -105,6 +109,18 @@ export const PDFTemplateTwo = ({
                 <Text style={stylesTwo.profileText}>
                   {debouncedFormData.nationality}
                 </Text>
+              </View>
+            )}
+            {spokenLanguages.length > 0 && (
+              <View>
+                <Text style={stylesTwo.heading}>Languages</Text>
+                {spokenLanguages.map((language, index) => (
+                  <Fragment key={index}>
+                    <Text style={stylesTwo.thirdTitle}>
+                      {`${language.name} - ${language.proficiency}`}
+                    </Text>
+                  </Fragment>
+                ))}
               </View>
             )}
           </View>

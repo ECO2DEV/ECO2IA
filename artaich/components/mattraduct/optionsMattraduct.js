@@ -29,7 +29,7 @@ export default function OptionsMattraduct({
   handleShowThirdTextarea,
   onClick,
   translationResponse,
-  prompt
+  prompt,
 }) {
   // console.log("language" + language)
   const { promptTokens } = useContext(PromptContext);
@@ -51,9 +51,10 @@ export default function OptionsMattraduct({
             </div>
           </li>
           <PDFDownloadLinkDynamic
+            className={!translationResponse ? "opacity-50 pointer-events-none" : ""}
             document={
-              <ExportPDF 
-                prompt={prompt} 
+              <ExportPDF
+                prompt={prompt}
                 translationResponse={translationResponse}
               />
             }

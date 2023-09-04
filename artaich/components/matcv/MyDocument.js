@@ -15,9 +15,13 @@ const MyDocument = ({ formData, setFormData }) => {
 
   const [textProfile, setTextProfile] = useState('');
   const [educationFields, setEducationFields] = useState([]);
-  const [workExperienceFields, setWorkExperienceFields] = useState([]);
-  const [textExperience, setTextExperience] = useState([]);
+  const [spokenLanguages, setSpokenLanguages] = useState([]);
+
+  const [dropdowns, setDropdowns] = useState([]); // Inicializa con un dropdown cerrado, componente add experience
+
   const [selectedTemplate, setSelectedTemplate] = useState('template1');
+
+  // debounce for the dropdowns
 
   const debouncedFormData = useDebounce(formData, 700);
   const debouncedTextProfile = useDebounce(textProfile, 700);
@@ -27,12 +31,17 @@ const MyDocument = ({ formData, setFormData }) => {
   const togglePreview = () => {
     setShowPreview(!showPreview);
   };
+  const isBisScreen = typeof window !== 'undefined' && window.innerWidth > 1024;
+
   return (
     <div className="flex flex-col lg:flex-row h-screen gap-2 relative">
       {selectedTemplate === 'template2' ? (
         <>
           {/* Left section Forms - inputs*/}
           <LeftSectionCV
+            setSpokenLanguages={setSpokenLanguages}
+            dropdowns={dropdowns}
+            setDropdowns={setDropdowns}
             selectedTemplate={selectedTemplate}
             setSelectedTemplate={setSelectedTemplate}
             formData={formData}
@@ -40,33 +49,30 @@ const MyDocument = ({ formData, setFormData }) => {
             textProfile={textProfile}
             setTextProfile={setTextProfile}
             setEducationFields={setEducationFields}
-            setTextExperience={setTextExperience}
-            textExperience={textExperience}
-            setWorkExperienceFields={setWorkExperienceFields}
           />
           {/* Right section PDF viewer*/}
 
-          {showPreview && (
+          {showPreview && !isBisScreen && (
             <MobilePopUp isModalNeedIt={true} onClose={togglePreview}>
               <PDFTemplateTwo
+                spokenLanguages={spokenLanguages}
+                dropdowns={dropdowns}
                 debouncedFormData={debouncedFormData}
                 debouncedTextProfile={debouncedTextProfile}
                 textProfile={textProfile}
-                workExperienceFields={workExperienceFields}
                 educationFields={educationFields}
-                textExperience={textExperience}
                 user={user}
               />
             </MobilePopUp>
           )}
           <section className="w-full hidden lg:block md:w-[35%] lg:w-[41%] lg:fixed lg:right-0 h-full">
             <PDFTemplateTwo
+              spokenLanguages={spokenLanguages}
+              dropdowns={dropdowns}
               debouncedFormData={debouncedFormData}
               debouncedTextProfile={debouncedTextProfile}
               textProfile={textProfile}
-              workExperienceFields={workExperienceFields}
               educationFields={educationFields}
-              textExperience={textExperience}
               user={user}
             />
           </section>
@@ -74,31 +80,34 @@ const MyDocument = ({ formData, setFormData }) => {
       ) : (
         <>
           <section className="w-full hidden lg:block md:w-[35%] lg:w-[41%] lg:fixed lg:right-0 h-full">
-            {showPreview && (
+            {showPreview && !isBisScreen && (
               <MobilePopUp isModalNeedIt={true}>
                 <PDFTemplateOne
+                  spokenLanguages={spokenLanguages}
+                  dropdowns={dropdowns}
                   debouncedFormData={debouncedFormData}
                   debouncedTextProfile={debouncedTextProfile}
                   textProfile={textProfile}
-                  workExperienceFields={workExperienceFields}
                   educationFields={educationFields}
-                  textExperience={textExperience}
                   user={user}
                 />
               </MobilePopUp>
             )}
             <PDFTemplateOne
+              spokenLanguages={spokenLanguages}
+              dropdowns={dropdowns}
               debouncedFormData={debouncedFormData}
               debouncedTextProfile={debouncedTextProfile}
               textProfile={textProfile}
-              workExperienceFields={workExperienceFields}
               educationFields={educationFields}
-              textExperience={textExperience}
               user={user}
             />
           </section>
           {/* Left section Forms - inputs*/}
           <LeftSectionCV
+            setSpokenLanguages={setSpokenLanguages}
+            dropdowns={dropdowns}
+            setDropdowns={setDropdowns}
             selectedTemplate={selectedTemplate}
             setSelectedTemplate={setSelectedTemplate}
             formData={formData}
@@ -106,9 +115,6 @@ const MyDocument = ({ formData, setFormData }) => {
             textProfile={textProfile}
             setTextProfile={setTextProfile}
             setEducationFields={setEducationFields}
-            setTextExperience={setTextExperience}
-            textExperience={textExperience}
-            setWorkExperienceFields={setWorkExperienceFields}
           />
         </>
       )}

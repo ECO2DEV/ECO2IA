@@ -4,7 +4,9 @@ import { userReducer } from './userReducer';
 
 const userInitialState = {
   user: null,
-  setUser: () => {}
+  language: 'french',
+  setUser: () => {},
+  setLanguage: () => {}
 };
 
 export const UserProvider = ({ children }) => {
@@ -17,11 +19,19 @@ export const UserProvider = ({ children }) => {
     });
   };
 
+  const setLanguage = (language) => {
+    dispatch({
+      type: 'SET_LANGUAGE',
+      payload: language
+    });
+  };
+
   return (
     <UserContext.Provider
       value={{
         ...state,
-        setUser
+        setUser,
+        setLanguage
       }}
     >
       {children}
