@@ -113,7 +113,7 @@ export const PDFTemplateOne = ({
             )}
             {spokenLanguages.length > 0 && (
               <View>
-                <Text style={stylesOne.heading}>Languages</Text>
+                <Text style={stylesOne.heading}>Langues</Text>
                 {spokenLanguages.map((language, index) => (
                   <Fragment key={index}>
                     <Text style={stylesOne.thirdTitle}>

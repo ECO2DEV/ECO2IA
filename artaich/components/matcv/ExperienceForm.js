@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BarsIcon, ChevronDown, DeleteCrossIcon } from '../icons/icons';
 import CVExperience from './CVExperience';
+import { DataMattCV } from '../../data/mattcv';
 
 const ExperienceForm = ({ dropdowns, setDropdowns }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -53,7 +54,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
         className="bg-indigo-600 text-white py-2 px-4 rounded mb-4 flex items-center"
         onClick={addDropdown}
       >
-        <span className="mr-2">Add Experience</span>
+        <span className="mr-2">{DataMattCV.AddExperience}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
@@ -95,13 +96,13 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
               htmlFor={`jobTitle${index}`}
               className="block text-gray-700 text-sm font-bold mb-2 mt-6"
             >
-              Job Title
+              {DataMattCV.JobTitle}
             </label>
             <input
               id={`jobTitle${index}`}
               className="w-full px-3 py-2 border rounded"
               type="text"
-              placeholder="Enter job title"
+              placeholder={DataMattCV.EnterJobTitle}
               value={dropdown.jobTitleXp || ''}
               onChange={(e) =>
                 handleInputChange(index, 'jobTitleXp', e.target.value)
@@ -114,13 +115,13 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
                 htmlFor={`startDate${index}`}
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Start Date
+                {DataMattCV.StartDate}
               </label>
               <input
                 id={`startDate${index}`}
                 className="w-full px-3 py-2 border rounded"
                 type="text"
-                placeholder="Enter start date"
+                placeholder={DataMattCV.EnterStartDate}
                 value={dropdown.startDate || ''}
                 onChange={(e) =>
                   handleInputChange(index, 'startDate', e.target.value)
@@ -132,13 +133,13 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
                 htmlFor={`endDate${index}`}
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                End Date
+                {DataMattCV.EndDate}
               </label>
               <input
                 id={`endDate${index}`}
                 className="w-full px-3 py-2 border rounded"
                 type="text"
-                placeholder="Enter end date"
+                placeholder={DataMattCV.EnterEndDate}
                 value={dropdown.endDate || ''}
                 onChange={(e) =>
                   handleInputChange(index, 'endDate', e.target.value)
@@ -152,13 +153,13 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
                 htmlFor={`employer${index}`}
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Employer
+                {DataMattCV.Employer}
               </label>
               <input
                 id={`employer${index}`}
                 className="w-full px-3 py-2 border rounded"
                 type="text"
-                placeholder="Enter employer"
+                placeholder={DataMattCV.EnterEmployer}
                 value={dropdown.employer || ''}
                 onChange={(e) =>
                   handleInputChange(index, 'employer', e.target.value)
@@ -170,13 +171,13 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
                 htmlFor={`cityXp${index}`}
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                City
+                {DataMattCV.City}
               </label>
               <input
                 id={`cityXp${index}`}
                 className="w-full px-3 py-2 border rounded"
                 type="text"
-                placeholder="Enter city"
+                placeholder={DataMattCV.EnterCity}
                 value={dropdown.cityXp || ''}
                 onChange={(e) =>
                   handleInputChange(index, 'cityXp', e.target.value)
@@ -189,12 +190,12 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
               htmlFor={`description${index}`}
               className="block text-gray-700 text-sm font-bold mb-2 mt-6"
             >
-              Description
+              {DataMattCV.Description}
             </label>
             <textarea
               id={`description${index}`}
               className="w-full h-36 text-xs p-2 border rounded resize-none border focus:border-indigo-600"
-              placeholder="Enter job title"
+              placeholder={DataMattCV.EnterDescription}
               value={dropdown.description || ''}
               onChange={(e) => {
                 handleInputChange(index, 'description', e.target.value);
@@ -205,7 +206,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
             onClick={handleModalOpen}
             className="gap-x-1.5 rounded-md px-3 py-2 mb-2 text-sm font-semibold bg-indigo-600 text-white ring-1 ring-inset ring-gray-30"
           >
-            Generate with AI
+            {DataMattCV.GenerateWithAI}
           </button>
         </div>
       ))}
