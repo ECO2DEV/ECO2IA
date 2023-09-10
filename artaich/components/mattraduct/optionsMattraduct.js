@@ -1,13 +1,15 @@
 // components/mattraduct/optionsMattraduct.js
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { Popover, Transition } from "@headlessui/react";
 import { DataMatTraduct } from "../../data/mattraduct";
 import { PromptContext } from "../../context/prompts/PromptContext";
+import ShareModal from "./ShareModal";
 import {
   MinusIcon,
   PlusIcon,
   ShareIcon,
   DocumentArrowDownIcon,
-  DocumentIcon,
+  // DocumentIcon,
 } from "@heroicons/react/20/solid";
 import dynamic from "next/dynamic";
 // Import PDFDownloadLink separately before the component definition
@@ -31,6 +33,12 @@ export default function OptionsMattraduct({
   translationResponse,
   prompt,
 }) {
+  // Handler para cambiar el estado de showShare
+  const toggleShare = () => {
+    setShowShare(!showShare);
+  };
+
+  const [showShare, setShowShare] = useState(false);
   // console.log("language" + language)
   const { promptTokens } = useContext(PromptContext);
   return (
@@ -51,7 +59,9 @@ export default function OptionsMattraduct({
             </div>
           </li>
           <PDFDownloadLinkDynamic
-            className={!translationResponse ? "opacity-50 pointer-events-none" : ""}
+            className={
+              !translationResponse ? "opacity-50 pointer-events-none" : ""
+            }
             document={
               <ExportPDF
                 prompt={prompt}
@@ -117,19 +127,38 @@ export default function OptionsMattraduct({
             >
               <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
             </svg>
-
-            <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
-              <div className="flex justify-center items-center">
-                <ShareIcon
-                  className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
-                  aria-hidden="true"
-                />
-                <span className="hidden sm:contents">
-                  {" "}
-                  {DataMatTraduct.ButtonShare}{" "}
-                </span>
-              </div>
-            </button>
+            <Popover className="relative">
+              {({ open }) => (
+                <>
+                  <Popover.Button
+                    onClick={toggleShare}
+                    className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800"
+                  >
+                    <div className="flex justify-center items-center">
+                      <ShareIcon
+                        className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                        aria-hidden="true"
+                      />
+                      <span className="hidden sm:contents">
+                        {DataMatTraduct.ButtonShare}
+                      </span>
+                    </div>
+                  </Popover.Button>
+                  <Transition
+                    show={showShare}
+                    enter="transition ease-out duration-200"
+                    enterFrom="opacity-0 translate-y-1"
+                    enterTo="opacity-100 translate-y-0"
+                  >
+                    <Popover.Panel className="absolute bottom-8 right-0 flex items-center z-10 p-4 w-14 bg-white rounded-lg shadow-lg">
+                      {showShare && (
+                        <ShareModal translationResponse={translationResponse} />
+                      )}
+                    </Popover.Panel>
+                  </Transition>
+                </>
+              )}
+            </Popover>
           </li>
           <li className="flex items-center">
             <svg
@@ -159,7 +188,7 @@ export default function OptionsMattraduct({
               ) : (
                 <div className="flex ">
                   <PlusIcon
-                    className=" mr-1 h-5 w-5 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                    className="mr-1 h-5 w-5 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                     aria-hidden="true"
                   />
                   <span className="hidden sm:contents">
