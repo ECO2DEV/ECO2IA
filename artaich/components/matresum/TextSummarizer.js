@@ -46,6 +46,7 @@ function TextSummarizerPage() {
     prompt,
     setResponse,
     setPromptTokens,
+    promptTokens,
     activeAI,
     setActiveAI,
   } = useContext(PromptContext);
@@ -275,6 +276,11 @@ function TextSummarizerPage() {
             ) : null}
             {DataMattResume.CreateResume}
           </button>
+          <div className="flex justify-center items-center my-2 text-gray-900">
+            <span>
+              Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+            </span>
+          </div>
         </div>
       </div>
       <div className="w-full md:w-6/12 px-4 mt-4 md:mt-0">
@@ -300,11 +306,10 @@ function TextSummarizerPage() {
               role="list"
               className="flex w-full justify-around rounded-md bg-gray-50 shadow"
             >
-              <li className="flex items-center">
+              <li onClick={handleModalHistory} className="flex items-center text-gray-500 hover:text-gray-800 sm:hover:text-gray-500 cursor-pointer">
                 <ButtonHistory
-                  className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                  className="mr-2 h-4 w-4"
                   aria-hidden="true"
-                  onClick={handleModalHistory}
                 />
                 <span className="hidden sm:contents">
                   {DataMattResume.History}
@@ -394,7 +399,7 @@ function TextSummarizerPage() {
                         enterFrom="opacity-0 translate-y-1"
                         enterTo="opacity-100 translate-y-0"
                       >
-                        <Popover.Panel className="absolute bottom-24 right-0 flex items-center z-10 p-4 w-14 bg-white rounded-lg shadow-lg">
+                        <Popover.Panel className="absolute bottom-8 right-0 flex items-center z-10 p-4 w-14 bg-white rounded-lg shadow-lg">
                           {showShare && (
                             <ShareModal summaryText={summaryText} />
                           )}
