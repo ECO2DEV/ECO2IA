@@ -1,9 +1,4 @@
-import { Fragment, useState } from 'react';
-import { Dialog, RadioGroup } from '@headlessui/react';
-import {
-  Bars3Icon,
-  XMarkIcon as XMarkIconOutline
-} from '@heroicons/react/24/outline';
+import { useState } from 'react';
 import {
   CheckIcon,
   XMarkIcon as XMarkIconMini
@@ -50,6 +45,7 @@ const pricing = {
       featured: true,
       description: '',
       price: { monthly: DataPricing.amount2, annually: '' },
+      //no son distintos los id de los planes
       priceid: DataPricing.priceid2,
       mainFeatures: [
         DataPricing.pricingfeatures2,
@@ -89,18 +85,14 @@ export default function Modal({ children, user }) {
   const [isEnterpriseOpen, setIsEnterpriseOpen] = useState(false);
   const [amount, setAmount] = useState(0);
   const [currency, setCurrency] = useState('eur');
-  console.log('User is ' + user?.customer_id);
 
-  const handleOnClose = () => {
-    setIsOpen(false);
-  };
+  // console.log('User is ' + user?.customer_id);
 
   const handleButtonClick = ({ amount }) => {
     if (user == null) {
       router.push('/auth/signin');
       // Set the state to open the modal
     } else {
-      console.log(amount);
       setAmount(amount);
       setIsModalOpen(!isModalOpen);
     }
@@ -116,16 +108,14 @@ export default function Modal({ children, user }) {
       try {
         const stripe = await stripePromise;
         const customerid = user.customer_id;
-
-        console.log('User is ' + customerid + 'Prix is' + price);
+        const userId = user.id;
 
         const checkoutSession = await axios.post('/api/create-subscription', {
           price,
-          customerid
+          customerid,
+          userId
         });
         //console.log(checkoutSession);
-
-        //  window.location.href =
 
         const result = await stripe.redirectToCheckout({
           sessionId: checkoutSession.data.sessionId

@@ -1,6 +1,7 @@
 import { getSession } from 'next-auth/react';
 import axios from 'axios';
 import { strapiUrl, strapiToken, header } from '../../constants/constans';
+import { toast } from 'react-hot-toast';
 
 export const createUser = async (data) => {
   try {
@@ -23,7 +24,14 @@ export const createUser = async (data) => {
     return response;
   } catch (error) {
     console.error(`Error making POST request to ${strapiUrl}:`, error);
-    return error.response.data.error;
+    if (error.response.data.error.message) {
+      toast.error('user already exists');
+      return error.response.data.error.message;
+    } else {
+      toast.error('Unexpected error');
+      return error.response.data.error;
+    }
+    // add the other error handler
     // throw new Error(`Failed to make POST request to ${strapiUrl}`);
   }
 };
@@ -35,9 +43,9 @@ export const setTrialPlan = async () => {
       {
         data: {
           typo: 'FreeTier',
-          max_tokens: '500',
+          max_tokens: 500,
           max_imagens: 10,
-          value: 50
+          value: 2
         }
       },
       header
@@ -46,6 +54,54 @@ export const setTrialPlan = async () => {
   } catch (error) {
     console.error(
       `Error creating freetrial plan POST request to ${strapiUrl}:`,
+      error
+    );
+    return error.response.data.error;
+  }
+};
+
+export const setEstudiantePlan = async () => {
+  try {
+    const response = await axios.post(
+      `${strapiUrl}/api/plans`,
+      {
+        data: {
+          typo: 'Estudiante',
+          max_tokens: 67500,
+          max_imagens: 16,
+          value: 4
+        }
+      },
+      header
+    );
+    return response;
+  } catch (error) {
+    console.error(
+      `Error creating Estudiante plan POST request to ${strapiUrl}:`,
+      error
+    );
+    return error.response.data.error;
+  }
+};
+
+export const setStandardPlan = async () => {
+  try {
+    const response = await axios.post(
+      `${strapiUrl}/api/plans`,
+      {
+        data: {
+          typo: 'Standard',
+          max_tokens: 112500,
+          max_imagens: 30,
+          value: 10
+        }
+      },
+      header
+    );
+    return response;
+  } catch (error) {
+    console.error(
+      `Error creating Standard plan POST request to ${strapiUrl}:`,
       error
     );
     return error.response.data.error;
@@ -90,6 +146,26 @@ export async function updateUserById({ formData, id }) {
     return updatedUser;
   } catch (error) {
     console.error(error);
+    return null;
+  }
+}
+
+export async function updatePlanById({ userId, planId }) {
+  try {
+    const updatedUser = await axios.put(
+      `${strapiUrl}/api/users/${userId}`,
+      {
+        plan: {
+          id: planId
+        }
+      },
+      {
+        headers: { Authorization: `Bearer ${strapiToken}` }
+      }
+    );
+    return updatedUser.data; // Retorna el usuario actualizado
+  } catch (error) {
+    console.error('Error al actualizar el plan del usuario:', error);
     return null;
   }
 }
