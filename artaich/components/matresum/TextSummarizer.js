@@ -11,6 +11,7 @@ import { ButtonHistory } from "./ButtonHistory";
 import HistoryResum from "./HistoryResum";
 import ExportPDF from "./ExportPDF";
 import mammoth from "mammoth";
+import ShareModal from "./ShareModal";
 
 import {
   DocumentArrowDownIcon,
@@ -18,6 +19,7 @@ import {
   ShareIcon,
 } from "@heroicons/react/20/solid";
 import dynamic from "next/dynamic";
+import { Popover, Transition } from "@headlessui/react";
 
 // Import PDFDownloadLink separately before the component definition
 const PDFDownloadLink = dynamic(
@@ -36,6 +38,7 @@ function TextSummarizerPage() {
   const [fileContent, setFileContent] = useState(null); // Contenido del archivo cargado
   const [isLoading, setIsLoading] = useState(false); // Estado de carga de la solicitud
   const [modalOpen, setModalOpen] = useState(false); // Estado de abrir el modal de historial
+  const [showShare, setShowShare] = useState(false);
 
   // Contextos utilizados
   const {
@@ -43,10 +46,16 @@ function TextSummarizerPage() {
     prompt,
     setResponse,
     setPromptTokens,
+    promptTokens,
     activeAI,
     setActiveAI,
   } = useContext(PromptContext);
   const { user } = useContext(UserContext); // Contexto del usuario
+
+  // Handler para cambiar el estado de showShare
+  const toggleShare = () => {
+    setShowShare(!showShare);
+  };
 
   useEffect(() => {
     if (activeAI !== "TextSummarizerAI") {
@@ -85,7 +94,7 @@ function TextSummarizerPage() {
         throw new Error("No se ha seleccionado ningun archivo.");
       }
       if (acceptedFiles.length === 0) {
-        throw new Error(DataMattResume.NoFileSelected)
+        throw new Error(DataMattResume.NoFileSelected);
       }
 
       const file = acceptedFiles[0];
@@ -93,7 +102,10 @@ function TextSummarizerPage() {
       if (!isValidDocx) {
         throw new Error("File must be .docx");
       }
-      if (file.type !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+      if (
+        file.type !==
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      ) {
         throw new Error(DataMattResume.FileDoc);
       }
 
@@ -151,7 +163,7 @@ function TextSummarizerPage() {
       } catch (error) {
         console.error("Error:", error);
         toast.error("An error occurred");
-        console.error('Error:', error);
+        console.error("Error:", error);
         toast.error(DataMattResume.AnErrorOcurred);
       } finally {
         setIsLoading(false); // Desactivar el loader
@@ -183,143 +195,155 @@ function TextSummarizerPage() {
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: handleDrop,
     accept: {
-      'application/msword': ['.docx', '.doc']
-    }
+      "application/msword": [".docx", ".doc"],
+    },
   });
 
   return (
-    <div className="container mx-auto py-5 min-h-screen">
-      <div className="flex flex-col md:flex-row h-full">
-        <div className="w-full md:w-6/12 h-full flex-grow -mr-1">
-          <div className="bg-white rounded-lg shadow-lg p-6 h-full">
-            <textarea
-              className="w-full p-4 rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-20"
-              value={fileContent || inputText}
-              onChange={handleTextChange}
-              placeholder={DataMattResume.WriteText}
-              style={{
-                overflow: "hidden",
-              }}
-            />
-            <div
-              className={`w-full h-40 flex items-center justify-center border border-dashed rounded mt-4 ${
-                isUploading ? "bg-gray-200" : ""
-              }`}
-              {...getRootProps()}
+    <div className="flex flex-col md:flex-row">
+      <div className="w-full md:w-6/12 h-full flex-grow -mr-1">
+        <div className="bg-white rounded-lg shadow-lg p-6 h-full">
+          <textarea
+            className="w-full p-4 rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-20"
+            value={fileContent || inputText}
+            onChange={handleTextChange}
+            placeholder={DataMattResume.WriteText}
+            style={{
+              overflow: "hidden",
+            }}
+          />
+          <div
+            className="w-full h-40 flex flex-col items-center justify-center text-blue-400 px-4 py-6 rounded-lg shadow-lg tracking-wide uppercase border border-blue-500 hover:bg-blue-500 cursor-pointer hover:text-white"
+            {...getRootProps()}
+          >
+            <svg
+              className="w-8 h-8"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
             >
-              {isUploading ? (
-                <p className="text-gray-500">{DataMattResume.LoadingField}</p>
-              ) : (
-                <p className="text-gray-500">{DataMattResume.DropField}</p>
-              )}
-            </div>
-            <div className="my-4">
-              <select
-                id="language"
-                name="language"
-                value={language}
-                onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded"
-                required
-              >
-                <option value={AUTO_LANGUAGE}>
-                  {DataMattResume.SelectLanguage}
-                </option>
-                <option value="english">{DataMattResume.English}</option>
-                <option value="spanish">{DataMattResume.Spanish}</option>
-                <option value="french">{DataMattResume.French}</option>
-                <option value="german">{DataMattResume.Deutsch}</option>
-                <option value="italian">{DataMattResume.Italian}</option>
-              </select>
-            </div>
-            <button
-              className="mt-auto w-full px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 relative rounded-full"
-              onClick={handleRequestSummary}
-              disabled={isLoading} // Deshabilita el botón mientras isLoading sea true
+              <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+            </svg>
+            <p>{DataMattResume.DropField}</p>
+          </div>
+          <div className="my-4">
+            <select
+              id="language"
+              name="language"
+              value={language}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
             >
-              {isLoading ? (
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <svg
-                    className="animate-spin h-5 w-5 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.309-2.691 6-6 6-3.309 0-6-2.691-6-6H6c0 4.411 3.589 8 8 8v-2.709z"
-                    ></path>
-                  </svg>
-                </span>
-              ) : null}
-              {DataMattResume.CreateResume}
-            </button>
+              <option value={AUTO_LANGUAGE}>
+                {DataMattResume.SelectLanguage}
+              </option>
+              <option value="english">{DataMattResume.English}</option>
+              <option value="spanish">{DataMattResume.Spanish}</option>
+              <option value="french">{DataMattResume.French}</option>
+              <option value="german">{DataMattResume.Deutsch}</option>
+              <option value="italian">{DataMattResume.Italian}</option>
+            </select>
+          </div>
+          <button
+            className="mt-auto w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 relative"
+            onClick={handleRequestSummary}
+            disabled={isLoading} // Deshabilita el botón mientras isLoading sea true
+          >
+            {isLoading ? (
+              <span className="absolute inset-0 flex items-center justify-center">
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.309-2.691 6-6 6-3.309 0-6-2.691-6-6H6c0 4.411 3.589 8 8 8v-2.709z"
+                  ></path>
+                </svg>
+              </span>
+            ) : null}
+            {DataMattResume.CreateResume}
+          </button>
+          <div className="flex justify-center items-center my-2 text-gray-900">
+            <span>
+              Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+            </span>
           </div>
         </div>
-        <div className="w-full md:w-6/12 px-4 mt-4 md:mt-0">
-          <div className="bg-white rounded-lg shadow-lg p-4 relative">
-            <textarea
-              className="w-full text-justify p-4 rounded border-none focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none placeholder-gray-400"
-              style={{ minHeight: "44rem" }}
-              value={summaryText}
-              readOnly
-              placeholder={DataMattResume.ResumeHere}
-            />
-            <div className="my-4">
-              <nav className="flex" aria-label="Breadcrumb">
-                <ol
-                  role="list"
-                  className="flex w-full justify-around space-x-4 rounded-md bg-gray-50 px-6 shadow"
-                >
-                  <li className="flex items-center">
-                    <ButtonHistory
-                      className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
-                      aria-hidden="true"
-                      onClick={handleModalHistory}
-                    />
-                    <span className="hidden sm:contents"> </span>
-                  </li>
-                  <PDFDownloadLink
-                    className={
-                      !summaryText ? "opacity-50 pointer-events-none" : ""
-                    }
-                    document={<ExportPDF summaryText={summaryText} />}
-                    fileName="MATTRESUME.pdf"
+      </div>
+      <div className="w-full md:w-6/12 px-4 mt-4 md:mt-0">
+        <div className="bg-white rounded-lg shadow-lg p-4 relative">
+          <textarea
+            className="w-full text-justify p-4 rounded border-none focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none placeholder-gray-400"
+            style={{ minHeight: "44rem" }}
+            value={summaryText}
+            readOnly
+            placeholder={DataMattResume.ResumeHere}
+          />
+          {summaryText && (
+            <div className="absolute bottom-[1rem] right-[1.5rem]">
+              <button className="text-white rounded" onClick={handleCopy}>
+                <ClipboardIcon />
+              </button>
+            </div>
+          )}
+        </div>
+        <div className="my-4">
+          <nav className="flex" aria-label="Breadcrumb">
+            <ol
+              role="list"
+              className="flex w-full justify-around rounded-md bg-gray-50 shadow"
+            >
+              <li onClick={handleModalHistory} className="flex items-center text-gray-500 hover:text-gray-800 sm:hover:text-gray-500 cursor-pointer">
+                <ButtonHistory
+                  className="mr-2 h-4 w-4"
+                  aria-hidden="true"
+                />
+                <span className="hidden sm:contents">
+                  {DataMattResume.History}
+                </span>
+              </li>
+              <PDFDownloadLink
+                className={!summaryText ? "opacity-50 pointer-events-none" : ""}
+                document={<ExportPDF summaryText={summaryText} />}
+                fileName="MattResume.pdf"
+              >
+                <li className="flex items-center">
+                  <svg
+                    className="h-full text-xs w-5 flex-shrink-0 text-gray-500"
+                    viewBox="0 0 24 44"
+                    preserveAspectRatio="none"
+                    fill="currentColor"
+                    aria-hidden="true"
                   >
-                    <li className="flex items-center">
-                      <svg
-                        className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
-                        viewBox="0 0 24 44"
-                        preserveAspectRatio="none"
-                        fill="currentColor"
+                    <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                  </svg>
+                  <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
+                    <div className="flex justify-center items-center">
+                      <DocumentArrowDownIcon
+                        className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                         aria-hidden="true"
-                      >
-                        <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-                      </svg>
-                      <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
-                        <div className="flex justify-center items-center">
-                          <DocumentArrowDownIcon
-                            className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
-                            aria-hidden="true"
-                          />
-                          <span className="hidden sm:contents">
-                            {" "}
-                            {DataMattResume.PDFButton}{" "}
-                          </span>
-                        </div>
-                      </button>
-                    </li>
-                  </PDFDownloadLink>
-                  {/* <li className="flex items-center">
+                      />
+                      <span className="hidden sm:contents">
+                        {DataMattResume.PDFButton}
+                      </span>
+                    </div>
+                  </button>
+                </li>
+              </PDFDownloadLink>
+              {/* <li className="flex items-center">
                     <svg
                       className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
                       viewBox="0 0 24 44"
@@ -342,40 +366,51 @@ function TextSummarizerPage() {
                       </div>
                     </button>
                   </li> */}
-                  <li className="flex items-center">
-                    <svg
-                      className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
-                      viewBox="0 0 24 44"
-                      preserveAspectRatio="none"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-                    </svg>
-                    <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
-                      <div className="flex justify-center items-center">
-                        <ShareIcon
-                          className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
-                          aria-hidden="true"
-                        />
-                        <span className="hidden sm:contents">
-                          {" "}
-                          {DataMattResume.ShareButton}{" "}
-                        </span>
-                      </div>
-                    </button>
-                  </li>
-                </ol>
-              </nav>
-            </div>
-            {summaryText && (
-              <div className="absolute bottom-[6rem] right-[1.5rem]">
-                <button className="text-white rounded" onClick={handleCopy}>
-                  <ClipboardIcon />
-                </button>
-              </div>
-            )}
-          </div>
+              <li className="flex items-center">
+                <svg
+                  className="h-full text-xs w-5 flex-shrink-0 text-gray-500"
+                  viewBox="0 0 24 44"
+                  preserveAspectRatio="none"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+                </svg>
+                <Popover className="relative">
+                  {({ open }) => (
+                    <>
+                      <Popover.Button
+                        onClick={toggleShare}
+                        className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800"
+                      >
+                        <div className="flex justify-center items-center">
+                          <ShareIcon
+                            className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
+                            aria-hidden="true"
+                          />
+                          <span className="hidden sm:contents">
+                            {DataMattResume.ShareButton}
+                          </span>
+                        </div>
+                      </Popover.Button>
+                      <Transition
+                        show={showShare}
+                        enter="transition ease-out duration-200"
+                        enterFrom="opacity-0 translate-y-1"
+                        enterTo="opacity-100 translate-y-0"
+                      >
+                        <Popover.Panel className="absolute bottom-8 right-0 flex items-center z-10 p-4 w-14 bg-white rounded-lg shadow-lg">
+                          {showShare && (
+                            <ShareModal summaryText={summaryText} />
+                          )}
+                        </Popover.Panel>
+                      </Transition>
+                    </>
+                  )}
+                </Popover>
+              </li>
+            </ol>
+          </nav>
         </div>
       </div>
       {modalOpen && <HistoryResum onClose={handleModalHistory} />}
