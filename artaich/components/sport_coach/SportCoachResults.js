@@ -4,6 +4,7 @@ import { useSportCoach } from "../../hooks/useSportCoach";
 import { LoadingIndicator } from "./LoadingIndicator";
 import ExportPDF from "./ExportPDF";
 import dynamic from "next/dynamic";
+import ShareModal from "./ShareModal";
 
 const PDFDownloadLinkDynamic = dynamic(
   () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
@@ -11,18 +12,12 @@ const PDFDownloadLinkDynamic = dynamic(
     ssr: false,
   }
 );
-import { FacebookIconSVG, WhatsAppIconSVG, EmailIconSVG } from "../icons/icons";
 import {
   ShareIcon,
   DocumentArrowDownIcon,
   // DocumentIcon,
   CheckIcon,
 } from "@heroicons/react/24/solid";
-import {
-  FacebookShareButton,
-  WhatsappShareButton,
-  EmailShareButton,
-} from "next-share";
 
 const exercisesReducer = (state, action) => {
   if (!state[action.dayIndex]?.exercises) {
@@ -59,7 +54,7 @@ export const SportCoachResults = () => {
   const initialState = responseObj?.resp?.map((day) => {
     if (day.exercises) {
       return {
-        exercises: new Array(day.exercises.length).fill(false),
+        exercises: day.exercises.map(() => false),
       };
     } else {
       return {
@@ -134,14 +129,14 @@ export const SportCoachResults = () => {
               >
                 <span className="flex h-9 items-center">
                   {completedExercises[index]?.exercises[exerciseIndex] ? (
-                    <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
+                    <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
                       <CheckIcon
                         className="h-5 w-5 text-white"
                         aria-hidden="true"
                       />
                     </span>
                   ) : (
-                    <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
+                    <span className="relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
                       <span className="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" />
                     </span>
                   )}
@@ -211,32 +206,7 @@ export const SportCoachResults = () => {
         </ol>
       </nav>
 
-      {showShareButtons && (
-        <div className="relative w-10 h-fit bottom-[6rem] left-14 gap-2 z-10 flex flex-col items-center bg-gray-100 shadow">
-          <FacebookShareButton
-            className="h-4 w-4"
-            url={"https://next-mattech.vercel.app"}
-            title={generateTrainingPlanContent()}
-            quote={generateTrainingPlanContent()}
-            hashtag={"#SportCoach"}
-          >
-            <FacebookIconSVG />
-          </FacebookShareButton>
-          <WhatsappShareButton
-            url={"https://next-mattech.vercel.app"}
-            title={generateTrainingPlanContent()}
-          >
-            <WhatsAppIconSVG />
-          </WhatsappShareButton>
-          <EmailShareButton
-            url={"https://next-mattech.vercel.app"}
-            subject="plan de formation"
-            body={generateTrainingPlanContent()}
-          >
-            <EmailIconSVG className='w-6' />
-          </EmailShareButton>
-        </div>
-      )}
+      {showShareButtons && <ShareModal generateTrainingPlanContent={generateTrainingPlanContent} />}
     </div>
   );
 };
