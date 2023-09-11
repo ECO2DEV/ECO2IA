@@ -54,7 +54,7 @@ export const SportCoachResults = () => {
   const initialState = responseObj?.resp?.map((day) => {
     if (day.exercises) {
       return {
-        exercises: new Array(day.exercises.length).fill(false),
+        exercises: day.exercises.map(() => false),
       };
     } else {
       return {
@@ -129,14 +129,14 @@ export const SportCoachResults = () => {
               >
                 <span className="flex h-9 items-center">
                   {completedExercises[index]?.exercises[exerciseIndex] ? (
-                    <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
+                    <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
                       <CheckIcon
                         className="h-5 w-5 text-white"
                         aria-hidden="true"
                       />
                     </span>
                   ) : (
-                    <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
+                    <span className="relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
                       <span className="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" />
                     </span>
                   )}
