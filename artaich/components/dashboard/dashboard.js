@@ -15,7 +15,7 @@ import matresume from '../../public/matresume.png';
 const actions = [
   {
     title: DataDashboard.MattechChatTitle,
-    href: 'chatgpt',
+    href: 'mattchat',
     description: DataDashboard.MattechChatDescription,
     icon: ia_chat,
     iconForeground: 'text-teal-700',
