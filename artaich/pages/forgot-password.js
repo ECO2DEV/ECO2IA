@@ -1,7 +1,7 @@
 // pages/forgot-password.js
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useForm, Controller } from 'react-hook-form'; // Import useForm and Controller
+import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import { header, strapiUrl } from '../constants/constans';
 import { toast, Toaster } from 'react-hot-toast';
@@ -98,7 +98,7 @@ export default function ForgotPassword() {
                     <Loader />
                   </div>
                 ) : (
-                  (DataForgotPassword.ResetLink)
+                  DataForgotPassword.ResetLink
                 )}
               </button>
             </form>

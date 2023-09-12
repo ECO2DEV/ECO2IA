@@ -31,7 +31,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   if (router.pathname == '/auth/signin') {
     return (
       <SessionProvider session={session}>
-        <Component {...pageProps} />
+        <UserProvider>
+          <Component {...pageProps} />
+        </UserProvider>
       </SessionProvider>
     );
   }
@@ -39,14 +41,17 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   if (router.pathname == '/suscribe') {
     return (
       <SessionProvider session={session}>
-        <Component {...pageProps} />
+        <UserProvider>
+          <Component {...pageProps} />
+        </UserProvider>
       </SessionProvider>
     );
   }
 
   if (
+    router.pathname == '/pairoll' ||
     router.pathname == '/dashboard' ||
-    router.pathname == '/chatgpt' ||
+    router.pathname == '/mattchat' ||
     router.pathname == '/dalle' ||
     router.pathname == '/profile' ||
     router.pathname == '/mattraduct' ||
@@ -74,11 +79,13 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   }
   return (
     <SessionProvider session={session}>
-      {/* <Elements stripe={stripePromise} options={options}> */}
-      <Layout router={router.pathname}>
-        <Component {...pageProps} />
-      </Layout>
-      {/* </Elements> */}
+      <UserProvider>
+        {/* <Elements stripe={stripePromise} options={options}> */}
+        <Layout router={router.pathname}>
+          <Component {...pageProps} />
+        </Layout>
+        {/* </Elements> */}
+      </UserProvider>
     </SessionProvider>
   );
 }
