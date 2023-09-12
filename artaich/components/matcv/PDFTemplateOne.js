@@ -1,6 +1,6 @@
 import { DataMattCV } from '../../data/mattcv';
 import { Fragment } from 'react';
-import { Page, Text, View, Document, Image } from '@react-pdf/renderer';
+import { Page, Text, View, Document, Image, PDFDownloadLink } from '@react-pdf/renderer';
 import dynamic from 'next/dynamic';
 import { stylesOne } from './TemplatesStyles';
 const DynamicPDFViewer = dynamic(
@@ -113,7 +113,7 @@ export const PDFTemplateOne = ({
             )}
             {spokenLanguages.length > 0 && (
               <View>
-                <Text style={stylesOne.heading}>Languages</Text>
+                <Text style={stylesOne.heading}>Langues</Text>
                 {spokenLanguages.map((language, index) => (
                   <Fragment key={index}>
                     <Text style={stylesOne.thirdTitle}>
@@ -128,4 +128,5 @@ export const PDFTemplateOne = ({
       </Document>
     </DynamicPDFViewer>
   );
+
 };

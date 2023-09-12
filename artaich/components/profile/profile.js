@@ -29,7 +29,7 @@ export default function Profile({ user }) {
       setImagePreview(reader.result);
     };
     reader.readAsDataURL(e.target.files[0]);
-    toast.success('Image selected');
+    toast.success(DataProfile.ImageSelected);
   };
 
   const handleImageUpload = async (e) => {
@@ -52,12 +52,12 @@ export default function Profile({ user }) {
           console.log('updated user', updatedUser);
           router.reload();
         }
-        toast.success('Image uploaded');
+        toast.success(DataProfile.ImageUploaded);
         // console.log('avatar response in profile', response.data[0]);
       }
     } catch (error) {
       console.error('error upload image', error);
-      toast.error('Error uploading image');
+      toast.error(DataProfile.ErrorUploadingImage);
     } finally {
       setLoading(false);
     }

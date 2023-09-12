@@ -1,5 +1,5 @@
 export const DataMattSport = {
-  Title:"Matt Sport",
+  Title:"MATTSPORT",
   SubTitle:"Obtenez un plan d'entraînement personnalisé",
   Weight: "Poids",
   Age: "Âge",
@@ -19,4 +19,5 @@ export const DataMattSport = {
   SevenDays: "7 jours",
   GetButton: "Envoyer",
   LoadingButton: "Chargement",
+  SelectOption:"Sélectionnez une option"
 };

@@ -1,5 +1,5 @@
 export const DataMattResume ={
-    Title:"Matt Resume",
+    Title:"MATTRESUME",
     SelectLanguage:"Sélectionner la langue",
     English: "Anglais",
     Spanish: "Espagnol",

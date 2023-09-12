@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { UserContext } from '../../context/user/UserContext';
+import { DataMattCV } from '../../data/mattcv';
 
 const LanguageDropdown = () => {
-  const languages = ['french', 'english', 'spanish', 'german', 'italian'];
+  const languages = ['Allemand', 'Anglais', 'Espagnol', 'Français', 'Italien', 'Portugais'];
   const { setLanguage, language } = useContext(UserContext);
 
   const handleChange = (e) => {
@@ -15,7 +16,7 @@ const LanguageDropdown = () => {
         htmlFor="languageDropdown"
         className=" text-gray-500 text-sm font-bold flex-shrink-0"
       >
-        Selected Language
+        {DataMattCV.SelectedLanguage}
       </label>
       <select
         id="languageDropdown"

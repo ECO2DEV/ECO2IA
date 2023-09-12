@@ -1,6 +1,6 @@
 import { useState } from 'react';
-
-const proficiencyLevels = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
+import { DataMattCV } from '../../data/mattcv';
+const proficiencyLevels = [DataMattCV.Begginer, DataMattCV.Intermediate, DataMattCV.Advanced, DataMattCV.Expert];
 
 const SpokenLanguagesForm = ({ setSpokenLanguages }) => {
   const [language, setLanguage] = useState({
@@ -26,7 +26,7 @@ const SpokenLanguagesForm = ({ setSpokenLanguages }) => {
 
   return (
     <section className="w-full ">
-      <h1 className="text-xl font-bold my-4 ">Spoken Languages</h1>
+      <h1 className="text-xl font-bold my-4 ">{DataMattCV.SpokenLanguages}</h1>
       <input
         type="text"
         name="name"
@@ -41,7 +41,7 @@ const SpokenLanguagesForm = ({ setSpokenLanguages }) => {
         onChange={handleInputChange}
         className="w-full mb-2 p-2 border rounded"
       >
-        <option value="">Select Proficiency</option>
+        <option value="">{DataMattCV.SelectProficiency}</option>
         {proficiencyLevels.map((level, index) => (
           <option key={index} value={level}>
             {level}
@@ -53,7 +53,7 @@ const SpokenLanguagesForm = ({ setSpokenLanguages }) => {
         disabled={!language.name || !language.proficiency}
         className="gap-x-1.5 rounded-md px-3 py-2 mb-6 text-sm font-semibold bg-indigo-600 text-white ring-1 ring-inset ring-gray-30"
       >
-        Add Language
+        {DataMattCV.AddLanguage}
       </button>
     </section>
   );

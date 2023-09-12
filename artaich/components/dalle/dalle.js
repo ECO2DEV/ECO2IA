@@ -11,6 +11,7 @@ import { Carousel } from './carousel';
 import { DropdownDalle } from './dropdown_dalle';
 import { ButtonLatestImg } from './buttonLatestImg';
 import SearchTextboxDalle from '../searchTextbox/searchTextboxDalle';
+import { DataMattImage } from '../../data/mattimage';
 
 export default function DalleIA() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -52,7 +53,7 @@ export default function DalleIA() {
   const FetchData = async (e) => {
     e.preventDefault();
     if (plan.max_imagens <= 0) {
-      toast.error('You have reached the limit of images for this plan');
+      toast.error(DataMattImage.YouHaveReachedLimit);
       return;
     }
     if (!prompt) {

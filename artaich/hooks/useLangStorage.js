@@ -15,11 +15,7 @@ function reducer(state, action) {
   const { type } = action;
 
   if (type === 'INTERCHANGE_LANGUAGES') {
-    // lógica del estado dentro del reducer
-    // porque lo evitamos en los componentes
-    // state.fromLanguage === AUTO_LANGUAGE no hacemos nada
     if (state.fromLanguage === AUTO_LANGUAGE) return state;
-    // loading, si el texto no está vacío entonces loading es true
     const loading = state.fromText !== '';
 
     return {
@@ -60,7 +56,7 @@ function reducer(state, action) {
   }
 
   if (type === 'SET_TO_THIRD_LANGUAGE') {
-    if (state.toThirdLanguage === action.payload) return state;
+    if (state.toThirdLanguage === action.payload || action.payload ===state.toLanguage) return state;
     const loading = state.fromText !== '';
 
     return {
@@ -128,6 +124,7 @@ export const useLangStorage = () => {
   const setToLanguage = (payload) => {
     dispatch({ type: 'SET_TO_LANGUAGE', payload });
   };
+
   const setToThirdLanguage = (payload) => {
     dispatch({ type: 'SET_TO_THIRD_LANGUAGE', payload });
   };
@@ -139,6 +136,7 @@ export const useLangStorage = () => {
   const setResult = (payload) => {
     dispatch({ type: 'SET_RESULT', payload });
   };
+
   const setSecondResult = (payload) => {
     dispatch({ type: 'SET_SECOND_RESULT', payload });
   };
