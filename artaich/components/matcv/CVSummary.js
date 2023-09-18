@@ -1,5 +1,6 @@
 import { useContext, Fragment, useRef, useState } from 'react';
 import { UserContext } from '../../context/user/UserContext';
+import { PromptContext } from '../../context/prompts/PromptContext';
 import { Dialog, Transition } from '@headlessui/react';
 import { MatCVResponse } from '../../util/api/MatCVResponse';
 import { toast } from 'react-hot-toast';
@@ -14,6 +15,7 @@ export default function CVSummary({ onClose, setTextProfile }) {
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
   const { user, language } = useContext(UserContext);
+  const { setResponse } = useContext(PromptContext);
   const [formProfile, setFormProfile] = useState({
     role: '',
     market: '',
@@ -44,6 +46,8 @@ export default function CVSummary({ onClose, setTextProfile }) {
         user: user
       });
       setTextProfile(result?.data?.data);
+      setResponse(result?.data?.data);
+
       setLoading(false);
       console.log('result is:', result.data);
       toast.success(DataMattCV.CVGenerated);
