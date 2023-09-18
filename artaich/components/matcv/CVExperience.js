@@ -1,5 +1,6 @@
 import { useContext, Fragment, useRef, useState } from 'react';
 import { UserContext } from '../../context/user/UserContext';
+import { PromptContext } from '../../context/prompts/PromptContext';
 import { Dialog, Transition } from '@headlessui/react';
 import { toast } from 'react-hot-toast';
 import { MatCVResponseXP } from '../../util/api/MatCVResponseXP';
@@ -13,6 +14,7 @@ export default function CVExperience({ onClose, setDescriptionResponse }) {
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
   const { user, language } = useContext(UserContext);
+  const { setResponse } = useContext(PromptContext);
   const [formProfile, setFormProfile] = useState({
     role: '',
     market: '',
@@ -46,6 +48,7 @@ export default function CVExperience({ onClose, setDescriptionResponse }) {
         ? result.data.data.split('\n').map((item) => `• ${item.trim()}\n`)
         : '';
 
+      setResponse(result?.data?.data);
       setDescriptionResponse(bulletPoints);
 
       console.log('result is:', result.data);

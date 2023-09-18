@@ -10,7 +10,7 @@ const NotFoundPage = () => {
         </p>
         <Link href="/dashboard" legacyBehavior>
           <a className="text-lg text-indigo-100 hover:text-indigo-900">
-            Go back to the dashboard
+            Go back ⬅️
           </a>
         </Link>
       </div>
