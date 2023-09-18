@@ -193,7 +193,7 @@ export default function SignIn() {
                     className="font-medium text-sm text-indigo-600 hover:text-indigo-500 cursor-pointer"
                     onClick={() => handleModalRegister()}
                   >
-                    créer un compte pas une
+                    {DataSignin.CreateAccount}
                   </a>
                 </div>
               </form>

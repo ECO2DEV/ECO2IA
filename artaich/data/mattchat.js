@@ -6,4 +6,6 @@ export const DataMattChat ={
     Capabilities:"Capacités",
     YouWantDelete:"Êtes-vous sûr de vouloir supprimer cette conversation ?",
     DeleteWarning:"Toutes vos données seront définitivement supprimées de nos serveurs pour toujours. Cette action ne peut pas être annulée.",
+    Delete:"Supprimer",
+    Cancel:"Annuler"
 }

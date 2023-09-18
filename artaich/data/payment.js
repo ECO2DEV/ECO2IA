@@ -3,6 +3,7 @@ export const DataPayment ={
     Submit:"Envoyer",
     Cancel:"Annuler",
     PaymentSucessful:"Paiement réussi",
+    PaymentAnnuler:"Paiement annulé",
     YouCanAccess:"Vous pouvez maintenant accéder à notre formidable plateforme IA. Merci de vous être abonné(e) !",
     GoDashboard:"Retourner au tableau de bord",
     SubscriptionCreated:"Abonnement créé avec succès !",

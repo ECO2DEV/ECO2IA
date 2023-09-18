@@ -1,6 +1,7 @@
 import download from 'downloadjs';
 import { Menu } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
+import { DataMattImage } from '../../data/mattimage';
 export const DropdownDalle = ({ imageSrc }) => {
   return (
     <Menu>
@@ -23,7 +24,7 @@ export const DropdownDalle = ({ imageSrc }) => {
                 )
               }
             >
-              Download
+              {DataMattImage.Download}
             </a>
           )}
         </Menu.Item>
@@ -42,7 +43,7 @@ export const DropdownDalle = ({ imageSrc }) => {
                 )
               }
             >
-              Download as PNG
+              {DataMattImage.DownloadPNG}
             </a>
           )}
         </Menu.Item>

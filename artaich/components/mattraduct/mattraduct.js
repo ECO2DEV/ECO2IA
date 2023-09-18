@@ -11,6 +11,7 @@ import { useMattraduct } from '../../hooks/useMattraduct';
 import HistoryRequest from './HistoryRequest';
 import { VOICE_FOR_LANGUAGE } from '../../constants/constans';
 import { DataMatTraduct } from '../../data/mattraduct';
+import { DetectionLanguage } from './JustDetectionLanguage';
 
 const MattraductAI = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -184,7 +185,7 @@ const MattraductAI = () => {
        
         <div className="w-full max-w-5xl bg-white shadow-lg rounded-md">
           <div className="flex items-center justify-around bg-indigo-600 text-gray-100 px-4 py-2 rounded-t-md">
-            <LanguageSelector
+            <DetectionLanguage
               onChange={setFromLanguage}
               type="from"
               value={fromLanguage}

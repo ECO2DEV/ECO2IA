@@ -8,4 +8,5 @@ export const DataRegister = {
     RegisterCountry: "Pays",
     RegisterCreate: "Créer",
     RegisterCancel: "Cancel par Retour",
+    CodeRegister:"Code Pays"
 }

@@ -27,5 +27,6 @@ export const DataPricing = {
   pricingfeatutes3_2: 'Abonnés illimités',
   pricingfeatures3_3: 'Analyses avancées',
   pricingfeatures3_4: 'SAV dédié',
-  pricingbutton3: 'Veuillez contacter le service commercial'
+  pricingbutton3: 'Veuillez contacter le service commercial',
+  PaymentFrequency:"Fréquence de paiement"
 };

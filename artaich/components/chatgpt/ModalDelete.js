@@ -74,7 +74,7 @@ export default function ModalDelete({ onClose, onHandleDelete }) {
                       toast.success('Conversation deleted successfully');
                     }}
                   >
-                    Delete
+                    {DataMattChat.Delete}
                   </button>
                   <button
                     type="button"
@@ -82,7 +82,7 @@ export default function ModalDelete({ onClose, onHandleDelete }) {
                     onClick={() => setOpen(false)}
                     ref={cancelButtonRef}
                   >
-                    Cancel
+                    {DataMattChat.Cancel}
                   </button>
                 </div>
               </Dialog.Panel>

@@ -1,5 +1,5 @@
 export const DataMatTraining={
-    Title:"Sport Coach",
+    Title:"MATTSPORT",
     SubTitle:"Bénéficiez d'un plan de formation personnalisé",
     WeightTitle:"Weight",
     GoalTitle:"Goal",
