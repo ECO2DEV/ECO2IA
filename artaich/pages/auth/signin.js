@@ -1,16 +1,16 @@
 // pages/auth/signin.js
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { LockClosedIcon } from '@heroicons/react/20/solid';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import logo from '../../public/Mlogop.png';
 import login_image from '../../public/login_image.png';
-import Footer from '../../components/footer/footer';
 import { DataSignin } from '../../data/signin';
 import Head from 'next/head';
 import Link from 'next/link';
 import Register from '../../components/register/register';
+import { isValidEmail } from '../../util/helpers/valid_email';
+import { toast, Toaster } from 'react-hot-toast';
 
 export default function SignIn() {
   const router = useRouter();
@@ -23,22 +23,40 @@ export default function SignIn() {
   const onSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    if (!isValidEmail(email)) {
+      toast.error('Email invalide');
+      setIsLoading(false);
+      return;
+    }
 
-    const result = await signIn('credentials', {
-      email,
-      password,
-      redirect: true,
-      callbackUrl: '/dashboard'
-      //maxAge: 300
-    });
+    try {
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false //
+      });
+
+      if (result?.error) {
+        if (
+          result.error.includes('email') ||
+          result.error.includes('password')
+        ) {
+          toast.error('Email or password is incorrect');
+        } else {
+          toast.error('Email or password is incorrect');
+        }
+      } else {
+        // Si no hubo errores, puedes redirigir manualmente al dashboard aquí.
+        router.push('/dashboard');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('An unexpected error occurred');
+    }
 
     setIsLoading(false);
-    //console.log(result);
-    //router.replace('/dashboard');
-    if (result?.error) {
-      setError(result.error);
-    }
   };
+
   const handleModalRegister = () => {
     // Handle button click logic here
 
@@ -144,7 +162,8 @@ export default function SignIn() {
                   </div>
 
                   <div className="text-sm">
-                    <Link href="/forgot-password"
+                    <Link
+                      href="/forgot-password"
                       className="font-medium text-indigo-600 hover:text-indigo-500"
                     >
                       {DataSignin.signinforgot}
@@ -191,6 +210,7 @@ export default function SignIn() {
         />
       </div>
       {isModalOpen && <Register onClose={handleModalRegister} />}
+      <Toaster position="top-center" />
     </div>
   );
 }
