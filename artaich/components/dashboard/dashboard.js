@@ -23,7 +23,7 @@ const actions = [
   },
   {
     title: DataDashboard.MattechImageTitle,
-    href: 'dalle',
+    href: 'mattimage',
     description: DataDashboard.MattechImageDescription,
     icon: mattimage,
     iconForeground: 'text-purple-700',
@@ -39,7 +39,7 @@ const actions = [
   },
   {
     title: DataDashboard.MattSportTitle,
-    href: 'sportcoach',
+    href: 'mattsport',
     description: DataDashboard.MattSportDescription,
     icon: mattsport,
     iconForeground: 'text-purple-700',

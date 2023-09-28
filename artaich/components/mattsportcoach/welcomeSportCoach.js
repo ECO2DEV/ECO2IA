@@ -7,7 +7,7 @@ import {
   DataSportHelpLimitation
 } from '../../data/sporthelper';
 
-export const WelcomeSport = () => {
+export const WelcomeSportCoach = () => {
   const { setPrompt } = useContext(PromptContext);
 
   return (
