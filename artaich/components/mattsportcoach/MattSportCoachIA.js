@@ -1,12 +1,12 @@
 //components/sport_coach/sportCoach.js
 import { useContext, useState } from "react";
 import { InputField } from "./InputField";
-import { SportButtonHelper } from "./SportCoach_Helper";
+import { SportButtonHelper } from "./MattSportCoachHelper";
 import { PromptContext } from "../../context/prompts/PromptContext";
 import { sendTrainingPlanRequest } from "../../util/api/sendTrainingPlanRequest";
-import { SportCoachResults } from "./SportCoachResults";
+import { SportCoachResults } from "./MattSportCoachResults";
 import { useSportCoach } from "../../hooks/useSportCoach";
-import { WelcomeSport } from "./welcomesport";
+import { WelcomeSportCoach } from "./welcomeSportCoach";
 import { DataMattSport } from "../../data/mattsport";
 import Loader from "../loader/loader";
 export const SportCoachIA = (props) => {
@@ -106,7 +106,7 @@ export const SportCoachIA = (props) => {
       </div>
 
       {!showResults ? (
-        <WelcomeSport className="mb-8" />
+        <WelcomeSportCoach className="mb-8" />
       ) : (
         (
           <div className="flex justify-center h-[60rem]">

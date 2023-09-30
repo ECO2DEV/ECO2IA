@@ -127,7 +127,7 @@ export default function OptionsMattraduct({
             >
               <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
             </svg>
-            <Popover className="relative">
+            <Popover className={!translationResponse  ? "opacity-50 pointer-events-none" : ""}>
               {({ open }) => (
                 <>
                   <Popover.Button
