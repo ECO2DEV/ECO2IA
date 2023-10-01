@@ -308,7 +308,7 @@ function TextSummarizerPage() {
             >
               <li onClick={handleModalHistory} className="flex items-center text-gray-500 hover:text-gray-800 sm:hover:text-gray-500 cursor-pointer">
                 <ButtonHistory
-                  className="mr-2 h-4 w-4"
+                  className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                   aria-hidden="true"
                 />
                 <span className="hidden sm:contents">
@@ -318,7 +318,7 @@ function TextSummarizerPage() {
               <PDFDownloadLink
                 className={!summaryText ? "opacity-50 pointer-events-none" : ""}
                 document={<ExportPDF summaryText={summaryText} />}
-                fileName="MattResume.pdf"
+                fileName="MATTRESUME.pdf"
               >
                 <li className="flex items-center">
                   <svg
