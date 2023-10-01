@@ -52,10 +52,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     router.pathname == '/pairoll' ||
     router.pathname == '/dashboard' ||
     router.pathname == '/mattchat' ||
-    router.pathname == '/dalle' ||
+    router.pathname == '/mattimage' ||
     router.pathname == '/profile' ||
     router.pathname == '/mattraduct' ||
-    router.pathname == '/sportcoach' ||
+    router.pathname == '/mattsport' ||
     router.pathname == '/matquiz' ||
     router.pathname == '/matdescription' ||
     router.pathname == '/mattresum' ||

@@ -22,9 +22,9 @@ import LanguageDropdown from './LanguageDropdown';
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
   { name: 'MATTCHAT', href: '/chatgpt', icon: HomeIcon, current: true },
-  { name: 'MATTIMAGE', href: '/dalle', icon: HomeIcon, current: true },
+  { name: 'MATTIMAGE', href: '/mattimage', icon: HomeIcon, current: true },
   { name: 'MATTRANSLATE', href: '/mattraduct', icon: HomeIcon, current: true },
-  { name: 'MATTSPORT', href: '/sportcoach', icon: HomeIcon, current: true },
+  { name: 'MATTSPORT', href: '/mattsport', icon: HomeIcon, current: true },
   { name: 'MATTQCM', href: '/matquiz', icon: HomeIcon, current: true },
   { name: 'MATTDESC', href: '/matdescription', icon: HomeIcon, current: true },
   { name: 'MATTRESUME', href: '/mattresum', icon: HomeIcon, current: true },
@@ -99,9 +99,9 @@ export default function LayoutUser({ children }) {
 
   const shouldShowTopNavBar = [
     '/chatgpt',
-    '/dalle',
+    '/mattimage',
     '/mattraduct',
-    '/sportcoach',
+    '/mattsport',
     '/matquiz',
     '/matdescription',
     '/mattresum',
