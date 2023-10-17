@@ -26,5 +26,6 @@ export const DataMattDescription = {
     ResponseExample: "Exemple : Découvrez l'innovation avec Mattech. Grâce à nos solutions logicielles, vous découvrirez un monde de possibilités pour améliorer votre productivité et vos performances. Nos dernières technologies vous permettent de sauter dans le futur avec une efficacité sans précédent.",
     AttachFile:"Joindre un fichier",
     Our:"Notre",
-    Share:"Partager"
+    Share:"Partager",
+    ConversationDeleted:"La conversation a été supprimée avec succès."
 }
