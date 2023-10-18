@@ -148,7 +148,7 @@ function TextSummarizerPage() {
   // Manejador de la solicitud de resumen
   const handleRequestSummary = async () => {
     if (!prompt && !fileContent) {
-      toast.error("Please type something before submit"); // Verifica que se haya ingresado texto antes de enviar la solicitud
+      toast.error("Veuillez taper quelque chose avant de soumettre"); // Verifica que se haya ingresado texto antes de enviar la solicitud
       toast.error(DataMattResume.PleaseTypeSomething); // Verifica que se haya ingresado texto antes de enviar la solicitud
     } else {
       setIsLoading(true); // Activar el loader
@@ -162,7 +162,7 @@ function TextSummarizerPage() {
         setSummaryText(response?.data?.data); // Establece el resumen recibido en el estado summaryText
       } catch (error) {
         console.error("Error:", error);
-        toast.error("An error occurred");
+        toast.error(DataMattResume.AnErrorOcurred);
         console.error("Error:", error);
         toast.error(DataMattResume.AnErrorOcurred);
       } finally {

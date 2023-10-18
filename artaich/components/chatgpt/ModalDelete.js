@@ -71,7 +71,7 @@ export default function ModalDelete({ onClose, onHandleDelete }) {
                     onClick={() => {
                       onHandleDelete();
                       onClose();
-                      toast.success('Conversation deleted successfully');
+                      toast.success(DataMattChat.ConversationDeleted);
                     }}
                   >
                     {DataMattChat.Delete}

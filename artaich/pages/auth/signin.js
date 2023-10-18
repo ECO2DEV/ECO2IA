@@ -41,9 +41,9 @@ export default function SignIn() {
           result.error.includes('email') ||
           result.error.includes('password')
         ) {
-          toast.error('Email or password is incorrect');
+          toast.error("L'adresse e-mail ou le mot de passe est incorrect.");
         } else {
-          toast.error('Email or password is incorrect');
+          toast.error("L'adresse e-mail ou le mot de passe est incorrect. ");
         }
       } else {
         // Si no hubo errores, puedes redirigir manualmente al dashboard aquí.
@@ -51,7 +51,7 @@ export default function SignIn() {
       }
     } catch (error) {
       console.error(error);
-      toast.error('An unexpected error occurred');
+      toast.error("Une erreur inattendue s'est produite");
     }
 
     setIsLoading(false);
