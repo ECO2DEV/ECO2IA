@@ -1,39 +1,39 @@
-import { Fragment, useState, useContext, useEffect } from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
-import { Dialog, Transition } from '@headlessui/react';
-import { signOut } from 'next-auth/react';
-import { PromptContext } from '../../context/prompts/PromptContext';
-import { UserContext } from '../../context/user/UserContext';
+import { Fragment, useState, useContext, useEffect } from "react";
+import Head from "next/head";
+import Link from "next/link";
+import { Dialog, Transition } from "@headlessui/react";
+import { signOut } from "next-auth/react";
+import { PromptContext } from "../../context/prompts/PromptContext";
+import { UserContext } from "../../context/user/UserContext";
 import {
   Bars3Icon,
   ArrowLeftOnRectangleIcon,
   HomeIcon,
-  XMarkIcon
-} from '@heroicons/react/24/outline';
-import Image from 'next/image';
-import logo from '../../public/Mlogop.png';
-import { strapiUrl } from '../../constants/constans';
-import { Toaster } from 'react-hot-toast';
-import { useRouter } from 'next/router';
-import { DataLayout } from '../../data/layout';
-import LanguageDropdown from './LanguageDropdown';
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
+import Image from "next/image";
+import logo from "../../public/Mlogop.png";
+import { strapiUrl } from "../../constants/constans";
+import { Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
+import { DataLayout } from "../../data/layout";
+import LanguageDropdown from "./LanguageDropdown";
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-  { name: 'MATTCHAT', href: '/chatgpt', icon: HomeIcon, current: true },
-  { name: 'MATTIMAGE', href: '/mattimage', icon: HomeIcon, current: true },
-  { name: 'MATTRANSLATE', href: '/mattraduct', icon: HomeIcon, current: true },
-  { name: 'MATTSPORT', href: '/mattsport', icon: HomeIcon, current: true },
-  { name: 'MATTQCM', href: '/matquiz', icon: HomeIcon, current: true },
-  { name: 'MATTDESC', href: '/matdescription', icon: HomeIcon, current: true },
-  { name: 'MATTRESUME', href: '/mattresum', icon: HomeIcon, current: true },
-  { name: 'MATTCV', href: '/matcv', icon: HomeIcon, current: true }
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
+  { name: "MATTCHAT", href: "/chatgpt", icon: HomeIcon, current: true },
+  { name: "MATTIMAGE", href: "/mattimage", icon: HomeIcon, current: true },
+  { name: "MATTRANSLATE", href: "/mattraduct", icon: HomeIcon, current: true },
+  { name: "MATTSPORT", href: "/mattsport", icon: HomeIcon, current: true },
+  { name: "MATTQCM", href: "/matquiz", icon: HomeIcon, current: true },
+  { name: "MATTDESC", href: "/matdescription", icon: HomeIcon, current: true },
+  { name: "MATTRESUME", href: "/mattresum", icon: HomeIcon, current: true },
+  { name: "MATTCV", href: "/matcv", icon: HomeIcon, current: true },
   // { name: 'Team', href: '#', icon: UsersIcon, current: false },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function LayoutUser({ children }) {
@@ -48,7 +48,7 @@ export default function LayoutUser({ children }) {
     response,
     setPromptTokens,
     setResponseTokens,
-    activeAI
+    activeAI,
   } = useContext(PromptContext);
   const { setUser } = useContext(UserContext);
   const { max_imagens = 0, max_tokens = 0 } = plan;
@@ -70,7 +70,7 @@ export default function LayoutUser({ children }) {
   // useEffect for discountTokensModal
   useEffect(() => {
     setDiscountTokensModal(promptTokens + responseTokens);
-    if (response && (activeAI === 'ChatGPT' || activeAI === 'DalleIA')) {
+    if (response && (activeAI === "ChatGPT" || activeAI === "DalleIA")) {
       setTimeout(() => {
         setDiscountTokensModal(0);
       }, 2000);
@@ -80,9 +80,9 @@ export default function LayoutUser({ children }) {
   useEffect(() => {
     setTimeout(() => {
       if (
-        activeAI === 'ChatGPT' ||
-        activeAI === 'DalleIA' ||
-        activeAI === 'MatquizAI'
+        activeAI === "ChatGPT" ||
+        activeAI === "DalleIA" ||
+        activeAI === "MatquizAI"
       ) {
         setPromptTokens(0);
       }
@@ -93,25 +93,25 @@ export default function LayoutUser({ children }) {
 
   const image_url = children.props.user.avatar
     ? strapiUrl + children.props.user.avatar.url
-    : '/empty_avatar.png';
+    : "/empty_avatar.png";
 
   const currentPath = useRouter().pathname; // Obtener la ruta actual
 
   const shouldShowTopNavBar = [
-    '/chatgpt',
-    '/mattimage',
-    '/mattraduct',
-    '/mattsport',
-    '/matquiz',
-    '/matdescription',
-    '/mattresum',
-    '/matcv'
+    "/chatgpt",
+    "/mattimage",
+    "/mattraduct",
+    "/mattsport",
+    "/matquiz",
+    "/matdescription",
+    "/mattresum",
+    "/matcv",
   ].includes(currentPath);
   // console.log('Image_url' + children.props.user.avatar);
   const navigationForMobile =
-    shouldShowTopNavBar && currentPath !== '/dashboard'
-      ? navigation.find((item) => item.href === currentPath)?.name || ''
-      : '';
+    shouldShowTopNavBar && currentPath !== "/dashboard"
+      ? navigation.find((item) => item.href === currentPath)?.name || ""
+      : "";
   return (
     <>
       {/*
@@ -174,7 +174,9 @@ export default function LayoutUser({ children }) {
                         className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                         onClick={() => setSidebarOpen(false)}
                       >
-                        <span className="sr-only">{DataLayout.CloseSidebar}</span>
+                        <span className="sr-only">
+                          {DataLayout.CloseSidebar}
+                        </span>
                         <XMarkIcon
                           className="h-6 w-6 text-white"
                           aria-hidden="true"
@@ -185,40 +187,39 @@ export default function LayoutUser({ children }) {
                   <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
                     <div className="flex items-center justify-center">
                       <div className="flex flex-shrink-0 px-4">
-                        <Link href="/dashboard">
-                          <Image
-                            className="h-12 w-auto"
-                            src={logo}
-                            alt="Mattech"
-                          />
-                        </Link>
+                        <Image
+                          className="h-12 w-auto"
+                          src={logo}
+                          alt="Mattech"
+                          onClick={() => router.push("/")}
+                        />
                       </div>
                     </div>
-                    <nav className="mt-5 flex-1 space-y-1 px-2">
-                <Link
-                  href="/dashboard"
-                  className={classNames(
-                    'bg-gray-900 text-white',
-                    'group flex items-center rounded-md px-2 py-2 text-sm font-medium'
-                  )}
-                >
-                  <HomeIcon
-                    className={classNames(
-                      'text-gray-300',
-                      'mr-3 h-6 w-6 flex-shrink-0'
-                    )}
-                    aria-hidden="true"
-                  />
-                  {DataLayout.Dashboard}
-                </Link>
-              </nav>
                   </div>
+                  <nav className="mt-5 flex-1 space-y-1 px-2">
+                    <Link
+                      href="/dashboard"
+                      className={classNames(
+                        "bg-gray-900 text-white",
+                        "group flex items-center rounded-md px-2 py-2 text-sm font-medium"
+                      )}
+                    >
+                      <HomeIcon
+                        className={classNames(
+                          "text-gray-300",
+                          "mr-3 h-6 w-6 flex-shrink-0"
+                        )}
+                        aria-hidden="true"
+                      />
+                      {DataLayout.Dashboard}
+                    </Link>
+                  </nav>
                   {/* Este es el counter para pantallas pequeñas */}
                   <div className="flex flex-shrink-0 p-4">
                     <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12">
                       <div className="relative flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
                         <dt className="text-sm lg:text-xs leading-3 text-gray-300 z-10">
-                        {DataLayout.Words}
+                          {DataLayout.Words}
                         </dt>
                         {discountTokensModal > 0 && (
                           <span className="text-red-500 text-1xl absolute top-0 -mt-7 right-4 z-0">
@@ -231,7 +232,7 @@ export default function LayoutUser({ children }) {
                       </div>
                       <div className="flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6">
                         <dt className="text-sm lg:text-xs leading-3 text-gray-300">
-                        {DataLayout.Images}
+                          {DataLayout.Images}
                         </dt>
                         <dd className="text-base font-semibold tracking-tight text-white">
                           {max_imagens}
@@ -262,7 +263,7 @@ export default function LayoutUser({ children }) {
                         <p className="text-base font-medium text-white">
                           {children.props.user.Name}
                         </p>
-                        <Link href={'/profile'}>
+                        <Link href={"/profile"}>
                           <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
                             {DataLayout.Profile}
                           </p>
@@ -298,7 +299,7 @@ export default function LayoutUser({ children }) {
           <div className="flex min-h-0 flex-1 flex-col bg-gray-800">
             <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
               <div className="flex flex-shrink-0 self-center px-4">
-                <Link href="/dashboard">
+                <Link href="/">
                   <Image className="h-12 w-auto" src={logo} alt="Mattech" />
                 </Link>
               </div>
@@ -306,14 +307,14 @@ export default function LayoutUser({ children }) {
                 <Link
                   href="/dashboard"
                   className={classNames(
-                    'bg-gray-900 text-white',
-                    'group flex items-center rounded-md px-2 py-2 text-sm font-medium'
+                    "bg-gray-900 text-white",
+                    "group flex items-center rounded-md px-2 py-2 text-sm font-medium"
                   )}
                 >
                   <HomeIcon
                     className={classNames(
-                      'text-gray-300',
-                      'mr-3 h-6 w-6 flex-shrink-0'
+                      "text-gray-300",
+                      "mr-3 h-6 w-6 flex-shrink-0"
                     )}
                     aria-hidden="true"
                   />
@@ -325,7 +326,7 @@ export default function LayoutUser({ children }) {
               <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12">
                 <div className="relative flex flex-col-reverse gap-y-3 border-l border-white/20 pl-6 ">
                   <dt className="text-sm lg:text-xs leading-3 text-gray-300 z-10">
-                  {DataLayout.Words}
+                    {DataLayout.Words}
                   </dt>
                   {discountTokensModal > 0 && (
                     <span className="text-red-500 text-1xl absolute top-0 -mt-7 right-1 z-0">
@@ -368,7 +369,7 @@ export default function LayoutUser({ children }) {
                   <p className="text-sm font-medium text-white">
                     {children.props.user.username}
                   </p>
-                  <Link href={'/profile'}>
+                  <Link href={"/profile"}>
                     <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
                       {DataLayout.Profile}
                     </p>
@@ -379,7 +380,7 @@ export default function LayoutUser({ children }) {
                 <button
                   title="Click for Logout !"
                   className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"
-                  onClick={() => signOut({ callbackUrl: '/' })}
+                  onClick={() => signOut({ callbackUrl: "/" })}
                 >
                   <ArrowLeftOnRectangleIcon
                     className="h-5 w-5"
@@ -393,14 +394,14 @@ export default function LayoutUser({ children }) {
 
         <div className="flex flex-1 flex-col lg:pl-64">
           <div className="sticky top-0 z-10 bg-white pl-1 pt-1 sm:pl-3 sm:pt-3  border-b border-gray-300">
-            {shouldShowTopNavBar && currentPath !== '/dashboard' && (
+            {shouldShowTopNavBar && currentPath !== "/dashboard" && (
               <div className="ml-8 flex justify-between">
                 <h2 className="text-gray-500 text-2xl ">
                   {navigation.find((item) => item.href === currentPath)?.name ||
-                    ''}
+                    ""}
                 </h2>
 
-                {currentPath === '/matcv' ? <LanguageDropdown /> : null}
+                {currentPath === "/matcv" ? <LanguageDropdown /> : null}
               </div>
             )}
             <button
