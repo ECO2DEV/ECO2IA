@@ -15,7 +15,7 @@ export const DataMattResume ={
     ResumeHere:"Votre résumé créé par MATTRESUME apparaîtra ici.",
     LoadingField:"Chargement...",
     // data history chat
-    History:"c'est Historique",
+    History:"Historique",
     HistoryNotAvaible:"Aucun historique disponible",
     LatestImages:"Dernières images",
     CopiedSuccess:"Texte copié dans le presse-papiers !",

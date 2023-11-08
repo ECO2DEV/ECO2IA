@@ -311,7 +311,7 @@ function TextSummarizerPage() {
                   className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                   aria-hidden="true"
                 />
-                <span className="hidden sm:contents">
+                <span className="hidden sm:contents" title="Historique">
                   {DataMattResume.History}
                 </span>
               </li>
