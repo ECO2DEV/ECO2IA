@@ -1,17 +1,33 @@
-import { useState, useEffect, Fragment, useRef } from 'react';
-import { useRouter } from 'next/router';
-import { Dialog, Transition } from '@headlessui/react';
-import { UserPlusIcon } from '@heroicons/react/24/outline';
-import { updateUserById } from '../../util/api/user';
-import { toast } from 'react-hot-toast';
-import { educational, domain, activity, sport, transport, nacionality } from './profilecollection';
-import {DataProfile} from '../../data/profile';
+import { useState, useEffect, Fragment, useRef } from "react";
+import { useRouter } from "next/router";
+import { Dialog, Transition } from "@headlessui/react";
+import { UserPlusIcon } from "@heroicons/react/24/outline";
+import { updateUserById } from "../../util/api/user";
+import { toast } from "react-hot-toast";
+import {
+  educational,
+  domain,
+  activity,
+  sport,
+  transport,
+  nacionality,
+} from "./profilecollection";
+import { DataProfile } from "../../data/profile";
 
 export default function EditProfile({ onClose, user }) {
-  console.log('Response:', user);
+  console.log("Response:", user);
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const router = useRouter();
+
+  // estado para controlar si el campo de texto adicional está activo.
+  const [additionalFieldActive, setAdditionalFieldActive] = useState(false);
+  const [additionalFieldValue, setAdditionalFieldValue] = useState(""); // Estado para el valor del campo de texto adicional.
+
+  // Función para activar el campo de texto adicional.
+  const activateAdditionalField = () => {
+    setAdditionalFieldActive(true);
+  };
 
   const domainSelect = domain.map((opcion) => (
     <option key={opcion} value={opcion}>
@@ -62,8 +78,8 @@ export default function EditProfile({ onClose, user }) {
     transport: user.transport,
     nacionality: user.nacionality,
     age: user.age,
-    height:user.height,
-    weight:user.weight
+    height: user.height,
+    weight: user.weight,
     // about: ''
   });
 
@@ -74,11 +90,11 @@ export default function EditProfile({ onClose, user }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
-      formData.Name === '' ||
-      formData.LastName === '' ||
-      formData.email === '' ||
-      formData.numberTelephone === '' ||
-      formData.country === ''
+      formData.Name === "" ||
+      formData.LastName === "" ||
+      formData.email === "" ||
+      formData.numberTelephone === "" ||
+      formData.country === ""
       // || formData.about === ''
     ) {
       toast.error(DataProfile.PleaseFill);
@@ -96,6 +112,13 @@ export default function EditProfile({ onClose, user }) {
 
       return;
     }
+
+    // Validar el campo de texto adicional si está activo.
+    if (additionalFieldActive && additionalFieldValue === '') {
+      toast.error('Por favor, complete el campo adicional.');
+      return;
+    }
+
     // Valid email with regex
     if (!formData.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       toast.error(DataProfile.EnterValidEmail);
@@ -106,14 +129,15 @@ export default function EditProfile({ onClose, user }) {
     try {
       const response = await updateUserById({
         formData: formData,
-        id: user.id
+        id: user.id,
+        additionalField: additionalFieldValue,
       });
       toast.success(DataProfile.ProfileUpdated);
-      router.push('/profile');
+      router.push("/profile");
       onClose();
     } catch (error) {
       toast.error(DataProfile.ErrorUpdating);
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -161,7 +185,7 @@ export default function EditProfile({ onClose, user }) {
                       as="h3"
                       className="text-base font-semibold leading-6 text-gray-900"
                     >
-                      {DataProfile.EditProfile}
+                      {DataProfile.zfile}
                     </Dialog.Title>
                   </div>
                   <div className="isolate bg-white px-6 pb-10 lg:px-8">
@@ -173,7 +197,7 @@ export default function EditProfile({ onClose, user }) {
                         className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
                         style={{
                           clipPath:
-                            'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+                            "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
                         }}
                       />
                     </div>
@@ -313,7 +337,10 @@ export default function EditProfile({ onClose, user }) {
                           </div>
                           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3">
                             <div>
-                              <label htmlFor="age" className="block text-sm font-semibold leading-6 text-gray-900">
+                              <label
+                                htmlFor="age"
+                                className="block text-sm font-semibold leading-6 text-gray-900"
+                              >
                                 {DataProfile.Age}
                               </label>
                               <div className="mt-2.5">
@@ -328,7 +355,10 @@ export default function EditProfile({ onClose, user }) {
                               </div>
                             </div>
                             <div>
-                              <label htmlFor="height" className="block text-sm font-semibold leading-6 text-gray-900">
+                              <label
+                                htmlFor="height"
+                                className="block text-sm font-semibold leading-6 text-gray-900"
+                              >
                                 {DataProfile.Height} (m)
                               </label>
                               <div className="mt-2.5">
@@ -343,7 +373,10 @@ export default function EditProfile({ onClose, user }) {
                               </div>
                             </div>
                             <div>
-                              <label htmlFor="weight" className="block text-sm font-semibold leading-6 text-gray-900">
+                              <label
+                                htmlFor="weight"
+                                className="block text-sm font-semibold leading-6 text-gray-900"
+                              >
                                 {DataProfile.Weight} (kg)
                               </label>
                               <div className="mt-2.5">
@@ -375,6 +408,33 @@ export default function EditProfile({ onClose, user }) {
                             >
                               {domainSelect}
                             </select>
+                            <label
+                              htmlFor="additionalField"
+                              className="block text-sm font-semibold leading-6 text-gray-900"
+                            >
+                              autres Domaines d'études
+                            </label>
+                            <div className="mt-2.5">
+                              {additionalFieldActive ? (
+                                <input
+                                  onChange={(e) =>
+                                    setAdditionalFieldValue(e.target.value)
+                                  }
+                                  value={additionalFieldValue}
+                                  type="text"
+                                  name="additionalField"
+                                  id="additionalField"
+                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                              ) : (
+                                <button
+                                  onClick={activateAdditionalField}
+                                  className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+                                >
+                                  Agregar
+                                </button>
+                              )}
+                            </div>
                           </div>
                           <label
                             htmlFor="educationallevel"
@@ -393,6 +453,33 @@ export default function EditProfile({ onClose, user }) {
                             >
                               {educationalSelect}
                             </select>
+                            <label
+                              htmlFor="additionalField"
+                              className="block text-sm font-semibold leading-6 text-gray-900"
+                            >
+                              autres Niveau d'étude
+                            </label>
+                            <div className="mt-2.5">
+                              {additionalFieldActive ? (
+                                <input
+                                  onChange={(e) =>
+                                    setAdditionalFieldValue(e.target.value)
+                                  }
+                                  value={additionalFieldValue}
+                                  type="text"
+                                  name="additionalField"
+                                  id="additionalField"
+                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                              ) : (
+                                <button
+                                  onClick={activateAdditionalField}
+                                  className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+                                >
+                                  Agregar
+                                </button>
+                              )}
+                            </div>
                           </div>
                           <label
                             htmlFor="activityarea"
@@ -411,6 +498,33 @@ export default function EditProfile({ onClose, user }) {
                             >
                               {activitySelect}
                             </select>
+                            <label
+                              htmlFor="additionalField"
+                              className="block text-sm font-semibold leading-6 text-gray-900"
+                            >
+                              autres Domaine d'activité
+                            </label>
+                            <div className="mt-2.5">
+                              {additionalFieldActive ? (
+                                <input
+                                  onChange={(e) =>
+                                    setAdditionalFieldValue(e.target.value)
+                                  }
+                                  value={additionalFieldValue}
+                                  type="text"
+                                  name="additionalField"
+                                  id="additionalField"
+                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                              ) : (
+                                <button
+                                  onClick={activateAdditionalField}
+                                  className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+                                >
+                                  Agregar
+                                </button>
+                              )}
+                            </div>
                           </div>
                           <label
                             htmlFor="sport"
@@ -429,6 +543,33 @@ export default function EditProfile({ onClose, user }) {
                             >
                               {sportSelect}
                             </select>
+                            <label
+                              htmlFor="additionalField"
+                              className="block text-sm font-semibold leading-6 text-gray-900"
+                            >
+                              autres Sports
+                            </label>
+                            <div className="mt-2.5">
+                              {additionalFieldActive ? (
+                                <input
+                                  onChange={(e) =>
+                                    setAdditionalFieldValue(e.target.value)
+                                  }
+                                  value={additionalFieldValue}
+                                  type="text"
+                                  name="additionalField"
+                                  id="additionalField"
+                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                              ) : (
+                                <button
+                                  onClick={activateAdditionalField}
+                                  className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+                                >
+                                  Agregar
+                                </button>
+                              )}
+                            </div>
                           </div>
                           <label
                             htmlFor="transport"
@@ -447,6 +588,33 @@ export default function EditProfile({ onClose, user }) {
                             >
                               {transportSelect}
                             </select>
+                            <label
+                              htmlFor="additionalField"
+                              className="block text-sm font-semibold leading-6 text-gray-900"
+                            >
+                              autres Transports
+                            </label>
+                            <div className="mt-2.5">
+                              {additionalFieldActive ? (
+                                <input
+                                  onChange={(e) =>
+                                    setAdditionalFieldValue(e.target.value)
+                                  }
+                                  value={additionalFieldValue}
+                                  type="text"
+                                  name="additionalField"
+                                  id="additionalField"
+                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                              ) : (
+                                <button
+                                  onClick={activateAdditionalField}
+                                  className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+                                >
+                                  Agregar
+                                </button>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
