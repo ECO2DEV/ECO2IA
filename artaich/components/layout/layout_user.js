@@ -20,15 +20,15 @@ import { DataLayout } from "../../data/layout";
 import LanguageDropdown from "./LanguageDropdown";
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
-  { name: "MATTCHAT", href: "/chatgpt", icon: HomeIcon, current: true },
-  { name: "MATTIMAGE", href: "/mattimage", icon: HomeIcon, current: true },
-  { name: "MATTRANSLATE", href: "/mattraduct", icon: HomeIcon, current: true },
-  { name: "MATTSPORT", href: "/mattsport", icon: HomeIcon, current: true },
-  { name: "MATTQCM", href: "/matquiz", icon: HomeIcon, current: true },
-  { name: "MATTDESC", href: "/matdescription", icon: HomeIcon, current: true },
-  { name: "MATTRESUME", href: "/mattresum", icon: HomeIcon, current: true },
-  { name: "MATTCV", href: "/matcv", icon: HomeIcon, current: true },
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
+  { name: 'MATTCHAT', href: '/chatgpt', icon: HomeIcon, current: true },
+  { name: 'MATTIMAGE', href: '/mattimage', icon: HomeIcon, current: true },
+  { name: 'MATTRAD', href: '/mattraduct', icon: HomeIcon, current: true },
+  { name: 'MATTSPORT', href: '/mattsport', icon: HomeIcon, current: true },
+  { name: 'MATTQCM', href: '/matquiz', icon: HomeIcon, current: true },
+  { name: 'MATTDESC', href: '/matdescription', icon: HomeIcon, current: true },
+  { name: 'MATTRESUME', href: '/mattresum', icon: HomeIcon, current: true },
+  { name: 'MATTCV', href: '/matcv', icon: HomeIcon, current: true }
   // { name: 'Team', href: '#', icon: UsersIcon, current: false },
 ];
 

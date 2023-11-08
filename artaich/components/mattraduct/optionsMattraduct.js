@@ -48,7 +48,7 @@ export default function OptionsMattraduct({
           role="list"
           className="flex space-x-2 rounded-md bg-gray-50 px-3 py-2 sm:px-6 shadow"
         >
-          <li className="flex">
+          <li className="flex" title="Historique">
             <div className="flex items-center">
               <button
                 onClick={onClick}
