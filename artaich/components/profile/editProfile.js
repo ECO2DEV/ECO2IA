@@ -15,7 +15,7 @@ import {
 import { DataProfile } from "../../data/profile";
 
 export default function EditProfile({ onClose, user }) {
-  console.log("Response:", user);
+  // console.log("Response:", user);
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const router = useRouter();

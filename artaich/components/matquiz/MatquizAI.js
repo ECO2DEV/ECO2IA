@@ -76,7 +76,7 @@ export const MatquizAI = () => {
     event.preventDefault();
     // Make form validation
 
-    console.log('formState.topic is:', prompt);
+    // console.log('formState.topic is:', prompt);
     if (prompt === '') {
       setError(DataMattQuiz.ProvideTopic);
       toast.error(DataMattQuiz.ProvideTopic);
@@ -104,13 +104,13 @@ export const MatquizAI = () => {
       user: user
     })
       .then((response) => {
-        console.log('response is:');
-        console.log(response?.data?.data);
+        // console.log('response is:');
+        // console.log(response?.data?.data);
         setSubmittedData(response?.data?.data);
         setResponse(response?.data?.data);
       })
       .catch((error) => {
-        console.log('error is:', error);
+        // console.log('error is:', error);
         setError('An error occurred while fetching data.');
       })
       .finally(() => {

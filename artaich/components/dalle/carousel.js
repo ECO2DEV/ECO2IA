@@ -63,14 +63,12 @@ export const Carousel = ({ setImageSrc }) => {
   const { data, isLoading, isError: error } = useDalle(user?.id);
 
   const handleImageClick = (firstImageSrc, secondImageSrc) => {
-    console.log('image clicked');
 
     setImageSrc(() => ({
       firstImage: firstImageSrc,
       secondImage: secondImageSrc
     }));
   };
-  // console.log('data is:', data?.data);
 
   if (isLoading)
     return (

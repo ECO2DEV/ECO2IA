@@ -51,7 +51,7 @@ export default function CVExperience({ onClose, setDescriptionResponse }) {
       setResponse(result?.data?.data);
       setDescriptionResponse(bulletPoints);
 
-      console.log('result is:', result.data);
+      // console.log('result is:', result.data);
       setLoading(false);
       toast.success(DataMattCV.CVGenerated);
       onClose();

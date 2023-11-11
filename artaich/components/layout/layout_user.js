@@ -64,7 +64,6 @@ export default function LayoutUser({ children }) {
   }, [children.props.user]);
 
   // const { attributes } = plan;
-  // console.log('Attributes are : ' + plan);
   // console.log(JSON.stringify(children.props.user));
 
   // useEffect for discountTokensModal

@@ -83,11 +83,8 @@ export const ContacUs = ({ onClose = () => {} }) => {
         }, 1500);
       }
 
-      console.log(DataNosIA.NosIAContactMessage, contactResponse);
-      console.log(DataNosIA.NosIAEmailMessage, emailResponse);
     } catch (error) {
       toast.error(DataNosIA.NosIASomethingWrong);
-      console.log(error);
     } finally {
       setLoading(false);
     }

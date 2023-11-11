@@ -87,7 +87,7 @@ export const PDFTemplateOne = ({
           <View style={stylesOne.secondColumn}>
             <View style={stylesOne.pictureContainer}>
               <Image
-                src={`http://localhost:1337${user?.avatar?.formats?.thumbnail?.url}`}
+                src={user?.avatar?.formats?.thumbnail?.url}
               />
             </View>
             {debouncedFormData.fullName && debouncedFormData.domainOfStudy && (
