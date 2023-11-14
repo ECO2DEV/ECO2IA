@@ -6,7 +6,7 @@ import { DataPayment } from '../../data/payment';
 
 export default function PaymentConfirmed({paymentIntent, redirect}) {
   const [open, setOpen] = useState(true)
-  console.log(paymentIntent);
+  // console.log(paymentIntent);
   if(paymentIntent == 'success'){
     return (
      

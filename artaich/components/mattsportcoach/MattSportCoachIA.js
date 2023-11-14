@@ -40,7 +40,7 @@ export const SportCoachIA = (props) => {
   // Función para enviar la solicitud de plan de entrenamiento
   const fetchData = async () => {
     if (!prompt) {
-      console.log(setPromptTokens);
+      // console.log(setPromptTokens);
       setError("Veuillez taper quelque chose avant de soumettre");
     } else {
       setSubmitting(true);

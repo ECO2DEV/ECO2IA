@@ -125,7 +125,7 @@ export default function Modal({ children, user }) {
           alert(result.error.message);
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
   };
@@ -150,7 +150,7 @@ export default function Modal({ children, user }) {
             </PopUpModal>
           )}
           <div className="isolate overflow-hidden">
-            <div className="flow-root bg-gray-900 py-16 sm:pt-32 lg:pb-0">
+            <div className="bg-gray-900 py-16 sm:pt-32 min-h-screen flex items-center justify-center lg:pb-0">
               <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="relative z-10">
                   <h3 className="mx-auto max-w-4xl text-center text-4xl font-light tracking-tight text-white">

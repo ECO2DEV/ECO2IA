@@ -71,7 +71,6 @@ export default function DalleIA() {
         mutate({ data: [...data.data, response?.data], ...data });
         setResponse(response?.data?.data);
       } catch (error) {
-        console.log('error is:', error);
         setIsError('An error occurred while fetching data.');
       } finally {
         setIsLoading(false);

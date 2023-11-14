@@ -20,7 +20,7 @@ export const createContactMessage = async ({ formData }) => {
     );
     return response;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error.response.data.error;
   }
 };
@@ -34,7 +34,7 @@ export const sendEmail = async ({ formData }) => {
     );
     return response;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error.response.data.error;
   }
 };

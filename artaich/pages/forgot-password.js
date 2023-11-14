@@ -27,7 +27,7 @@ export default function ForgotPassword() {
         { email },
         header
       );
-      console.log('response', response);
+      // console.log('response', response);
       setMessage(DataForgotPassword.ResetPassWord);
       toast.success(DataForgotPassword.ResetPassWord);
       // router.push('/auth/signin');

@@ -10,7 +10,6 @@ import { LoadingChatgpt } from './LoadingChatgpt';
 import { DataMattChat } from '../../data/mattchat';
 
 export const Conversations = ({ messages }) => {
-  // console.log(' Otra cosa message', messages);
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
