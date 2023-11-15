@@ -9,6 +9,7 @@ const DynamicPDFViewer = dynamic(
     ssr: false
   }
 );
+import { strapiUrl } from "../../constants/constans";
 
 export const PDFTemplateTwo = ({
   spokenLanguages,
@@ -87,7 +88,7 @@ export const PDFTemplateTwo = ({
           <View style={stylesTwo.secondColumn}>
             <View style={stylesTwo.pictureContainer}>
               <Image
-                src={`http://localhost:1337${user?.avatar?.formats?.thumbnail?.url}`}
+                src={strapiUrl + user?.avatar?.formats?.thumbnail?.url}
               />
             </View>
             {debouncedFormData.fullName && debouncedFormData.domainOfStudy && (
