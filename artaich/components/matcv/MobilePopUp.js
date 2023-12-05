@@ -29,7 +29,7 @@ export const MobilePopUp = ({ children, isModalNeedIt, onClose }) => {
               </Transition.Child>
 
               <div className="fixed inset-0 z-10 overflow-y-auto">
-                <div className="flex h-full w-full items-end justify-center p-4 text-center items-center">
+                <div className="flex h-full w-full items-end justify-center p-4 text-center">
                   <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"

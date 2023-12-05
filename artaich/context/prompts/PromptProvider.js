@@ -60,9 +60,9 @@ export const PromptProvider = ({ children }) => {
         { plan: null },
         header
       );
-      console.log('Updated user plan to null');
+      // console.log('Updated user plan to null');
     } catch (error) {
-      console.log('Error updating user plan', error);
+      // console.log('Error updating user plan', error);
     }
   };
 
@@ -175,7 +175,7 @@ export const PromptProvider = ({ children }) => {
     if (Array.isArray(state.response) && state.response.length > 0) {
       updatedMaxImages = state.plan.max_imagens -= 2; // Restar 2 imágenes
       totalTokens = state.promptTokens;
-      console.log('DALL·E Response Tokens', totalTokens);
+      // console.log('DALL·E Response Tokens', totalTokens);
     } else {
       // If the response is a string (GPT-3 - mattraduct)
 

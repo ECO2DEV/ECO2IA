@@ -7,6 +7,6 @@ export const DataRegister = {
     RegisterPhone: "Numéro de Télephone",
     RegisterCountry: "Pays",
     RegisterCreate: "Créer",
-    RegisterCancel: "Cancel par Retour",
+    RegisterCancel: "Cancel",
     CodeRegister:"Code Pays"
 }

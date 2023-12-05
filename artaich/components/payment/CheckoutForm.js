@@ -17,14 +17,14 @@ const CheckoutForm = ({ onClose, amount, currency,user }) => {
   const strapiToken = process.env.API_TOKEN;
   const nextUrl = process.env.NEXTAUTH_URL;
   const logged_user = user;
-  console.log(logged_user);
+  // console.log(logged_user);
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
 
     if (!stripe || !elements) {
-      console.log('Stripe not loadeed yet ');
+      // console.log('Stripe not loadeed yet ');
       // Stripe.js has not yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
@@ -63,7 +63,7 @@ const CheckoutForm = ({ onClose, amount, currency,user }) => {
       }
     });
 
-    console.log("Entre aqui result confirm payment" + JSON.stringify(result));
+    // console.log("Entre aqui result confirm payment" + JSON.stringify(result));
     
     // const response = await axios.post(
     //   `${strapiUrl}/api/payment/createSubscription`,
@@ -75,7 +75,7 @@ const CheckoutForm = ({ onClose, amount, currency,user }) => {
 
     if (result.error) {
       // Show error to your customer (for example, payment details incomplete)
-      console.log(result.error.message);
+      // console.log(result.error.message);
     }
     // else {
     //     console.log("Entre en el else")

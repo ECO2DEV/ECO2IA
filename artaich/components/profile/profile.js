@@ -49,7 +49,7 @@ export default function Profile({ user }) {
           id: user.id
         });
         if (updatedUser) {
-          console.log('updated user', updatedUser);
+          // console.log('updated user', updatedUser);
           router.reload();
         }
         toast.success(DataProfile.ImageUploaded);

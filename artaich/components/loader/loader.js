@@ -1,3 +1,5 @@
+import { DataLoader } from "../../data/loader";
+
 export default function Loader(params) {
   return (
     <div role="status">
@@ -17,7 +19,7 @@ export default function Loader(params) {
           fill="currentFill"
         />
       </svg>
-      <span className="sr-only">Chargement...</span>
+      <span className="sr-only">{DataLoader.Loading}</span>
     </div>
   );
 }

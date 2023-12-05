@@ -1,5 +1,5 @@
 export const DataHistory ={
-    History:"Histoire",
+    History:"Historique",
     HistoryNotAvaible:"Aucun historique disponible",
     LatestImages:"Dernières images",
 }

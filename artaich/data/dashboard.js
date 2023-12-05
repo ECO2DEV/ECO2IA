@@ -6,7 +6,7 @@ export const DataDashboard = {
   MattechImageTitle: 'MATTIMAGE',
   MattechImageDescription:
     "Cette IA génère des images à partir de descriptions fournies par l'utilisateur.",
-  MatTranslateTitle: 'MATTRADUCT',
+  MatTranslateTitle: 'MATTRAD',
   MatTranslateDescription:
     "L'utilisateur peut entrer du texte pour une traduction dans une langue choisie.",
   MattSportTitle: 'MATTSPORT',

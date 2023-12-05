@@ -49,7 +49,7 @@ export default function CVSummary({ onClose, setTextProfile }) {
       setResponse(result?.data?.data);
 
       setLoading(false);
-      console.log('result is:', result.data);
+      // console.log('result is:', result.data);
       toast.success(DataMattCV.CVGenerated);
       onClose();
     } catch (error) {

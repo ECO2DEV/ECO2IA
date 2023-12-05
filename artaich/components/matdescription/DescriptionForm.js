@@ -88,7 +88,7 @@ const DescriptionForm = () => {
       })
       .catch((error) => {
         setError('An error occurred while fetching data.');
-        toast.error('An error occurred while fetching data.');
+        toast.error(DataMattDescription.ConversationDeleted);
         console.error(error);
       })
       .finally(() => {

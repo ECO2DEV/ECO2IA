@@ -148,7 +148,7 @@ function TextSummarizerPage() {
   // Manejador de la solicitud de resumen
   const handleRequestSummary = async () => {
     if (!prompt && !fileContent) {
-      toast.error("Please type something before submit"); // Verifica que se haya ingresado texto antes de enviar la solicitud
+      toast.error("Veuillez taper quelque chose avant de soumettre"); // Verifica que se haya ingresado texto antes de enviar la solicitud
       toast.error(DataMattResume.PleaseTypeSomething); // Verifica que se haya ingresado texto antes de enviar la solicitud
     } else {
       setIsLoading(true); // Activar el loader
@@ -162,7 +162,7 @@ function TextSummarizerPage() {
         setSummaryText(response?.data?.data); // Establece el resumen recibido en el estado summaryText
       } catch (error) {
         console.error("Error:", error);
-        toast.error("An error occurred");
+        toast.error(DataMattResume.AnErrorOcurred);
         console.error("Error:", error);
         toast.error(DataMattResume.AnErrorOcurred);
       } finally {
@@ -308,17 +308,17 @@ function TextSummarizerPage() {
             >
               <li onClick={handleModalHistory} className="flex items-center text-gray-500 hover:text-gray-800 sm:hover:text-gray-500 cursor-pointer">
                 <ButtonHistory
-                  className="mr-2 h-4 w-4"
+                  className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
                   aria-hidden="true"
                 />
-                <span className="hidden sm:contents">
+                <span className="hidden sm:contents" title="Historique">
                   {DataMattResume.History}
                 </span>
               </li>
               <PDFDownloadLink
                 className={!summaryText ? "opacity-50 pointer-events-none" : ""}
                 document={<ExportPDF summaryText={summaryText} />}
-                fileName="MattResume.pdf"
+                fileName="MATTRESUME.pdf"
               >
                 <li className="flex items-center">
                   <svg

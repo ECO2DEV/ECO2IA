@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 
 export const createUser = async (data) => {
   try {
-    console.log('Data to create user' + data.email);
+    // console.log('Data to create user' + data.email);
     const dataStripe = { email: data.email, name: data.Name };
     const respStripe = await axios.post(
       `${strapiUrl}/api/payment/createUser`,
@@ -19,16 +19,16 @@ export const createUser = async (data) => {
       newData,
       header
     );
-    console.log('Full response');
-    console.log(response);
+    // console.log('Full response');
+    // console.log(response);
     return response;
   } catch (error) {
     console.error(`Error making POST request to ${strapiUrl}:`, error);
     if (error.response.data.error.message) {
-      toast.error('user already exists');
+      toast.error(" L'utilisateur existe déjà. Veuillez choisir un autre nom d'utilisateur. ");
       return error.response.data.error.message;
     } else {
-      toast.error('Unexpected error');
+      toast.error("Une erreur inattendue s'est produite.");
       return error.response.data.error;
     }
     // add the other error handler
