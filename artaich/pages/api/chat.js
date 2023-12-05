@@ -13,11 +13,13 @@ const openai = new OpenAIApi(apiConfig);
 
 export default async function POST(req) {
   // Extract the `messages` from the body of the request
-  const { messages } = await req.json();
+  const { messages, model } = await req.json();
+
+  console.log('this is the model', model);
 
   // Request the OpenAI API for the response based on the prompt
   const response = await openai.createChatCompletion({
-    model: 'gpt-3.5-turbo',
+    model: model,
     stream: true,
     messages: messages,
     max_tokens: 500,
