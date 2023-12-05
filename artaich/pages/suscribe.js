@@ -4,7 +4,7 @@ import SubscriptionForm from '../components/payment/SubscriptionForm';
 import Checkout from '../components/payment/SubscriptionHandler';
 import { getUser } from '../util/api/user';
 
-const stripePromise = loadStripe(process.env.STRIPE_KEY);
+//const stripePromise = loadStripe();
 
 const Subscribe = (props) => {
   return (

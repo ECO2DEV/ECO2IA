@@ -3,7 +3,7 @@ import axios from 'axios';
 import { DataPayment } from '../../data/payment';
 
 const STRIPE_KEY = process.env.STRIPE_KEY;
-const stripePromise = loadStripe(`${STRIPE_KEY}`);
+const stripePromise = loadStripe('pk_test_51MmF5HEZbX6Zpxv9PbTYYGR1U9d14TmcHEsxCKTPzDVpKXDcaFqz87ElscE2TRYjdV3t1r5gxVo3G8FRAlOivqKG00jMOoioNN');
 
 export default function Checkout({ price }) {
   const handleCheckout = async () => {
