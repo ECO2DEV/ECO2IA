@@ -10,7 +10,7 @@ export const DataPricing = {
   pricingfeatures1_5: 'Prix abordable pour les etudiants',
   pricingbutton1: '4€',
   amount1: 4,
-  priceid1: 'plan_NeeieGD7qqOAm9',
+  priceid1: 'price_1OJmy2EZbX6Zpxv9o68J83SF',
   pricingtitle2: 'STANDARD',
   pricingfeatures2: '30 images par mois',
   pricingfeatures2_2: '112500 mots par mois',
@@ -20,7 +20,7 @@ export const DataPricing = {
     'Prix compétitif pour les particuliers et les petites enterprises',
   pricingbutton2: '10€',
   amount2: 10,
-  priceid2: 'plan_NeeieGD7qqOAm9',
+  priceid2: 'price_1MmGSjEZbX6Zpxv99rMLuyjN',
   pricingtitle3: 'ENTREPRISE',
   pricingprice3: 'Sur mesure',
   pricingfeatures3: 'Produits illimités',
@@ -28,5 +28,5 @@ export const DataPricing = {
   pricingfeatures3_3: 'Analyses avancées',
   pricingfeatures3_4: 'SAV dédié',
   pricingbutton3: 'Veuillez contacter le service commercial',
-  PaymentFrequency:"Fréquence de paiement"
+  PaymentFrequency: 'Fréquence de paiement'
 };

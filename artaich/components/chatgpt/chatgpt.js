@@ -12,14 +12,29 @@ import { useChat as useChatReact } from 'ai/react';
 import { header, strapiUrl } from '../../constants/constans';
 import HistoryChat from './HistoryChat';
 import { countTokens } from '../../util/helpers/count_tokens';
+import { SelectModel } from '../ui/SelectModel';
 
 export const config = {
   runtime: 'edge'
 };
 
+const options = [
+  { value: 'gpt-3.5-turbo', label: 'GPT-3.5' },
+  { value: 'gpt-4', label: 'GPT-4' }
+  // { value: 'text-curie-001', label: 'Curie' }
+  // { value: 'claude-1', label: 'Claude' }
+
+  // Add more AI models as needed
+];
+
 export default function ChatGpt(props) {
   const [openHelpers, setOpenHelpers] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [selectedModel, setSelectedModel] = useState(options[0].value);
+
+  const handleModelChange = (e) => {
+    setSelectedModel(e.target.value);
+  };
 
   const { setResponse, setPromptTokens, setActiveAI, activeAI } =
     useContext(PromptContext);
@@ -30,6 +45,7 @@ export default function ChatGpt(props) {
   useEffect(() => {
     setActiveAI('ChatGpt');
   }, []);
+
   const {
     messages,
     input,
@@ -80,6 +96,9 @@ export default function ChatGpt(props) {
       } finally {
         setOpenHelpers(false);
       }
+    },
+    body: {
+      model: selectedModel
     }
   });
 
@@ -99,7 +118,6 @@ export default function ChatGpt(props) {
   return (
     <>
       <section>
-       
         {messages.length === 0 ? (
           <Welcome setInput={setInput} />
         ) : openHelpers ? (
@@ -117,6 +135,7 @@ export default function ChatGpt(props) {
           <div className="flex justify-between gap-2 mb-4">
             <ButtonHelper onClick={() => setOpenHelpers(!openHelpers)} />
             <ButtonHelperHistory onClick={handleModalHistory} />
+            <SelectModel options={options} onChange={handleModelChange} />
           </div>
         </div>
       </section>
