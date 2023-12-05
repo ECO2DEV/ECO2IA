@@ -1,36 +1,34 @@
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
-const stripePromise =  loadStripe('pk_test_51MmF5HEZbX6Zpxv9PbTYYGR1U9d14TmcHEsxCKTPzDVpKXDcaFqz87ElscE2TRYjdV3t1r5gxVo3G8FRAlOivqKG00jMOoioNN');
-import { DataPayment } from "../../data/payment";
-export default function Checkout({price}) {
-    const handleCheckout = async () => {
-      try {
-        const stripe = await stripePromise;
-       
-        const checkoutSession = await axios.post("/api/create-subscription", {
-          price,
-          customerid
-        });
-       //console.log(checkoutSession);
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
+const stripePromise = loadStripe(process.env.STRIPE_KEY);
+import { DataPayment } from '../../data/payment';
+export default function Checkout({ price }) {
+  const handleCheckout = async () => {
+    try {
+      const stripe = await stripePromise;
 
-     //  window.location.href = 
+      const checkoutSession = await axios.post('/api/create-subscription', {
+        price,
+        customerid
+      });
+      //console.log(checkoutSession);
 
-        const result = await stripe.redirectToCheckout({
-          sessionId: checkoutSession.data.sessionId,
-        });
-  
-        if (result.error) {
-          alert(result.error.message);
-        }
-      } catch (error) {
-        console.log(error);
+      //  window.location.href =
+
+      const result = await stripe.redirectToCheckout({
+        sessionId: checkoutSession.data.sessionId
+      });
+
+      if (result.error) {
+        alert(result.error.message);
       }
-    };
-    return (
-      <div>
-      <button onClick={handleCheckout}>
-    {DataPayment.Checkout}
-</button>
-      </div>
-    );
-  }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <div>
+      <button onClick={handleCheckout}>{DataPayment.Checkout}</button>
+    </div>
+  );
+}
