@@ -11,9 +11,7 @@ import { ContacUs } from '../contact_us/contacUs';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 
-const stripePromise = loadStripe(
-  'pk_test_51MmF5HEZbX6Zpxv9PbTYYGR1U9d14TmcHEsxCKTPzDVpKXDcaFqz87ElscE2TRYjdV3t1r5gxVo3G8FRAlOivqKG00jMOoioNN'
-);
+const stripePromise = loadStripe(process.env.STRIPE_KEY);
 
 const pricing = {
   frequencies: [
