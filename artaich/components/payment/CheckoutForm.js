@@ -27,6 +27,7 @@ const CheckoutForm = ({ onClose, amount, currency,user }) => {
       // console.log('Stripe not loadeed yet ');
       // Stripe.js has not yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
+      console.log("Stripe not loaded yet ");
       return;
     }
 
@@ -59,7 +60,7 @@ const CheckoutForm = ({ onClose, amount, currency,user }) => {
       clientSecret,
       elements,
       confirmParams: {
-        return_url:   `http://localhost:3000/${transactionId}`
+        return_url:   `https://mattech-ia.com/${transactionId}`
       }
     });
 

@@ -13,24 +13,22 @@ export default function Checkout({price}) {
         });
        //console.log(checkoutSession);
 
-     //  window.location.href = 
+      //  window.location.href =
 
-        const result = await stripe.redirectToCheckout({
-          sessionId: checkoutSession.data.sessionId,
-        });
-  
-        if (result.error) {
-          alert(result.error.message);
-        }
-      } catch (error) {
-        console.log(error);
+      const result = await stripe.redirectToCheckout({
+        sessionId: checkoutSession.data.sessionId
+      });
+
+      if (result.error) {
+        alert(result.error.message);
       }
-    };
-    return (
-      <div>
-      <button onClick={handleCheckout}>
-    {DataPayment.Checkout}
-</button>
-      </div>
-    );
-  }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <div>
+      <button onClick={handleCheckout}>{DataPayment.Checkout}</button>
+    </div>
+  );
+}
