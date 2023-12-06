@@ -6,60 +6,126 @@ import { useRouter } from 'next/router';
 import { DataPricing } from '../../data/pricing';
 import { ContacUs } from '../contact_us/contacUs';
 import { PopUpModal } from '../modal/popUpModal';
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
+
 const frequencies = [
   { value: 'monthly', label: 'Mensuel', priceSuffix: '' }
   // { value: '', label: '', priceSuffix: '' },
 ];
 
-const tiers = [
-  {
-    name: DataPricing.pricingtitle1,
-    id: 'tier-freelancer',
-    // href: 'https://buy.stripe.com/test_aEU6rG57i6bu3cIfYZ',
-    price: { monthly: 4, annually: '' },
-    description: '',
-    features: [
-      DataPricing.pricingfeatures1,
-      DataPricing.pricingfeatures1_2,
-      DataPricing.pricingfeatures1_3,
-      DataPricing.pricingfeatures1_4,
-      DataPricing.pricingfeatures1_5
-    ],
-    featured: false,
-    cta: DataPricing.pricingbutton1
-  },
-  {
-    name: DataPricing.pricingtitle2,
-    id: 'tier-startup',
-    href: '#',
-    price: { monthly: 10, annually: '' },
-    description: '',
-    features: [
-      DataPricing.pricingfeatures2,
-      DataPricing.pricingfeatures2_2,
-      DataPricing.pricingfeatures2_3,
-      DataPricing.pricingfeatures2_4,
-      DataPricing.pricingfeatures2_5
-    ],
-    featured: false,
-    cta: DataPricing.pricingbutton2
-  },
-  {
-    name: DataPricing.pricingtitle3,
-    id: 'tier-enterprise',
-    href: '#',
-    price: { monthly: DataPricing.pricingbutton3, annually: '' },
-    description: '',
-    features: [
-      DataPricing.pricingfeatures3,
-      DataPricing.pricingfeatutes3_2,
-      DataPricing.pricingfeatures3_3,
-      DataPricing.pricingfeatures3_4
-    ],
-    featured: true,
-    cta: DataPricing.pricingbutton3
-  }
-];
+const stripePromise = loadStripe(
+  'pk_live_51MmF5HEZbX6Zpxv9jAViXayufKdtNHbR3B95kUFAFg424uNDazCpZ4SwRxuiv3Er2byJs6M0ATZWHYBBD7NIaOjo00E6LpUFqp'
+);
+
+const pricing = {
+  frequencies: [
+    { value: '', label: '' },
+    { value: '', label: '' }
+  ],
+  tiers: [
+    {
+      name: DataPricing.pricingtitle1,
+      id: '',
+      href: '#',
+      featured: false,
+      description: '',
+      price: { monthly: DataPricing.amount1, annually: '' },
+      priceid: DataPricing.priceid1,
+      mainFeatures: [
+        DataPricing.pricingfeatures1,
+        DataPricing.pricingfeatures1_2,
+        DataPricing.pricingfeatures1_3,
+        DataPricing.pricingfeatures1_4,
+        DataPricing.pricingfeatures1_5
+      ],
+      cta: DataPricing.pricingbutton1
+    },
+    {
+      name: DataPricing.pricingtitle2,
+      id: '',
+      href: '#',
+      featured: true,
+      description: '',
+      price: { monthly: DataPricing.amount2, annually: '' },
+      //no son distintos los id de los planes
+      priceid: DataPricing.priceid2,
+      mainFeatures: [
+        DataPricing.pricingfeatures2,
+        DataPricing.pricingfeatures2_2,
+        DataPricing.pricingfeatures2_3,
+        DataPricing.pricingfeatures2_4,
+        DataPricing.pricingfeatures2_5
+      ],
+      cta: DataPricing.pricingbutton2
+    },
+    {
+      name: DataPricing.pricingtitle3,
+      id: '',
+      href: '#',
+      featured: false,
+      description: '',
+      price: { monthly: DataPricing.pricingbutton3, annually: '' },
+      mainFeatures: [
+        DataPricing.pricingfeatures3,
+        DataPricing.pricingfeatutes3_2,
+        DataPricing.pricingfeatures3_3,
+        DataPricing.pricingfeatures3_4
+      ],
+      cta: DataPricing.pricingbutton3
+    }
+  ]
+};
+
+// const tiers = [
+//   {
+//     name: DataPricing.pricingtitle1,
+//     id: 'tier-freelancer',
+//     // href: 'https://buy.stripe.com/test_aEU6rG57i6bu3cIfYZ',
+//     price: { monthly: 4, annually: '' },
+//     description: '',
+//     features: [
+//       DataPricing.pricingfeatures1,
+//       DataPricing.pricingfeatures1_2,
+//       DataPricing.pricingfeatures1_3,
+//       DataPricing.pricingfeatures1_4,
+//       DataPricing.pricingfeatures1_5
+//     ],
+//     featured: false,
+//     cta: DataPricing.pricingbutton1
+//   },
+//   {
+//     name: DataPricing.pricingtitle2,
+//     id: 'tier-startup',
+//     href: '#',
+//     price: { monthly: 10, annually: '' },
+//     description: '',
+//     features: [
+//       DataPricing.pricingfeatures2,
+//       DataPricing.pricingfeatures2_2,
+//       DataPricing.pricingfeatures2_3,
+//       DataPricing.pricingfeatures2_4,
+//       DataPricing.pricingfeatures2_5
+//     ],
+//     featured: false,
+//     cta: DataPricing.pricingbutton2
+//   },
+//   {
+//     name: DataPricing.pricingtitle3,
+//     id: 'tier-enterprise',
+//     href: '#',
+//     price: { monthly: DataPricing.pricingbutton3, annually: '' },
+//     description: '',
+//     features: [
+//       DataPricing.pricingfeatures3,
+//       DataPricing.pricingfeatutes3_2,
+//       DataPricing.pricingfeatures3_3,
+//       DataPricing.pricingfeatures3_4
+//     ],
+//     featured: true,
+//     cta: DataPricing.pricingbutton3
+//   }
+// ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -73,6 +139,37 @@ export default function Pricing({ user }) {
   const [isEnterpriseOpen, setIsEnterpriseOpen] = useState(false);
   const [amount, setAmount] = useState(0);
   const [currency, setCurrency] = useState('eur');
+
+  const handleCheckout = async ({ price }) => {
+    console.log(price)
+    if (user == null) {
+      router.push('/auth/signin');
+      // Set the state to open the modal
+    } else {
+      try {
+        const stripe = await stripePromise;
+        const customerid = user.customer_id;
+        const userId = user.id;
+
+        const checkoutSession = await axios.post('/api/create-subscription', {
+          price,
+          customerid,
+          userId
+        });
+        console.log(checkoutSession);
+
+        const result = await stripe.redirectToCheckout({
+          sessionId: checkoutSession.data.sessionId
+        });
+
+        if (result.error) {
+          alert(result.error.message);
+        }
+      } catch (error) {
+        // console.log(error);
+      }
+    }
+  };
 
   const handleButtonClick = ({ amount }) => {
     if (user == null) {
@@ -106,6 +203,7 @@ export default function Pricing({ user }) {
           onClose={handleButtonClick}
           amount={amount}
           currency={currency}
+          user={user}
         />
       )}
       {isEnterpriseOpen && (
@@ -149,9 +247,9 @@ export default function Pricing({ user }) {
           </RadioGroup>
         </div>
         <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          {tiers.map((tier) => (
+          {pricing.tiers.map((tier, index) => (
             <div
-              key={tier.id}
+              key={index}
               className={classNames(
                 tier.featured ? 'bg-gray-900 ring-gray-900' : 'ring-gray-200',
                 'rounded-3xl p-8 ring-1 xl:p-10'
@@ -202,7 +300,7 @@ export default function Pricing({ user }) {
                   'mt-4 space-y-3 text-sm leading-6 xl:mt-6'
                 )}
               >
-                {tier.features.map((feature) => (
+                {tier.mainFeatures.map((feature) => (
                   <li key={feature} className="flex gap-x-3">
                     <CheckIcon
                       className={classNames(
@@ -221,10 +319,11 @@ export default function Pricing({ user }) {
                   tier.name === DataPricing.pricingtitle3
                     ? () => {
                         handleButtonEnterprise();
+                        console.log(DataPricing)
                       }
                     : () => {
-                        handleButtonClick({
-                          amount: tier.price.monthly * 100
+                      handleCheckout({
+                          price: tier.priceid
                         });
                       }
                 }

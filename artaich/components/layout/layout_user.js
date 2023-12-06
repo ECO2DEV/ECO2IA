@@ -54,14 +54,14 @@ export default function LayoutUser({ children }) {
   const { max_imagens = 0, max_tokens = 0 } = plan;
 
   useEffect(() => {
-    if (!children.props.user.plan) return;
+    if (!children?.props?.user?.plan) return;
     setPlan(children.props.user.plan ? children.props.user.plan.id : null);
   }, []);
 
   useEffect(() => {
-    if (!children.props.user) return;
-    setUser(children.props.user);
-  }, [children.props.user]);
+    if (!children?.props?.user) return;
+    setUser(children?.props?.user);
+  }, [children?.props?.user]);
 
   // const { attributes } = plan;
   // console.log(JSON.stringify(children.props.user));
@@ -90,7 +90,7 @@ export default function LayoutUser({ children }) {
     }, 3000);
   }, [response, responseTokens]);
 
-  const image_url = children.props.user.avatar
+  const image_url = children?.props?.user?.avatar
     ? strapiUrl + children.props.user.avatar.url
     : "/empty_avatar.png";
 
@@ -247,7 +247,7 @@ export default function LayoutUser({ children }) {
                           <img
                             className="inline-block h-9 w-9 rounded-full"
                             src={image_url}
-                            alt={children.props.user.username}
+                            alt={children?.props?.user?.username}
                           />
                         ) : (
                           <div className="flex items-center justify-center h-full text-white bg-gray-400 rounded-full">
@@ -260,7 +260,7 @@ export default function LayoutUser({ children }) {
                       </div>
                       <div className="ml-3">
                         <p className="text-base font-medium text-white">
-                          {children.props.user.Name}
+                          {children?.props?.user?.Name}
                         </p>
                         <Link href={"/profile"}>
                           <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
@@ -353,7 +353,7 @@ export default function LayoutUser({ children }) {
                     <img
                       className="inline-block h-9 w-9 rounded-full"
                       src={image_url}
-                      alt={children.props.user.username}
+                      alt={children?.props?.user?.username}
                     />
                   ) : (
                     <div className="flex items-center justify-center h-full text-white bg-gray-400 rounded-full">
@@ -366,7 +366,7 @@ export default function LayoutUser({ children }) {
                 </div>
                 <div className="ml-3">
                   <p className="text-sm font-medium text-white">
-                    {children.props.user.username}
+                    {children?.props?.user?.username}
                   </p>
                   <Link href={"/profile"}>
                     <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
