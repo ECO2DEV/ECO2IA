@@ -1,6 +1,6 @@
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-const stripePromise =  loadStripe('pk_test_51MmF5HEZbX6Zpxv9PbTYYGR1U9d14TmcHEsxCKTPzDVpKXDcaFqz87ElscE2TRYjdV3t1r5gxVo3G8FRAlOivqKG00jMOoioNN');
+const stripePromise =  loadStripe('pk_live_51MmF5HEZbX6Zpxv9jAViXayufKdtNHbR3B95kUFAFg424uNDazCpZ4SwRxuiv3Er2byJs6M0ATZWHYBBD7NIaOjo00E6LpUFqp');
 import { DataPayment } from "../../data/payment";
 export default function Checkout({price}) {
     const handleCheckout = async () => {
