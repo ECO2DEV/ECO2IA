@@ -1,3 +1,5 @@
+const STANDARD_PLAN = process.env.NEXT_PUBLIC_STANDARD_PLAN;
+const STUDENT_PLAN = process.env.NEXT_PUBLIC_STUDENT_PLAN;
 export const DataPricing = {
   pricingmaintitle: 'Tarification',
   pricingmaindescription: 'Plans tarifaires pour tous les types de besoins',
@@ -10,7 +12,7 @@ export const DataPricing = {
   pricingfeatures1_5: 'Prix abordable pour les etudiants',
   pricingbutton1: '5€',
   amount1: 5,
-  priceid1: 'plan_P8Il0WSGCtXXBO',
+  priceid1: `${STUDENT_PLAN}`,
   pricingtitle2: 'STANDARD',
   pricingfeatures2: '75 images par mois',
   pricingfeatures2_2: '108000 mots par mois',
@@ -20,7 +22,7 @@ export const DataPricing = {
     'Prix compétitif pour les particuliers et les petites enterprises',
   pricingbutton2: '10€',
   amount2: 10,
-  priceid2: 'price_1MmGTDEZbX6Zpxv9sbhqN2xz',
+  priceid2: `${STANDARD_PLAN}`,
   pricingtitle3: 'ENTREPRISE',
   pricingprice3: 'Sur mesure',
   pricingfeatures3: 'Produits illimités',

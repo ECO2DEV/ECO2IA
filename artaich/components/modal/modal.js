@@ -69,7 +69,7 @@ export default function Modal({ children, user }) {
     }
   };
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [frequency, setFrequency] = useState(pricing.frequencies[0]);
+  const [frequency, setFrequency] = useState(plan_pricing.frequencies[0]);
   return (
     <>
       {isOpen && (
