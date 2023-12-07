@@ -1,17 +1,18 @@
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
-const stripePromise =  loadStripe('pk_live_51MmF5HEZbX6Zpxv9jAViXayufKdtNHbR3B95kUFAFg424uNDazCpZ4SwRxuiv3Er2byJs6M0ATZWHYBBD7NIaOjo00E6LpUFqp');
-import { DataPayment } from "../../data/payment";
-export default function Checkout({price}) {
-    const handleCheckout = async () => {
-      try {
-        const stripe = await stripePromise;
-       
-        const checkoutSession = await axios.post("/api/create-subscription", {
-          price,
-          customerid
-        });
-       //console.log(checkoutSession);
+import axios from 'axios';
+
+import { DataPayment } from '../../data/payment';
+import { stripePromise } from '../../constants/constans';
+
+export default function Checkout({ price }) {
+  const handleCheckout = async () => {
+    try {
+      const stripe = await stripePromise;
+
+      const checkoutSession = await axios.post('/api/create-subscription', {
+        price,
+        customerid
+      });
+      //console.log(checkoutSession);
 
       //  window.location.href =
 
