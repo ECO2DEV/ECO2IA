@@ -8,71 +8,10 @@ import { useRouter } from 'next/router';
 import CheckoutForm from '../payment/CheckoutForm';
 import { PopUpModal } from './popUpModal';
 import { ContacUs } from '../contact_us/contacUs';
-import { loadStripe } from '@stripe/stripe-js';
+import { plan_pricing } from '../../constants/constans';
 import axios from 'axios';
 
-const stripePromise = loadStripe(
-  'pk_live_51MmF5HEZbX6Zpxv9jAViXayufKdtNHbR3B95kUFAFg424uNDazCpZ4SwRxuiv3Er2byJs6M0ATZWHYBBD7NIaOjo00E6LpUFqp'
-);
-
-const pricing = {
-  frequencies: [
-    { value: '', label: '' },
-    { value: '', label: '' }
-  ],
-  tiers: [
-    {
-      name: DataPricing.pricingtitle1,
-      id: '',
-      href: '#',
-      featured: false,
-      description: '',
-      price: { monthly: DataPricing.amount1, annually: '' },
-      priceid: DataPricing.priceid1,
-      mainFeatures: [
-        DataPricing.pricingfeatures1,
-        DataPricing.pricingfeatures1_2,
-        DataPricing.pricingfeatures1_3,
-        DataPricing.pricingfeatures1_4,
-        DataPricing.pricingfeatures1_5
-      ],
-      cta: DataPricing.pricingbutton1
-    },
-    {
-      name: DataPricing.pricingtitle2,
-      id: '',
-      href: '#',
-      featured: true,
-      description: '',
-      price: { monthly: DataPricing.amount2, annually: '' },
-      //no son distintos los id de los planes
-      priceid: DataPricing.priceid2,
-      mainFeatures: [
-        DataPricing.pricingfeatures2,
-        DataPricing.pricingfeatures2_2,
-        DataPricing.pricingfeatures2_3,
-        DataPricing.pricingfeatures2_4,
-        DataPricing.pricingfeatures2_5
-      ],
-      cta: DataPricing.pricingbutton2
-    },
-    {
-      name: DataPricing.pricingtitle3,
-      id: '',
-      href: '#',
-      featured: false,
-      description: '',
-      price: { monthly: DataPricing.pricingbutton3, annually: '' },
-      mainFeatures: [
-        DataPricing.pricingfeatures3,
-        DataPricing.pricingfeatutes3_2,
-        DataPricing.pricingfeatures3_3,
-        DataPricing.pricingfeatures3_4
-      ],
-      cta: DataPricing.pricingbutton3
-    }
-  ]
-};
+import { stripePromise } from '../../constants/constans';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -201,7 +140,7 @@ export default function Modal({ children, user }) {
                     className="hidden lg:absolute lg:inset-x-px lg:bottom-0 lg:top-4 lg:block lg:rounded-t-2xl lg:bg-gray-800/80 lg:ring-1 lg:ring-white/10"
                     aria-hidden="true"
                   />
-                  {pricing.tiers.map((tier, index) => (
+                  {plan_pricing.tiers.map((tier, index) => (
                     <div
                       key={index}
                       className={classNames(
