@@ -1,5 +1,6 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
+import { UserContext } from '../../context/user/UserContext';
 
 import axios from 'axios';
 import SearchTextbox from '../searchTextbox/searchTextbox';
@@ -9,7 +10,7 @@ import { useChat } from '../../hooks/useChat';
 import { ButtonHelper } from '../welcome/buttonHelper';
 import ButtonHelperHistory from '../welcome/ButtonHelperHistory';
 import { useChat as useChatReact } from 'ai/react';
-import { header, strapiUrl } from '../../constants/constans';
+import { header, strapiUrl, modelOptions } from '../../constants/constans';
 import HistoryChat from './HistoryChat';
 import { countTokens } from '../../util/helpers/count_tokens';
 import { SelectModel } from '../ui/SelectModel';
@@ -18,19 +19,15 @@ export const config = {
   runtime: 'edge'
 };
 
-const options = [
-  { value: 'gpt-3.5-turbo', label: 'GPT-3.5' },
-  { value: 'gpt-4', label: 'GPT-4' }
-  // { value: 'text-curie-001', label: 'Curie' }
-  // { value: 'claude-1', label: 'Claude' }
-
-  // Add more AI models as needed
-];
-
 export default function ChatGpt(props) {
-  const [openHelpers, setOpenHelpers] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedModel, setSelectedModel] = useState(options[0].value);
+  const {
+    setOpenHelpers,
+    setSelectedModel,
+    openHelpers,
+    setModalOpen,
+    selectedModel,
+    modalOpen
+  } = useContext(UserContext);
 
   const handleModelChange = (e) => {
     setSelectedModel(e.target.value);
@@ -102,10 +99,6 @@ export default function ChatGpt(props) {
     }
   });
 
-  const handleModalHistory = () => {
-    setModalOpen((prev) => !prev);
-  };
-
   useEffect(() => {
     if (input === '') {
       setPromptTokens(0);
@@ -125,21 +118,24 @@ export default function ChatGpt(props) {
         ) : (
           <Conversations messages={messages} />
         )}
-        <div className="flex justify-center items-center fixed bottom-3 w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem]">
+        <div className="flex justify-center flex-col-reverse md:flex-row items-center fixed bottom-3 w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem]">
           <SearchTextbox
             OnChange={handleInputChange}
             Fetch={handleSubmit}
             loading={isLoading}
             prompt={input}
           />
-          <div className="flex justify-between gap-2 mb-4">
+          <div className="hidden md:flex justify-between items-center gap-2 mb-4">
             <ButtonHelper onClick={() => setOpenHelpers(!openHelpers)} />
-            <ButtonHelperHistory onClick={handleModalHistory} />
-            <SelectModel options={options} onChange={handleModelChange} />
+            <ButtonHelperHistory onClick={() => setModalOpen(!modalOpen)} />
+            <SelectModel
+              modelOptions={modelOptions}
+              onChange={handleModelChange}
+            />
           </div>
         </div>
       </section>
-      {modalOpen && <HistoryChat onClose={handleModalHistory} />}
+      {modalOpen && <HistoryChat onClose={() => setModalOpen(!modalOpen)} />}
     </>
   );
 }

@@ -1,44 +1,57 @@
-import { Fragment, useState, useContext, useEffect } from "react";
-import Head from "next/head";
-import Link from "next/link";
-import { Dialog, Transition } from "@headlessui/react";
-import { signOut } from "next-auth/react";
-import { PromptContext } from "../../context/prompts/PromptContext";
-import { UserContext } from "../../context/user/UserContext";
+import { Fragment, useState, useContext, useEffect } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import { Dialog, Transition } from '@headlessui/react';
+import { signOut } from 'next-auth/react';
+import { PromptContext } from '../../context/prompts/PromptContext';
+import { UserContext } from '../../context/user/UserContext';
+import { navigation, modelOptions } from '../../constants/constans';
 import {
   Bars3Icon,
   ArrowLeftOnRectangleIcon,
   HomeIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import Image from "next/image";
-import logo from "../../public/Mlogop.png";
-import { strapiUrl } from "../../constants/constans";
-import { Toaster } from "react-hot-toast";
-import { useRouter } from "next/router";
-import { DataLayout } from "../../data/layout";
-import LanguageDropdown from "./LanguageDropdown";
-
-const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-  { name: 'MATTCHAT', href: '/chatgpt', icon: HomeIcon, current: true },
-  { name: 'MATTIMAGE', href: '/mattimage', icon: HomeIcon, current: true },
-  { name: 'MATTRAD', href: '/mattraduct', icon: HomeIcon, current: true },
-  { name: 'MATTSPORT', href: '/mattsport', icon: HomeIcon, current: true },
-  { name: 'MATTQCM', href: '/matquiz', icon: HomeIcon, current: true },
-  { name: 'MATTDESC', href: '/matdescription', icon: HomeIcon, current: true },
-  { name: 'MATTRESUME', href: '/mattresum', icon: HomeIcon, current: true },
-  { name: 'MATTCV', href: '/matcv', icon: HomeIcon, current: true }
-  // { name: 'Team', href: '#', icon: UsersIcon, current: false },
-];
+  XMarkIcon
+} from '@heroicons/react/24/outline';
+import Image from 'next/image';
+import logo from '../../public/Mlogop.png';
+import { strapiUrl } from '../../constants/constans';
+import { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import { DataLayout } from '../../data/layout';
+import LanguageDropdown from './LanguageDropdown';
+import { ButtonHelper } from '../welcome/buttonHelper';
+import ButtonHelperHistory from '../welcome/ButtonHelperHistory';
+import { SelectModel } from '../ui/SelectModel';
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function LayoutUser({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [discountTokensModal, setDiscountTokensModal] = useState(0);
+  const router = useRouter();
+  const image_url = children?.props?.user?.avatar
+    ? strapiUrl + children.props.user.avatar.url
+    : '/empty_avatar.png';
+
+  const currentPath = useRouter().pathname; // Obtener la ruta actual
+
+  const shouldShowTopNavBar = [
+    '/mattchat',
+    '/mattimage',
+    '/mattraduct',
+    '/mattsport',
+    '/matquiz',
+    '/matdescription',
+    '/mattresum',
+    '/matcv'
+  ].includes(currentPath);
+  // console.log('Image_url' + children.props.user.avatar);
+  const navigationForMobile =
+    shouldShowTopNavBar && currentPath !== '/dashboard'
+      ? navigation.find((item) => item.href === currentPath)?.name || ''
+      : '';
 
   const {
     setPlan,
@@ -48,10 +61,23 @@ export default function LayoutUser({ children }) {
     response,
     setPromptTokens,
     setResponseTokens,
-    activeAI,
+    activeAI
   } = useContext(PromptContext);
-  const { setUser } = useContext(UserContext);
+
   const { max_imagens = 0, max_tokens = 0 } = plan;
+
+  const {
+    setUser,
+    openHelpers,
+    modalOpen,
+    setOpenHelpers,
+    setModalOpen,
+    setSelectedModel
+  } = useContext(UserContext);
+
+  const handleModelChange = (e) => {
+    setSelectedModel(e.target.value);
+  };
 
   useEffect(() => {
     if (!children?.props?.user?.plan) return;
@@ -69,7 +95,7 @@ export default function LayoutUser({ children }) {
   // useEffect for discountTokensModal
   useEffect(() => {
     setDiscountTokensModal(promptTokens + responseTokens);
-    if (response && (activeAI === "ChatGPT" || activeAI === "DalleIA")) {
+    if (response && (activeAI === 'ChatGPT' || activeAI === 'DalleIA')) {
       setTimeout(() => {
         setDiscountTokensModal(0);
       }, 2000);
@@ -79,9 +105,9 @@ export default function LayoutUser({ children }) {
   useEffect(() => {
     setTimeout(() => {
       if (
-        activeAI === "ChatGPT" ||
-        activeAI === "DalleIA" ||
-        activeAI === "MatquizAI"
+        activeAI === 'ChatGPT' ||
+        activeAI === 'DalleIA' ||
+        activeAI === 'MatquizAI'
       ) {
         setPromptTokens(0);
       }
@@ -90,37 +116,8 @@ export default function LayoutUser({ children }) {
     }, 3000);
   }, [response, responseTokens]);
 
-  const image_url = children?.props?.user?.avatar
-    ? strapiUrl + children.props.user.avatar.url
-    : "/empty_avatar.png";
-
-  const currentPath = useRouter().pathname; // Obtener la ruta actual
-
-  const shouldShowTopNavBar = [
-    "/chatgpt",
-    "/mattimage",
-    "/mattraduct",
-    "/mattsport",
-    "/matquiz",
-    "/matdescription",
-    "/mattresum",
-    "/matcv",
-  ].includes(currentPath);
-  // console.log('Image_url' + children.props.user.avatar);
-  const navigationForMobile =
-    shouldShowTopNavBar && currentPath !== "/dashboard"
-      ? navigation.find((item) => item.href === currentPath)?.name || ""
-      : "";
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html className="h-full bg-gray-100">
-        <body className="h-full">
-        ```
-      */}
       {/* Removing the scroll for let chatGpt to scroll with his own scrollbar (overflow-y-hidden h-screen)*/}
       <div>
         <Head>
@@ -128,10 +125,10 @@ export default function LayoutUser({ children }) {
           <meta name="description" content="Generated by ECO² Colombia" />
           <link rel="icon" href="/Mlogo.ico" />
         </Head>
-
+        {/* Sideba. When is in mobile version and the hamburguer menu button is been clicked*/}
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
-            as="div"
+            as="aside"
             className="relative z-40 lg:hidden"
             onClose={setSidebarOpen}
           >
@@ -187,10 +184,10 @@ export default function LayoutUser({ children }) {
                     <div className="flex items-center justify-center">
                       <div className="flex flex-shrink-0 px-4">
                         <Image
-                          className="h-12 w-auto"
+                          className="h-12 w-auto cursor-pointer"
                           src={logo}
                           alt="Mattech"
-                          onClick={() => router.push("/")}
+                          onClick={() => router.push('/dashboard')}
                         />
                       </div>
                     </div>
@@ -199,14 +196,14 @@ export default function LayoutUser({ children }) {
                     <Link
                       href="/dashboard"
                       className={classNames(
-                        "bg-gray-900 text-white",
-                        "group flex items-center rounded-md px-2 py-2 text-sm font-medium"
+                        'bg-gray-900 text-white',
+                        'group flex items-center rounded-md px-2 py-2 text-sm font-medium'
                       )}
                     >
                       <HomeIcon
                         className={classNames(
-                          "text-gray-300",
-                          "mr-3 h-6 w-6 flex-shrink-0"
+                          'text-gray-300',
+                          'mr-3 h-6 w-6 flex-shrink-0'
                         )}
                         aria-hidden="true"
                       />
@@ -262,7 +259,7 @@ export default function LayoutUser({ children }) {
                         <p className="text-base font-medium text-white">
                           {children?.props?.user?.Name}
                         </p>
-                        <Link href={"/profile"}>
+                        <Link href={'/profile'}>
                           <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
                             {DataLayout.Profile}
                           </p>
@@ -292,7 +289,7 @@ export default function LayoutUser({ children }) {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
+        <aside className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
 
           <div className="flex min-h-0 flex-1 flex-col bg-gray-800">
@@ -306,14 +303,14 @@ export default function LayoutUser({ children }) {
                 <Link
                   href="/dashboard"
                   className={classNames(
-                    "bg-gray-900 text-white",
-                    "group flex items-center rounded-md px-2 py-2 text-sm font-medium"
+                    'bg-gray-900 text-white',
+                    'group flex items-center rounded-md px-2 py-2 text-sm font-medium'
                   )}
                 >
                   <HomeIcon
                     className={classNames(
-                      "text-gray-300",
-                      "mr-3 h-6 w-6 flex-shrink-0"
+                      'text-gray-300',
+                      'mr-3 h-6 w-6 flex-shrink-0'
                     )}
                     aria-hidden="true"
                   />
@@ -368,7 +365,7 @@ export default function LayoutUser({ children }) {
                   <p className="text-sm font-medium text-white">
                     {children?.props?.user?.username}
                   </p>
-                  <Link href={"/profile"}>
+                  <Link href={'/profile'}>
                     <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">
                       {DataLayout.Profile}
                     </p>
@@ -379,7 +376,7 @@ export default function LayoutUser({ children }) {
                 <button
                   title="Click for Logout !"
                   className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"
-                  onClick={() => signOut({ callbackUrl: "/" })}
+                  onClick={() => signOut({ callbackUrl: '/' })}
                 >
                   <ArrowLeftOnRectangleIcon
                     className="h-5 w-5"
@@ -389,28 +386,45 @@ export default function LayoutUser({ children }) {
               </div>
             </div>
           </div>
-        </div>
+        </aside>
 
         <div className="flex flex-1 flex-col lg:pl-64">
           <div className="sticky top-0 z-10 bg-white pl-1 pt-1 sm:pl-3 sm:pt-3  border-b border-gray-300">
-            {shouldShowTopNavBar && currentPath !== "/dashboard" && (
-              <div className="ml-8 flex justify-between">
-                <h2 className="text-gray-500 text-2xl ">
-                  {navigation.find((item) => item.href === currentPath)?.name ||
-                    ""}
-                </h2>
+            {shouldShowTopNavBar && currentPath !== '/dashboard' && (
+              <div className="mb-1 flex justify-between">
+                <div className="flex items-center">
+                  <button
+                    type="button"
+                    className=" inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 lg:hidden"
+                    onClick={() => setSidebarOpen(true)}
+                  >
+                    <span className="sr-only">{DataLayout.OpenSidebar}</span>
+                    <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+                  <h2 className="text-gray-500 text-2xl ">
+                    {navigation.find((item) => item.href === currentPath)
+                      ?.name || ''}
+                  </h2>
+                </div>
 
-                {currentPath === "/matcv" ? <LanguageDropdown /> : null}
+                {currentPath === '/matcv' ? (
+                  <LanguageDropdown />
+                ) : currentPath === '/mattchat' ? (
+                  <div className="flex md:hidden justify-between items-center gap-2">
+                    <ButtonHelper
+                      onClick={() => setOpenHelpers(!openHelpers)}
+                    />
+                    <ButtonHelperHistory
+                      onClick={() => setModalOpen(!modalOpen)}
+                    />
+                    <SelectModel
+                      modelOptions={modelOptions}
+                      onChange={handleModelChange}
+                    />
+                  </div>
+                ) : null}
               </div>
             )}
-            <button
-              type="button"
-              className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 lg:hidden"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <span className="sr-only">{DataLayout.OpenSidebar}</span>
-              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-            </button>
           </div>
           <main className="flex-1">
             <div className="lg:py-3 h-screen">
