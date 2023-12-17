@@ -25,7 +25,9 @@ export const createUser = async (data) => {
   } catch (error) {
     console.error(`Error making POST request to ${strapiUrl}:`, error);
     if (error.response.data.error.message) {
-      toast.error(" L'utilisateur existe déjà. Veuillez choisir un autre nom d'utilisateur. ");
+      toast.error(
+        " L'utilisateur existe déjà. Veuillez choisir un autre nom d'utilisateur. "
+      );
       return error.response.data.error.message;
     } else {
       toast.error("Une erreur inattendue s'est produite.");
@@ -67,9 +69,9 @@ export const setEstudiantePlan = async () => {
       {
         data: {
           typo: 'Estudiante',
-          max_tokens: 67500,
-          max_imagens: 16,
-          value: 4
+          max_tokens: 54000,
+          max_imagens: 30,
+          value: 5
         }
       },
       header
@@ -91,8 +93,8 @@ export const setStandardPlan = async () => {
       {
         data: {
           typo: 'Standard',
-          max_tokens: 112500,
-          max_imagens: 30,
+          max_tokens: 108000,
+          max_imagens: 75,
           value: 10
         }
       },
