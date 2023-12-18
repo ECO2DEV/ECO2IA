@@ -1,18 +1,18 @@
-import { useState, useEffect, Fragment, useRef } from "react";
-import { useRouter } from "next/router";
-import { Dialog, Transition } from "@headlessui/react";
-import { UserPlusIcon } from "@heroicons/react/24/outline";
-import { updateUserById } from "../../util/api/user";
-import { toast } from "react-hot-toast";
+import { useState, useEffect, Fragment, useRef } from 'react';
+import { useRouter } from 'next/router';
+import { Dialog, Transition } from '@headlessui/react';
+import { UserPlusIcon } from '@heroicons/react/24/outline';
+import { updateUserById } from '../../util/api/user';
+import { toast } from 'react-hot-toast';
 import {
   educational,
   domain,
   activity,
   sport,
   transport,
-  nacionality,
-} from "./profilecollection";
-import { DataProfile } from "../../data/profile";
+  nacionality
+} from './profilecollection';
+import { DataProfile } from '../../data/profile';
 
 export default function EditProfile({ onClose, user }) {
   // console.log("Response:", user);
@@ -22,7 +22,7 @@ export default function EditProfile({ onClose, user }) {
 
   // estado para controlar si el campo de texto adicional está activo.
   const [additionalFieldActive, setAdditionalFieldActive] = useState(false);
-  const [additionalFieldValue, setAdditionalFieldValue] = useState(""); // Estado para el valor del campo de texto adicional.
+  const [additionalFieldValue, setAdditionalFieldValue] = useState(''); // Estado para el valor del campo de texto adicional.
 
   // Función para activar el campo de texto adicional.
   const activateAdditionalField = () => {
@@ -79,7 +79,7 @@ export default function EditProfile({ onClose, user }) {
     nacionality: user.nacionality,
     age: user.age,
     height: user.height,
-    weight: user.weight,
+    weight: user.weight
     // about: ''
   });
 
@@ -90,11 +90,11 @@ export default function EditProfile({ onClose, user }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
-      formData.Name === "" ||
-      formData.LastName === "" ||
-      formData.email === "" ||
-      formData.numberTelephone === "" ||
-      formData.country === ""
+      formData.Name === '' ||
+      formData.LastName === '' ||
+      formData.email === '' ||
+      formData.numberTelephone === '' ||
+      formData.country === ''
       // || formData.about === ''
     ) {
       toast.error(DataProfile.PleaseFill);
@@ -115,7 +115,7 @@ export default function EditProfile({ onClose, user }) {
 
     // Validar el campo de texto adicional si está activo.
     if (additionalFieldActive && additionalFieldValue === '') {
-      toast.error('Por favor, complete el campo adicional.');
+      toast.error(DataProfile.ErrorAdditionalField);
       return;
     }
 
@@ -130,14 +130,14 @@ export default function EditProfile({ onClose, user }) {
       const response = await updateUserById({
         formData: formData,
         id: user.id,
-        additionalField: additionalFieldValue,
+        additionalField: additionalFieldValue
       });
       toast.success(DataProfile.ProfileUpdated);
-      router.push("/profile");
+      router.push('/profile');
       onClose();
     } catch (error) {
       toast.error(DataProfile.ErrorUpdating);
-      console.error("Error:", error);
+      console.error('Error:', error);
     }
   };
 
@@ -197,7 +197,7 @@ export default function EditProfile({ onClose, user }) {
                         className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
                         style={{
                           clipPath:
-                            "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+                            'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
                         }}
                       />
                     </div>
@@ -431,7 +431,7 @@ export default function EditProfile({ onClose, user }) {
                                   onClick={activateAdditionalField}
                                   className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
                                 >
-                                  Agregar
+                                  Ajouter
                                 </button>
                               )}
                             </div>
@@ -476,7 +476,7 @@ export default function EditProfile({ onClose, user }) {
                                   onClick={activateAdditionalField}
                                   className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
                                 >
-                                  Agregar
+                                  Ajouter
                                 </button>
                               )}
                             </div>
@@ -521,7 +521,7 @@ export default function EditProfile({ onClose, user }) {
                                   onClick={activateAdditionalField}
                                   className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
                                 >
-                                  Agregar
+                                  Ajouter
                                 </button>
                               )}
                             </div>
@@ -566,7 +566,7 @@ export default function EditProfile({ onClose, user }) {
                                   onClick={activateAdditionalField}
                                   className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
                                 >
-                                  Agregar
+                                  Ajouter
                                 </button>
                               )}
                             </div>
@@ -611,7 +611,7 @@ export default function EditProfile({ onClose, user }) {
                                   onClick={activateAdditionalField}
                                   className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
                                 >
-                                  Agregar
+                                  Ajouter
                                 </button>
                               )}
                             </div>

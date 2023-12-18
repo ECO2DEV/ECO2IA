@@ -8,7 +8,7 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
   const { promptTokens } = useContext(PromptContext);
 
   return (
-    <div className="flex-1">
+    <div className="w-full">
       {/* <label
         htmlFor="text"
         className="block text-sm font-medium leading-6 text-gray-900"
@@ -36,7 +36,7 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
           disabled={loading}
         >
           <BarsArrowUpIcon className="-ml-0.5 h-5 w-5 text-white" />
-          Envoyer
+          <span className="hidden md:flex">Envoyer</span>
         </button>
       </form>
       <div className="flex justify-start">

@@ -10,6 +10,21 @@ export const userReducer = (state, action) => {
         ...state,
         language: action.payload
       };
+    case 'SET_OPEN_HELPERS':
+      return {
+        ...state,
+        openHelpers: action.payload
+      };
+    case 'SET_MODAL_OPEN':
+      return {
+        ...state,
+        modalOpen: action.payload
+      };
+    case 'SET_SELECTED_MODEL':
+      return {
+        ...state,
+        selectedModel: action.payload
+      };
     default:
       return state;
   }

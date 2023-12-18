@@ -1,5 +1,6 @@
 import { loadStripe } from '@stripe/stripe-js';
 import { DataPricing } from '../data/pricing';
+import { HomeIcon } from '@heroicons/react/24/outline';
 
 const PUBLICABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_KEY;
 const stripePromise = loadStripe(PUBLICABLE_KEY);
@@ -9,6 +10,28 @@ export { stripePromise };
 export const strapiToken = process.env.API_TOKEN;
 export const strapiUrl = process.env.STRAPI_URL;
 export const nextAuthUrl = process.env.NEXTAUTH_URL;
+
+export const navigation = [
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
+  { name: 'MATTCHAT', href: '/mattchat', icon: HomeIcon, current: true },
+  { name: 'MATTIMAGE', href: '/mattimage', icon: HomeIcon, current: true },
+  { name: 'MATTRAD', href: '/mattraduct', icon: HomeIcon, current: true },
+  { name: 'MATTSPORT', href: '/mattsport', icon: HomeIcon, current: true },
+  { name: 'MATTQCM', href: '/matquiz', icon: HomeIcon, current: true },
+  { name: 'MATTDESC', href: '/matdescription', icon: HomeIcon, current: true },
+  { name: 'MATTRESUME', href: '/mattresum', icon: HomeIcon, current: true },
+  { name: 'MATTCV', href: '/matcv', icon: HomeIcon, current: true }
+  // { name: 'Team', href: '#', icon: UsersIcon, current: false },
+];
+
+export const modelOptions = [
+  { value: 'gpt-3.5-turbo', label: 'GPT-3.5' },
+  { value: 'gpt-4', label: 'GPT-4' }
+  // { value: 'text-curie-001', label: 'Curie' }
+  // { value: 'claude-1', label: 'Claude' }
+
+  // Add more AI models as needed
+];
 
 export const header = {
   headers: {

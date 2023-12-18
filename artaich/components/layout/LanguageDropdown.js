@@ -3,7 +3,14 @@ import { UserContext } from '../../context/user/UserContext';
 import { DataMattCV } from '../../data/mattcv';
 
 const LanguageDropdown = () => {
-  const languages = ['Allemand', 'Anglais', 'Espagnol', 'Français', 'Italien', 'Portugais'];
+  const languages = [
+    'Allemand',
+    'Anglais',
+    'Espagnol',
+    'Français',
+    'Italien',
+    'Portugais'
+  ];
   const { setLanguage, language } = useContext(UserContext);
 
   const handleChange = (e) => {
@@ -11,7 +18,7 @@ const LanguageDropdown = () => {
   };
 
   return (
-    <div className="w-60 mb-2 flex items-center gap-2">
+    <div className="w-60 flex items-center gap-2">
       <label
         htmlFor="languageDropdown"
         className=" text-gray-500 text-sm font-bold flex-shrink-0"

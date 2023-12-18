@@ -6,7 +6,14 @@ const userInitialState = {
   user: null,
   language: 'french',
   setUser: () => {},
-  setLanguage: () => {}
+  setLanguage: () => {},
+  // ui matchat stuff
+  openHelpers: false,
+  setOpenHelpers: () => {},
+  modalOpen: false,
+  setModalOpen: () => {},
+  selectedModel: 'gpt-3.5-turbo',
+  setSelectedModel: () => {}
 };
 
 export const UserProvider = ({ children }) => {
@@ -26,12 +33,36 @@ export const UserProvider = ({ children }) => {
     });
   };
 
+  const setOpenHelpers = (openHelpers) => {
+    dispatch({
+      type: 'SET_OPEN_HELPERS',
+      payload: openHelpers
+    });
+  };
+
+  const setSelectedModel = (selectedModel) => {
+    dispatch({
+      type: 'SET_SELECTED_MODEL',
+      payload: selectedModel
+    });
+  };
+
+  const setModalOpen = (modalOpen) => {
+    dispatch({
+      type: 'SET_MODAL_OPEN',
+      payload: modalOpen
+    });
+  };
+
   return (
     <UserContext.Provider
       value={{
         ...state,
         setUser,
-        setLanguage
+        setLanguage,
+        setOpenHelpers,
+        setModalOpen,
+        setSelectedModel
       }}
     >
       {children}
