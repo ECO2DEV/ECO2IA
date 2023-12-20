@@ -15,7 +15,7 @@ export default async function POST(req) {
   // Extract the `messages` from the body of the request
   const { messages, model } = await req.json();
 
-  console.log('this is the model', model);
+  // console.log('this is the model', model);
 
   // Request the OpenAI API for the response based on the prompt
   const response = await openai.createChatCompletion({
