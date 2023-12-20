@@ -9,9 +9,11 @@ import { signIn } from 'next-auth/react';
 import { DataRegister } from '../../data/register';
 import { toast, Toaster } from 'react-hot-toast';
 import { isValidEmail } from '../../util/helpers/valid_email';
+import Loader from '../loader/loader';
 
 export default function Register({ onClose }) {
   const [open, setOpen] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -36,7 +38,7 @@ export default function Register({ onClose }) {
       toast.error('Email invalide');
       return;
     }
-
+    setLoading(true);
     try {
       const responsePlan = await setTrialPlan();
       // console.log('Response Plan', responsePlan.data.data.id);
@@ -70,6 +72,8 @@ export default function Register({ onClose }) {
       }
     } catch (error) {
       console.error('Error:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -183,11 +187,16 @@ export default function Register({ onClose }) {
                   </div>
                   <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                     <button
+                      disabled={loading}
                       type="button"
                       className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
                       onClick={handleSubmit}
                     >
-                      {DataRegister.RegisterCreate}
+                      {loading ? (
+                        <Loader />
+                      ) : (
+                        <span>{DataRegister.RegisterCreate}</span>
+                      )}
                     </button>
                     <button
                       type="button"

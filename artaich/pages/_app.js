@@ -3,8 +3,6 @@ import { SessionProvider } from 'next-auth/react';
 import Layout from '../components/layout/layout';
 import { useRouter } from 'next/router';
 import LayoutUser from '../components/layout/layout_user';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import { PromptProvider } from '../context/prompts/PromptProvider';
 import { SWRConfig } from 'swr';
 import { UserProvider } from '../context/user/UserProvider';

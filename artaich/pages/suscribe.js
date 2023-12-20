@@ -17,22 +17,22 @@ const Subscribe = (props) => {
 
 export default Subscribe;
 
-export async function getServerSideProps(context) {
-  const result = await getUser(context);
+// export async function getServerSideProps(context) {
+//   const result = await getUser(context);
 
-  if (!result) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/auth/signin'
-      }
-    };
-  }
-  // console.log(result.data.customer_id);
-  return {
-    props: {
-      user: result?.data.customer_id,
-      session: result?.session
-    }
-  };
-}
+//   if (!result) {
+//     return {
+//       redirect: {
+//         permanent: false,
+//         destination: '/auth/signin'
+//       }
+//     };
+//   }
+//   // console.log(result.data.customer_id);
+//   return {
+//     props: {
+//       user: result?.data.customer_id,
+//       session: result?.session
+//     }
+//   };
+// }

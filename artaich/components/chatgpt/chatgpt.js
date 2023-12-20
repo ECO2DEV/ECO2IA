@@ -19,25 +19,25 @@ export const config = {
   runtime: 'edge'
 };
 
-export default function ChatGpt(props) {
+export default function ChatGpt() {
   const {
     setOpenHelpers,
     setSelectedModel,
     openHelpers,
     setModalOpen,
     selectedModel,
-    modalOpen
+    modalOpen,
+    user
   } = useContext(UserContext);
 
   const handleModelChange = (e) => {
     setSelectedModel(e.target.value);
   };
 
-  const { setResponse, setPromptTokens, setActiveAI, activeAI } =
+  const { setResponse, setPromptTokens, setActiveAI } =
     useContext(PromptContext);
-  const user = props.user;
 
-  const { mutate } = useChat(user);
+  const { mutate } = useChat(user?.id);
 
   useEffect(() => {
     setActiveAI('ChatGpt');

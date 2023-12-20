@@ -25,8 +25,8 @@ export const navigation = [
 ];
 
 export const modelOptions = [
-  { value: 'gpt-3.5-turbo', label: 'GPT-3.5' },
-  { value: 'gpt-4', label: 'GPT-4' }
+  { value: 'gpt-3.5-turbo', label: 'MATTECH 1.0' },
+  { value: 'gpt-4', label: 'MATTECH 2.0' }
   // { value: 'text-curie-001', label: 'Curie' }
   // { value: 'claude-1', label: 'Claude' }
 
