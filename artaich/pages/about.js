@@ -1,98 +1,11 @@
-import { useState } from 'react'
-import { Dialog } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { DataAbout } from '../data/about'
-import Image from 'next/image'
-import Photo1 from "../public/Photo1.jpg"
-import Photo2 from "../public/Photo2.jpg"
-import Photo3 from "../public/Photo3.jpg"
-import Photo4 from "../public/Photo4.jpg"
-import {
-  AcademicCapIcon,
-  CheckCircleIcon,
-  HandRaisedIcon,
-  RocketLaunchIcon,
-  SparklesIcon,
-  SunIcon,
-  UserGroupIcon
-} from '@heroicons/react/20/solid'
+import { DataAbout } from '../data/about';
 
-const stats = [
-
-
-  { label: (DataAbout.aboutfounded), value: '2023' },
-  { label: (DataAbout.aboutteam), value: '5+' },
-  { label: (DataAbout.aboutusers), value: (DataAbout.aboutusersvalue) },
-  { label: (DataAbout.aboutiaavaibles), value: (DataAbout.aboutiaavaiblesvalue) },
-]
-const values = [
-  {
-      name: (DataAbout.aboutworldclass),
-      description: (DataAbout.aboutworldclassdescription),
-      icon: RocketLaunchIcon,
-  },
-  {
-      name: (DataAbout.aboutresponsibility),
-      description: (DataAbout.aboutresponsibilitydescription),
-      icon: HandRaisedIcon,
-  },
-  {
-      name: (DataAbout.aboutsupportive),
-      description: (DataAbout.aboutsupportivedescription),
-      icon: UserGroupIcon,
-  },
-  {
-      name: (DataAbout.aboutlearnign),
-      description: (DataAbout.aboutlearnigndescription),
-      icon: AcademicCapIcon,
-  },
-  {
-      name: (DataAbout.aboutshareeverything),
-      description: (DataAbout.aboutshareeverythingdescription),
-      icon: SparklesIcon,
-  },
-  {
-      name: (DataAbout.aboutenjoy),
-      description: (DataAbout.aboutenjoydescription),
-      icon: SunIcon,
-  },
-]
-const team = [
-  {
-      name: (DataAbout.aboutteam1),
-      role: (DataAbout.aboutteam1jobtitle),
-      image:
-          Photo1,
-      imageClass: 'centered-image'    
-  },
-  {
-      name: (DataAbout.aboutteam2),
-      role: (DataAbout.aboutteam2jobtitle),
-      image:
-      Photo2,
-      imageClass: 'centered-image'
-  },
-  {
-      name: (DataAbout.aboutteam3),
-      role: (DataAbout.aboutteam3jobtitle),
-      image:
-      Photo3,
-  },
-  {
-      name: (DataAbout.aboutteam4),
-      role: (DataAbout.aboutteam4jobtitle),
-      image:
-      Photo4,
-      imageClass: 'centered-image'
-  },
-  // More people...
-]
-
+import { values, stats } from '../constants/constans';
 
 export default function About() {
   return (
     <div className="bg-gray-900">
-      <main className="relative isolate">
+      <section className="relative isolate">
         {/* Background */}
         <div
           className="absolute inset-x-0 top-4 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl"
@@ -107,14 +20,16 @@ export default function About() {
           />
         </div>
 
-                {/* Header section */}
-                <div className="px-6 pt-14 lg:px-8">
-                    <div className="mx-auto max-w-2xl pt-24 text-center sm:pt-40">
-                        <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl"> {DataAbout.aboutheadersection} </h2>
-                        <p className="mt-6 text-lg leading-8 text-gray-300">
-                        </p>
-                    </div>
-                </div>
+        {/* Header section */}
+        <div className="px-6 pt-14 lg:px-8">
+          <div className="mx-auto max-w-2xl pt-24 text-center sm:pt-40">
+            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+              {' '}
+              {DataAbout.aboutheadersection}{' '}
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-300"></p>
+          </div>
+        </div>
 
         {/* Content section */}
         <div className="mx-auto mt-20 max-w-7xl px-6 lg:px-8">
@@ -123,12 +38,10 @@ export default function About() {
               <div>
                 <h3 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">
                   {' '}
-                   {DataAbout.aboutintroduction} {' '}
+                  {DataAbout.aboutintroduction}{' '}
                 </h3>
                 <br />
-                <p>
-                {DataAbout.aboutintroductiontext}
-                </p>
+                <p>{DataAbout.aboutintroductiontext}</p>
               </div>
               <div>
                 <h3 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">
@@ -193,10 +106,8 @@ export default function About() {
           </dl>
         </div>
 
-    
-
         {/* CTA section */}
-      </main>
+      </section>
     </div>
-  )
+  );
 }
