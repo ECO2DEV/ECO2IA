@@ -73,7 +73,7 @@ export default function Modal({ children, user }) {
   return (
     <>
       {isOpen && (
-        <div className="inset-0 z-50 overflow-auto bg-gray-900 rounded-lg shadow-xl">
+        <section className="-my-10 -pb-10 -mx-4 sm:-mx-6 lg:-mx-8 lg:-my-13 inset-0 z-50 overflow-auto bg-gray-900 ">
           {/* Render the modal if isModalOpen is true */}
           {isModalOpen && (
             <CheckoutForm
@@ -238,7 +238,7 @@ export default function Modal({ children, user }) {
               </div>
             </div>
           </div>
-        </div>
+        </section>
       )}
     </>
   );

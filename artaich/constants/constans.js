@@ -1,6 +1,21 @@
 import { loadStripe } from '@stripe/stripe-js';
 import { DataPricing } from '../data/pricing';
 import { HomeIcon } from '@heroicons/react/24/outline';
+import { DataAbout } from '../data/about';
+
+import Photo1 from '../public/Photo1.jpg';
+import Photo2 from '../public/Photo2.jpg';
+import Photo3 from '../public/Photo3.jpg';
+import Photo4 from '../public/Photo4.jpg';
+
+import {
+  AcademicCapIcon,
+  HandRaisedIcon,
+  RocketLaunchIcon,
+  SparklesIcon,
+  SunIcon,
+  UserGroupIcon
+} from '@heroicons/react/20/solid';
 
 const PUBLICABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_KEY;
 const stripePromise = loadStripe(PUBLICABLE_KEY);
@@ -116,3 +131,70 @@ export const plan_pricing = {
     }
   ]
 };
+
+export const values = [
+  {
+    name: DataAbout.aboutworldclass,
+    description: DataAbout.aboutworldclassdescription,
+    icon: RocketLaunchIcon
+  },
+  {
+    name: DataAbout.aboutresponsibility,
+    description: DataAbout.aboutresponsibilitydescription,
+    icon: HandRaisedIcon
+  },
+  {
+    name: DataAbout.aboutsupportive,
+    description: DataAbout.aboutsupportivedescription,
+    icon: UserGroupIcon
+  },
+  {
+    name: DataAbout.aboutlearnign,
+    description: DataAbout.aboutlearnigndescription,
+    icon: AcademicCapIcon
+  },
+  {
+    name: DataAbout.aboutshareeverything,
+    description: DataAbout.aboutshareeverythingdescription,
+    icon: SparklesIcon
+  },
+  {
+    name: DataAbout.aboutenjoy,
+    description: DataAbout.aboutenjoydescription,
+    icon: SunIcon
+  }
+];
+
+export const team = [
+  {
+    name: DataAbout.aboutteam1,
+    role: DataAbout.aboutteam1jobtitle,
+    image: Photo1,
+    imageClass: 'centered-image'
+  },
+  {
+    name: DataAbout.aboutteam2,
+    role: DataAbout.aboutteam2jobtitle,
+    image: Photo2,
+    imageClass: 'centered-image'
+  },
+  {
+    name: DataAbout.aboutteam3,
+    role: DataAbout.aboutteam3jobtitle,
+    image: Photo3
+  },
+  {
+    name: DataAbout.aboutteam4,
+    role: DataAbout.aboutteam4jobtitle,
+    image: Photo4,
+    imageClass: 'centered-image'
+  }
+  // More people...
+];
+
+export const stats = [
+  { label: DataAbout.aboutfounded, value: '2023' },
+  { label: DataAbout.aboutteam, value: '+10' },
+  { label: DataAbout.aboutusers, value: DataAbout.aboutusersvalue },
+  { label: DataAbout.aboutiaavaibles, value: DataAbout.aboutiaavaiblesvalue }
+];
