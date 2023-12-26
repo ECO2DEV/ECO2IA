@@ -68,7 +68,7 @@ export const PromptProvider = ({ children }) => {
 
   const setResponse = async (response) => {
     // Para que no pueda hacer el llamado a la API si no han escogido plan
-    if (state.plan.length === 0) {
+    if (state.plan.length === 0 || state.plan.max_tokens <= 0) {
       // Add message to user to select a plan
       router.push('/dashboard');
       return;
@@ -84,7 +84,9 @@ export const PromptProvider = ({ children }) => {
     // validate that the user has maxtokens to use, if not redirect to buy a plan
     if (state.plan.length === 0) return;
     if (state.plan.max_tokens <= 0) {
-      toast.error("Vous n'avez plus de jetons à utiliser, veuillez acheter un nouveau plan");
+      toast.error(
+        "Vous n'avez plus de jetons à utiliser, veuillez acheter un nouveau plan"
+      );
       //setTimer(5);
       setTimeout(() => {
         updateUserPlanToNull(idsUpdateMaxTokens.userId);
@@ -105,7 +107,9 @@ export const PromptProvider = ({ children }) => {
     // validate that the user has maxtokens to use, if not redirect to buy a plan
     if (state.plan.length === 0) return;
     if (state.plan.max_tokens <= 0) {
-      toast.error("Vous n'avez plus de jetons à utiliser, veuillez acheter un nouveau plan");
+      toast.error(
+        "Vous n'avez plus de jetons à utiliser, veuillez acheter un nouveau plan"
+      );
       updateUserPlanToNull(idsUpdateMaxTokens.userId);
       router.push('/dashboard');
       return;

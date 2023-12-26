@@ -179,7 +179,7 @@ export default function LayoutUser({ children }) {
                           className="h-12 w-auto cursor-pointer"
                           src={logo}
                           alt="Mattech"
-                          onClick={() => router.push('/dashboard')}
+                          onClick={() => router.push('/')}
                         />
                       </div>
                     </div>
