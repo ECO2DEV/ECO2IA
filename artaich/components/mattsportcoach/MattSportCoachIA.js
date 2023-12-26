@@ -1,25 +1,25 @@
 //components/sport_coach/sportCoach.js
-import { useContext, useState } from "react";
-import { InputField } from "./InputField";
-import { SportButtonHelper } from "./MattSportCoachHelper";
-import { PromptContext } from "../../context/prompts/PromptContext";
-import { sendTrainingPlanRequest } from "../../util/api/sendTrainingPlanRequest";
-import { SportCoachResults } from "./MattSportCoachResults";
-import { useSportCoach } from "../../hooks/useSportCoach";
-import { WelcomeSportCoach } from "./welcomeSportCoach";
-import { DataMattSport } from "../../data/mattsport";
-import Loader from "../loader/loader";
+import { useContext, useState } from 'react';
+import { InputField } from './InputField';
+import { SportButtonHelper } from './MattSportCoachHelper';
+import { PromptContext } from '../../context/prompts/PromptContext';
+import { sendTrainingPlanRequest } from '../../util/api/sendTrainingPlanRequest';
+import { SportCoachResults } from './MattSportCoachResults';
+import { useSportCoach } from '../../hooks/useSportCoach';
+import { WelcomeSportCoach } from './welcomeSportCoach';
+import { DataMattSport } from '../../data/mattsport';
+import { toast } from 'react-hot-toast';
+import Loader from '../loader/loader';
 export const SportCoachIA = (props) => {
   // Estados para almacenar los datos del formulario
-  const [weight, setWeight] = useState("");
-  const [age, setAge] = useState("");
+  const [weight, setWeight] = useState('');
+  const [age, setAge] = useState('');
   // const [goal, setGoal] = useState("");
-  const [trainingDays, setTrainingDays] = useState("1");
+  const [trainingDays, setTrainingDays] = useState('1');
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [showResults, setShowResults] = useState(false);
   // estado para mostrar o no el componente de ayuda
-  const [openHelpers, setOpenHelpers] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
 
   const user = props.user;
@@ -27,7 +27,7 @@ export const SportCoachIA = (props) => {
   // Obtener los datos del entrenador deportivo personalizado
   const { data, mutate } = useSportCoach(user);
   // inicializamos el estado del prompt con el valor "Select an option"
-  const { prompt, setPrompt, setResponse, setPromptTokens, promptTokens } =
+  const { prompt, setPrompt, setResponse, promptTokens } =
     useContext(PromptContext);
 
   // Manejar el envío del formulario
@@ -41,7 +41,7 @@ export const SportCoachIA = (props) => {
   const fetchData = async () => {
     if (!prompt) {
       // console.log(setPromptTokens);
-      setError("Veuillez taper quelque chose avant de soumettre");
+      setError('Veuillez taper quelque chose avant de soumettre');
     } else {
       setSubmitting(true);
       // Realiza la llamada a la API para enviar la solicitud de plan de entrenamiento
@@ -50,9 +50,9 @@ export const SportCoachIA = (props) => {
         weight: weight,
         age: age,
         goal: prompt,
-        language: "French",
+        language: 'French',
         trainingDays: trainingDays,
-        user: user,
+        user: user
       })
         .then((response) => {
           setResponse(response?.data?.data);
@@ -60,34 +60,31 @@ export const SportCoachIA = (props) => {
           setShowResults(true);
         })
         .catch((error) => {
+          console.log(error);
           setError(
             "Une erreur s'est produite lors de la récupération des données."
           );
         })
         .finally(() => {
           setSubmitting(false);
-          setPrompt("select an option");
         });
     }
   };
 
   const handlePromptChange = (e) => {
-    setPrompt(e.target.value);
-    if (e.target.value === "Select an option") {
-      setPromptTokens(0);
+    const { value } = e.target;
+    if (value === DataMattSport.SelectOption) {
+      toast.error('Veuillez sélectionner un objectif');
+      return;
     }
+    setPrompt(value);
   };
 
   // Manejar cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "weight") {
-      setWeight(value);
-    } else if (name === "age") {
-      setAge(value);
-    } else if (name === "goal") {
-      setPrompt(value);
-    } else if (name === "trainingDays") {
+
+    if (name === 'trainingDays') {
       setTrainingDays(value);
     }
   };
@@ -116,10 +113,11 @@ export const SportCoachIA = (props) => {
                 age={age}
                 goal={prompt}
                 trainingDays={trainingDays}
+                user={user}
               />
             </div>
           </div>
-        ) && <SportCoachResults />
+        ) && <SportCoachResults user={user} />
       )}
       <div className="bottom-3 z-20 sticky grid xl:grid-cols-[minmax(auto,_1fr)_100px] md:fixed md:bottom-3 xl:fixed p-4 bg-gray-200">
         <form
@@ -127,9 +125,7 @@ export const SportCoachIA = (props) => {
           className="grid xl:grid-cols-5 md:grid-cols-5 items-center gap-4 grid-cols-2"
         >
           <fieldset>
-            <label htmlFor="">
-              {DataMattSport.Weight}
-            </label>
+            <label htmlFor="">{DataMattSport.Weight}</label>
             <InputField
               name="weight"
               value={weight}
@@ -139,9 +135,7 @@ export const SportCoachIA = (props) => {
             />
           </fieldset>
           <fieldset>
-            <label htmlFor="">
-              {DataMattSport.Age}
-            </label>
+            <label htmlFor="">{DataMattSport.Age}</label>
             <InputField
               name="age"
               value={age}
@@ -161,17 +155,15 @@ export const SportCoachIA = (props) => {
               id="prompt"
               name="prompt"
               // value={""}
-              defaultValue=""
+              defaultValue={prompt}
               onChange={handlePromptChange}
               className="mt-1 px-4 py-2 border w-full border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
-              <option disabled value={prompt}>
-                {DataMattSport.SelectOption}
-              </option>
+              <option value={prompt}>{DataMattSport.SelectOption}</option>
+
               <option value="weight loss"> {DataMattSport.WeightLoss}</option>
               <option value="muscle building">
-                {" "}
-                {DataMattSport.MuscleBuilding}{" "}
+                {DataMattSport.MuscleBuilding}
               </option>
               <option value="mass"> {DataMattSport.Mass} </option>
               <option value="crossfit"> {DataMattSport.Crossfit} </option>
