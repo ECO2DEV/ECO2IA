@@ -1,7 +1,7 @@
-import { SportCoachIA } from "../components/mattsportcoach/MattSportCoachIA";
-import Modal from "../components/modal/modal";
-import { getUser } from "../util/api/user";
-import Head from "next/head";
+import { SportCoachIA } from '../components/mattsportcoach/MattSportCoachIA';
+import Modal from '../components/modal/modal';
+import { getUser } from '../util/api/user';
+import Head from 'next/head';
 
 export default function SportCoach(props) {
   return (
@@ -12,7 +12,13 @@ export default function SportCoach(props) {
         <link rel="icon" href="/Mlogo.ico" />
       </Head>
       {/* Condición para renderizar el componente SportCoachIA o el componente Modal */}
-      {props.user.plan ? <SportCoachIA user={props.user.id} /> : <Modal />}
+      {!props.user.plan ? (
+        <Modal user={props?.user} />
+      ) : +props?.user?.plan?.max_tokens <= 0 ? (
+        <Modal user={props?.user} />
+      ) : (
+        <SportCoachIA user={props.user.id} />
+      )}
     </div>
   );
 }
@@ -28,8 +34,8 @@ export const getServerSideProps = async (context) => {
     return {
       redirect: {
         permanent: false,
-        destination: "/",
-      },
+        destination: '/'
+      }
     };
   }
 
@@ -37,7 +43,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       user: result?.data,
-      session: result?.session,
-    },
+      session: result?.session
+    }
   };
 };

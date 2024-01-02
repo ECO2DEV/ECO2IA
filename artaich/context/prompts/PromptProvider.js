@@ -62,16 +62,28 @@ export const PromptProvider = ({ children }) => {
       );
       // console.log('Updated user plan to null');
     } catch (error) {
-      // console.log('Error updating user plan', error);
+      console.log('Error updating user plan', error);
     }
   };
 
   const setResponse = async (response) => {
     // Para que no pueda hacer el llamado a la API si no han escogido plan
-    if (state.plan.length === 0 || state.plan.max_tokens <= 0) {
+    if (state.plan.length === 0) {
       // Add message to user to select a plan
-      router.push('/dashboard');
-      return;
+      toast.error('Vous n avez pas de plan');
+      setTimeout(() => {
+        router.push('/#pricing');
+        return;
+      }, 1000);
+    }
+    if (state.plan.max_tokens <= 0) {
+      toast.error(
+        'Vous n avez plus de jetons à utiliser, veuillez acheter un nouveau plan'
+      );
+      setTimeout(() => {
+        router.push('/#pricing');
+        return;
+      }, 1000);
     }
     dispatch({
       type: 'SET_RESPONSE',
@@ -82,14 +94,20 @@ export const PromptProvider = ({ children }) => {
   useEffect(() => {
     if (!state.prompt) return;
     // validate that the user has maxtokens to use, if not redirect to buy a plan
-    if (state.plan.length === 0) return;
+    if (state.plan.length === 0) {
+      toast.error('Vous n avez pas de plan');
+      setTimeout(() => {
+        router.push('/dashboard');
+        return;
+      }, 500);
+    }
     if (state.plan.max_tokens <= 0) {
       toast.error(
         "Vous n'avez plus de jetons à utiliser, veuillez acheter un nouveau plan"
       );
       //setTimer(5);
       setTimeout(() => {
-        updateUserPlanToNull(idsUpdateMaxTokens.userId);
+        // updateUserPlanToNull(idsUpdateMaxTokens.userId);
         router.push('/dashboard');
         return;
       }, 500);
@@ -110,7 +128,7 @@ export const PromptProvider = ({ children }) => {
       toast.error(
         "Vous n'avez plus de jetons à utiliser, veuillez acheter un nouveau plan"
       );
-      updateUserPlanToNull(idsUpdateMaxTokens.userId);
+      // updateUserPlanToNull(idsUpdateMaxTokens.userId);
       router.push('/dashboard');
       return;
     }

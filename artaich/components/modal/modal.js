@@ -17,15 +17,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Modal({ children, user }) {
+export default function Modal({ user }) {
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEnterpriseOpen, setIsEnterpriseOpen] = useState(false);
   const [amount, setAmount] = useState(0);
   const [currency, setCurrency] = useState('eur');
-
-  // console.log('User is ' + user?.customer_id);
 
   const handleButtonClick = ({ amount }) => {
     if (user == null) {

@@ -1,14 +1,16 @@
-import TextSummarizerPage from "../components/matresum/TextSummarizer";
-import Modal from "../components/modal/modal";
-import { getUser } from "../util/api/user";
+import TextSummarizerPage from '../components/matresum/TextSummarizer';
+import Modal from '../components/modal/modal';
+import { getUser } from '../util/api/user';
 
 export default function MatResume(props) {
   return (
     <div className="my-10">
-      {props.user.plan ? (
-        <TextSummarizerPage user={props.user.id} />
+      {!props.user.plan ? (
+        <Modal user={props?.user} />
+      ) : +props?.user?.plan?.max_tokens <= 0 ? (
+        <Modal user={props?.user} />
       ) : (
-        <Modal />
+        <TextSummarizerPage user={props.user.id} />
       )}
     </div>
   );
@@ -21,15 +23,15 @@ export const getServerSideProps = async (context) => {
     return {
       redirect: {
         permanent: false,
-        destination: "/",
-      },
+        destination: '/'
+      }
     };
   }
 
   return {
     props: {
       user: result?.data,
-      session: result?.session,
-    },
+      session: result?.session
+    }
   };
 };

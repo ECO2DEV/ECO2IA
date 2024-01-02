@@ -3,7 +3,17 @@ import MattraductAI from '../components/mattraduct/mattraduct';
 import { getUser } from '../util/api/user';
 
 const Mattraduct = (props) => {
-  return <div>{props.user.plan ? <MattraductAI /> : <Modal />}</div>;
+  return (
+    <div>
+      {!props.user.plan ? (
+        <Modal user={props?.user} />
+      ) : +props?.user?.plan?.max_tokens <= 0 ? (
+        <Modal user={props?.user} />
+      ) : (
+        <MattraductAI />
+      )}
+    </div>
+  );
 };
 
 export const getServerSideProps = async (context) => {
