@@ -5,7 +5,7 @@ import { PromptContext } from './PromptContext';
 import { promptReducer } from './promptReducer';
 import { countTokens } from '../../util/helpers/count_tokens';
 import axios from 'axios';
-import { strapiUrl, header } from '../../constants/constans';
+import { strapiUrl, header, modelOptions } from '../../constants/constans';
 import { toast } from 'react-hot-toast';
 
 const promptInitialState = {
@@ -24,7 +24,7 @@ const promptInitialState = {
 };
 
 export const PromptProvider = ({ children }) => {
-  const { user } = useContext(UserContext);
+  const { user, selectedModel, setSelectedModel } = useContext(UserContext);
   const router = useRouter();
   const [idsUpdateMaxTokens, setIdsUpdateMaxTokens] = useState({
     userId: null,
@@ -33,6 +33,7 @@ export const PromptProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(promptReducer, promptInitialState);
   const countTokensMemo = useMemo(() => countTokens, []);
+  let isGPT4Model = false;
 
   const setActiveAI = (aiName) => {
     dispatch({
@@ -136,7 +137,15 @@ export const PromptProvider = ({ children }) => {
     if (Array.isArray(state.response) && state.response.length > 0) {
       return;
     }
-    const resptokens = countTokensMemo(state.response);
+    if (state.activeAI === 'ChatGpt') {
+      if (selectedModel === modelOptions[1].value) {
+        isGPT4Model = true;
+      } else {
+        isGPT4Model = false;
+      }
+    }
+
+    const resptokens = countTokensMemo(state.response, isGPT4Model);
     dispatch({
       type: 'SET_RESPONSE_TOKENS',
       payload: resptokens

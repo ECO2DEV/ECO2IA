@@ -41,6 +41,7 @@ export default function ChatGpt() {
 
   useEffect(() => {
     setActiveAI('ChatGpt');
+    setSelectedModel('gpt-3.5-turbo');
   }, []);
 
   const {
