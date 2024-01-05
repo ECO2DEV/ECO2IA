@@ -5,7 +5,7 @@ import { PromptContext } from './PromptContext';
 import { promptReducer } from './promptReducer';
 import { countTokens } from '../../util/helpers/count_tokens';
 import axios from 'axios';
-import { strapiUrl, header } from '../../constants/constans';
+import { strapiUrl, header, modelOptions } from '../../constants/constans';
 import { toast } from 'react-hot-toast';
 
 const promptInitialState = {
@@ -24,7 +24,7 @@ const promptInitialState = {
 };
 
 export const PromptProvider = ({ children }) => {
-  const { user } = useContext(UserContext);
+  const { user, selectedModel, setSelectedModel } = useContext(UserContext);
   const router = useRouter();
   const [idsUpdateMaxTokens, setIdsUpdateMaxTokens] = useState({
     userId: null,
@@ -33,6 +33,7 @@ export const PromptProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(promptReducer, promptInitialState);
   const countTokensMemo = useMemo(() => countTokens, []);
+  let isGPT4Model = false;
 
   const setActiveAI = (aiName) => {
     dispatch({
@@ -62,16 +63,28 @@ export const PromptProvider = ({ children }) => {
       );
       // console.log('Updated user plan to null');
     } catch (error) {
-      // console.log('Error updating user plan', error);
+      console.log('Error updating user plan', error);
     }
   };
 
   const setResponse = async (response) => {
     // Para que no pueda hacer el llamado a la API si no han escogido plan
-    if (state.plan.length === 0 || state.plan.max_tokens <= 0) {
+    if (state.plan.length === 0) {
       // Add message to user to select a plan
-      router.push('/dashboard');
-      return;
+      toast.error('Vous n avez pas de plan');
+      setTimeout(() => {
+        router.push('/#pricing');
+        return;
+      }, 1000);
+    }
+    if (state.plan.max_tokens <= 0) {
+      toast.error(
+        'Vous n avez plus de jetons à utiliser, veuillez acheter un nouveau plan'
+      );
+      setTimeout(() => {
+        router.push('/#pricing');
+        return;
+      }, 1000);
     }
     dispatch({
       type: 'SET_RESPONSE',
@@ -82,14 +95,20 @@ export const PromptProvider = ({ children }) => {
   useEffect(() => {
     if (!state.prompt) return;
     // validate that the user has maxtokens to use, if not redirect to buy a plan
-    if (state.plan.length === 0) return;
+    if (state.plan.length === 0) {
+      toast.error('Vous n avez pas de plan');
+      setTimeout(() => {
+        router.push('/dashboard');
+        return;
+      }, 500);
+    }
     if (state.plan.max_tokens <= 0) {
       toast.error(
         "Vous n'avez plus de jetons à utiliser, veuillez acheter un nouveau plan"
       );
       //setTimer(5);
       setTimeout(() => {
-        updateUserPlanToNull(idsUpdateMaxTokens.userId);
+        // updateUserPlanToNull(idsUpdateMaxTokens.userId);
         router.push('/dashboard');
         return;
       }, 500);
@@ -110,7 +129,7 @@ export const PromptProvider = ({ children }) => {
       toast.error(
         "Vous n'avez plus de jetons à utiliser, veuillez acheter un nouveau plan"
       );
-      updateUserPlanToNull(idsUpdateMaxTokens.userId);
+      // updateUserPlanToNull(idsUpdateMaxTokens.userId);
       router.push('/dashboard');
       return;
     }
@@ -118,7 +137,15 @@ export const PromptProvider = ({ children }) => {
     if (Array.isArray(state.response) && state.response.length > 0) {
       return;
     }
-    const resptokens = countTokensMemo(state.response);
+    if (state.activeAI === 'ChatGpt') {
+      if (selectedModel === modelOptions[1].value) {
+        isGPT4Model = true;
+      } else {
+        isGPT4Model = false;
+      }
+    }
+
+    const resptokens = countTokensMemo(state.response, isGPT4Model);
     dispatch({
       type: 'SET_RESPONSE_TOKENS',
       payload: resptokens
