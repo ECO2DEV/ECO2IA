@@ -1,8 +1,9 @@
 import Features from '../components/features_section/features';
 import Hero from '../components/hero_section/hero';
+import { ProjectsIA } from '../components/proyectsIA';
 import styles from '../styles/Home.module.css';
 import { getUser } from '../util/api/user';
-import Pricing from '../components/pricing_section/pricing';
+// import Pricing from '../components/pricing_section/pricing';
 
 export default function Home(props) {
   //console.log("User connected:" + JSON.stringify(props.user))
@@ -13,7 +14,8 @@ export default function Home(props) {
     <div className={styles.container}>
       <Hero user={user} />
       <Features />
-      <Pricing user={user} />
+      <ProjectsIA />
+      {/* <Pricing user={user} /> */}
 
       {/* <div>
     {!session && <>

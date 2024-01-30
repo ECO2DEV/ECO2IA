@@ -19,6 +19,7 @@
     "eventsource-parser": "^1.0.0",
     "express": "^4.18.2",
     "file-saver": "^2.0.5",
+    "framer-motion": "^11.0.3",
     "fs": "^0.0.1-security",
     "gpt-3-encoder": "^1.1.4",
     "heroicons": "^2.0.16",
