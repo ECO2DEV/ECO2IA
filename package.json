@@ -21,7 +21,10 @@
     "express": "^4.18.2",
     "file-saver": "^2.0.5",
     "framer-motion": "^11.0.3",
+<<<<<<< HEAD
     "fs": "0.0.1-security",
+=======
+>>>>>>> ad360b75ca7ccb9bc26727caa3a6af7358016ad9
     "fs-extra": "^11.2.0",
     "gpt-3-encoder": "^1.1.4",
     "heroicons": "^2.0.16",

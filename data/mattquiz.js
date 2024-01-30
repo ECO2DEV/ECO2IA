@@ -1,4 +1,5 @@
 export const DataMattQuiz = {
+<<<<<<< HEAD
     ProvideTopic: "Veuillez saisir un sujet",
     ProvideNumber: "Veuillez saisir un nombre entre 1 et 10",
     ProvideSubject: "Veuillez saisir un sujet contenant moins de 1000 caractères",
@@ -22,4 +23,29 @@ export const DataMattQuiz = {
     NumberQuestions:"Nombre de questions souhaité",
     CopiedSuccess:"Texte copié dans le presse-papiers !",
     CopiedFailed:"Échec de la copie du texte dans le presse-papiers !",
+=======
+    ProvideTopic: "Por favor ingresa un asunto",
+    ProvideNumber: "Por favor introduce un número entre 1 y 10",
+    ProvideSubject: "Por favor ingrese un asunto que contenga menos de 1000 caracteres",
+    PromptMain: "Genere preguntas de cuestionario basadas en un tema, por ejemplo: matemáticas, historia, ciencias, marketing digital.",
+    MultipleChoise:"Opción multiple",
+    TrueFalse:"Verdadero o falso",
+    ShortAnswer:"Respuesta corta",
+    Auto:"Auto",
+    English: "Inglés",
+    Spanish: "Español",
+    French: "Francés",
+    Deutsch: "Alemán",
+    Italian: "italiano",
+    Portuguese: "portugués",
+    Easy: "Fácil",
+    Medium: "PROMEDIO",
+    Hard: "Difícil",
+    Submit: "enviar a",
+    QuestionGenerated:"Preguntas generadas",
+    CorrectAnswer:"Respuesta correcta",
+    NumberQuestions:"Número deseado de preguntas",
+    CopiedSuccess:"¡Texto copiado al portapapeles!",
+    CopiedFailed:"¡No se pudo copiar el texto al portapapeles!",
+>>>>>>> ad360b75ca7ccb9bc26727caa3a6af7358016ad9
 }
