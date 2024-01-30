@@ -9,7 +9,7 @@ export default function Layout({ children, router }) {
 
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-[#000000]">
         <Navbar router={router} user={children.props.user}/>
         <Head>
           <title>Mattech</title>

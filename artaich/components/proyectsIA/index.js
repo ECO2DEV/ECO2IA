@@ -1,0 +1,1 @@
+export { ProjectsIA } from './ProjectsIA'

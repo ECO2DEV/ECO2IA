@@ -116,7 +116,7 @@ export default function LayoutUser({ children }) {
   return (
     <>
       {/* Removing the scroll for let chatGpt to scroll with his own scrollbar (overflow-y-hidden h-screen)*/}
-      <div>
+      <div className='bg-[#000000]'>
         {/* Sideba. When is in mobile version and the hamburguer menu button is been clicked*/}
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
