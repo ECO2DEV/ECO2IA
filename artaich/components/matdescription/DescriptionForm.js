@@ -75,7 +75,7 @@ const DescriptionForm = () => {
     // Handle form submission here
     setIsLoading(true);
     MatDescriptionResp({
-      productDescription: formData.product,
+      productDescription: prompt,
       company: formData.company,
       field: formData.field,
       socialMedia: formData.socialMedia,

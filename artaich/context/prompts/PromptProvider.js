@@ -145,6 +145,8 @@ export const PromptProvider = ({ children }) => {
       }
     }
 
+    // console.log('isGPT4Model', isGPT4Model, 'and', state.response);
+
     const resptokens = countTokensMemo(state.response, isGPT4Model);
     dispatch({
       type: 'SET_RESPONSE_TOKENS',
