@@ -1,41 +1,7 @@
 export const DataMattDescription = {
-  SelectSocialMedia:
-<<<<<<< HEAD
-    'Veuillez sélectionner au moins une plateforme de médias sociaux.',
-  CompanyName: "Nom de l'entreprise",
-  FieldBusinnes: "Secteur d'activité",
-  SelectLanguage: 'Sélectionner la langue',
-  English: 'Anglais',
-  Spanish: 'Espagnol',
-  French: 'Français',
-  Deutsch: 'Allemand',
-  Italian: 'Italien',
-  Portuguese: 'Portugais',
-  ProductText:
-    "Décrivez-nous le produit, par exemple : Eco2, la solution à vos soucis de batterie faible, vous permettant de rester connecté(e) à tout moment, n'importe où.",
-  Submit: 'Envoyer',
-  MattDescriptionIA: "MATTDESCRIPTION alimenté par l'IA",
-  PlatformEnable: 'La plateforme vous permet de',
-  Captivanting: 'Créer sans effort des contenus captivants',
-  TargetAudience: 'accroche votre public cible',
-  Conversions: 'favorise les conversions',
-  Leads: 'génère des prospects',
-  Revenue: 'augmente les revenus',
-  EnjoyShare: 'Profitez et Partagez !!',
-  Start: 'Commencer',
-  CopiedSuccess: 'Texte copié dans le presse-papiers !',
-  CopiedFailed: 'Échec de la copie du texte dans le presse-papiers !',
-  NoText: 'Aucun texte à copier !',
-  ResponseExample:
-    "Exemple : Découvrez l'innovation avec Mattech. Grâce à nos solutions logicielles, vous découvrirez un monde de possibilités pour améliorer votre productivité et vos performances. Nos dernières technologies vous permettent de sauter dans le futur avec une efficacité sans précédent.",
-  AttachFile: 'Joindre un fichier',
-  Our: 'Notre',
-  Share: 'Partager',
-  ConversationDeleted: 'La conversation a été supprimée avec succès.'
-=======
-    'Seleccione al menos una plataforma de redes sociales.',
-  CompanyName: "Nombre de la empresa",
-  FieldBusinnes: "Sector de actividad",
+  SelectSocialMedia: 'Seleccione al menos una plataforma de redes sociales.',
+  CompanyName: 'Nombre de la empresa',
+  FieldBusinnes: 'Sector de actividad',
   SelectLanguage: 'Seleccione el idioma',
   English: 'Inglés',
   Spanish: 'Español',
@@ -44,9 +10,9 @@ export const DataMattDescription = {
   Italian: 'italiano',
   Portuguese: 'portugués',
   ProductText:
-    "Cuéntenos sobre el producto, por ejemplo: Eco2, la solución a sus preocupaciones de batería baja, que le permite permanecer conectado en cualquier momento y en cualquier lugar.",
+    'Cuéntenos sobre el producto, por ejemplo: Eco2, la solución a sus preocupaciones de batería baja, que le permite permanecer conectado en cualquier momento y en cualquier lugar.',
   Submit: 'enviar a',
-  MattDescriptionIA: "MATTDESCRIPCIÓN impulsado por IA",
+  MattDescriptionIA: 'MATTDESCRIPCIÓN impulsado por IA',
   PlatformEnable: 'La plataforma te permite',
   Captivanting: 'Crea contenido cautivador sin esfuerzo',
   TargetAudience: 'engancha a tu público objetivo',
@@ -59,10 +25,9 @@ export const DataMattDescription = {
   CopiedFailed: '¡No se pudo copiar el texto al portapapeles!',
   NoText: '¡No hay texto para copiar!',
   ResponseExample:
-    "Ejemplo: Descubra la innovación con Mattech. Con nuestras soluciones de software descubrirá un mundo de posibilidades para mejorar su productividad y rendimiento. Nuestras últimas tecnologías le permiten dar un salto hacia el futuro con una eficiencia sin precedentes.",
+    'Ejemplo: Descubra la innovación con Mattech. Con nuestras soluciones de software descubrirá un mundo de posibilidades para mejorar su productividad y rendimiento. Nuestras últimas tecnologías le permiten dar un salto hacia el futuro con una eficiencia sin precedentes.',
   AttachFile: 'Adjuntar un archivo',
   Our: 'Nuestro',
   Share: 'Compartir',
   ConversationDeleted: 'La conversación se ha eliminado correctamente.'
->>>>>>> ad360b75ca7ccb9bc26727caa3a6af7358016ad9
 };
