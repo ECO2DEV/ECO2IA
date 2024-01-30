@@ -1,0 +1,23 @@
+export const DataMattSport = {
+  Title:"MATTSPORT",
+  SubTitle:"Obtenez un plan d'entraînement personnalisé",
+  Weight: "Poids",
+  Age: "Âge",
+  Goal: "Objectif",
+  WeightLoss: "Perte de poids",
+  MuscleBuilding: "Renforcement musculaire",
+  Mass: "Prise de masse",
+  Crossfit: "Crossfit",
+  Dry: "Séche",
+  NumberofTrainigns: "Jours",
+  OneDay: "1 jour",
+  TwoDays: "2 jours",
+  ThreeDays: "3 jours",
+  FourDays: "4 jours",
+  FiveDays: "5 jours",
+  SixDays: "6 jours",
+  SevenDays: "7 jours",
+  GetButton: "Envoyer",
+  LoadingButton: "Chargement",
+  SelectOption:"Sélectionnez une option"
+};

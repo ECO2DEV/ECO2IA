@@ -28,14 +28,14 @@ export const nextAuthUrl = process.env.NEXTAUTH_URL;
 
 export const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-  { name: 'ECO2CHAT', href: '/mattchat', icon: HomeIcon, current: true },
-  { name: 'ECO2IMAGE', href: '/mattimage', icon: HomeIcon, current: true },
-  { name: 'ECO2RAD', href: '/mattraduct', icon: HomeIcon, current: true },
-  { name: 'ECO2SPORT', href: '/mattsport', icon: HomeIcon, current: true },
-  { name: 'ECO2QCM', href: '/matquiz', icon: HomeIcon, current: true },
-  { name: 'ECO2DESC', href: '/matdescription', icon: HomeIcon, current: true },
-  { name: 'ECO2RESUME', href: '/mattresum', icon: HomeIcon, current: true },
-  { name: 'ECO2CV', href: '/matcv', icon: HomeIcon, current: true }
+  { name: 'MATTCHAT', href: '/mattchat', icon: HomeIcon, current: true },
+  { name: 'MATTIMAGE', href: '/mattimage', icon: HomeIcon, current: true },
+  { name: 'MATTRAD', href: '/mattraduct', icon: HomeIcon, current: true },
+  { name: 'MATTSPORT', href: '/mattsport', icon: HomeIcon, current: true },
+  { name: 'MATTQCM', href: '/matquiz', icon: HomeIcon, current: true },
+  { name: 'MATTDESC', href: '/matdescription', icon: HomeIcon, current: true },
+  { name: 'MATTRESUME', href: '/mattresum', icon: HomeIcon, current: true },
+  { name: 'MATTCV', href: '/matcv', icon: HomeIcon, current: true }
   // { name: 'Team', href: '#', icon: UsersIcon, current: false },
 ];
 
