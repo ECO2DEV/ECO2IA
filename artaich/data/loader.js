@@ -1,3 +1,3 @@
 export const DataLoader ={
-    Loading:"Chargement...",
+    Loading:"CARGANDO...",
 }
