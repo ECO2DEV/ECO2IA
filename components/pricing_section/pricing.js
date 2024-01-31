@@ -29,7 +29,7 @@ export default function Pricing({ user }) {
   const [currency, setCurrency] = useState('eur');
 
   const handleCheckout = async ({ price }) => {
-    console.log(price);
+    // console.log(price);
     if (user == null) {
       router.push('/auth/signin');
       // Set the state to open the modal
@@ -44,7 +44,7 @@ export default function Pricing({ user }) {
           customerid,
           userId
         });
-        console.log(checkoutSession);
+        // console.log(checkoutSession);
 
         const result = await stripe.redirectToCheckout({
           sessionId: checkoutSession.data.sessionId
@@ -196,7 +196,7 @@ export default function Pricing({ user }) {
                   tier.name === DataPricing.pricingtitle3
                     ? () => {
                         handleButtonEnterprise();
-                        console.log(DataPricing);
+                        // console.log(DataPricing);
                       }
                     : () => {
                         handleCheckout({

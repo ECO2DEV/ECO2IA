@@ -1,12 +1,12 @@
 export const DataRegister = {
-    RegisterNickName: "Nom Utilisateur",
-    RegisterEmail: "Email",
-    RegisterPassword: "Mot de passe",
-    RegisterName: "Nom",
-    RegisterLastName: "Prénom",
-    RegisterPhone: "Numéro de Télephone",
-    RegisterCountry: "Pays",
-    RegisterCreate: "Créer",
-    RegisterCancel: "Cancel",
-    CodeRegister:"Code Pays"
-}
+  RegisterNickName: 'Nombre de usuario',
+  RegisterEmail: 'Correo electrónico',
+  RegisterPassword: 'Contraseña',
+  RegisterName: 'Nombre',
+  RegisterLastName: 'Apellido',
+  RegisterPhone: 'Número de teléfono',
+  RegisterCountry: 'País',
+  RegisterCreate: 'Crear',
+  RegisterCancel: 'Cancelar',
+  CodeRegister: 'Código de país'
+};

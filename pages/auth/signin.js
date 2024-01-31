@@ -186,7 +186,7 @@ export default function SignIn() {
                   <h4 className="font-medium text-sm text-white"> {error}</h4>
                 )}
                 <div className="text-sm text-center">
-                  <h4 className="font-medium text-sm text-white">ou</h4>
+                  <h4 className="font-medium text-sm text-white">o</h4>
                 </div>
                 <div className="text-sm text-center">
                   <a

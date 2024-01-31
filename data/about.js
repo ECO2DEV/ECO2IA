@@ -1,48 +1,48 @@
 export const DataAbout = {
-  aboutheadersection: 'Nous sommes Mattech!',
-  aboutintroduction: 'Introduction',
+  aboutheadersection: '¡Somos Mattech!',
+  aboutintroduction: 'Introducción',
   aboutintroductiontext:
-    "Nous sommes une start-up française créée par deux étudiants passionnés par l'innovation technologique. Nous avons pour mission de révolutionner le monde de l'IA en développant et en mettant en place différentes solutions d'intelligence artificielle pour répondre aux besoins multiples de nos clients, qu'il s'agisse de particuliers, d'étudiants ou d'entreprises.",
-  aboutservice: 'Notre offre de service',
+    'Somos una startup francesa fundada por dos estudiantes apasionados por la innovación tecnológica. Nuestra misión es revolucionar el mundo de la IA desarrollando e implementando diversas soluciones de inteligencia artificial para satisfacer las múltiples necesidades de nuestros clientes, ya sean particulares, estudiantes o empresas.',
+  aboutservice: 'Nuestra oferta de servicios',
   aboutservicetext:
-    "Nous proposons des solutions d'IA par domaine d'activité pour aider les entreprises à résoudre leurs problèmes et à améliorer leur productivité. En outre, nous offrons un service supplémentaire de création d'IA personnalisées pour répondre aux besoins spécifiques de chaque entreprise. Nous mettons également en place des formations gratuites pour aider les particuliers et les étudiants à comprendre le fonctionnement des IA et leur utilisation au quotidien.",
-  aboutfounded: 'Est l’année de création de notre entreprise',
-  aboutteam: 'Personnes dans nos équipes',
-  aboutusers: 'Utilisateurs sur notre plateforme',
+    'Ofrecemos soluciones de IA por área de actividad para ayudar a las empresas a resolver sus problemas y mejorar su productividad. Además, ofrecemos un servicio adicional de creación de IA personalizadas para satisfacer las necesidades específicas de cada empresa. También implementamos formaciones gratuitas para ayudar a particulares y estudiantes a comprender el funcionamiento de la IA y su uso diario.',
+  aboutfounded: 'Año de fundación de nuestra empresa',
+  aboutteam: 'Personas en nuestros equipos',
+  aboutusers: 'Usuarios en nuestra plataforma',
   aboutusersvalue: '+1000',
   aboutiaavaibles: 'IA disponibles',
   aboutiaavaiblesvalue: '+8',
-  aboutnotreplateforme: "Notre plateforme d'IA",
+  aboutnotreplateforme: 'Nuestra plataforma de IA',
   aboutplateformetext:
-    "Notre plateforme d'IA est conçue pour répondre aux besoins des particuliers, des étudiants et des entreprises. Elle permet aux entreprises de gérer facilement leurs propres modèles d'IA par domaine d'activité, tout en offrant la possibilité de créer des IA personnalisées répondant aux besoins spécifiques de chaque entreprise. Elle est également conçue pour aider les particuliers et les étudiants à se familiariser avec les IA et à comprendre leur potentiel.",
-  aboutworldclass: 'Leader en IA : ',
+    'Nuestra plataforma de IA está diseñada para satisfacer las necesidades de particulares, estudiantes y empresas. Permite a las empresas gestionar fácilmente sus propios modelos de IA por área de actividad, ofreciendo la posibilidad de crear IA personalizadas que respondan a las necesidades específicas de cada empresa. También está diseñada para ayudar a particulares y estudiantes a familiarizarse con las IA y comprender su potencial.',
+  aboutworldclass: 'Líder en IA: ',
   aboutworldclassdescription:
-    "Notre objectif est d'être en perpétuelle évolution pour devenir la référence en matière d'intelligence artificielle.",
-  aboutresponsibility: 'Responsabilité : ',
+    'Nuestro objetivo es evolucionar constantemente para convertirnos en la referencia en inteligencia artificial.',
+  aboutresponsibility: 'Responsabilidad: ',
   aboutresponsibilitydescription:
-    "Nous nous engageons à créer des solutions d'IA éthiques et durables pour un impact positif sur la société.",
-  aboutsupportive: 'Communauté soudée : ',
+    'Nos comprometemos a crear soluciones de IA éticas y sostenibles para un impacto positivo en la sociedad.',
+  aboutsupportive: 'Comunidad unida: ',
   aboutsupportivedescription:
-    "Rejoignez une communauté d'experts et d'utilisateurs passionnés, partageant leurs connaissances et leurs expériences.",
-  aboutlearnign: 'Apprentissage : ',
+    'Únete a una comunidad de expertos y usuarios apasionados que comparten sus conocimientos y experiencias.',
+  aboutlearnign: 'Aprendizaje: ',
   aboutlearnigndescription:
-    'Bénéficiez de cours et d’exemples de qualité supérieure pour développer vos compétences en intelligence artificielle.',
-  aboutshareeverything: 'Magie de la technologie : ',
+    'Benefíciate de cursos y ejemplos de calidad superior para desarrollar tus habilidades en inteligencia artificial.',
+  aboutshareeverything: 'Magia de la tecnología: ',
   aboutshareeverythingdescription:
-    "Découvrez le pouvoir fascinant de l'IA et comment elle peut transformer votre vie quotidienne.",
-  aboutenjoy: 'Évolution constante : ',
+    'Descubre el fascinante poder de la IA y cómo puede transformar tu vida cotidiana.',
+  aboutenjoy: 'Evolución constante: ',
   aboutenjoydescription:
-    "Notre plateforme d'IA s'améliore et se développe chaque jour pour rester à la pointe de l'innovation.",
-  aboutourteam: 'Notre équipe',
+    'Nuestra plataforma de IA mejora y crece cada día para mantenerse a la vanguardia de la innovación.',
+  aboutourteam: 'Nuestro equipo',
   aboutourteamdescription:
-    'Voici les dirigeants ainsi que les gérants de chacun de nos pôles',
+    'Aquí están los líderes y gerentes de cada uno de nuestros departamentos.',
   aboutteam1: 'Matthieu HUBERT',
-  aboutteam1jobtitle: 'Co-Fondateur / CEO',
+  aboutteam1jobtitle: 'Co-Fundador / CEO',
   aboutteam2: 'Mathis CARVAL',
-  aboutteam2jobtitle: 'Co-Fondateur / CEO',
+  aboutteam2jobtitle: 'Co-Fundador / CEO',
   aboutteam3: 'Manuel FELIPE',
   aboutteam3jobtitle: 'CTO',
   aboutteam4: 'Iris BROUILLARD',
-  aboutteam4jobtitle: 'Réseaux Sociaux',
-  aboutjoinourteam: 'Rejoindre notre équipe'
+  aboutteam4jobtitle: 'Redes Sociales',
+  aboutjoinourteam: 'Únete a nuestro equipo'
 };
