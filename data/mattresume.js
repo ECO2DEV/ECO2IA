@@ -11,8 +11,8 @@ export const DataMattResume = {
   PDFButton: 'PDF',
   WordButton: 'Palabra',
   ShareButton: 'Compartir',
-  CreateResume: 'Crear currículum',
-  ResumeHere: 'Su currículum aparecerá aquí',
+  CreateResume: 'Crear resumen',
+  ResumeHere: 'Su resumen aparecerá aquí',
   LoadingField: 'Cargando...',
   // data history chat
   History: 'Historia',

@@ -6,13 +6,13 @@ export const DataDashboard = {
   MattechImageTitle: 'ECO2IMAGE',
   MattechImageDescription:
     'Esta IA genera imágenes a partir de descripciones proporcionadas por el usuario.',
-  MatTranslateTitle: 'ECO2RAD',
+  MatTranslateTitle: 'ECO2TRAD',
   MatTranslateDescription:
     'El usuario puede ingresar texto para traducir al idioma elegido.',
   MattSportTitle: 'ECO2SPORT',
   MattSportDescription:
     'La IA genera programas de acondicionamiento físico basados ​​en los objetivos del usuario, como pérdida de peso o desarrollo muscular.',
-  MattQuizTitle: 'ECO2QCM',
+  MattQuizTitle: 'ECO2QUIZ',
   MattQuizDescription:
     'A partir de un tema dado por el usuario, la IA genera un cuestionario de opción múltiple de 10 preguntas, cada una con dos opciones de respuesta.',
   MattDescriptionTitle: 'ECO2DESC',

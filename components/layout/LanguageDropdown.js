@@ -4,12 +4,12 @@ import { DataMattCV } from '../../data/mattcv';
 
 const LanguageDropdown = () => {
   const languages = [
-    'Allemand',
-    'Anglais',
-    'Espagnol',
-    'Français',
-    'Italien',
-    'Portugais'
+    'Español',
+    'Ingles',
+    'Aleman',
+    'Françes',
+    'Italiano',
+    'Portugues'
   ];
   const { setLanguage, language } = useContext(UserContext);
 

@@ -56,12 +56,12 @@ export const header = {
 };
 
 export const SUPPORTED_LENGUAGES = {
-  De: 'Allemand',
-  En: 'Anglais',
-  Es: 'Espagnol',
-  Fr: 'Français',
-  It: 'Italien',
-  Pt: 'Portugais'
+  De: 'Aleman',
+  En: 'Ingles',
+  Es: 'Español',
+  Fr: 'Frances',
+  It: 'Italiano',
+  Pt: 'Portugues'
 };
 
 export const VOICE_FOR_LANGUAGE = {

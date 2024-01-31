@@ -50,7 +50,7 @@ export const DataMattCV = {
   Details: 'Detalles',
   Profile: 'Perfil',
   EmploymentHistory: 'Historial de Empleo',
-  SelectedLanguage: 'Idioma Seleccionado',
+  SelectedLanguage: 'Idioma',
   AddExperience: 'Añadir Experiencia',
   StartDate: 'Fecha de inicio',
   EndDate: 'Fecha de finalización',

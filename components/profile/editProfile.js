@@ -10,7 +10,7 @@ import {
   activity,
   sport,
   transport,
-  nacionality
+  nationality
 } from './profilecollection';
 import { DataProfile } from '../../data/profile';
 
@@ -59,7 +59,7 @@ export default function EditProfile({ onClose, user }) {
     </option>
   ));
 
-  const nacionalitySelect = nacionality.map((opcion) => (
+  const nacionalitySelect = nationality.map((opcion) => (
     <option key={opcion} value={opcion}>
       {opcion}
     </option>

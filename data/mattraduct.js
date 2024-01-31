@@ -19,6 +19,6 @@ export const DataMatTraduct = {
   CopiedSuccess: '¡Texto copiado al portapapeles!',
   CopiedFailed: '¡No se pudo copiar el texto al portapapeles!',
   NoText: 'No hay texto para copiar',
-  MatTraduct: 'ECO2RAD',
+  MatTraduct: 'ECO2TRAD',
   YourText: 'Tu texto'
 };
