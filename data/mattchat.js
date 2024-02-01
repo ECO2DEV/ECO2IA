@@ -1,5 +1,6 @@
 export const DataMattChat = {
   CopiedSuccess: '¡Texto copiado al portapapeles!',
+  CopiedCodeSuccess: 'Código copiado al portapapeles!',
   CopiedFailed: '¡No se pudo copiar el texto al portapapeles!',
   Example: 'Ejemplo',
   Limitation: 'Limitaciones',
