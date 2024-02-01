@@ -8,16 +8,7 @@ module.exports = {
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
-    extend: {
-      colors: {
-        dark: "#1a1a1a", // color oscuro
-        green: "#4CAF50", // color verde
-      },
-    },
-  },
-  plugins: [
-    // ...
-    require("@tailwindcss/forms"),
-  ],
+  darkMode: "selector",
+  theme: {},
+  plugins: [require("@tailwindcss/forms")],
 };

@@ -116,7 +116,7 @@ export default function LayoutUser({ children }) {
   return (
     <>
       {/* Removing the scroll for let chatGpt to scroll with his own scrollbar (overflow-y-hidden h-screen)*/}
-      <div className='bg-[#000000]'>
+      <div className=''>
         {/* Sideba. When is in mobile version and the hamburguer menu button is been clicked*/}
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
@@ -381,7 +381,7 @@ export default function LayoutUser({ children }) {
         </aside>
 
         <div className="flex flex-1 flex-col lg:pl-64">
-          <div className="sticky top-0 z-10 bg-white pl-1 pt-1 sm:pl-3 sm:pt-3  border-b border-gray-300">
+          <div className="sticky top-0 z-10 pl-1 pt-1 sm:pl-3 sm:pt-3  border-b bg-zinc-900 border-gray-300">
             {shouldShowTopNavBar && (
               <div className="mb-1 flex justify-between">
                 <div className="flex items-center">
@@ -393,7 +393,7 @@ export default function LayoutUser({ children }) {
                     <span className="sr-only">{DataLayout.OpenSidebar}</span>
                     <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                   </button>
-                  <h2 className="text-gray-500 text-2xl ">
+                  <h2 className="text-[#21c284] text-2xl ">
                     {navigation.find((item) => item.href === currentPath)
                       ?.name || ''}
                   </h2>

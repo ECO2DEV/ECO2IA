@@ -1,11 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-* {
-  /* background: #000000; */
-  color: white;
-}
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import './prism.css';
 
 .tags-input-container{
   border: 2px solid #2520207c;

@@ -123,12 +123,12 @@ export default function DashboardSection() {
         ```
       */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10">
-        <h1 className="text-2xl text-center font-semibold text-gray-900">
+        <h1 className="text-2xl text-center font-semibolds">
           {DataDashboard.DashboardTitle}
         </h1>
       </div>
 
-      <div className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-gray-200 shadow sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
+      <div className="divide-y divide-white overflow-hidden bg-[#21c284] rounded-lg shadow sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
         {actions.map((action, actionIdx) => (
           <div
             key={action.title}
@@ -141,7 +141,7 @@ export default function DashboardSection() {
               actionIdx === actions.length - 1
                 ? 'rounded-bl-lg rounded-br-lg sm:rounded-bl-none'
                 : '',
-              'group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500'
+              'group relative p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500'
             )}
           >
             <div>
@@ -161,14 +161,14 @@ export default function DashboardSection() {
               </span>
             </div>
             <div className="mt-8">
-              <h3 className="text-base font-semibold leading-6 text-gray-900">
+              <h3 className="text-base font-semibold leading-6">
                 <Link href={action.href} className="focus:outline-none">
                   {/* Extend touch target to entire panel */}
                   <span className="absolute inset-0" aria-hidden="true" />
                   {action.title}
                 </Link>
               </h3>
-              <p className="mt-2 text-sm text-gray-500">{action.description}</p>
+              <p className="mt-2 text-sm text-gray-600">{action.description}</p>
             </div>
             <span
               className="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400"
