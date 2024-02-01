@@ -11,8 +11,8 @@ export const DataMattResume = {
   PDFButton: 'PDF',
   WordButton: 'Palabra',
   ShareButton: 'Compartir',
-  CreateResume: 'Crear currículum',
-  ResumeHere: 'Su currículum aparecerá aquí',
+  CreateResume: 'Crear resumen',
+  ResumeHere: 'Su resumen aparecerá aquí',
   LoadingField: 'Cargando...',
   // data history chat
   History: 'Historia',
@@ -30,7 +30,7 @@ export const DataMattResume = {
   NoFileSelected: 'No se seleccionó ningún archivo',
   FileDoc: 'Archivo docx',
   PleaseTypeSomething: 'Por favor escribe algo',
-  AnErrorOcurred: "Ocurrió un error",
+  AnErrorOcurred: 'Ocurrió un error',
   MustBeFileError: 'Debe ser un archivo',
-  PickError: 'Debe seleccionar un archivo',
+  PickError: 'Debe seleccionar un archivo'
 };

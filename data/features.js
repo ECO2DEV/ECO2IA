@@ -1,33 +1,37 @@
-import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from '@heroicons/react/24/outline'
-export const DataFeatures =
-{
-  title: 'Nos avantages',
+import {
+  ArrowPathIcon,
+  CloudArrowUpIcon,
+  FingerPrintIcon,
+  LockClosedIcon
+} from '@heroicons/react/24/outline';
+export const DataFeatures = {
+  title: 'Nuestros beneficios',
   title1: '',
-  maintext_features: '',
-}
+  maintext_features: ''
+};
 export const features = [
-    {
-      name: "Fiabilité",
-      description:
-        'Nous tenons à vous rassurer quant à la fiabilité de nos Intelligences Artificielles. Nous avons effectué des tests rigoureux et mis en place des contrôles de qualité stricts pour garantir des résultats précis et cohérents. Nous sommes confiants dans la valeur de nos IA.',
-      icon: FingerPrintIcon,
-    },
-    {
-      name: 'Sécurité',
-      description:
-        'Notre entreprise utilise des serveurs et des logiciels pour assurer la meilleure sécurité possible. Nos IA sont validées et bénéficient de contrôles de qualité stricts pour garantir des résultats cohérents. ',
-      icon: LockClosedIcon,
-    },
-    {
-      name: 'Performance',
-      description:
-        'Nos IA ont été rigoureusement testées, validées et soumises à des contrôles de qualité pour garantir des résultats cohérents et fiables. Nous sommes déterminés à fournir des performances de pointe à tous nos clients et nous sommes disponibles pour répondre à toutes les questions ou préoccupations que vous pourriez avoir.',
-      icon: ArrowPathIcon,
-    },
-    {
-      name: 'SAV',
-      description:
-       'Nous sommes engagés à fournir un service client efficace et rapide pour répondre à toutes vos questions et résoudre tout problème que vous pourriez rencontrer. ',
-      icon: CloudArrowUpIcon,
-    },
-  ]
+  {
+    name: 'Confiabilidad',
+    description:
+      'Queremos tranquilizarle sobre la fiabilidad de nuestras Inteligencias Artificiales. Hemos realizado pruebas rigurosas e implementado controles de calidad estrictos para asegurar resultados precisos y coherentes. Confiamos en el valor de nuestras IA.',
+    icon: FingerPrintIcon
+  },
+  {
+    name: 'Seguridad',
+    description:
+      'Nuestra empresa utiliza servidores y software para asegurar la mejor seguridad posible. Nuestras IA son validadas y están sujetas a controles de calidad estrictos para garantizar resultados coherentes',
+    icon: LockClosedIcon
+  },
+  {
+    name: 'Calidad',
+    description:
+      'Nuestras IA han sido rigurosamente probadas, validadas y sometidas a controles de calidad para asegurar resultados coherentes y confiables. Estamos comprometidos a proporcionar un rendimiento de vanguardia a todos nuestros clientes y estamos disponibles para abordar cualquier pregunta o inquietud que pueda tener',
+    icon: ArrowPathIcon
+  },
+  {
+    name: 'SAV',
+    description:
+      'Estamos comprometidos a ofrecer un servicio al cliente eficiente y rápido para responder a todas sus preguntas y resolver cualquier problema que pueda surgir.',
+    icon: CloudArrowUpIcon
+  }
+];

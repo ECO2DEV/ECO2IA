@@ -151,7 +151,7 @@ function Resource({ resource }) {
       <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-zinc-900/7.5 group-hover:ring-zinc-900/10 dark:ring-white/10 dark:group-hover:ring-white/20" />
       <div className="relative rounded-2xl px-4 pb-4 pt-16">
         {/* <ResourceIcon icon={resource.icon} /> */}
-        <div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+        <div whilehover={{ scale: 1.2 }} whiletap={{ scale: 0.8 }}>
           <Image src={resource.image} alt={resource.name} className="w-full h-auto mb-4" />
         </div>
         <h3 className="mt-4 text-xl font-semibold leading-7 text-zinc-900 dark:text-white">
@@ -174,7 +174,7 @@ export function ProjectsIA() {
       </Heading> */}
       <div className="not-prose mt-4 grid grid-cols-3 gap-8 border-t border-zinc-900/5 pt-10 dark:border-white/5 sm:grid-cols-2 xl:grid-cols-3">
         {resources.map((resource) => (
-          <Resource key={resource.href} resource={resource} />
+          <Resource key={resource.name} resource={resource} />
         ))}
       </div>
     </div>

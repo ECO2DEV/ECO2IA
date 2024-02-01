@@ -236,8 +236,8 @@ function TextSummarizerPage() {
               <option value={AUTO_LANGUAGE}>
                 {DataMattResume.SelectLanguage}
               </option>
-              <option value="english">{DataMattResume.English}</option>
               <option value="spanish">{DataMattResume.Spanish}</option>
+              <option value="english">{DataMattResume.English}</option>
               <option value="french">{DataMattResume.French}</option>
               <option value="german">{DataMattResume.Deutsch}</option>
               <option value="italian">{DataMattResume.Italian}</option>

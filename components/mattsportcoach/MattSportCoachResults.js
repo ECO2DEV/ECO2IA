@@ -185,7 +185,7 @@ export const SportCoachResults = ({ user }) => {
               onClick={handleShareClick}
               className="flex items-center p-2 rounded-md hover:bg-gray-100"
             >
-              <ShareIcon className="w-5 h-5 mr-1" /> Partager
+              <ShareIcon className="w-5 h-5 mr-1" /> Compartir
             </button>
           </li>
 

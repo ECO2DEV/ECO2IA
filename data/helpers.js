@@ -1,13 +1,12 @@
-
 export const EXAMPLES = [
-  "Explique la computación cuántica en términos simples para una mejor comprensión de los no iniciados.",
+  'Explique la computación cuántica en términos simples para una mejor comprensión de los no iniciados.',
   '¿Tienes ideas creativas para el cumpleaños de un niño de 10 años?',
-  "¿Puede decirme cómo realizar una solicitud HTTP usando JavaScript?"
+  '¿Puede decirme cómo realizar una solicitud HTTP usando JavaScript?'
 ];
 
 export const CAPABILITIES = [
-  "Capacitado para rechazar solicitudes inapropiadas con el fin de mantener un ambiente seguro y respetuoso.",
-  "Permite al usuario proporcionar comentarios para mejorar la precisión y relevancia de los resultados.",
+  'Capacitado para rechazar solicitudes inapropiadas con el fin de mantener un ambiente seguro y respetuoso.',
+  'Permite al usuario proporcionar comentarios para mejorar la precisión y relevancia de los resultados.',
   'Recuerda lo que el usuario dijo anteriormente en la conversación.'
 ];
 

@@ -1,12 +1,11 @@
 export const DataForgotPassword = {
-  ResetPassWord: 'Veuillez vérifier votre messagerie électronique.',
-  SomethingWrong:
-    "Quelque chose s'est mal passé. Veuillez réessayer ultérieurement.",
-  ForgotPassword: 'Mot de passe oublié ?',
+  ResetPassWord: 'Por favor, verifica tu correo electrónico.',
+  SomethingWrong: 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.',
+  ForgotPassword: '¿Olvidaste tu contraseña?',
   ForgotPasswordInstructions:
-    'Saisissez votre adresse e-mail pour réinitialiser votre mot de passe',
-  EmailRequired: "L'adresse e-mail est requise.",
-  InvalidEmail: 'Adresse e-mail invalide.',
-  EnterEmail: 'Entrez votre adresse e-mail',
-  ResetLink: 'Réinitialiser le mot de passe'
+    'Ingresa tu dirección de correo electrónico para restablecer tu contraseña',
+  EmailRequired: 'Se requiere la dirección de correo electrónico.',
+  InvalidEmail: 'Dirección de correo electrónico no válida.',
+  EnterEmail: 'juanesteban203@gmail.com',
+  ResetLink: 'Restablecer contraseña'
 };

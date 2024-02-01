@@ -9,6 +9,13 @@ const nextConfig = {
   },
   images: {
     domains: ['oaidalleapiprodscus.blob.core.windows.net']
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback.fs = false;
+    }
+
+    return config;
   }
 };
 

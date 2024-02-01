@@ -1,9 +1,9 @@
-export const DataLayout={
-    Mattech:"Mattech",
-    CloseSidebar:"Fermer barre latérale",
-    OpenSidebar:"Ouvrir barre latérale",
-    Dashboard:"Tableau de bord",
-    Words:"Mots restants",
-    Images:"Images restants",
-    Profile:"Mon Profil",
-}
+export const DataLayout = {
+  Mattech: 'ECO2IA',
+  CloseSidebar: 'Cerrar barra lateral',
+  OpenSidebar: 'Abrir barra lateral',
+  Dashboard: 'Dashboard',
+  Words: 'Palabras restantes',
+  Images: 'Imágenes restantes',
+  Profile: 'Mi Perfil'
+};

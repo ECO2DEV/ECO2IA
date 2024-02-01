@@ -122,7 +122,7 @@ export default function Register({ onClose }) {
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
-                        Création d'utilisateur
+                        Creación de usuarios
                       </Dialog.Title>
                     </div>
                     <div className="mt-2">
