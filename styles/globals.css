@@ -51,3 +51,24 @@
   outline: none;
   box-shadow: none;
 }
+
+
+/* Contenedor para bloques de código */
+.markdown-content pre code {
+  position: relative;
+
+  background-color: #282c34; /* color de fondo oscuro */
+  color: #abb2bf; /* color de texto claro */
+  padding: 1em;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  display: block;
+  white-space: pre-wrap;
+}
+
+.markdown-content pre {
+  margin: 0.5em 0;
+  position: relative;
+
+}

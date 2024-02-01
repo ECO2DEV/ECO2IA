@@ -1,0 +1,20 @@
+/* Estilos para el bloque de código */
+.code-block {
+  background-color: #282c34; /* color de fondo oscuro */
+  color: #abb2bf; /* color de texto claro */
+  padding: 1em;
+  margin: 0.5em 0;
+  border-radius: 10px;
+  overflow-x: auto; /* para manejar bloques de código largos */
+}
+
+/* Estilos para el elemento 'pre' dentro del bloque de código */
+.code-block pre {
+  white-space: pre-wrap; /* Asegura que el código se envuelva */
+}
+
+/* Estilos para el elemento 'code' dentro del bloque de código */
+.code-block code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace; /* Fuente monoespaciada */
+  display: block; /* Asegura que ocupe su propio bloque */
+}
