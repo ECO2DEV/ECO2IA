@@ -134,16 +134,8 @@ function Resource({ resource }) {
     >
       <ResourcePattern {...resource.pattern} mouseX={mouseX} mouseY={mouseY} />
       <div className="relative rounded-2xl px-4 pb-4 pt-16">
-<<<<<<< HEAD:artaich/components/proyectsIA/ProjectsIA.jsx
         <Image src={resource.image} alt={resource.name} className="w-full h-auto mb-4" />
         <h3 className="mt-4 text-xl font-semibold leading-7 text-white">
-=======
-        {/* <ResourceIcon icon={resource.icon} /> */}
-        <div whilehover={{ scale: 1.2 }} whiletap={{ scale: 0.8 }}>
-          <Image src={resource.image} alt={resource.name} className="w-full h-auto mb-4" />
-        </div>
-        <h3 className="mt-4 text-xl font-semibold leading-7 text-zinc-900 dark:text-white">
->>>>>>> 2252287c7bd03b1137f47d70fdf3f0dfd2a06471:components/proyectsIA/ProjectsIA.jsx
           <span className="absolute inset-0 rounded-2xl" />
           {resource.name}
         </h3>
