@@ -11,7 +11,7 @@ export const RadioButtonsTemplate = ({
       </div>
       <label className="flex radio p-2 cursor-pointer">
         <input
-          className="my-auto transform scale-125 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+          className="my-auto transform scale-125 text-emerald-600 border-gray-300 focus:ring-emerald-500"
           type="radio"
           value="template1"
           checked={selectedTemplate === 'template1'}
@@ -22,7 +22,7 @@ export const RadioButtonsTemplate = ({
 
       <label className="flex radio p-2 cursor-pointer">
         <input
-          className="my-auto transform scale-125 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+          className="my-auto transform scale-125 text-emerald-600 border-gray-300  focus:ring-emerald-500"
           type="radio"
           value="template2"
           checked={selectedTemplate === 'template2'}

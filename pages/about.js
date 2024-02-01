@@ -63,14 +63,14 @@ function classNames(...classes) {
 
 export default function About() {
   return (
-    <div className="shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
+    <div className="dark:bg-zinc-900 dark:text-zinc-200 dark:hover:ring-white/20">
       <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl font-bold tracking-tight sm:text-4xl dark:text-zinc-100"
+            className="text-3xl font-bold tracking-tight sm:text-4xl text-[#21c284]"
           >
             Nuestros Proyectos
           </motion.h2>
@@ -103,10 +103,10 @@ export default function About() {
                   "mt-6 lg:col-span-5 lg:row-start-1 lg:mt-0 xl:col-span-4"
                 )}
               >
-                <motion.h3 className="text-4xl font-medium text-[#21c284] dark:text-zinc-100">
+                <motion.h3 className="text-4xl font-medium text-[#21c284]">
                   {feature.name}
                 </motion.h3>
-                <motion.p className="mt-2 text-lg dark:text-zinc-600">
+                <motion.p className="mt-2 text-lg dark:text-zinc-200">
                   {feature.description}
                 </motion.p>
               </div>

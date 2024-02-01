@@ -1,4 +1,3 @@
-// pages/auth/signin.js
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';

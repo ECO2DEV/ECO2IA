@@ -98,7 +98,7 @@ function ResourcePattern({ mouseX, mouseY, ...gridProps }) {
         />
       </div>
       <motion.div
-        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#39fb86] to-[#0804eb] opacity-0 transition duration-300 group-hover:opacity-100 dark:from-[#324e3d] dark:to-[#43575f]"
+        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#21c284] to-[#e6fff8] opacity-0 transition duration-300 group-hover:opacity-100 dark:from-[#324e3d] dark:to-[#43575f]"
         style={style}
       />
       <motion.div
@@ -130,16 +130,16 @@ function Resource({ resource }) {
   return (
     <div
       onMouseMove={onMouseMove}
-      className="group relative flex flex-col rounded-2xl bg-neutral-900 transition-shadow hover:shadow-md hover:shadow-green-900/1 dark:bg-white/2.5 dark:hover:shadow-black/5"
+      className="group relative flex flex-col rounded-2xl bg-zinc-200 dark:bg-zinc-900 transition-shadow hover:shadow-md hover:shadow-green-900/1 dark:bg-white/2.5 dark:hover:shadow-black/5"
     >
       <ResourcePattern {...resource.pattern} mouseX={mouseX} mouseY={mouseY} />
       <div className="relative rounded-2xl px-4 pb-4 pt-16">
         <Image src={resource.image} alt={resource.name} className="w-full h-auto mb-4" />
-        <h3 className="mt-4 text-xl font-semibold leading-7 text-white">
+        <h3 className="mt-4 text-xl font-semibold leading-7 text-[#21c284]">
           <span className="absolute inset-0 rounded-2xl" />
           {resource.name}
         </h3>
-        <p className="mt-1 text-xl text-zinc-600 dark:text-zinc-100">
+        <p className="mt-1 text-xl text-zinc-400 dark:text-zinc-100">
           {resource.description}
         </p>
       </div>

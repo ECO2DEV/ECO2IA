@@ -200,9 +200,9 @@ function TextSummarizerPage() {
   return (
     <div className="flex flex-col md:flex-row">
       <div className="w-full md:w-6/12 h-full flex-grow -mr-1">
-        <div className="bg-white rounded-lg shadow-lg p-6 h-full">
+        <div className="bg-[#21c284] rounded-lg shadow-lg p-6 h-full">
           <textarea
-            className="w-full p-4 rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-20"
+            className="w-full p-4 rounded border-emerald-800 focus:outline-none dark:text-zinc-900 focus:ring-2 focus:ring-emerald-600 h-20"
             value={fileContent || inputText}
             onChange={handleTextChange}
             placeholder={DataMattResume.WriteText}
@@ -211,7 +211,7 @@ function TextSummarizerPage() {
             }}
           />
           <div
-            className="w-full h-40 flex flex-col items-center justify-center text-blue-400 px-4 py-6 rounded-lg shadow-lg tracking-wide uppercase border border-blue-500 hover:bg-blue-500 cursor-pointer hover:text-white"
+            className="w-full h-40 flex flex-col items-center justify-center text-zinc-100 px-4 py-6 rounded-lg shadow-lg tracking-wide uppercase border border-blue-500 hover:bg-blue-500 cursor-pointer hover:text-white"
             {...getRootProps()}
           >
             <svg
@@ -230,7 +230,7 @@ function TextSummarizerPage() {
               name="language"
               value={language}
               onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-2 border border-emerald-800 bg-[#21c284] rounded"
               required
             >
               <option value={AUTO_LANGUAGE}>
@@ -282,7 +282,7 @@ function TextSummarizerPage() {
         </div>
       </div>
       <div className="w-full md:w-6/12 px-4 mt-4 md:mt-0">
-        <div className="bg-white rounded-lg shadow-lg p-4 relative">
+        <div className="bg-white rounded-lg shadow-lg p-4 relative dark:text-zinc-900">
           <textarea
             className="w-full text-justify p-4 rounded border-none focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none placeholder-gray-400"
             style={{ minHeight: '44rem' }}

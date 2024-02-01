@@ -114,21 +114,13 @@ function classNames(...classes) {
 export default function DashboardSection() {
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10">
         <h1 className="text-2xl text-center font-semibolds">
           {DataDashboard.DashboardTitle}
         </h1>
       </div>
 
-      <div className="divide-y divide-white overflow-hidden bg-[#21c284] rounded-lg shadow sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
+      <div className="overflow-hidden bg-[#21c284] rounded-lg shadow grid sm:grid-cols-2 gap-px">
         {actions.map((action, actionIdx) => (
           <div
             key={action.title}
@@ -141,7 +133,7 @@ export default function DashboardSection() {
               actionIdx === actions.length - 1
                 ? 'rounded-bl-lg rounded-br-lg sm:rounded-bl-none'
                 : '',
-              'group relative p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500'
+              'group relative p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-emerald-900'
             )}
           >
             <div>
@@ -157,7 +149,6 @@ export default function DashboardSection() {
                   src={action.icon}
                   alt={action.title}
                 />
-                {/* <action.icon className="h-6 w-6" aria-hidden="true" /> */}
               </span>
             </div>
             <div className="mt-8">
