@@ -1,16 +1,19 @@
-import { useRef, useState, useEffect, useContext } from 'react';
-import Image from 'next/image';
-import { UserContext } from '../../context/user/UserContext';
-import { EmptyAvatar } from '../icons/icons';
-import { useChat } from '../../hooks/useChat';
-import { strapiUrl } from '../../constants/constans';
-import { ClipboardIcon } from '../icons/icons';
-import ModalDelete from './ModalDelete';
-import { LoadingChatgpt } from './LoadingChatgpt';
-import { DataMattChat } from '../../data/mattchat';
+import { useRef, useState, useEffect, useContext } from "react";
+import Image from "next/image";
+import { marked } from "marked";
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark.css";
+
+import { UserContext } from "../../context/user/UserContext";
+import { EmptyAvatar } from "../icons/icons";
+import { useChat } from "../../hooks/useChat";
+import { strapiUrl } from "../../constants/constans";
+import { ClipboardIcon } from "../icons/icons";
+import ModalDelete from "./ModalDelete";
+import { LoadingChatgpt } from "./LoadingChatgpt";
+import { DataMattChat } from "../../data/mattchat";
 
 export const Conversations = ({ messages }) => {
-
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const { user } = useContext(UserContext);
@@ -22,9 +25,16 @@ export const Conversations = ({ messages }) => {
 
   const lastMessageRef = useRef(null);
 
+  const codeRefs = useRef({});
+
+  const renderMarkdown = (markdown) => {
+    const rawMarkup = marked(markdown);
+    return { __html: rawMarkup };
+  };
+
   useEffect(() => {
     if (lastMessageRef.current) {
-      lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+      lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [data]);
 
@@ -46,9 +56,11 @@ export const Conversations = ({ messages }) => {
         }, 2000);
       })
       .catch((error) => {
-        console.error('Error al copiar al portapapeles:', error);
+        console.error("Error al copiar al portapapeles:", error);
       });
   };
+
+
 
   const onHandleModalDelete = (id) => {
     setDeleteModalOpen((prev) => !prev);
@@ -59,6 +71,10 @@ export const Conversations = ({ messages }) => {
   }
   useEffect(() => {
     if (messages) {
+      document.querySelectorAll("pre code").forEach((block) => {
+        hljs.highlightElement(block);
+      });
+
       const reqId = messages.find((item) => item.reqId !== undefined)?.reqId;
       setLatestReqId(reqId);
     }
@@ -68,9 +84,11 @@ export const Conversations = ({ messages }) => {
     <div className="h-full bg-gray-100">
       <section className="flex flex-col text-sm h-[80vh] lg:h-[75vh] overflow-y-scroll overflow-x-hidden">
         {messages?.map((item, index) => {
+          const isCodeBlock = item.content.includes("```");
+
           return (
             <div key={item.id}>
-              {item.role === 'user' ? (
+              {item.role === "user" ? (
                 <div
                   className={`group w-full text-gray-800 bg-gray-100 relative`}
                 >
@@ -100,7 +118,7 @@ export const Conversations = ({ messages }) => {
                   )} */}
                 </div>
               ) : null}
-              {item.role === 'assistant' ? (
+              {item.role === "assistant" ? (
                 <div
                   className={`relative group w-full text-gray-100 border-b border-black/10 bg-gray-800 `}
                 >
@@ -114,7 +132,33 @@ export const Conversations = ({ messages }) => {
                       />
                     </div>
                     <div className="flex flex-col text-justify w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
-                      {item.content}
+                      <div className="flex flex-col text-justify w-full">
+                        {/* Renderizamos el contenido como Markdown si es un bloque de código */}
+                        <div className="relative">
+                          {isCodeBlock ? (
+                            <>
+                              <div className="relative markdown-container">
+                                <div
+                                  className="markdown-content"
+                                  dangerouslySetInnerHTML={renderMarkdown(
+                                    item.content
+                                  )}
+                                />
+                              {/* {isCodeBlock && (
+                                <button
+                                  className="absolute top-2 right-2 text-xs text-gray-300 bg-gray-600 hover:bg-gray-500 rounded px-2 py-1"
+                                >
+                                  Copiar
+                                </button>
+                              )} */}
+                              </div>
+                            </>
+                          ) : (
+                            <div>{item.content}</div>
+                          )}
+                        </div>
+                      </div>
+                      {/* </div> */}
                       <div className="absolute right-0 top-0 flex flex-col items-end ">
                         <button
                           className="p-1"
