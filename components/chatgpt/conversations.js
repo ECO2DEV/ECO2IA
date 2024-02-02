@@ -18,6 +18,7 @@ export const Conversations = ({ messages }) => {
   const [deleteId, setDeleteId] = useState(null);
   const { user } = useContext(UserContext);
   const [copied, setCopied] = useState([]);
+  const [copiedCode, setCopiedCode] = useState([]);
 
   const [latestReqId, setLatestReqId] = useState(0);
 
@@ -30,6 +31,26 @@ export const Conversations = ({ messages }) => {
   const renderMarkdown = (markdown) => {
     const rawMarkup = marked(markdown);
     return { __html: rawMarkup };
+  };
+
+  const extractCodeFromMarkdown = (markdown) => {
+    // esta expression regular busca el contenido dentro del ``` tambien captura el nombre del lenguaje
+    const regex = /```(\w+)?[\s\S]*?```/g;
+    let extractedCode = "";
+
+    let match;
+    while ((match = regex.exec(markdown)) !== null) {
+      // match[0] es el bloque de código completo, match[1] es el lenguaje de programación capturado este hay que quitarlo para obtener solo el codigo
+      let codeBlock = match[0];
+      if (match[1]) {
+        // si capturo un lenguaje, eliminarlo del inicio del bloque de código
+        codeBlock = codeBlock.replace(`\`\`\`${match[1]}`, "```");
+      }
+      // se elimina los backticks y espacios adicionales
+      extractedCode += codeBlock.replace(/```/g, "").trim() + "\n\n";
+    }
+
+    return extractedCode.trim();
   };
 
   useEffect(() => {
@@ -60,7 +81,31 @@ export const Conversations = ({ messages }) => {
       });
   };
 
+  const handleCopyCode = (text, index) => {
+    const codeToCopy = text.includes("```")
+      ? extractCodeFromMarkdown(text)
+      : text;
 
+    navigator.clipboard
+      .writeText(codeToCopy)
+      .then(() => {
+        setCopiedCode((prevCopied) => {
+          const newCopied = [...prevCopied];
+          newCopied[index] = true;
+          return newCopied;
+        });
+        setTimeout(() => {
+          setCopiedCode((prevCopied) => {
+            const newCopied = [...prevCopied];
+            newCopied[index] = false;
+            return newCopied;
+          });
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error("Error al copiar al portapapeles:", error);
+      });
+  };
 
   const onHandleModalDelete = (id) => {
     setDeleteModalOpen((prev) => !prev);
@@ -144,13 +189,19 @@ export const Conversations = ({ messages }) => {
                                     item.content
                                   )}
                                 />
-                              {/* {isCodeBlock && (
                                 <button
+                                  onClick={() =>
+                                    handleCopyCode(
+                                      item.content.includes("```")
+                                        ? item.content
+                                        : "",
+                                      index
+                                    )
+                                  }
                                   className="absolute top-2 right-2 text-xs text-gray-300 bg-gray-600 hover:bg-gray-500 rounded px-2 py-1"
                                 >
-                                  Copiar
+                                  Copiar Código
                                 </button>
-                              )} */}
                               </div>
                             </>
                           ) : (
@@ -168,11 +219,16 @@ export const Conversations = ({ messages }) => {
                             <ClipboardIcon />
                           </div>
                         </button>
-                        {copied[index] && (
+                        {(copied[index] && (
                           <div className=" bg-blue-900 text-white rounded">
                             {DataMattChat.CopiedSuccess}
                           </div>
-                        )}
+                        )) ||
+                          (copiedCode[index] && (
+                            <div className=" bg-blue-900 text-white rounded">
+                              {DataMattChat.CopiedCodeSuccess}
+                            </div>
+                          ))}
                       </div>
                     </div>
                   </div>

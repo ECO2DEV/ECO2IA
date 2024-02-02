@@ -31,7 +31,7 @@ export const EditAvatar = ({
         ) : (
           <img
             src={
-              user.avatar ? strapiUrl + user.avatar.url : '/empty_avatar.png'
+              user.avatar ? strapiUrl + user.avatar.url : '/empty_avatar.webp'
             }
             alt="Avatar preview"
             className={`w-full h-full object-cover rounded-full align-middle border-none shadow-lg `}

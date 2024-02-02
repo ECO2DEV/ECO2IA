@@ -41,7 +41,7 @@ export const SportCoachIA = (props) => {
   const fetchData = async () => {
     if (!prompt) {
       // console.log(setPromptTokens);
-      setError('Veuillez taper quelque chose avant de soumettre');
+      setError('Por favor, escriba algo antes de enviar');
     } else {
       setSubmitting(true);
       // Realiza la llamada a la API para enviar la solicitud de plan de entrenamiento
@@ -61,9 +61,7 @@ export const SportCoachIA = (props) => {
         })
         .catch((error) => {
           console.log(error);
-          setError(
-            "Une erreur s'est produite lors de la récupération des données."
-          );
+          setError('Se produjo un error al recuperar los datos');
         })
         .finally(() => {
           setSubmitting(false);
@@ -74,7 +72,7 @@ export const SportCoachIA = (props) => {
   const handlePromptChange = (e) => {
     const { value } = e.target;
     if (value === DataMattSport.SelectOption) {
-      toast.error('Veuillez sélectionner un objectif');
+      toast.error('Por favor, seleccione un objetivo');
       return;
     }
     setPrompt(value);
@@ -145,10 +143,7 @@ export const SportCoachIA = (props) => {
             />
           </fieldset>
           <div className="">
-            <label
-              htmlFor="prompt"
-              className="block text-sm font-medium"
-            >
+            <label htmlFor="prompt" className="block text-sm font-medium">
               {DataMattSport.Goal}
             </label>
             <select
@@ -171,10 +166,7 @@ export const SportCoachIA = (props) => {
             </select>
           </div>
           <div className="">
-            <label
-              htmlFor="trainingDays"
-              className="block text-sm font-medium"
-            >
+            <label htmlFor="trainingDays" className="block text-sm font-medium">
               {DataMattSport.NumberofTrainigns}
             </label>
             <select
