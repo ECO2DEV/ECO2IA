@@ -22,7 +22,7 @@ export const QuizForm = ({
     <form onSubmit={handleSubmit} className="max-w-md mx-auto">
       <label
         htmlFor="prompt"
-        className="block text-sm font-medium text-gray-700"
+        className="block text-sm font-medium text-[#21c284]"
       >
         Prompt:
       </label>
@@ -34,12 +34,12 @@ export const QuizForm = ({
         placeholder={DataMattQuiz.PromptMain}
         value={prompt ? prompt : ''}
         onChange={handlePropmtChange}
-        className="w-full px-4 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 mt-1"
+        className="w-full px-4 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284] mt-1"
       />
 
       <label
         htmlFor="optionChoice"
-        className="block text-sm font-medium text-gray-700 mt-4"
+        className="block text-sm font-medium text-[#21c284] mt-4"
       >
         Option Choice:
       </label>
@@ -47,7 +47,7 @@ export const QuizForm = ({
         name="optionChoice"
         value={formState.optionChoice}
         onChange={handleChange}
-        className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284]"
       >
         <option value="multipleChoice"> {DataMattQuiz.MultipleChoise} </option>
         <option value="trueFalse"> {DataMattQuiz.TrueFalse} </option>
@@ -56,7 +56,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="language"
-        className="block text-sm font-medium text-gray-700 mt-4"
+        className="block text-sm font-medium text-[#21c284] mt-4"
       >
         Language:
       </label>
@@ -65,7 +65,7 @@ export const QuizForm = ({
         name="language"
         value={formState.language}
         onChange={handleChange}
-        className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284]"
       >
         <option value="Auto"> {DataMattQuiz.Auto} </option>
         <option value="En"> {DataMattQuiz.English} </option>
@@ -78,7 +78,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="difficulty"
-        className="block text-sm font-medium text-gray-700 mt-4"
+        className="block text-sm font-medium text-[#21c284] mt-4"
       >
         Difficulty:
       </label>
@@ -87,7 +87,7 @@ export const QuizForm = ({
         name="difficulty"
         value={formState.difficulty}
         onChange={handleChange}
-        className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284]"
       >
         <option value="easy"> {DataMattQuiz.Easy} </option>
         <option value="medium"> {DataMattQuiz.Medium} </option>
@@ -96,7 +96,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="questionQuantity"
-        className="block text-sm font-medium text-gray-700 mt-4"
+        className="block text-sm font-medium text-[#21c284] mt-4"
       >
         Question Quantity:
       </label>
@@ -107,7 +107,7 @@ export const QuizForm = ({
         placeholder={DataMattQuiz.NumberQuestions}
         value={formState.questionQuantity}
         onChange={handleChange}
-        className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284]"
       />
 
       <button
@@ -115,7 +115,7 @@ export const QuizForm = ({
         type="submit"
         className={`${
           loading
-            ? 'text-white bg-gray-500 rounded-full text-center focus:outline-none focus:ring-2 focus:ring-blue-500'
+            ? 'text-white bg-gray-500 rounded-full text-center focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284]'
             : ' rounded-full  font-semibold bg-indigo-600 text-white ring-1 ring-inset ring-gray-300'
         } w-full mt-4 px-4 py-2 `}
       >

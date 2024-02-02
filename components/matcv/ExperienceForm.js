@@ -194,7 +194,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
             </label>
             <textarea
               id={`description${index}`}
-              className="w-full h-36 text-xs p-2 border rounded resize-none focus:border-indigo-600"
+              className="w-full h-36 text-xs p-2 border rounded resize-none focus:border-emerald-600"
               placeholder={DataMattCV.EnterDescription}
               value={dropdown.description || ''}
               onChange={(e) => {

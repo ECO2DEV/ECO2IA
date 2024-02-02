@@ -33,13 +33,13 @@ const SpokenLanguagesForm = ({ setSpokenLanguages }) => {
         value={language.name ? language.name : ''}
         onChange={handleInputChange}
         placeholder="Language Name"
-        className="w-full mb-2 p-2 border rounded"
+        className="w-full mb-2 p-2 border rounded dark:bg-[#21c284] dark:text-zinc-900"
       />
       <select
         name="proficiency"
         value={language.proficiency ? language.proficiency : ''}
         onChange={handleInputChange}
-        className="w-full mb-2 p-2 border rounded"
+        className="w-full mb-2 p-2 border rounded dark:bg-[#21c284]"
       >
         <option value="">{DataMattCV.SelectProficiency}</option>
         {proficiencyLevels.map((level, index) => (

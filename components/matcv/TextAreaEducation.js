@@ -37,7 +37,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
         value={education.degree ? education.degree : ''}
         onChange={handleInputChange}
         placeholder={DataMattCV.Degree}
-        className="w-full mb-2 p-2 border rounded"
+        className="w-full mb-2 p-2 border rounded dark:bg-[#21c284] dark:text-zinc-900"
       />
       <input
         type="text"
@@ -45,7 +45,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
         value={education.institution ? education.institution : ''}
         onChange={handleInputChange}
         placeholder={DataMattCV.Institution}
-        className="w-full mb-2 p-2 border rounded"
+        className="w-full mb-2 p-2 border rounded dark:bg-[#21c284] dark:text-zinc-900"
       />
       <input
         type="text"
@@ -53,7 +53,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
         value={education.startDate ? education.startDate : ''}
         onChange={handleInputChange}
         placeholder={DataMattCV.StartDate}
-        className="w-full mb-2 p-2 border rounded"
+        className="w-full mb-2 p-2 border rounded dark:bg-[#21c284] dark:text-zinc-900"
       />
       <input
         type="text"
@@ -61,7 +61,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
         value={education.endDate ? education.endDate : ''}
         onChange={handleInputChange}
         placeholder={DataMattCV.EndDate}
-        className="w-full mb-2 p-2 border rounded"
+        className="w-full mb-2 p-2 border rounded dark:bg-[#21c284] dark:text-zinc-900"
       />
       <input
         type="text"
@@ -69,7 +69,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
         value={education.city ? education.city : ''}
         onChange={handleInputChange}
         placeholder={DataMattCV.City}
-        className="w-full mb-2 p-2 border rounded"
+        className="w-full mb-2 p-2 border rounded dark:bg-[#21c284] dark:text-zinc-900"
       />
       <button
         onClick={handleAddEducation}

@@ -109,7 +109,7 @@ const DescriptionForm = () => {
           name="company"
           value={formData.company}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-emerald-900 rounded bg-[#21c284]"
           placeholder={DataMattDescription.CompanyName}
           required
         />
@@ -121,7 +121,7 @@ const DescriptionForm = () => {
           name="field"
           value={formData.field}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-emerald-900 rounded bg-[#21c284]"
           placeholder={DataMattDescription.FieldBusinnes}
           required
         />
@@ -132,7 +132,7 @@ const DescriptionForm = () => {
           name="language"
           value={formData.language}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-emerald-900 rounded bg-[#21c284]"
           required
         >
           <option value=""> {DataMattDescription.SelectLanguage} </option>
@@ -152,7 +152,7 @@ const DescriptionForm = () => {
           name="prompt"
           value={prompt ? prompt : ''}
           onChange={handlePromptChange}
-          className="w-full text-xs p-2 border border-gray-300 rounded resize-none focus:ring-0"
+          className="w-full text-xs p-2 border border-emerald-900 rounded resize-none focus:ring-0 bg-[#21c284]"
           placeholder={DataMattDescription.ProductText}
           required
         />

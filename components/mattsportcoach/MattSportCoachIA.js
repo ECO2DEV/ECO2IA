@@ -96,14 +96,14 @@ export const SportCoachIA = (props) => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <div className="flex justify-center items-center text-gray-900 mb-4">
+      <div className="flex justify-center items-center text-[#21c284] mb-4">
         <span>
           Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
         </span>
       </div>
 
       {!showResults ? (
-        <WelcomeSportCoach className="mb-8" />
+        <WelcomeSportCoach className="mb-8 bg-[#21c284]" />
       ) : (
         (
           <div className="flex justify-center h-[60rem]">
@@ -119,7 +119,7 @@ export const SportCoachIA = (props) => {
           </div>
         ) && <SportCoachResults user={user} />
       )}
-      <div className="bottom-3 z-20 sticky grid xl:grid-cols-[minmax(auto,_1fr)_100px] md:fixed md:bottom-3 xl:fixed p-4 bg-gray-200">
+      <div className="bottom-3 z-20 sticky grid xl:grid-cols-[minmax(auto,_1fr)_100px] md:fixed md:bottom-3 xl:fixed p-4 bg-gray-200 dark:bg-zinc-900/80">
         <form
           onSubmit={handleSubmit}
           className="grid xl:grid-cols-5 md:grid-cols-5 items-center gap-4 grid-cols-2"
@@ -131,7 +131,7 @@ export const SportCoachIA = (props) => {
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
               type="text"
-              className="mt-1 px-4 py-2 w-full rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 px-4 py-2 w-full rounded-md focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm dark:text-zinc-900"
             />
           </fieldset>
           <fieldset>
@@ -141,13 +141,13 @@ export const SportCoachIA = (props) => {
               value={age}
               onChange={(e) => setAge(e.target.value)}
               type="text"
-              className="mt-1 px-4 py-2 w-full rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 px-4 py-2 w-full rounded-md focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
             />
           </fieldset>
           <div className="">
             <label
               htmlFor="prompt"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium"
             >
               {DataMattSport.Goal}
             </label>
@@ -157,7 +157,7 @@ export const SportCoachIA = (props) => {
               // value={""}
               defaultValue={prompt}
               onChange={handlePromptChange}
-              className="mt-1 px-4 py-2 border w-full border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 px-4 py-2 border w-full border-gray-300 rounded-md bg-[#21c284] focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
             >
               <option value={prompt}>{DataMattSport.SelectOption}</option>
 
@@ -173,7 +173,7 @@ export const SportCoachIA = (props) => {
           <div className="">
             <label
               htmlFor="trainingDays"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium"
             >
               {DataMattSport.NumberofTrainigns}
             </label>
@@ -182,7 +182,7 @@ export const SportCoachIA = (props) => {
               name="trainingDays"
               value={trainingDays}
               onChange={handleChange}
-              className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full bg-[#21c284] focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
             >
               <option value="1"> {DataMattSport.OneDay} </option>
               <option value="2"> {DataMattSport.TwoDays} </option>
