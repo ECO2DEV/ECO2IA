@@ -3,10 +3,10 @@ import { DataPricing } from '../data/pricing';
 import { HomeIcon } from '@heroicons/react/24/outline';
 import { DataAbout } from '../data/about';
 
-import Photo1 from '../public/Photo1.jpg';
-import Photo2 from '../public/Photo2.jpg';
-import Photo3 from '../public/Photo3.jpg';
-import Photo4 from '../public/Photo4.jpg';
+import Photo1 from '../public/Photo1.webp';
+import Photo2 from '../public/Photo2.webp';
+import Photo3 from '../public/Photo3.webp';
+import Photo4 from '../public/Photo4.webp';
 
 import {
   AcademicCapIcon,

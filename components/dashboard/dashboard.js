@@ -3,14 +3,14 @@ import Image from 'next/image';
 
 import { DataDashboard } from '../../data/dashboard';
 
-import mattchat from '../../public/mattchat.png'
-import mattresume from '../../public/mattresume.png'
-import mattimage from '../../public/mattimage.png'
-import mattrad from '../../public/mattrad.png'
-import mattsport from '../../public/mattsport.png'
-import mattquiz from '../../public/mattquiz.png'
-import mattdesc from '../../public/mattdesc.png'
-import mattcv from '../../public/mattcv.png'
+import mattchat from '../../public/mattchat.webp';
+import mattresume from '../../public/mattresume.webp';
+import mattimage from '../../public/mattimage.webp';
+import mattrad from '../../public/mattrad.webp';
+import mattsport from '../../public/mattsport.webp';
+import mattquiz from '../../public/mattquiz.webp';
+import mattdesc from '../../public/mattdesc.webp';
+import mattcv from '../../public/mattcv.webp';
 
 const actions = [
   {
@@ -120,7 +120,7 @@ export default function DashboardSection() {
         </h1>
       </div>
 
-      <div className="overflow-hidden bg-[#21c284] rounded-lg shadow grid sm:grid-cols-2 gap-px">
+      <div className="overflow-hidden  rounded-lg shadow grid sm:grid-cols-2 gap-2">
         {actions.map((action, actionIdx) => (
           <div
             key={action.title}
@@ -133,7 +133,7 @@ export default function DashboardSection() {
               actionIdx === actions.length - 1
                 ? 'rounded-bl-lg rounded-br-lg sm:rounded-bl-none'
                 : '',
-              'group relative p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-emerald-900'
+              'group relative p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-emerald-900 bg-[#21c284] '
             )}
           >
             <div>

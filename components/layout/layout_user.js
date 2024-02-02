@@ -13,7 +13,7 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline';
 import Image from 'next/image';
-import logo from '../../public/Mlogop.png';
+import logo from '../../public/Mlogop.webp';
 import { strapiUrl } from '../../constants/constans';
 import { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
@@ -33,7 +33,7 @@ export default function LayoutUser({ children }) {
   const router = useRouter();
   const image_url = children?.props?.user?.avatar
     ? strapiUrl + children.props.user.avatar.url
-    : '/empty_avatar.png';
+    : '/empty_avatar.webp';
 
   const currentPath = useRouter().pathname; // Obtener la ruta actual
 
@@ -116,7 +116,7 @@ export default function LayoutUser({ children }) {
   return (
     <>
       {/* Removing the scroll for let chatGpt to scroll with his own scrollbar (overflow-y-hidden h-screen)*/}
-      <div className=''>
+      <div className="">
         {/* Sideba. When is in mobile version and the hamburguer menu button is been clicked*/}
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog

@@ -1,17 +1,17 @@
-import { useState } from "react";
-import { Dialog, Disclosure, Popover } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { signIn } from "next-auth/react";
-import { DataNavbar } from "../../data/navbar";
-import { products, callsToAction } from "../../data/navbar";
-import logo from "../../public/Mlogop.png";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { useState } from 'react';
+import { Dialog, Disclosure, Popover } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { signIn } from 'next-auth/react';
+import { DataNavbar } from '../../data/navbar';
+import { products, callsToAction } from '../../data/navbar';
+import logo from '../../public/Mlogop.webp';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Header({ router, user }) {
@@ -19,15 +19,15 @@ export default function Header({ router, user }) {
   const router2 = useRouter();
 
   const handleRedirectToDashboard = () => {
-    router2.push("/dashboard");
+    router2.push('/dashboard');
   };
   return (
     <div className="">
       <header
         className={
-          router != ""
-            ? "fixed inset-x-0 top-0 z-50"
-            : "absolute inset-x-0 top-0 z-50"
+          router != ''
+            ? 'fixed inset-x-0 top-0 z-50'
+            : 'absolute inset-x-0 top-0 z-50'
         }
       >
         <nav
@@ -35,9 +35,11 @@ export default function Header({ router, user }) {
           aria-label="Global"
         >
           <div className="flex lg:flex-1">
-            <Link href={"/"} legacyBehavior>
+            <Link href={'/'} legacyBehavior>
               <a className="-m-1.5 p-1.5">
-                <span className="sr-only text-xl">{DataNavbar.COMPANY_NAME}</span>
+                <span className="sr-only text-xl">
+                  {DataNavbar.COMPANY_NAME}
+                </span>
                 <Image className="h-8 w-auto" src={logo} alt="Mattech" />
               </a>
             </Link>
@@ -65,7 +67,7 @@ export default function Header({ router, user }) {
             >
               {DataNavbar.menu_opt_3}
             </a>
-            <Link href={"/about"} legacyBehavior>
+            <Link href={'/about'} legacyBehavior>
               <a className="text-xl font-semibold leading-6 text-white">
                 {DataNavbar.menu_opt_4}
               </a>
@@ -118,8 +120,8 @@ export default function Header({ router, user }) {
                             >
                               <ChevronDownIcon
                                 className={classNames(
-                                  open ? "rotate-180" : "",
-                                  "h-5 w-5 flex-none"
+                                  open ? 'rotate-180' : '',
+                                  'h-5 w-5 flex-none'
                                 )}
                                 aria-hidden="true"
                               />
@@ -142,7 +144,7 @@ export default function Header({ router, user }) {
                   >
                     {DataNavbar.menu_opt_3}
                   </Link>
-                  <Link href={"/about"} legacyBehavior>
+                  <Link href={'/about'} legacyBehavior>
                     <a className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                       {DataNavbar.menu_opt_4}
                     </a>

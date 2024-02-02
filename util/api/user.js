@@ -26,11 +26,11 @@ export const createUser = async (data) => {
     console.error(`Error making POST request to ${strapiUrl}:`, error);
     if (error.response.data.error.message) {
       toast.error(
-        " L'utilisateur existe déjà. Veuillez choisir un autre nom d'utilisateur. "
+        'El usuario ya existe. Por favor, elija otro nombre de usuario '
       );
       return error.response.data.error.message;
     } else {
-      toast.error("Une erreur inattendue s'est produite.");
+      toast.error('Se ha producido un error inesperado');
       return error.response.data.error;
     }
     // add the other error handler

@@ -35,7 +35,7 @@ export default function Register({ onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isValidEmail(formData.email)) {
-      toast.error('Email invalide');
+      toast.error('Email invalido');
       return;
     }
     setLoading(true);

@@ -96,7 +96,7 @@ export const PromptProvider = ({ children }) => {
     if (!state.prompt) return;
     // validate that the user has maxtokens to use, if not redirect to buy a plan
     if (state.plan.length === 0) {
-      toast.error('Vous n avez pas de plan');
+      toast.error('No tienes un plan');
       setTimeout(() => {
         router.push('/dashboard');
         return;
@@ -104,7 +104,7 @@ export const PromptProvider = ({ children }) => {
     }
     if (state.plan.max_tokens <= 0) {
       toast.error(
-        "Vous n'avez plus de jetons à utiliser, veuillez acheter un nouveau plan"
+        'Ya no tiene tokens para usar, por favor, compre un nuevo plan'
       );
       //setTimer(5);
       setTimeout(() => {
@@ -127,7 +127,7 @@ export const PromptProvider = ({ children }) => {
     if (state.plan.length === 0) return;
     if (state.plan.max_tokens <= 0) {
       toast.error(
-        "Vous n'avez plus de jetons à utiliser, veuillez acheter un nouveau plan"
+        'No tiene más tokens para usar, por favor, compre un nuevo plan'
       );
       // updateUserPlanToNull(idsUpdateMaxTokens.userId);
       router.push('/dashboard');
