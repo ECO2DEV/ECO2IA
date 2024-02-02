@@ -120,7 +120,7 @@ export default function DashboardSection() {
         </h1>
       </div>
 
-      <div className="overflow-hidden bg-[#21c284] rounded-lg shadow grid sm:grid-cols-2 gap-px">
+      <div className="overflow-hidden rounded-lg shadow grid sm:grid-cols-2 gap-y-4 gap-x-4">
         {actions.map((action, actionIdx) => (
           <div
             key={action.title}
@@ -133,7 +133,7 @@ export default function DashboardSection() {
               actionIdx === actions.length - 1
                 ? 'rounded-bl-lg rounded-br-lg sm:rounded-bl-none'
                 : '',
-              'group relative p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-emerald-900'
+              'group bg-[#21c284] relative p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-emerald-500 gap-6'
             )}
           >
             <div>
