@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
-import logo from '../../public/Mlogop.png';
+import logo from '../../public/Mlogop.webp';
 import login_image from '../../public/login_image.png';
 import { DataSignin } from '../../data/signin';
 import Head from 'next/head';
@@ -23,7 +23,7 @@ export default function SignIn() {
     e.preventDefault();
     setIsLoading(true);
     if (!isValidEmail(email)) {
-      toast.error('Email invalide');
+      toast.error('Email invalido');
       setIsLoading(false);
       return;
     }
@@ -40,9 +40,13 @@ export default function SignIn() {
           result.error.includes('email') ||
           result.error.includes('password')
         ) {
-          toast.error("L'adresse e-mail ou le mot de passe est incorrect.");
+          toast.error(
+            'La dirección de correo electrónico o la contraseña son incorrectas'
+          );
         } else {
-          toast.error("L'adresse e-mail ou le mot de passe est incorrect. ");
+          toast.error(
+            'La dirección de correo electrónico o la contraseña son incorrectas '
+          );
         }
       } else {
         // Si no hubo errores, puedes redirigir manualmente al dashboard aquí.
@@ -50,7 +54,7 @@ export default function SignIn() {
       }
     } catch (error) {
       console.error(error);
-      toast.error("Une erreur inattendue s'est produite");
+      toast.error('Se produjo un error inesperado');
     }
 
     setIsLoading(false);

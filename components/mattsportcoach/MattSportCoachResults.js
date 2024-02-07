@@ -48,7 +48,7 @@ export const SportCoachResults = ({ user }) => {
   useEffect(() => {
     if (!data || data?.data[0]?.attributes?.payload_out === undefined) {
       toast.error(
-        "Une erreur s'est produite lors de la récupération des données, veuillez réessayer."
+        'Se ha producido un error al recuperar los datos, por favor, inténtelo de nuevo'
       );
       return;
     }

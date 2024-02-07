@@ -1,114 +1,86 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
 
-import { DataDashboard } from '../../data/dashboard';
+import { DataDashboard } from "../../data/dashboard";
 
-import mattchat from '../../public/mattchat.png'
-import mattresume from '../../public/mattresume.png'
-import mattimage from '../../public/mattimage.png'
-import mattrad from '../../public/mattrad.png'
-import mattsport from '../../public/mattsport.png'
-import mattquiz from '../../public/mattquiz.png'
-import mattdesc from '../../public/mattdesc.png'
-import mattcv from '../../public/mattcv.png'
+import mattchat from "../../public/mattchat.webp";
+import mattresume from "../../public/mattresume.webp";
+import mattimage from "../../public/mattimage.webp";
+import mattrad from "../../public/mattrad.webp";
+import mattsport from "../../public/mattsport.webp";
+import mattquiz from "../../public/mattquiz.webp";
+import mattdesc from "../../public/mattdesc.webp";
+import mattcv from "../../public/mattcv.webp";
 
 const actions = [
   {
     title: DataDashboard.MattechChatTitle,
-    href: 'mattchat',
+    href: "mattchat",
     description: DataDashboard.MattechChatDescription,
     icon: mattchat,
-    iconForeground: 'text-teal-700',
-    iconBackground: 'bg-teal-50'
+    iconForeground: "text-teal-700",
+    iconBackground: "bg-teal-50",
   },
   {
     title: DataDashboard.MattechImageTitle,
-    href: 'mattimage',
+    href: "mattimage",
     description: DataDashboard.MattechImageDescription,
     icon: mattimage,
-    iconForeground: 'text-purple-700',
-    iconBackground: 'bg-purple-50'
+    iconForeground: "text-purple-700",
+    iconBackground: "bg-purple-50",
   },
   {
     title: DataDashboard.MatTranslateTitle,
-    href: 'mattraduct',
+    href: "mattraduct",
     description: DataDashboard.MatTranslateDescription,
     icon: mattrad,
-    iconForeground: 'text-purple-700',
-    iconBackground: 'bg-purple-50'
+    iconForeground: "text-purple-700",
+    iconBackground: "bg-purple-50",
   },
   {
     title: DataDashboard.MattSportTitle,
-    href: 'mattsport',
+    href: "mattsport",
     description: DataDashboard.MattSportDescription,
     icon: mattsport,
-    iconForeground: 'text-purple-700',
-    iconBackground: 'bg-purple-50'
+    iconForeground: "text-purple-700",
+    iconBackground: "bg-purple-50",
   },
   {
     title: DataDashboard.MattQuizTitle,
-    href: 'matquiz',
+    href: "matquiz",
     description: DataDashboard.MattQuizDescription,
     icon: mattquiz,
-    iconForeground: 'text-purple-700',
-    iconBackground: 'bg-purple-50'
+    iconForeground: "text-purple-700",
+    iconBackground: "bg-purple-50",
   },
   {
     title: DataDashboard.MattDescriptionTitle,
-    href: 'matdescription',
+    href: "matdescription",
     description: DataDashboard.MattDescription,
     icon: mattdesc,
-    iconForeground: 'text-purple-700',
-    iconBackground: 'bg-purple-50'
+    iconForeground: "text-purple-700",
+    iconBackground: "bg-purple-50",
   },
   {
     title: DataDashboard.MattResumeTitle,
-    href: 'mattresum',
+    href: "mattresum",
     description: DataDashboard.MattResume,
     icon: mattresume,
-    iconForeground: 'text-purple-700',
-    iconBackground: 'bg-purple-50'
+    iconForeground: "text-purple-700",
+    iconBackground: "bg-purple-50",
   },
   {
     title: DataDashboard.MatCVTitle,
-    href: 'matcv',
+    href: "matcv",
     description: DataDashboard.MatCVDescription,
     icon: mattcv,
-    iconForeground: 'text-purple-700',
-    iconBackground: 'bg-purple-50'
-  }
-  // {
-  //   title: 'Schedule a one-on-one',
-  //   href: '#',
-  //   icon: UsersIcon,
-  //   iconForeground: 'text-sky-700',
-  //   iconBackground: 'bg-sky-50',
-  // },
-  // {
-  //   title: 'Payroll',
-  //   href: '#',
-  //   icon: BanknotesIcon,
-  //   iconForeground: 'text-yellow-700',
-  //   iconBackground: 'bg-yellow-50',
-  // },
-  // {
-  //   title: 'Submit an expense',
-  //   href: '#',
-  //   icon: ReceiptRefundIcon,
-  //   iconForeground: 'text-rose-700',
-  //   iconBackground: 'bg-rose-50',
-  // },
-  // {
-  //   title: 'Training',
-  //   href: '#',
-  //   icon: AcademicCapIcon,
-  //   iconForeground: 'text-indigo-700',
-  //   iconBackground: 'bg-indigo-50',
-  // },
+    iconForeground: "text-purple-700",
+    iconBackground: "bg-purple-50",
+  },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function DashboardSection() {
@@ -126,14 +98,14 @@ export default function DashboardSection() {
             key={action.title}
             className={classNames(
               actionIdx === 0
-                ? 'rounded-tl-lg rounded-tr-lg sm:rounded-tr-none'
-                : '',
-              actionIdx === 1 ? 'sm:rounded-tr-lg' : '',
-              actionIdx === actions.length - 2 ? 'sm:rounded-bl-lg' : '',
+                ? "rounded-tl-lg rounded-tr-lg sm:rounded-tr-none"
+                : "",
+              actionIdx === 1 ? "sm:rounded-tr-lg" : "",
+              actionIdx === actions.length - 2 ? "sm:rounded-bl-lg" : "",
               actionIdx === actions.length - 1
-                ? 'rounded-bl-lg rounded-br-lg sm:rounded-bl-none'
-                : '',
-              'group bg-[#21c284] relative p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-emerald-500 gap-6'
+                ? "rounded-bl-lg rounded-br-lg sm:rounded-bl-none"
+                : "",
+              "group relative p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-emerald-900 bg-[#21c284] "
             )}
           >
             <div>
@@ -141,7 +113,7 @@ export default function DashboardSection() {
                 className={classNames(
                   action.iconBackground,
                   action.iconForeground,
-                  'inline-flex rounded-lg p-1 ring-4 ring-white'
+                  "inline-flex rounded-lg p-1 ring-4 ring-white"
                 )}
               >
                 <Image
