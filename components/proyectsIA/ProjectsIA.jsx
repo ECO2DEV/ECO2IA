@@ -1,12 +1,12 @@
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
 
 import { GridPattern } from '../GridPattern'
-import IA1 from '../../public/IA1.png'
-import IA2 from '../../public/IA2.png'
-import IA3 from '../../public/IA3.png'
-import IA4 from '../../public/IA4.png'
-import IA5 from '../../public/IA5.png'
-import IA6 from '../../public/IA6.png'
+import IA1 from '../../public/IA1.webp'
+import IA2 from '../../public/IA2.webp'
+import IA3 from '../../public/IA3.webp'
+import IA4 from '../../public/IA4.webp'
+import IA5 from '../../public/IA5.webp'
+import IA6 from '../../public/IA6.webp'
 import Image from 'next/image'
 
 const resources = [
