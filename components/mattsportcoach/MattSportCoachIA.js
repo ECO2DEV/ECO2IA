@@ -96,7 +96,7 @@ export const SportCoachIA = (props) => {
     <div className="flex flex-col items-center w-full">
       <div className="flex justify-center items-center text-[#21c284] mb-4">
         <span>
-          Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+        Puntos utilizados para la pregunta. : {promptTokens}&nbsp;&nbsp;
         </span>
       </div>
 

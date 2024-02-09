@@ -3,77 +3,77 @@ import Image from 'next/image';
 
 import { DataDashboard } from '../../data/dashboard';
 
-import mattchat from '../../public/mattchat.webp';
-import mattresume from '../../public/mattresume.webp';
-import mattimage from '../../public/mattimage.webp';
-import mattrad from '../../public/mattrad.webp';
-import mattsport from '../../public/mattsport.webp';
-import mattquiz from '../../public/mattquiz.webp';
-import mattdesc from '../../public/mattdesc.webp';
-import mattcv from '../../public/mattcv.webp';
+import eco2chat from '../../public/eco2chat.webp';
+import eco2resume from '../../public/eco2resume.webp';
+import eco2image from '../../public/eco2image.webp';
+import eco2rad from '../../public/eco2rad.webp';
+import eco2sport from '../../public/eco2sport.webp';
+import eco2quiz from '../../public/eco2quiz.webp';
+import eco2desc from '../../public/eco2desc.webp';
+import eco2cv from '../../public/eco2cv.webp';
 
 const actions = [
   {
-    title: DataDashboard.MattechChatTitle,
-    href: 'mattchat',
-    description: DataDashboard.MattechChatDescription,
-    icon: mattchat,
+    title: DataDashboard.Eco2ChatTitle,
+    href: 'eco2chat',
+    description: DataDashboard.Eco2ChatDescription,
+    icon: eco2chat,
     iconForeground: 'text-teal-700',
     iconBackground: 'bg-teal-50'
   },
   {
-    title: DataDashboard.MattechImageTitle,
-    href: 'mattimage',
-    description: DataDashboard.MattechImageDescription,
-    icon: mattimage,
+    title: DataDashboard.Eco2ImageTitle,
+    href: 'eco2image',
+    description: DataDashboard.Eco2ImageDescription,
+    icon: eco2image,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MatTranslateTitle,
-    href: 'mattraduct',
-    description: DataDashboard.MatTranslateDescription,
-    icon: mattrad,
+    title: DataDashboard.Eco2TranslateTitle,
+    href: 'eco2traduct',
+    description: DataDashboard.Eco2TranslateDescription,
+    icon: eco2rad,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MattSportTitle,
-    href: 'mattsport',
-    description: DataDashboard.MattSportDescription,
-    icon: mattsport,
+    title: DataDashboard.Eco2SportTitle,
+    href: 'eco2sport',
+    description: DataDashboard.Eco2SportDescription,
+    icon: eco2sport,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MattQuizTitle,
-    href: 'matquiz',
-    description: DataDashboard.MattQuizDescription,
-    icon: mattquiz,
+    title: DataDashboard.Eco2QuizTitle,
+    href: 'eco2quiz',
+    description: DataDashboard.Eco2QuizDescription,
+    icon: eco2quiz,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MattDescriptionTitle,
-    href: 'matdescription',
-    description: DataDashboard.MattDescription,
-    icon: mattdesc,
+    title: DataDashboard.Eco2DescriptionTitle,
+    href: 'eco2description',
+    description: DataDashboard.Eco2Description,
+    icon: eco2desc,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MattResumeTitle,
-    href: 'mattresum',
-    description: DataDashboard.MattResume,
-    icon: mattresume,
+    title: DataDashboard.Eco2ResumeTitle,
+    href: 'eco2resume',
+    description: DataDashboard.Eco2Resume,
+    icon: eco2resume,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MatCVTitle,
-    href: 'matcv',
-    description: DataDashboard.MatCVDescription,
-    icon: mattcv,
+    title: DataDashboard.Eco2CVTitle,
+    href: 'eco2cv',
+    description: DataDashboard.Eco2CVDescription,
+    icon: eco2cv,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   }

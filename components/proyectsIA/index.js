@@ -1,1 +1,1 @@
-export { ProjectsIA } from './ProjectsIA'
+export { ProjectsIA } from './ProjectsIA';

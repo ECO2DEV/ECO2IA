@@ -108,7 +108,7 @@ export const SportCoachResults = ({ user }) => {
 
   // formato para compartir el plan de entrenamiento a pdf y a las redes sociales
   const generateTrainingPlanContent = () => {
-    let content = "Salut! Je partage mon plan d'entraînement :\n\n";
+    let content = "¡Hola! Comparto mi plan de entrenamiento :\n\n";
     if (responseObj) {
       // console.log('the response obj', typeof responseObj);
       responseObj?.resp?.forEach((day) => {
@@ -172,7 +172,7 @@ export const SportCoachResults = ({ user }) => {
           </div>
         ))
       ) : (
-        <div>Essayer à nouveau</div>
+        <div>Intentar de nuevo</div>
       )}
 
       <nav aria-label="Breadcrumb">

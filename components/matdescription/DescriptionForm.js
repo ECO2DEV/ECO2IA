@@ -234,7 +234,7 @@ const DescriptionForm = () => {
         )}
       </button>
       <span className=" flex justify-center items-center text-gray-900">
-        Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+      Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
       </span>
     </form>
   );

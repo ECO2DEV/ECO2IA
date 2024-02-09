@@ -569,7 +569,7 @@ export function EmailIconSVG() {
 }
 export function LinkedinIcon() {
   const iconStyle = {
-    color: 'white' // Agrega cualquier estilo adicional aquí si es necesario
+    color: 'gray' // Agrega cualquier estilo adicional aquí si es necesario
   };
 
   return (
