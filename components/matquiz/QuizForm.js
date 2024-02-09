@@ -115,7 +115,7 @@ export const QuizForm = ({
         type="submit"
         className={`${
           loading
-            ? 'text-white bg-gray-500 rounded-full text-center focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284]'
+            ? 'text-white rounded-full text-center focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284]'
             : ' rounded-full  font-semibold bg-indigo-600 text-white ring-1 ring-inset ring-gray-300'
         } w-full mt-4 px-4 py-2 `}
       >
