@@ -67,3 +67,104 @@
   margin: 0.5em 0;
   position: relative;
 }
+
+
+/* Navbar styles */
+
+#header .burger::after,
+#header .burger::before {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 40%;
+    margin: auto;
+    background-color: white;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+#header .burger::after {
+    top: -5px;
+}
+
+#header .burger::before {
+    top: 5px;
+}
+
+#header .burgerActive::after {
+    transform: rotate(45deg);
+    top: -1px;
+}
+
+#header .burgerActive::before {
+    transform: rotate(-45deg);
+    top: 0px;
+}
+
+
+/* Link styles */
+
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 25px;
+  right: 0;
+}
+
+
+.svgCurve{
+  
+  position: absolute;
+  top: 0;
+  left: -99px;
+  width: 100px;
+  height: 100%;
+  fill: rgb(41, 41, 41);
+  stroke: none;
+}
+
+/* style for the hamburfer nav */
+
+.btn{
+  display: flex;
+  flex-direction: column;
+  width: 3rem;
+  height: 3rem;
+  background: transparent;
+  border: 0;
+  gap: .65rem;
+ }
+ 
+ .btn > div{
+  background: black;
+  width: 40px;
+  height: 2px;
+  border-radius: 5px;
+  transition: all .5s;
+  transform-origin: left;
+ }
+ 
+ 
+ 
+ .btn2 div:first-child{
+  transform:  rotate(40deg);
+  
+ }
+ 
+ .btn2 div:nth-child(2){
+  opacity: 0;
+ }
+ 
+ .btn2 div:last-child{
+  transform:  rotate(-40deg);
+ }
+
+
+
+
+
+

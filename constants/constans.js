@@ -2,6 +2,15 @@ import { loadStripe } from '@stripe/stripe-js';
 import { DataPricing } from '../data/pricing';
 import { HomeIcon } from '@heroicons/react/24/outline';
 import { DataAbout } from '../data/about';
+import { DataDashboard } from '../data/dashboard';
+import mattchat from '../public/mattchat.webp';
+import mattresume from '../public/mattresume.webp';
+import mattimage from '../public/mattimage.webp';
+import mattrad from '../public/mattrad.webp';
+import mattsport from '../public/mattsport.webp';
+import mattquiz from '../public/mattquiz.webp';
+import mattdesc from '../public/mattdesc.webp';
+import mattcv from '../public/mattcv.webp';
 
 import Photo1 from '../public/Photo1.webp';
 import Photo2 from '../public/Photo2.webp';
@@ -17,6 +26,8 @@ import {
   UserGroupIcon
 } from '@heroicons/react/20/solid';
 
+import crypto from 'crypto';
+
 const PUBLICABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_KEY;
 const stripePromise = loadStripe(PUBLICABLE_KEY);
 
@@ -28,14 +39,14 @@ export const nextAuthUrl = process.env.NEXTAUTH_URL;
 
 export const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-  { name: 'MATTCHAT', href: '/mattchat', icon: HomeIcon, current: true },
-  { name: 'MATTIMAGE', href: '/mattimage', icon: HomeIcon, current: true },
-  { name: 'MATTRAD', href: '/mattraduct', icon: HomeIcon, current: true },
-  { name: 'MATTSPORT', href: '/mattsport', icon: HomeIcon, current: true },
-  { name: 'MATTQCM', href: '/matquiz', icon: HomeIcon, current: true },
-  { name: 'MATTDESC', href: '/matdescription', icon: HomeIcon, current: true },
-  { name: 'MATTRESUME', href: '/mattresum', icon: HomeIcon, current: true },
-  { name: 'MATTCV', href: '/matcv', icon: HomeIcon, current: true }
+  { name: 'ECO2CHAT', href: '/mattchat', icon: HomeIcon, current: true },
+  { name: 'ECO2IMAGE', href: '/mattimage', icon: HomeIcon, current: true },
+  { name: 'ECO2TRAD', href: '/mattraduct', icon: HomeIcon, current: true },
+  { name: 'ECO2TSPORT', href: '/mattsport', icon: HomeIcon, current: true },
+  { name: 'ECO2QUIZ', href: '/matquiz', icon: HomeIcon, current: true },
+  { name: 'ECO2DESC', href: '/matdescription', icon: HomeIcon, current: true },
+  { name: 'ECO2RESUME', href: '/mattresum', icon: HomeIcon, current: true },
+  { name: 'ECO2CV', href: '/matcv', icon: HomeIcon, current: true }
   // { name: 'Team', href: '#', icon: UsersIcon, current: false },
 ];
 
@@ -71,65 +82,208 @@ export const VOICE_FOR_LANGUAGE = {
   Fr: 'fr-FR'
 };
 
-export const AUTO_LANGUAGE = 'Auto';
+export const IA_CARDS = [
+  {
+    id: crypto.randomBytes(16).toString('hex'),
+    title: 'ECO2CHAT',
+    href: '/mattchat',
+    description:
+      'Chatbot especializado en interacción con usuarios, resolver dudas y preguntas frecuentes sobre cualquier tema',
+    icon: mattchat,
+    screenShot: '/screenshot/chat_eco2.webp',
+    demoLink: '/mattchat',
+    classNames: true,
+    index: 1,
+    keywords: ['Chat', 'bot', 'ia', 'inteligencia artificial']
+  },
+  {
+    id: crypto.randomBytes(16).toString('hex'),
+    title: 'ECO2IMAGE',
+    href: '/mattimage',
+    description:
+      'Creación de imágenes y edición de fotos con inteligencia artificial',
+    icon: mattimage,
+    screenShot: '/screenshot/dalle_eco2.webp',
+    demoLink: '/matimage',
+    classNames: false,
+    index: 2,
+    keywords: ['Imagen', 'edición', 'dalle', 'inteligencia artificial']
+  },
+  {
+    id: crypto.randomBytes(16).toString('hex'),
+    title: 'ECO2TRAD',
+    href: '/mattraduct',
+    description: 'Traductor de idiomas con inteligencia artificial',
+    icon: mattrad,
+    screenShot: '/screenshot/trad_eco2.webp',
+    demoLink: '/mattraduct',
+    classNames: false,
+    index: 3,
+    keywords: ['Traductor', 'idiomas', 'lenguas', 'inteligencia artificial']
+  },
+  {
+    id: crypto.randomBytes(16).toString('hex'),
+    title: 'ECO2SPORT',
+    href: '/mattsport',
+    description: 'entrenador personal con inteligencia artificial',
+    icon: mattsport,
+    screenShot: '/screenshot/sport_eco2.webp',
+    demoLink: '/mattsport',
+    classNames: true,
+    index: 4,
+    keywords: ['Deporte', 'entrenador', 'personal', 'GYM']
+  },
+  {
+    id: crypto.randomBytes(16).toString('hex'),
+    title: 'ECO2QUIZ',
+    href: '/matquiz',
+    description:
+      'Creador de cuestionarios, quizzes con inteligencia artificial',
+    icon: mattquiz,
+    screenShot: '/screenshot/quiz_eco2.webp',
+    demoLink: '/matquiz',
+    classNames: true,
+    index: 5,
+    keywords: ['Quiz', 'cuestionario', 'preguntas', 'inteligencia artificial']
+  },
+  {
+    id: crypto.randomBytes(16).toString('hex'),
+    title: 'ECO2DESC',
+    href: '/matdescription',
+    description:
+      'Creación de copys, descripciones para productos y servicio | marketing digital con inteligencia artificial',
+    icon: mattdesc,
+    screenShot: '/screenshot/desc_eco2.webp',
+    demoLink: '/matdescription',
+    classNames: false,
+    index: 6,
+    keywords: ['Descripcion', 'copys', 'marketing', 'inteligencia artificial']
+  },
+  {
+    id: crypto.randomBytes(16).toString('hex'),
+    title: 'ECO2RESUME',
+    href: '/mattresum',
+    description:
+      'Genarador de resumenes, resumenes de texto con inteligencia artificial',
+    icon: mattresume,
+    screenShot: '/screenshot/resum_eco2.webp',
+    demoLink: '/mattresum',
+    classNames: false,
+    index: 7,
+    keywords: ['Resumen', 'Acotar', 'Extracto', 'inteligencia artificia']
+  },
+  {
+    id: crypto.randomBytes(16).toString('hex'),
+    title: 'ECO2CV',
+    href: '/matcv',
+    description:
+      'Creación de curriculum vitae, hojas de vida con inteligencia artificial',
+    icon: mattcv,
+    screenShot: '/screenshot/cv_eco2.webp',
+    demoLink: '/matcv',
+    classNames: false,
+    index: 8,
+    keywords: ['Curriculum', 'hoja de vida', 'inteligencia artificial']
+  }
+];
 
-export const plan_pricing = {
-  frequencies: [
-    { value: '', label: '' },
-    { value: '', label: '' }
-  ],
-  tiers: [
-    {
-      name: DataPricing.pricingtitle1,
-      id: '',
-      href: '#',
-      featured: false,
-      description: '',
-      price: { monthly: DataPricing.amount1, annually: '' },
-      priceid: DataPricing.priceid1,
-      mainFeatures: [
-        DataPricing.pricingfeatures1,
-        DataPricing.pricingfeatures1_2,
-        DataPricing.pricingfeatures1_3,
-        DataPricing.pricingfeatures1_4,
-        DataPricing.pricingfeatures1_5
-      ],
-      cta: DataPricing.pricingbutton1
-    },
-    {
-      name: DataPricing.pricingtitle2,
-      id: '',
-      href: '#',
-      featured: true,
-      description: '',
-      price: { monthly: DataPricing.amount2, annually: '' },
-      //no son distintos los id de los planes
-      priceid: DataPricing.priceid2,
-      mainFeatures: [
-        DataPricing.pricingfeatures2,
-        DataPricing.pricingfeatures2_2,
-        DataPricing.pricingfeatures2_3,
-        DataPricing.pricingfeatures2_4,
-        DataPricing.pricingfeatures2_5
-      ],
-      cta: DataPricing.pricingbutton2
-    },
-    {
-      name: DataPricing.pricingtitle3,
-      id: '',
-      href: '#',
-      featured: false,
-      description: '',
-      price: { monthly: DataPricing.pricingbutton3, annually: '' },
-      mainFeatures: [
-        DataPricing.pricingfeatures3,
-        DataPricing.pricingfeatutes3_2,
-        DataPricing.pricingfeatures3_3,
-        DataPricing.pricingfeatures3_4
-      ],
-      cta: DataPricing.pricingbutton3
-    }
-  ]
+export const actions = [
+  {
+    title: DataDashboard.MattechChatTitle,
+    href: 'mattchat',
+    description: DataDashboard.MattechChatDescription,
+    icon: mattchat,
+    iconForeground: 'text-teal-700',
+    iconBackground: 'bg-teal-50'
+  },
+  {
+    title: DataDashboard.MattechImageTitle,
+    href: 'mattimage',
+    description: DataDashboard.MattechImageDescription,
+    icon: mattimage,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
+  },
+  {
+    title: DataDashboard.MatTranslateTitle,
+    href: 'mattraduct',
+    description: DataDashboard.MatTranslateDescription,
+    icon: mattrad,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
+  },
+  {
+    title: DataDashboard.MattSportTitle,
+    href: 'mattsport',
+    description: DataDashboard.MattSportDescription,
+    icon: mattsport,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
+  },
+  {
+    title: DataDashboard.MattQuizTitle,
+    href: 'matquiz',
+    description: DataDashboard.MattQuizDescription,
+    icon: mattquiz,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
+  },
+  {
+    title: DataDashboard.MattDescriptionTitle,
+    href: 'matdescription',
+    description: DataDashboard.MattDescription,
+    icon: mattdesc,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
+  },
+  {
+    title: DataDashboard.MattResumeTitle,
+    href: 'mattresum',
+    description: DataDashboard.MattResume,
+    icon: mattresume,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
+  },
+  {
+    title: DataDashboard.MatCVTitle,
+    href: 'matcv',
+    description: DataDashboard.MatCVDescription,
+    icon: mattcv,
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
+  }
+  // {
+  //   title: 'Schedule a one-on-one',
+  //   href: '#',
+  //   icon: UsersIcon,
+  //   iconForeground: 'text-sky-700',
+  //   iconBackground: 'bg-sky-50',
+  // },
+  // {
+  //   title: 'Payroll',
+  //   href: '#',
+  //   icon: BanknotesIcon,
+  //   iconForeground: 'text-yellow-700',
+  //   iconBackground: 'bg-yellow-50',
+  // },
+  // {
+  //   title: 'Submit an expense',
+  //   href: '#',
+  //   icon: ReceiptRefundIcon,
+  //   iconForeground: 'text-rose-700',
+  //   iconBackground: 'bg-rose-50',
+  // },
+  // {
+  //   title: 'Training',
+  //   href: '#',
+  //   icon: AcademicCapIcon,
+  //   iconForeground: 'text-indigo-700',
+  //   iconBackground: 'bg-indigo-50',
+  // },
+];
+
+export const classNames = (...classes) => {
+  return classes.filter(Boolean).join(' ');
 };
 
 export const values = [
@@ -198,3 +352,64 @@ export const stats = [
   { label: DataAbout.aboutusers, value: DataAbout.aboutusersvalue },
   { label: DataAbout.aboutiaavaibles, value: DataAbout.aboutiaavaiblesvalue }
 ];
+
+export const AUTO_LANGUAGE = 'Auto';
+
+export const plan_pricing = {
+  frequencies: [
+    { value: '', label: '' },
+    { value: '', label: '' }
+  ],
+  tiers: [
+    {
+      name: DataPricing.pricingtitle1,
+      id: '',
+      href: '#',
+      featured: false,
+      description: '',
+      price: { monthly: DataPricing.amount1, annually: '' },
+      priceid: DataPricing.priceid1,
+      mainFeatures: [
+        DataPricing.pricingfeatures1,
+        DataPricing.pricingfeatures1_2,
+        DataPricing.pricingfeatures1_3,
+        DataPricing.pricingfeatures1_4,
+        DataPricing.pricingfeatures1_5
+      ],
+      cta: DataPricing.pricingbutton1
+    },
+    {
+      name: DataPricing.pricingtitle2,
+      id: '',
+      href: '#',
+      featured: true,
+      description: '',
+      price: { monthly: DataPricing.amount2, annually: '' },
+      //no son distintos los id de los planes
+      priceid: DataPricing.priceid2,
+      mainFeatures: [
+        DataPricing.pricingfeatures2,
+        DataPricing.pricingfeatures2_2,
+        DataPricing.pricingfeatures2_3,
+        DataPricing.pricingfeatures2_4,
+        DataPricing.pricingfeatures2_5
+      ],
+      cta: DataPricing.pricingbutton2
+    },
+    {
+      name: DataPricing.pricingtitle3,
+      id: '',
+      href: '#',
+      featured: false,
+      description: '',
+      price: { monthly: DataPricing.pricingbutton3, annually: '' },
+      mainFeatures: [
+        DataPricing.pricingfeatures3,
+        DataPricing.pricingfeatutes3_2,
+        DataPricing.pricingfeatures3_3,
+        DataPricing.pricingfeatures3_4
+      ],
+      cta: DataPricing.pricingbutton3
+    }
+  ]
+};
