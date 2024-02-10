@@ -1,29 +1,29 @@
-import { useState, useContext, useEffect } from 'react';
-import { PromptContext } from '../../context/prompts/PromptContext';
-import { UserContext } from '../../context/user/UserContext';
-import { useDalle } from '../../hooks/useDalle';
-import { DalleResponse } from '../../util/api/dalleResponse';
-import { WelcomeDalle } from './welcomedalle';
-import { ButtonHelper } from '../welcome/buttonHelper';
+import { useState, useContext, useEffect } from "react";
+import { PromptContext } from "../../context/prompts/PromptContext";
+import { UserContext } from "../../context/user/UserContext";
+import { useDalle } from "../../hooks/useDalle";
+import { DalleResponse } from "../../util/api/dalleResponse";
+import { WelcomeDalle } from "./welcomedalle";
+import { ButtonHelper } from "../welcome/buttonHelper";
 
-import { toast } from 'react-hot-toast';
-import { Carousel } from './carousel';
-import { DropdownDalle } from './dropdown_dalle';
-import { ButtonLatestImg } from './buttonLatestImg';
-import SearchTextboxDalle from '../searchTextbox/searchTextboxDalle';
-import { DataMattImage } from '../../data/mattimage';
+import { toast } from "react-hot-toast";
+import { Carousel } from "./carousel";
+import { DropdownDalle } from "./dropdown_dalle";
+import { ButtonLatestImg } from "./buttonLatestImg";
+import SearchTextboxDalle from "../searchTextbox/searchTextboxDalle";
+import { DataEco2Image } from "../../data/eco2image";
 
 export default function DalleIA() {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const [imageSrc, setImageSrc] = useState({
-    firstImage: '',
-    secondImage: ''
+    firstImage: "",
+    secondImage: "",
   });
   const [openHelpers, setOpenHelpers] = useState(false);
   const [openLastestImages, setOpenLastestImages] = useState(false);
   const [loading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState('');
+  const [isError, setIsError] = useState("");
   const { user } = useContext(UserContext);
   const {
     prompt,
@@ -32,32 +32,35 @@ export default function DalleIA() {
     setResponse,
     activeAI,
     setActiveAI,
-    plan
+    plan,
   } = useContext(PromptContext);
 
   const { data, mutate } = useDalle(user?.id);
+  console.log('data:', data)
 
   useEffect(() => {
-    if (activeAI !== 'DalleIA') {
-      setPrompt('');
+    if (activeAI !== "") {
+      console.log('activeAI:', activeAI)
+      setPrompt("");
     }
-    setActiveAI('DalleIA');
+    setActiveAI("DalleIA");
+    console.log("setActiveAI:", setActiveAI)
   }, []);
 
   const handleChange = (e) => {
     setPrompt(e.target.value);
-    if (e.target.value === '') {
+    if (e.target.value === "") {
       setPromptTokens(0);
     }
   };
   const FetchData = async (e) => {
     e.preventDefault();
     if (plan.max_imagens <= 0) {
-      toast.error(DataMattImage.YouHaveReachedLimit);
+      toast.error(DataEco2Image.YouHaveReachedLimit);
       return;
     }
     if (!prompt) {
-      setIsError('Please type something before submit');
+      setIsError("Please type something before submit");
     } else {
       setIsLoading(true);
       try {
@@ -66,15 +69,16 @@ export default function DalleIA() {
         const decodedSecondImage = response?.data?.data[1]?.b64_json;
         setImageSrc({
           firstImage: decodedFirstImage,
-          secondImage: decodedSecondImage
+          secondImage: decodedSecondImage,
         });
         mutate({ data: [...data.data, response?.data], ...data });
         setResponse(response?.data?.data);
+        console.log('setResponse:', setResponse)
       } catch (error) {
-        setIsError('An error occurred while fetching data.');
+        setIsError("An error occurred while fetching data.");
       } finally {
         setIsLoading(false);
-        setPrompt('');
+        setPrompt("");
         setOpenHelpers(false);
       }
     }
@@ -82,7 +86,7 @@ export default function DalleIA() {
 
   return (
     <section>
-      {imageSrc.firstImage === '' ? (
+      {imageSrc.firstImage === "" ? (
         <WelcomeDalle />
       ) : openHelpers ? (
         <WelcomeDalle />
@@ -90,7 +94,7 @@ export default function DalleIA() {
         <div className=" flex flex-col items-center my-10 gap-2">
           <div className="flex flex-col sm:flex-row justify-center items-center gap-2">
             <div className="flex-1 relative">
-              {imageSrc !== '' ? (
+              {imageSrc !== "" ? (
                 <>
                   <img
                     src={
@@ -103,7 +107,7 @@ export default function DalleIA() {
                   />
                   <div
                     className={`${
-                      showDropdown ? 'absolute  top-10 ' : 'hidden'
+                      showDropdown ? "absolute  top-10 " : "hidden"
                     }`}
                   >
                     <DropdownDalle imageSrc={imageSrc.firstImage} />
@@ -112,7 +116,7 @@ export default function DalleIA() {
               ) : null}
             </div>
             <div className="flex-1 relative">
-              {imageSrc.secondImage !== '' ? (
+              {imageSrc.secondImage !== "" ? (
                 <>
                   <img
                     src={
@@ -125,7 +129,7 @@ export default function DalleIA() {
                   />
                   <div
                     className={`${
-                      showDropdown ? 'absolute  top-10 ' : 'hidden'
+                      showDropdown ? "absolute  top-10 " : "hidden"
                     }`}
                   >
                     <DropdownDalle imageSrc={imageSrc.secondImage} />
@@ -146,11 +150,13 @@ export default function DalleIA() {
 
       <div className="fixed bottom-3 w-full">
         <div className="flex justify-center  w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem]">
-          <SearchTextboxDalle
-            OnChange={handleChange}
-            Fetch={FetchData}
-            loading={loading}
-          />
+            <SearchTextboxDalle
+              OnChange={handleChange}
+              Fetch={FetchData}
+              loading={loading}
+              prompt={prompt ? prompt : ''}
+            />
+
           <div className="flex justify-center items-center gap-2 mb-4">
             <ButtonHelper onClick={() => setOpenHelpers((prev) => !prev)} />
             <ButtonLatestImg

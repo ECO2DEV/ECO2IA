@@ -34,13 +34,14 @@ export default function ChatGpt() {
     setSelectedModel(e.target.value);
   };
 
-  const { setResponse, setPromptTokens, setActiveAI } =
+  const { ...state } =
     useContext(PromptContext);
 
   const { mutate } = useChat(user?.id);
 
   useEffect(() => {
-    setActiveAI('ChatGpt');
+    state.setActiveAI('ChatGpt');
+    // setActiveAI('ChatGpt');
     setSelectedModel('gpt-3.5-turbo');
   }, []);
 
@@ -102,11 +103,11 @@ export default function ChatGpt() {
 
   useEffect(() => {
     if (input === '') {
-      setPromptTokens(0);
+      state.setPromptTokens(0);
       return;
     }
     const tokens = countTokens(input);
-    setPromptTokens(tokens);
+    state.setPromptTokens(tokens);
   }, [input]);
 
   return (

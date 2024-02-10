@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
 
-import { DataDashboard } from '../../data/dashboard';
+import { DataDashboard } from "../../data/dashboard";
 
 import eco2chat from '../../public/eco2chat.webp';
 import eco2resume from '../../public/eco2resume.webp';
@@ -108,7 +108,7 @@ const actions = [
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function DashboardSection() {
@@ -126,10 +126,10 @@ export default function DashboardSection() {
             key={action.title}
             className={classNames(
               actionIdx === 0
-                ? 'rounded-tl-lg rounded-tr-lg sm:rounded-tr-none'
-                : '',
-              actionIdx === 1 ? 'sm:rounded-tr-lg' : '',
-              actionIdx === actions.length - 2 ? 'sm:rounded-bl-lg' : '',
+                ? "rounded-tl-lg rounded-tr-lg sm:rounded-tr-none"
+                : "",
+              actionIdx === 1 ? "sm:rounded-tr-lg" : "",
+              actionIdx === actions.length - 2 ? "sm:rounded-bl-lg" : "",
               actionIdx === actions.length - 1
                 ? 'rounded-bl-lg rounded-br-lg sm:rounded-bl-none'
                 : '',
@@ -141,7 +141,7 @@ export default function DashboardSection() {
                 className={classNames(
                   action.iconBackground,
                   action.iconForeground,
-                  'inline-flex rounded-lg p-1 ring-4 ring-white'
+                  "inline-flex rounded-lg p-1 ring-4 ring-white"
                 )}
               >
                 <Image
