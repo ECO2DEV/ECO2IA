@@ -62,7 +62,7 @@ export default function Modal({ user }) {
           alert(result.error.message);
         }
       } catch (error) {
-        // console.log(error);
+        console.error('loadStripe', error);
       }
     }
   };

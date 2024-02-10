@@ -276,7 +276,7 @@ function TextSummarizerPage() {
           </button>
           <div className="flex justify-center items-center my-2 text-gray-900">
             <span>
-              Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+              Tokens utilizados en la pregunta : {promptTokens}&nbsp;&nbsp;
             </span>
           </div>
         </div>

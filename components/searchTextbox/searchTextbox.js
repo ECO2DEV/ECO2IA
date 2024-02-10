@@ -25,7 +25,7 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
             name="prompt"
             id="prompt"
             className="w-full rounded-none rounded-l-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            placeholder="Comment je peux vous servir aujourd’hui"
+            placeholder="¿Como puedo ayudarte hoy?"
             onChange={OnChange}
             value={prompt ? prompt : ''}
           />
@@ -36,12 +36,12 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
           disabled={loading}
         >
           <BarsArrowUpIcon className="-ml-0.5 h-5 w-5 text-white" />
-          <span className="hidden md:flex">Envoyer</span>
+          <span className="hidden md:flex">Enviar</span>
         </button>
       </form>
       <div className="flex justify-start">
         <span className=" bottom-4 text-gray-900">
-          Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+          Tokens utilizados para la pregunta: {promptTokens}&nbsp;&nbsp;
         </span>
         <span>{loading && <Loader />}</span>
       </div>

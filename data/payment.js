@@ -1,13 +1,14 @@
-export const DataPayment ={
-    PaymentCheckout:"Passer à la caisse",
-    Submit:"Envoyer",
-    Cancel:"Annuler",
-    PaymentSucessful:"Paiement réussi",
-    PaymentAnnuler:"Paiement annulé",
-    YouCanAccess:"Vous pouvez maintenant accéder à notre formidable plateforme IA. Merci de vous être abonné(e) !",
-    GoDashboard:"Retourner au tableau de bord",
-    SubscriptionCreated:"Abonnement créé avec succès !",
-    Processing:"En cours de traitement...",
-    Suscribe:"S'abonner",
-    Checkout:"Paiement"
-}
+export const DataPayment = {
+  PaymentCheckout: 'Ir a la caja',
+  Submit: 'Enviar',
+  Cancel: 'Cancelar',
+  PaymentSucessful: 'Pago exitoso',
+  PaymentAnnuler: 'Pago cancelado',
+  YouCanAccess:
+    'Ahora puedes acceder a nuestra increíble plataforma de IA. ¡Gracias por suscribirte!',
+  GoDashboard: 'Ir al panel de control',
+  SubscriptionCreated: '¡Suscripción creada exitosamente!',
+  Processing: 'Procesando...',
+  Suscribe: 'Suscribirse',
+  Checkout: 'Pago'
+};
