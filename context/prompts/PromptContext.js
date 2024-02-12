@@ -2,8 +2,8 @@ import { createContext } from 'react';
 
 export const PromptContext = createContext({
   plan: [],
-  activeAI: 'ChatGpt' || 'DalleIA' || 'Eco2DescriptionAI',
-  prompt: 'una mariposa malvada, sangre, roja',
+  activeAI: null,
+  prompt: null,
   response: null,
   promptTokens: 0,
   responseTokens: 0,

@@ -124,12 +124,12 @@ export const QuizForm = ({
             <Loader />
           </div>
         ) : (
-          'Envoyer'
+          'Enviar'
         )}
       </button>
 
       <span className="flex justify-center items-center text-gray-900 my-2">
-        Points utilisés pour la question : {promptTokens}&nbsp;&nbsp;
+        Tokens utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
       </span>
     </form>
   );

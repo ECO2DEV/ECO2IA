@@ -4,8 +4,8 @@ import Loader from '../loader/loader';
 
 import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 
-export default function SearchTextboxDalle({ OnChange, Fetch, loading, prompt }) {
-  const { promptTokens } = useContext(PromptContext);
+export default function SearchTextboxDalle({ OnChange, Fetch, loading }) {
+  const { promptTokens, prompt } = useContext(PromptContext);
 
   return (
     <div className="flex-1">
@@ -28,7 +28,7 @@ export default function SearchTextboxDalle({ OnChange, Fetch, loading, prompt })
             className="w-full rounded-none rounded-l-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             placeholder="¿Como puedo ayudarte hoy?"
             onChange={OnChange}
-            value={prompt}
+            value={prompt ? prompt : ''}
           />
         </div>
         <button

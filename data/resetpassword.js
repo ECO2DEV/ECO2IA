@@ -1,9 +1,10 @@
 export const DataResetPassword = {
-    PasswordReset: "Réinitialisation du mot de passe réussie.",
-    ErrorPassword:"Erreur lors de la réinitialisation du mot de passe.",
-    ResetPasswordTitle:"Réinitialiser le mot de passe",
-    NewPassword:"Nouveau mot de passe",
-    ResentPassword:"Renvoyer le mot de passe",
-    PasswordMust:"Le mot de passe doit comporter au moins 6 caractères.",
-    Instructions:"Veuillez choisir un mot de passe sécurisé et unique qui combine des lettres (majuscules et minuscules), des chiffres et des symboles."
-}
+  PasswordReset: 'Restablecimiento de contraseña exitoso.',
+  ErrorPassword: 'Error al restablecer la contraseña.',
+  ResetPasswordTitle: 'Restablecer contraseña',
+  NewPassword: 'Nueva contraseña',
+  ResentPassword: 'Reenviar contraseña',
+  PasswordMust: 'La contraseña debe tener al menos 6 caracteres.',
+  Instructions:
+    'Por favor, elige una contraseña segura y única que combine letras (mayúsculas y minúsculas), números y símbolos.'
+};

@@ -13,7 +13,7 @@ import { VOICE_FOR_LANGUAGE } from "../../constants/constans";
 import { DataEco2Traduct } from "../../data/eco2traduct";
 import { DetectionLanguage } from "./JustDetectionLanguage";
 
-const MattraductAI = () => {
+const Eco2traductAI = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showThirdTextarea, setShowThirdTextarea] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -79,7 +79,7 @@ const MattraductAI = () => {
       });
   };
   const handleMatTraduct = () => {
-    if (!prompt || activeAI !== "MattraductAI") return;
+    if (!prompt || activeAI !== "Eco2traductAI") return;
     setIsLoading(true);
     Eco2traductResponse({
       prompt: prompt,
@@ -257,4 +257,4 @@ const MattraductAI = () => {
   );
 };
 
-export default MattraductAI;
+export default Eco2traductAI;

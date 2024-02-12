@@ -52,7 +52,7 @@ const Transcription = ({language}) => {
   };
 
   if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
+    return <span>El navegador no admite el reconocimiento de voz.</span>;
   }
 
   return (

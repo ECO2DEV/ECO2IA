@@ -1,4 +1,4 @@
-export const DataMattChat = {
+export const DataEco2Chat = {
   CopiedSuccess: '¡Texto copiado al portapapeles!',
   CopiedCodeSuccess: 'Código copiado al portapapeles!',
   CopiedFailed: '¡No se pudo copiar el texto al portapapeles!',

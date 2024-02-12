@@ -16,7 +16,7 @@ export default function Layout({ children, router }) {
             type="text/javascript"
             src="http://localhost:1337/plugins/strapi-stripe/static/stripe.js"
           />
-          <link rel="icon" href="/Mlogo.ico" />
+          <link rel="icon" href="/eco2it_logo.jpeg" />
         </Head>
 
         {children}
