@@ -15,13 +15,13 @@ export default async function POST(req) {
   // Extract the `messages` from the body of the request
   const { messages, model } = await req.json();
 
-  const messagesWithMarkdownRequest = [
-    ...messages,
-    {
-      role: 'system',
-      content: 'Responder con el código en formato Markdown por favor.'
-    }
-  ];
+  // const messagesWithMarkdownRequest = [
+  //   ...messages,
+  //   {
+  //     role: 'system',
+  //     content: 'Responder con el código en formato Markdown por favor.'
+  //   }
+  // ];
 
   // console.log('this is the model', model);
 
@@ -29,7 +29,7 @@ export default async function POST(req) {
   const response = await openai.createChatCompletion({
     model: model,
     stream: true,
-    messages: messagesWithMarkdownRequest,
+    messages: messages,
     max_tokens: 500,
     temperature: 0.7,
     top_p: 1,
@@ -37,7 +37,7 @@ export default async function POST(req) {
     presence_penalty: 1
   });
 
-  if (!response.ok) throw new Error(response.statusText);
+  // if (!response.ok) throw new Error(response.statusText);
 
   // z
   const stream = OpenAIStream(response);
