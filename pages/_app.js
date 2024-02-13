@@ -1,12 +1,12 @@
-import "../styles/globals.css";
-import { SessionProvider } from "next-auth/react";
-import Layout from "../components/layout/layout";
-import { useRouter } from "next/router";
-import LayoutUser from "../components/layout/layout_user";
-import { PromptProvider } from "../context/prompts/PromptProvider";
-import { SWRConfig } from "swr";
-import { UserProvider } from "../context/user/UserProvider";
-import { Providers } from "../util/providers/providers";
+import '../styles/globals.css';
+import { SessionProvider } from 'next-auth/react';
+import Layout from '../components/layout/layout';
+import { useRouter } from 'next/router';
+import LayoutUser from '../components/layout/layout_user';
+import { PromptProvider } from '../context/prompts/PromptProvider';
+import { SWRConfig } from 'swr';
+import { UserProvider } from '../context/user/UserProvider';
+import { Providers } from '../util/providers/providers';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   //   currency: 'eur'
   // };
 
-  if (router.pathname == "/auth/signin") {
+  if (router.pathname == '/auth/signin') {
     return (
       <SessionProvider session={session}>
         <UserProvider>
@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     );
   }
 
-  if (router.pathname == "/suscribe") {
+  if (router.pathname == '/suscribe') {
     return (
       <SessionProvider session={session}>
         <UserProvider>
@@ -48,17 +48,18 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   }
 
   if (
-    router.pathname == "/pairoll" ||
-    router.pathname == "/dashboard" ||
-    router.pathname == "/mattchat" ||
-    router.pathname == "/mattimage" ||
-    router.pathname == "/profile" ||
-    router.pathname == "/mattraduct" ||
-    router.pathname == "/mattsport" ||
-    router.pathname == "/matquiz" ||
-    router.pathname == "/matdescription" ||
-    router.pathname == "/mattresum" ||
-    router.pathname == "/matcv"
+    router.pathname == '/pairoll' ||
+    router.pathname == '/dashboard' ||
+    router.pathname == '/mattchat' ||
+    router.pathname == '/mattimage' ||
+    router.pathname == '/profile' ||
+    router.pathname == '/mattraduct' ||
+    router.pathname == '/mattsport' ||
+    router.pathname == '/matquiz' ||
+    router.pathname == '/matdescription' ||
+    router.pathname == '/mattresum' ||
+    router.pathname == '/matcv' ||
+    router.pathname == '/renovhome'
   ) {
     return (
       <Providers>

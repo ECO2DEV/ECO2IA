@@ -27,6 +27,10 @@ import {
 } from '@heroicons/react/20/solid';
 
 import crypto from 'crypto';
+import ImageStep from '../components/steps_renovhome/ImageStep';
+import MaskImageStep from '../components/steps_renovhome/MaskImageStep';
+import FormStep from '../components/steps_renovhome/FormStep';
+import { OutputImgStep } from '../components/steps_renovhome/OutputImgStep';
 
 const PUBLICABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_KEY;
 const stripePromise = loadStripe(PUBLICABLE_KEY);
@@ -184,6 +188,19 @@ export const IA_CARDS = [
     classNames: false,
     index: 8,
     keywords: ['Curriculum', 'hoja de vida', 'inteligencia artificial']
+  },
+  {
+    id: crypto.randomBytes(16).toString('hex'),
+    title: 'ECO2RENOVHOME',
+    href: '/renovhome',
+    description:
+      'Renovhome es una aplicación que utiliza inteligencia artificial para ayudar a los usuarios a rediseñar sus espacios',
+    icon: mattcv,
+    screenShot: '/screenshot/cv_eco2.webp',
+    demoLink: '/renovhome',
+    classNames: false,
+    index: 9,
+    keywords: ['Renovhome', 'rediseñar', 'espacios', 'casa', 'hogar']
   }
 ];
 
@@ -413,3 +430,90 @@ export const plan_pricing = {
     }
   ]
 };
+
+export const steps = [
+  {
+    id: 1,
+    name: 'imageStep',
+    title: 'Upload Image',
+    component: ImageStep,
+    status: 'current'
+  },
+  {
+    id: 2,
+    name: 'maskImageStep',
+    title: 'Mask Image',
+    component: MaskImageStep,
+    status: 'upcoming'
+  },
+  {
+    id: 3,
+    name: 'formStep',
+    title: 'Provide Details',
+    component: FormStep,
+    status: 'upcoming'
+  },
+  {
+    id: 4,
+    name: 'outputImgStep',
+    title: 'Output Image',
+    component: OutputImgStep,
+    status: 'upcoming'
+  }
+];
+
+export const roomOptions = [
+  { value: 'Living-room', label: 'Living room' },
+  { value: 'Bedroom', label: 'Bedroom' },
+  { value: 'Bathroom', label: 'Bathroom' },
+  { value: 'Study-Room', label: 'Study Room' },
+  { value: 'Kitchen', label: 'Kitchen' },
+  { value: 'Dining-Room', label: 'Dining Room' },
+  { value: 'Office', label: 'Office' },
+  { value: 'Outdoor', label: 'Outdoor' }
+];
+
+export const aiInterventionOptions = [
+  { value: 'high-AI-Intervention', label: 'Extrema AI Intervention' },
+  { value: 'Medium-Intervention', label: 'Medium Intervention' },
+  { value: 'Low-AI-Intervention', label: 'Low AI Intervention' },
+  { value: 'Very-Low-AI-Intervention', label: 'Very Low AI Intervention' }
+];
+export const aiModeOptions = [
+  { value: 'beautiful-redesign', label: 'Beautiful Redesign' },
+  { value: 'creative-redesign', label: 'Creative Redesign' },
+  { value: 'fill-the-room', label: 'Fill The Room' },
+  { value: 'eclectic', label: 'Eclectic' },
+  { value: 'minimalist', label: 'Minimalist' },
+  { value: 'vibrant-oasis', label: 'Vibrant Oasis' },
+  { value: 'urban-chic', label: 'Urban Chic' },
+  { value: 'cozy-retreat', label: 'Cozy Retreat' },
+  { value: 'modern-elegance', label: 'Modern Elegance' },
+  { value: 'rustic-charm', label: 'Rustic Charm' }
+];
+
+export const designStyleOptions = [
+  { value: 'contemporary', label: 'Contemporary' },
+  { value: 'traditional', label: 'Traditional' },
+  { value: 'mid-century-modern', label: 'Mid-Century Modern' },
+  { value: 'industrial', label: 'Industrial' },
+  { value: 'bohemian', label: 'Bohemian' },
+  { value: 'scandinavian', label: 'Scandinavian' },
+  { value: 'farmhouse', label: 'Farmhouse' },
+  { value: 'vintage', label: 'Vintage' },
+  { value: 'coastal', label: 'Coastal' },
+  { value: 'transitional', label: 'Transitional' }
+];
+
+export const numberDesignsOptions = [
+  { value: '1', label: '1' },
+  { value: '2', label: '2' },
+  { value: '3', label: '3' },
+  { value: '4', label: '4' },
+  { value: '5', label: '5' },
+  { value: '6', label: '6' },
+  { value: '7', label: '7' },
+  { value: '8', label: '8' },
+  { value: '9', label: '9' },
+  { value: '10', label: '10' }
+];
