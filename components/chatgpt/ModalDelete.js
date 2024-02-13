@@ -2,7 +2,7 @@ import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
-import { DataMattChat } from '../../data/mattchat';
+import { DataEco2Chat } from '../../data/eco2chat';
 
 export default function ModalDelete({ onClose, onHandleDelete }) {
   const [open, setOpen] = useState(true);
@@ -54,11 +54,11 @@ export default function ModalDelete({ onClose, onHandleDelete }) {
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
-                        {DataMattChat.YouWantDelete}
+                        {DataEco2Chat.YouWantDelete}
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          {DataMattChat.DeleteWarning}
+                          {DataEco2Chat.DeleteWarning}
                         </p>
                       </div>
                     </div>
@@ -71,10 +71,10 @@ export default function ModalDelete({ onClose, onHandleDelete }) {
                     onClick={() => {
                       onHandleDelete();
                       onClose();
-                      toast.success(DataMattChat.ConversationDeleted);
+                      toast.success(DataEco2Chat.ConversationDeleted);
                     }}
                   >
-                    {DataMattChat.Delete}
+                    {DataEco2Chat.Delete}
                   </button>
                   <button
                     type="button"
@@ -82,7 +82,7 @@ export default function ModalDelete({ onClose, onHandleDelete }) {
                     onClick={() => setOpen(false)}
                     ref={cancelButtonRef}
                   >
-                    {DataMattChat.Cancel}
+                    {DataEco2Chat.Cancel}
                   </button>
                 </div>
               </Dialog.Panel>

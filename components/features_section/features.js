@@ -1,61 +1,76 @@
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { DataFeatures, features } from "../../data/features";
 
 export default function Features() {
-  return (
-    <div className="mx-auto w-full relative isolate overflow-hidden px-6 pt-10 pb-14 shadow-2xl sm:rounded-3xl sm:px-16 lg:flex lg:gap-x-20 lg:px-24 ">
-      <svg
-        viewBox="0 0 1024 1024"
-        className="absolute top-1/2 left-1/2 -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:translate-y-0 lg:-translate-x-1/2"
-        aria-hidden="true"
-      >
-        <circle
-          cx={512}
-          cy={512}
-          r={512}
-          fill="url(#759c1415-0410-454c-8f7c-9a820de03641)"
-          fillOpacity="0.7"
-        />
-        <defs>
-          <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
-            <stop stopColor="#10b981" />
-            <stop offset={1} stopColor="#065f46" />
-          </radialGradient>
-        </defs>
-      </svg>
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base text-center font-semibold leading-7 text-[#21c284]">
-            {" "}
-            {DataFeatures.title}{" "}
-          </h2>
-          <p className="mt-2  text-3xl font-bold tracking-tight sm:text-4xl text-zinc-900">
-            {DataFeatures.title1}
-          </p>
-          <p className="mt-6 text-lg leading-8">
+  useEffect(() => {
+    const rootElement = document.documentElement;
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "class") {
+          const isDark = rootElement.classList.contains("dark");
+          setIsDarkMode(isDark);
+        }
+      });
+    });
+
+    observer.observe(rootElement, {
+      attributes: true,
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      className={`mx-auto w-full relative overflow-hidden ${
+        isDarkMode
+          ? "dark"
+          : "bg-gradient-to-br from-green-400 via-green-500 to-green-600"
+      } px-4 pt-10 pb-14 shadow-xl sm:rounded-3xl lg:px-24 lg:py-20`}
+    >
+      <div className="grid grid-cols-1 items-center lg:grid-cols-2 lg:gap-8">
+        <motion.div
+        // variants={item}
+        >
+          <motion.img
+            className="h-80 w-80 mx-auto animate-float"
+            src="https://eco2.com.co/moanooch/2021/09/Eco3.gif"
+            alt=""
+            loading="lazy"
+          />
+        </motion.div>
+        <motion.div className="space-y-6">
+          <h1 className="text-center text-3xl font-bold leading-9 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14 lg:text-left lg:text-6xl lg:leading-none text-white dark:text-white">
+            Nuestros beneficios
+          </h1>
+          <p className="mt-4 text-lg leading-8 sm:text-left text-white dark:text-green-200">
             {DataFeatures.maintext_features}
           </p>
-        </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-          <dl className="grid max-w-xl grid-cols-1 gap-y-10 gap-x-8 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-            {features.map((feature) => (
-              <div key={feature.name} className="relative pl-16">
-                <dt className="text-base font-semibold leading-7">
-                  <div className="absolute top-0 left-0 flex h-10 w-10 items-center justify-center rounded-lg bg-[#21c284]">
-                    <feature.icon
-                      className="h-6 w-6"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  {feature.name}
+          {features.map((feature, index) => (
+            <motion.div
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 1.1 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 10 }}
+            >
+              <div className="p-6 rounded-lg shadow-lg bg-white dark:bg-green-600 dark:text-green-200">
+                <dt className="flex items-center text-lg font-medium text-gray-900 dark:text-white">
+                  <feature.icon
+                    className="flex-shrink-0 h-6 w-6 text-green-600 dark:text-green-300"
+                    aria-hidden="true"
+                  />
+                  <span className="ml-3 font-bold">{feature.name}</span>
                 </dt>
-                <dd className="mt-2 text-base leading-7">
+                <dd className="mt-2 text-base text-gray-500 dark:text-green-100">
                   {feature.description}
                 </dd>
               </div>
-            ))}
-          </dl>
-        </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { signIn } from 'next-auth/react';
 import { DataNavbar } from '../../data/navbar';
 import { products, callsToAction } from '../../data/navbar';
-import logo from '../../public/Mlogop.webp';
+import logo from '../../public/eco2it_logo.jpeg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -40,7 +40,7 @@ export default function Header({ router, user }) {
                 <span className="sr-only text-xl">
                   {DataNavbar.COMPANY_NAME}
                 </span>
-                <Image className="h-8 w-auto" src={logo} alt="Mattech" />
+                <Image className="h-8 w-auto" src={logo} alt="Eco2IA" />
               </a>
             </Link>
           </div>
@@ -50,7 +50,7 @@ export default function Header({ router, user }) {
               className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
               onClick={() => setMobileMenuOpen(true)}
             >
-              <span className="sr-only">Ouvrir Menu principal</span>
+              <span className="sr-only">Abrir menú principal</span>
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
@@ -92,7 +92,7 @@ export default function Header({ router, user }) {
           <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between bg-black">
               <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Mattech</span>
+                <span className="sr-only">Eco2IA</span>
                 <Image className="h-8 w-auto" src={logo} alt="Mattech" />
               </a>
               <button
@@ -100,7 +100,7 @@ export default function Header({ router, user }) {
                 className=" -m-2.5 rounded-md p-2.5 text-gray-700"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <span className="sr-only">Fermer Menu</span>
+                <span className="sr-only">Cerrar menú</span>
                 <XMarkIcon className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>

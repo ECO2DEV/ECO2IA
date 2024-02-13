@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
-import IA1 from "../public/IA1.webp";
-import IA2 from "../public/IA2.webp";
-import IA3 from "../public/IA3.webp";
-import IA4 from "../public/IA4.webp";
-import IA5 from "../public/IA5.webp";
-import IA6 from "../public/IA6.webp";
+import IA1 from "../public/screenshot/chat_eco2.webp";
+import IA2 from "../public/screenshot/sport_eco2.webp";
+import IA3 from "../public/screenshot/quiz_eco2.webp";
+import IA4 from "../public/screenshot/desc_eco2.webp";
+import IA5 from "../public/screenshot/resum_eco2.webp";
+import IA6 from "../public/screenshot/cv_eco2.webp";
 
 // import { DataAbout } from '../data/about';
 

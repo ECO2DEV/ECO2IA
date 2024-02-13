@@ -1,0 +1,23 @@
+export const DataEco2Sport = {
+  Title: 'ECO2SPORT',
+  SubTitle: 'Obtén un plan de entrenamiento personalizado',
+  Weight: 'Peso',
+  Age: 'Edad',
+  Goal: 'Objetivo',
+  WeightLoss: 'Pérdida de peso',
+  MuscleBuilding: 'Fortalecimiento muscular',
+  Mass: 'Aumento de peso',
+  Crossfit: 'Crossfit',
+  Dry: 'Seco',
+  NumberofTrainigns: 'Días',
+  OneDay: '1 Dia',
+  TwoDays: '2 Dias',
+  ThreeDays: '3 Dias',
+  FourDays: '4 Dias',
+  FiveDays: '5 Dias',
+  SixDays: '6 Dias',
+  SevenDays: '7 Dias',
+  GetButton: 'enviar a',
+  LoadingButton: 'Cargando ...',
+  SelectOption: 'Seleccione una opción'
+};

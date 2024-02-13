@@ -12,5 +12,6 @@ export const PromptContext = createContext({
   setResponse: () => {},
   setPrompt: () => {},
   setPlan: () => {},
+  setActiveAI: () => {},
   updatePlanTokens: () => {}
 });

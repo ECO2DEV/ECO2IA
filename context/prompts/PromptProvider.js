@@ -15,6 +15,7 @@ const promptInitialState = {
   plan: [],
   promptTokens: 0,
   responseTokens: 0,
+  setActiveAI: () => {},
   setResponseTokens: () => {},
   setPromptTokens: () => {},
   setResponse: () => {},
@@ -250,7 +251,7 @@ export const PromptProvider = ({ children }) => {
         if (
           state.activeAI === 'ChatGpt' ||
           state.activeAI === 'DalleIA' ||
-          state.activeAI === 'MatquizAI'
+          state.activeAI === 'Eco2quizAI'
         ) {
           dispatch({
             type: 'SET_PROMPT_TOKENS',

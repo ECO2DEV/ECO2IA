@@ -8,7 +8,9 @@ const nextConfig = {
     API_TOKEN: process.env.API_TOKEN
   },
   images: {
-    domains: ['oaidalleapiprodscus.blob.core.windows.net']
+    remotePatterns: [
+      { protocol: 'https', hostname: 'oaidalleapiprodscus.blob.core.windows.net' },
+    ],
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
