@@ -21,7 +21,7 @@ export const WelcomeDalle = () => {
             <button
               key={index}
               onClick={() => setPrompt(DataDalleHelpExample)}
-              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-gray-800  hover:bg-gray-900"
+              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-[#21c284]  hover:bg-[#21c284a8]"
             >
               {DataDalleHelpExample} →
             </button>
@@ -36,7 +36,7 @@ export const WelcomeDalle = () => {
           {DataDalleHelpCapabilities.map((DataDalleHelpCapabilities, index) => (
             <li
               key={index}
-              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-gray-800 "
+              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-[#21c284]"
             >
               {DataDalleHelpCapabilities}
             </li>
@@ -51,7 +51,7 @@ export const WelcomeDalle = () => {
           {DataDalleHelpLimitation.map((DataDalleHelpLimitation, index) => (
             <li
               key={index}
-              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-gray-800"
+              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-[#21c284]"
             >
               {DataDalleHelpLimitation}
             </li>
