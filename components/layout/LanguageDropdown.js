@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { UserContext } from '../../context/user/UserContext';
-import { DataMattCV } from '../../data/mattcv';
+import { DataEco2CV } from '../../data/eco2cv';
 
 const LanguageDropdown = () => {
   const languages = [
@@ -23,7 +23,7 @@ const LanguageDropdown = () => {
         htmlFor="languageDropdown"
         className=" text-gray-500 text-sm font-bold flex-shrink-0"
       >
-        {DataMattCV.SelectedLanguage}
+        {DataEco2CV.SelectedLanguage}
       </label>
       <select
         id="languageDropdown"

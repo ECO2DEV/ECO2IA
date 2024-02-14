@@ -50,15 +50,15 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   if (
     router.pathname == '/pairoll' ||
     router.pathname == '/dashboard' ||
-    router.pathname == '/mattchat' ||
-    router.pathname == '/mattimage' ||
+    router.pathname == '/eco2chat' ||
+    router.pathname == '/eco2image' ||
     router.pathname == '/profile' ||
-    router.pathname == '/mattraduct' ||
-    router.pathname == '/mattsport' ||
-    router.pathname == '/matquiz' ||
-    router.pathname == '/matdescription' ||
-    router.pathname == '/mattresum' ||
-    router.pathname == '/matcv' ||
+    router.pathname == '/eco2traduct' ||
+    router.pathname == '/eco2sport' ||
+    router.pathname == '/eco2quiz' ||
+    router.pathname == '/eco2description' ||
+    router.pathname == '/eco2resum' ||
+    router.pathname == '/eco2cv' ||
     router.pathname == '/renovhome'
   ) {
     return (

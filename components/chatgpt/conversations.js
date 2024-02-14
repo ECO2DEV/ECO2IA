@@ -11,7 +11,7 @@ import { strapiUrl } from "../../constants/constans";
 import { ClipboardIcon } from "../icons/icons";
 import ModalDelete from "./ModalDelete";
 import { LoadingChatgpt } from "./LoadingChatgpt";
-import { DataMattChat } from "../../data/mattchat";
+import { DataEco2Chat } from "../../data/eco2chat";
 
 export const Conversations = ({ messages }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -221,12 +221,12 @@ export const Conversations = ({ messages }) => {
                         </button>
                         {(copied[index] && (
                           <div className=" bg-blue-900 text-white rounded">
-                            {DataMattChat.CopiedSuccess}
+                            {DataEco2Chat.CopiedSuccess}
                           </div>
                         )) ||
                           (copiedCode[index] && (
                             <div className=" bg-blue-900 text-white rounded">
-                              {DataMattChat.CopiedCodeSuccess}
+                              {DataEco2Chat.CopiedCodeSuccess}
                             </div>
                           ))}
                       </div>

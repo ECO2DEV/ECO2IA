@@ -11,14 +11,14 @@ const NotFoundPage = () => {
       <div className="relative text-center text-white z-10">
         <p className="text-base font-semibold leading-8">404</p>
         <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
-          Page non trouvée.
+        Página no encontrada.
         </h1>
         <p className="mt-4 text-base text-white/70">
-          Désolé, nous n'avons pas pu trouver la page que vous recherchez.
+        Lo sentimos, no pudimos encontrar la página que estabas buscando.
         </p>
         <div className="mt-10 flex justify-center">
           <Link href="/" className="text-sm font-semibold leading-7 text-white">
-            <span aria-hidden="true">&larr;</span> Retour à la page d'accueil
+            <span aria-hidden="true">&larr;</span> Volver a la página inicial
           </Link>
         </div>
       </div>

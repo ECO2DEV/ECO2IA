@@ -65,7 +65,7 @@ export default function LayoutUser({ children }) {
       if (
         activeAI === 'ChatGPT' ||
         activeAI === 'DalleIA' ||
-        activeAI === 'MatquizAI'
+        activeAI === 'Eco2quizAI'
       ) {
         setPromptTokens(0);
       }

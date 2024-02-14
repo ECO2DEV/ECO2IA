@@ -3,14 +3,14 @@ import { DataPricing } from '../data/pricing';
 import { HomeIcon } from '@heroicons/react/24/outline';
 import { DataAbout } from '../data/about';
 import { DataDashboard } from '../data/dashboard';
-import mattchat from '../public/mattchat.webp';
-import mattresume from '../public/mattresume.webp';
-import mattimage from '../public/mattimage.webp';
-import mattrad from '../public/mattrad.webp';
-import mattsport from '../public/mattsport.webp';
-import mattquiz from '../public/mattquiz.webp';
-import mattdesc from '../public/mattdesc.webp';
-import mattcv from '../public/mattcv.webp';
+import eco2chat from '../public/eco2chat.webp';
+import eco2resume from '../public/eco2resume.webp';
+import eco2image from '../public/eco2image.webp';
+import eco2rad from '../public/eco2rad.webp';
+import eco2sport from '../public/eco2sport.webp';
+import eco2quiz from '../public/eco2quiz.webp';
+import eco2desc from '../public/eco2desc.webp';
+import eco2cv from '../public/eco2cv.webp';
 
 import Photo1 from '../public/Photo1.webp';
 import Photo2 from '../public/Photo2.webp';
@@ -32,10 +32,11 @@ import MaskImageStep from '../components/steps_renovhome/MaskImageStep';
 import FormStep from '../components/steps_renovhome/FormStep';
 import { OutputImgStep } from '../components/steps_renovhome/OutputImgStep';
 
-const PUBLICABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_KEY;
-const stripePromise = loadStripe(PUBLICABLE_KEY);
+// const PUBLICABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_KEY;
+// console.log(PUBLICABLE_KEY)
+// const stripePromise = loadStripe(PUBLICABLE_KEY);
 
-export { stripePromise };
+// export { stripePromise };
 
 export const strapiToken = process.env.API_TOKEN;
 export const strapiUrl = process.env.STRAPI_URL;
@@ -43,20 +44,20 @@ export const nextAuthUrl = process.env.NEXTAUTH_URL;
 
 export const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-  { name: 'ECO2CHAT', href: '/mattchat', icon: HomeIcon, current: true },
-  { name: 'ECO2IMAGE', href: '/mattimage', icon: HomeIcon, current: true },
-  { name: 'ECO2TRAD', href: '/mattraduct', icon: HomeIcon, current: true },
-  { name: 'ECO2TSPORT', href: '/mattsport', icon: HomeIcon, current: true },
-  { name: 'ECO2QUIZ', href: '/matquiz', icon: HomeIcon, current: true },
-  { name: 'ECO2DESC', href: '/matdescription', icon: HomeIcon, current: true },
-  { name: 'ECO2RESUME', href: '/mattresum', icon: HomeIcon, current: true },
-  { name: 'ECO2CV', href: '/matcv', icon: HomeIcon, current: true }
+  { name: 'ECO2CHAT', href: '/eco2chat', icon: HomeIcon, current: true },
+  { name: 'ECO2IMAGE', href: '/eco2image', icon: HomeIcon, current: true },
+  { name: 'ECO2RAD', href: '/eco2traduct', icon: HomeIcon, current: true },
+  { name: 'ECO2SPORT', href: '/eco2sport', icon: HomeIcon, current: true },
+  { name: 'ECO2QCM', href: '/eco2quiz', icon: HomeIcon, current: true },
+  { name: 'ECO2DESC', href: '/eco2description', icon: HomeIcon, current: true },
+  { name: 'ECO2RESUME', href: '/eco2resum', icon: HomeIcon, current: true },
+  { name: 'ECO2CV', href: '/eco2cv', icon: HomeIcon, current: true }
   // { name: 'Team', href: '#', icon: UsersIcon, current: false },
 ];
 
 export const modelOptions = [
-  { value: 'gpt-3.5-turbo', label: 'MATTECH 1.0' },
-  { value: 'gpt-4', label: 'MATTECH 2.0' }
+  { value: 'gpt-3.5-turbo', label: 'ECO2 1.0' },
+  { value: 'gpt-4', label: 'ECO2 2.0' }
   // { value: 'text-curie-001', label: 'Curie' }
   // { value: 'claude-1', label: 'Claude' }
 
@@ -90,12 +91,12 @@ export const IA_CARDS = [
   {
     id: crypto.randomBytes(16).toString('hex'),
     title: 'ECO2CHAT',
-    href: '/mattchat',
+    href: '/eco2chat',
     description:
       'Chatbot especializado en interacción con usuarios, resolver dudas y preguntas frecuentes sobre cualquier tema',
-    icon: mattchat,
+    icon: eco2chat,
     screenShot: '/screenshot/chat_eco2.webp',
-    demoLink: '/mattchat',
+    demoLink: '/eco2chat',
     classNames: true,
     index: 1,
     keywords: ['Chat', 'bot', 'ia', 'inteligencia artificial']
@@ -103,12 +104,12 @@ export const IA_CARDS = [
   {
     id: crypto.randomBytes(16).toString('hex'),
     title: 'ECO2IMAGE',
-    href: '/mattimage',
+    href: '/eco2image',
     description:
       'Creación de imágenes y edición de fotos con inteligencia artificial',
-    icon: mattimage,
+    icon: eco2image,
     screenShot: '/screenshot/dalle_eco2.webp',
-    demoLink: '/matimage',
+    demoLink: '/eco2image',
     classNames: false,
     index: 2,
     keywords: ['Imagen', 'edición', 'dalle', 'inteligencia artificial']
@@ -116,11 +117,11 @@ export const IA_CARDS = [
   {
     id: crypto.randomBytes(16).toString('hex'),
     title: 'ECO2TRAD',
-    href: '/mattraduct',
+    href: '/eco2traduct',
     description: 'Traductor de idiomas con inteligencia artificial',
-    icon: mattrad,
+    icon: eco2rad,
     screenShot: '/screenshot/trad_eco2.webp',
-    demoLink: '/mattraduct',
+    demoLink: '/eco2traduct',
     classNames: false,
     index: 3,
     keywords: ['Traductor', 'idiomas', 'lenguas', 'inteligencia artificial']
@@ -128,11 +129,11 @@ export const IA_CARDS = [
   {
     id: crypto.randomBytes(16).toString('hex'),
     title: 'ECO2SPORT',
-    href: '/mattsport',
+    href: '/eco2sport',
     description: 'entrenador personal con inteligencia artificial',
-    icon: mattsport,
+    icon: eco2sport,
     screenShot: '/screenshot/sport_eco2.webp',
-    demoLink: '/mattsport',
+    demoLink: '/eco2sport',
     classNames: true,
     index: 4,
     keywords: ['Deporte', 'entrenador', 'personal', 'GYM']
@@ -140,12 +141,12 @@ export const IA_CARDS = [
   {
     id: crypto.randomBytes(16).toString('hex'),
     title: 'ECO2QUIZ',
-    href: '/matquiz',
+    href: '/eco2quiz',
     description:
       'Creador de cuestionarios, quizzes con inteligencia artificial',
-    icon: mattquiz,
+    icon: eco2quiz,
     screenShot: '/screenshot/quiz_eco2.webp',
-    demoLink: '/matquiz',
+    demoLink: '/eco2quiz',
     classNames: true,
     index: 5,
     keywords: ['Quiz', 'cuestionario', 'preguntas', 'inteligencia artificial']
@@ -153,12 +154,12 @@ export const IA_CARDS = [
   {
     id: crypto.randomBytes(16).toString('hex'),
     title: 'ECO2DESC',
-    href: '/matdescription',
+    href: '/eco2description',
     description:
       'Creación de copys, descripciones para productos y servicio | marketing digital con inteligencia artificial',
-    icon: mattdesc,
+    icon: eco2desc,
     screenShot: '/screenshot/desc_eco2.webp',
-    demoLink: '/matdescription',
+    demoLink: '/eco2description',
     classNames: false,
     index: 6,
     keywords: ['Descripcion', 'copys', 'marketing', 'inteligencia artificial']
@@ -166,12 +167,12 @@ export const IA_CARDS = [
   {
     id: crypto.randomBytes(16).toString('hex'),
     title: 'ECO2RESUME',
-    href: '/mattresum',
+    href: '/eco2resum',
     description:
       'Genarador de resumenes, resumenes de texto con inteligencia artificial',
-    icon: mattresume,
+    icon: eco2resume,
     screenShot: '/screenshot/resum_eco2.webp',
-    demoLink: '/mattresum',
+    demoLink: '/eco2resum',
     classNames: false,
     index: 7,
     keywords: ['Resumen', 'Acotar', 'Extracto', 'inteligencia artificia']
@@ -179,12 +180,12 @@ export const IA_CARDS = [
   {
     id: crypto.randomBytes(16).toString('hex'),
     title: 'ECO2CV',
-    href: '/matcv',
+    href: '/eco2cv',
     description:
       'Creación de curriculum vitae, hojas de vida con inteligencia artificial',
-    icon: mattcv,
+    icon: eco2cv,
     screenShot: '/screenshot/cv_eco2.webp',
-    demoLink: '/matcv',
+    demoLink: '/eco2cv',
     classNames: false,
     index: 8,
     keywords: ['Curriculum', 'hoja de vida', 'inteligencia artificial']
@@ -206,66 +207,66 @@ export const IA_CARDS = [
 
 export const actions = [
   {
-    title: DataDashboard.MattechChatTitle,
-    href: 'mattchat',
-    description: DataDashboard.MattechChatDescription,
-    icon: mattchat,
+    title: DataDashboard.Eco2ChatTitle,
+    href: 'eco2chat',
+    description: DataDashboard.Eco2ChatDescription,
+    icon: eco2chat,
     iconForeground: 'text-teal-700',
     iconBackground: 'bg-teal-50'
   },
   {
-    title: DataDashboard.MattechImageTitle,
-    href: 'mattimage',
-    description: DataDashboard.MattechImageDescription,
-    icon: mattimage,
+    title: DataDashboard.Eco2ImageTitle,
+    href: 'eco2image',
+    description: DataDashboard.Eco2ImageDescription,
+    icon: eco2image,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MatTranslateTitle,
-    href: 'mattraduct',
-    description: DataDashboard.MatTranslateDescription,
-    icon: mattrad,
+    title: DataDashboard.Eco2TranslateTitle,
+    href: 'eco2traduct',
+    description: DataDashboard.Eco2TranslateDescription,
+    icon: eco2rad,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MattSportTitle,
-    href: 'mattsport',
-    description: DataDashboard.MattSportDescription,
-    icon: mattsport,
+    title: DataDashboard.Eco2SportTitle,
+    href: 'eco2sport',
+    description: DataDashboard.Eco2SportDescription,
+    icon: eco2sport,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MattQuizTitle,
-    href: 'matquiz',
-    description: DataDashboard.MattQuizDescription,
-    icon: mattquiz,
+    title: DataDashboard.Eco2QuizTitle,
+    href: 'eco2quiz',
+    description: DataDashboard.Eco2QuizDescription,
+    icon: eco2quiz,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MattDescriptionTitle,
-    href: 'matdescription',
-    description: DataDashboard.MattDescription,
-    icon: mattdesc,
+    title: DataDashboard.Eco2DescriptionTitle,
+    href: 'eco2description',
+    description: DataDashboard.Eco2Description,
+    icon: eco2desc,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MattResumeTitle,
-    href: 'mattresum',
-    description: DataDashboard.MattResume,
-    icon: mattresume,
+    title: DataDashboard.Eco2ResumeTitle,
+    href: 'eco2resum',
+    description: DataDashboard.Eco2Resume,
+    icon: eco2resume,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: DataDashboard.MatCVTitle,
-    href: 'matcv',
-    description: DataDashboard.MatCVDescription,
-    icon: mattcv,
+    title: DataDashboard.Eco2CVTitle,
+    href: 'eco2cv',
+    description: DataDashboard.Eco2CVDescription,
+    icon: eco2cv,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   }
