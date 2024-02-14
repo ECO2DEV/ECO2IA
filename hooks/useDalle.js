@@ -10,7 +10,7 @@ const fetcher = (url) =>
 
 export function useDalle(userId = 1) {
   const { data, error, isLoading, mutate } = useSWR(
-    `${strapiUrl}/api/requests?filters[users_permissions_user][id][$eq]=${userId}&filters[source][$eq]=MatDalle&sort=createdAt:desc&pagination[page]=1&pagination[pageSize]=2`,
+    `${strapiUrl}/api/requests?filters[users_permissions_user][id][$eq]=${userId}&filters[source][$eq]=Eco2Dalle&sort=createdAt:desc&pagination[page]=1&pagination[pageSize]=2`,
     fetcher,
     {
       revalidateIfStale: false,

@@ -17,7 +17,6 @@ export default function HistoryResum({ onClose }) {
   const { data, deleteChat } = useEco2Resume(user?.id);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
-
   const onHandleModalDelete = (id) => {
     setDeleteModalOpen((prev) => !prev);
   };
@@ -120,8 +119,8 @@ export default function HistoryResum({ onClose }) {
                                 <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl  md:py-6 lg:px-0 m-auto">
                                   <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
                                     <Image
-                                      src="/Mlogo.ico"
-                                      alt="MatTech logo"
+                                      src="/eco2it_logo.jpeg"
+                                      alt="Eco2IA logo"
                                       width={30}
                                       height={30}
                                     />

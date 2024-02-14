@@ -51,7 +51,7 @@ export default function ChatGpt() {
     handleInputChange,
     handleSubmit,
     isLoading,
-    setMessages
+    setMessages,
   } = useChatReact({
     api: '/api/chat',
     onFinish: async (message) => {
@@ -80,7 +80,7 @@ export default function ChatGpt() {
           return updatedMessages;
         });
 
-        setResponse(message.content + input);
+        state.setResponse(message.content + input);
 
         mutate();
       } catch (error) {
