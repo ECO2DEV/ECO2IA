@@ -196,7 +196,7 @@ export const IA_CARDS = [
     href: '/renovhome',
     description:
       'Renovhome es una aplicación que utiliza inteligencia artificial para ayudar a los usuarios a rediseñar sus espacios',
-    icon: mattcv,
+    icon: eco2cv,
     screenShot: '/screenshot/cv_eco2.webp',
     demoLink: '/renovhome',
     classNames: false,
