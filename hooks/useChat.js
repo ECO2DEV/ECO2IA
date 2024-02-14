@@ -10,7 +10,7 @@ const fetcher = (url) =>
 
 export function useChat(userId = 1) {
   const { data, error, isLoading, mutate } = useSWR(
-    `${strapiUrl}/api/requests?filters[users_permissions_user][id][$eq]=${userId}&filters[source][$eq]=MatChat&sort=createdAt:desc&pagination[page]=1&pagination[pageSize]=5`,
+    `${strapiUrl}/api/requests?filters[users_permissions_user][id][$eq]=${userId}&filters[source][$eq]=Eco2Chat&sort=createdAt:desc&pagination[page]=1&pagination[pageSize]=5`,
     fetcher,
     {
       revalidateIfStale: false,

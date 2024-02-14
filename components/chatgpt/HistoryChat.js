@@ -1,14 +1,14 @@
-import { useContext, Fragment, useRef, useState } from 'react';
-import Image from 'next/image';
-import { Dialog, Transition } from '@headlessui/react';
-import { UserContext } from '../../context/user/UserContext';
-import { useChat } from '../../hooks/useChat';
-import { strapiUrl } from '../../constants/constans';
-import { DeleteIcon, ClipboardIcon, EmptyAvatar } from '../icons/icons';
-import ModalDelete from './ModalDelete';
-import { toast } from 'react-hot-toast';
-import { DataHistory } from '../../data/history';
-import { DataEco2Chat } from '../../data/eco2chat';
+import { useContext, Fragment, useRef, useState } from "react";
+import Image from "next/image";
+import { Dialog, Transition } from "@headlessui/react";
+import { UserContext } from "../../context/user/UserContext";
+import { useChat } from "../../hooks/useChat";
+import { strapiUrl } from "../../constants/constans";
+import { DeleteIcon, ClipboardIcon, EmptyAvatar } from "../icons/icons";
+import ModalDelete from "./ModalDelete";
+import { toast } from "react-hot-toast";
+import { DataHistory } from "../../data/history";
+import { DataEco2Chat } from "../../data/eco2chat";
 
 export default function HistoryChat({ onClose }) {
   const cancelButtonRef = useRef(null);
@@ -120,8 +120,8 @@ export default function HistoryChat({ onClose }) {
                                 <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl  md:py-6 lg:px-0 m-auto">
                                   <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
                                     <Image
-                                      src="/Mlogo.ico"
-                                      alt="MatTech logo"
+                                      src="/eco2it_logo.jpeg"
+                                      alt="Eco2IA logo"
                                       width={30}
                                       height={30}
                                     />
