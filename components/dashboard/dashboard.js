@@ -117,7 +117,7 @@ function classNames(...classes) {
 
 export default function DashboardSection() {
   return (
-    <section className="w-full grid auto-rows-[380px] lg:auto-rows-[140px] grid-cols-8 gap-4">
+    <section className="w-full grid auto-rows-[380px] lg:auto-rows-[140px] grid-cols-8 gap-4 dark:bg-darkColor">
       {IA_CARDS.map((ia) => {
         return <IACard key={ia.index} {...ia} />;
       })}

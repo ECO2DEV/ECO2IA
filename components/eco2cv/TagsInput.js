@@ -27,7 +27,7 @@ function TagsInput({ tags, setTags }) {
       <input
         onKeyDown={handleKeyDown}
         type="text"
-        className="tags-input"
+        className="tags-input dark:text-black"
         placeholder={DataEco2CV.TypeaTag}
       />
     </div>
