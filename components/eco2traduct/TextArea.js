@@ -48,7 +48,7 @@ export const TextArea = ({
         }
       ${
         type === 'from'
-          ? 'h-[200px] sm:h-[300px] lg:h-[400px] xl:h-[410px] w-full bg-gray-800 text-gray-100'
+          ? 'h-[200px] sm:h-[300px] lg:h-[400px] xl:h-[410px] w-full bg-primary text-gray-100'
           : 'h-[200px]  sm:h-[300px] lg:h-[400px] xl:h-[410px] w-full bg-gray-200'
       }`}
       value={value} 

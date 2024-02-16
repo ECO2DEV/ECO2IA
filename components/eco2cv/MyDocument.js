@@ -121,7 +121,7 @@ const MyDocument = ({ formData, setFormData }) => {
       {/* Mobile button section */}
 
       <button
-        className="fixed bottom-5 right-4 bg-indigo-500 text-white px-4 py-2 rounded-md lg:hidden"
+        className="fixed bottom-5 right-4 bg-primary text-white px-4 py-2 rounded-md lg:hidden"
         onClick={togglePreview}
       >
         Avance

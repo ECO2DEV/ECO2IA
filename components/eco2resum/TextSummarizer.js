@@ -200,7 +200,7 @@ function TextSummarizerPage() {
   return (
     <div className="flex flex-col md:flex-row">
       <div className="w-full md:w-6/12 h-full flex-grow -mr-1">
-        <div className="bg-[#21c284] rounded-lg shadow-lg p-6 h-full">
+        <div className="dark:bg-zinc-800 rounded-lg shadow-lg p-6 h-full">
           <textarea
             className="w-full p-4 rounded border-emerald-800 focus:outline-none dark:text-zinc-900 focus:ring-2 focus:ring-emerald-600 h-20"
             value={fileContent || inputText}
@@ -211,7 +211,7 @@ function TextSummarizerPage() {
             }}
           />
           <div
-            className="w-full h-40 flex flex-col items-center justify-center text-zinc-100 px-4 py-6 rounded-lg shadow-lg tracking-wide uppercase border border-blue-500 hover:bg-blue-500 cursor-pointer hover:text-white"
+            className="w-full h-40 flex flex-col items-center justify-center text-zinc-100 px-4 py-6 rounded-lg shadow-lg tracking-wide uppercase border border-primary hover:bg-primaryHover cursor-pointer hover:text-white"
             {...getRootProps()}
           >
             <svg
@@ -222,7 +222,7 @@ function TextSummarizerPage() {
             >
               <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
             </svg>
-            <p>{DataEco2Resume.DropField}</p>
+            <p className='text-zinc-800 dark:text-white'>{DataEco2Resume.DropField}</p>
           </div>
           <div className="my-4">
             <select
@@ -230,7 +230,7 @@ function TextSummarizerPage() {
               name="language"
               value={language}
               onChange={handleChange}
-              className="w-full p-2 border border-emerald-800 bg-[#21c284] rounded"
+              className="w-full p-2 border dark:bg-zinc-800 rounded"
               required
             >
               <option value={AUTO_LANGUAGE}>
@@ -244,7 +244,7 @@ function TextSummarizerPage() {
             </select>
           </div>
           <button
-            className="mt-auto w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 relative"
+            className="mt-auto w-full px-4 py-2 bg-primary text-white rounded hover:bg-primaryHover relative"
             onClick={handleRequestSummary}
             disabled={isLoading} // Deshabilita el botón mientras isLoading sea true
           >
@@ -274,7 +274,7 @@ function TextSummarizerPage() {
             ) : null}
             {DataEco2Resume.CreateResume}
           </button>
-          <div className="flex justify-center items-center my-2 text-gray-900">
+          <div className="flex justify-center items-center my-2 text-primary">
             <span>
               Tokens utilizados en la pregunta : {promptTokens}&nbsp;&nbsp;
             </span>
@@ -282,9 +282,9 @@ function TextSummarizerPage() {
         </div>
       </div>
       <div className="w-full md:w-6/12 px-4 mt-4 md:mt-0">
-        <div className="bg-white rounded-lg shadow-lg p-4 relative dark:text-zinc-900">
+        <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-4 relative dark:text-zinc-900">
           <textarea
-            className="w-full text-justify p-4 rounded border-none focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none placeholder-gray-400"
+            className="w-full text-justify p-4 rounded border-none focus:outline-none focus:ring-2 dark:bg-zinc-700 resize-none placeholder-gray-400"
             style={{ minHeight: '44rem' }}
             value={summaryText}
             readOnly
@@ -302,7 +302,7 @@ function TextSummarizerPage() {
           <nav className="flex" aria-label="Breadcrumb">
             <ol
               role="list"
-              className="flex w-full justify-around rounded-md bg-gray-50 shadow"
+              className="flex w-full justify-around rounded-md bg-primary shadow"
             >
               <li
                 onClick={handleModalHistory}

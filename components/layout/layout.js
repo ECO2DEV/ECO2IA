@@ -7,7 +7,7 @@ import { Header } from "../shared/Header";
 export default function Layout({ children, router }) {
   return (
     <>
-      <div className="">
+      <div className="dark:bg-darkColor bg-zinc-300">
         <Header router={router} user={children.props.user} />
         <Head>
           <title>ECO²</title>

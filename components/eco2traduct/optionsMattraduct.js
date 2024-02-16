@@ -46,7 +46,7 @@ export default function OptionsMattraduct({
       <nav className="flex justify-center" aria-label="Breadcrumb">
         <ol
           role="list"
-          className="flex space-x-2 rounded-md bg-gray-50 px-3 py-2 sm:px-6 shadow"
+          className="flex space-x-2 rounded-md bg-primary px-3 py-2 sm:px-6 shadow"
         >
           <li className="flex" title="Historique">
             <div className="flex items-center">
@@ -60,7 +60,7 @@ export default function OptionsMattraduct({
           </li>
           <PDFDownloadLinkDynamic
             className={
-              !translationResponse ? "opacity-50 pointer-events-none" : ""
+              !translationResponse ? "opacity-90 pointer-events-none" : ""
             }
             document={
               <ExportPDF
@@ -127,7 +127,7 @@ export default function OptionsMattraduct({
             >
               <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
             </svg>
-            <Popover className={!translationResponse  ? "opacity-50 pointer-events-none" : ""}>
+            <Popover className={!translationResponse  ? "opacity-80 pointer-events-none" : ""}>
               {({ open }) => (
                 <>
                   <Popover.Button

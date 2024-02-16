@@ -84,7 +84,7 @@ export default function Register() {
       >
         <div className="bg-zinc-200 bg-opacity-50 blur-0 border-2 border-spacing-16 border-green-900 p-5 backdrop-blur-lg absolute backdrop-filter shadow-md rounded flex flex-col justify-center pb-8 px-4 sm:px-6 lg:px-8 xl:px-10 md:flex-row lg:flex-none flex-none">
           <div className="mx-auto w-full max-w-md md:w-96 lg:w-96">
-            <header className="flex items-center justify-center gap-4 my-8 text-[#21c284]">
+            <header className="flex items-center justify-center gap-4 my-8 text-primary">
               <UserPlusIcon className="h-6 w-6" aria-hidden="true" />
               <h3 className="text-base font-semibold leading-6">
                 Creación de usuarios

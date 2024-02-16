@@ -22,7 +22,7 @@ export const QuizForm = ({
     <form onSubmit={handleSubmit} className="max-w-md mx-auto">
       <label
         htmlFor="prompt"
-        className="block text-sm font-medium text-[#21c284]"
+        className="block text-sm font-medium text-primary"
       >
         Prompt:
       </label>
@@ -34,12 +34,12 @@ export const QuizForm = ({
         placeholder={DataEco2Quiz.PromptMain}
         value={prompt ? prompt : ''}
         onChange={handlePropmtChange}
-        className="w-full px-4 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284] mt-1"
+        className="w-full px-4 py-2 border rounded-lg resize-none text-black mt-1"
       />
 
       <label
         htmlFor="optionChoice"
-        className="block text-sm font-medium text-[#21c284] mt-4"
+        className="block text-sm font-medium text-primary mt-4"
       >
         Option Choice:
       </label>
@@ -47,7 +47,7 @@ export const QuizForm = ({
         name="optionChoice"
         value={formState.optionChoice}
         onChange={handleChange}
-        className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284]"
+        className="w-full mt-1 px-4 py-2 border rounded-lg text-black"
       >
         <option value="multipleChoice"> {DataEco2Quiz.MultipleChoise} </option>
         <option value="trueFalse"> {DataEco2Quiz.TrueFalse} </option>
@@ -56,7 +56,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="language"
-        className="block text-sm font-medium text-[#21c284] mt-4"
+        className="block text-sm font-medium text-primary mt-4"
       >
         Language:
       </label>
@@ -65,7 +65,7 @@ export const QuizForm = ({
         name="language"
         value={formState.language}
         onChange={handleChange}
-        className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284]"
+        className="w-full mt-1 px-4 py-2 border rounded-lg text-black"
       >
         <option value="Auto"> {DataEco2Quiz.Auto} </option>
         <option value="En"> {DataEco2Quiz.English} </option>
@@ -78,7 +78,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="difficulty"
-        className="block text-sm font-medium text-[#21c284] mt-4"
+        className="block text-sm font-medium text-primary mt-4"
       >
         Difficulty:
       </label>
@@ -87,7 +87,7 @@ export const QuizForm = ({
         name="difficulty"
         value={formState.difficulty}
         onChange={handleChange}
-        className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284]"
+        className="w-full mt-1 px-4 py-2 border rounded-lg text-black"
       >
         <option value="easy"> {DataEco2Quiz.Easy} </option>
         <option value="medium"> {DataEco2Quiz.Medium} </option>
@@ -96,7 +96,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="questionQuantity"
-        className="block text-sm font-medium text-[#21c284] mt-4"
+        className="block text-sm font-medium text-primary mt-4"
       >
         Question Quantity:
       </label>
@@ -107,7 +107,7 @@ export const QuizForm = ({
         placeholder={DataEco2Quiz.NumberQuestions}
         value={formState.questionQuantity}
         onChange={handleChange}
-        className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284]"
+        className="w-full mt-1 px-4 py-2 border rounded-lg text-black"
       />
 
       <button
@@ -115,8 +115,8 @@ export const QuizForm = ({
         type="submit"
         className={`${
           loading
-            ? 'text-white rounded-full text-center focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-[#21c284]'
-            : ' rounded-full  font-semibold bg-indigo-600 text-white ring-1 ring-inset ring-gray-300'
+            ? 'text-white rounded-full text-center focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-primary'
+            : ' rounded-full  font-semibold bg-primary text-white ring-1 ring-inset ring-gray-300'
         } w-full mt-4 px-4 py-2 `}
       >
         {loading ? (
@@ -128,7 +128,7 @@ export const QuizForm = ({
         )}
       </button>
 
-      <span className="flex justify-center items-center text-gray-900 my-2">
+      <span className="flex justify-center items-center text-primary">
         Tokens utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
       </span>
     </form>

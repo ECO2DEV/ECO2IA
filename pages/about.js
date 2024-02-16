@@ -70,7 +70,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl font-bold tracking-tight sm:text-4xl text-[#21c284]"
+            className="text-3xl font-bold tracking-tight sm:text-4xl text-primary"
           >
             Nuestros Proyectos
           </motion.h2>
@@ -103,7 +103,7 @@ export default function About() {
                   "mt-6 lg:col-span-5 lg:row-start-1 lg:mt-0 xl:col-span-4"
                 )}
               >
-                <motion.h3 className="text-4xl font-medium text-[#21c284]">
+                <motion.h3 className="text-4xl font-medium text-primary">
                   {feature.name}
                 </motion.h3>
                 <motion.p className="mt-2 text-lg dark:text-zinc-200">

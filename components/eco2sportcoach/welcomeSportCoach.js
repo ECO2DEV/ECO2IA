@@ -20,7 +20,7 @@ export const WelcomeSportCoach = () => {
           {DataSportHelpExample.map((DataSportHelpExample, index) => (
             <li
               key={index}
-              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-gray-800  hover:bg-gray-900"
+              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-primary"
             >
               {DataSportHelpExample} →
             </li>
@@ -35,7 +35,7 @@ export const WelcomeSportCoach = () => {
           {DataSportHelpCapabilities.map((DataSportHelpCapabilities, index) => (
             <li
               key={index}
-              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-gray-800 "
+              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-primary"
             >
               {DataSportHelpCapabilities}
             </li>
@@ -50,7 +50,7 @@ export const WelcomeSportCoach = () => {
           {DataSportHelpLimitation.map((DataSportHelpLimitation, index) => (
             <li
               key={index}
-              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-gray-800"
+              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-primary"
             >
               {DataSportHelpLimitation}
             </li>

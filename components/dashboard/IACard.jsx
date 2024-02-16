@@ -60,7 +60,7 @@ const IACard = ({
           >
             {/* <MdArrowOutward /> */}
             <svg
-              className="h-6 w-6 dark:text-white hover:text-[#21c284]"
+              className="h-6 w-6 dark:text-white hover:text-primary"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
