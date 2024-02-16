@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { DataFeatures, features } from "../../data/features";
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { DataFeatures, features } from '../../data/features';
 
 export default function Features() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -9,15 +9,15 @@ export default function Features() {
     const rootElement = document.documentElement;
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        if (mutation.attributeName === "class") {
-          const isDark = rootElement.classList.contains("dark");
+        if (mutation.attributeName === 'class') {
+          const isDark = rootElement.classList.contains('dark');
           setIsDarkMode(isDark);
         }
       });
     });
 
     observer.observe(rootElement, {
-      attributes: true,
+      attributes: true
     });
 
     return () => observer.disconnect();
@@ -27,8 +27,8 @@ export default function Features() {
     <div
       className={`mx-auto w-full relative overflow-hidden ${
         isDarkMode
-          ? "dark"
-          : "bg-gradient-to-br from-green-400 via-green-500 to-green-600"
+          ? 'dark'
+          : 'bg-gradient-to-br from-green-400 via-green-500 to-green-600'
       } px-4 pt-10 pb-14 shadow-xl sm:rounded-3xl lg:px-24 lg:py-20`}
     >
       <div className="grid grid-cols-1 items-center lg:grid-cols-2 lg:gap-8">
@@ -51,6 +51,7 @@ export default function Features() {
           </p>
           {features.map((feature, index) => (
             <motion.div
+              key={index}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 1.1 }}
               initial={{ opacity: 0 }}
