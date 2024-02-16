@@ -189,6 +189,14 @@
 
 
 
+ .bg-image {
+  background-image: url('/renovhome/renov_04.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  
+}
 
 
 
