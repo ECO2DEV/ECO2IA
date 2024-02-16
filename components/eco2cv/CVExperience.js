@@ -110,12 +110,12 @@ export default function CVExperience({ onClose, setDescriptionResponse }) {
                     </Dialog.Title>
                   </div>
                   <div>
-                    <h3>{DataEco2CV.WorkExperienceBox}</h3>
+                    <h3 className='dark:text-black'>{DataEco2CV.WorkExperienceBox}</h3>
                     <form onSubmit={handleSubmit}>
                       <div className="flex space-x-2 mt-2">
                         <input
                           type="text"
-                          className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
+                          className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200 dark:text-black"
                           placeholder={DataEco2CV.Role}
                           value={formProfile.role ? formProfile.role : ''}
                           name="role"
@@ -124,7 +124,7 @@ export default function CVExperience({ onClose, setDescriptionResponse }) {
                         <input
                           type="text"
                           name="market"
-                          className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
+                          className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200 dark:text-black"
                           placeholder={DataEco2CV.Market}
                           value={formProfile.market ? formProfile.market : ''}
                           onChange={handleChange}

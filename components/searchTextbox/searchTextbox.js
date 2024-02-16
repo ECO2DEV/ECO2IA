@@ -32,7 +32,7 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
         </div>
         <button
           type="submit"
-          className="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold bg-indigo-600 text-white ring-1 ring-inset ring-gray-300"
+          className="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold bg-primary hover:bg-primaryHover text-white ring-1 ring-inset ring-gray-300"
           disabled={loading}
         >
           <BarsArrowUpIcon className="-ml-0.5 h-5 w-5 text-white" />
@@ -40,7 +40,7 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
         </button>
       </form>
       <div className="flex justify-start">
-        <span className=" bottom-4 text-gray-900">
+        <span className=" bottom-4 text-primary">
           Tokens utilizados para la pregunta: {promptTokens}&nbsp;&nbsp;
         </span>
         <span>{loading && <Loader />}</span>

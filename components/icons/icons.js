@@ -136,7 +136,7 @@ export const SendIcon = () => (
 );
 export const ClipboardIcon = () => (
   <svg
-    className="w-7 h-7 rounded-full  bg-gray-200 text-gray-700 hover:bg-indigo-600 hover:text-indigo-200 hover:-scale-110 transition-colors duration-200 p-1"
+    className="w-7 h-7 rounded-full  bg-gray-200 text-gray-700 hover:bg-primaryHover hover:text-indigo-200 hover:-scale-110 transition-colors duration-200 p-1"
     focusable="false"
     xmlns="http://www.w3.org/2000/svg"
     height="24"
@@ -522,7 +522,7 @@ export function VolumenSpeakerIcon() {
       xmlns="http://www.w3.org/2000/svg"
       width="20"
       height="20"
-      fill="currentColor"
+      fill="#21c284"
       className="bi bi-volume-up-fill"
       viewBox="0 0 16 16"
     >

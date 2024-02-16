@@ -9,6 +9,14 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "selector",
-  theme: {},
+  theme: {
+    extend: {
+      colors: {
+        primary: "#21c284",
+        primaryHover: "#21c284a8",
+        darkColor: "#18181b"
+      }
+    }
+  },
   plugins: [require("@tailwindcss/forms")],
 };
