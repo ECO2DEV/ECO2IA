@@ -172,7 +172,7 @@ function DesktopNavigation(props) {
   )
 }
 
-function ThemeToggle() {
+export function ThemeToggle() {
   let { resolvedTheme, setTheme } = useTheme()
   let otherTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
   let [mounted, setMounted] = useState(false)

@@ -9,6 +9,8 @@ import { Curve } from '../../../util/animate/Curve';
 import Footer from './Footer';
 import { strapiUrl } from '../../../constants/constans';
 import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
+import { ThemeToggle } from '../../shared/Header/Header';
+
 const navItems = [
   {
     title: 'Home',
@@ -44,10 +46,10 @@ export const Nav = ({ children }) => {
           onMouseLeave={() => {
             setSelectedIndicator(pathname);
           }}
-          className="flex flex-col justify-between h-full text-5xl gap-2"
+          className="flex flex-col justify-between h-full text-5xl"
         >
           <article className="flex flex-shrink-0 ">
-            <div className="flex items-center">
+            <div className="flex items-center gap-4">
               <div>
                 {image_url ? (
                   <img
@@ -73,7 +75,8 @@ export const Nav = ({ children }) => {
                     Mi perfil
                   </p>
                 </Link>
-                 <button
+              </div>
+              <button
                 title="Click for Logout !"
                 className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full text-left flex justify-center"
                 onClick={() => signOut({ callbackUrl: '/' })}
@@ -83,10 +86,10 @@ export const Nav = ({ children }) => {
                   aria-hidden="true"
                 />
               </button>
-              </div> 
-             
+              <ThemeToggle />
+
             </div>
-           
+
           </article>
           {navItems.map((data, index) => {
             return (
@@ -98,7 +101,7 @@ export const Nav = ({ children }) => {
               ></LinkComponent>
             );
           })}
-        <Footer />
+          <Footer />
         </div>
       </div>
       <Curve />
