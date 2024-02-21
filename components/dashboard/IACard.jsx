@@ -10,14 +10,18 @@ const IACard = ({
   title,
   description,
   href,
-  screenShot,
-  classNames = false,
-  index,
+  screenShoot,
+  classNames ,
   keywords,
+  index,
+  score
 
 }) => {
   const [ref, hovering] = useHover();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const arrKeywords = keywords.split(',');
+  let urlImg = screenShoot.data.attributes.url
 
   return (
     <motion.article
@@ -35,20 +39,22 @@ const IACard = ({
     >
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-start gap-5 opacity-50 z-[1]">
-          <StarsButton isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+          <StarsButton score={score} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}  />
          
           <AnimatePresence initial={false} wait={true} onExitComplete={() => null}>
              {isModalOpen && (
               <FramerModal
+              title={title}
+                id_ia={id}
                 modalOpen={isModalOpen}
                 handleClose={() => setIsModalOpen((prev) => !prev)}
-                text="hey there!"
+                
               />
             )}
           </AnimatePresence>
 
           <p className="font-semibold uppercase">
-            Votos <span className="text-[#21c284] text-lg font-semibold"> 0</span>
+            Votos <span className="text-[#21c284] text-lg font-semibold"> {score?.length}</span>
           </p>
          
           <Link
@@ -71,11 +77,11 @@ const IACard = ({
         </div>
         
         <div className="flex flex-col gap-1 z-[1]">
-          <h3 className={`${isModalOpen? "opacity-10": ""} text-2xl font-bold`}>{title}</h3>
-          <p className={`${isModalOpen? "opacity-10": ""} text-base opacity-70`}>{description}</p>
+          <h3 className={`${isModalOpen? "opacity-5": ""} text-2xl font-bold`}>{title}</h3>
+          <p className={`${isModalOpen? "opacity-5": ""} text-base `}>{description}</p>
           <div className="flex items-center gap-2 opacity-90 font-medium">
-            {keywords.map((keyword) => (
-              <span key={keyword} className={`${isModalOpen? "opacity-10": ""} text-sm`}>
+            {arrKeywords.map((keyword) => (
+              <span key={keyword} className={`${isModalOpen? "opacity-5": ""} text-sm`}>
                 {keyword}
               </span>
             ))}
@@ -85,9 +91,9 @@ const IACard = ({
           className={`${isModalOpen? "opacity-10": ""} absolute  -right-10 w-full top-48 rounded-2xl object-cover  transition-all duration-300 lg:-right-12 lg:top-48 ${
             hovering && 'scale-[1.025]'
           }`}
-          src={screenShot}
+          src={urlImg}
           alt={title}
-          title="Project screenshot"
+          title={title}
         />
       </div>
     </motion.article>
