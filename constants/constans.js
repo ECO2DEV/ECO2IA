@@ -90,115 +90,115 @@ export const VOICE_FOR_LANGUAGE = {
 export const IA_CARDS = [
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2CHAT',
+    title: 'Eco2Chat',
     href: '/eco2chat',
     description:
       'Chatbot especializado en interacción con usuarios, resolver dudas y preguntas frecuentes sobre cualquier tema',
     icon: eco2chat,
     screenShot: '/screenshot/chat_eco2.webp',
-    demoLink: '/eco2chat',
+
     classNames: true,
     index: 1,
     keywords: ['Chat', 'bot', 'ia', 'inteligencia artificial']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2IMAGE',
+    title: 'Eco2Dalle',
     href: '/eco2image',
     description:
       'Creación de imágenes y edición de fotos con inteligencia artificial',
     icon: eco2image,
     screenShot: '/screenshot/dalle_eco2.webp',
-    demoLink: '/eco2image',
+
     classNames: false,
     index: 2,
     keywords: ['Imagen', 'edición', 'dalle', 'inteligencia artificial']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2TRAD',
+    title: 'Eco2Traduct',
     href: '/eco2traduct',
     description: 'Traductor de idiomas con inteligencia artificial',
     icon: eco2rad,
     screenShot: '/screenshot/trad_eco2.webp',
-    demoLink: '/eco2traduct',
+
     classNames: false,
     index: 3,
     keywords: ['Traductor', 'idiomas', 'lenguas', 'inteligencia artificial']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2SPORT',
+    title: 'Eco2Sport',
     href: '/eco2sport',
-    description: 'entrenador personal con inteligencia artificial',
+    description: 'Entrenador personal con inteligencia artificial',
     icon: eco2sport,
     screenShot: '/screenshot/sport_eco2.webp',
-    demoLink: '/eco2sport',
+
     classNames: true,
     index: 4,
     keywords: ['Deporte', 'entrenador', 'personal', 'GYM']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2QUIZ',
+    title: 'Eco2Quiz',
     href: '/eco2quiz',
     description:
       'Creador de cuestionarios, quizzes con inteligencia artificial',
     icon: eco2quiz,
     screenShot: '/screenshot/quiz_eco2.webp',
-    demoLink: '/eco2quiz',
+
     classNames: true,
     index: 5,
     keywords: ['Quiz', 'cuestionario', 'preguntas', 'inteligencia artificial']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2DESC',
+    title: 'Eco2Desc',
     href: '/eco2description',
     description:
       'Creación de copys, descripciones para productos y servicio | marketing digital con inteligencia artificial',
     icon: eco2desc,
     screenShot: '/screenshot/desc_eco2.webp',
-    demoLink: '/eco2description',
+
     classNames: false,
     index: 6,
     keywords: ['Descripcion', 'copys', 'marketing', 'inteligencia artificial']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2RESUME',
+    title: 'Eco2Resume',
     href: '/eco2resum',
     description:
       'Genarador de resumenes, resumenes de texto con inteligencia artificial',
     icon: eco2resume,
     screenShot: '/screenshot/resum_eco2.webp',
-    demoLink: '/eco2resum',
+
     classNames: false,
     index: 7,
     keywords: ['Resumen', 'Acotar', 'Extracto', 'inteligencia artificia']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2CV',
+    title: 'Eco2CV',
     href: '/eco2cv',
     description:
       'Creación de curriculum vitae, hojas de vida con inteligencia artificial',
     icon: eco2cv,
     screenShot: '/screenshot/cv_eco2.webp',
-    demoLink: '/eco2cv',
+
     classNames: false,
     index: 8,
     keywords: ['Curriculum', 'hoja de vida', 'inteligencia artificial']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2RENOVHOME',
+    title: 'Eco2Renov',
     href: '/renovhome',
     description:
       'Renovhome es una aplicación que utiliza inteligencia artificial para ayudar a los usuarios a rediseñar sus espacios',
     icon: eco2cv,
     screenShot: '/screenshot/cv_eco2.webp',
-    demoLink: '/renovhome',
+
     classNames: false,
     index: 9,
     keywords: ['Renovhome', 'rediseñar', 'espacios', 'casa', 'hogar']
