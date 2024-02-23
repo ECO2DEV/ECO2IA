@@ -51,7 +51,7 @@ export default function ChatGpt() {
     handleInputChange,
     handleSubmit,
     isLoading,
-    setMessages,
+    setMessages
   } = useChatReact({
     api: '/api/chat',
     onFinish: async (message) => {
@@ -111,7 +111,7 @@ export default function ChatGpt() {
 
   return (
     <>
-      <section>
+      <section className="dark:bg-darkColor bg-lightColor h-screen">
         {messages.length === 0 ? (
           <Welcome setInput={setInput} />
         ) : openHelpers ? (

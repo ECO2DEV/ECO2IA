@@ -1,13 +1,13 @@
-import Head from "next/head";
-import Script from "next/script";
-import Footer from "../footer/footer";
+import Head from 'next/head';
+import Script from 'next/script';
+import Footer from '../footer/footer';
 // import Navbar from '../header/navbar';
-import { Header } from "../shared/Header";
+import { Header } from '../shared/Header';
 
 export default function Layout({ children, router }) {
   return (
     <>
-      <div className="dark:bg-darkColor bg-zinc-300">
+      <div className="dark:bg-darkColor bg-lightColor">
         <Header router={router} user={children.props.user} />
         <Head>
           <title>ECO²</title>

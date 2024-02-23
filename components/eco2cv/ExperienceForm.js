@@ -51,7 +51,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
   return (
     <div className="p-4">
       <button
-        className="bg-primary text-white py-2 px-4 rounded mb-4 flex items-center"
+        className="bg-eco2MainColor text-white py-2 px-4 rounded mb-4 flex items-center"
         onClick={addDropdown}
       >
         <span className="mr-2">{DataEco2CV.AddExperience}</span>
@@ -204,7 +204,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
           </div>
           <button
             onClick={handleModalOpen}
-            className="gap-x-1.5 rounded-md px-3 py-2 mb-2 text-sm font-semibold bg-primary text-white ring-1 ring-inset ring-gray-30"
+            className="gap-x-1.5 rounded-md px-3 py-2 mb-2 text-sm font-semibold bg-eco2MainColor text-white ring-1 ring-inset ring-gray-30"
           >
             {DataEco2CV.GenerateWithAI}
           </button>

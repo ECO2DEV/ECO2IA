@@ -13,7 +13,11 @@ const Eco2cvIA = () => {
     city: ' '
   });
 
-  return <MyDocument formData={formData} setFormData={setFormData} />;
+  return (
+    <div className="dark:bg-darkColor bg-lightColor md:h-[215vh]">
+      <MyDocument formData={formData} setFormData={setFormData} />
+    </div>
+  );
 };
 
 export default Eco2cvIA;

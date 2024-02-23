@@ -5,8 +5,8 @@
 
 
 :root {
-  --dark: #101315;
-  --light: #eeeeee;
+  --dark: #020617;
+  --light: #f0fdf4;
   --gradient: linear-gradient(10deg, #ffaa00, #ff6a00);
   --gradient2: linear-gradient(15deg, #04ea00, #00d17d);
   --gradient3: linear-gradient(15deg, #b648ff, #ef5dff);
@@ -289,6 +289,4 @@
   width: clamp(50%, 700px, 90%);
   height: min(50%, 300px);
   
-
-
 }

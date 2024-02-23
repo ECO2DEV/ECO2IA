@@ -211,7 +211,7 @@ function TextSummarizerPage() {
             }}
           />
           <div
-            className="w-full h-40 flex flex-col items-center justify-center text-zinc-100 px-4 py-6 rounded-lg shadow-lg tracking-wide uppercase border border-primary hover:bg-primaryHover cursor-pointer hover:text-white"
+            className="w-full h-40 flex flex-col items-center justify-center text-zinc-100 px-4 py-6 rounded-lg shadow-lg tracking-wide uppercase border border-eco2MainColor hover:bg-eco2HoverColor cursor-pointer hover:text-white"
             {...getRootProps()}
           >
             <svg
@@ -222,7 +222,9 @@ function TextSummarizerPage() {
             >
               <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
             </svg>
-            <p className='text-zinc-800 dark:text-white'>{DataEco2Resume.DropField}</p>
+            <p className="text-zinc-800 dark:text-white">
+              {DataEco2Resume.DropField}
+            </p>
           </div>
           <div className="my-4">
             <select
@@ -244,7 +246,7 @@ function TextSummarizerPage() {
             </select>
           </div>
           <button
-            className="mt-auto w-full px-4 py-2 bg-primary text-white rounded hover:bg-primaryHover relative"
+            className="mt-auto w-full px-4 py-2 bg-eco2MainColor text-white rounded hover:bg-eco2HoverColor relative"
             onClick={handleRequestSummary}
             disabled={isLoading} // Deshabilita el botón mientras isLoading sea true
           >
@@ -274,7 +276,7 @@ function TextSummarizerPage() {
             ) : null}
             {DataEco2Resume.CreateResume}
           </button>
-          <div className="flex justify-center items-center my-2 text-primary">
+          <div className="flex justify-center items-center my-2 text-eco2MainColor">
             <span>
               Tokens utilizados en la pregunta : {promptTokens}&nbsp;&nbsp;
             </span>
@@ -302,7 +304,7 @@ function TextSummarizerPage() {
           <nav className="flex" aria-label="Breadcrumb">
             <ol
               role="list"
-              className="flex w-full justify-around rounded-md bg-primary shadow"
+              className="flex w-full justify-around rounded-md bg-eco2MainColor shadow"
             >
               <li
                 onClick={handleModalHistory}
