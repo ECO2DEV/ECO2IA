@@ -2,6 +2,18 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+
+
+:root {
+  --dark: #101315;
+  --light: #eeeeee;
+  --gradient: linear-gradient(10deg, #ffaa00, #ff6a00);
+  --gradient2: linear-gradient(15deg, #04ea00, #00d17d);
+  --gradient3: linear-gradient(15deg, #b648ff, #ef5dff);
+  font-size: 1rem;
+}
+
+
 .tags-input-container {
   border: 2px solid #2520207c;
   padding: 0.5em;
@@ -198,4 +210,85 @@
 }
 
 
+/* Modal styles for starts scores */
 
+
+
+.modal-button {
+  position: relative;
+  bottom: 1.5rem;
+  padding: 0 2rem;
+  min-height: 2rem;
+  margin: auto auto 0 auto;
+  background: #0f172a;
+  color: #f1f5f9;
+}
+
+.save-button {
+  padding: 0 1rem;
+  margin: 2rem auto auto 0;
+  background: #0f172a;
+  color: #0f172a;
+}
+
+.close-button {
+  padding: 0 2rem;
+  height: 2.5rem;
+  margin: 2rem auto 1rem 0;
+  background: #101111;
+  /* border: 1px dashed #9a9a9a99; */
+  color: #ffaa00;
+  border-radius: 4px;
+  transition: background ease 400ms;
+  box-shadow: 1px 1px 15px #03030399;
+}
+
+.container {
+  display: flex;
+  width: 50vw;
+  height: 50%;
+  margin: auto;
+}
+
+
+.close {
+  height: 1.1rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  margin: 0 0 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.orange-gradient {
+  background: var(--gradient);
+}
+
+.green-gradient {
+  background: var(--gradient2);
+}
+
+/* .backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000000e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+} */
+
+.modal {
+  width: clamp(50%, 700px, 90%);
+  height: min(50%, 300px);
+  
+
+
+}
