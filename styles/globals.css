@@ -67,6 +67,15 @@
   position: relative;
 }
 
+/* .img-light-mode {
+  filter: sepia(1) hue-rotate(90deg) brightness(0.9) saturate(1.5);
+} */
+
+.img-filter-green {
+  filter: brightness(0.5) saturate(1.6) hue-rotate(120deg);
+}
+
+
 /* animacion feacture */
 @keyframes pulse {
   0%, 100% {
@@ -92,8 +101,24 @@
   animation: float 6s ease-in-out infinite;
 }
 
+@keyframes moveBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
-/* Navbar styles */
+.modalBackground {
+  animation: moveBg 10s linear infinite;
+  background: linear-gradient(270deg, #0b420d, #0b420d, #0b420d);
+  background-size: 400% 400%;
+}
+
 
 #header .burger::after,
 #header .burger::before {

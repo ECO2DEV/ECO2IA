@@ -84,101 +84,105 @@ const resources = [
 
 export const ProjectsIA = () => {
   return (
-    <section
-      className="w-full max-w-[1400px]
+    <>
+      <hr className="my-10 h-px bg-gray-600 border-0 dark:bg-gray-700" />
+
+      <section
+        className="w-full max-w-[1400px]
     grid lg:grid-cols-10 auto-rows-[30rem] gap-4
     mx-auto pt-6"
-    >
-      <BentoItem
-        title={resources[0].name}
-        appliedPrompt={resources[0].description}
-        classProp="col-span-10 lg:col-span-4"
       >
-        <Image
-          className="background transition-scale absolute bottom-0 left-0 top-0
+        <BentoItem
+          title={resources[0].name}
+          appliedPrompt={resources[0].description}
+          classProp="col-span-10 lg:col-span-4"
+        >
+          <Image
+            className="background transition-scale absolute bottom-0 left-0 top-0
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
-          src={IA1}
-          alt="image"
-          width={600}
-          height={600}
-        />
-      </BentoItem>
-      <BentoItem
-        title={resources[1].name}
-        appliedPrompt={resources[1].description}
-        classProp="col-span-10 lg:col-span-6"
-      >
-        <Image
-          className="background transition-scale absolute bottom-0 left-0 top-0
+            src={IA1}
+            alt="image"
+            width={600}
+            height={600}
+          />
+        </BentoItem>
+        <BentoItem
+          title={resources[1].name}
+          appliedPrompt={resources[1].description}
+          classProp="col-span-10 lg:col-span-6"
+        >
+          <Image
+            className="background transition-scale absolute bottom-0 left-0 top-0
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
-          src={IA2}
-          alt="image"
-          width={600}
-          height={600}
-        />
-      </BentoItem>
-      <BentoItem
-        title={resources[3].name}
-        appliedPrompt={resources[3].description}
-        classProp="col-span-10 lg:col-span-6"
-      >
-        <Image
-          className="background transition-scale absolute bottom-0 left-0 top-0
+            src={IA2}
+            alt="image"
+            width={600}
+            height={600}
+          />
+        </BentoItem>
+        <BentoItem
+          title={resources[3].name}
+          appliedPrompt={resources[3].description}
+          classProp="col-span-10 lg:col-span-6"
+        >
+          <Image
+            className="background transition-scale absolute bottom-0 left-0 top-0
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
-          src={IA4}
-          alt="image"
-          width={600}
-          height={600}
-        />
-      </BentoItem>
-      <BentoItem
-        title={resources[2].name}
-        appliedPrompt={resources[2].description}
-        classProp="col-span-10 lg:col-span-4"
-      >
-        <Image
-          className="background transition-scale absolute bottom-0 left-0 top-0
+            src={IA4}
+            alt="image"
+            width={600}
+            height={600}
+          />
+        </BentoItem>
+        <BentoItem
+          title={resources[2].name}
+          appliedPrompt={resources[2].description}
+          classProp="col-span-10 lg:col-span-4"
+        >
+          <Image
+            className="background transition-scale absolute bottom-0 left-0 top-0
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
-          src={IA3}
-          alt="image"
-          width={600}
-          height={600}
-        />
-      </BentoItem>
-      <BentoItem
-        title={resources[4].name}
-        appliedPrompt={resources[4].description}
-        classProp="col-span-10 lg:col-span-5"
-      >
-        <Image
-          className="background transition-scale absolute bottom-0 left-0 top-0
+            src={IA3}
+            alt="image"
+            width={600}
+            height={600}
+          />
+        </BentoItem>
+        <BentoItem
+          title={resources[4].name}
+          appliedPrompt={resources[4].description}
+          classProp="col-span-10 lg:col-span-5"
+        >
+          <Image
+            className="background transition-scale absolute bottom-0 left-0 top-0
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
-          src={IA5}
-          alt="image"
-          width={600}
-          height={600}
-        />
-      </BentoItem>
-      <BentoItem
-        title={resources[5].name}
-        appliedPrompt={resources[5].description}
-        classProp="col-span-10 lg:col-span-5"
-      >
-        <Image
-          className="background transition-scale absolute bottom-0 left-0 top-0
+            src={IA5}
+            alt="image"
+            width={600}
+            height={600}
+          />
+        </BentoItem>
+        <BentoItem
+          title={resources[5].name}
+          appliedPrompt={resources[5].description}
+          classProp="col-span-10 lg:col-span-5"
+        >
+          <Image
+            className="background transition-scale absolute bottom-0 left-0 top-0
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
-          src={IA6}
-          alt="image"
-          width={600}
-          height={600}
-        />
-      </BentoItem>
-    </section>
+            src={IA6}
+            alt="image"
+            width={600}
+            height={600}
+          />
+        </BentoItem>
+      </section>
+    </>
   );
 };
