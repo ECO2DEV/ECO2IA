@@ -51,7 +51,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
   return (
     <div className="p-4">
       <button
-        className="bg-indigo-600 text-white py-2 px-4 rounded mb-4 flex items-center"
+        className="bg-eco2MainColor text-white py-2 px-4 rounded mb-4 flex items-center"
         onClick={addDropdown}
       >
         <span className="mr-2">{DataEco2CV.AddExperience}</span>
@@ -100,7 +100,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
             </label>
             <input
               id={`jobTitle${index}`}
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 border rounded dark:text-black"
               type="text"
               placeholder={DataEco2CV.EnterJobTitle}
               value={dropdown.jobTitleXp || ''}
@@ -119,7 +119,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
               </label>
               <input
                 id={`startDate${index}`}
-                className="w-full px-3 py-2 border rounded"
+                className="w-full px-3 py-2 border rounded dark:text-black"
                 type="text"
                 placeholder={DataEco2CV.EnterStartDate}
                 value={dropdown.startDate || ''}
@@ -137,7 +137,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
               </label>
               <input
                 id={`endDate${index}`}
-                className="w-full px-3 py-2 border rounded"
+                className="w-full px-3 py-2 border rounded dark:text-black"
                 type="text"
                 placeholder={DataEco2CV.EnterEndDate}
                 value={dropdown.endDate || ''}
@@ -157,7 +157,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
               </label>
               <input
                 id={`employer${index}`}
-                className="w-full px-3 py-2 border rounded"
+                className="w-full px-3 py-2 border rounded dark:text-black"
                 type="text"
                 placeholder={DataEco2CV.EnterEmployer}
                 value={dropdown.employer || ''}
@@ -175,7 +175,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
               </label>
               <input
                 id={`cityXp${index}`}
-                className="w-full px-3 py-2 border rounded"
+                className="w-full px-3 py-2 border rounded dark:text-black"
                 type="text"
                 placeholder={DataEco2CV.EnterCity}
                 value={dropdown.cityXp || ''}
@@ -194,7 +194,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
             </label>
             <textarea
               id={`description${index}`}
-              className="w-full h-36 text-xs p-2 border rounded resize-none focus:border-emerald-600"
+              className="w-full h-36 text-xs p-2 border rounded resize-none dark:text-black"
               placeholder={DataEco2CV.EnterDescription}
               value={dropdown.description || ''}
               onChange={(e) => {
@@ -204,7 +204,7 @@ const ExperienceForm = ({ dropdowns, setDropdowns }) => {
           </div>
           <button
             onClick={handleModalOpen}
-            className="gap-x-1.5 rounded-md px-3 py-2 mb-2 text-sm font-semibold bg-indigo-600 text-white ring-1 ring-inset ring-gray-30"
+            className="gap-x-1.5 rounded-md px-3 py-2 mb-2 text-sm font-semibold bg-eco2MainColor text-white ring-1 ring-inset ring-gray-30"
           >
             {DataEco2CV.GenerateWithAI}
           </button>

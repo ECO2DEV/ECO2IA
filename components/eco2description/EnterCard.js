@@ -4,7 +4,7 @@ import { DataEco2Description } from '../../data/eco2description';
 
 export const EnterCard = ({ response, handleCopy }) => {
   return (
-    <section className="flex flex-col gap-2 sm:absolute sm:top-[4.7rem] right-0">
+    <section className="flex flex-col gap-2 sm:absolute sm:top-[8.5rem] lg:top-[4.5rem] right-0">
       <div className="flex items-start space-x-4">
         <div className="flex shrink-0">
           <DefaultSocialIcon />

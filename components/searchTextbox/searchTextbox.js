@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { PromptContext } from "../../context/prompts/PromptContext";
-import Loader from "../loader/loader";
+import { useContext } from 'react';
+import { PromptContext } from '../../context/prompts/PromptContext';
+import Loader from '../loader/loader';
 
-import { BarsArrowUpIcon, UsersIcon } from "@heroicons/react/20/solid";
+import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 
 export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
   const { promptTokens } = useContext(PromptContext);
@@ -27,12 +27,12 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
             className="w-full rounded-none rounded-l-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             placeholder="¿Como puedo ayudarte hoy?"
             onChange={OnChange}
-            value={prompt ? prompt : ""}
+            value={prompt ? prompt : ''}
           />
         </div>
         <button
           type="submit"
-          className="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold bg-indigo-600 text-white ring-1 ring-inset ring-gray-300"
+          className="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold bg-eco2MainColor hover:bg-eco2HoverColor text-white ring-1 ring-inset ring-gray-300"
           disabled={loading}
         >
           <BarsArrowUpIcon className="-ml-0.5 h-5 w-5 text-white" />
@@ -40,7 +40,7 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
         </button>
       </form>
       <div className="flex justify-start">
-        <span className=" bottom-4 text-gray-900">
+        <span className=" bottom-4 text-eco2MainColor">
           Tokens utilizados para la pregunta: {promptTokens}&nbsp;&nbsp;
         </span>
         <span>{loading && <Loader />}</span>

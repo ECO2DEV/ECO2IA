@@ -30,14 +30,17 @@ const TextAreaEducation = ({ setEducationFields }) => {
 
   return (
     <div className="w-full">
-      <h1 className="text-xl font-bold"> {DataEco2CV.EducationBackground} </h1>
+      <h1 className="text-xl font-bold text-eco2MainColor">
+        {' '}
+        {DataEco2CV.EducationBackground}{' '}
+      </h1>
       <input
         type="text"
         name="degree"
         value={education.degree ? education.degree : ''}
         onChange={handleInputChange}
         placeholder={DataEco2CV.Degree}
-        className="w-full mb-2 p-2 border rounded dark:bg-[#21c284] dark:text-zinc-900"
+        className="w-full mb-2 p-2 border rounded dark:text-black"
       />
       <input
         type="text"
@@ -45,7 +48,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
         value={education.institution ? education.institution : ''}
         onChange={handleInputChange}
         placeholder={DataEco2CV.Institution}
-        className="w-full mb-2 p-2 border rounded dark:bg-[#21c284] dark:text-zinc-900"
+        className="w-full mb-2 p-2 border rounded dark:text-black"
       />
       <input
         type="text"
@@ -53,7 +56,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
         value={education.startDate ? education.startDate : ''}
         onChange={handleInputChange}
         placeholder={DataEco2CV.StartDate}
-        className="w-full mb-2 p-2 border rounded dark:bg-[#21c284] dark:text-zinc-900"
+        className="w-full mb-2 p-2 border rounded dark:text-black"
       />
       <input
         type="text"
@@ -61,7 +64,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
         value={education.endDate ? education.endDate : ''}
         onChange={handleInputChange}
         placeholder={DataEco2CV.EndDate}
-        className="w-full mb-2 p-2 border rounded dark:bg-[#21c284] dark:text-zinc-900"
+        className="w-full mb-2 p-2 border rounded dark:text-black"
       />
       <input
         type="text"
@@ -69,7 +72,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
         value={education.city ? education.city : ''}
         onChange={handleInputChange}
         placeholder={DataEco2CV.City}
-        className="w-full mb-2 p-2 border rounded dark:bg-[#21c284] dark:text-zinc-900"
+        className="w-full mb-2 p-2 border rounded dark:text-black"
       />
       <button
         onClick={handleAddEducation}
@@ -80,7 +83,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
           !education.endDate ||
           !education.city
         }
-        className="gap-x-1.5 rounded-md px-3 py-2 mb-2 text-sm font-semibold bg-indigo-600 text-white ring-1 ring-inset ring-gray-30"
+        className="gap-x-1.5 rounded-md px-3 py-2 mb-2 text-sm font-semibold bg-eco2MainColor text-white ring-1 ring-inset ring-gray-30"
       >
         {DataEco2CV.AddEducation}
       </button>

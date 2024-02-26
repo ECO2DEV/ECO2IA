@@ -13,7 +13,7 @@ export const Welcome = ({ setInput }) => {
             <button
               key={index}
               onClick={() => setInput(example)}
-              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-gray-800  hover:bg-gray-900"
+              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-eco2MainColor  hover:bg-eco2HoverColor"
             >
               {example} →
             </button>
@@ -28,7 +28,7 @@ export const Welcome = ({ setInput }) => {
           {CAPABILITIES.map((capability, index) => (
             <li
               key={index}
-              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-gray-800 "
+              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-eco2MainColor"
             >
               {capability}
             </li>
@@ -43,7 +43,7 @@ export const Welcome = ({ setInput }) => {
           {LIMITATION.map((limitation, index) => (
             <li
               key={index}
-              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-gray-800"
+              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-eco2MainColor"
             >
               {limitation}
             </li>

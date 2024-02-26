@@ -108,7 +108,7 @@ export const SportCoachResults = ({ user }) => {
 
   // formato para compartir el plan de entrenamiento a pdf y a las redes sociales
   const generateTrainingPlanContent = () => {
-    let content = "¡Hola! Comparto mi plan de entrenamiento :\n\n";
+    let content = '¡Hola! Comparto mi plan de entrenamiento :\n\n';
     if (responseObj) {
       // console.log('the response obj', typeof responseObj);
       responseObj?.resp?.forEach((day) => {
@@ -178,12 +178,12 @@ export const SportCoachResults = ({ user }) => {
       <nav aria-label="Breadcrumb">
         <ol
           role="list"
-          className="flex justify-evenly w-96 space-x-4 rounded-md bg-gray-50 shadow absolute"
+          className="flex justify-evenly w-96 space-x-4 rounded-md bg-eco2MainColor shadow absolute"
         >
-          <li className="flex items-center w-auto text-gray-500">
+          <li className="flex items-center w-auto text-white">
             <button
               onClick={handleShareClick}
-              className="flex items-center p-2 rounded-md hover:bg-gray-100"
+              className="flex items-center p-2 rounded-md hover:bg-eco2HoverColor"
             >
               <ShareIcon className="w-5 h-5 mr-1" /> Compartir
             </button>
@@ -197,9 +197,9 @@ export const SportCoachResults = ({ user }) => {
             }
             fileName="MATTSPORT.pdf"
           >
-            <li className="flex space-x-4 items-center w-auto text-gray-500 hover:text-gray-500">
+            <li className="flex space-x-4 items-center w-auto text-white">
               <svg
-                className="h-full text-xs w-5 flex-shrink-0 text-gray-400"
+                className="h-full text-xs w-5 flex-shrink-0 text-white"
                 viewBox="0 0 24 44"
                 preserveAspectRatio="none"
                 fill="currentColor"
@@ -207,7 +207,7 @@ export const SportCoachResults = ({ user }) => {
               >
                 <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
               </svg>
-              <button className="flex items-center p-2 rounded-md hover:bg-gray-100">
+              <button className="flex items-center p-2 rounded-md">
                 <DocumentArrowDownIcon className="w-5 h-5 mr-1" /> PDF
               </button>
             </li>

@@ -36,7 +36,7 @@ export default function Hero({ user }) {
   };
 
   return (
-    <div className="relative isolate px-6 lg:px-8 text-white">
+    <div className="relative isolate px-6 pt-44 lg:px-8 text-white">
       <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-sm"></div>
 
       <div className="mx-auto max-w-3xl sm:py-46 lg:pb-48 pb-48">

@@ -1,35 +1,29 @@
 import axios from "axios";
 import { strapiUrl, strapiToken, header } from "../../constants/constans";
 
-export const createIAContactMessage = async ({formData}) => {
+export const createIAContactMessage = async ({ formData }) => {
   const data = {
     data: {
       name: formData.name,
       Email: formData.Email,
       ImageIAS: {
-        data: formData.ImageIAS
+        data: formData.ImageIAS,
       },
-      IADetail: formData.IADetail
-    }
+      IADetail: formData.IADetail,
+    },
   };
   try {
-    console.log(data)
     const response = await axios.post(
       `${strapiUrl}/api/ia-contacts`,
       data,
-      {
-        headers: {
-          Authorization: `Bearer ${strapiToken}`,
-          'Content-Type': 'application/json'
-        }
-      }
+      header
     );
+    console.log(data)
     return response;
   } catch (error) {
     return error.response.data.error;
   }
 };
-
 
 // export const sendEmail = async ({ formData }) => {
 //   try {

@@ -77,13 +77,13 @@ export default function LayoutUser({ children }) {
   return (
     <>
       {/* Removing the scroll for let chatGpt to scroll with his own scrollbar (overflow-y-hidden h-screen)*/}
-      <div>
+      <div className="dark:bg-darkColor bg-lightColor">
         <Header children={children} />
 
         <div>
-          <main className="">
-            <div className="lg:py-3 h-screen">
-              <div className="mx-auto h-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <main>
+            <div className="lg:py-3  dark:bg-darkColor bg-lightColor">
+              <div className="mx-auto h-full max-w-7xl px-4 sm:px-6 lg:px-8 dark:bg-darkColor bg-lightColor ">
                 {children}
               </div>
             </div>

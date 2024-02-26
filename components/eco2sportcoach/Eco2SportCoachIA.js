@@ -93,15 +93,15 @@ export const SportCoachIA = (props) => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <div className="flex justify-center items-center text-[#21c284] mb-4">
+    <div className="flex flex-col items-center w-full h-screen">
+      <div className="flex justify-center items-center text-gray-900 dark:text-gray-100 mb-4">
         <span>
-        Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
+          Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
         </span>
       </div>
 
       {!showResults ? (
-        <WelcomeSportCoach className="mb-8 bg-[#21c284]" />
+        <WelcomeSportCoach className="mb-8 bg-eco2MainColor" />
       ) : (
         (
           <div className="flex justify-center h-[60rem]">
@@ -117,7 +117,7 @@ export const SportCoachIA = (props) => {
           </div>
         ) && <SportCoachResults user={user} />
       )}
-      <div className="bottom-3 z-20 sticky grid xl:grid-cols-[minmax(auto,_1fr)_100px] md:fixed md:bottom-3 xl:fixed p-4 bg-gray-200 dark:bg-zinc-900/80">
+      <div className="bottom-3 z-20 sticky grid xl:grid-cols-[minmax(auto,_1fr)_100px] md:fixed md:bottom-3 xl:fixed p-4 bg-gray-200 dark:bg-zinc-900/100">
         <form
           onSubmit={handleSubmit}
           className="grid xl:grid-cols-5 md:grid-cols-5 items-center gap-4 grid-cols-2"
@@ -129,7 +129,7 @@ export const SportCoachIA = (props) => {
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
               type="text"
-              className="mt-1 px-4 py-2 w-full rounded-md focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm dark:text-zinc-900"
+              className="mt-1 px-4 py-2 w-full rounded-md focus:ring-emerald-500 dark:text-black focus:border-emerald-500 sm:text-sm"
             />
           </fieldset>
           <fieldset>
@@ -152,7 +152,7 @@ export const SportCoachIA = (props) => {
               // value={""}
               defaultValue={prompt}
               onChange={handlePromptChange}
-              className="mt-1 px-4 py-2 border w-full border-gray-300 rounded-md bg-[#21c284] focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+              className="mt-1 px-4 py-2 border w-full border-gray-300 rounded-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm dark:text-black"
             >
               <option value={prompt}>{DataEco2Sport.SelectOption}</option>
 
@@ -174,7 +174,7 @@ export const SportCoachIA = (props) => {
               name="trainingDays"
               value={trainingDays}
               onChange={handleChange}
-              className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full bg-[#21c284] focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+              className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full dark:text-black focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
             >
               <option value="1"> {DataEco2Sport.OneDay} </option>
               <option value="2"> {DataEco2Sport.TwoDays} </option>
@@ -189,7 +189,7 @@ export const SportCoachIA = (props) => {
             <button
               type="submit"
               disabled={submitting}
-              className="mt-5 h-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-7 py-2 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              className="mt-5 h-10 text-white bg-eco2MainColor hover:bg-eco2HoverColor font-medium rounded-full text-sm px-7 py-2 mr-2"
             >
               {submitting ? <Loader /> : DataEco2Sport.GetButton}
             </button>

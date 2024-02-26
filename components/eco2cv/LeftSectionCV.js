@@ -31,9 +31,14 @@ export const LeftSectionCV = ({
   };
 
   return (
-    <section className="md-w-[45%] lg:w-[50%] lg:absolute lg:-left-4">
-      <h1 className="text-xl font-bold"> {DataEco2CV.PersonalDetails} </h1>
-      <p className="text-xs">{DataEco2CV.PersonalDetailsText}</p>
+    <section className="md-w-[45%] lg:w-[50%] lg:absolute lg:-left-4 dark:bg-darkColor bg-lightColor">
+      <h1 className="text-xl font-bold text-eco2MainColor">
+        {' '}
+        {DataEco2CV.PersonalDetails}{' '}
+      </h1>
+      <p className="text-xs dark:text-black">
+        {DataEco2CV.PersonalDetailsText}
+      </p>
       <FormCV formData={formData} setFormData={setFormData} />
 
       <div className="flex justify-start items-center relative">

@@ -4,7 +4,7 @@ import { userReducer } from './userReducer';
 
 const userInitialState = {
   user: null,
-  language: 'french',
+  language: 'spanish',
   setUser: () => {},
   setLanguage: () => {},
   // ui matchat stuff

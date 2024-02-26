@@ -1,29 +1,29 @@
 // components/mattraduct/optionsMattraduct.js
-import { useContext, useState } from "react";
-import { Popover, Transition } from "@headlessui/react";
-import { DataEco2Traduct } from "../../data/eco2traduct";
-import { PromptContext } from "../../context/prompts/PromptContext";
-import ShareModal from "./ShareModal";
+import { useContext, useState } from 'react';
+import { Popover, Transition } from '@headlessui/react';
+import { DataEco2Traduct } from '../../data/eco2traduct';
+import { PromptContext } from '../../context/prompts/PromptContext';
+import ShareModal from './ShareModal';
 import {
   MinusIcon,
   PlusIcon,
   ShareIcon,
-  DocumentArrowDownIcon,
+  DocumentArrowDownIcon
   // DocumentIcon,
-} from "@heroicons/react/20/solid";
-import dynamic from "next/dynamic";
+} from '@heroicons/react/20/solid';
+import dynamic from 'next/dynamic';
 // Import PDFDownloadLink separately before the component definition
 const PDFDownloadLinkDynamic = dynamic(
-  () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
+  () => import('@react-pdf/renderer').then((mod) => mod.PDFDownloadLink),
   {
-    ssr: false,
+    ssr: false
   }
 );
 
-import { HistoryIcon, VolumenSpeakerIcon } from "../icons/icons";
-import ExportPDF from "./ExportPDF";
+import { HistoryIcon, VolumenSpeakerIcon } from '../icons/icons';
+import ExportPDF from './ExportPDF';
 
-const Transcription = dynamic(() => import("./transcript"), { ssr: false });
+const Transcription = dynamic(() => import('./transcript'), { ssr: false });
 
 export default function OptionsMattraduct({
   showThirdTextarea,
@@ -31,7 +31,7 @@ export default function OptionsMattraduct({
   handleShowThirdTextarea,
   onClick,
   translationResponse,
-  prompt,
+  prompt
 }) {
   // Handler para cambiar el estado de showShare
   const toggleShare = () => {
@@ -46,7 +46,7 @@ export default function OptionsMattraduct({
       <nav className="flex justify-center" aria-label="Breadcrumb">
         <ol
           role="list"
-          className="flex space-x-2 rounded-md bg-gray-50 px-3 py-2 sm:px-6 shadow"
+          className="flex space-x-2 rounded-md bg-eco2MainColor px-3 py-2 sm:px-6 shadow"
         >
           <li className="flex" title="Historique">
             <div className="flex items-center">
@@ -60,7 +60,7 @@ export default function OptionsMattraduct({
           </li>
           <PDFDownloadLinkDynamic
             className={
-              !translationResponse ? "opacity-50 pointer-events-none" : ""
+              !translationResponse ? 'opacity-90 pointer-events-none' : ''
             }
             document={
               <ExportPDF
@@ -87,8 +87,8 @@ export default function OptionsMattraduct({
                     aria-hidden="true"
                   />
                   <span className="hidden sm:contents">
-                    {" "}
-                    {DataEco2Traduct.ButtonPDF}{" "}
+                    {' '}
+                    {DataEco2Traduct.ButtonPDF}{' '}
                   </span>
                 </div>
               </button>
@@ -127,7 +127,11 @@ export default function OptionsMattraduct({
             >
               <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
             </svg>
-            <Popover className={!translationResponse  ? "opacity-50 pointer-events-none" : ""}>
+            <Popover
+              className={
+                !translationResponse ? 'opacity-80 pointer-events-none' : ''
+              }
+            >
               {({ open }) => (
                 <>
                   <Popover.Button
@@ -181,8 +185,8 @@ export default function OptionsMattraduct({
                     aria-hidden="true"
                   />
                   <span className="hidden sm:contents">
-                    {" "}
-                    {DataEco2Traduct.ButtonLanguage}{" "}
+                    {' '}
+                    {DataEco2Traduct.ButtonLanguage}{' '}
                   </span>
                 </div>
               ) : (
@@ -192,8 +196,8 @@ export default function OptionsMattraduct({
                     aria-hidden="true"
                   />
                   <span className="hidden sm:contents">
-                    {" "}
-                    {DataEco2Traduct.ButtonLanguage}{" "}
+                    {' '}
+                    {DataEco2Traduct.ButtonLanguage}{' '}
                   </span>
                 </div>
               )}
@@ -223,8 +227,8 @@ export default function OptionsMattraduct({
         </ol>
       </nav>
       <div className="flex justify-center items-center my-2">
-        <span className=" bottom-4 text-gray-900">
-        Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
+        <span className=" bottom-4 text-gray-900 dark:text-gray-100">
+          Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
         </span>
       </div>
     </div>

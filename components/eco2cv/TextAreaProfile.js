@@ -11,14 +11,15 @@ export const TextAreaProfile = ({ textProfile, setTextProfile }) => {
   return (
     <>
       <form>
-        <h2 className="text-xl font-bold"> {DataEco2CV.ProfessionalSummary} </h2>
-        <p className="text-xs mb-2">
-          {DataEco2CV.ProffesionalSummaryText}
-        </p>
+        <h2 className="text-xl font-bold text-eco2MainColor">
+          {' '}
+          {DataEco2CV.ProfessionalSummary}{' '}
+        </h2>
+        <p className="text-xs mb-2">{DataEco2CV.ProffesionalSummaryText}</p>
         <textarea
           value={textProfile ? textProfile : ''}
           onChange={(e) => setTextProfile(e.target.value)}
-          className="w-full h-36 text-xs p-2 border rounded resize-none dark:text-zinc-900 dark:bg-[#21c284] focus:border-emerald-600"
+          className="w-full h-36 text-xs p-2 border rounded resize-none dark:text-black"
         ></textarea>
       </form>
       <button

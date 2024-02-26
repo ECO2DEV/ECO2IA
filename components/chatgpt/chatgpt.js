@@ -34,14 +34,13 @@ export default function ChatGpt() {
     setSelectedModel(e.target.value);
   };
 
-  const { ...state } =
+  const { setResponse, setPromptTokens, setActiveAI } =
     useContext(PromptContext);
 
   const { mutate } = useChat(user?.id);
 
   useEffect(() => {
-    state.setActiveAI('ChatGpt');
-    // setActiveAI('ChatGpt');
+    setActiveAI('ChatGpt');
     setSelectedModel('gpt-3.5-turbo');
   }, []);
 
@@ -52,7 +51,7 @@ export default function ChatGpt() {
     handleInputChange,
     handleSubmit,
     isLoading,
-    setMessages,
+    setMessages
   } = useChatReact({
     api: '/api/chat',
     onFinish: async (message) => {
@@ -81,7 +80,7 @@ export default function ChatGpt() {
           return updatedMessages;
         });
 
-        state.setResponse(message.content + input);
+        setResponse(message.content + input);
 
         mutate();
       } catch (error) {
@@ -103,16 +102,16 @@ export default function ChatGpt() {
 
   useEffect(() => {
     if (input === '') {
-      state.setPromptTokens(0);
+      setPromptTokens(0);
       return;
     }
     const tokens = countTokens(input);
-    state.setPromptTokens(tokens);
+    setPromptTokens(tokens);
   }, [input]);
 
   return (
     <>
-      <section>
+      <section className="dark:bg-darkColor bg-lightColor h-screen">
         {messages.length === 0 ? (
           <Welcome setInput={setInput} />
         ) : openHelpers ? (

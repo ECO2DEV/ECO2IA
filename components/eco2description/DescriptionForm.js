@@ -109,7 +109,7 @@ const DescriptionForm = () => {
           name="company"
           value={formData.company}
           onChange={handleChange}
-          className="w-full p-2 border border-emerald-900 rounded bg-[#21c284]"
+          className="w-full p-2 border border-emerald-900 rounded text-black"
           placeholder={DataEco2Description.CompanyName}
           required
         />
@@ -121,7 +121,7 @@ const DescriptionForm = () => {
           name="field"
           value={formData.field}
           onChange={handleChange}
-          className="w-full p-2 border border-emerald-900 rounded bg-[#21c284]"
+          className="w-full p-2 border border-emerald-900 rounded text-black"
           placeholder={DataEco2Description.FieldBusinnes}
           required
         />
@@ -132,7 +132,7 @@ const DescriptionForm = () => {
           name="language"
           value={formData.language}
           onChange={handleChange}
-          className="w-full p-2 border border-emerald-900 rounded bg-[#21c284]"
+          className="w-full p-2 border border-emerald-900 rounded text-black"
           required
         >
           <option value=""> {DataEco2Description.SelectLanguage} </option>
@@ -152,7 +152,7 @@ const DescriptionForm = () => {
           name="prompt"
           value={prompt ? prompt : ''}
           onChange={handlePromptChange}
-          className="w-full text-xs p-2 border border-emerald-900 rounded resize-none focus:ring-0 bg-[#21c284]"
+          className="w-full text-xs p-2 border border-emerald-900 rounded resize-none focus:ring-0 text-black"
           placeholder={DataEco2Description.ProductText}
           required
         />
@@ -166,7 +166,7 @@ const DescriptionForm = () => {
             value="facebook"
             checked={formData.socialMedia.includes('facebook')}
             onChange={handleChange}
-            className="mr-1"
+            className="mr-1 text-green-600 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
           />
           <label htmlFor="socialMediaFacebook">Facebook</label>
 
@@ -177,7 +177,7 @@ const DescriptionForm = () => {
             value="instagram"
             checked={formData.socialMedia.includes('instagram')}
             onChange={handleChange}
-            className="mx-2"
+            className="mx-2 text-green-600 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
           />
           <label htmlFor="socialMediaInstagram">Instagram</label>
 
@@ -188,7 +188,7 @@ const DescriptionForm = () => {
             value="twitter"
             checked={formData.socialMedia.includes('twitter')}
             onChange={handleChange}
-            className="mx-2"
+            className="mx-2 text-green-600 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
           />
           <label htmlFor="socialMediaTwitter">Twitter</label>
 
@@ -199,7 +199,7 @@ const DescriptionForm = () => {
             value="telegram"
             checked={formData.socialMedia.includes('telegram')}
             onChange={handleChange}
-            className="mx-2"
+            className="mx-2 text-green-600 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
           />
           <label htmlFor="socialMediaTelegram">Telegram</label>
 
@@ -210,7 +210,7 @@ const DescriptionForm = () => {
             value="whatsapp"
             checked={formData.socialMedia.includes('whatsapp')}
             onChange={handleChange}
-            className="mx-2"
+            className="mx-2 text-green-600 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
           />
           <label htmlFor="socialMediaWhatsApp">WhatsApp</label>
         </div>
@@ -222,7 +222,7 @@ const DescriptionForm = () => {
         className={`${
           isLoading || !prompt
             ? 'text-white bg-gray-500  text-center focus:outline-none focus:ring-2 focus:ring-blue-500 py-2 px-4 rounded-full'
-            : '  bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full my-8'
+            : '  bg-eco2MainColor hover:bg-eco2MainColor text-white font-semibold py-2 px-4 rounded-full my-8'
         } w-full mt-4 px-4 py-2 `}
       >
         {isLoading ? (
@@ -230,11 +230,11 @@ const DescriptionForm = () => {
             <Loader />
           </div>
         ) : (
-          'Envoyer'
+          'Enviar'
         )}
       </button>
-      <span className=" flex justify-center items-center text-gray-900">
-      Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
+      <span className=" flex justify-center items-center dark:text-gray-100 text-gray-900">
+        Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
       </span>
     </form>
   );

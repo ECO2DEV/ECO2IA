@@ -1,13 +1,17 @@
 import { getUser } from '../util/api/user';
 import DashboardSection from '../components/dashboard/dashboard';
-import Modal from '../components/modal/modal';
+import { getAllIAs } from '../util/api/score_ias';
+// import Modal from "../components/modal/modal";
 
 export default function Dashboard(props) {
   // console.log(props);
   // console.log(props.user)
   return (
-    <div className="my-10 pb-10">
-      {props?.user?.plan ? <DashboardSection /> : <Modal user={props.user} />}
+    // <div className="my-10 pb-10">
+    //   {props?.user?.plan ? <DashboardSection /> : <Modal user={props.user} />}
+    // </div>
+    <div className="my-10 pb-10 bg-lightColor dark:bg-darkColor">
+      <DashboardSection user={props} />
     </div>
   );
 }
@@ -26,10 +30,13 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const res = await getAllIAs();
+
   return {
     props: {
       user: result?.data,
-      session: result?.session
+      session: result?.session,
+      IA_CARDS: res ? res : null
     }
   };
 }

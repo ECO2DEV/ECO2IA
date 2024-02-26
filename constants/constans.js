@@ -27,6 +27,10 @@ import {
 } from '@heroicons/react/20/solid';
 
 import crypto from 'crypto';
+import ImageStep from '../components/steps_renovhome/ImageStep';
+import MaskImageStep from '../components/steps_renovhome/MaskImageStep';
+import FormStep from '../components/steps_renovhome/FormStep';
+import { OutputImgStep } from '../components/steps_renovhome/OutputImgStep';
 
 // const PUBLICABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_KEY;
 // console.log(PUBLICABLE_KEY)
@@ -82,112 +86,123 @@ export const VOICE_FOR_LANGUAGE = {
   De: 'de-DE',
   Fr: 'fr-FR'
 };
-
 export const IA_CARDS = [
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2CHAT',
+    title: 'Eco2Chat',
     href: '/eco2chat',
     description:
       'Chatbot especializado en interacción con usuarios, resolver dudas y preguntas frecuentes sobre cualquier tema',
     icon: eco2chat,
     screenShot: '/screenshot/chat_eco2.webp',
-    demoLink: '/eco2chat',
+
     classNames: true,
     index: 1,
     keywords: ['Chat', 'bot', 'ia', 'inteligencia artificial']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2IMAGE',
+    title: 'Eco2Dalle',
     href: '/eco2image',
     description:
       'Creación de imágenes y edición de fotos con inteligencia artificial',
     icon: eco2image,
     screenShot: '/screenshot/dalle_eco2.webp',
-    demoLink: '/eco2image',
+
     classNames: false,
     index: 2,
     keywords: ['Imagen', 'edición', 'dalle', 'inteligencia artificial']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2TRAD',
+    title: 'Eco2Traduct',
     href: '/eco2traduct',
     description: 'Traductor de idiomas con inteligencia artificial',
     icon: eco2rad,
     screenShot: '/screenshot/trad_eco2.webp',
-    demoLink: '/eco2traduct',
+
     classNames: false,
     index: 3,
     keywords: ['Traductor', 'idiomas', 'lenguas', 'inteligencia artificial']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2SPORT',
+    title: 'Eco2Sport',
     href: '/eco2sport',
-    description: 'entrenador personal con inteligencia artificial',
+    description: 'Entrenador personal con inteligencia artificial',
     icon: eco2sport,
     screenShot: '/screenshot/sport_eco2.webp',
-    demoLink: '/eco2sport',
+
     classNames: true,
     index: 4,
     keywords: ['Deporte', 'entrenador', 'personal', 'GYM']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2QUIZ',
+    title: 'Eco2Quiz',
     href: '/eco2quiz',
     description:
       'Creador de cuestionarios, quizzes con inteligencia artificial',
     icon: eco2quiz,
     screenShot: '/screenshot/quiz_eco2.webp',
-    demoLink: '/eco2quiz',
+
     classNames: true,
     index: 5,
     keywords: ['Quiz', 'cuestionario', 'preguntas', 'inteligencia artificial']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2DESC',
+    title: 'Eco2Desc',
     href: '/eco2description',
     description:
       'Creación de copys, descripciones para productos y servicio | marketing digital con inteligencia artificial',
     icon: eco2desc,
     screenShot: '/screenshot/desc_eco2.webp',
-    demoLink: '/eco2description',
+
     classNames: false,
     index: 6,
     keywords: ['Descripcion', 'copys', 'marketing', 'inteligencia artificial']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2RESUME',
+    title: 'Eco2Resume',
     href: '/eco2resum',
     description:
       'Genarador de resumenes, resumenes de texto con inteligencia artificial',
     icon: eco2resume,
     screenShot: '/screenshot/resum_eco2.webp',
-    demoLink: '/eco2resum',
+
     classNames: false,
     index: 7,
     keywords: ['Resumen', 'Acotar', 'Extracto', 'inteligencia artificia']
   },
   {
     id: crypto.randomBytes(16).toString('hex'),
-    title: 'ECO2CV',
+    title: 'Eco2CV',
     href: '/eco2cv',
     description:
       'Creación de curriculum vitae, hojas de vida con inteligencia artificial',
     icon: eco2cv,
     screenShot: '/screenshot/cv_eco2.webp',
-    demoLink: '/eco2cv',
+
     classNames: false,
     index: 8,
     keywords: ['Curriculum', 'hoja de vida', 'inteligencia artificial']
+  },
+  {
+    id: crypto.randomBytes(16).toString('hex'),
+    title: 'Eco2Renov',
+    href: '/renovhome',
+    description:
+      'Renovhome es una aplicación que utiliza inteligencia artificial para ayudar a los usuarios a rediseñar sus espacios',
+    icon: eco2cv,
+    screenShot: '/screenshot/cv_eco2.webp',
+
+    classNames: false,
+    index: 9,
+    keywords: ['Renovhome', 'rediseñar', 'espacios', 'casa', 'hogar']
   }
 ];
-
 export const actions = [
   {
     title: DataDashboard.Eco2ChatTitle,
@@ -414,3 +429,90 @@ export const plan_pricing = {
     }
   ]
 };
+
+export const steps = [
+  {
+    id: 1,
+    name: 'imageStep',
+    title: 'Upload Image',
+    component: ImageStep,
+    status: 'current'
+  },
+  {
+    id: 2,
+    name: 'maskImageStep',
+    title: 'Mask Image',
+    component: MaskImageStep,
+    status: 'upcoming'
+  },
+  {
+    id: 3,
+    name: 'formStep',
+    title: 'Provide Details',
+    component: FormStep,
+    status: 'upcoming'
+  },
+  {
+    id: 4,
+    name: 'outputImgStep',
+    title: 'Output Image',
+    component: OutputImgStep,
+    status: 'upcoming'
+  }
+];
+
+export const roomOptions = [
+  { value: 'Living-room', label: 'Living room' },
+  { value: 'Bedroom', label: 'Bedroom' },
+  { value: 'Bathroom', label: 'Bathroom' },
+  { value: 'Study-Room', label: 'Study Room' },
+  { value: 'Kitchen', label: 'Kitchen' },
+  { value: 'Dining-Room', label: 'Dining Room' },
+  { value: 'Office', label: 'Office' },
+  { value: 'Outdoor', label: 'Outdoor' }
+];
+
+export const aiInterventionOptions = [
+  { value: 'high-AI-Intervention', label: 'Extrema AI Intervention' },
+  { value: 'Medium-Intervention', label: 'Medium Intervention' },
+  { value: 'Low-AI-Intervention', label: 'Low AI Intervention' },
+  { value: 'Very-Low-AI-Intervention', label: 'Very Low AI Intervention' }
+];
+export const aiModeOptions = [
+  { value: 'beautiful-redesign', label: 'Beautiful Redesign' },
+  { value: 'creative-redesign', label: 'Creative Redesign' },
+  { value: 'fill-the-room', label: 'Fill The Room' },
+  { value: 'eclectic', label: 'Eclectic' },
+  { value: 'minimalist', label: 'Minimalist' },
+  { value: 'vibrant-oasis', label: 'Vibrant Oasis' },
+  { value: 'urban-chic', label: 'Urban Chic' },
+  { value: 'cozy-retreat', label: 'Cozy Retreat' },
+  { value: 'modern-elegance', label: 'Modern Elegance' },
+  { value: 'rustic-charm', label: 'Rustic Charm' }
+];
+
+export const designStyleOptions = [
+  { value: 'contemporary', label: 'Contemporary' },
+  { value: 'traditional', label: 'Traditional' },
+  { value: 'mid-century-modern', label: 'Mid-Century Modern' },
+  { value: 'industrial', label: 'Industrial' },
+  { value: 'bohemian', label: 'Bohemian' },
+  { value: 'scandinavian', label: 'Scandinavian' },
+  { value: 'farmhouse', label: 'Farmhouse' },
+  { value: 'vintage', label: 'Vintage' },
+  { value: 'coastal', label: 'Coastal' },
+  { value: 'transitional', label: 'Transitional' }
+];
+
+export const numberDesignsOptions = [
+  { value: '1', label: '1' },
+  { value: '2', label: '2' },
+  { value: '3', label: '3' },
+  { value: '4', label: '4' },
+  { value: '5', label: '5' },
+  { value: '6', label: '6' },
+  { value: '7', label: '7' },
+  { value: '8', label: '8' },
+  { value: '9', label: '9' },
+  { value: '10', label: '10' }
+];
