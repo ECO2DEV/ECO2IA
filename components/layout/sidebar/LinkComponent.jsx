@@ -7,7 +7,7 @@ export const LinkComponent = ({ data, isActive, setSelectedIndicator }) => {
   const { title, href, index } = data;
   return (
     <motion.nav
-      className={` ${isActive ? 'text-primary' : ''} relative `}
+      className={` ${isActive ? 'text-eco2MainColor' : ''} relative `}
       onMouseEnter={() => {
         setSelectedIndicator(href);
       }}

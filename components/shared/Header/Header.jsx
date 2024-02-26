@@ -7,7 +7,7 @@ import { Popover, Transition } from "@headlessui/react"
 import clsx from "clsx"
 
 import { Container } from "../../Container"
-import logo from "../../../public/eco2it_logo.jpeg"
+import logo from "../../../public/eco2_no_bg.png"
 
 
 function CloseIcon(props) {
@@ -122,7 +122,7 @@ function MobileNavigation(props) {
               </h2>
             </div>
             <nav className="mt-6">
-              <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
+              <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-lightColor">
                 <MobileNavItem href="/">Home</MobileNavItem>
                 <MobileNavItem href="/about">About</MobileNavItem>
                 <MobileNavItem href="/auth/signin">Login</MobileNavItem>
@@ -146,8 +146,8 @@ function NavItem({ href, children }) {
         className={clsx(
           'relative block px-3 py-2 transition',
           isActive
-            ? 'text-primary dark:text-primary'
-            : 'hover:text-primary dark:hover:text-primary',
+            ? 'text-eco2MainColor dark:text-eco2MainColor'
+            : 'hover:text-eco2MainColor dark:hover:text-eco2MainColor',
         )}
       >
         {children}

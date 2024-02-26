@@ -31,10 +31,10 @@ const IACard = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1, duration: 0.3 }}
       viewport={{ once: true }}
-      className={`relative flex flex-col rounded-3xl bg-gray-100 p-6 gap-3 border-2 border-transparent overflow-hidden col-span-8 row-span-1 sm:row-span-2 md:row-span-3  dark:bg-[#1c1e23] md:p-8  ${
+      className={`relative flex flex-col rounded-3xl bg-lightBgCard p-6 gap-3 border-2  overflow-hidden col-span-8 row-span-1 sm:row-span-2 md:row-span-3  dark:bg-darkBgCard md:p-8  ${
         classNames
-          ? 'lg:row-span-4 xl:col-span-4'
-          : 'lg:row-span-3 xl:col-span-4'
+          ? 'md:row-span-4 lg:col-span-4'
+          : 'md:row-span-3 lg:col-span-4'
       }`}
     >
       <div className="flex flex-col gap-3">
@@ -66,7 +66,7 @@ const IACard = ({
           >
             {/* <MdArrowOutward /> */}
             <svg
-              className="h-6 w-6 dark:text-white hover:text-primary"
+              className="h-6 w-6 dark:text-white hover:text-eco2MainColor"
               fill="currentColor"
               viewBox="0 0 24 24"
             >

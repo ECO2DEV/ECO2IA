@@ -30,7 +30,10 @@ const TextAreaEducation = ({ setEducationFields }) => {
 
   return (
     <div className="w-full">
-      <h1 className="text-xl font-bold text-primary"> {DataEco2CV.EducationBackground} </h1>
+      <h1 className="text-xl font-bold text-eco2MainColor">
+        {' '}
+        {DataEco2CV.EducationBackground}{' '}
+      </h1>
       <input
         type="text"
         name="degree"
@@ -80,7 +83,7 @@ const TextAreaEducation = ({ setEducationFields }) => {
           !education.endDate ||
           !education.city
         }
-        className="gap-x-1.5 rounded-md px-3 py-2 mb-2 text-sm font-semibold bg-primary text-white ring-1 ring-inset ring-gray-30"
+        className="gap-x-1.5 rounded-md px-3 py-2 mb-2 text-sm font-semibold bg-eco2MainColor text-white ring-1 ring-inset ring-gray-30"
       >
         {DataEco2CV.AddEducation}
       </button>

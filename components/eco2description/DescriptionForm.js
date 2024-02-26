@@ -222,7 +222,7 @@ const DescriptionForm = () => {
         className={`${
           isLoading || !prompt
             ? 'text-white bg-gray-500  text-center focus:outline-none focus:ring-2 focus:ring-blue-500 py-2 px-4 rounded-full'
-            : '  bg-primary hover:bg-primaryHover text-white font-semibold py-2 px-4 rounded-full my-8'
+            : '  bg-eco2MainColor hover:bg-eco2MainColor text-white font-semibold py-2 px-4 rounded-full my-8'
         } w-full mt-4 px-4 py-2 `}
       >
         {isLoading ? (
@@ -230,11 +230,11 @@ const DescriptionForm = () => {
             <Loader />
           </div>
         ) : (
-          'Envoyer'
+          'Enviar'
         )}
       </button>
-      <span className=" flex justify-center items-center text-gray-900">
-      Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
+      <span className=" flex justify-center items-center dark:text-gray-100 text-gray-900">
+        Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
       </span>
     </form>
   );

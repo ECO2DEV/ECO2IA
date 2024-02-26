@@ -1,23 +1,23 @@
 //components/sport_coach/sportCoach.js
-import { useContext, useState } from "react";
-import { InputField } from "./InputField";
-import { SportButtonHelper } from "./Eco2SportCoachHelper";
-import { PromptContext } from "../../context/prompts/PromptContext";
-import { sendTrainingPlanRequest } from "../../util/api/sendTrainingPlanRequest";
-import { SportCoachResults } from "./Eco2SportCoachResults";
-import { useSportCoach } from "../../hooks/useSportCoach";
-import { WelcomeSportCoach } from "./welcomeSportCoach";
-import { DataEco2Sport } from "../../data/eco2sport";
-import { toast } from "react-hot-toast";
-import Loader from "../loader/loader";
+import { useContext, useState } from 'react';
+import { InputField } from './InputField';
+import { SportButtonHelper } from './Eco2SportCoachHelper';
+import { PromptContext } from '../../context/prompts/PromptContext';
+import { sendTrainingPlanRequest } from '../../util/api/sendTrainingPlanRequest';
+import { SportCoachResults } from './Eco2SportCoachResults';
+import { useSportCoach } from '../../hooks/useSportCoach';
+import { WelcomeSportCoach } from './welcomeSportCoach';
+import { DataEco2Sport } from '../../data/eco2sport';
+import { toast } from 'react-hot-toast';
+import Loader from '../loader/loader';
 export const SportCoachIA = (props) => {
   // Estados para almacenar los datos del formulario
-  const [weight, setWeight] = useState("");
-  const [age, setAge] = useState("");
+  const [weight, setWeight] = useState('');
+  const [age, setAge] = useState('');
   // const [goal, setGoal] = useState("");
-  const [trainingDays, setTrainingDays] = useState("1");
+  const [trainingDays, setTrainingDays] = useState('1');
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [showResults, setShowResults] = useState(false);
   // estado para mostrar o no el componente de ayuda
   const [showWelcome, setShowWelcome] = useState(true);
@@ -41,7 +41,7 @@ export const SportCoachIA = (props) => {
   const fetchData = async () => {
     if (!prompt) {
       // console.log(setPromptTokens);
-      setError("Por favor, escriba algo antes de enviar");
+      setError('Por favor, escriba algo antes de enviar');
     } else {
       setSubmitting(true);
       // Realiza la llamada a la API para enviar la solicitud de plan de entrenamiento
@@ -50,9 +50,9 @@ export const SportCoachIA = (props) => {
         weight: weight,
         age: age,
         goal: prompt,
-        language: "Spanish",
+        language: 'Spanish',
         trainingDays: trainingDays,
-        user: user,
+        user: user
       })
         .then((response) => {
           setResponse(response?.data?.data);
@@ -61,7 +61,7 @@ export const SportCoachIA = (props) => {
         })
         .catch((error) => {
           console.log(error);
-          setError("Se produjo un error al recuperar los datos");
+          setError('Se produjo un error al recuperar los datos');
         })
         .finally(() => {
           setSubmitting(false);
@@ -72,7 +72,7 @@ export const SportCoachIA = (props) => {
   const handlePromptChange = (e) => {
     const { value } = e.target;
     if (value === DataEco2Sport.SelectOption) {
-      toast.error("Por favor, seleccione un objetivo");
+      toast.error('Por favor, seleccione un objetivo');
       return;
     }
     setPrompt(value);
@@ -82,7 +82,7 @@ export const SportCoachIA = (props) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "trainingDays") {
+    if (name === 'trainingDays') {
       setTrainingDays(value);
     }
   };
@@ -93,15 +93,15 @@ export const SportCoachIA = (props) => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <div className="flex justify-center items-center text-primary mb-4">
+    <div className="flex flex-col items-center w-full h-screen">
+      <div className="flex justify-center items-center text-gray-900 dark:text-gray-100 mb-4">
         <span>
           Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
         </span>
       </div>
 
       {!showResults ? (
-        <WelcomeSportCoach className="mb-8 bg-primary" />
+        <WelcomeSportCoach className="mb-8 bg-eco2MainColor" />
       ) : (
         (
           <div className="flex justify-center h-[60rem]">
@@ -189,7 +189,7 @@ export const SportCoachIA = (props) => {
             <button
               type="submit"
               disabled={submitting}
-              className="mt-5 h-10 text-white bg-primary hover:bg-primaryHover font-medium rounded-full text-sm px-7 py-2 mr-2"
+              className="mt-5 h-10 text-white bg-eco2MainColor hover:bg-eco2HoverColor font-medium rounded-full text-sm px-7 py-2 mr-2"
             >
               {submitting ? <Loader /> : DataEco2Sport.GetButton}
             </button>
