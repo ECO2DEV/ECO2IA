@@ -70,7 +70,7 @@ export const LoginForm = () => {
         <div className="mx-auto w-full max-w-md md:w-96 lg:w-96">
           <header className="flex items-center justify-center flex-col">
             <Image className="h-12 w-auto" src={logo} alt="Eco2IA" />
-            <h2 className="mt-6 text-3xl font-bold tracking-tight text-primary">
+            <h2 className="mt-6 text-3xl font-bold tracking-tight text-eco2MainColor">
               {DataSignin.signintitle}
             </h2>
           </header>
@@ -92,7 +92,7 @@ export const LoginForm = () => {
                     type="email"
                     name="email"
                     id="email"
-                    className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-emerald-600 dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
+                    className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-emerald-600 dark:focus:border-eco2MainColor focus:outline-none focus:ring-0 focus:border-eco2MainColor peer"
                     placeholder=" "
                     autoComplete="email"
                     value={email}
@@ -101,7 +101,7 @@ export const LoginForm = () => {
                   />
                   <label
                     htmlFor="floating_email"
-                    className="peer-focus:font-medium absolute text-xl leading-6 text-white duration-300 transform -translate-y-6 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                    className="peer-focus:font-medium absolute text-xl leading-6 text-white duration-300 transform -translate-y-6 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-eco2MainColor peer-focus:dark:text-eco2MainColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                   >
                     {DataSignin.signinadress}
                   </label>
@@ -112,7 +112,7 @@ export const LoginForm = () => {
                     type="password"
                     name="password"
                     id="password"
-                    className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-emerald-600 dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
+                    className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-emerald-600 dark:focus:border-eco2MainColor focus:outline-none focus:ring-0 focus:border-eco2MainColor peer"
                     placeholder=" "
                     autoComplete="current-password"
                     value={password}
@@ -121,7 +121,7 @@ export const LoginForm = () => {
                   />
                   <label
                     htmlFor="password"
-                    className="peer-focus:font-medium absolute text-xl leading-6 text-white duration-300 transform -translate-y-6 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                    className="peer-focus:font-medium absolute text-xl leading-6 text-white duration-300 transform -translate-y-6 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-eco2MainColor peer-focus:dark:text-eco2MainColor peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                   >
                     {DataSignin.signinpassword}
                   </label>
@@ -133,11 +133,11 @@ export const LoginForm = () => {
                       id="remember-me"
                       name="remember-me"
                       type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-gray-300 text-eco2MainColor focus:ring-eco2MainColor"
                     />
                     <label
                       htmlFor="remember-me"
-                      className="ml-2 block text-xl text-primary"
+                      className="ml-2 block text-xl text-eco2MainColor"
                     >
                       {DataSignin.signinremember}
                     </label>
@@ -146,7 +146,7 @@ export const LoginForm = () => {
                   <div className="text-sm">
                     <Link
                       href="/forgot-password"
-                      className="font-medium text-primary hover:text-emerald-900"
+                      className="font-medium text-eco2MainColor hover:text-emerald-900"
                     >
                       {DataSignin.signinforgot}
                     </Link>
@@ -178,7 +178,7 @@ export const LoginForm = () => {
                 <div className="text-sm text-center">
                   <Link
                     href="/auth/signup"
-                    className="font-medium text-sm text-primary hover:text-emerald"
+                    className="font-medium text-sm text-eco2MainColor hover:text-emerald"
                   >
                     {DataSignin.CreateAccount}
                   </Link>

@@ -22,7 +22,7 @@ export const QuizForm = ({
     <form onSubmit={handleSubmit} className="max-w-md mx-auto">
       <label
         htmlFor="prompt"
-        className="block text-sm font-medium text-primary"
+        className="block text-sm font-medium text-eco2MainColor"
       >
         Prompt:
       </label>
@@ -39,7 +39,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="optionChoice"
-        className="block text-sm font-medium text-primary mt-4"
+        className="block text-sm font-medium text-eco2MainColor mt-4"
       >
         Option Choice:
       </label>
@@ -56,7 +56,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="language"
-        className="block text-sm font-medium text-primary mt-4"
+        className="block text-sm font-medium text-eco2MainColor mt-4"
       >
         Language:
       </label>
@@ -78,7 +78,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="difficulty"
-        className="block text-sm font-medium text-primary mt-4"
+        className="block text-sm font-medium text-eco2MainColor mt-4"
       >
         Difficulty:
       </label>
@@ -96,7 +96,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="questionQuantity"
-        className="block text-sm font-medium text-primary mt-4"
+        className="block text-sm font-medium text-eco2MainColor mt-4"
       >
         Question Quantity:
       </label>
@@ -115,8 +115,8 @@ export const QuizForm = ({
         type="submit"
         className={`${
           loading
-            ? 'text-white rounded-full text-center focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-primary'
-            : ' rounded-full  font-semibold bg-primary text-white ring-1 ring-inset ring-gray-300'
+            ? 'text-white rounded-full text-center focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-eco2MainColor'
+            : ' rounded-full  font-semibold bg-eco2MainColor text-white ring-1 ring-inset ring-gray-300'
         } w-full mt-4 px-4 py-2 `}
       >
         {loading ? (
@@ -128,7 +128,7 @@ export const QuizForm = ({
         )}
       </button>
 
-      <span className="flex justify-center items-center text-primary">
+      <span className="flex justify-center items-center text-eco2MainColor">
         Tokens utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
       </span>
     </form>

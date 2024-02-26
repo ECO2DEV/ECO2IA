@@ -30,7 +30,7 @@ export const FramerModal = ({handleClose, id_ia, title}) => {
         animate="visible"
         exit="exit"
       >
-        <h2 className="bg-gradient-to-r from-red-500 via-primary to-slate-800 inline-block dark:text-transparent bg-clip-text font-extrabold text-xl">Califica {title}</h2>
+        <h2 className="bg-gradient-to-r from-red-500 via-eco2MainColor to-slate-800 inline-block dark:text-transparent bg-clip-text font-extrabold text-xl">Califica {title}</h2>
         <StarsRate filledStars={filledStars} setFilledStars={setFilledStars} />
         <footer className="flex justify-evenly gap-4">
           <ModalButton onClick={handleSendScore} label="Enviar" />

@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { DataEco2CV } from '../../data/eco2cv';
-const proficiencyLevels = [DataEco2CV.Begginer, DataEco2CV.Intermediate, DataEco2CV.Advanced, DataEco2CV.Expert];
+const proficiencyLevels = [
+  DataEco2CV.Begginer,
+  DataEco2CV.Intermediate,
+  DataEco2CV.Advanced,
+  DataEco2CV.Expert
+];
 
 const SpokenLanguagesForm = ({ setSpokenLanguages }) => {
   const [language, setLanguage] = useState({
@@ -26,7 +31,9 @@ const SpokenLanguagesForm = ({ setSpokenLanguages }) => {
 
   return (
     <section className="w-full ">
-      <h1 className="text-xl font-bold my-4 text-primary">{DataEco2CV.SpokenLanguages}</h1>
+      <h1 className="text-xl font-bold my-4 text-eco2MainColor">
+        {DataEco2CV.SpokenLanguages}
+      </h1>
       <input
         type="text"
         name="name"
@@ -51,7 +58,7 @@ const SpokenLanguagesForm = ({ setSpokenLanguages }) => {
       <button
         onClick={handleAddLanguage}
         disabled={!language.name || !language.proficiency}
-        className="gap-x-1.5 rounded-md px-3 py-2 mb-6 text-sm font-semibold bg-primary text-white ring-1 ring-inset ring-gray-30"
+        className="gap-x-1.5 rounded-md px-3 py-2 mb-6 text-sm font-semibold bg-eco2MainColor text-white ring-1 ring-inset ring-gray-30"
       >
         {DataEco2CV.AddLanguage}
       </button>
