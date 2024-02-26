@@ -2,7 +2,7 @@ export function Star() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="icon icon-tabler icon-tabler-star text-white"
+      className="icon icon-tabler icon-tabler-star text-white hover:text-amber-300"
       width="24"
       height="24"
       viewBox="0 0 24 24"

@@ -48,6 +48,7 @@ const IACard = ({
                 id_ia={id}
                 modalOpen={isModalOpen}
                 handleClose={() => setIsModalOpen((prev) => !prev)}
+                score={score}
                 
               />
             )}
