@@ -80,7 +80,7 @@ export default function ChatGpt() {
           return updatedMessages;
         });
 
-        state.setResponse(message.content + input);
+        setResponse(message.content + input);
 
         mutate();
       } catch (error) {
