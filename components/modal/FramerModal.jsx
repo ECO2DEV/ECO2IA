@@ -7,7 +7,7 @@ import { sendScore } from "../../util/api/score_ias";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 
-export const FramerModal = ({handleClose, id_ia, title}) => {
+export const FramerModal = ({handleClose, id_ia, title, score}) => {
   const [filledStars, setFilledStars] = useState(0);
   const router = useRouter();
 
@@ -31,7 +31,7 @@ export const FramerModal = ({handleClose, id_ia, title}) => {
         exit="exit"
       >
         <h2 className="bg-gradient-to-r from-red-500 via-eco2MainColor to-slate-800 inline-block dark:text-transparent bg-clip-text font-extrabold text-xl">Califica {title}</h2>
-        <StarsRate filledStars={filledStars} setFilledStars={setFilledStars} />
+        <StarsRate filledStars={filledStars} setFilledStars={setFilledStars} score={score}/>
         <footer className="flex justify-evenly gap-4">
           <ModalButton onClick={handleSendScore} label="Enviar" />
           <ModalButton onClick={handleClose} label="Cerrar" />

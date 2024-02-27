@@ -14,7 +14,7 @@ import { avatar } from '../../avatarSvg/avatar';
 
 const navItems = [
   {
-    title: 'Home',
+    title: 'Inicio',
     href: '/'
   },
   {
@@ -22,9 +22,13 @@ const navItems = [
     href: '/dashboard'
   },
   {
-    title: 'Profile',
+    title: 'Perfil',
     href: '/profile'
   },
+  {
+    title: 'Servicios',
+    href: '/about'
+  }
   ,
 ];
 export const Nav = ({ children }) => {
