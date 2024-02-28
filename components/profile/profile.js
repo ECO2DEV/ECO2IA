@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+
 import EditProfile from './editProfile';
 import { PencilIcon } from '../icons/icons';
 import { EditAvatar } from './editAvatar';
@@ -65,6 +67,10 @@ export default function Profile({ user }) {
 
   return (
     <>
+      <Head>
+        <link rel="eco2 icon" href="/eco2it_logo.jpeg" />
+        <title>Editar Perfil</title>
+      </Head>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10">
         <EditAvatar
           onChange={handleImageChange}
@@ -81,9 +87,7 @@ export default function Profile({ user }) {
           <h3 className="text-base font-semibold leading-6 text-gray-900">
             {DataProfile.ProfileInformation}
           </h3>
-          <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            
-          </p>
+          <p className="mt-1 max-w-2xl text-sm text-gray-500"></p>
         </div>
         <div className="ml-4 flex-shrink-0 my-auto">
           <button
@@ -101,7 +105,10 @@ export default function Profile({ user }) {
       <div className="mt-5 border-t border-gray-200">
         <dl className="divide-y divide-gray-200">
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500"> {DataProfile.FullName} </dt>
+            <dt className="text-sm font-medium text-gray-500">
+              {' '}
+              {DataProfile.FullName}{' '}
+            </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">
                 {user.Name} {user.LastName}
@@ -109,13 +116,19 @@ export default function Profile({ user }) {
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500"> {DataProfile.Sex} </dt>
+            <dt className="text-sm font-medium text-gray-500">
+              {' '}
+              {DataProfile.Sex}{' '}
+            </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.sex}</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500"> {DataProfile.Email} </dt>
+            <dt className="text-sm font-medium text-gray-500">
+              {' '}
+              {DataProfile.Email}{' '}
+            </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.email}</span>
             </dd>
@@ -129,25 +142,37 @@ export default function Profile({ user }) {
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500"> {DataProfile.Nationality} </dt>
+            <dt className="text-sm font-medium text-gray-500">
+              {' '}
+              {DataProfile.Nationality}{' '}
+            </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.nacionality}</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500"> {DataProfile.Country} </dt>
+            <dt className="text-sm font-medium text-gray-500">
+              {' '}
+              {DataProfile.Country}{' '}
+            </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.country}</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500"> {DataProfile.Age} </dt>
+            <dt className="text-sm font-medium text-gray-500">
+              {' '}
+              {DataProfile.Age}{' '}
+            </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.age}</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500"> {DataProfile.Weight} </dt>
+            <dt className="text-sm font-medium text-gray-500">
+              {' '}
+              {DataProfile.Weight}{' '}
+            </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.weight}</span>
             </dd>
@@ -169,19 +194,28 @@ export default function Profile({ user }) {
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500"> {DataProfile.ActivityArea} </dt>
+            <dt className="text-sm font-medium text-gray-500">
+              {' '}
+              {DataProfile.ActivityArea}{' '}
+            </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.activityarea}</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500"> {DataProfile.Sport} </dt>
+            <dt className="text-sm font-medium text-gray-500">
+              {' '}
+              {DataProfile.Sport}{' '}
+            </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.sport}</span>
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500"> {DataProfile.Transport} </dt>
+            <dt className="text-sm font-medium text-gray-500">
+              {' '}
+              {DataProfile.Transport}{' '}
+            </dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">{user.transport}</span>
             </dd>

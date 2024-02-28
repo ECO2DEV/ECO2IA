@@ -120,7 +120,7 @@ function MobileNavigation(props) {
                 <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
               </Popover.Button>
               <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                Navigation
+                Navegación
               </h2>
             </div>
             <nav className="mt-6">
@@ -172,7 +172,7 @@ function DesktopNavigation(props) {
 
   return (
     <nav {...props}>
-      <ul className="flex ml-15 mr-16  mx-auto rounded-full bg-white/90  text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
+<ul className="flex ml-15 mr-16  mx-auto rounded-full bg-white/90  text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
         <NavItem href="/">Home</NavItem>
         <NavItem href="/about">About</NavItem>
         {session ? (
