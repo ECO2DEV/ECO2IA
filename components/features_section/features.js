@@ -31,7 +31,7 @@ export default function Features() {
         className={`mx-auto w-full relative overflow-hidden ${
           isDarkMode
             ? "dark"
-            : "bg-gradient-to-br from-green-400 via-green-500 to-green-600"
+            : "bg-eco2MainColor"
         } px-4 pt-10 pb-14 shadow-xl sm:rounded-3xl lg:px-24 lg:py-20`}
       >
         <div className="grid grid-cols-1 items-center lg:grid-cols-2 lg:gap-8">
@@ -60,7 +60,7 @@ export default function Features() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 10 }}
               >
-                <div className="p-6 rounded-lg shadow-lg bg-white dark:bg-green-600 dark:text-green-200">
+                <div className="p-6 rounded-lg shadow-lg bg-white dark:bg-eco2MainColor dark:text-green-200">
                   <dt className="flex items-center text-lg font-medium text-gray-900 dark:text-white">
                     <feature.icon
                       className="flex-shrink-0 h-6 w-6 text-green-600 dark:text-green-300"
@@ -68,7 +68,7 @@ export default function Features() {
                     />
                     <span className="ml-3 font-bold">{feature.name}</span>
                   </dt>
-                  <dd className="mt-2 text-base text-gray-500 dark:text-green-100">
+                  <dd className="mt-2 text-base text-gray-500 dark:text-white">
                     {feature.description}
                   </dd>
                 </div>

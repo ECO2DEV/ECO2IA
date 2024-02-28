@@ -40,7 +40,7 @@ export default function Footer() {
     return () => observer.disconnect();
   }, []);
   return (
-    <footer className="bg-white dark:bg-neutral-950">
+    <footer className="bg-lightColor dark:bg-darkColor">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <hr className="my-10 h-px bg-gray-600 border-0 dark:bg-gray-700" />
 

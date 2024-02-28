@@ -1,4 +1,3 @@
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import Image from "next/image";
 import { BentoItem } from "./BentoItem";
 
@@ -8,6 +7,8 @@ import IA3 from "../../public/screenshot/quiz_eco2.webp";
 import IA4 from "../../public/screenshot/desc_eco2.webp";
 import IA5 from "../../public/screenshot/resum_eco2.webp";
 import IA6 from "../../public/screenshot/cv_eco2.webp";
+import IA7 from "../../public/screenshot/dalle_eco2.webp";
+import IA8 from "../../public/screenshot/trad_eco2.webp";
 
 const resources = [
   {
@@ -78,6 +79,32 @@ const resources = [
     pattern: {
       y: 22,
       squares: [[0, 1]],
+    },
+  },
+  {
+    name: "Eco2IA-Dalle",
+    description: "Genera imágenes únicas y creativas a partir de descripciones textuales, abriendo nuevas posibilidades para la creación de contenido visual.",
+    image: IA7,
+    pattern: {
+      x: -60,
+      y: 10,
+      squares: [
+        [1, 2],
+        [2, 3],
+      ],
+    },
+  },
+  {
+    name: "Eco2IA-Traduccion",
+    description: "Traduce textos en tiempo real permitiendo a los usuarios comunicarse sin barreras idiomáticas y explorar múltiples idiomas con facilidad.",
+    image: IA8,
+    pattern: {
+      x: 20,
+      y: -15,
+      squares: [
+        [0, 1],
+        [-1, 2],
+      ],
     },
   },
 ];
@@ -182,6 +209,37 @@ export const ProjectsIA = () => {
             height={600}
           />
         </BentoItem>
+        <BentoItem
+          title={resources[7].name}
+          appliedPrompt={resources[7].description}
+          classProp="col-span-10 lg:col-span-4"
+        >
+          <Image
+            className="background transition-scale absolute bottom-0 left-0 top-0
+        -z-10 h-full w-full bg-blue-950
+        bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+            src={IA8}
+            alt="image"
+            width={600}
+            height={600}
+          />
+        </BentoItem>
+        <BentoItem
+          title={resources[6].name}
+          appliedPrompt={resources[6].description}
+          classProp="col-span-10 lg:col-span-6"
+        >
+          <Image
+            className="background transition-scale absolute bottom-0 left-0 top-0
+        -z-10 h-full w-full bg-blue-950
+        bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+            src={IA7}
+            alt="image"
+            width={600}
+            height={600}
+          />
+        </BentoItem>
+
       </section>
     </>
   );
