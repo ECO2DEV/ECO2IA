@@ -3,7 +3,7 @@ import { DataRegister } from "../../data/register";
 export default function DropDownText({id,libelle,nametx,type,placeholder,onChange,value}) {
     return (
       <div className="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
-        <label htmlFor="phone-number" className="block text-sm font-medium leading-6 text-gray-900">
+        <label htmlFor="phone-number" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
           {libelle}
         </label>
         <div className="relative mt-2 rounded-md shadow-sm">
