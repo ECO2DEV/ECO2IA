@@ -422,7 +422,7 @@ export default function EditProfile({ onClose, user }) {
                               htmlFor="additionalField"
                               className="block text-sm font-semibold leading-6 text-gray-900"
                             >
-                              autres Domaines d'études
+                              otros campos de estudio
                             </label>
                             <div className="mt-2.5">
                               {additionalFieldActive ? (
@@ -445,7 +445,7 @@ export default function EditProfile({ onClose, user }) {
                                   onClick={activateAdditionalField}
                                   className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
                                 >
-                                  Ajouter
+                                  Agregar
                                 </button>
                               )}
                             </div>
@@ -475,7 +475,7 @@ export default function EditProfile({ onClose, user }) {
                               htmlFor="additionalField"
                               className="block text-sm font-semibold leading-6 text-gray-900"
                             >
-                              autres Niveau d'étude
+                              otro nivel de estudio
                             </label>
                             <div className="mt-2.5">
                               {additionalFieldActive ? (
@@ -498,7 +498,7 @@ export default function EditProfile({ onClose, user }) {
                                   onClick={activateAdditionalField}
                                   className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
                                 >
-                                  Ajouter
+                                  Agregar
                                 </button>
                               )}
                             </div>
@@ -528,7 +528,7 @@ export default function EditProfile({ onClose, user }) {
                               htmlFor="additionalField"
                               className="block text-sm font-semibold leading-6 text-gray-900"
                             >
-                              autres Domaine d'activité
+                              Otro campo de actividad
                             </label>
                             <div className="mt-2.5">
                               {additionalFieldActive ? (
@@ -551,7 +551,7 @@ export default function EditProfile({ onClose, user }) {
                                   onClick={activateAdditionalField}
                                   className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
                                 >
-                                  Ajouter
+                                  Agregar
                                 </button>
                               )}
                             </div>
@@ -577,7 +577,7 @@ export default function EditProfile({ onClose, user }) {
                               htmlFor="additionalField"
                               className="block text-sm font-semibold leading-6 text-gray-900"
                             >
-                              autres Sports
+                              otros deportes
                             </label>
                             <div className="mt-2.5">
                               {additionalFieldActive ? (
@@ -600,7 +600,7 @@ export default function EditProfile({ onClose, user }) {
                                   onClick={activateAdditionalField}
                                   className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
                                 >
-                                  Ajouter
+                                  Agragar
                                 </button>
                               )}
                             </div>
@@ -628,7 +628,7 @@ export default function EditProfile({ onClose, user }) {
                               htmlFor="additionalField"
                               className="block text-sm font-semibold leading-6 text-gray-900"
                             >
-                              autres Transports
+                              Otro transporte
                             </label>
                             <div className="mt-2.5">
                               {additionalFieldActive ? (
@@ -651,7 +651,7 @@ export default function EditProfile({ onClose, user }) {
                                   onClick={activateAdditionalField}
                                   className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:ring focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
                                 >
-                                  Ajouter
+                                  Agregar
                                 </button>
                               )}
                             </div>

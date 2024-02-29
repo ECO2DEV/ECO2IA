@@ -10,6 +10,7 @@ import { Curve } from '../../../util/animate/Curve';
 import Footer from './Footer';
 import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
 import { ThemeToggle } from '../../shared/Header/Header';
+import { avatar } from '../../avatarSvg/avatar';
 
 const navItems = [
   {

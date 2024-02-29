@@ -79,6 +79,15 @@
   position: relative;
 }
 
+/* .img-light-mode {
+  filter: sepia(1) hue-rotate(90deg) brightness(0.9) saturate(1.5);
+} */
+
+.img-filter-green {
+  filter: brightness(0.5) saturate(1.6) hue-rotate(120deg);
+}
+
+
 /* animacion feacture */
 @keyframes pulse {
   0%, 100% {
@@ -104,8 +113,37 @@
   animation: float 6s ease-in-out infinite;
 }
 
+@keyframes moveBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
-/* Navbar styles */
+.modalBackground {
+  animation: moveBg 10s linear infinite;
+  background: linear-gradient(270deg, #020617, #020617, #020617);
+  background-size: 400% 400%;
+}
+
+@media (max-width: 768px) {
+  .modalBackground {
+    padding: 10px; /* Reduce el padding en dispositivos más pequeños */
+  }
+
+  .w-full {
+    width: 90% !important; /* Ajusta el ancho de los inputs para que ocupen más espacio */
+  }
+}
+.flex-wrap {
+  flex-wrap: wrap; /* Permite que los elementos hijos se ajusten y envuelvan según el ancho disponible */
+}
+
 
 #header .burger::after,
 #header .burger::before {
@@ -290,4 +328,11 @@
   width: clamp(50%, 700px, 90%);
   height: min(50%, 300px);
   
+}
+
+@layer components {
+	.bg-glass {
+		@apply bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 
+		hover:bg-gray-600/10 border-green-800 border text-white;
+	}
 }

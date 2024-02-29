@@ -24,7 +24,7 @@ export const Conversations = ({ messages }) => {
 
   const { data, isLoading, deleteChat } = useChat(user?.id);
 
-  const lastMessageRef = useRef(null);
+  const messagesEndRef = useRef(null);
 
   const codeRefs = useRef({});
 
@@ -34,30 +34,20 @@ export const Conversations = ({ messages }) => {
   };
 
   const extractCodeFromMarkdown = (markdown) => {
-    // esta expression regular busca el contenido dentro del ``` tambien captura el nombre del lenguaje
     const regex = /```(\w+)?[\s\S]*?```/g;
     let extractedCode = "";
 
     let match;
     while ((match = regex.exec(markdown)) !== null) {
-      // match[0] es el bloque de código completo, match[1] es el lenguaje de programación capturado este hay que quitarlo para obtener solo el codigo
       let codeBlock = match[0];
       if (match[1]) {
-        // si capturo un lenguaje, eliminarlo del inicio del bloque de código
         codeBlock = codeBlock.replace(`\`\`\`${match[1]}`, "```");
       }
-      // se elimina los backticks y espacios adicionales
       extractedCode += codeBlock.replace(/```/g, "").trim() + "\n\n";
     }
 
     return extractedCode.trim();
-  };
-
-  useEffect(() => {
-    if (lastMessageRef.current) {
-      lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [data]);
+  };  
 
   const handleCopy = (resp, index) => {
     navigator.clipboard
@@ -119,14 +109,13 @@ export const Conversations = ({ messages }) => {
       document.querySelectorAll("pre code").forEach((block) => {
         hljs.highlightElement(block);
       });
-
-      const reqId = messages.find((item) => item.reqId !== undefined)?.reqId;
-      setLatestReqId(reqId);
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
+    
   }, [messages]);
 
   return (
-    <div className="h-full bg-gray-100">
+    <div className="h-[80vh] lg:h-[75vh] bg-gray-100">
       <section className="flex flex-col text-sm h-[80vh] lg:h-[75vh] overflow-y-scroll overflow-x-hidden">
         {messages?.map((item, index) => {
           const isCodeBlock = item.content.includes("```");
@@ -153,14 +142,6 @@ export const Conversations = ({ messages }) => {
                       {item.content}
                     </div>
                   </div>
-                  {/* {latestReqId && (
-                    <button
-                      onClick={() => onHandleModalDelete(latestReqId)}
-                      className="absolute right-0 top-0 cursor-pointer "
-                    >
-                      <DeleteIcon />
-                    </button>
-                  )} */}
                 </div>
               ) : null}
               {item.role === "assistant" ? (
@@ -170,7 +151,7 @@ export const Conversations = ({ messages }) => {
                   <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl  md:py-6 lg:px-0 m-auto">
                     <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
                       <Image
-                        src="/eco2it_logo.jpeg"
+                        src="/eco2_no_bg.png"
                         alt="Eco2IA logo"
                         width={30}
                         height={30}
@@ -178,7 +159,6 @@ export const Conversations = ({ messages }) => {
                     </div>
                     <div className="flex flex-col text-justify w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
                       <div className="flex flex-col text-justify w-full">
-                        {/* Renderizamos el contenido como Markdown si es un bloque de código */}
                         <div className="relative">
                           {isCodeBlock ? (
                             <>
@@ -237,7 +217,7 @@ export const Conversations = ({ messages }) => {
             </div>
           );
         })}
-        <div ref={lastMessageRef}></div>
+        <div ref={messagesEndRef}></div>
       </section>
       {deleteModalOpen && (
         <ModalDelete
