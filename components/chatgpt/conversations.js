@@ -116,7 +116,7 @@ export const Conversations = ({ messages }) => {
 
   return (
     <div className="h-[80vh] lg:h-[75vh] bg-gray-100">
-      <section className="flex flex-col text-sm h-[80vh] lg:h-[75vh] overflow-y-scroll overflow-x-hidden">
+      <section className="flex flex-col text-sm h-[90vh] lg:h-[90vh] overflow-y-scroll overflow-x-hidden">
         {messages?.map((item, index) => {
           const isCodeBlock = item.content.includes("```");
 
