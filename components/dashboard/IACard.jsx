@@ -19,9 +19,10 @@ const IACard = ({
 }) => {
   const [ref, hovering] = useHover();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // console.log('screenShoot?.data?.attributes?.url', screenShoot )
 
   const arrKeywords = keywords.split(',');
-  let urlImg = screenShoot.data.attributes.url
+  let urlImg = screenShoot || '/empty_image.webp';
 
   return (
     <motion.article
@@ -31,7 +32,7 @@ const IACard = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1, duration: 0.3 }}
       viewport={{ once: true }}
-      className={`relative flex flex-col rounded-3xl bg-lightBgCard p-6 gap-3 border-2  overflow-hidden col-span-8 row-span-1 sm:row-span-2 md:row-span-3  dark:bg-darkBgCard md:p-8  ${
+      className={`relative flex flex-col rounded-3xl bg-eco2HoverColor p-6 gap-3 border-2  overflow-hidden col-span-8 row-span-1 sm:row-span-2 md:row-span-3  dark:bg-darkBgCard md:p-8  ${
         classNames
           ? 'md:row-span-4 lg:col-span-4'
           : 'md:row-span-3 lg:col-span-4'
@@ -55,17 +56,17 @@ const IACard = ({
           </AnimatePresence>
 
           <p className="font-semibold uppercase">
-            Votos <span className="text-[#21c284] text-lg font-semibold"> {score?.length}</span>
+            Votos <span className="text-slate-950 dark:text-eco2MainColor text-lg font-semibold"> {score?.length}</span>
           </p>
          
           <Link
-            className="p-2 border-2 border-[#0b0a10] dark:border-[#f5f5f7] opacity-40 rounded-full absolute top-4 right-6 lg:top-6 lg:right-8 cursor-pointer hover:bg-[#f5f5f7] hover:text-white dark:hover:bg-[] dark:hover:text-[#f5f5f7] transition-colors duration-150 z-[1] "
+            className="p-2 border-2 border-[#0b0a10] dark:border-[#f5f5f7]  rounded-full absolute z-50 top-4 right-6 lg:top-6 lg:right-8 cursor-pointer hover:scale-110 hover:bg-black hover:text-white duration-200 transition-all dark:hover:text-[#f5f5f7] duration-150 "
             href={href}
             target="_blank"
             rel="noreferrer"
-            title={`${title} demo`}
+            title={`${title} link to the website`}
           >
-            {/* <MdArrowOutward /> */}
+            
             <svg
               className="h-6 w-6 dark:text-white hover:text-eco2MainColor"
               fill="currentColor"

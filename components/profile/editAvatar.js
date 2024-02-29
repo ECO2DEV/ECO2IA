@@ -1,6 +1,6 @@
-import Loader from '../loader/loader';
+import { FadeLoader } from 'react-spinners';
+import Image from 'next/image';
 import { DataProfile } from '../../data/profile';
-const strapiUrl = process.env.STRAPI_URL;
 
 export const EditAvatar = ({
   onSubmit,
@@ -11,30 +11,34 @@ export const EditAvatar = ({
   imagePreview,
   loading
 }) => {
-  // console.log('see the url image in avatar', user);
   return (
-    <form onSubmit={onSubmit}>
+    <form
+      className="col-span-full flex items-center gap-x-8 mb-10 mt-[20px]"
+      onSubmit={onSubmit}
+    >
       <label
         htmlFor="profile_avatar"
-        className={`flex flex-col items-center transition-all duration-500  w-28 h-w-28 mx-auto border-2 ${
+        className={`col-span-full flex items-center transition-all duration-500  w-28 h-w-28 gap-x-8 border-2 ${
           selectFile
-            ? 'border-solid border-green-600'
-            : 'border-dashed hover:border-gray-500 '
-        }  rounded-full cursor-pointer`}
+            ? 'border-solid border-eco2MainColor'
+            : 'border-dashed border-darkColor dark:border-gray-100 hover:border-eco2MainColor '
+        }   cursor-pointer`}
       >
         {selectFile ? (
-          <img
-            src={imagePreview}
+          <Image
+            width={200}
+            height={200}
+            src={imagePreview ? imagePreview : '/empty_avatar.webp'}
             alt="Avatar preview"
-            className={` w-full h-full object-cover rounded-full align-middle border-none shadow-lg `}
+            className={` w-full h-full object-cover  align-middle border-none shadow-lg `}
           />
         ) : (
-          <img
-            src={
-              user.avatar ? strapiUrl + user.avatar.url : '/empty_avatar.webp'
-            }
+          <Image
+            width={200}
+            height={200}
+            src={user.avatar ? user.avatar.url : '/empty_avatar.webp'}
             alt="Avatar preview"
-            className={`w-full h-full object-cover rounded-full align-middle border-none shadow-lg `}
+            className={`w-full h-full object-cover  align-middle border-none shadow-lg `}
           />
         )}
 
@@ -46,25 +50,26 @@ export const EditAvatar = ({
           onChange={onChange}
         />
       </label>
-      <span
-        className={`${
-          selectFile ? ' hidden' : ''
-        } text-xs font-medium text-gray-600 flex justify-center items-center mx-auto mt-2`}
-      >
-        {DataProfile.SelectFile}
-      </span>
+
       {loading ? (
-        <div className="flex justify-center items-center mx-auto px-3 py-2 mt-6">
-          <Loader />
+        <div className="flex justify-center items-center">
+          <FadeLoader color="#36d7b7" />
         </div>
       ) : (
-        <button
-          type="submit"
-          className="bg-gray-800 text-gray-100 rounded-full px-3 py-2 mt-4 disabled:opacity-50 flex justify-center items-center mx-auto"
-          disabled={!uploadImage}
-        >
-          {DataProfile.Update}
-        </button>
+        <div>
+          <button
+            type="submit"
+            className={`rounded-md bg-eco2MainColor text-black hover:bg-eco2HoverColor dark:bg-white/10 px-3 py-2 text-sm font-semibold dark:text-white shadow-sm ${
+              !uploadImage ? '' : 'dark:hover:bg-white/20'
+            } `}
+            disabled={!uploadImage}
+          >
+            {uploadImage ? DataProfile.Update : '👈 Seleccione imagen'}
+          </button>
+          <p className="mt-2 text-xs leading-5 text-gray-400">
+            {uploadImage ? '' : 'JPG, GIF or PNG. 1MB max.'}
+          </p>
+        </div>
       )}
     </form>
   );

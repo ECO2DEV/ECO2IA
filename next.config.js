@@ -9,8 +9,12 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
-      { protocol: 'https', hostname: 'oaidalleapiprodscus.blob.core.windows.net' },
-    ],
+      {
+        protocol: 'https',
+        hostname: 'oaidalleapiprodscus.blob.core.windows.net'
+      },
+      { protocol: 'https', hostname: 'res.cloudinary.com' }
+    ]
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
