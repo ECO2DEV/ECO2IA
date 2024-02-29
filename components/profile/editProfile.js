@@ -216,7 +216,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <input
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.Name}
+                              value={formData.Name ? formData.Name : ''}
                               type="text"
                               name="Name"
                               id="Name"
@@ -235,7 +235,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <input
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.LastName}
+                              value={formData.LastName ? formData.LastName : ''}
                               type="text"
                               name="LastName"
                               id="LastName"
@@ -254,7 +254,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <input
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.email}
+                              value={formData.email ? formData.email : ''}
                               type="email"
                               name="email"
                               id="email"
@@ -272,7 +272,11 @@ export default function EditProfile({ onClose, user }) {
                           </label>
                           <input
                             onChange={(e) => handleProfileChange(e)}
-                            value={formData.numberTelephone}
+                            value={
+                              formData.numberTelephone
+                                ? formData.numberTelephone
+                                : ''
+                            }
                             type="number"
                             name="numberTelephone"
                             id="numberTelephone"
@@ -290,7 +294,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <input
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.country}
+                              value={formData.country ? formData.country : ''}
                               type="text"
                               name="country"
                               id="country"
@@ -307,7 +311,9 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <select
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.nacionality}
+                              value={
+                                formData.nacionality ? formData.nacionality : ''
+                              }
                               name="nacionality"
                               id="nacionality"
                               autoComplete="nacionality"
@@ -325,7 +331,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <select
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.sex}
+                              value={formData.sex ? formData.sex : ''}
                               name="sex"
                               id="sex"
                               autoComplete="sex"
@@ -346,7 +352,7 @@ export default function EditProfile({ onClose, user }) {
                               <div className="mt-2.5">
                                 <input
                                   onChange={(e) => handleProfileChange(e)}
-                                  value={formData.age}
+                                  value={formData.age ? formData.age : ''}
                                   type="number"
                                   name="age"
                                   id="age"
@@ -364,7 +370,7 @@ export default function EditProfile({ onClose, user }) {
                               <div className="mt-2.5">
                                 <input
                                   onChange={(e) => handleProfileChange(e)}
-                                  value={formData.height}
+                                  value={formData.height ? formData.height : ''}
                                   type="number"
                                   name="height"
                                   id="height"
@@ -382,7 +388,7 @@ export default function EditProfile({ onClose, user }) {
                               <div className="mt-2.5">
                                 <input
                                   onChange={(e) => handleProfileChange(e)}
-                                  value={formData.weight}
+                                  value={formData.weight ? formData.weight : ''}
                                   type="number"
                                   name="weight"
                                   id="weight"
@@ -400,7 +406,11 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <select
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.domainofstudy}
+                              value={
+                                formData.domainofstudy
+                                  ? formData.domainofstudy
+                                  : ''
+                              }
                               name="domainofstudy"
                               id="domainofstudy"
                               autoComplete="domainofstudy"
@@ -420,7 +430,11 @@ export default function EditProfile({ onClose, user }) {
                                   onChange={(e) =>
                                     setAdditionalFieldValue(e.target.value)
                                   }
-                                  value={additionalFieldValue}
+                                  value={
+                                    additionalFieldValue
+                                      ? additionalFieldValue
+                                      : ''
+                                  }
                                   type="text"
                                   name="additionalField"
                                   id="additionalField"
@@ -445,7 +459,11 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <select
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.educationallevel}
+                              value={
+                                formData.educationallevel
+                                  ? formData.educationallevel
+                                  : ''
+                              }
                               name="educationallevel"
                               id="educationallevel"
                               autoComplete="educationallevel"
@@ -465,7 +483,11 @@ export default function EditProfile({ onClose, user }) {
                                   onChange={(e) =>
                                     setAdditionalFieldValue(e.target.value)
                                   }
-                                  value={additionalFieldValue}
+                                  value={
+                                    additionalFieldValue
+                                      ? additionalFieldValue
+                                      : ''
+                                  }
                                   type="text"
                                   name="additionalField"
                                   id="additionalField"
@@ -490,7 +512,11 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <select
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.activityarea}
+                              value={
+                                formData.activityarea
+                                  ? formData.activityarea
+                                  : ''
+                              }
                               name="activityarea"
                               id="activityarea"
                               autoComplete="activityarea"
@@ -510,7 +536,11 @@ export default function EditProfile({ onClose, user }) {
                                   onChange={(e) =>
                                     setAdditionalFieldValue(e.target.value)
                                   }
-                                  value={additionalFieldValue}
+                                  value={
+                                    additionalFieldValue
+                                      ? additionalFieldValue
+                                      : ''
+                                  }
                                   type="text"
                                   name="additionalField"
                                   id="additionalField"
@@ -535,7 +565,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <select
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.sport}
+                              value={formData.sport ? formData.sport : ''}
                               name="sport"
                               id="sport"
                               autoComplete="sport"
@@ -555,7 +585,11 @@ export default function EditProfile({ onClose, user }) {
                                   onChange={(e) =>
                                     setAdditionalFieldValue(e.target.value)
                                   }
-                                  value={additionalFieldValue}
+                                  value={
+                                    additionalFieldValue
+                                      ? additionalFieldValue
+                                      : ''
+                                  }
                                   type="text"
                                   name="additionalField"
                                   id="additionalField"
@@ -580,7 +614,9 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <select
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.transport}
+                              value={
+                                formData.transport ? formData.transport : ''
+                              }
                               name="transport"
                               id="transport"
                               autoComplete="transport"
@@ -600,7 +636,11 @@ export default function EditProfile({ onClose, user }) {
                                   onChange={(e) =>
                                     setAdditionalFieldValue(e.target.value)
                                   }
-                                  value={additionalFieldValue}
+                                  value={
+                                    additionalFieldValue
+                                      ? additionalFieldValue
+                                      : ''
+                                  }
                                   type="text"
                                   name="additionalField"
                                   id="additionalField"
