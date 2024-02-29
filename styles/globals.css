@@ -126,7 +126,7 @@
 
 .modalBackground {
   animation: moveBg 10s linear infinite;
-  background: linear-gradient(270deg, #0b420d, #0b420d, #0b420d);
+  background: linear-gradient(270deg, #020617, #020617, #020617);
   background-size: 400% 400%;
 }
 

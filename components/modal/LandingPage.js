@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { motion, AnimatePresence } from "framer-motion";
 import { XMarkIcon } from "@heroicons/react/20/solid";
@@ -15,11 +14,6 @@ Modal.setAppElement("#__next");
 const modalBackdrop = {
   visible: { opacity: 1 },
   hidden: { opacity: 0 },
-};
-
-const modalContent = {
-  hidden: { y: -50, opacity: 0 },
-  visible: { y: 0, opacity: 1 },
 };
 
 const buttonVariants = {
@@ -45,6 +39,7 @@ const modalVariants = {
 
 function LandingPage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -67,6 +62,24 @@ function LandingPage() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  useEffect(() => {
+    const rootElement = document.documentElement;
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          const isDark = rootElement.classList.contains('dark');
+          setIsDarkMode(isDark);
+        }
+      });
+    });
+
+    observer.observe(rootElement, {
+      attributes: true
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,19 +106,24 @@ function LandingPage() {
     }
 
     try {
-      // const formPayload = new FormData();
-      // const data = {
-      //   name: formData.name,
-      //   Email: formData.Email,
-      //   IADetail: formData.IADetail,
-      // };
-      // formPayload.append("data", JSON.stringify(data));
+      const formPayload = new FormData();
 
-      // files.forEach((file) => {
-      //   formPayload.append("files.ImageIAS", file, file.name);
-      // });
+      formPayload.append(
+        "data",
+        JSON.stringify({
+          name: formData.name,
+          Email: formData.Email,
+          IADetail: formData.IADetail,
 
-      const response = await createIAContactMessage({ formData: formData });
+          data: (formData.ImageIAS = files.forEach((file) => {
+            "files.ImageIAS", file, file.name;
+          })),
+        })
+      );
+
+      const response = await createIAContactMessage({
+        formData: formPayload,
+      });
 
       console.log(response);
       if (response.status === 200) {
@@ -142,20 +160,21 @@ function LandingPage() {
             animate="visible"
             exit="hidden"
           >
-            <div
-              className="absolute w-full max-w-xl mx-auto rounded-3xl bg-purple-500 shadow-2xl"
-              style={{ transform: "rotate(-5deg)" }}
-            ></div>
+            <div className="absolute w-full max-w-xl mx-auto rounded-3xl bg-purple-500 shadow-2xl rotate-[-5deg]"></div>
+
             <motion.div
-              className="absolute w-full sm:w-[42%] h-full sm:h-[90%] p-4 sm:p-10 transform bg-[#bb08e8] rounded-3xl sm:-rotate-2"
+              className="fixed w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-full p-4 sm:p-10 bg-eco2MainColor rounded-3xl rotate-2"
               initial={{ scale: 0 }}
               animate={{ rotate: 8, scale: 1 }}
               exit={{ rotate: 8, scale: 0 }}
               transition={{ delay: 0.1 }}
             />
-
-            <motion.div
-              className="absolute w-full sm:w-[42%] h-full sm:h-[90%] p-4 sm:p-10 transform bg-[#8d2100] rounded-3xl sm:-rotate-2"
+            <motion.div 
+              className={`absolute w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-full p-4 sm:p-10 ${
+                isDarkMode
+                  ? "bg-darkBgCard"
+                  : "bg-lightBgCard"
+              }  rounded-3xl rotate-2`}
               initial={{ scale: 0 }}
               animate={{ rotate: -8, scale: 1 }}
               exit={{ rotate: -8, scale: 0 }}
@@ -176,7 +195,7 @@ function LandingPage() {
                 animate="visible"
                 exit="hidden"
               >
-                <div className="relative w-full max-w-xl p-4 mx-auto modalBackground rounded-lg sm:p-8">
+                <div className="relative w-full max-w-xl p-4 mx-auto rounded-lg sm:p-8">
                   <button
                     onClick={closeModal}
                     className="absolute top-2 right-2"
@@ -185,7 +204,7 @@ function LandingPage() {
                   </button>
 
                   <div className="text-center">
-                    <h1 className="mt-2 text-2xl font-bold animate-text-gradient bg-gradient-to-r from-[#21C284] via-[#8678f9] to-[#c7d2fe] bg-[200%_auto] bg-clip-text text-xl text-transparent">
+                    <h1 className="mt-2 text-2xl font-bold text-white bg-clip-text text-xl">
                       Únete a ECO2 IA's 🍃
                     </h1>
                     <p className="mt-2 text-sm text-gray-100">
@@ -207,7 +226,7 @@ function LandingPage() {
                           id="name"
                           value={formData.name}
                           required
-                          className="rounded-md bg-white text-gray-700 border-gray-300 w-full"
+                          className="rounded-md bg-white text-gray-700 border-green w-full"
                         />
                       </div>
                       <div className="w-full sm:w-1/2 px-2">
@@ -260,7 +279,7 @@ function LandingPage() {
                         <motion.button
                           variants={buttonVariants}
                           whileHover="hover"
-                          className="inline-flex h-full w-32 cursor-pointer items-center justify-center rounded-full border border-white bg-[#21C284] px-4 py-2 font-semibold text-white hover:bg-green-700 transition-colors duration-300"
+                          className="inline-flex h-full w-32 cursor-pointer items-center justify-center rounded-full border border-white bg-eco2MainColor px-4 py-2 font-semibold text-white hover:bg-green-700 transition-colors duration-300"
                         >
                           Enviar 🍃
                         </motion.button>
@@ -280,7 +299,7 @@ function LandingPage() {
       </AnimatePresence>
       <motion.button
         onClick={openModal}
-        className="bg-green-600 mt-3 text-white font-semibold border-white py-1 px-2 rounded-md"
+        className="bg-eco2MainColor mt-3 text-white font-semibold border-white py-1 px-2 rounded-md"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
