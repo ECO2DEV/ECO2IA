@@ -6,14 +6,14 @@ import { toast } from 'react-hot-toast';
 export const createUser = async (data) => {
   try {
     // console.log('Data to create user' + data.email);
-    const dataStripe = { email: data.email, name: data.Name };
-    const respStripe = await axios.post(
-      `${strapiUrl}/api/payment/createUser`,
-      dataStripe,
-      header
-    );
+    // const dataStripe = { email: data.email, name: data.Name };
+    // const respStripe = await axios.post(
+    //   `${strapiUrl}/api/payment/createUser`,
+    //   dataStripe,
+    //   header
+    // );
     //console.log('Id usuario' + respStripe.data.id);
-    const newData = { ...data, customer_id: respStripe.data.id };
+    const newData = { ...data };
     const response = await axios.post(
       `${strapiUrl}/api/auth/local/register`,
       newData,
@@ -62,53 +62,53 @@ export const setTrialPlan = async () => {
   }
 };
 
-export const setEstudiantePlan = async () => {
-  try {
-    const response = await axios.post(
-      `${strapiUrl}/api/plans`,
-      {
-        data: {
-          typo: 'Estudiante',
-          max_tokens: 54000,
-          max_imagens: 30,
-          value: 5
-        }
-      },
-      header
-    );
-    return response;
-  } catch (error) {
-    console.error(
-      `Error creating Estudiante plan POST request to ${strapiUrl}:`,
-      error
-    );
-    return error.response.data.error;
-  }
-};
+// export const setEstudiantePlan = async () => {
+//   try {
+//     const response = await axios.post(
+//       `${strapiUrl}/api/plans`,
+//       {
+//         data: {
+//           typo: 'Estudiante',
+//           max_tokens: 54000,
+//           max_imagens: 30,
+//           value: 5
+//         }
+//       },
+//       header
+//     );
+//     return response;
+//   } catch (error) {
+//     console.error(
+//       `Error creating Estudiante plan POST request to ${strapiUrl}:`,
+//       error
+//     );
+//     return error.response.data.error;
+//   }
+// };
 
-export const setStandardPlan = async () => {
-  try {
-    const response = await axios.post(
-      `${strapiUrl}/api/plans`,
-      {
-        data: {
-          typo: 'Standard',
-          max_tokens: 108000,
-          max_imagens: 75,
-          value: 10
-        }
-      },
-      header
-    );
-    return response;
-  } catch (error) {
-    console.error(
-      `Error creating Standard plan POST request to ${strapiUrl}:`,
-      error
-    );
-    return error.response.data.error;
-  }
-};
+// export const setStandardPlan = async () => {
+//   try {
+//     const response = await axios.post(
+//       `${strapiUrl}/api/plans`,
+//       {
+//         data: {
+//           typo: 'Standard',
+//           max_tokens: 108000,
+//           max_imagens: 75,
+//           value: 10
+//         }
+//       },
+//       header
+//     );
+//     return response;
+//   } catch (error) {
+//     console.error(
+//       `Error creating Standard plan POST request to ${strapiUrl}:`,
+//       error
+//     );
+//     return error.response.data.error;
+//   }
+// };
 
 export async function getUser(context) {
   const session = await getSession(context);

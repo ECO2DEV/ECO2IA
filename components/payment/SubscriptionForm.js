@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+// import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { DataPayment } from '../../data/payment';
 
 const SubscriptionForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
+  // const stripe = useStripe();
+  // const elements = useElements();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

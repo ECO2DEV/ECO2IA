@@ -38,7 +38,7 @@ export default function Register() {
     try {
       const responsePlan = await setTrialPlan();
 
-      const newPlanId = responsePlan.data.data.id;
+      // const newPlanId = responsePlan.data.data.id;
 
       // Update the formData with the newPlanId
       let updatedFormData = {
