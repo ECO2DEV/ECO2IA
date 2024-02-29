@@ -1,14 +1,14 @@
-import { Fragment, useEffect, useRef, useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { usePathname } from 'next/navigation'
-import { useTheme } from "next-themes"
-import { Popover, Transition } from "@headlessui/react"
-import clsx from "clsx"
+import { Fragment, useEffect, useRef, useState } from "react";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
+import { Popover, Transition } from "@headlessui/react";
+import clsx from "clsx";
 
-import { Container } from "../../Container"
-import logo from "../../../public/eco2_no_bg.png"
-
+import { Container } from "../../Container";
+import logo from "../../../public/eco2_no_bg.png";
 
 function CloseIcon(props) {
   return (
@@ -22,7 +22,7 @@ function CloseIcon(props) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
 function ChevronDownIcon(props) {
@@ -36,7 +36,7 @@ function ChevronDownIcon(props) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
 function SunIcon(props) {
@@ -55,7 +55,7 @@ function SunIcon(props) {
         fill="none"
       />
     </svg>
-  )
+  );
 }
 
 function MoonIcon(props) {
@@ -68,7 +68,7 @@ function MoonIcon(props) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
 function MobileNavItem({ href, children }) {
@@ -78,15 +78,17 @@ function MobileNavItem({ href, children }) {
         {children}
       </Popover.Button>
     </li>
-  )
+  );
 }
 
 function MobileNavigation(props) {
+  const { data: session } = useSession();
+
   return (
     <Popover {...props}>
-      <Popover.Button className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
+      <Popover.Button className="group flex  items-center rounded-full bg-white/90 px-3 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
         Menu
-        <ChevronDownIcon className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400" />
+        <ChevronDownIcon className="ml-1 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400" />
       </Popover.Button>
       <Transition.Root>
         <Transition.Child
@@ -123,31 +125,37 @@ function MobileNavigation(props) {
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-lightColor">
-                <MobileNavItem href="/">Inicio</MobileNavItem>
-                <MobileNavItem href="/about">Servicios</MobileNavItem>
-                <MobileNavItem href="/auth/signin">Iniciar sesión</MobileNavItem>
-                <MobileNavItem href="/auth/signup">Registrate</MobileNavItem>
+                <MobileNavItem href="/">Home</MobileNavItem>
+                <MobileNavItem href="/about">About</MobileNavItem>
+                {session ? (
+                  <MobileNavItem href="/dashboard">Dashboard</MobileNavItem>
+                ) : (
+                  <>
+                    <MobileNavItem href="/auth/signin">Login</MobileNavItem>
+                    <MobileNavItem href="/auth/signup">Register</MobileNavItem>
+                  </>
+                )}
               </ul>
             </nav>
           </Popover.Panel>
         </Transition.Child>
       </Transition.Root>
     </Popover>
-  )
+  );
 }
 
 function NavItem({ href, children }) {
-  let isActive = usePathname() === href
+  let isActive = usePathname() === href;
 
   return (
     <li>
       <Link
         href={href}
         className={clsx(
-          'relative block px-3 py-2 transition',
+          "relative flex block px-3 py-2 transition",
           isActive
-            ? 'text-eco2MainColor dark:text-eco2MainColor'
-            : 'hover:text-eco2MainColor dark:hover:text-eco2MainColor',
+            ? "text-eco2MainColor dark:text-eco2MainColor"
+            : "hover:text-eco2MainColor dark:hover:text-eco2MainColor"
         )}
       >
         {children}
@@ -156,54 +164,57 @@ function NavItem({ href, children }) {
         )}
       </Link>
     </li>
-  )
+  );
 }
 
 function DesktopNavigation(props) {
+  const { data: session } = useSession();
+
   return (
     <nav {...props}>
-      <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <NavItem href="/">Inicio</NavItem>
-        <NavItem href="/about">Servicios</NavItem>
-        <NavItem href="/auth/signin">Sesión</NavItem>
-        <NavItem href="/auth/signup">Registrate</NavItem>
+<ul className="flex ml-15 mr-16  mx-auto rounded-full bg-white/90  text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
+        <NavItem href="/">Home</NavItem>
+        <NavItem href="/about">About</NavItem>
+        {session ? (
+          <NavItem href="/dashboard">Dashboard</NavItem>
+        ) : (
+          <>
+            <NavItem href="/auth/signin">Login</NavItem>
+            <NavItem href="/auth/signup">Register</NavItem>
+          </>
+        )}
       </ul>
     </nav>
-  )
+  );
 }
 
 export function ThemeToggle() {
-  let { resolvedTheme, setTheme } = useTheme()
-  let otherTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
-  let [mounted, setMounted] = useState(false)
+  let { resolvedTheme, setTheme } = useTheme();
+  let otherTheme = resolvedTheme === "dark" ? "light" : "dark";
+  let [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   return (
     <button
       type="button"
+
       title="Click para cambiar el tema !"
       aria-label={mounted ? `Switch to ${otherTheme} theme` : 'Toggle theme'}
       className="group flex items-center rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+
       onClick={() => setTheme(otherTheme)}
     >
       <SunIcon className="h-6 w-6 fill-zinc-100 stroke-zinc-500 transition group-hover:fill-zinc-200 group-hover:stroke-zinc-700 dark:hidden [@media(prefers-color-scheme:dark)]:fill-teal-50 [@media(prefers-color-scheme:dark)]:stroke-teal-500 [@media(prefers-color-scheme:dark)]:group-hover:fill-teal-50 [@media(prefers-color-scheme:dark)]:group-hover:stroke-teal-600" />
       <MoonIcon className="hidden h-6 w-6 fill-zinc-700 stroke-zinc-500 transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-zinc-400 [@media_not_(prefers-color-scheme:dark)]:fill-teal-400/10 [@media_not_(prefers-color-scheme:dark)]:stroke-teal-500" />
     </button>
-  )
+  );
 }
 
 function AvatarContainer({ className, ...props }) {
-  return (
-    <div
-      className={clsx(
-        className,
-      )}
-      {...props}
-    />
-  )
+  return <div className={clsx(className)} {...props} />;
 }
 
 function Avatar({ large = false, className, ...props }) {
@@ -211,33 +222,31 @@ function Avatar({ large = false, className, ...props }) {
     <Link
       href="/"
       aria-label="Home"
-      className={clsx(className, 'pointer-events-auto group flex items-center')}
+      className={clsx(className, "pointer-events-auto group flex items-center")}
       {...props}
     >
       <Image
         src={logo}
         alt=""
-        sizes={large ? '4rem' : '2.25rem'}
+        sizes={large ? "4rem" : "2.25rem"}
         className={clsx(
-          'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
-          large ? 'h-15 w-15' : 'h-11 w-11',
+          "rounded-full bg-zinc-100 object-cover dark:bg-zinc-800",
+          large ? "h-15 w-15" : "h-10 w-12"
         )}
         priority
       />
     </Link>
-  )
+  );
 }
 
 export const Header = () => {
-
   return (
     <>
       <header className="z-50 flex flex-none flex-col sticky top-0">
         <div className="top-0 z-10 h-16 pt-6">
           <Container>
             <div className="flex justify-start">
-              <AvatarContainer
-              />
+              <AvatarContainer />
               <Avatar
                 // large
                 className="block w-16 origin-left"
@@ -263,5 +272,5 @@ export const Header = () => {
         />
       )} */}
     </>
-  )
-}
+  );
+};

@@ -145,7 +145,6 @@ export const VOICE_FOR_LANGUAGE = {
   De: 'de-DE',
   Fr: 'fr-FR'
 };
-
 export const IA_CARDS = [
   {
     id: crypto.randomBytes(16).toString('hex'),
@@ -263,7 +262,6 @@ export const IA_CARDS = [
     keywords: ['Renovhome', 'rediseñar', 'espacios', 'casa', 'hogar']
   }
 ];
-
 export const actions = [
   {
     title: DataDashboard.Eco2ChatTitle,

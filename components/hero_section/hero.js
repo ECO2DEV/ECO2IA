@@ -36,7 +36,7 @@ export default function Hero({ user }) {
   };
 
   return (
-    <div className="relative isolate px-6 pt-44 lg:px-8 text-white">
+    <div className="relative isolate px-6 pt-20 lg:px-8 text-white">
       <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-sm"></div>
 
       <div className="mx-auto max-w-3xl sm:py-46 lg:pb-48 pb-48">
@@ -48,7 +48,7 @@ export default function Hero({ user }) {
           variants={textVariants}
           className="text-center sm:mb-8 sm:flex sm:justify-center"
         >
-          <p className="text-lg leading-8 text-emerald-500">
+          <p className="text-lg leading-8 text-eco2MainColor">
             {DataHero.hero_description}
           </p>
         </motion.div>
@@ -60,7 +60,7 @@ export default function Hero({ user }) {
           variants={textVariants}
           className="text-center"
         >
-          <h1 className="text-4xl font-bold tracking-tight text-green-300 sm:text-6xl">
+          <h1 className="text-4xl font-bold tracking-tight text-eco2MainColor sm:text-6xl">
             {DataHero.hero_maintext}
           </h1>
         </motion.div>
@@ -73,33 +73,25 @@ export default function Hero({ user }) {
         >
           <a
             href={"/about"}
-            className="font-semibold text-green-600 hover:text-green-300"
+            className="font-semibold text-eco2MainColor hover:text-green-300"
           >
             <span className="absolute inset-0" aria-hidden="true" />
             {DataHero.hero_readmore}
             <span aria-hidden="true">&rarr;</span>
           </a>
         </motion.div>
-
-        <motion.button
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 1 }}
-          variants={buttonVariants}
-          className="mx-auto mt-8 relative border hover:border-emerald-600 duration-500 group cursor-pointer text-sky-50 overflow-hidden h-14 w-56 rounded-md bg-emerald-800 p-2 flex justify-center items-center font-extrabold"
+        <Link
+          href={user ? "/dashboard" : "/auth/signin"}
+          className="z-10 bg-transparent"
         >
-          <div className="absolute z-10 w-48 h-48 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-emerald-900 delay-150 group-hover:delay-75"></div>
-          <div className="absolute z-10 w-40 h-40 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-emerald-800 delay-150 group-hover:delay-100"></div>
-          <div className="absolute z-10 w-32 h-32 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-emerald-700 delay-150 group-hover:delay-150"></div>
-          <div className="absolute z-10 w-24 h-24 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-emerald-600 delay-150 group-hover:delay-200"></div>
-          <div className="absolute z-10 w-16 h-16 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-emerald-500 delay-150 group-hover:delay-300"></div>
-          <Link
-            href={user ? "/dashboard" : "/auth/signin"}
-            className="z-10 bg-transparent"
+          <motion.button
+            className="mx-auto mt-8 relative border hover:border-eco2MainColor duration-500 group cursor-pointer text-sky-50 overflow-hidden h-14 w-56 rounded-md bg-eco2MainColor p-2 flex justify-center items-center font-extrabold"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             {DataHero.hero_getstarted}
-          </Link>
-        </motion.button>
+          </motion.button>
+        </Link>
       </div>
       <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-sm"></div>
     </div>
