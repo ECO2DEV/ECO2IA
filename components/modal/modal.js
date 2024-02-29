@@ -11,7 +11,7 @@ import { ContacUs } from '../contact_us/contacUs';
 import { plan_pricing } from '../../constants/constans';
 import axios from 'axios';
 
-import { stripePromise } from '../../constants/constans';
+// import { stripePromise } from '../../constants/constans';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -43,7 +43,7 @@ export default function Modal({ user }) {
       // Set the state to open the modal
     } else {
       try {
-        const stripe = await stripePromise;
+        // const stripe = await stripePromise;
         const customerid = user.customer_id;
         const userId = user.id;
 
@@ -54,15 +54,16 @@ export default function Modal({ user }) {
         });
         console.log(checkoutSession);
 
-        const result = await stripe.redirectToCheckout({
-          sessionId: checkoutSession.data.sessionId
-        });
+        // const result = await stripe.redirectToCheckout({
+        //   sessionId: checkoutSession.data.sessionId
+        // });
 
         if (result.error) {
           alert(result.error.message);
         }
       } catch (error) {
-        console.error('loadStripe', error);
+        // console.error('loadStripe', error);
+        console.log(error)
       }
     }
   };

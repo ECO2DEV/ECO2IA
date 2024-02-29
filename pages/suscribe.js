@@ -1,7 +1,7 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import SubscriptionForm from '../components/payment/SubscriptionForm';
-import Checkout from '../components/payment/SubscriptionHandler';
+// import SubscriptionForm from '../components/payment/SubscriptionForm';
+// import Checkout from '../components/payment/SubscriptionHandler';
 import { getUser } from '../util/api/user';
 
 //const stripePromise = loadStripe();
