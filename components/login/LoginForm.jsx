@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image"
 import LogoTipoECO2verde from "../../public/LogoTipoECO2verde.png";
 import { DataSignin } from "../../data/signin";
+import { GithubSignInButton } from "../authbutton/authButtons";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -61,7 +62,7 @@ export const LoginForm = () => {
       <div className="p-10 rounded flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 xl:px-10 md:flex-row lg:flex-none flex-none">
         <div className="mx-auto w-full max-w-md md:w-96 lg:w-96">
           <header className="flex items-center justify-center flex-col">
-            <Image className="h-12 w-auto" src={LogoTipoECO2verde} alt="Eco2IA" />
+            <Image className="h-28 w-28" src={LogoTipoECO2verde} alt="Eco2IA" />
             <h2 className="mt-6 text-3xl font-bold tracking-tight text-eco2MainColor">
               {DataSignin.signintitle}
             </h2>
@@ -144,6 +145,7 @@ export const LoginForm = () => {
                     </Link>
                   </div>
                 </div>
+                <GithubSignInButton />
 
                 <button
                   type="submit"
