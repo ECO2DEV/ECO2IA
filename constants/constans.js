@@ -25,6 +25,12 @@ import IA5 from '../public/screenshot/resum_eco2.webp';
 import IA6 from '../public/screenshot/cv_eco2.webp';
 
 import {
+  domain,
+  sport,
+  nationality
+} from '../components/profile/profilecollection';
+
+import {
   AcademicCapIcon,
   HandRaisedIcon,
   RocketLaunchIcon,
@@ -147,7 +153,7 @@ export const IA_CARDS = [
     href: '/eco2chat',
     description:
       'Chatbot especializado en interacción con usuarios, resolver dudas y preguntas frecuentes sobre cualquier tema',
-    icon: eco2chat,
+    icon: './eco2chat.webp',
     screenShot: '/screenshot/chat_eco2.webp',
 
     classNames: true,
@@ -160,7 +166,7 @@ export const IA_CARDS = [
     href: '/eco2image',
     description:
       'Creación de imágenes y edición de fotos con inteligencia artificial',
-    icon: eco2image,
+    icon: './eco2image.webp',
     screenShot: '/screenshot/dalle_eco2.webp',
 
     classNames: false,
@@ -172,7 +178,7 @@ export const IA_CARDS = [
     title: 'Eco2Traduct',
     href: '/eco2traduct',
     description: 'Traductor de idiomas con inteligencia artificial',
-    icon: eco2rad,
+    icon: './eco2rad.webp',
     screenShot: '/screenshot/trad_eco2.webp',
 
     classNames: false,
@@ -184,7 +190,7 @@ export const IA_CARDS = [
     title: 'Eco2Sport',
     href: '/eco2sport',
     description: 'Entrenador personal con inteligencia artificial',
-    icon: eco2sport,
+    icon: './eco2sport.webp',
     screenShot: '/screenshot/sport_eco2.webp',
 
     classNames: true,
@@ -197,7 +203,7 @@ export const IA_CARDS = [
     href: '/eco2quiz',
     description:
       'Creador de cuestionarios, quizzes con inteligencia artificial',
-    icon: eco2quiz,
+    icon: './eco2quiz.webp',
     screenShot: '/screenshot/quiz_eco2.webp',
 
     classNames: true,
@@ -210,7 +216,7 @@ export const IA_CARDS = [
     href: '/eco2description',
     description:
       'Creación de copys, descripciones para productos y servicio | marketing digital con inteligencia artificial',
-    icon: eco2desc,
+    icon: './eco2desc.webp',
     screenShot: '/screenshot/desc_eco2.webp',
 
     classNames: false,
@@ -223,7 +229,7 @@ export const IA_CARDS = [
     href: '/eco2resum',
     description:
       'Genarador de resumenes, resumenes de texto con inteligencia artificial',
-    icon: eco2resume,
+    icon: './eco2resume.webp',
     screenShot: '/screenshot/resum_eco2.webp',
 
     classNames: false,
@@ -236,7 +242,7 @@ export const IA_CARDS = [
     href: '/eco2cv',
     description:
       'Creación de curriculum vitae, hojas de vida con inteligencia artificial',
-    icon: eco2cv,
+    icon: './eco2cv.webp',
     screenShot: '/screenshot/cv_eco2.webp',
 
     classNames: false,
@@ -249,7 +255,7 @@ export const IA_CARDS = [
     href: '/renovhome',
     description:
       'Renovhome es una aplicación que utiliza inteligencia artificial para ayudar a los usuarios a rediseñar sus espacios',
-    icon: eco2cv,
+    icon: './eco2cv.webp',
     screenShot: '/screenshot/cv_eco2.webp',
 
     classNames: false,
@@ -571,3 +577,21 @@ export const numberDesignsOptions = [
   { value: '9', label: '9' },
   { value: '10', label: '10' }
 ];
+
+export const domainSelect = domain.map((opcion) => (
+  <option key={opcion} value={opcion}>
+    {opcion}
+  </option>
+));
+
+export const sportSelect = sport.map((opcion) => (
+  <option key={opcion} value={opcion}>
+    {opcion}
+  </option>
+));
+
+export const nacionalitySelect = nationality.map((opcion) => (
+  <option key={opcion} value={opcion}>
+    {opcion}
+  </option>
+));
