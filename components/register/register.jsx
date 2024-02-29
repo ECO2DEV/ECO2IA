@@ -43,9 +43,9 @@ export default function Register() {
       // Update the formData with the newPlanId
       let updatedFormData = {
         ...formData,
-        plan: {
-          id: newPlanId,
-        },
+        // plan: {
+        //   id: newPlanId,
+        // },
       };
 
       const response = await createUser(updatedFormData);
@@ -73,16 +73,8 @@ export default function Register() {
 
   return (
     <>
-      <div
-        className="flex -z-10 flex-col md:flex-row w-auto items-center justify-center h-[100vh] dark:bg-zinc-900 bg-image"
-        style={{
-          backgroundImage: 'url("/bg-image.jpg")',
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          filter: "brightness(70%)"
-        }}
-      >
-        <div className="bg-zinc-200 bg-opacity-50 blur-0 border-2 border-spacing-16 border-green-900 p-5 backdrop-blur-lg absolute backdrop-filter shadow-md rounded flex flex-col justify-center pb-8 px-4 sm:px-6 lg:px-8 xl:px-10 md:flex-row lg:flex-none flex-none">
+      <div className="flex dark:bg-darkColor w-auto -z-10 flex-col items-center justify-center h-[100vh]">
+        <div className="p-10 rounded flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 xl:px-10 md:flex-row lg:flex-none flex-none">
           <div className="mx-auto w-full max-w-md md:w-96 lg:w-96">
             <header className="flex items-center justify-center gap-4 my-8 text-eco2MainColor">
               <UserPlusIcon className="h-6 w-6" aria-hidden="true" />
@@ -152,23 +144,17 @@ export default function Register() {
 
             <button
               type="submit"
-              disabled={loading}
               onClick={handleSubmit}
-              className="mx-auto w-full mt-8 relative border hover:border-emerald-600 duration-500 group cursor-pointer text-sky-50  overflow-hidden rounded-md bg-emerald-800 p-2 flex justify-center items-center font-extrabold"
+              disabled={loading}
+              className="bg-eco2MainColor w-full mt-8 rounded-lg text-white px-6 py-3 text-base hover:bg-eco2HoverColor cursor-pointer transition"
             >
-              <div className="absolute z-10 w-48 h-48 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-emerald-900 delay-150 group-hover:delay-75"></div>
-              <div className="absolute z-10 w-40 h-40 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-emerald-800 delay-150 group-hover:delay-100"></div>
-              <div className="absolute z-10 w-32 h-32 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-emerald-700 delay-150 group-hover:delay-150"></div>
-              <div className="absolute z-10 w-24 h-24 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-emerald-600 delay-150 group-hover:delay-200"></div>
-              <div className="absolute z-10 w-16 h-16 rounded-full group-hover:scale-150 transition-all  duration-500 ease-in-out bg-emerald-500 delay-150 group-hover:delay-300"></div>
-              <div className="z-10 bg-transparent">
-                {loading ? (
-                  <Loader />
-                ) : (
-                  <span>{DataRegister.RegisterCreate}</span>
-                )}
-              </div>
+              {loading ? (
+                <Loader />
+              ) : (
+                <span>{DataRegister.RegisterCreate}</span>
+              )}
             </button>
+
           </div>
         </div>
       </div>
