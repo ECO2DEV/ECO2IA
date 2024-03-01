@@ -28,11 +28,7 @@ export default function Features() {
       <hr className="my-10 h-px bg-gray-600 border-0 dark:bg-gray-700" />
 
       <section
-        className={`mx-auto w-full relative overflow-hidden ${
-          isDarkMode
-            ? "dark"
-            : "bg-eco2MainColor"
-        } px-4 pt-10 pb-14 shadow-xl sm:rounded-3xl lg:px-24 lg:py-20`}
+        className={`mx-auto w-full relative overflow-hidden bg-eco2MainColor dark:bg-darkColor px-4 pt-10 pb-14 shadow-xl sm:rounded-3xl lg:px-24 lg:py-20`}
       >
         <div className="grid grid-cols-1 items-center lg:grid-cols-2 lg:gap-8">
           <motion.div
