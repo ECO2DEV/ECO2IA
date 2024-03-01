@@ -12,7 +12,7 @@ export default Footer
 
 function AIIconsDirectFooter() {
   return (
-    <footer className="grid grid-cols-4 md:grid-cols-6 md:gap-3 rounded-xl">
+    <footer className="grid grid-cols-4 md:grid-cols-6 gap-2 md:gap-3 rounded-xl">
       {IA_CARDS.map((card) => {
         return (
           <Link key={card.id} href={card.href} >

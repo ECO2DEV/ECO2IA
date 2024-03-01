@@ -9,12 +9,6 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
 
   return (
     <div className="w-full">
-      {/* <label
-        htmlFor="text"
-        className="block text-sm font-medium leading-6 text-gray-900"
-      >
-        Demander Quelque chose
-      </label> */}
       <form onSubmit={Fetch} className="mt-2 flex rounded-md shadow-sm">
         <div className="relative flex flex-grow items-stretch focus-within:z-10">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -24,6 +18,8 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
             type="text"
             name="prompt"
             id="prompt"
+            autoComplete="off"
+            aria-autocomplete="none"
             className="w-full rounded-none rounded-l-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             placeholder="¿Como puedo ayudarte hoy?"
             onChange={OnChange}

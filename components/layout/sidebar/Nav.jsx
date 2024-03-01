@@ -8,9 +8,8 @@ import { menuSlide } from '../../../util/animate/Anim';
 import { LinkComponent } from './LinkComponent';
 import { Curve } from '../../../util/animate/Curve';
 import Footer from './Footer';
-import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, EmptyAvatar } from '../../icons/icons';
 import { ThemeToggle } from '../../shared/Header/Header';
-import { avatar } from '../../avatarSvg/avatar';
 
 const navItems = [
   {
@@ -29,14 +28,24 @@ const navItems = [
     title: 'Servicios',
     href: '/about'
   }
-  ,
 ];
 export const Nav = ({ children }) => {
+
+
   const { pathname } = useRouter();
   const [selectedIndicator, setSelectedIndicator] = useState(pathname);
-  const image_url = children?.props?.user?.avatar
-    ?  children.props.user.avatar.url
-    : '/empty_avatar.webp';
+
+  const image_url = children?.props?.user?.avatar ? (
+    <Image
+      className="inline-block rounded-full "
+      src={children.props.user.avatar.url}
+      alt={children?.props?.user?.username}
+      width={80}
+      height={80}
+    />
+  ) : (
+    <EmptyAvatar className="w-14 h-w-14 dark:text-gray-900 text-lightColor text-center" />
+  );
 
   return (
     <motion.aside
@@ -44,7 +53,6 @@ export const Nav = ({ children }) => {
       initial="initial"
       animate="enter"
       exit="exit"
-      
       className="h-screen  fixed right-0 top-0 z-40 dark:bg-lightColor bg-darkBgCard "
     >
       <div className="p-20 h-full">
@@ -56,52 +64,28 @@ export const Nav = ({ children }) => {
         >
           <article className="flex flex-shrink-0 ">
             <div className="flex flex-wrap justify-center items-center gap-4">
-             
-              <div>
-                {image_url ? (
-                  <Image
-                    className="inline-block rounded-full "
-                    src={image_url}
-                    alt={children?.props?.user?.username}
-                    width={80}
-                    height={80}
-                  />
-                ) : (
-                  <div className="flex items-center justify-center h-full text-white bg-gray-400 rounded-full">
-                    <span className="text-lg font-semibold">
-                      {children.props.user.username.charAt(0)}
-                      {children.props.user.username.charAt(1)}
-                    </span>
-                  </div>
-                )}
-              </div>
+              <div>{image_url}</div>
               <div className="ml-3 flex flex-col gap-1">
-                <p className="text-sm font-medium text-white text-left text-lightColor dark:text-darkColor">
-                  {children?.props?.user?.username}
+                <p className="text-sm font-medium text-white text-center text-lightColor dark:text-darkColor">
+                  {children?.props?.user?.Name}
                 </p>
                 <Link href={'/profile'}>
-                  <p className="text-sm font-medium text-lightColor dark:text-darkColor group-hover:text-gray-300 text-left">
+                  <p className="rounded dark:bg-white/10 px-2 py-1 text-sm font-semibold text-white shadow-sm dark:hover:bg-white/20 dark:text-darkColor ring-1 ring-inset ring-gray-300 hover:scale-110 transition hover:opacity-95">
                     Mi perfil
                   </p>
                 </Link>
               </div>
-              <div className='flex justify-center mx-auto pl-5 md:pl-0 gap-2 '>
-                   <button
-                title="Click para cerrar sessión !"
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full text-left flex justify-center"
-                onClick={() => signOut({ callbackUrl: '/' })}
-              >
-                <ArrowLeftOnRectangleIcon
-                  className="h-5 w-5"
-                  aria-hidden="true"
-                />
-              </button>
-              <ThemeToggle />
-
+              <div className="flex justify-center mx-auto pl-5 md:pl-0 gap-2 ">
+                <button
+                  title="Click para cerrar sessión !"
+                  className="bg-red-500 hover:bg-red-600 hover:scale-110 transition text-white font-bold py-2 px-4 rounded-full text-left flex justify-center"
+                  onClick={() => signOut({ callbackUrl: '/' })}
+                >
+                  <ArrowLeftIcon className="h-6 w-6 " />
+                </button>
+                <ThemeToggle />
               </div>
-           
             </div>
-
           </article>
           {navItems.map((data, index) => {
             return (
@@ -110,7 +94,7 @@ export const Nav = ({ children }) => {
                 data={{ ...data, index }}
                 isActive={selectedIndicator == data.href}
                 setSelectedIndicator={setSelectedIndicator}
-              ></LinkComponent>
+              />
             );
           })}
           <Footer />

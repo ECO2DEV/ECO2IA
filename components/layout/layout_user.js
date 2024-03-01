@@ -83,7 +83,7 @@ export default function LayoutUser({ children }) {
         <div>
           <main>
             <div className="lg:py-3  dark:bg-darkColor bg-lightColor">
-              <div className="mx-auto h-full max-w-7xl px-4 sm:px-6 lg:px-8 dark:bg-darkColor bg-lightColor ">
+              <div className="mx-auto h-full max-w-7xl xl:max-w-[85rem] px-4 sm:px-6 lg:px-8 dark:bg-darkColor bg-lightColor ">
                 {children}
               </div>
             </div>
