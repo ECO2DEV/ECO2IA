@@ -201,7 +201,7 @@
   stroke: none;
 }
 
-/* style for the hamburfer nav */
+/* style for the nav hamburger */
 
 .btn{
   display: flex;
@@ -209,15 +209,14 @@
   width: 3rem;
   height: 3rem;
   background: transparent;
-  border: 0;
-  gap: .65rem;
+  gap: .62rem;
  }
  
  .btn > div{
   background: black;
-  width: 40px;
-  height: 2px;
-  border-radius: 5px;
+  width: 35px;
+  height: 1.5px;
+  border-radius: 15px;
   transition: all .5s;
   transform-origin: left;
  }

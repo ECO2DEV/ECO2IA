@@ -35,7 +35,7 @@ export const StarsButton = ({isModalOpen,setIsModalOpen, score}) => {
         whileTap={{ scale: 0.9 }}
  
         onClick={() => (isModalOpen ? close() : open())}
-        className="flex items-center gap-1 p-2 bg-gray-900 dark:bg-[#1c1e23] rounded-lg"
+        className="flex items-center gap-1 p-2 bg-darkBgCard dark:bg-darkColor rounded-lg hover:text-none"
       >
        {stars}  
       
