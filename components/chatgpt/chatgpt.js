@@ -34,8 +34,7 @@ export default function ChatGpt() {
     setSelectedModel(e.target.value);
   };
 
-  const { setResponse, setPromptTokens, setActiveAI } =
-    useContext(PromptContext);
+  const { setResponse, setActiveAI } = useContext(PromptContext);
 
   const { mutate } = useChat(user?.id);
 
@@ -100,14 +99,14 @@ export default function ChatGpt() {
     }
   });
 
-  useEffect(() => {
-    if (input === '') {
-      setPromptTokens(0);
-      return;
-    }
-    const tokens = countTokens(input);
-    setPromptTokens(tokens);
-  }, [input]);
+  // useEffect(() => {
+  //   if (input === '') {
+  //     setPromptTokens(0);
+  //     return;
+  //   }
+  //   const tokens = countTokens(input);
+  //   setPromptTokens(tokens);
+  // }, [input]);
 
   return (
     <>
