@@ -122,7 +122,7 @@ function LandingPage() {
       );
 
       const response = await createIAContactMessage({
-        formData: formPayload,
+        formData: formData,
       });
 
       console.log(response);

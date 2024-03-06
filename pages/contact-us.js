@@ -86,7 +86,7 @@ export default function contactUs() {
       );
 
       const response = await createIAContactMessage({
-        formData: formPayload,
+        formData: formData,
       });
 
       console.log(response);
