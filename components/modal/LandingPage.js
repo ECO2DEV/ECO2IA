@@ -168,9 +168,7 @@ function LandingPage() {
               transition={{ delay: 0.1 }}
             />
             <motion.div
-              className={`absolute w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-full p-4 sm:p-10 ${
-                isDarkMode ? "bg-darkColor" : "bg-lightBgCard"
-              }  rounded-3xl rotate-2`}
+              className="absolute w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-full p-4 sm:p-10 dark:bg-darkColor bg-lightBgCard rounded-3xl rotate-2"
               initial={{ scale: 0 }}
               animate={{ rotate: -8, scale: 1 }}
               exit={{ rotate: -8, scale: 0 }}

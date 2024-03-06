@@ -8,7 +8,8 @@ import { Popover, Transition } from "@headlessui/react";
 import clsx from "clsx";
 
 import { Container } from "../../Container";
-import logo from "../../../public/eco2_no_bg.png";
+import logoLight from "../../../public/LogoECO2Verde.png";
+import logoDark from "../../../public/LogoECO2Negro.png";
 
 function CloseIcon(props) {
   return (
@@ -83,10 +84,10 @@ function MobileNavItem({ href, children }) {
 
 function MobileNavigation(props) {
   const { data: session } = useSession();
-
+  // mt-1 mr-5
   return (
     <Popover {...props}>
-      <Popover.Button className="group flex  items-center rounded-full bg-white/90 px-3 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
+      <Popover.Button className="group flex h-full  mr-5  items-center rounded-full bg-white/90 px-3 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
         Menu
         <ChevronDownIcon className="ml-1 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400" />
       </Popover.Button>
@@ -127,14 +128,13 @@ function MobileNavigation(props) {
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-lightColor">
                 <MobileNavItem href="/">Home</MobileNavItem>
                 <MobileNavItem href="/about">About</MobileNavItem>
-                <NavItem href="/contact-us">Contactanos</NavItem>
+                <MobileNavItem href="/contact-us">Contactanos</MobileNavItem>
 
                 {session ? (
                   <MobileNavItem href="/dashboard">Dashboard</MobileNavItem>
                 ) : (
                   <>
                     <MobileNavItem href="/auth/signin">Login</MobileNavItem>
-                    <MobileNavItem href="/auth/signup">Register</MobileNavItem>
                   </>
                 )}
               </ul>
@@ -183,7 +183,6 @@ function DesktopNavigation(props) {
         ) : (
           <>
             <NavItem href="/auth/signin">Login</NavItem>
-            <NavItem href="/auth/signup">Register</NavItem>
           </>
         )}
       </ul>
@@ -219,6 +218,25 @@ function AvatarContainer({ className, ...props }) {
 }
 
 function Avatar({ large = false, className, ...props }) {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const rootElement = document.documentElement;
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "class") {
+          const isDark = rootElement.classList.contains("dark");
+          setIsDarkMode(isDark);
+        }
+      });
+    });
+
+    observer.observe(rootElement, {
+      attributes: true,
+    });
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <Link
       href="/"
@@ -227,7 +245,7 @@ function Avatar({ large = false, className, ...props }) {
       {...props}
     >
       <Image
-        src={logo}
+        src={isDarkMode ? logoLight : logoDark}
         alt=""
         sizes={large ? "4rem" : "2.25rem"}
         className={clsx(
