@@ -87,7 +87,7 @@ export const Eco2Cards = () => {
                     value={copy || ''}
                     name="response"
                     id="response"
-                    className="overflow-y-hidden block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 text-[0.750rem] leading-2 md:text-[0.750rem] lg:leading-6 "
+                    className="overflow-y-hidden block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 dark:text-lightColor placeholder:text-gray-400 focus:ring-0 text-[0.750rem] leading-2 md:text-[0.750rem] lg:leading-6 "
                     placeholder={DataEco2Description.ResponseExample}
                   />
 
@@ -106,7 +106,7 @@ export const Eco2Cards = () => {
                       <button
                         type="button"
                         onClick={() => handleCopy(index)}
-                        className="-m-2.5 flex h-10 w-10 items-center justify-center rounded-full text-gray-400 hover:text-gray-500"
+                        className="-m-2.5 flex h-10 w-10 items-center justify-center rounded-full text-gray-400 hover:text-gray-500 dark:hover:text-gray-100"
                       >
                         <ClipboardIcon />
                         <span className="sr-only">
@@ -154,7 +154,7 @@ export const Eco2Cards = () => {
                           <GlobalShareIcon />
                         )
                       )}
-                      <div className="opacity-0 group-hover:opacity-100 absolute left-0 bottom-10 right-0 z-10 flex justify-center items-end text-xl text-black font-semibold rounded-full">
+                      <div className="opacity-0 group-hover:opacity-100 absolute left-0 bottom-10 right-0 z-10 flex justify-center items-end text-xl text-black dark:text-lightColor font-semibold rounded-full">
                         {DataEco2Description.Share}
                       </div>
                     </div>

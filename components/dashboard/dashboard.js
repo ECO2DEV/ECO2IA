@@ -1,6 +1,5 @@
 import IACard from './IACard';
 import Head from 'next/head';
-import { IA_CARDS } from '../../constants/constans';
 
 export default function DashboardSection(props) {
   // console.log('DashboardSection props', props?.user.IA_CARDS?.data);
@@ -15,8 +14,8 @@ export default function DashboardSection(props) {
         <meta name="description" content="Ai Ecosystem dashboard" />
         <link rel="Eco2 icon" href="/eco2it_logo.jpeg" />
       </Head>
-      <section className="w-full grid auto-rows-[380px] lg:auto-rows-[140px] grid-cols-8 gap-4 bg-lightColor dark:bg-darkColor ">
-        {iaCards.map((ia) => {
+      <section className="w-full grid auto-rows-[380px] lg:auto-rows-[140px] grid-cols-8 gap-4 bg-lightColor dark:bg-darkColor mx-auto">
+        {iaCards.map((ia, index) => {
           return (
             <IACard
               key={ia.id}
@@ -25,9 +24,9 @@ export default function DashboardSection(props) {
               description={ia.attributes.description}
               href={ia.attributes.href}
               screenShoot={ia.attributes.screenShoot}
-              classNames={ia.attributes.classNames}
               keywords={ia.attributes.keywords}
-              index={iaCards.length}
+              quantity={iaCards.length}
+              index={index}
               score={ia.attributes.id_score.data}
             />
           );
