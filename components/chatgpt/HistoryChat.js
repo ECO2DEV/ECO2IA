@@ -1,14 +1,13 @@
-import { useContext, Fragment, useRef, useState } from "react";
-import Image from "next/image";
-import { Dialog, Transition } from "@headlessui/react";
-import { UserContext } from "../../context/user/UserContext";
-import { useChat } from "../../hooks/useChat";
-import { strapiUrl } from "../../constants/constans";
-import { DeleteIcon, ClipboardIcon, EmptyAvatar } from "../icons/icons";
-import ModalDelete from "./ModalDelete";
-import { toast } from "react-hot-toast";
-import { DataHistory } from "../../data/history";
-import { DataEco2Chat } from "../../data/eco2chat";
+import { useContext, Fragment, useRef, useState } from 'react';
+import Image from 'next/image';
+import { Dialog, Transition } from '@headlessui/react';
+import { UserContext } from '../../context/user/UserContext';
+import { useChat } from '../../hooks/useChat';
+import { DeleteIcon, ClipboardIcon, EmptyAvatar } from '../icons/icons';
+import ModalDelete from './ModalDelete';
+import { toast } from 'react-hot-toast';
+import { DataHistory } from '../../data/history';
+import { DataEco2Chat } from '../../data/eco2chat';
 
 export default function HistoryChat({ onClose }) {
   const cancelButtonRef = useRef(null);
@@ -91,7 +90,7 @@ export default function HistoryChat({ onClose }) {
                                     {user?.avatar ? (
                                       <img
                                         className="w-7 h-7 rounded-full object-cover"
-                                        src={strapiUrl + user.avatar.url}
+                                        src={user.avatar.url}
                                         alt="user_avatar"
                                       />
                                     ) : (
