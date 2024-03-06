@@ -11,10 +11,11 @@ const IACard = ({
   description,
   href,
   screenShoot,
-  classNames ,
   keywords,
+  quantity,
+  score,
   index,
-  score
+  
 
 }) => {
   const [ref, hovering] = useHover();
@@ -23,17 +24,17 @@ const IACard = ({
 
   const arrKeywords = keywords.split(',');
   let urlImg = screenShoot || '/empty_image.webp';
-
+  
   return (
     <motion.article
       key={id}
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.3 }}
+      transition={{ delay: quantity * 0.1, duration: 0.3 }}
       viewport={{ once: true }}
       className={`relative flex flex-col rounded-3xl bg-eco2HoverColor p-6 gap-3 border-2  overflow-hidden col-span-8 row-span-1 sm:row-span-2 md:row-span-3  dark:bg-darkBgCard md:p-8  ${
-        classNames
+        index % 2 === 0
           ? 'md:row-span-4 lg:col-span-4'
           : 'md:row-span-3 lg:col-span-4'
       }`}
@@ -50,6 +51,7 @@ const IACard = ({
                 modalOpen={isModalOpen}
                 handleClose={() => setIsModalOpen((prev) => !prev)}
                 score={score}
+                
                 
               />
             )}

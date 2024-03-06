@@ -1,6 +1,0 @@
-export const avatar = () => {
-  return (
-    <>
-    </>
-  )
-}
