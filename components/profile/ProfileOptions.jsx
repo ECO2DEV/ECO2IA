@@ -391,7 +391,7 @@ export const ProfileOptions = ({ user }) => {
               htmlFor="sport"
               className="block text-sm font-medium leading-6  dark:text-white"
             >
-              {DataProfile.DomainofStudy}
+              {DataProfile.Sport}
             </label>
             <div className="mt-2">
               <select

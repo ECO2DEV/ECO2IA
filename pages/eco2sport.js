@@ -1,5 +1,5 @@
 import { SportCoachIA } from '../components/eco2sportcoach/Eco2SportCoachIA';
-import Modal from '../components/modal/modal';
+// import Modal from '../components/modal/modal';
 import { getUser } from '../util/api/user';
 import Head from 'next/head';
 
@@ -12,13 +12,14 @@ export default function SportCoach(props) {
         <link rel="icon" href="/eco2it_logo.jpeg" />
       </Head>
       {/* Condición para renderizar el componente SportCoachIA o el componente Modal */}
-      {!props.user.plan ? (
+      {/* {!props.user.plan ? (
         <Modal user={props?.user} />
       ) : +props?.user?.plan?.max_tokens <= 0 ? (
         <Modal user={props?.user} />
       ) : (
         <SportCoachIA user={props.user.id} />
-      )}
+      )} */}
+      <SportCoachIA user={props.user.id} />
     </div>
   );
 }

@@ -179,29 +179,29 @@
 /* Link styles */
 
 
-.indicator {
-  width: 10px;
-  height: 10px;
-  background-color: white;
-  border-radius: 50%;
-  position: absolute;
-  top: 25px;
-  right: 0;
-}
-
-
-.svgCurve{
+.svgCurveDark{
   
   position: absolute;
   top: 0;
   left: -99px;
   width: 100px;
   height: 100%;
-  fill: rgb(41, 41, 41);
+  fill: #1f2937;
   stroke: none;
 }
 
-/* style for the hamburfer nav */
+.svgCurveLight{
+  
+  position: absolute;
+  top: 0;
+  left: -99px;
+  width: 100px;
+  height: 100%;
+  fill: #f0fdf4;
+  stroke: none;
+}
+
+/* style for the nav hamburger */
 
 .btn{
   display: flex;
@@ -209,15 +209,14 @@
   width: 3rem;
   height: 3rem;
   background: transparent;
-  border: 0;
-  gap: .65rem;
+  gap: .62rem;
  }
  
  .btn > div{
   background: black;
-  width: 40px;
-  height: 2px;
-  border-radius: 5px;
+  width: 35px;
+  height: 1.5px;
+  border-radius: 15px;
   transition: all .5s;
   transform-origin: left;
  }
@@ -335,4 +334,9 @@
 		@apply bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 
 		hover:bg-gray-600/10 border-green-800 border text-white;
 	}
+}
+
+.scroll-color {
+  scrollbar-color: #f0fdf4 #1f2937 ;
+  scrollbar-width: thin;
 }

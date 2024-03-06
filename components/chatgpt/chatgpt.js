@@ -34,8 +34,7 @@ export default function ChatGpt() {
     setSelectedModel(e.target.value);
   };
 
-  const { setResponse, setPromptTokens, setActiveAI } =
-    useContext(PromptContext);
+  const { setResponse, setActiveAI } = useContext(PromptContext);
 
   const { mutate } = useChat(user?.id);
 
@@ -100,18 +99,18 @@ export default function ChatGpt() {
     }
   });
 
-  useEffect(() => {
-    if (input === '') {
-      setPromptTokens(0);
-      return;
-    }
-    const tokens = countTokens(input);
-    setPromptTokens(tokens);
-  }, [input]);
+  // useEffect(() => {
+  //   if (input === '') {
+  //     setPromptTokens(0);
+  //     return;
+  //   }
+  //   const tokens = countTokens(input);
+  //   setPromptTokens(tokens);
+  // }, [input]);
 
   return (
     <>
-      <section className="dark:bg-darkColor bg-lightColor h-screen">
+      <section className="dark:bg-darkColor bg-lightColor h-screen sm:w-full">
         {messages.length === 0 ? (
           <Welcome setInput={setInput} />
         ) : openHelpers ? (
@@ -119,7 +118,7 @@ export default function ChatGpt() {
         ) : (
           <Conversations messages={messages} />
         )}
-        <div className="flex justify-center flex-col-reverse md:flex-row items-center fixed bottom-3 w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem]">
+        <div className="flex justify-center flex-col-reverse md:flex-row items-center fixed bottom-3 w-[92%]  xl:w-[88%] 2xl:max-w-[77rem]">
           <SearchTextbox
             OnChange={handleInputChange}
             Fetch={handleSubmit}
