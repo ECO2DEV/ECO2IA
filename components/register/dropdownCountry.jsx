@@ -1,10 +1,10 @@
 import { DataRegister } from '../../data/register';
 export default function DropdownCountry() {
   return (
-    <div className="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
+    <div className="mt-4 shadow-sm">
       <label
         htmlFor="country"
-        className="block text-xs font-medium text-gray-900 dark:text-white"
+        className="block text-xl font-medium leading-6 text-gray-900 dark:text-white"
       >
         {DataRegister.RegisterCountry}
       </label>
@@ -12,7 +12,7 @@ export default function DropdownCountry() {
         id="country"
         name="country"
         autoComplete="country-name"
-        className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+        className="block py-2.5 px-0 w-full dark:text-gray-400 text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-emerald-600 dark:focus:border-eco2MainColor focus:outline-none focus:ring-0 focus:border-eco2MainColor peer"
       >
         <option value="CO">Colombia</option>
         <option value="AF">Afghanistan</option>

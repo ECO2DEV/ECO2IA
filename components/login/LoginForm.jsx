@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image"
 import LogoTipoECO2verde from "../../public/LogoTipoECO2verde.png";
 import { DataSignin } from "../../data/signin";
-import { GithubSignInButton } from "../authbutton/authButtons";
+import { GithubSignInButton, GoogleSignInButton } from "../authbutton/authButtons";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -62,7 +62,11 @@ export const LoginForm = () => {
       <div className="p-10 rounded flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 xl:px-10 md:flex-row lg:flex-none flex-none">
         <div className="mx-auto w-full max-w-md md:w-96 lg:w-96">
           <header className="flex items-center justify-center flex-col">
-            <Image className="h-28 w-28" src={LogoTipoECO2verde} alt="Eco2IA" />
+            <Image
+              className="h-28 w-28"
+              src={LogoTipoECO2verde}
+              alt="Eco2IA"
+            />
             <h2 className="mt-6 text-3xl font-bold tracking-tight text-eco2MainColor">
               {DataSignin.signintitle}
             </h2>
@@ -120,7 +124,7 @@ export const LoginForm = () => {
                   </label>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex-col flex items-center justify-between md:flex-row">
                   <div className="flex items-center">
                     <input
                       id="remember-me"
@@ -145,7 +149,6 @@ export const LoginForm = () => {
                     </Link>
                   </div>
                 </div>
-                <GithubSignInButton />
 
                 <button
                   type="submit"
@@ -159,6 +162,21 @@ export const LoginForm = () => {
                 {error && (
                   <h4 className="font-medium text-sm text-white"> {error}</h4>
                 )}
+                <div>
+                  <div className="relative mt-10">
+                    <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                      <div className="w-full border-t border-gray-200" />
+                    </div>
+                    <div className="relative flex justify-center text-sm font-medium leading-6">
+                      <span className="dark:bg-darkBgCard bg-eco2MainColor rounded-lg px-6 text-gray-900 dark:text-white">o continuar con</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 grid grid-cols-2 gap-4">
+                    <GithubSignInButton />
+                    <GoogleSignInButton />
+                  </div>
+                </div>
                 <div className="text-sm text-center">
                   <h4 className="font-medium text-sm text-white">o</h4>
                 </div>
@@ -170,12 +188,13 @@ export const LoginForm = () => {
                     {DataSignin.CreateAccount}
                   </Link>
                 </div>
+
               </form>
             </div>
           </div>
         </div>
-      </div>
+      </div >
       <Toaster position="top-center" />
-    </div>
+    </div >
   )
 }
