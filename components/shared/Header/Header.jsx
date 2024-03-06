@@ -8,8 +8,8 @@ import { Popover, Transition } from "@headlessui/react";
 import clsx from "clsx";
 
 import { Container } from "../../Container";
-import logoLight from "../../../public/LogoECO2Verde.png";
-import logoDark from "../../../public/LogoECO2Negro.png";
+import logoLight from "../../../public/LogoECO2Negro.png";
+import logoDark from "../../../public/LogoECO2Blanco.png";
 
 function CloseIcon(props) {
   return (
@@ -236,7 +236,11 @@ function Avatar({ large = false, className, ...props }) {
     });
 
     return () => observer.disconnect();
+
+    
   }, []);
+  const dark = 'h-10 w-10'
+  const light = 'h-15 w-15'
   return (
     <Link
       href="/"
@@ -245,12 +249,13 @@ function Avatar({ large = false, className, ...props }) {
       {...props}
     >
       <Image
-        src={isDarkMode ? logoLight : logoDark}
+        src={isDarkMode ? logoDark : logoLight }
         alt=""
-        sizes={large ? "4rem" : "2.25rem"}
+        // sizes={large ? "4rem" : "2.25rem"}
         className={clsx(
-          "rounded-full bg-zinc-100 object-cover dark:bg-zinc-800",
-          large ? "h-15 w-15" : "h-10 w-12"
+          "rounded-full max-h-10 max-w-12 bg-zinc-100 object-cover dark:bg-zinc-800",
+          // large ? dark : "h-10 w-12" 
+          // large ? "h-15 w-15" : "h-10 w-12"
         )}
         priority
       />
