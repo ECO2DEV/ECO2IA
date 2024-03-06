@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google"
 
 import axios from "axios";
 const strapiUrl = process.env.STRAPI_URL;
@@ -13,11 +14,12 @@ export const authOptions = {
         email: { label: "Email", type: "text", placeholder: "test@test.com" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, account) {
         try {
           const { data } = await axios.post(`${strapiUrl}/api/auth/local`, {
             identifier: credentials.email,
             password: credentials.password,
+            provider: account.provider
           });
           if (data) {
             console.log("nextauth data ", data);
@@ -46,6 +48,10 @@ export const authOptions = {
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    })
   ],
   jwt: {
     // The maximum age of the NextAuth.js issued JWT in seconds.

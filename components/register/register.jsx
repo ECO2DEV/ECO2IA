@@ -76,12 +76,14 @@ export default function Register() {
       <div className="flex dark:bg-darkColor w-auto -z-10 flex-col items-center justify-center h-[100vh]">
         <div className="p-10 rounded flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 xl:px-10 md:flex-row lg:flex-none flex-none">
           <div className="mx-auto w-full max-w-md md:w-96 lg:w-96">
-            <header className="flex items-center justify-center gap-4 my-8 text-eco2MainColor">
-              <UserPlusIcon className="h-6 w-6" aria-hidden="true" />
-              <h3 className="text-base font-semibold leading-6">
+
+            <header className="flex items-center justify-center my-8 text-eco2MainColor">
+              <UserPlusIcon className="h-8 w-8" aria-hidden="true" />
+              <h3 className="ml-4 text-3xl font-bold tracking-tight">
                 Creación de usuarios
               </h3>
             </header>
+
             <div className="mt-2">
               <form>
                 <Textbox
@@ -132,7 +134,7 @@ export default function Register() {
                 <DropDownText
                   id={"numberTelephone"}
                   nametx={"numberTelephone"}
-                  placeholder={"+33 06 98 66 91"}
+                  placeholder={"+57 310 760 4389"}
                   libelle={DataRegister.RegisterPhone}
                   type={"text"}
                   onChange={(e) => handleUsernameChange(e)}
@@ -146,7 +148,7 @@ export default function Register() {
               type="submit"
               onClick={handleSubmit}
               disabled={loading}
-              className="bg-eco2MainColor w-full mt-8 rounded-lg text-white px-6 py-3 text-base hover:bg-eco2HoverColor cursor-pointer transition"
+              className="bg-eco2MainColor w-full flex items-center justify-center mt-8 rounded-lg text-white px-6 py-3 text-base hover:bg-eco2HoverColor cursor-pointer transition"
             >
               {loading ? (
                 <Loader />
