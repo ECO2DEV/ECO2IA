@@ -69,9 +69,9 @@ export const navigation = [
 ];
 
 export const modelOptions = [
-  { value: 'gpt-3.5-turbo', label: 'ECO2 1.0' },
-  { value: 'gpt-4', label: 'ECO2 2.0' }
-  // { value: 'text-curie-001', label: 'Curie' }
+  { value: 'gpt-3.5-turbo', label: 'gpt-3-turbo' },
+  { value: 'gpt-4', label: 'gpt-4' },
+  { value: 'gemini-pro', label: 'Gemini-pro' }
   // { value: 'claude-1', label: 'Claude' }
 
   // Add more AI models as needed

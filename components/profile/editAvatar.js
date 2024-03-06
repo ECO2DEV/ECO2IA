@@ -18,7 +18,7 @@ export const EditAvatar = ({
     >
       <label
         htmlFor="profile_avatar"
-        className={`col-span-full flex items-center transition-all duration-500  w-28 h-w-28 gap-x-8 border-2 ${
+        className={`col-span-full flex items-center transition-all duration-500  w-28 h-w-28 gap-x-8 border-2 dark:bg-lightColor ${
           selectFile
             ? 'border-solid border-eco2MainColor'
             : 'border-dashed border-darkColor dark:border-gray-100 hover:border-eco2MainColor '

@@ -15,7 +15,7 @@ export const FramerModal = ({handleClose, id_ia, title, score}) => {
 
   async function handleSendScore() {
     if(filledStars === 0) return toast.error('Debes seleccionar una calificación');
-    await sendScore({ id_ia: id_ia, stars: filledStars, userId:user.id });
+    await sendScore({ id_ia: id_ia, stars: filledStars, userId:user.id, voteBy: user.id});
     toast.success('Calificación enviada');
     router.reload();
     
@@ -31,7 +31,7 @@ export const FramerModal = ({handleClose, id_ia, title, score}) => {
         exit="exit"
       >
         <h2 className="bg-gradient-to-r from-red-500 via-eco2MainColor to-slate-800 inline-block dark:text-transparent bg-clip-text font-extrabold text-xl">Califica {title}</h2>
-        <StarsRate filledStars={filledStars} setFilledStars={setFilledStars} score={score}/>
+        <StarsRate filledStars={filledStars} setFilledStars={setFilledStars} score={score} />
         <footer className="flex justify-evenly gap-4">
           <ModalButton onClick={handleSendScore} label="Enviar" />
           <ModalButton onClick={handleClose} label="Cerrar" />

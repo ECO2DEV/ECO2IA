@@ -18,7 +18,7 @@ export const Header = ({children}) => {
           onClick={() => {
             setIsActive(!isActive);
           }}
-          className="fixed right-0 top-0 m-[20px] z-[100] w-[60px] h-[60px] rounded-[50%] bg-[#21c284] flex items-center justify-center cursor-pointer"
+          className="fixed right-0 top-0 m-[20px] z-[100] w-[45px] h-[45px] rounded-[50%] bg-[#21c284] flex items-center justify-center cursor-pointer"
         >
           {isActive ? (
             <button
@@ -32,7 +32,7 @@ export const Header = ({children}) => {
           ) : (
             <button
               onClick={() => setIsActive(!isActive)}
-              className={`grow flex items-center justify-center btn `}
+              className={`grow flex items-center justify-center btn`}
             >
               <div></div>
               <div></div>

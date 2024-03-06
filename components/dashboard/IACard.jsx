@@ -15,6 +15,7 @@ const IACard = ({
   keywords,
   index,
   score
+  
 
 }) => {
   const [ref, hovering] = useHover();
@@ -50,6 +51,7 @@ const IACard = ({
                 modalOpen={isModalOpen}
                 handleClose={() => setIsModalOpen((prev) => !prev)}
                 score={score}
+                
                 
               />
             )}
