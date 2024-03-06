@@ -1,6 +1,5 @@
 import Head from 'next/head';
-
-import { ProfileOptions } from './ProfileOptions';
+import ProfileContainer from './ProfileContainer';
 
 export default function Profile({ user }) {
   return (
@@ -10,7 +9,7 @@ export default function Profile({ user }) {
         <title>Editar Perfil</title>
       </Head>
 
-      <ProfileOptions user={user} />
+      <ProfileContainer user={user} />
     </>
   );
 }

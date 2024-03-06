@@ -1,46 +1,33 @@
-import { useState, useContext, useEffect } from 'react';
-
-import { PromptContext } from '../../context/prompts/PromptContext';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../../context/user/UserContext';
-
-import { strapiUrl } from '../../constants/constans';
 import { Toaster } from 'react-hot-toast';
-import { useRouter } from 'next/router';
-
 import { Header } from './sidebar/Header';
 
 export default function LayoutUser({ children }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [discountTokensModal, setDiscountTokensModal] = useState(0);
+  // const [sidebarOpen, setSidebarOpen] = useState(false);
+  // const [discountTokensModal, setDiscountTokensModal] = useState(0);
 
-  const currentPath = useRouter().pathname; // Obtener la ruta actual
+  // const currentPath = useRouter().pathname; // Obtener la ruta actual
 
-  const {
-    setPlan,
-    plan,
-    promptTokens,
-    responseTokens,
-    response,
-    setPromptTokens,
-    setResponseTokens,
-    activeAI
-  } = useContext(PromptContext);
+  // const {
+  //   setPlan,
+  //   plan,
+  //   promptTokens,
+  //   responseTokens,
+  //   response,
+  //   setPromptTokens,
+  //   setResponseTokens,
+  //   activeAI
+  // } = useContext(PromptContext);
 
-  const { max_imagens = 0, max_tokens = 0 } = plan;
+  // const { max_imagens = 0, max_tokens = 0 } = plan;
 
-  const {
-    setUser,
-    openHelpers,
-    modalOpen,
-    setOpenHelpers,
-    setModalOpen,
-    setSelectedModel
-  } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
-  useEffect(() => {
-    if (!children?.props?.user?.plan) return;
-    setPlan(children.props.user.plan ? children.props.user.plan.id : null);
-  }, []);
+  // useEffect(() => {
+  //   if (!children?.props?.user?.plan) return;
+  //   setPlan(children.props.user.plan ? children.props.user.plan.id : null);
+  // }, []);
 
   useEffect(() => {
     if (!children?.props?.user) return;
@@ -51,28 +38,28 @@ export default function LayoutUser({ children }) {
   // console.log(JSON.stringify(children.props.user));
 
   // useEffect for discountTokensModal
-  useEffect(() => {
-    setDiscountTokensModal(promptTokens + responseTokens);
-    if (response && (activeAI === 'ChatGPT' || activeAI === 'DalleIA')) {
-      setTimeout(() => {
-        setDiscountTokensModal(0);
-      }, 2000);
-    }
-  }, [response, responseTokens, activeAI]);
-  // useEffect for start counting the tokens in 0, after the next response
-  useEffect(() => {
-    setTimeout(() => {
-      if (
-        activeAI === 'ChatGPT' ||
-        activeAI === 'DalleIA' ||
-        activeAI === 'Eco2quizAI'
-      ) {
-        setPromptTokens(0);
-      }
-      setResponseTokens(0);
-      setDiscountTokensModal(0);
-    }, 3000);
-  }, [response, responseTokens]);
+  // useEffect(() => {
+  //   setDiscountTokensModal(promptTokens + responseTokens);
+  //   if (response && (activeAI === 'ChatGPT' || activeAI === 'DalleIA')) {
+  //     setTimeout(() => {
+  //       setDiscountTokensModal(0);
+  //     }, 2000);
+  //   }
+  // }, [response, responseTokens, activeAI]);
+  // // useEffect for start counting the tokens in 0, after the next response
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     if (
+  //       activeAI === 'ChatGPT' ||
+  //       activeAI === 'DalleIA' ||
+  //       activeAI === 'Eco2quizAI'
+  //     ) {
+  //       setPromptTokens(0);
+  //     }
+  //     setResponseTokens(0);
+  //     setDiscountTokensModal(0);
+  //   }, 3000);
+  // }, [response, responseTokens]);
 
   return (
     <>
