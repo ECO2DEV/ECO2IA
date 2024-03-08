@@ -1,4 +1,5 @@
 const domain = [
+  'Escoge tu especialidad',
   'Ciencias de la salud',
   'Ciencias humanas y sociales',
   'Ciencias, tecnología, ingeniería y matemáticas (STEM)',
@@ -49,6 +50,7 @@ const activity = [
 ];
 
 const sport = [
+  'Escoge tu deporte favorito',
   'Aikido',
   'Atletismo',
   'Remo',
@@ -116,6 +118,7 @@ const transport = [
 ];
 
 const nationality = [
+  'Escoge tu nacionalidad',
   'Afgano',
   'Albanés',
   'Argelino',

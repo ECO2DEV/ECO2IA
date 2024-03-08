@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { DataProfile } from '../../data/profile';
 import { toast } from 'react-hot-toast';
 import { uploadUserImage, updateUserImage } from '../../util/api/user';
+import { useSession } from 'next-auth/react';
 
 export const EditAvatar = ({ user }) => {
   const [uploadImage, setUploadImage] = useState(null);
@@ -12,6 +13,8 @@ export const EditAvatar = ({ user }) => {
   const [imagePreview, setImagePreview] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  const { data: session } = useSession();
 
   const handleImageChange = (e) => {
     setUploadImage(e.target.files[0]);
@@ -34,8 +37,10 @@ export const EditAvatar = ({ user }) => {
     formData.append('files', uploadImage, uploadImage.name);
     setLoading(true);
 
+    console.log('response from avatar', formData);
     try {
       const response = await uploadUserImage({ formData: formData });
+
       if (response) {
         // usar la funcion para actualizar el usuario
 
@@ -83,7 +88,13 @@ export const EditAvatar = ({ user }) => {
           <Image
             width={200}
             height={200}
-            src={user.avatar ? user.avatar.url : '/empty_avatar.webp'}
+            src={
+              user?.avatar
+                ? user?.avatar?.url
+                : session?.picture
+                ? session?.picture
+                : '/empty_avatar.webp'
+            }
             alt="Avatar preview"
             className={`w-full h-full mx-auto object-cover  align-middle border-none shadow-lg `}
           />
