@@ -1,18 +1,19 @@
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import GithubProvider from "next-auth/providers/github";
-import GoogleProvider from "next-auth/providers/google"
+import NextAuth from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import GithubProvider from 'next-auth/providers/github';
+import GoogleProvider from 'next-auth/providers/google';
 
-import axios from "axios";
+import axios from 'axios';
+import { createUserForProvider, getUserByEmail } from '../../../util/api/user';
+
 const strapiUrl = process.env.STRAPI_URL;
-
 export const authOptions = {
   providers: [
-    CredentialsProvider({
-      name: "Credentials",
+    Credentials({
+      name: 'Credentials',
       credentials: {
-        email: { label: "Email", type: "text", placeholder: "test@test.com" },
-        password: { label: "Password", type: "password" },
+        email: { label: 'Email', type: 'text', placeholder: 'test@test.com' },
+        password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials, account) {
         try {
@@ -22,14 +23,13 @@ export const authOptions = {
             provider: account.provider
           });
           if (data) {
-            console.log("nextauth data ", data);
+            // console.log('nextauth data inside credentials in authorize', data);
             const token = {
               id: data.user.id,
               name: data.user.username,
               email: data.user.email,
-              jwt: data.jwt,
+              jwt: data.jwt
             };
-
             return { ...data, ...token };
           } else {
             return null;
@@ -37,60 +37,123 @@ export const authOptions = {
         } catch (e) {
           // console.log('caught error');
           // const errorMessage = e.response.data.message
-          // Redirecting to the login page with error message          in the URL
+          // Redirecting to the login page with error message in the URL
           console.log(e);
-          throw new Error("Invalid credentials " + e);
+          throw new Error('Invalid credentials ' + e);
           //return null;
         }
-      },
+      }
     }),
     GithubProvider({
       clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
+      clientSecret: process.env.GITHUB_SECRET
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
+      clientSecret: process.env.GOOGLE_SECRET
     })
   ],
   jwt: {
     // The maximum age of the NextAuth.js issued JWT in seconds.
     // Defaults to `session.maxAge`.
     //maxAge: 3600,
-    maxAge: 28800, // 8h
+    maxAge: 28800 // 8h
   },
   session: {
     jwt: true,
-    maxAge: 28800, // 8h
+    maxAge: 28800 // 8h
     //
     // 30 * 24 * 60 * 60, // 30 days
   },
 
   pages: {
-    signIn: "/auth/signin",
-    signOut: "/",
-    error: "/auth/error", // Error code passed in query string as ?error=
-    verifyRequest: "/auth/verify-request", // (used for check email message)
+    signIn: '/auth/signin',
+    signOut: '/',
+    error: '/auth/error', // Error code passed in query string as ?error=
+    verifyRequest: '/auth/verify-request' // (used for check email message)
+
     // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   callbacks: {
-    session: async ({ session, token }) => {
-      session.id = token.id;
-      session.jwt = token.jwt;
-      //console.log("Estoy aqui" + JSON.stringify(session));
-      return Promise.resolve(session);
+    async redirect({ url, baseUrl = 'http://localhost:3000' }) {
+      // console.log(baseUrl + "/dashboard");
+      return baseUrl + '/dashboard';
     },
-    jwt: async ({ token, user }) => {
-      // Refactor
-      const isSignIn = user ? true : false;
-      if (isSignIn) {
-        token.id = user.id;
-        token.jwt = user.jwt;
+    async jwt({ token, account, user }) {
+      // const isSignIn = user ? true : false;
+
+      if (account) {
+        switch (account?.type) {
+          case 'credentials':
+            token.id = user.id;
+            token.jwt = user.jwt;
+
+            break;
+          case 'oauth':
+            token.accessToken = account.access_token;
+            const { id, username, email, Name } = await getUserByEmail({
+              email: user.email
+            });
+
+            // console.log(
+            //   'all data after get user by email',
+            //   id,
+            //   username,
+            //   email,
+            //   Name
+            // );
+            if (id == undefined || id == null) {
+              // Create a new user in Strapi backend
+              // console.log('viendo el token en el create user', token);
+              const newUserResponse = await createUserForProvider({
+                username: user.name,
+                email: user.email,
+                password: 'something'
+              });
+
+              // console.log('newUserResponse', newUserResponse.data.user);
+
+              token.user = {
+                id: newUserResponse.data.user.id,
+                username: newUserResponse.data.user.username,
+                email: newUserResponse.data.user.email,
+                Name: newUserResponse.data.user.username
+              };
+            } else {
+              // const { id, username, email, Name } = await getUserByEmail({
+              //   email: user.email
+              // });
+
+              token.user = {
+                id: id,
+                username: username,
+                email: email,
+                Name: Name
+              };
+            }
+
+            // console.log('find it the token inside callback', token);
+            break;
+        }
       }
-      // console.log("Pasando por aqui" + JSON.stringify(token));
-      return Promise.resolve(token);
+      return token;
     },
-  },
+    session: async ({ session, token }) => {
+      if (token.accessToken) {
+        session.id = token.id;
+        session = token.user;
+        session.picture = token.picture;
+        session.accessToken = token.accessToken;
+
+        return session;
+      } else {
+        session.user = token.user;
+        session.id = token.id;
+        // console.log('Este es el clg final session' + JSON.stringify(session));
+        return session;
+      }
+    }
+  }
 };
 
 export default NextAuth(authOptions);

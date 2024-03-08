@@ -36,7 +36,7 @@ export default function Register() {
     }
     setLoading(true);
     try {
-      const responsePlan = await setTrialPlan();
+      // const responsePlan = await setTrialPlan();
 
       // const newPlanId = responsePlan.data.data.id;
 
