@@ -3,9 +3,11 @@ import { updateUserById } from '../../util/api/user';
 import { DataProfile } from '../../data/profile';
 import { toast } from 'react-hot-toast';
 import { domainSelect, nacionalitySelect, sportSelect } from '../../constants/constans';
+import {domain, nationality, sport  } from "./profilecollection"
 import { isValidEmail } from '../../util/helpers/valid_email';
 
 export function ProfileForm({ user }) {
+
 
   const [formData, setFormData] = useState({
     Name: user?.Name,
@@ -14,24 +16,24 @@ export function ProfileForm({ user }) {
     numberTelephone: user.numberTelephone,
     country: user.country,
     sex: user.sex,
-    domainofstudy: user.domainofstudy,
-    educationallevel: user.educationallevel,
-    activityarea: user.activityarea,
-    sport: user.sport,
-    transport: user.transport,
-    nacionality: user.nacionality,
+    domainofstudy: domain[0],
+    sport: sport[0],
+    nacionality: nationality[0],
     age: user.age,
     height: user.height,
     weight: user.weight
   });
 
-  
+  // console.log("this is the user", formData)
   const handleProfileChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    
+
   };
   const handleSubmitForm = async (e) => {
     e.preventDefault();
+    
     if (
       formData.Name === '' ||
       formData.LastName === '' ||
@@ -54,6 +56,10 @@ export function ProfileForm({ user }) {
 
       return;
     }
+    if(formData,nationality == nationality[0] || formData.domainofstudy == domain[0] || formData.sport == sport[0]){
+      toast.error("Por favor seleccione una opción valida, en el campo de nacionalidad, deporte y campo de estudio");
+      return;
+    }
 
     // Valid email with regex
     if (!isValidEmail(formData.email)) {
@@ -64,7 +70,7 @@ export function ProfileForm({ user }) {
     try {
       const response = await updateUserById({
         formData: formData,
-        id: user.id
+        id: user?.id,
       });
       toast.success(DataProfile.ProfileUpdated);
       // router.push('/profile');
@@ -90,6 +96,7 @@ export function ProfileForm({ user }) {
         </label>
         <div className="mt-2">
           <input
+            required
             onChange={(e) => handleProfileChange(e)}
             value={formData.Name ? formData.Name : ''}
             type="text"
@@ -111,6 +118,7 @@ export function ProfileForm({ user }) {
         </label>
         <div className="mt-2">
           <input
+            required
             onChange={(e) => handleProfileChange(e)}
             value={formData.LastName ? formData.LastName : ''}
             type="text"
@@ -132,6 +140,7 @@ export function ProfileForm({ user }) {
         </label>
         <div className="mt-2">
           <input
+            required
             onChange={(e) => handleProfileChange(e)}
             value={formData.email ? formData.email : ''}
             type="email"
@@ -153,6 +162,7 @@ export function ProfileForm({ user }) {
         </label>
         <div className="mt-2">
           <input
+            required
             onChange={(e) => handleProfileChange(e)}
             value={
               formData.numberTelephone ? formData.numberTelephone : ''
@@ -176,6 +186,7 @@ export function ProfileForm({ user }) {
         </label>
         <div className="mt-2">
           <input
+            required
             onChange={(e) => handleProfileChange(e)}
             value={formData.country ? formData.country : ''}
             type="text"
@@ -240,6 +251,7 @@ export function ProfileForm({ user }) {
         </label>
         <div className="mt-2">
           <input
+            required
             onChange={(e) => handleProfileChange(e)}
             value={formData.age ? formData.age : ''}
             type="number"
@@ -261,6 +273,7 @@ export function ProfileForm({ user }) {
         </label>
         <div className="mt-2">
           <input
+            required
             onChange={(e) => handleProfileChange(e)}
             value={formData.height ? formData.height : ''}
             type="number"
@@ -282,6 +295,7 @@ export function ProfileForm({ user }) {
         </label>
         <div className="mt-2">
           <input
+            required
             onChange={(e) => handleProfileChange(e)}
             value={formData.weight ? formData.weight : ''}
             type="number"

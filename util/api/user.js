@@ -112,13 +112,13 @@ export const setTrialPlan = async () => {
 
 export async function getUser(context) {
   const session = await getSession(context);
-
+  // console.log('session backend', session);
   if (!session) {
     return null;
   }
   try {
     const { data } = await axios.get(
-      `${strapiUrl}/api/users/${session.id}?populate=%2A`,
+      `${strapiUrl}/api/users/${session.id}?populate=*`,
       {
         headers: { Authorization: `Bearer ${strapiToken}` }
       }
@@ -133,6 +133,44 @@ export async function getUser(context) {
       data: null,
       session: null
     };
+  }
+}
+
+// getuserbyEmail
+
+export async function getUserByEmail({ email }) {
+  const data = await axios.get(
+    `${strapiUrl}/api/users?filters[$and][0][email][$eq]=${email}`,
+    {
+      headers: { Authorization: `Bearer ${strapiToken}` }
+    }
+  );
+  // console.log('already exist i will return the data', data.data[0]);
+  if (data.data.length > 0) {
+    const { id, username, email, Name } = data?.data[0];
+
+    return { id, username, email, Name };
+  }
+
+  return {
+    id: null,
+    username: null,
+    email: null,
+    Name: null
+  };
+}
+
+export async function createUserForProvider({ username, email, password }) {
+  try {
+    const response = await axios.post(
+      `${strapiUrl}/api/auth/local/register`,
+      { username, email, password, Name: username },
+      header
+    );
+    return response;
+  } catch (error) {
+    console.error(`Error making POST request to ${strapiUrl}:`, error);
+    return error.response.data.error;
   }
 }
 
@@ -173,6 +211,7 @@ export async function updatePlanById({ userId, planId }) {
 }
 
 export async function uploadUserImage({ formData }) {
+  // console.log('formPayload in the uploaduser', formData);
   try {
     const uploadedImage = await axios.post(
       `${strapiUrl}/api/upload`,

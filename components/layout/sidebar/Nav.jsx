@@ -10,7 +10,7 @@ import { Curve } from '../../../util/animate/Curve';
 import Footer from './Footer';
 import { ArrowLeftIcon, EmptyAvatar } from '../../icons/icons';
 import { ThemeToggle } from '../../shared/Header/Header';
-
+import { useSession } from 'next-auth/react';
 const navItems = [
   {
     title: 'Inicio',
@@ -34,11 +34,20 @@ export const Nav = ({ children }) => {
 
   const { pathname } = useRouter();
   const [selectedIndicator, setSelectedIndicator] = useState(pathname);
+  const { data: session } = useSession();
 
   const image_url = children?.props?.user?.avatar ? (
     <Image
       className="inline-block rounded-full "
       src={children.props.user.avatar.url}
+      alt={children?.props?.user?.username}
+      width={80}
+      height={80}
+    />
+  ) : session?.picture ? (
+    <Image
+      className="inline-block rounded-full "
+      src={session.picture}
       alt={children?.props?.user?.username}
       width={80}
       height={80}

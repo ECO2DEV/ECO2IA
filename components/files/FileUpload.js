@@ -1,12 +1,12 @@
-import { XMarkIcon } from "@heroicons/react/20/solid";
+import { XMarkIcon } from '@heroicons/react/20/solid';
 
 export const FileUpload = ({ files, setFiles }) => {
   const handleFileChange = (e) => {
     const newFiles = Array.from(e.target.files);
-    
+
     setFiles((prevFiles) => {
       const updatedFiles = [...prevFiles, ...newFiles];
-      console.log(updatedFiles);
+      // console.log('each image upload', updatedFiles);
       return updatedFiles;
     });
   };
@@ -27,7 +27,7 @@ export const FileUpload = ({ files, setFiles }) => {
             <button
               onClick={() => removeFile(file)}
               className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
-              style={{ top: "-10px", right: "-10px" }} // Posición del botón
+              style={{ top: '-10px', right: '-10px' }} // Posición del botón
             >
               <XMarkIcon className="h-3 w-3" />
             </button>
