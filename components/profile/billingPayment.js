@@ -40,7 +40,7 @@ export function BillingAndPayment() {
         className="bg-white dark:bg-lightColor shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2"
       >
         <div className="px-4 py-6 sm:p-8">
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <label
               htmlFor="card-number"
               className="block text-sm font-medium leading-6 text-black"
@@ -86,6 +86,64 @@ export function BillingAndPayment() {
                 </div>
               </div>
 
+            </div>
+          </div> */}
+          <div className="mt-4">
+            <label
+              htmlFor="card-number"
+              className="block text-sm font-medium leading-6 text-black"
+            >
+              Número de tarjeta
+            </label>
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  role="img"
+                  className="h-6 w-6 text-gray-500"
+                >
+                  <path
+                    vectorEffect="non-scaling-stroke"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="1.5"
+                    d="M19 20H5c-1.7 0-3-1.3-3-3V8c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3v9c0 1.6-1.4 3-3 3z"
+                  ></path>
+                  <path fill="currentColor" d="M22 8H2v3h20V8z"></path>
+                </svg>
+              </div>
+              <input
+                type="text"
+                name="card-number"
+                id="card-number"
+                className="focus:bg-darkColor border-white bg-darkBgCard block w-full pl-10 pr-24 sm:text-sm text-white rounded-md input-card-number"
+                placeholder="1234 5678 9012 3456"
+                required
+              />
+              <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                <div className="flex space-x-2">
+                  <Image
+                    src={visa}
+                    alt="Visa"
+                    className="h-6 w-auto card-icon"
+                  />
+                  <Image
+                    src={mastercard}
+                    alt="Mastercard"
+                    className="h-6 w-auto card-icon"
+                  />
+                  <Image
+                    src={amex}
+                    alt="Amex"
+                    className="h-6 w-auto card-icon"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 

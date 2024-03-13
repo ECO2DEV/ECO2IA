@@ -1,4 +1,6 @@
 import { useContext, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import { PromptContext } from "../../context/prompts/PromptContext";
 import { UserContext } from "../../context/user/UserContext";
 
@@ -83,15 +85,17 @@ export default function ChatGpt() {
         const newMessage = {
           content: message.content,
           model: selectedModel,
-          id: message.id // Use the unique identifier for the message
+          id: message.id = uuidv4(), // Use the unique identifier for the message
+          role: message.role
         };
+        console.log('objeto del mensage', newMessage);
         
         setMessages(prevMessages => [...prevMessages, newMessage]);
         
         setResponseModelMap(prevMap => ({ ...prevMap, [newMessage.id]: selectedModel }));
         
 
-        setResponse(message.content + input);
+        setResponse(newMessage.content + input);
         console.log("response", message.id);
 
         mutate();

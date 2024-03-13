@@ -128,9 +128,13 @@ export const Conversations = ({ messages, responseModelMap }) => {
       <section className="flex flex-col text-sm h-[90vh] lg:h-[90vh] overflow-y-scroll overflow-x-hidden">
         {messages?.map((item, index) => {
           const isCodeBlock = item.content.includes("```");
+          console.log('item del mensage', item.id)
           const modelForThisMessage = responseModelMap[item.id];
+          console.log('id del mensage', modelForThisMessage)
+
 
           const messageIcon = getModelIcon(modelForThisMessage);
+          console.log('icono del mensage', messageIcon)
 
           return (
             <div key={item.id}>
