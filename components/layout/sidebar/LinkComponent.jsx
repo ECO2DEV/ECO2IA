@@ -20,7 +20,7 @@ export const LinkComponent = ({ data, isActive, setSelectedIndicator }) => {
       <motion.div
         variants={scale}
         animate={isActive ? 'open' : 'closed'}
-        className="indicator"
+        className="w-[10px] h-[10px] bg-lightColor dark:bg-darkColor border absolute top-[25px] right-0 rounded-full"
       ></motion.div>
       <Link href={href}>{title}</Link>
     </motion.nav>

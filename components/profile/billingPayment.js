@@ -43,7 +43,7 @@ export function BillingAndPayment() {
           <div className="mt-4">
             <label
               htmlFor="card-number"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium leading-6 text-black"
             >
               Número de tarjeta
             </label>
@@ -73,7 +73,7 @@ export function BillingAndPayment() {
                 type="text"
                 name="card-number"
                 id="card-number"
-                className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 pr-36 sm:text-sm border-gray-300 rounded-md"
+                className="focus:bg-darkColor us:border-white er:border-white bg-darkBgCard block w-full pl-10 pr-36 sm:text-sm text-white rounded-md"
                 placeholder="1234 5678 9012 3456"
                 required
               />
@@ -93,32 +93,32 @@ export function BillingAndPayment() {
             <div>
               <label
                 htmlFor="pc-first-name"
-                className="text-sm font-medium text-gray-700 block"
+                className="block text-sm font-medium leading-6 text-black"
               >
-                First name
+                Primer nombre
               </label>
               <input
                 id="pc-first-name"
                 type="text"
                 autoComplete="cc-given-name"
                 maxLength="60"
-                className="mt-1 block w-full border-gray-300 shadow-sm rounded-md p-2"
+                className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard text-white shadow-sm rounded-md p-2"
                 placeholder="Sneyder Joaquin"
               />
             </div>
             <div>
               <label
                 htmlFor="pc-last-name"
-                className="text-sm font-medium text-gray-700 block"
+                className="block text-sm font-medium leading-6 text-black"
               >
-                Last name
+                Apellido
               </label>
               <input
                 id="pc-last-name"
                 type="text"
                 autoComplete="cc-family-name"
                 maxLength="60"
-                className="mt-1 block w-full border-gray-300 shadow-sm rounded-md p-2"
+                className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard shadow-sm rounded-md p-2"
                 placeholder="Huertas Rodriguez"
               />
             </div>
@@ -128,7 +128,7 @@ export function BillingAndPayment() {
             <div className="flex-1">
               <label
                 htmlFor="expiry-month"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium leading-6 text-black"
               >
                 Expiration month
               </label>
@@ -136,7 +136,7 @@ export function BillingAndPayment() {
                 id="expiry-month"
                 type="text"
                 placeholder="MM"
-                className="mt-1 block w-full border-gray-300 rounded-md p-2"
+                className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard rounded-md p-2"
                 autoComplete="cc-exp"
                 maxLength="2"
                 onChange={handleMonthInput}
@@ -146,7 +146,7 @@ export function BillingAndPayment() {
             <div className="flex-1">
               <label
                 htmlFor="expiry-year"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium leading-6 text-black"
               >
                 Expiration year
               </label>
@@ -155,7 +155,7 @@ export function BillingAndPayment() {
                 id="expiry-year"
                 type="text"
                 placeholder="YY"
-                className="mt-1 block w-full border-gray-300 rounded-md p-2"
+                className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard rounded-md p-2"
                 autoComplete="cc-exp"
                 maxLength="2"
                 required
@@ -165,7 +165,7 @@ export function BillingAndPayment() {
           <div className="relative">
             <label
               htmlFor="security-code"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium leading-6 text-black"
             >
               Security code
               <InformationCircleIcon
@@ -177,7 +177,7 @@ export function BillingAndPayment() {
               id="security-code"
               type="text"
               maxLength="3"
-              className="mt-1 block w-full border-gray-300 shadow-sm rounded-md p-2"
+              className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard shadow-sm rounded-md p-2"
               placeholder="3 digits"
               autoComplete="cc-csc"
               required
@@ -198,14 +198,14 @@ export function BillingAndPayment() {
             <div>
               <label
                 htmlFor="country"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium leading-6 text-black"
               >
                 País
               </label>
               <select
                 id="country"
                 name="country"
-                className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                className="mt-1 block w-full pl-3 pr-10 py-2 text-base focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white rounded-md"
                 defaultValue="CO"
               >
                 <option value="CO">Colombia</option>
@@ -216,14 +216,14 @@ export function BillingAndPayment() {
             <div className="mb-4">
               <label
                 htmlFor="address-street"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium leading-6 text-black"
               >
                 Línea de dirección 1
               </label>
               <input
                 type="text"
                 required
-                className="mt-1 block w-full border-gray-300 shadow-sm rounded-md p-2"
+                className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard shadow-sm rounded-md p-2"
                 id="address-street"
                 autoComplete="billing address-line1"
                 minLength="2"
@@ -233,14 +233,14 @@ export function BillingAndPayment() {
             <div className="mb-4">
               <label
                 htmlFor="address-street2"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium leading-6 text-black"
               >
                 Línea de dirección 2{" "}
                 <span className="text-gray-500">(opcional)</span>
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full border-gray-300 shadow-sm rounded-md p-2"
+                className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard shadow-sm rounded-md p-2"
                 id="address-street2"
                 autoComplete="billing address-line2"
                 maxLength="60"
@@ -250,7 +250,7 @@ export function BillingAndPayment() {
               <div className="md:mb-0">
                 <label
                   htmlFor="address-city"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium leading-6 text-black"
                 >
                   Ciudad
                 </label>
@@ -260,14 +260,14 @@ export function BillingAndPayment() {
                   autoComplete="billing address-level2"
                   required
                   maxLength="50"
-                  className="mt-1 block w-full border-gray-300 shadow-sm rounded-md p-2"
+                  className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard shadow-sm rounded-md p-2"
                   placeholder="Villavicencio"
                 />
               </div>
               <div>
                 <label
                   htmlFor="address-zip"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium leading-6 text-black"
                 >
                   Código postal{" "}
                   <span className="text-gray-500">(opcional)</span>
@@ -277,7 +277,7 @@ export function BillingAndPayment() {
                   type="text"
                   autoComplete="billing postal-code"
                   maxLength="10"
-                  className="mt-1 block w-full border-gray-300 shadow-sm rounded-md p-2"
+                  className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard shadow-sm rounded-md p-2"
                   placeholder="Código postal"
                 />
               </div>

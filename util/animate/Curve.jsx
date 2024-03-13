@@ -18,7 +18,7 @@ export const Curve = () => {
   }
 
   return (
-    <svg className="svgCurve">
+    <svg className="svgCurveDark">
         <motion.path variants={curve} initial="initial" animate="enter" exit="exit"></motion.path>
     </svg>
   )

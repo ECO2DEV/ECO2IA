@@ -70,90 +70,90 @@ export const PromptProvider = ({ children }) => {
 
   const setResponse = async (response) => {
     // Para que no pueda hacer el llamado a la API si no han escogido plan
-    if (state.plan.length === 0) {
-      // Add message to user to select a plan
-      toast.error('Vous n avez pas de plan');
-      setTimeout(() => {
-        router.push('/#pricing');
-        return;
-      }, 1000);
-    }
-    if (state.plan.max_tokens <= 0) {
-      toast.error(
-        'Vous n avez plus de jetons à utiliser, veuillez acheter un nouveau plan'
-      );
-      setTimeout(() => {
-        router.push('/#pricing');
-        return;
-      }, 1000);
-    }
+    // if (state.plan.length === 0) {
+    //   // Add message to user to select a plan
+    //   toast.error('Vous n avez pas de plan');
+    //   setTimeout(() => {
+    //     router.push('/#pricing');
+    //     return;
+    //   }, 1000);
+    // }
+    // if (state.plan.max_tokens <= 0) {
+    //   toast.error(
+    //     'Vous n avez plus de jetons à utiliser, veuillez acheter un nouveau plan'
+    //   );
+    //   setTimeout(() => {
+    //     router.push('/#pricing');
+    //     return;
+    //   }, 1000);
+    // }
     dispatch({
       type: 'SET_RESPONSE',
       payload: response
     });
   };
 
-  useEffect(() => {
-    if (!state.prompt) return;
-    // validate that the user has maxtokens to use, if not redirect to buy a plan
-    if (state.plan.length === 0) {
-      toast.error('No tienes un plan');
-      setTimeout(() => {
-        router.push('/dashboard');
-        return;
-      }, 500);
-    }
-    if (state.plan.max_tokens <= 0) {
-      toast.error(
-        'Ya no tiene tokens para usar, por favor, compre un nuevo plan'
-      );
-      //setTimer(5);
-      setTimeout(() => {
-        // updateUserPlanToNull(idsUpdateMaxTokens.userId);
-        router.push('/dashboard');
-        return;
-      }, 500);
-    }
-    const resptokens = countTokensMemo(state.prompt);
-    dispatch({
-      type: 'SET_PROMPT_TOKENS',
-      payload: resptokens
-    });
-  }, [state.prompt]);
+  // useEffect(() => {
+  //   if (!state.prompt) return;
+  //   // validate that the user has maxtokens to use, if not redirect to buy a plan
+  //   // if (state.plan.length === 0) {
+  //   //   toast.error('No tienes un plan');
+  //   //   setTimeout(() => {
+  //   //     router.push('/dashboard');
+  //   //     return;
+  //   //   }, 500);
+  //   // }
+  //   // if (state.plan.max_tokens <= 0) {
+  //   //   toast.error(
+  //   //     'Ya no tiene tokens para usar, por favor, compre un nuevo plan'
+  //   //   );
+  //   //   //setTimer(5);
+  //   //   setTimeout(() => {
+  //   //     // updateUserPlanToNull(idsUpdateMaxTokens.userId);
+  //   //     router.push('/dashboard');
+  //   //     return;
+  //   //   }, 500);
+  //   // }
+  //   // const resptokens = countTokensMemo(state.prompt);
+  //   dispatch({
+  //     type: 'SET_PROMPT_TOKENS',
+  //     payload: resptokens
+  //   });
+  // }, [state.prompt]);
 
   // useEfect for set response tokens when the response is set
-  useEffect(() => {
-    if (!state.response) return;
-    // validate that the user has maxtokens to use, if not redirect to buy a plan
-    if (state.plan.length === 0) return;
-    if (state.plan.max_tokens <= 0) {
-      toast.error(
-        'No tiene más tokens para usar, por favor, compre un nuevo plan'
-      );
-      // updateUserPlanToNull(idsUpdateMaxTokens.userId);
-      router.push('/dashboard');
-      return;
-    }
-    // validation, if is a dalle response, count only the prompt
-    if (Array.isArray(state.response) && state.response.length > 0) {
-      return;
-    }
-    if (state.activeAI === 'ChatGpt') {
-      if (selectedModel === modelOptions[1].value) {
-        isGPT4Model = true;
-      } else {
-        isGPT4Model = false;
-      }
-    }
+  // useEffect(() => {
+  //   if (!state.response) return;
+  //   // validate that the user has maxtokens to use, if not redirect to buy a plan
+  //   // if (state.plan.length === 0) return;
+  //   // if (state.plan.max_tokens <= 0) {
+  //   //   toast.error(
+  //   //     'No tiene más tokens para usar, por favor, compre un nuevo plan'
+  //   //   );
+  //   //   // updateUserPlanToNull(idsUpdateMaxTokens.userId);
+  //   //   router.push('/dashboard');
+  //   //   return;
+  //   // }
+  //   // validation, if is a dalle response, count only the prompt
+  //   if (Array.isArray(state.response) && state.response.length > 0) {
+  //     return;
+  //   }
+  //   if (state.activeAI === 'ChatGpt') {
+  //     if (selectedModel === modelOptions[1].value) {
+  //       isGPT4Model = true;
+  //     } else {
+  //       isGPT4Model = false;
+  //     }
+  //   }
 
-    // console.log('isGPT4Model', isGPT4Model, 'and', state.response);
+  //   // console.log('isGPT4Model', isGPT4Model, 'and', state.response);
 
-    const resptokens = countTokensMemo(state.response, isGPT4Model);
-    dispatch({
-      type: 'SET_RESPONSE_TOKENS',
-      payload: resptokens
-    });
-  }, [state.response]);
+  //   // const resptokens = countTokensMemo(state.response, isGPT4Model);
+  //   dispatch({
+  //     type: 'SET_RESPONSE_TOKENS',
+  //     payload: resptokens
+  //   });
+  // }, [state.response]);
 
   const setPlan = async (id) => {
     try {
@@ -193,73 +193,73 @@ export const PromptProvider = ({ children }) => {
 
   // Este useEffect cada vez que se actualiza el response, resta a
   // sumatoria de tokens del prompt y el response al max_tokens del plan
-  useEffect(() => {
-    if (!state.response) return;
-    if (state?.plan?.max_tokens <= 0) return;
+  // useEffect(() => {
+  //   if (!state.response) return;
+  //   // if (state?.plan?.max_tokens <= 0) return;
 
-    // if it is not a plan so return and do not update the plan
-    if (state.plan.length === 0) {
-      return;
-    }
-    let responseTokensCount;
-    let updatedMaxImages;
-    let totalTokens;
+  //   // if it is not a plan so return and do not update the plan
+  //   // if (state.plan.length === 0) {
+  //   //   return;
+  //   // }
+  //   let responseTokensCount;
+  //   let updatedMaxImages;
+  //   let totalTokens;
 
-    // If the response is an array (DALL·E) and has more than 1 image
-    if (Array.isArray(state.response) && state.response.length > 0) {
-      updatedMaxImages = state.plan.max_imagens -= 2; // Restar 2 imágenes
-      totalTokens = state.promptTokens;
-      // console.log('DALL·E Response Tokens', totalTokens);
-    } else {
-      // If the response is a string (GPT-3 - mattraduct)
+  //   // If the response is an array (DALL·E) and has more than 1 image
+  //   if (Array.isArray(state.response) && state.response.length > 0) {
+  //     updatedMaxImages = state.plan.max_imagens -= 2; // Restar 2 imágenes
+  //     totalTokens = state.promptTokens;
+  //     // console.log('DALL·E Response Tokens', totalTokens);
+  //   } else {
+  //     // If the response is a string (GPT-3 - mattraduct)
 
-      responseTokensCount = countTokensMemo(state.response);
-      totalTokens = responseTokensCount + state.promptTokens;
-    }
+  //     responseTokensCount = countTokensMemo(state.response);
+  //     totalTokens = responseTokensCount + state.promptTokens;
+  //   }
 
-    // console.log('AI Response Tokens', responseTokens);
+  //   // console.log('AI Response Tokens', responseTokens);
 
-    const updatedMaxTokens = (state.plan.max_tokens -= totalTokens);
-    // const updatedMaxImages = (state.plan.max_imagens -= 1);
+  //   const updatedMaxTokens = (state.plan.max_tokens -= totalTokens);
+  //   // const updatedMaxImages = (state.plan.max_imagens -= 1);
 
-    const maxTokensUpdated = {
-      data: {
-        typo: state.plan.typo,
-        max_tokens: updatedMaxTokens,
-        max_imagens: updatedMaxImages,
-        users_permissions_user: idsUpdateMaxTokens.userId
-      }
-    };
+  //   const maxTokensUpdated = {
+  //     data: {
+  //       typo: state.plan.typo,
+  //       max_tokens: updatedMaxTokens,
+  //       max_imagens: updatedMaxImages,
+  //       users_permissions_user: idsUpdateMaxTokens.userId
+  //     }
+  //   };
 
-    axios
-      .put(
-        `${strapiUrl}/api/plans/${idsUpdateMaxTokens.planId}`,
-        maxTokensUpdated,
-        header
-      )
-      .then((res) => {
-        // console.log('Updated plan', res.data.data);
-        dispatch({
-          type: 'UPDATE_PLAN_TOKENS',
-          payload: res.data.data
-        });
-      })
-      .catch((error) => {
-        console.error('Error updating plan', error);
-      })
-      .finally(() => {
-        if (
-          state.activeAI === 'ChatGpt' ||
-          state.activeAI === 'DalleIA' ||
-          state.activeAI === 'Eco2quizAI'
-        ) {
-          dispatch({
-            type: 'SET_PROMPT_TOKENS',
-            payload: 0
-          });
-        }
-      });
-  }, [state.response]);
+  //   axios
+  //     .put(
+  //       `${strapiUrl}/api/plans/${idsUpdateMaxTokens.planId}`,
+  //       maxTokensUpdated,
+  //       header
+  //     )
+  //     .then((res) => {
+  //       // console.log('Updated plan', res.data.data);
+  //       dispatch({
+  //         type: 'UPDATE_PLAN_TOKENS',
+  //         payload: res.data.data
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error updating plan', error);
+  //     })
+  //     .finally(() => {
+  //       if (
+  //         state.activeAI === 'ChatGpt' ||
+  //         state.activeAI === 'DalleIA' ||
+  //         state.activeAI === 'Eco2quizAI'
+  //       ) {
+  //         dispatch({
+  //           type: 'SET_PROMPT_TOKENS',
+  //           payload: 0
+  //         });
+  //       }
+  //     });
+  // }, [state.response]);
 
   const setPromptTokens = (promptTokens) => {
     dispatch({

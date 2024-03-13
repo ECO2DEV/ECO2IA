@@ -1,3 +1,23 @@
+export function ArrowLeftIcon({ className }) {
+  return (
+    <svg
+      className={className}
+      fill="none"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+      />
+    </svg>
+  );
+}
+
 export function Star() {
   return (
     <svg
@@ -131,21 +151,22 @@ export const BarsIcon = () => (
   </svg>
 );
 
-export const EmptyAvatar = () => {
+export const EmptyAvatar = ({ className }) => {
   return (
     <svg
       fill="none"
+      strokeWidth={1.5}
       stroke="currentColor"
-      strokeWidth="1.5"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
+      className={className}
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-      ></path>
+        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+      />
     </svg>
   );
 };
@@ -254,8 +275,15 @@ export const HistoryIcon = () => (
   </svg>
 );
 
-export const HistoryIconChatGpt = () => (
-  <svg viewBox="0 0 24 24" focusable="false" className="w-9 h-9">
+export const HistoryIconChatGpt = ({ className }) => (
+  <svg
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    focusable="false"
+    strokeWidth="1"
+    className={className}
+  >
     <path d="M4 4v2.01C5.83 3.58 8.73 2 12.01 2 17.53 2 22 6.48 22 12s-4.47 10-9.99 10C6.48 22 2 17.52 2 12h2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8C9.04 4 6.47 5.61 5.09 8H8v2H2V4h2z"></path>
     <path d="M13 12V6h-2v7l4.97 3.49 1.26-1.55z"></path>
   </svg>
@@ -281,10 +309,10 @@ export function LatestImages() {
   );
 }
 
-export function QuestionIcon() {
+export function QuestionIcon({ className }) {
   return (
     <svg
-      className="w-8 h-8 text-gray-100 bg-gray-900 rounded-full"
+      className={className}
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"

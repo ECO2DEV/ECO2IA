@@ -24,7 +24,7 @@ export async function getAllIAs() {
   }
 }
 
-export async function sendScore({ id_ia, stars, userId }) {
+export async function sendScore({ id_ia, stars, userId, voteBy }) {
   try {
     const score = await axios.post(
       `${strapiUrl}/api/scores`,
@@ -32,7 +32,8 @@ export async function sendScore({ id_ia, stars, userId }) {
         data: {
           stars: stars,
           id_ia: id_ia,
-          user_score: userId
+          user_score: userId,
+          voteBy: voteBy
         }
       },
       header

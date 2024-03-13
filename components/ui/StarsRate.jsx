@@ -1,14 +1,20 @@
 
+import { useContext } from "react";
+import { UserContext } from "../../context/user/UserContext";
+import toast from "react-hot-toast";
 import { Star, StarFill } from "../icons/icons";
 
 
-export const StarsRate = ({filledStars, setFilledStars, score}) => {
+export const StarsRate = ({filledStars, setFilledStars, score }) => {
+  // console.log("score", score)
 
+  const { user } = useContext(UserContext);
   const handleStarClick = (index) => {
+    const alReadyVoted = score.find((el) => el.attributes.voteBy == user.id) && toast.error('Ya has votado por esta IA');
+    if (alReadyVoted) return;
     setFilledStars(index + 1);
   };
  
-
   const stars = [];
   for (let i = 0; i < 5; i++) {
     stars.push(

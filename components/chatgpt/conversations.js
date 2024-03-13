@@ -7,26 +7,36 @@ import "highlight.js/styles/atom-one-dark.css";
 import { UserContext } from "../../context/user/UserContext";
 import { EmptyAvatar } from "../icons/icons";
 import { useChat } from "../../hooks/useChat";
-import { strapiUrl } from "../../constants/constans";
+import { strapiUrl, modelOptions } from "../../constants/constans";
 import { ClipboardIcon } from "../icons/icons";
 import ModalDelete from "./ModalDelete";
 import { LoadingChatgpt } from "./LoadingChatgpt";
 import { DataEco2Chat } from "../../data/eco2chat";
+import { PromptContext } from "../../context/prompts/PromptContext";
 
-export const Conversations = ({ messages }) => {
+export const Conversations = ({ messages, responseModelMap }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
-  const { user } = useContext(UserContext);
+  const { user, selectedModel, setSelectedModel } = useContext(UserContext);
+  const { activeAI } = useContext(PromptContext);
   const [copied, setCopied] = useState([]);
   const [copiedCode, setCopiedCode] = useState([]);
-
-  const [latestReqId, setLatestReqId] = useState(0);
 
   const { data, isLoading, deleteChat } = useChat(user?.id);
 
   const messagesEndRef = useRef(null);
 
-  const codeRefs = useRef({});
+  const getModelIcon = (model) => {
+    // console.log('modelo en las opciones:', model, modelOptions);
+    const modelOption = modelOptions.find((option) => option.value === model);
+    if (modelOption) {
+      // console.log('Found icon:', modelOption.icon);
+      return modelOption.icon;
+    } else {
+      console.warn("Model not found in options:", model);
+      return null; // Or return a default icon path
+    }
+  };
 
   const renderMarkdown = (markdown) => {
     const rawMarkup = marked(markdown);
@@ -47,7 +57,7 @@ export const Conversations = ({ messages }) => {
     }
 
     return extractedCode.trim();
-  };  
+  };
 
   const handleCopy = (resp, index) => {
     navigator.clipboard
@@ -111,7 +121,6 @@ export const Conversations = ({ messages }) => {
       });
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-    
   }, [messages]);
 
   return (
@@ -119,19 +128,22 @@ export const Conversations = ({ messages }) => {
       <section className="flex flex-col text-sm h-[90vh] lg:h-[90vh] overflow-y-scroll overflow-x-hidden">
         {messages?.map((item, index) => {
           const isCodeBlock = item.content.includes("```");
+          const modelForThisMessage = responseModelMap[item.id];
+
+          const messageIcon = getModelIcon(modelForThisMessage);
 
           return (
             <div key={item.id}>
               {item.role === "user" ? (
                 <div
-                  className={`group w-full text-gray-800 bg-gray-100 relative`}
+                  className={`group sm:w-full text-gray-800 bg-lightColor dark:text-eco2MainColor dark:bg-darkColor relative`}
                 >
                   <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl md:py-6 lg:px-0 m-auto">
                     <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
                       {user?.avatar ? (
                         <img
-                          className="w-7 h-7 rounded-full object-cover"
-                          src={strapiUrl + user.avatar.url}
+                          className="w-8 h-8 rounded-full object-cover"
+                          src={user.avatar.url}
                           alt="user_avatar"
                         />
                       ) : (
@@ -146,16 +158,23 @@ export const Conversations = ({ messages }) => {
               ) : null}
               {item.role === "assistant" ? (
                 <div
-                  className={`relative group w-full text-gray-100 border-b border-black/10 bg-gray-800 `}
+                  className={`relative group sm:w-full text-lightColor border-b bg-darkColor dark:text-darkColor dark:bg-lightColor border-gray-300 dark:border-gray-700`}
                 >
                   <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl  md:py-6 lg:px-0 m-auto">
                     <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
-                      <Image
-                        src="/eco2_no_bg.png"
-                        alt="Eco2IA logo"
-                        width={30}
-                        height={30}
-                      />
+                      <div
+                        className="relative p-1 rounded-full hs-9 w-9 flex items-center justify-center"
+                        style={{ backgroundColor: "#19c37d" }}
+                      >
+                        {messageIcon && (
+                          <Image
+                            src={messageIcon}
+                            alt="AI model icon"
+                            width={50}
+                            height={50}
+                          />
+                        )}
+                      </div>
                     </div>
                     <div className="flex flex-col text-justify w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
                       <div className="flex flex-col text-justify w-full">

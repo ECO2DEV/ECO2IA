@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
-import { motion, AnimatePresence } from "framer-motion";
-import { XMarkIcon } from "@heroicons/react/20/solid";
-import { toast } from "react-hot-toast";
+import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
+import { motion, AnimatePresence } from 'framer-motion';
+import { XMarkIcon } from '@heroicons/react/20/solid';
+import { toast } from 'react-hot-toast';
 
-import { createIAContactMessage } from "../../util/api/iaContact";
-import Loader from "../loader/loader";
-import { DataNosIA } from "../../data/nosia";
-import { FileUpload } from "../files/FileUpload";
+import { createIAContactMessage } from '../../util/api/iaContact';
+import Loader from '../loader/loader';
+import { DataNosIA } from '../../data/nosia';
+import { FileUpload } from '../files/FileUpload';
 
-Modal.setAppElement("#__next");
+Modal.setAppElement('#__next');
 
 const modalBackdrop = {
   visible: { opacity: 1 },
-  hidden: { opacity: 0 },
+  hidden: { opacity: 0 }
 };
 
 const buttonVariants = {
@@ -21,9 +21,9 @@ const buttonVariants = {
     scale: 1.1,
     transition: {
       duration: 0.3,
-      yoyo: Infinity,
-    },
-  },
+      yoyo: Infinity
+    }
+  }
 };
 
 const animationDuration = 1000;
@@ -32,23 +32,25 @@ const modalVariants = {
   hidden: {
     y: -50,
     opacity: 0,
-    transition: { duration: 1000 / 2000 },
+    transition: { duration: 1000 / 2000 }
   },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.5 } }
 };
 
 function LandingPage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [confirmationMessage, setConfirmationMessage] = useState("");
+  const [confirmationMessage, setConfirmationMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    Email: "",
+    name: '',
+    Email: '',
     ImageIAS: [],
-    IADetail: "",
+    IADetail: ''
   });
   const [files, setFiles] = useState([]);
+
+  // console.log('images details', files);
 
   const openModal = async () => {
     setModalIsOpen(true);
@@ -85,9 +87,9 @@ function LandingPage() {
     e.preventDefault();
     setLoading(true);
     if (
-      formData.name === "" ||
-      formData.Email === "" ||
-      formData.IADetail === ""
+      formData.name === '' ||
+      formData.Email === '' ||
+      formData.IADetail === ''
     ) {
       toast.error(DataNosIA.NosIAPleaseFill);
       setLoading(false);
@@ -108,38 +110,41 @@ function LandingPage() {
     try {
       const formPayload = new FormData();
 
-      formPayload.append(
-        "data",
-        JSON.stringify({
-          name: formData.name,
-          Email: formData.Email,
-          IADetail: formData.IADetail,
+      // formPayload.append(
+      //   'files',
+      //   JSON.stringify({
+      //     name: formData.name,
+      //     Email: formData.Email,
+      //     IADetail: formData.IADetail,
 
-          data: (formData.ImageIAS = files.forEach((file) => {
-            "files.ImageIAS", file, file.name;
-          })),
-        })
-      );
+      //     data: (formData.ImageIAS = files.forEach((file) => {
+      //       'files.ImageIAS', file, file.name;
+      //     }))
+      //   })
+      // );
+      // create a forma append for each file, you have to iterate over the files array
+      formPayload.append('files', files[0], files[0].name);
 
       const response = await createIAContactMessage({
         formData: formData,
+        formPayload: formPayload
       });
 
-      console.log(response);
+      console.log('already created', response);
       if (response.status === 200) {
         toast.success(DataNosIA.NosIAMessageSent);
         setConfirmationMessage(
-          "Info enviada, nos pondremos en contacto contigo en breve."
+          'Info enviada, nos pondremos en contacto contigo en breve.'
         );
         setFormData({
-          name: "",
-          Email: "",
+          name: '',
+          Email: '',
           ImageIAS: [],
-          IADetail: "",
+          IADetail: ''
         });
         setFiles([]);
       } else {
-        toast.error("Hubo un problema al enviar los datos.");
+        toast.error('Hubo un problema al enviar los datos.');
       }
     } catch (error) {
       console.error(error);
@@ -168,7 +173,9 @@ function LandingPage() {
               transition={{ delay: 0.1 }}
             />
             <motion.div
-              className="absolute w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-full p-4 sm:p-10 dark:bg-darkColor bg-lightBgCard rounded-3xl rotate-2"
+              className={`absolute w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-full p-4 sm:p-10 ${
+                isDarkMode ? 'bg-darkBgCard' : 'bg-lightBgCard'
+              }  rounded-3xl rotate-2`}
               initial={{ scale: 0 }}
               animate={{ rotate: -8, scale: 1 }}
               exit={{ rotate: -8, scale: 0 }}

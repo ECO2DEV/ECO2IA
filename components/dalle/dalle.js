@@ -145,7 +145,7 @@ export default function DalleIA() {
       </div>
 
       <div className="fixed bottom-3 w-full">
-        <div className="flex justify-center  w-[92%] lg:w-[72.5%] xl:w-[77%] 2xl:max-w-[77rem]">
+        <div className="flex justify-center   w-[92%]  xl:w-[88%] 2xl:max-w-[77rem] mx-auto md:mx-0">
           <SearchTextboxDalle
             OnChange={handleChange}
             Fetch={FetchData}
