@@ -7,13 +7,8 @@ import { PromptProvider } from '../context/prompts/PromptProvider';
 import { SWRConfig } from 'swr';
 import { UserProvider } from '../context/user/UserProvider';
 import { Providers } from '../util/providers/providers';
-
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-
-// const stripePromise = loadStripe(
-//   'pk_test_51MmF5HEZbX6Zpxv9PbTYYGR1U9d14TmcHEsxCKTPzDVpKXDcaFqz87ElscE2TRYjdV3t1r5gxVo3G8FRAlOivqKG00jMOoioNN'
-// );
+// import { Elements } from '@stripe/react-stripe-js';
+// import { stripePromise } from '../constants/constans';
 // console.log(stripePromise);
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
@@ -21,9 +16,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter();
   // const options = {
   //   // passing the client secret obtained from the server
-  //   clientSecret: process.env.STRIPE_SECRET,
+  //   clientSecret: process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY,
   //   mode: 'payment',
-  //  // amount: 1099,
+  //   // amount: 1099,
   //   currency: 'eur'
   // };
 

@@ -33,6 +33,8 @@ export default async function POST(req) {
   // Extract the `messages` from the body of the request
   const { messages, model } = await req.json();
 
+  console.log('model', model);
+
   if (model === 'gpt-3.5-turbo' || model === 'gpt-4') {
     // Request the OpenAI API for the response based on the prompt
     const response = await openai.createChatCompletion({
@@ -46,9 +48,6 @@ export default async function POST(req) {
       presence_penalty: 1
     });
 
-    // if (!response.ok) throw new Error(response.statusText);
-
-    // z
     const stream = OpenAIStream(response);
 
     // Respond with the stream

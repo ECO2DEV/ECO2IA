@@ -45,11 +45,11 @@ import MaskImageStep from '../components/steps_renovhome/MaskImageStep';
 import FormStep from '../components/steps_renovhome/FormStep';
 import { OutputImgStep } from '../components/steps_renovhome/OutputImgStep';
 
-// const PUBLICABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_KEY;
-// console.log(PUBLICABLE_KEY)
-// const stripePromise = loadStripe(PUBLICABLE_KEY);
+const PUBLICABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_KEY;
+// console.log(PUBLICABLE_KEY);
+const stripePromise = loadStripe(PUBLICABLE_KEY);
 
-// export { stripePromise };
+export { stripePromise };
 
 export const strapiToken = process.env.API_TOKEN;
 export const strapiUrl = process.env.STRAPI_URL;

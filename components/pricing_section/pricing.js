@@ -9,6 +9,7 @@ import { PopUpModal } from '../modal/popUpModal';
 import axios from 'axios';
 import { DataPricing } from '../../data/pricing';
 import { stripePromise } from '../../constants/constans';
+import PricingPlans from './PricingPlans';
 
 const frequencies = [
   { value: 'monthly', label: 'Mensuel', priceSuffix: '' }
@@ -75,7 +76,7 @@ export default function Pricing({ user }) {
   return (
     <div id="pricing" className="bg-white py-10 sm:py-16">
       {/* Render the modal if isModalOpen is true */}
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <CheckoutForm
           onClose={handleButtonClick}
           amount={amount}
@@ -87,10 +88,10 @@ export default function Pricing({ user }) {
         <PopUpModal isModalNeedIt={true}>
           <ContacUs onClose={handleButtonEnterprise} />
         </PopUpModal>
-      )}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      )} */}
+      {/* <section className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          {/* <h2 className="text-base font-semibold leading-7 text-indigo-600">Pix</h2> */}
+        
           <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             {DataPricing.pricingmaintitle}
           </p>
@@ -149,27 +150,7 @@ export default function Pricing({ user }) {
               >
                 {tier.description}
               </p>
-              {/* <p className="mt-6 flex items-baseline gap-x-1">
-                <span
-                  className={classNames(
-                    tier.featured ? 'text-white' : 'text-gray-900',
-                    'text-4xl font-bold tracking-tight'
-                  )}
-                >
-                  {typeof tier.price === 'string' ? tier.price : tier.price[frequency.value]}
-                </span>
-                {typeof tier.price !== 'string' ? (
-                  <span
-                    className={classNames(
-                      tier.featured ? 'text-gray-300' : 'text-gray-600',
-                      'text-sm font-semibold leading-6'
-                    )}
-                  >
-                    {frequency.priceSuffix}
-                  </span>
-                ) : null}
-              </p>
-            */}
+             
               <ul
                 role="list"
                 className={classNames(
@@ -191,7 +172,7 @@ export default function Pricing({ user }) {
                 ))}
               </ul>
               <a
-                // href={tier.href}
+
                 onClick={
                   tier.name === DataPricing.pricingtitle3
                     ? () => {
@@ -217,7 +198,8 @@ export default function Pricing({ user }) {
             </div>
           ))}
         </div>
-      </div>
+      </section> */}
+      <PricingPlans user={user} />
     </div>
   );
 }
