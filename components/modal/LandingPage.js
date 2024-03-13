@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { motion, AnimatePresence } from 'framer-motion';
 import { XMarkIcon } from '@heroicons/react/20/solid';
-import { toast } from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 
-import { createIAContactMessage } from '../../util/api/iaContact';
+import {
+  createIAContactMessage,
+  updatedAIContactImage
+} from '../../util/api/iaContact';
 import Loader from '../loader/loader';
 import { DataNosIA } from '../../data/nosia';
 import { FileUpload } from '../files/FileUpload';
+import { uploadUserImage } from '../../util/api/user';
 
 Modal.setAppElement('#__next');
 
@@ -54,6 +58,9 @@ function LandingPage() {
 
   const openModal = async () => {
     setModalIsOpen(true);
+    if (modalIsOpen === false) {
+      setConfirmationMessage('');
+    }
   };
 
   const closeModal = async () => {
@@ -110,39 +117,46 @@ function LandingPage() {
     try {
       const formPayload = new FormData();
 
-      // formPayload.append(
-      //   'files',
-      //   JSON.stringify({
-      //     name: formData.name,
-      //     Email: formData.Email,
-      //     IADetail: formData.IADetail,
-
-      //     data: (formData.ImageIAS = files.forEach((file) => {
-      //       'files.ImageIAS', file, file.name;
-      //     }))
-      //   })
-      // );
-      // create a forma append for each file, you have to iterate over the files array
-      formPayload.append('files', files[0], files[0].name);
-
-      const response = await createIAContactMessage({
-        formData: formData,
-        formPayload: formPayload
+      files.forEach((file) => {
+        formPayload.append('files', file, file.name);
       });
 
-      console.log('already created', response);
-      if (response.status === 200) {
-        toast.success(DataNosIA.NosIAMessageSent);
-        setConfirmationMessage(
-          'Info enviada, nos pondremos en contacto contigo en breve.'
-        );
-        setFormData({
-          name: '',
-          Email: '',
-          ImageIAS: [],
-          IADetail: ''
+      const respUpload = await uploadUserImage({ formData: formPayload });
+
+      // console.log(
+      //   'response upload new',
+      //   respUpload.data.map((image) => image)
+      // );
+
+      if (respUpload) {
+        const response = await createIAContactMessage({
+          formData: formData
         });
-        setFiles([]);
+        // console.log('already created', response.data.data.id);
+        if (response.status === 200) {
+          await updatedAIContactImage({
+            formData: {
+              data: {
+                ImageIAS: respUpload.data.map((image) => image)
+              }
+            },
+            id: response.data.data.id
+          });
+
+          toast.success(DataNosIA.NosIAMessageSent);
+          setConfirmationMessage(
+            'Info enviada, nos pondremos en contacto contigo en breve.'
+          );
+          setFormData({
+            name: '',
+            Email: '',
+            ImageIAS: [],
+            IADetail: ''
+          });
+          setFiles([]);
+        } else {
+          toast.error('Hubo un problema al enviar los datos.');
+        }
       } else {
         toast.error('Hubo un problema al enviar los datos.');
       }
@@ -308,6 +322,7 @@ function LandingPage() {
       >
         Click, Aquí!
       </motion.button>
+      <Toaster position="top-center" />
     </section>
   );
 }

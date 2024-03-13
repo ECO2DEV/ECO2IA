@@ -1,6 +1,6 @@
-import Head from "next/head";
-
-import { LoginForm } from "../../components/login/LoginForm";
+import Head from 'next/head';
+import { getSession } from 'next-auth/react';
+import { LoginForm } from '../../components/login/LoginForm';
 
 export default function SignIn() {
   return (
@@ -14,4 +14,22 @@ export default function SignIn() {
     </>
   );
 }
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/dashboard'
+      }
+    };
+  }
+
+  return {
+    props: {}
+  };
+}
+
 SignIn.getLayout = (page) => page;
