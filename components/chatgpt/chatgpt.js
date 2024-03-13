@@ -1,25 +1,28 @@
-import { useContext, useEffect } from 'react';
-import { PromptContext } from '../../context/prompts/PromptContext';
-import { UserContext } from '../../context/user/UserContext';
+import { useContext, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-import axios from 'axios';
-import SearchTextbox from '../searchTextbox/searchTextbox';
-import { Welcome } from '../welcome/welcome';
-import { Conversations } from './conversations';
-import { useChat } from '../../hooks/useChat';
-import { ButtonHelper } from '../welcome/buttonHelper';
-import ButtonHelperHistory from '../welcome/ButtonHelperHistory';
-import { useChat as useChatReact } from 'ai/react';
-import { header, strapiUrl, modelOptions } from '../../constants/constans';
-import HistoryChat from './HistoryChat';
-import { countTokens } from '../../util/helpers/count_tokens';
-import { SelectModel } from '../ui/SelectModel';
+import { PromptContext } from "../../context/prompts/PromptContext";
+import { UserContext } from "../../context/user/UserContext";
+
+import axios from "axios";
+import SearchTextbox from "../searchTextbox/searchTextbox";
+import { Welcome } from "../welcome/welcome";
+import { Conversations } from "./conversations";
+import { useChat } from "../../hooks/useChat";
+import { ButtonHelper } from "../welcome/buttonHelper";
+import ButtonHelperHistory from "../welcome/ButtonHelperHistory";
+import { useChat as useChatReact } from "ai/react";
+import { header, strapiUrl, modelOptions } from "../../constants/constans";
+import HistoryChat from "./HistoryChat";
+import { countTokens } from "../../util/helpers/count_tokens";
+import { SelectModel } from "../ui/SelectModel";
 
 export const config = {
-  runtime: 'edge'
+  runtime: "edge",
 };
 
 export default function ChatGpt() {
+  const [responseModelMap, setResponseModelMap] = useState({});
   const {
     setOpenHelpers,
     setSelectedModel,
@@ -27,7 +30,7 @@ export default function ChatGpt() {
     setModalOpen,
     selectedModel,
     modalOpen,
-    user
+    user,
   } = useContext(UserContext);
 
   const handleModelChange = (e) => {
@@ -39,8 +42,8 @@ export default function ChatGpt() {
   const { mutate } = useChat(user?.id);
 
   useEffect(() => {
-    setActiveAI('ChatGpt');
-    setSelectedModel('gpt-3.5-turbo');
+    setActiveAI("ChatGpt");
+    setSelectedModel("gpt-3.5-turbo");
   }, []);
 
   const {
@@ -50,9 +53,9 @@ export default function ChatGpt() {
     handleInputChange,
     handleSubmit,
     isLoading,
-    setMessages
+    setMessages,
   } = useChatReact({
-    api: '/api/chat',
+    api: "/api/chat",
     onFinish: async (message) => {
       try {
         const res = await axios.post(
@@ -60,7 +63,7 @@ export default function ChatGpt() {
           {
             prompt: input,
             aiResponse: message.content,
-            users_permissions_user: user
+            users_permissions_user: user,
           },
           header
         );
@@ -68,7 +71,7 @@ export default function ChatGpt() {
 
         setMessages((prevMessages) => {
           const updatedMessages = prevMessages.map((msg) => {
-            if (msg.role === 'assistant') {
+            if (msg.role === "assistant") {
               if (msg.reqId === message.reqId) {
                 return { ...msg, reqId };
               }
@@ -79,24 +82,38 @@ export default function ChatGpt() {
           return updatedMessages;
         });
 
-        setResponse(message.content + input);
+        const newMessage = {
+          content: message.content,
+          model: selectedModel,
+          id: message.id = uuidv4(), // Use the unique identifier for the message
+          role: message.role
+        };
+        console.log('objeto del mensage', newMessage);
+        
+        setMessages(prevMessages => [...prevMessages, newMessage]);
+        
+        setResponseModelMap(prevMap => ({ ...prevMap, [newMessage.id]: selectedModel }));
+        
+
+        setResponse(newMessage.content + input);
+        console.log("response", message.id);
 
         mutate();
       } catch (error) {
         // Handle error here
-        console.error('Error:', error);
+        console.error("Error:", error);
         setMessages((prevMessages) => [
           ...prevMessages,
 
-          { role: 'assistant', content: '¡Se ha producido un error!' }
+          { role: "assistant", content: "¡Se ha producido un error!" },
         ]);
       } finally {
         setOpenHelpers(false);
       }
     },
     body: {
-      model: selectedModel
-    }
+      model: selectedModel,
+    },
   });
 
   // useEffect(() => {
@@ -116,7 +133,7 @@ export default function ChatGpt() {
         ) : openHelpers ? (
           <Welcome setInput={setInput} />
         ) : (
-          <Conversations messages={messages} />
+          <Conversations messages={messages} responseModelMap={responseModelMap} />
         )}
         <div className="flex justify-center flex-col-reverse md:flex-row items-center fixed bottom-3 w-[92%]  xl:w-[88%] 2xl:max-w-[77rem]">
           <SearchTextbox

@@ -144,6 +144,25 @@
   flex-wrap: wrap; /* Permite que los elementos hijos se ajusten y envuelvan según el ancho disponible */
 }
 
+/* Estilos base para dispositivos grandes */
+.input-card-number {
+  padding-right: 6rem; /* Ajusta esto para asegurar que haya espacio para los iconos */
+}
+
+/* Estilos para pantallas medianas */
+@media (min-width: 640px) {
+  .card-icon {
+    display: block; /* o cualquier otra regla de display que estés utilizando */
+  }
+}
+
+/* Estilos para pantallas de hasta 640px */
+@media (max-width: 640px) {
+  .card-icon {
+    display: none; /* oculta los iconos en pantallas pequeñas */
+  }
+}
+
 
 #header .burger::after,
 #header .burger::before {

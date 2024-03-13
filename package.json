@@ -55,6 +55,7 @@
     "strapi-stripe": "3.4.1",
     "swr": "2.2.4",
     "typewriter-effect": "2.21.0",
+    "uuid": "^9.0.1",
     "voice-activity-detection": "0.0.5"
   },
   "devDependencies": {

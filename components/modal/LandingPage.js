@@ -76,15 +76,15 @@ function LandingPage() {
     const rootElement = document.documentElement;
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          const isDark = rootElement.classList.contains('dark');
+        if (mutation.attributeName === "class") {
+          const isDark = rootElement.classList.contains("dark");
           setIsDarkMode(isDark);
         }
       });
     });
 
     observer.observe(rootElement, {
-      attributes: true
+      attributes: true,
     });
 
     return () => observer.disconnect();
@@ -179,8 +179,6 @@ function LandingPage() {
             animate="visible"
             exit="hidden"
           >
-            <div className="absolute w-full max-w-xl mx-auto rounded-3xl bg-purple-500 shadow-2xl rotate-[-5deg]"></div>
-
             <motion.div
               className="fixed w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-full p-4 sm:p-10 bg-eco2MainColor rounded-3xl rotate-2"
               initial={{ scale: 0 }}

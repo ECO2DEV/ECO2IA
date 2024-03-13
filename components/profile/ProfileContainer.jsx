@@ -2,6 +2,7 @@
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import {ProfileForm} from './ProfileForm';
 import { EditAvatar } from './editAvatar';
+import { BillingAndPayment } from './billingPayment';
 export default function ProfileContainer({user}) {
   
   return (
@@ -29,7 +30,8 @@ export default function ProfileContainer({user}) {
             Add a payment method
           </p>
         </div>
-
+        <BillingAndPayment />
+{/* 
         <form className="bg-white dark:bg-lightColor shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
           <div className="px-4 py-6 sm:p-8">
             <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -148,7 +150,7 @@ export default function ProfileContainer({user}) {
               Save
             </button>
           </div>
-        </form>
+        </form> */}
       </div>
 
      

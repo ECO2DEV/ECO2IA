@@ -1,28 +1,42 @@
-import { useRef, useState, useEffect, useContext } from 'react';
-import Image from 'next/image';
-import { marked } from 'marked';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/atom-one-dark.css';
+import { useRef, useState, useEffect, useContext } from "react";
+import Image from "next/image";
+import { marked } from "marked";
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark.css";
 
-import { UserContext } from '../../context/user/UserContext';
-import { EmptyAvatar } from '../icons/icons';
-import { useChat } from '../../hooks/useChat';
-import { strapiUrl } from '../../constants/constans';
-import { ClipboardIcon } from '../icons/icons';
-import ModalDelete from './ModalDelete';
-import { LoadingChatgpt } from './LoadingChatgpt';
-import { DataEco2Chat } from '../../data/eco2chat';
+import { UserContext } from "../../context/user/UserContext";
+import { EmptyAvatar } from "../icons/icons";
+import { useChat } from "../../hooks/useChat";
+import { strapiUrl, modelOptions } from "../../constants/constans";
+import { ClipboardIcon } from "../icons/icons";
+import ModalDelete from "./ModalDelete";
+import { LoadingChatgpt } from "./LoadingChatgpt";
+import { DataEco2Chat } from "../../data/eco2chat";
+import { PromptContext } from "../../context/prompts/PromptContext";
 
-export const Conversations = ({ messages }) => {
+export const Conversations = ({ messages, responseModelMap }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
-  const { user } = useContext(UserContext);
+  const { user, selectedModel, setSelectedModel } = useContext(UserContext);
+  const { activeAI } = useContext(PromptContext);
   const [copied, setCopied] = useState([]);
   const [copiedCode, setCopiedCode] = useState([]);
 
   const { data, isLoading, deleteChat } = useChat(user?.id);
 
   const messagesEndRef = useRef(null);
+
+  const getModelIcon = (model) => {
+    // console.log('modelo en las opciones:', model, modelOptions);
+    const modelOption = modelOptions.find((option) => option.value === model);
+    if (modelOption) {
+      // console.log('Found icon:', modelOption.icon);
+      return modelOption.icon;
+    } else {
+      console.warn("Model not found in options:", model);
+      return null; // Or return a default icon path
+    }
+  };
 
   const renderMarkdown = (markdown) => {
     const rawMarkup = marked(markdown);
@@ -31,15 +45,15 @@ export const Conversations = ({ messages }) => {
 
   const extractCodeFromMarkdown = (markdown) => {
     const regex = /```(\w+)?[\s\S]*?```/g;
-    let extractedCode = '';
+    let extractedCode = "";
 
     let match;
     while ((match = regex.exec(markdown)) !== null) {
       let codeBlock = match[0];
       if (match[1]) {
-        codeBlock = codeBlock.replace(`\`\`\`${match[1]}`, '```');
+        codeBlock = codeBlock.replace(`\`\`\`${match[1]}`, "```");
       }
-      extractedCode += codeBlock.replace(/```/g, '').trim() + '\n\n';
+      extractedCode += codeBlock.replace(/```/g, "").trim() + "\n\n";
     }
 
     return extractedCode.trim();
@@ -63,12 +77,12 @@ export const Conversations = ({ messages }) => {
         }, 2000);
       })
       .catch((error) => {
-        console.error('Error al copiar al portapapeles:', error);
+        console.error("Error al copiar al portapapeles:", error);
       });
   };
 
   const handleCopyCode = (text, index) => {
-    const codeToCopy = text.includes('```')
+    const codeToCopy = text.includes("```")
       ? extractCodeFromMarkdown(text)
       : text;
 
@@ -89,7 +103,7 @@ export const Conversations = ({ messages }) => {
         }, 2000);
       })
       .catch((error) => {
-        console.error('Error al copiar al portapapeles:', error);
+        console.error("Error al copiar al portapapeles:", error);
       });
   };
 
@@ -102,22 +116,29 @@ export const Conversations = ({ messages }) => {
   }
   useEffect(() => {
     if (messages) {
-      document.querySelectorAll('pre code').forEach((block) => {
+      document.querySelectorAll("pre code").forEach((block) => {
         hljs.highlightElement(block);
       });
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
 
   return (
-    <div className="h-[93vh]  bg-lightColor dark:bg-darkColor sm:w-full">
-      <section className="flex flex-col text-sm h-[92vh] scroll-color  overflow-y-scroll overflow-x-hidden sm:w-full">
+    <div className="h-[80vh] lg:h-[75vh] bg-gray-100">
+      <section className="flex flex-col text-sm h-[90vh] lg:h-[90vh] overflow-y-scroll overflow-x-hidden">
         {messages?.map((item, index) => {
-          const isCodeBlock = item.content.includes('```');
+          const isCodeBlock = item.content.includes("```");
+          console.log('item del mensage', item.id)
+          const modelForThisMessage = responseModelMap[item.id];
+          console.log('id del mensage', modelForThisMessage)
+
+
+          const messageIcon = getModelIcon(modelForThisMessage);
+          console.log('icono del mensage', messageIcon)
 
           return (
             <div key={item.id}>
-              {item.role === 'user' ? (
+              {item.role === "user" ? (
                 <div
                   className={`group sm:w-full text-gray-800 bg-lightColor dark:text-eco2MainColor dark:bg-darkColor relative`}
                 >
@@ -139,19 +160,25 @@ export const Conversations = ({ messages }) => {
                   </div>
                 </div>
               ) : null}
-              {item.role === 'assistant' ? (
+              {item.role === "assistant" ? (
                 <div
-                  className={`relative group sm:w-full text-lightColor border-b bg-darkColor dark:text-darkColor dark:bg-lightColor border-gray-300 dark:border-gray-700 relative`}
+                  className={`relative group sm:w-full text-lightColor border-b bg-darkColor dark:text-darkColor dark:bg-lightColor border-gray-300 dark:border-gray-700`}
                 >
                   <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl  md:py-6 lg:px-0 m-auto">
                     <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
-                      <Image
-                        src="/eco2_no_bg.png"
-                        alt="Eco2IA logo"
-                        width={50}
-                        height={50}
-                        className="w-10 h-w-10 rounded-full object-cover"
-                      />
+                      <div
+                        className="relative p-1 rounded-full hs-9 w-9 flex items-center justify-center"
+                        style={{ backgroundColor: "#19c37d" }}
+                      >
+                        {messageIcon && (
+                          <Image
+                            src={messageIcon}
+                            alt="AI model icon"
+                            width={50}
+                            height={50}
+                          />
+                        )}
+                      </div>
                     </div>
                     <div className="flex flex-col text-justify w-[calc(100%-50px)] gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
                       <div className="flex flex-col text-justify w-full">
@@ -168,9 +195,9 @@ export const Conversations = ({ messages }) => {
                                 <button
                                   onClick={() =>
                                     handleCopyCode(
-                                      item.content.includes('```')
+                                      item.content.includes("```")
                                         ? item.content
-                                        : '',
+                                        : "",
                                       index
                                     )
                                   }
