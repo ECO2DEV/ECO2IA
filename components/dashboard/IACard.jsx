@@ -41,7 +41,7 @@ const IACard = ({
     >
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-start gap-5 opacity-50 z-[1]">
-          <StarsButton score={score} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}  />
+          <StarsButton title={title} score={score} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}  />
          
           <AnimatePresence initial={false} wait={true} onExitComplete={() => null}>
              {isModalOpen && (
@@ -60,6 +60,10 @@ const IACard = ({
           <p className="font-semibold uppercase">
             Votos <span className="text-slate-950 dark:text-eco2MainColor text-lg font-semibold"> {score?.length}</span>
           </p>
+
+          <Link title='Vuelvete cliente premium 😍' className='font-semibold uppercase hover:scale-110 dark:hover:text-amber-500 transition-all ' href="/#pricing">
+              Premium 👈
+          </Link>
          
           <Link
             className="p-2 border-2 border-[#0b0a10] dark:border-[#f5f5f7]  rounded-full absolute z-50 top-4 right-6 lg:top-6 lg:right-8 cursor-pointer hover:scale-110 hover:bg-black hover:text-white duration-200 transition-all dark:hover:text-[#f5f5f7] duration-150 "

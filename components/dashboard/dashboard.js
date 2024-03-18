@@ -5,8 +5,27 @@ export default function DashboardSection(props) {
   // console.log('DashboardSection props', props?.user.IA_CARDS?.data);
 
   const iaCards = props?.user.IA_CARDS?.data;
-  // console.log('iaCards', iaCards);
+  // const iasPlanPurchase = props?.user?.user?.plan?.ias_access.split(',');
+  // const iasPlanPurchaseArrayClean = iasPlanPurchase.map((ia) => ia.trim());
 
+  // const filterIasCards = (iaCards, iasPlanPurchaseArrayClean) => {
+  //   // Filter iaCards based on whether their title is in iasPlanPurchase
+  //   const filteredIaCards = iaCards.filter((iaCard) => {
+  //     return iasPlanPurchaseArrayClean.includes(iaCard.attributes.ias_name); // Corregido a 'ias_name'
+  //   });
+
+  //   return filteredIaCards;
+  // };
+
+  // const filteredCards = filterIasCards(iaCards, iasPlanPurchaseArrayClean);
+
+  // console.log('filteredCards', filteredCards);
+
+  // console.log('user', props.user.user.plan.ias_access.split(','));
+  // console.log(
+  //   'iaCards',
+  //   iaCards.map((ia) => ia.attributes.title)
+  // );
   return (
     <>
       <Head>
