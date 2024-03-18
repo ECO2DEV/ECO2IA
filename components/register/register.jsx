@@ -1,9 +1,9 @@
-import { Fragment, useRef, useState } from "react";
+import {  useState } from "react";
 import { UserPlusIcon } from "@heroicons/react/24/outline";
 import Textbox from "./textboxt";
 import DropDownText from "./dropdowntextboxt";
 import DropdownCountry from "./dropdownCountry";
-import { createUser, setTrialPlan } from "../../util/api/user";
+import { createUser, setFreemiumPlan } from "../../util/api/user";
 import { signIn } from "next-auth/react";
 import { DataRegister } from "../../data/register";
 import { toast, Toaster } from "react-hot-toast";
@@ -36,16 +36,16 @@ export default function Register() {
     }
     setLoading(true);
     try {
-      // const responsePlan = await setTrialPlan();
+      const responsePlan = await setFreemiumPlan();
 
-      // const newPlanId = responsePlan.data.data.id;
+      const newPlanId = responsePlan.data.data.id;
 
       // Update the formData with the newPlanId
       let updatedFormData = {
         ...formData,
-        // plan: {
-        //   id: newPlanId,
-        // },
+        plan: {
+          id: newPlanId,
+        },
       };
 
       const response = await createUser(updatedFormData);

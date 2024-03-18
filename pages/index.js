@@ -15,9 +15,9 @@ export default function Home(props) {
     <>
       <Hero user={user} />
       <Features />
+      <Pricing user={user} />
       <ProjectsIA />
       {/* <LandingPage /> */}
-      <Pricing user={user} />
     </>
   );
 }

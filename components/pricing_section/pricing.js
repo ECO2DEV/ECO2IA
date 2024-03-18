@@ -3,7 +3,7 @@ import { RadioGroup } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/20/solid';
 import CheckoutForm from '../payment/CheckoutForm';
 import { useRouter } from 'next/router';
-import { plan_pricing } from '../../constants/constans';
+import { plan_pricing, classNames } from '../../constants/constans';
 import { ContacUs } from '../contact_us/contacUs';
 import { PopUpModal } from '../modal/popUpModal';
 import axios from 'axios';
@@ -16,10 +16,6 @@ const frequencies = [
   // { value: '', label: '', priceSuffix: '' },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
-
 export default function Pricing({ user }) {
   const router = useRouter();
   // console.log('User in pricing is:' + user);
@@ -27,7 +23,7 @@ export default function Pricing({ user }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEnterpriseOpen, setIsEnterpriseOpen] = useState(false);
   const [amount, setAmount] = useState(0);
-  const [currency, setCurrency] = useState('eur');
+  const [currency, setCurrency] = useState('cop');
 
   const handleCheckout = async ({ price }) => {
     // console.log(price);
@@ -126,7 +122,7 @@ export default function Pricing({ user }) {
         </div>
         <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {plan_pricing.tiers.map((tier, index) => (
-            <div
+            <article
               key={index}
               className={classNames(
                 tier.featured ? 'bg-gray-900 ring-gray-900' : 'ring-gray-200',
@@ -195,10 +191,10 @@ export default function Pricing({ user }) {
               >
                 {tier.cta}
               </a>
-            </div>
+            </article>
           ))}
         </div>
-      </section> */}
+      </section>  */}
       <PricingPlans user={user} />
     </div>
   );

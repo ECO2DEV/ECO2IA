@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Star, StarFill } from "../icons/icons";
 
-export const StarsButton = ({isModalOpen,setIsModalOpen, score}) => {
+export const StarsButton = ({isModalOpen,setIsModalOpen, score, title}) => {
 
   const close = () => setIsModalOpen(false);
   const open = () => setIsModalOpen(true);
@@ -33,6 +33,7 @@ export const StarsButton = ({isModalOpen,setIsModalOpen, score}) => {
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
+        title={`Califica a ${title} 👍`}
  
         onClick={() => (isModalOpen ? close() : open())}
         className="flex items-center gap-1 p-2 bg-darkBgCard dark:bg-darkColor rounded-lg hover:text-none"
