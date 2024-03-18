@@ -2,11 +2,15 @@ import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
+import { header, strapiUrl } from '../../../constants/constans';
 
 import axios from 'axios';
-import { createUserForProvider, getUserByEmail } from '../../../util/api/user';
+import {
+  createUserForProvider,
+  getUserByEmail,
+  setFreemiumPlan
+} from '../../../util/api/user';
 
-const strapiUrl = process.env.STRAPI_URL;
 export const authOptions = {
   providers: [
     Credentials({
@@ -102,13 +106,25 @@ export const authOptions = {
             //   email,
             //   Name
             // );
-            if (id == undefined || id == null) {
+            if (id == null) {
               // Create a new user in Strapi backend
               // console.log('viendo el token en el create user', token);
+              const resPlan = await setFreemiumPlan();
+              const dataStripe = { email: user.email, name: user.name };
+              const resStripe = await axios.post(
+                `${strapiUrl}/api/payment/createUser`,
+                dataStripe,
+                header
+              );
+
               const newUserResponse = await createUserForProvider({
                 username: user.name,
                 email: user.email,
-                password: 'something'
+                password: 'encrypter',
+                customer_id: resStripe.data.id,
+                plan: {
+                  id: resPlan.data.data.id
+                }
               });
 
               // console.log('newUserResponse', newUserResponse.data.user);
