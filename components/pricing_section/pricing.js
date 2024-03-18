@@ -70,7 +70,7 @@ export default function Pricing({ user }) {
   };
 
   return (
-    <div id="pricing" className="bg-white py-10 sm:py-16">
+    <div id="pricing" className="bg-lightColor dark:bg-darkColor py-10 sm:py-16">
       {/* Render the modal if isModalOpen is true */}
       {/* {isModalOpen && (
         <CheckoutForm
