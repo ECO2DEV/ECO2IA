@@ -15,6 +15,8 @@ const promptInitialState = {
   plan: [],
   promptTokens: 0,
   responseTokens: 0,
+  iasAllowedToAccess: ['Eco2Dalle', 'Eco2Chat'],
+  setIasAllowedToAccess: () => {},
   setActiveAI: () => {},
   setResponseTokens: () => {},
   setPromptTokens: () => {},
@@ -33,8 +35,8 @@ export const PromptProvider = ({ children }) => {
   });
 
   const [state, dispatch] = useReducer(promptReducer, promptInitialState);
-  const countTokensMemo = useMemo(() => countTokens, []);
-  let isGPT4Model = false;
+  // const countTokensMemo = useMemo(() => countTokens, []);
+  // let isGPT4Model = false;
 
   const setActiveAI = (aiName) => {
     dispatch({
@@ -191,6 +193,26 @@ export const PromptProvider = ({ children }) => {
     }
   };
 
+  // Estado inicial del plan para asignar las ias que puede usar el usuario
+  useEffect(() => {
+    if (!user?.plan) {
+      return;
+    }
+    if (!user?.plan?.typo === 'Freemium') {
+      toast.error('Estas en el plan gratuito, tendras limitaciones de uso.');
+      // router.push('/#pricing');
+      return;
+    }
+
+    const iasAllowedToAccess = user?.plan?.ias_access?.split(',');
+    const iasAllowedToAccessClean = iasAllowedToAccess.map((ia) => ia.trim());
+    dispatch({
+      type: 'SET_IAS_ALLOWED_TO_ACCESS',
+      payload: iasAllowedToAccessClean
+    });
+    console.log('this is the iasAllowedToAccessClean', user.plan);
+  }, [user?.plan]);
+
   // Este useEffect cada vez que se actualiza el response, resta a
   // sumatoria de tokens del prompt y el response al max_tokens del plan
   // useEffect(() => {
@@ -275,6 +297,13 @@ export const PromptProvider = ({ children }) => {
     });
   };
 
+  const setIasAllowedToAccess = (iasAllowedToAccess) => {
+    dispatch({
+      type: 'SET_IAS_ALLOWED_TO_ACCESS',
+      payload: iasAllowedToAccess
+    });
+  };
+
   return (
     <PromptContext.Provider
       value={{
@@ -284,7 +313,8 @@ export const PromptProvider = ({ children }) => {
         setPrompt,
         setResponse,
         setPromptTokens,
-        setResponseTokens
+        setResponseTokens,
+        setIasAllowedToAccess
       }}
     >
       {children}

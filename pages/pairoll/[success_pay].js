@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { DataPricing } from '../../data/pricing';
 import {
   setFreemiumPlan,
+  setPremiumPlan,
   setStandardPlan,
   updatePlanById
 } from '../../util/api/user';
@@ -40,6 +41,18 @@ export default function Success_Pay() {
             await updatePlanById({
               userId: id,
               planId: standardPlanId
+            });
+          } catch (error) {
+            console.error('Error al obtener el plan:', error);
+          }
+        } else if (q === DataPricing.priceid3) {
+          try {
+            const premiumPlanResponse = await setPremiumPlan();
+            const premiumPlanId = premiumPlanResponse.data.data.id;
+            // console.log('id del plan creado', premiumPlanId);
+            await updatePlanById({
+              userId: id,
+              planId: premiumPlanId
             });
           } catch (error) {
             console.error('Error al obtener el plan:', error);

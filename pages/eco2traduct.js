@@ -1,5 +1,5 @@
 import Head from 'next/head';
-// import Modal from '../components/modal/modal';
+import Modal from '../components/modal/modal';
 import Eco2traductAI from '../components/eco2traduct/eco2traduct';
 import { getUser } from '../util/api/user';
 
@@ -18,7 +18,15 @@ const Eco2traduct = (props) => {
       ) : (
         <Eco2traductAI />
       )} */}
-      <Eco2traductAI />
+
+      {props.user.plan.typo === 'Freemium' ||
+      props.user.plan.typo === 'Standard' ? (
+        <Modal user={props?.user} />
+      ) : +props?.user?.plan?.max_tokens <= 0 ? (
+        <Modal user={props?.user} />
+      ) : (
+        <Eco2traductAI />
+      )}
     </div>
   );
 };

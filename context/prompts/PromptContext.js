@@ -7,6 +7,8 @@ export const PromptContext = createContext({
   response: null,
   promptTokens: 0,
   responseTokens: 0,
+  iasAllowedToAccess: ['Eco2Dalle', 'Eco2Chat'],
+  setIasAllowedToAccess: () => {},
   setResponseTokens: () => {},
   setPromptTokens: () => {},
   setResponse: () => {},
