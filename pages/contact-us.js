@@ -72,21 +72,11 @@ export default function contactUs() {
     try {
       const formPayload = new FormData();
 
-      formPayload.append(
-        "data",
-        JSON.stringify({
-          name: formData.name,
-          Email: formData.Email,
-          IADetail: formData.IADetail,
-
-          data: (formData.ImageIAS = files.forEach((file) => {
-            "files.ImageIAS", file, file.name;
-          })),
-        })
-      );
+      formPayload.append('files', files[0], files[0].name);
 
       const response = await createIAContactMessage({
         formData: formData,
+        formPayload: formPayload
       });
 
       console.log(response);
