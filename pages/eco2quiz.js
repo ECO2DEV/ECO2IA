@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { Eco2quizAI } from '../components/eco2quiz/eco2quizAI';
-// import Modal from '../components/modal/modal';
+import Modal from '../components/modal/modal';
 
 import { getUser } from '../util/api/user';
 
@@ -19,7 +19,14 @@ const Matquiz = (props) => {
       ) : (
         <Eco2quizAI />
       )} */}
-      <Eco2quizAI />
+      {props.user.plan.typo === 'Freemium' ? (
+        <Modal user={props?.user} />
+      ) : +props?.user?.plan?.max_tokens <= 0 ? (
+        <Modal user={props?.user} />
+      ) : (
+        <Eco2quizAI />
+      )}
+      {/* <Eco2quizAI /> */}
     </div>
   );
 };
