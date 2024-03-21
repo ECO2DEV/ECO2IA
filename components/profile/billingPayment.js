@@ -1,42 +1,84 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
+// import bcrypt from "bcrypt";
+
+import { createBillingInfo } from "../../util/api/billingAndPayment";
+
 import visa from "../../public/creditCard/visa.svg";
 import amex from "../../public/creditCard/amex.svg";
 import mastercard from "../../public/creditCard/Mastercard.svg";
 
 export function BillingAndPayment() {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [formData, setFormData] = useState({
+    CreditCard: "",
+    Name: "",
+    LastName: "",
+    ExpirationMonth: "",
+    ExpirationYear: "",
+    SecurityCode: "",
+    Country: "CO",
+    Address: "",
+    AddressOptional: "",
+    City: "",
+    PostalCode: "",
+  });
   const yearInputRef = useRef(null);
 
   const toggleTooltip = () => {
     setShowTooltip(!showTooltip);
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   const handleMonthInput = (e) => {
     const value = e.target.value;
+
+    handleInputChange(e);
     if (value.length === 2) {
       yearInputRef.current.focus();
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const currentYear = new Date().getFullYear();
+    const formattedExpirationMonth = `${formData.ExpirationMonth.padStart(
+      2,
+      "0"
+    )}/1/${currentYear}`;
+
+    // Formatea la fecha de expiración del año como 01/01/YYYY
+    const formattedExpirationYear = `1/1/20${formData.ExpirationYear}`;
+    // const cardNumber = formData.CreditCard;
+    // const salt = bcrypt.genSaltSync(10);
+    // const hash = bcrypt.hashSync(cardNumber, salt);
+
+    const submitData = {
+      ...formData,
+      // CreditCard: hash,
+      ExpirationMonth: formattedExpirationMonth,
+      ExpirationYear: formattedExpirationYear,
+    };
+    try {
+      const response = await createBillingInfo({ formData: submitData });
+      console.log(response);
+    } catch (error) {
+      console.error("Error enviando el formulario:", error);
+    }
+  };
+
   return (
-    // <div className="space-y-10 divide-y divide-gray-900/10 dark:divide-gray-100">
-    //   {/* ---------billing----------- */}
-    //   <div className="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
-    //     <div className="px-4 sm:px-0">
-    //       <h2 className="text-base font-semibold leading-7 dark:text-white text-gray-900">
-    //         Billing information
-    //       </h2>
-    //       <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-100">
-    //         Add a payment method
-    //       </p>
-    //     </div>
     <>
       <form
         autoComplete="on"
         method="POST"
         noValidate
+        onSubmit={handleSubmit}
         className="bg-white dark:bg-lightColor shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2"
       >
         <div className="px-4 py-6 sm:p-8">
@@ -119,8 +161,10 @@ export function BillingAndPayment() {
               </div>
               <input
                 type="text"
-                name="card-number"
-                id="card-number"
+                name="CreditCard"
+                id="CreditCard"
+                value={formData.CreditCard}
+                onChange={handleInputChange}
                 className="focus:bg-darkColor border-white bg-darkBgCard block w-full pl-10 pr-24 sm:text-sm text-white rounded-md input-card-number"
                 placeholder="1234 5678 9012 3456"
                 required
@@ -156,8 +200,10 @@ export function BillingAndPayment() {
                 Primer nombre
               </label>
               <input
-                id="pc-first-name"
+                id="Name"
                 type="text"
+                name="Name"
+                onChange={handleInputChange}
                 autoComplete="cc-given-name"
                 maxLength="60"
                 className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard text-white shadow-sm rounded-md p-2"
@@ -172,8 +218,10 @@ export function BillingAndPayment() {
                 Apellido
               </label>
               <input
-                id="pc-last-name"
+                id="LastName"
                 type="text"
+                name="LastName"
+                onChange={handleInputChange}
                 autoComplete="cc-family-name"
                 maxLength="60"
                 className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard shadow-sm rounded-md p-2"
@@ -191,13 +239,14 @@ export function BillingAndPayment() {
                 Expiration month
               </label>
               <input
-                id="expiry-month"
+                id="ExpirationMonth"
+                onChange={handleMonthInput}
                 type="text"
+                name="ExpirationMonth"
                 placeholder="MM"
                 className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard rounded-md p-2"
                 autoComplete="cc-exp"
                 maxLength="2"
-                onChange={handleMonthInput}
                 required
               />
             </div>
@@ -210,8 +259,10 @@ export function BillingAndPayment() {
               </label>
               <input
                 ref={yearInputRef}
-                id="expiry-year"
+                onChange={handleInputChange}
                 type="text"
+                id="ExpirationYear"
+                name="ExpirationYear"
                 placeholder="YY"
                 className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard rounded-md p-2"
                 autoComplete="cc-exp"
@@ -232,8 +283,10 @@ export function BillingAndPayment() {
               />
             </label>
             <input
-              id="security-code"
-              type="text"
+              id="SecurityCode"
+              type="password"
+              name="SecurityCode"
+              onChange={handleInputChange}
               maxLength="3"
               className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard shadow-sm rounded-md p-2"
               placeholder="3 digits"
@@ -261,8 +314,9 @@ export function BillingAndPayment() {
                 País
               </label>
               <select
-                id="country"
-                name="country"
+                id="Country"
+                name="Country"
+                onChange={handleInputChange}
                 className="mt-1 block w-full pl-3 pr-10 py-2 text-base focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white rounded-md"
                 defaultValue="CO"
               >
@@ -282,7 +336,9 @@ export function BillingAndPayment() {
                 type="text"
                 required
                 className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard shadow-sm rounded-md p-2"
-                id="address-street"
+                id="Address"
+                name="Address"
+                onChange={handleInputChange}
                 autoComplete="billing address-line1"
                 minLength="2"
                 maxLength="60"
@@ -299,7 +355,9 @@ export function BillingAndPayment() {
               <input
                 type="text"
                 className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard shadow-sm rounded-md p-2"
-                id="address-street2"
+                id="AddressOptional"
+                name="AddressOptional"
+                onChange={handleInputChange}
                 autoComplete="billing address-line2"
                 maxLength="60"
               />
@@ -313,11 +371,13 @@ export function BillingAndPayment() {
                   Ciudad
                 </label>
                 <input
-                  id="address-city"
+                  id="City"
                   type="text"
+                  name="City"
                   autoComplete="billing address-level2"
                   required
                   maxLength="50"
+                  onChange={handleInputChange}
                   className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard shadow-sm rounded-md p-2"
                   placeholder="Villavicencio"
                 />
@@ -331,9 +391,11 @@ export function BillingAndPayment() {
                   <span className="text-gray-500">(opcional)</span>
                 </label>
                 <input
-                  id="address-zip"
+                  id="PostalCode"
                   type="text"
+                  name="PostalCode"
                   autoComplete="billing postal-code"
+                  onChange={handleInputChange}
                   maxLength="10"
                   className="mt-1 block w-full focus:bg-darkColor us:border-white er:border-white bg-darkBgCard shadow-sm rounded-md p-2"
                   placeholder="Código postal"
@@ -357,7 +419,6 @@ export function BillingAndPayment() {
           </button>
         </div>
       </form>
-      {/* --------billing-------- */}
     </>
   );
 }
