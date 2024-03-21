@@ -67,36 +67,52 @@ export default function ChatGpt() {
           },
           header
         );
-        const reqId = res.data.reqId; // Assuming the response from the backend contains the reqId
+        const reqId = res.data.reqId;
 
-        setMessages((prevMessages) => {
-          const updatedMessages = prevMessages.map((msg) => {
-            if (msg.role === "assistant") {
-              if (msg.reqId === message.reqId) {
-                return { ...msg, reqId };
-              }
-            }
-            return msg;
-          });
+        // setMessages((prevMessages) => {
+        //   const updatedMessages = prevMessages.map((msg) => {
+        //     if (msg.role === "assistant") {
+        //       if (msg.reqId === message.reqId) {
+        //         return { ...msg, reqId };
+        //       }
+        //     }
+        //     return msg;
+        //   });
 
-          return updatedMessages;
-        });
+        //   return updatedMessages;
+        // });
+
+
+        const newMessageId = uuidv4()
 
         const newMessage = {
           content: message.content,
           model: selectedModel,
-          id: message.id = uuidv4(), // Use the unique identifier for the message
+          id: newMessageId,
           role: message.role
         };
         console.log('objeto del mensage', newMessage);
+
+        setMessages((prevMessages) => {
+          const updatedMessages = prevMessages.map((msg) => {
+            if (msg.role === "assistant" && msg.id === message.id) {
+              return { ...msg, id: newMessageId };
+            }
+            return msg;
+          });
+          return updatedMessages;
+        });
+  
+        setResponseModelMap(prevMap => ({
+          ...prevMap,
+          [newMessage.id]: selectedModel
+        }));
+        console.log('set response model map:', setResponseModelMap)
         
-        setMessages(prevMessages => [...prevMessages, newMessage]);
-        
-        setResponseModelMap(prevMap => ({ ...prevMap, [newMessage.id]: selectedModel }));
         
 
         setResponse(newMessage.content + input);
-        console.log("response", message.id);
+        console.log("response + input", setResponse);
 
         mutate();
       } catch (error) {
