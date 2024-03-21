@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { UserContext } from '../../context/user/UserContext';
+import { PromptContext } from '../../context/prompts/PromptContext';
 import { Toaster } from 'react-hot-toast';
 import { Header } from './sidebar/Header';
 
@@ -9,25 +10,16 @@ export default function LayoutUser({ children }) {
 
   // const currentPath = useRouter().pathname; // Obtener la ruta actual
 
-  // const {
-  //   setPlan,
-  //   plan,
-  //   promptTokens,
-  //   responseTokens,
-  //   response,
-  //   setPromptTokens,
-  //   setResponseTokens,
-  //   activeAI
-  // } = useContext(PromptContext);
+  const { setPlan } = useContext(PromptContext);
 
   // const { max_imagens = 0, max_tokens = 0 } = plan;
 
   const { setUser } = useContext(UserContext);
 
-  // useEffect(() => {
-  //   if (!children?.props?.user?.plan) return;
-  //   setPlan(children.props.user.plan ? children.props.user.plan.id : null);
-  // }, []);
+  useEffect(() => {
+    if (!children?.props?.user?.plan) return;
+    setPlan(children.props.user.plan ? children.props.user.plan.id : null);
+  }, []);
 
   useEffect(() => {
     if (!children?.props?.user) return;

@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { DataPricing } from '../../data/pricing';
 import {
-  setEstudiantePlan,
+  setFreemiumPlan,
+  setPremiumPlan,
   setStandardPlan,
   updatePlanById
 } from '../../util/api/user';
@@ -15,12 +16,14 @@ export default function Success_Pay() {
 
   const { success_pay, q, id } = router.query;
 
+  // console.log('success_pay', success_pay, 'q', q, 'id', id);
+
   useEffect(() => {
     const fetchData = async () => {
       if (success_pay) {
         if (q === DataPricing.priceid1) {
           try {
-            const studentsPlanResponse = await setEstudiantePlan();
+            const studentsPlanResponse = await setFreemiumPlan();
             const stundentPlanId = studentsPlanResponse.data.data.id;
             // console.log('id del plan creado', stundentPlanId);
             await updatePlanById({
@@ -38,6 +41,18 @@ export default function Success_Pay() {
             await updatePlanById({
               userId: id,
               planId: standardPlanId
+            });
+          } catch (error) {
+            console.error('Error al obtener el plan:', error);
+          }
+        } else if (q === DataPricing.priceid3) {
+          try {
+            const premiumPlanResponse = await setPremiumPlan();
+            const premiumPlanId = premiumPlanResponse.data.data.id;
+            // console.log('id del plan creado', premiumPlanId);
+            await updatePlanById({
+              userId: id,
+              planId: premiumPlanId
             });
           } catch (error) {
             console.error('Error al obtener el plan:', error);

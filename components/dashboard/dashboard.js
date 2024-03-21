@@ -5,7 +5,6 @@ export default function DashboardSection(props) {
   // console.log('DashboardSection props', props?.user.IA_CARDS?.data);
 
   const iaCards = props?.user.IA_CARDS?.data;
-  // console.log('iaCards', iaCards);
 
   return (
     <>
@@ -18,6 +17,7 @@ export default function DashboardSection(props) {
         {iaCards.map((ia, index) => {
           return (
             <IACard
+              plan={props.user.user.plan}
               key={ia.id}
               id={ia.id}
               title={ia.attributes.title}

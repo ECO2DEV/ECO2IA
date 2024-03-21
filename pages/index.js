@@ -4,7 +4,7 @@ import { ProjectsIA } from '../components/proyectsIA';
 import LandingPage from '../components/modal/LandingPage';
 // import styles from '../styles/Home.module.css';
 import { getUser } from '../util/api/user';
-// import Pricing from '../components/pricing_section/pricing';
+import Pricing from '../components/pricing_section/pricing';
 
 export default function Home(props) {
   //console.log("User connected:" + JSON.stringify(props.user))
@@ -15,6 +15,7 @@ export default function Home(props) {
     <>
       <Hero user={user} />
       <Features />
+      <Pricing user={user} />
       <ProjectsIA />
       {/* <LandingPage /> */}
     </>

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import TextSummarizerPage from '../components/eco2resum/TextSummarizer';
-// import Modal from '../components/modal/modal';
+import Modal from '../components/modal/modal';
 import { getUser } from '../util/api/user';
 
 export default function Eco2Resume(props) {
@@ -18,7 +18,15 @@ export default function Eco2Resume(props) {
       ) : (
         <TextSummarizerPage user={props.user.id} />
       )} */}
-      <TextSummarizerPage user={props.user.id} />
+      {props.user.plan.typo === 'Freemium' ||
+      props.user.plan.typo === 'Standard' ? (
+        <Modal user={props?.user} />
+      ) : +props?.user?.plan?.max_tokens <= 0 ? (
+        <Modal user={props?.user} />
+      ) : (
+        <TextSummarizerPage user={props.user.id} />
+      )}
+      {/* <TextSummarizerPage user={props.user.id} /> */}
     </div>
   );
 }
