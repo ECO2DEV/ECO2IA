@@ -54,7 +54,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     router.pathname == '/eco2description' ||
     router.pathname == '/eco2resum' ||
     router.pathname == '/eco2cv' ||
-    router.pathname == '/renovhome'
+    router.pathname == '/renovhome' ||
+    router.pathname == '/chatia'
   ) {
     return (
       <Providers>
