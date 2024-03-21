@@ -67,7 +67,7 @@ export default function ChatGpt() {
           },
           header
         );
-        const reqId = res.data.reqId; // Assuming the response from the backend contains the reqId
+        const reqId = res.data.reqId;
 
         // setMessages((prevMessages) => {
         //   const updatedMessages = prevMessages.map((msg) => {
@@ -88,15 +88,10 @@ export default function ChatGpt() {
         const newMessage = {
           content: message.content,
           model: selectedModel,
-          id: newMessageId, // Use the unique identifier for the message
+          id: newMessageId,
           role: message.role
         };
         console.log('objeto del mensage', newMessage);
-
-        // setMessages((prevMessages) => [
-        //   ...prevMessages,
-        //   newMessage
-        // ]);
 
         setMessages((prevMessages) => {
           const updatedMessages = prevMessages.map((msg) => {

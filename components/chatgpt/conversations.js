@@ -27,14 +27,12 @@ export const Conversations = ({ messages, responseModelMap }) => {
   const messagesEndRef = useRef(null);
 
   const getModelIcon = (model) => {
-    // console.log('modelo en las opciones:', model, modelOptions);
     const modelOption = modelOptions.find((option) => option.value === model);
     if (modelOption) {
-      // console.log('Found icon:', modelOption.icon);
       return modelOption.icon;
     } else {
       console.warn("Model not found in options:", model);
-      return null; // Or return a default icon path
+      return null;
     }
   };
 
@@ -128,13 +126,10 @@ export const Conversations = ({ messages, responseModelMap }) => {
       <section className="flex flex-col text-sm h-[90vh] lg:h-[90vh] overflow-y-scroll overflow-x-hidden">
         {messages?.map((item, index) => {
           const isCodeBlock = item.content.includes("```");
-          console.log('item del mensage', item.id)
-          const modelForThisMessage = responseModelMap[item.id];
-          console.log('id del mensage', modelForThisMessage)
 
+          const modelForThisMessage = responseModelMap[item.id];
 
           const messageIcon = getModelIcon(modelForThisMessage);
-          console.log('icono del mensage', messageIcon)
 
           return (
             <div key={item.id}>
@@ -166,10 +161,7 @@ export const Conversations = ({ messages, responseModelMap }) => {
                 >
                   <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl  md:py-6 lg:px-0 m-auto">
                     <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
-                      <div
-                        className="relative p-1 rounded-full hs-9 w-9 flex items-center justify-center"
-                        style={{ backgroundColor: "#19c37d" }}
-                      >
+                      <div className="relative p-1 rounded-full hs-9 w-9 flex items-center justify-center">
                         {messageIcon && (
                           <Image
                             src={messageIcon}
