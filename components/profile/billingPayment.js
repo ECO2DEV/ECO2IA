@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
-// import bcrypt from "bcrypt";
+import toast from "react-hot-toast";
 
 import { createBillingInfo } from "../../util/api/billingAndPayment";
+import { DataProfile } from "../../data/profile";
 
 import visa from "../../public/creditCard/visa.svg";
 import amex from "../../public/creditCard/amex.svg";
@@ -46,28 +47,53 @@ export function BillingAndPayment() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (
+      formData.CreditCard === '' ||
+      formData.Name === '' ||
+      formData.LastName === '' ||
+      formData.ExpirationMonth === '' ||
+      formData.ExpirationYear === '' ||
+      formData.SecurityCode === '' ||
+      formData.Country === '' ||
+      formData.Address === '' ||
+      formData.City === ''
+    ) {
+      toast.error(DataProfile.PleaseFill);
+
+      return;
+    }
+
+    if (
+      formData.Name.length < 3 ||
+      formData.Name.length > 50 ||
+      formData.LastName.length < 3 ||
+      formData.LastName.length > 50
+    ) {
+      toast.error(DataProfile.NameMustBe);
+
+      return;
+    }
+
     const currentYear = new Date().getFullYear();
     const formattedExpirationMonth = `${formData.ExpirationMonth.padStart(
       2,
       "0"
     )}/1/${currentYear}`;
 
-    // Formatea la fecha de expiración del año como 01/01/YYYY
     const formattedExpirationYear = `1/1/20${formData.ExpirationYear}`;
-    // const cardNumber = formData.CreditCard;
-    // const salt = bcrypt.genSaltSync(10);
-    // const hash = bcrypt.hashSync(cardNumber, salt);
 
     const submitData = {
       ...formData,
-      // CreditCard: hash,
       ExpirationMonth: formattedExpirationMonth,
       ExpirationYear: formattedExpirationYear,
     };
     try {
       const response = await createBillingInfo({ formData: submitData });
+      toast.success(DataProfile.ProfileUpdated);
       console.log(response);
     } catch (error) {
+      toast.error(DataProfile.ErrorUpdating);
       console.error("Error enviando el formulario:", error);
     }
   };
@@ -82,54 +108,6 @@ export function BillingAndPayment() {
         className="bg-white dark:bg-lightColor shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2"
       >
         <div className="px-4 py-6 sm:p-8">
-          {/* <div className="mt-4">
-            <label
-              htmlFor="card-number"
-              className="block text-sm font-medium leading-6 text-black"
-            >
-              Número de tarjeta
-            </label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  role="img"
-                  className="h-6 w-6 text-gray-500"
-                >
-                  <path
-                    vector-effect="non-scaling-stroke"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="10"
-                    stroke-width="1.5"
-                    d="M19 20H5c-1.7 0-3-1.3-3-3V8c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3v9c0 1.6-1.4 3-3 3z"
-                  ></path>
-                  <path fill="currentColor" d="M22 8H2v3h20V8z"></path>
-                </svg>
-              </div>
-              <input
-                type="text"
-                name="card-number"
-                id="card-number"
-                className="focus:bg-darkColor us:border-white er:border-white bg-darkBgCard block w-full pl-10 pr-36 sm:text-sm text-white rounded-md"
-                placeholder="1234 5678 9012 3456"
-                required
-              />
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                <div className="flex justify-end">
-                  <Image src={visa} alt="Visa" className="h-6 max-w-7" />
-
-                  <Image src={mastercard} alt="Mastercard" className="h-6 max-w-7" />
-                  <Image src={amex} alt="Amex" className="h-6 max-w-7" />
-                </div>
-              </div>
-
-            </div>
-          </div> */}
           <div className="mt-4">
             <label
               htmlFor="card-number"
@@ -413,7 +391,7 @@ export function BillingAndPayment() {
           </button>
           <button
             type="submit"
-            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-eco2MainColor px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-eco2HoverColor transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Save
           </button>

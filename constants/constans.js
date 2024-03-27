@@ -24,6 +24,8 @@ import IA4 from "../public/screenshot/desc_eco2.webp";
 import IA5 from "../public/screenshot/resum_eco2.webp";
 import IA6 from "../public/screenshot/cv_eco2.webp";
 
+
+import gpt3image from "../public/ias/gpt3image.png";
 import gpt3 from "../public/ias/chatgpt3-icon.svg";
 import gpt4 from "../public/ias/GPT-4_Logo.svg";
 import gemini from "../public/ias/google-gemini-icon.svg";

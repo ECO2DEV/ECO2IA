@@ -7,12 +7,12 @@ export const SelectModel = ({ modelOptions, onChange }) => {
       {modelOptions.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}
-          
         </option>
       ))}
     </select>
   );
 };
+
 
 
 

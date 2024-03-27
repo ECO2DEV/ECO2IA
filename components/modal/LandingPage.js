@@ -1,23 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
-import { motion, AnimatePresence } from 'framer-motion';
-import { XMarkIcon } from '@heroicons/react/20/solid';
-import { toast, Toaster } from 'react-hot-toast';
+import React, { useState } from "react";
+import Modal from "react-modal";
+import { motion, AnimatePresence } from "framer-motion";
+import { XMarkIcon } from "@heroicons/react/20/solid";
+import { toast, Toaster } from "react-hot-toast";
 
-import {
-  createIAContactMessage,
-  updatedAIContactImage
-} from '../../util/api/iaContact';
-import Loader from '../loader/loader';
-import { DataNosIA } from '../../data/nosia';
-import { FileUpload } from '../files/FileUpload';
+import { createIAContactMessage, updatedAIContactImage } from "../../util/api/iaContact";
 import { uploadUserImage } from '../../util/api/user';
+import Loader from "../loader/loader";
+import { DataNosIA } from "../../data/nosia";
+import { FileUpload } from "../files/FileUpload";
 
-Modal.setAppElement('#__next');
+Modal.setAppElement("#__next");
 
 const modalBackdrop = {
   visible: { opacity: 1 },
-  hidden: { opacity: 0 }
+  hidden: { opacity: 0 },
 };
 
 const buttonVariants = {
@@ -25,9 +22,9 @@ const buttonVariants = {
     scale: 1.1,
     transition: {
       duration: 0.3,
-      yoyo: Infinity
-    }
-  }
+      yoyo: Infinity,
+    },
+  },
 };
 
 const animationDuration = 1000;
@@ -36,25 +33,22 @@ const modalVariants = {
   hidden: {
     y: -50,
     opacity: 0,
-    transition: { duration: 1000 / 2000 }
+    transition: { duration: 1000 / 2000 },
   },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.5 } }
+  visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
 };
 
 function LandingPage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [confirmationMessage, setConfirmationMessage] = useState('');
+  const [confirmationMessage, setConfirmationMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    Email: '',
+    name: "",
+    Email: "",
     ImageIAS: [],
-    IADetail: ''
+    IADetail: "",
   });
   const [files, setFiles] = useState([]);
-
-  // console.log('images details', files);
 
   const openModal = async () => {
     setModalIsOpen(true);
@@ -72,31 +66,13 @@ function LandingPage() {
     setFormData({ ...formData, [name]: value });
   };
 
-  useEffect(() => {
-    const rootElement = document.documentElement;
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === "class") {
-          const isDark = rootElement.classList.contains("dark");
-          setIsDarkMode(isDark);
-        }
-      });
-    });
-
-    observer.observe(rootElement, {
-      attributes: true,
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     if (
-      formData.name === '' ||
-      formData.Email === '' ||
-      formData.IADetail === ''
+      formData.name === "" ||
+      formData.Email === "" ||
+      formData.IADetail === ""
     ) {
       toast.error(DataNosIA.NosIAPleaseFill);
       setLoading(false);
@@ -116,49 +92,44 @@ function LandingPage() {
 
     try {
       const formPayload = new FormData();
-
+      // create a forma append for each file, you have to iterate over the files array
       files.forEach((file) => {
-        formPayload.append('files', file, file.name);
+        formPayload.append("files", file, file.name);
       });
 
       const respUpload = await uploadUserImage({ formData: formPayload });
 
-      // console.log(
-      //   'response upload new',
-      //   respUpload.data.map((image) => image)
-      // );
-
       if (respUpload) {
         const response = await createIAContactMessage({
-          formData: formData
+          formData: formData,
         });
         // console.log('already created', response.data.data.id);
         if (response.status === 200) {
           await updatedAIContactImage({
             formData: {
               data: {
-                ImageIAS: respUpload.data.map((image) => image)
-              }
+                ImageIAS: respUpload.data.map((image) => image),
+              },
             },
-            id: response.data.data.id
+            id: response.data.data.id,
           });
 
           toast.success(DataNosIA.NosIAMessageSent);
           setConfirmationMessage(
-            'Info enviada, nos pondremos en contacto contigo en breve.'
+            "Info enviada, nos pondremos en contacto contigo en breve."
           );
           setFormData({
-            name: '',
-            Email: '',
+            name: "",
+            Email: "",
             ImageIAS: [],
-            IADetail: ''
+            IADetail: "",
           });
           setFiles([]);
         } else {
-          toast.error('Hubo un problema al enviar los datos.');
+          toast.error("Hubo un problema al enviar los datos.");
         }
       } else {
-        toast.error('Hubo un problema al enviar los datos.');
+        toast.error("Hubo un problema al enviar los datos.");
       }
     } catch (error) {
       console.error(error);
@@ -187,9 +158,7 @@ function LandingPage() {
               transition={{ delay: 0.1 }}
             />
             <motion.div
-              className={`absolute w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-full p-4 sm:p-10 ${
-                isDarkMode ? 'bg-darkBgCard' : 'bg-lightBgCard'
-              }  rounded-3xl rotate-2`}
+              className={`absolute w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl h-full p-4 sm:p-10 bg-lightBgCard dark:bg-darkBgCard rounded-3xl rotate-2`}
               initial={{ scale: 0 }}
               animate={{ rotate: -8, scale: 1 }}
               exit={{ rotate: -8, scale: 0 }}
@@ -219,7 +188,7 @@ function LandingPage() {
                   </button>
 
                   <div className="text-center">
-                    <h1 className="mt-2 text-2xl font-bold text-white bg-clip-text text-xl">
+                    <h1 className="mt-2 text-2xl font-bold text-white bg-clip-text">
                       Únete a ECO2 IA's 🍃
                     </h1>
                     <p className="mt-2 text-sm text-gray-100">

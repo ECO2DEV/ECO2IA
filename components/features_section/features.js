@@ -1,28 +1,7 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { DataFeatures, features } from '../../data/features';
 
 export default function Features() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const rootElement = document.documentElement;
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          const isDark = rootElement.classList.contains('dark');
-          setIsDarkMode(isDark);
-        }
-      });
-    });
-
-    observer.observe(rootElement, {
-      attributes: true
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <>
       <hr className="my-10 h-px bg-gray-600 border-0 dark:bg-gray-700" />

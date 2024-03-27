@@ -56,7 +56,7 @@ export function ProfileForm({ user }) {
 
       return;
     }
-    if(formData,nationality == nationality[0] || formData.domainofstudy == domain[0] || formData.sport == sport[0]){
+    if(formData.nacionality == nationality[0] || formData.domainofstudy == domain[0] || formData.sport == sport[0]){
       toast.error("Por favor seleccione una opción valida, en el campo de nacionalidad, deporte y campo de estudio");
       return;
     }

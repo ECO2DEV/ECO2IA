@@ -8,7 +8,7 @@ import { Popover, Transition } from "@headlessui/react";
 import clsx from "clsx";
 
 import { Container } from "../../Container";
-import logoLight from "../../../public/LogoECO2Negro.png";
+import logoLight from "../../../public/LogoECO2Verde.png";
 import logoDark from "../../../public/LogoECO2Blanco.png";
 
 function CloseIcon(props) {
@@ -154,7 +154,7 @@ function NavItem({ href, children }) {
       <Link
         href={href}
         className={clsx(
-          "relative flex block px-3 py-2 transition",
+          "relative flex px-3 py-2 transition",
           isActive
             ? "text-eco2MainColor dark:text-eco2MainColor"
             : "hover:text-eco2MainColor dark:hover:text-eco2MainColor"
@@ -249,7 +249,7 @@ function Avatar({ large = false, className, ...props }) {
       {...props}
     >
       <Image
-        src={isDarkMode ? logoDark : logoLight }
+        src={isDarkMode ? logoLight : logoLight }
         alt=""
         // sizes={large ? "4rem" : "2.25rem"}
         className={clsx(

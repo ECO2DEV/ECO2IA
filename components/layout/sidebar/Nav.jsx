@@ -75,7 +75,7 @@ export const Nav = ({ children }) => {
             <div className="flex flex-wrap justify-center items-center gap-4">
               <div>{image_url}</div>
               <div className="ml-3 flex flex-col gap-1">
-                <p className="text-sm font-medium text-white text-center text-lightColor dark:text-darkColor">
+                <p className="text-sm font-medium text-center text-lightColor dark:text-darkColor">
                   {children?.props?.user?.Name}
                 </p>
                 <Link href={'/profile'}>

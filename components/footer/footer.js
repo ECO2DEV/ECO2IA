@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { LinkedinIcon } from "../icons/icons";
 import { DataNavbar } from "../../data/navbar";
 import LandingPage from "../modal/LandingPage";
@@ -20,25 +19,6 @@ const navigation = {
 };
 
 export default function Footer() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const rootElement = document.documentElement;
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === "class") {
-          const isDark = rootElement.classList.contains("dark");
-          setIsDarkMode(isDark);
-        }
-      });
-    });
-
-    observer.observe(rootElement, {
-      attributes: true,
-    });
-
-    return () => observer.disconnect();
-  }, []);
   return (
     <footer className="bg-lightColor dark:bg-darkColor">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -48,9 +28,7 @@ export default function Footer() {
           <div className="flex justify-between">
             <div className="flex flex-col sm:flex-row sm:space-x-10">
               <img
-                className={`h-20 w-20 animate-float ${
-                  !isDarkMode ? "img-filter-green" : "filter grayscale"
-                }`}
+                className={`h-20 w-20 animate-float img-filter-green dark:filter-none`}
                 src="https://eco2.com.co/moanooch/2021/09/Eco3.gif"
                 alt="Eco2 Animation"
               />

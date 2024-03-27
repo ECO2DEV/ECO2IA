@@ -359,3 +359,67 @@
   scrollbar-color: #f0fdf4 #1f2937 ;
   scrollbar-width: thin;
 }
+
+
+.custom-select-wrapper {
+  position: relative;
+  user-select: none;
+}
+
+.custom-select {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-select__trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.custom-select__trigger:hover {
+  background-color: #f8f8f8;
+}
+
+.icon {
+  margin-left: 10px;
+}
+
+.custom-options {
+  position: absolute;
+  display: none;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  background-color: white;
+  z-index: 2;
+}
+
+.custom-select.open .custom-options {
+  display: block;
+}
+
+.custom-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.custom-option:hover {
+  background-color: #f8f8f8;
+}
+
+.custom-option.selected {
+  background-color: #e9e9e9;
+}

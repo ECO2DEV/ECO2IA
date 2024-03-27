@@ -6,7 +6,7 @@ import { CheckIcon } from '@heroicons/react/20/solid'
 import {classNames, plan_pricing, stripePromise} from '../../constants/constans'
 // import {frequencies, tiers} from '../../constants/PricingConstans'
 import CheckoutForm from '../payment/CheckoutForm'
-import { ContacUs } from '../contact_us/contacUs'
+import { ContacUsPricing } from '../contact_us/contactUsPricing'
 import { PopUpModal } from '../modal/popUpModal'
 import axios from 'axios'
 
@@ -78,7 +78,7 @@ export default function PricingPlans() {
       )}
       {isEnterpriseOpen && (
         <PopUpModal isModalNeedIt={true}>
-          <ContacUs onClose={handleButtonEnterprise} />
+          <ContacUsPricing onClose={handleButtonEnterprise} />
         </PopUpModal>
       )}
 
