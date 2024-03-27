@@ -29,9 +29,6 @@ export default function Footer() {
             <div className="flex flex-col sm:flex-row sm:space-x-10">
               <img
                 className={`h-20 w-20 animate-float img-filter-green dark:filter-none`}
-                // !isDarkMode ? "img-filter-green" : "filter grayscale"
-                //dark:img-filter-green
-                //  filter grayscale
                 src="https://eco2.com.co/moanooch/2021/09/Eco3.gif"
                 alt="Eco2 Animation"
               />

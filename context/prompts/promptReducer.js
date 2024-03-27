@@ -38,6 +38,11 @@ export const promptReducer = (state, action) => {
         ...state,
         responseTokens: action.payload
       };
+    case 'SET_IAS_ALLOWED_TO_ACCESS':
+      return {
+        ...state,
+        iasAllowedToAccess: action.payload
+      };
     default:
       return state;
   }

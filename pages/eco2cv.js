@@ -1,5 +1,5 @@
 import Head from 'next/head';
-// import Modal from '../components/modal/modal';
+import Modal from '../components/modal/modal';
 import Eco2cvIA from '../components/eco2cv/Eco2cv';
 import { getUser } from '../util/api/user';
 
@@ -18,7 +18,14 @@ const Eco2cv = (props) => {
       ) : (
         <Eco2cvIA />
       )} */}
-      <Eco2cvIA />
+      {/* <Eco2cvIA /> */}
+      {props.user.plan.typo === 'Freemium' ? (
+        <Modal user={props?.user} />
+      ) : +props?.user?.plan?.max_tokens <= 0 ? (
+        <Modal user={props?.user} />
+      ) : (
+        <Eco2cvIA />
+      )}
     </div>
   );
 };

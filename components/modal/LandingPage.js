@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { motion, AnimatePresence } from "framer-motion";
 import { XMarkIcon } from "@heroicons/react/20/solid";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 
 import { createIAContactMessage, updatedAIContactImage } from "../../util/api/iaContact";
 import { uploadUserImage } from '../../util/api/user';
@@ -52,6 +52,9 @@ function LandingPage() {
 
   const openModal = async () => {
     setModalIsOpen(true);
+    if (modalIsOpen === false) {
+      setConfirmationMessage('');
+    }
   };
 
   const closeModal = async () => {
@@ -286,6 +289,7 @@ function LandingPage() {
       >
         Click, Aquí!
       </motion.button>
+      <Toaster position="top-center" />
     </section>
   );
 }
