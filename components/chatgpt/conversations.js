@@ -31,7 +31,7 @@ export const Conversations = ({ messages, responseModelMap }) => {
     if (modelOption) {
       return modelOption.icon;
     } else {
-      console.warn("Model not found in options:", model);
+      // console.warn("Model not found in options:", model);
       return null;
     }
   };

@@ -33,8 +33,8 @@ export default function ChatGpt() {
     user,
   } = useContext(UserContext);
 
-  const handleModelChange = (e) => {
-    setSelectedModel(e.target.value);
+  const handleModelChange = (option) => {
+    setSelectedModel(option.value);
   };
 
   const { setResponse, setActiveAI } = useContext(PromptContext);
@@ -91,7 +91,7 @@ export default function ChatGpt() {
           id: newMessageId,
           role: message.role
         };
-        console.log('objeto del mensage', newMessage);
+        // console.log('objeto del mensage', newMessage);
 
         setMessages((prevMessages) => {
           const updatedMessages = prevMessages.map((msg) => {
@@ -107,12 +107,12 @@ export default function ChatGpt() {
           ...prevMap,
           [newMessage.id]: selectedModel
         }));
-        console.log('set response model map:', setResponseModelMap)
+        // console.log('set response model map:', setResponseModelMap)
         
         
 
         setResponse(newMessage.content + input);
-        console.log("response + input", setResponse);
+        // console.log("response + input", setResponse);
 
         mutate();
       } catch (error) {
