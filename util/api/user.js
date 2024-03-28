@@ -6,15 +6,17 @@ import { toast } from 'react-hot-toast';
 // Here are users CRUD operations 👪
 export const createUser = async (data) => {
   try {
-    // console.log('Data to create user' + data.email);
-    const dataStripe = { email: data.email, name: data.Name };
-    const respStripe = await axios.post(
-      `${strapiUrl}/api/payment/createUser`,
-      dataStripe,
-      header
-    );
+    // console.log('Data to create user' + data.email)+
+    // this is for create the user in stripe <---> payment
+    // const dataStripe = { email: data.email, name: data.Name };
+    // const respStripe = await axios.post(
+    //   `${strapiUrl}/api/payment/createUser`,
+    //   dataStripe,
+    //   header
+    // );
     // console.log('Id costumer usuario' + respStripe.data.id);
-    const newData = { ...data, customer_id: respStripe.data.id };
+    // const newData = { ...data, customer_id: resStripe.data.id};
+    const newData = { ...data };
     const response = await axios.post(
       `${strapiUrl}/api/auth/local/register`,
       newData,
@@ -43,13 +45,12 @@ export async function createUserForProvider({
   username,
   email,
   password,
-  customer_id,
   plan
 }) {
   try {
     const response = await axios.post(
       `${strapiUrl}/api/auth/local/register`,
-      { username, email, password, Name: username, customer_id, plan },
+      { username, email, password, Name: username, plan },
       header
     );
     return response;
@@ -177,7 +178,22 @@ export async function updateUserImage({ formData, id }) {
     return null;
   }
 }
+//ToDo : create in all planes a create user in stripe payment
 
+export const createStripeUser = async ({ email, name }) => {
+  console.log('inside the createStripeUser', email, name);
+  try {
+    const response = await axios.post(
+      `${strapiUrl}/api/payment/createUser`,
+      { email, name },
+      header
+    );
+    return response;
+  } catch (error) {
+    console.error(`Error making POST request to ${strapiUrl}:`, error);
+    return error.response.data.error;
+  }
+};
 // Here are the functions to create the plans🗓️
 export const setStandardPlan = async () => {
   try {
