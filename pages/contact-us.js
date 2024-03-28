@@ -105,9 +105,7 @@ export default function contactUs() {
 
   return (
     <section
-      className={`relative isolate ${
-        isDarkMode ? "dark-darkColor" : "light-lightColor"
-      }`}
+      className={`relative isolate bg-lightColor dark:bg-darkColor`}
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
         <section className="relative px-3 pb-5 pt-5 sm:pt-20 lg:static lg:px-8 lg:py-20">

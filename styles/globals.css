@@ -359,3 +359,62 @@
   scrollbar-color: #f0fdf4 #1f2937 ;
   scrollbar-width: thin;
 }
+
+
+.custom-select-wrapper {
+  position: relative;
+  user-select: none;
+  width: 160px;
+}
+
+.custom-select {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.custom-select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.custom-select__trigger:hover, .custom-option:hover {
+  background-color: #f0f0f0;
+}
+
+.custom-options {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  top: auto;
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  background-color: white;
+  z-index: 2;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.custom-option {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.custom-option.selected {
+  font-weight: bold;
+}
+
+.custom-select.open .custom-options {
+  display: block;
+}

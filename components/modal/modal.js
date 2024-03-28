@@ -1,29 +1,58 @@
-import { useState } from 'react';
-import {
-  CheckIcon,
-  XMarkIcon as XMarkIconMini
-} from '@heroicons/react/20/solid';
-import { DataPricing } from '../../data/pricing';
-import { useRouter } from 'next/router';
-import CheckoutForm from '../payment/CheckoutForm';
-import { PopUpModal } from './popUpModal';
-import { ContacUs } from '../contact_us/contacUs';
-import { plan_pricing } from '../../constants/constans';
-import axios from 'axios';
+import { useState,useContext } from 'react'
+import { UserContext } from '../../context/user/UserContext';
+import { useRouter } from 'next/router'
+import { RadioGroup } from '@headlessui/react'
+import { CheckIcon } from '@heroicons/react/20/solid'
+import {classNames, plan_pricing, stripePromise} from '../../constants/constans'
+// import {frequencies, tiers} from '../../constants/PricingConstans'
+import CheckoutForm from '../payment/CheckoutForm'
+import { ContacUsPricing } from '../contact_us/contactUsPricing'
+import { PopUpModal } from '../modal/popUpModal'
+import axios from 'axios'
 
-// import { stripePromise } from '../../constants/constans';
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
-
-export default function Modal({ user }) {
-  const [isOpen, setIsOpen] = useState(true);
+export default function PricingPlans() {
+  const { user } = useContext(UserContext);
   const router = useRouter();
+  // console.log('User in pricing is:' + user);
+  const [frequency, setFrequency] = useState(plan_pricing.frequencies[0]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEnterpriseOpen, setIsEnterpriseOpen] = useState(false);
   const [amount, setAmount] = useState(0);
-  const [currency, setCurrency] = useState('eur');
+  const [currency, setCurrency] = useState('cop');
+
+  const handleCheckout = async ({ price }) => {
+    // console.log(price);
+    if (user == null) {
+      router.push('/auth/signin');
+      // Set the state to open the modal
+    } else {
+      try {
+        const stripe = await stripePromise;
+        const customerid = user.customer_id;
+        const userId = user.id;
+
+        console.log("inside the handleCheckout", price, customerid, userId)
+
+        const checkoutSession = await axios.post('/api/create-subscription', {
+          price,
+          customerid,
+          userId
+        });
+        console.log("hey cjeckout session",checkoutSession);
+
+        const result = await stripe.redirectToCheckout({
+          sessionId: checkoutSession.data.sessionId
+        });
+
+        if (result.error) {
+          alert(result.error.message);
+        }
+      } catch (error) {
+        // console.log(error);
+      }
+    }
+  };
 
   const handleButtonClick = ({ amount }) => {
     if (user == null) {
@@ -31,214 +60,158 @@ export default function Modal({ user }) {
       // Set the state to open the modal
     } else {
       setAmount(amount);
-      setIsModalOpen(!isModalOpen);
+      setIsModalOpen((prev) => !prev);
     }
   };
   const handleButtonEnterprise = () => {
-    setIsEnterpriseOpen(!isEnterpriseOpen);
+    setIsEnterpriseOpen((prev) => !prev);
   };
-  const handleCheckout = async ({ price }) => {
-    if (user == null) {
-      router.push('/auth/signin');
-      // Set the state to open the modal
-    } else {
-      try {
-        // const stripe = await stripePromise;
-        const customerid = user.customer_id;
-        const userId = user.id;
-
-        const checkoutSession = await axios.post('/api/create-subscription', {
-          price,
-          customerid,
-          userId
-        });
-        console.log(checkoutSession);
-
-        // const result = await stripe.redirectToCheckout({
-        //   sessionId: checkoutSession.data.sessionId
-        // });
-
-        if (result.error) {
-          alert(result.error.message);
-        }
-      } catch (error) {
-        // console.error('loadStripe', error);
-        console.log(error)
-      }
-    }
-  };
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [frequency, setFrequency] = useState(plan_pricing.frequencies[0]);
   return (
     <>
-      {isOpen && (
-        <section className="-my-10 -pb-10 -mx-4 sm:-mx-6 lg:-mx-8 lg:-my-13 inset-0 z-50 overflow-auto bg-gray-900 ">
-          {/* Render the modal if isModalOpen is true */}
-          {isModalOpen && (
-            <CheckoutForm
-              onClose={handleButtonClick}
-              amount={amount}
-              currency={currency}
-              user={user}
-            />
-          )}
-          {isEnterpriseOpen && (
-            <PopUpModal isModalNeedIt={true}>
-              <ContacUs onClose={handleButtonEnterprise} />
-            </PopUpModal>
-          )}
-          <div className="isolate overflow-hidden">
-            <div className="bg-gray-900 py-16 sm:pt-32 min-h-screen flex items-center justify-center lg:pb-0">
-              <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="relative z-10">
-                  <h3 className="mx-auto max-w-4xl text-center text-4xl font-light tracking-tight text-white">
-                    {DataPricing.pricingmaindescription}
-                  </h3>
-                  {/* <div clas sName="mt-16 flex justify-center">
-               <RadioGroup
-                 value={frequency}
-                 onChange={setFrequency}
-                 className="grid grid-cols-2 gap-x-1 rounded-full bg-white/5 p-1 text-center text-xs font-semibold leading-5 text-white"
-               >
-                 <RadioGroup.Label className="sr-only">Payment frequency</RadioGroup.Label>
-                 {pricing.frequencies.map((option) => (
-                   <RadioGroup.Option
-                     key={option.value}
-                     value={option}
-                     className={({ checked }) =>
-                       classNames(checked ? 'bg-indigo-500' : '', 'cursor-pointer rounded-full px-2.5 py-1')
-                     }
-                   >
-                     <span>{option.label}</span>
-                   </RadioGroup.Option>
-                 ))}
-               </RadioGroup>
-             </div> */}
-                </div>
-                <div className="relative mx-auto mt-10 grid max-w-md grid-cols-1 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-                  <svg
-                    viewBox="0 0 1208 1024"
-                    aria-hidden="true"
-                    className="absolute -bottom-48 left-1/2 h-[64rem] -translate-x-1/2 translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] lg:-top-48 lg:bottom-auto lg:translate-y-0"
-                  >
-                    <ellipse
-                      cx={604}
-                      cy={512}
-                      fill="url(#d25c25d4-6d43-4bf9-b9ac-1842a30a4867)"
-                      rx={604}
-                      ry={512}
-                    />
-                    <defs>
-                      <radialGradient id="d25c25d4-6d43-4bf9-b9ac-1842a30a4867">
-                        <stop stopColor="#7775D6" />
-                        <stop offset={1} stopColor="#E935C1" />
-                      </radialGradient>
-                    </defs>
-                  </svg>
-                  <div
-                    className="hidden lg:absolute lg:inset-x-px lg:bottom-0 lg:top-4 lg:block lg:rounded-t-2xl lg:bg-gray-800/80 lg:ring-1 lg:ring-white/10"
-                    aria-hidden="true"
-                  />
-                  {plan_pricing.tiers.map((tier, index) => (
-                    <div
-                      key={index}
-                      className={classNames(
-                        tier.featured
-                          ? 'z-10 bg-white shadow-xl ring-1 ring-gray-900/10'
-                          : 'bg-gray-800/80 ring-1 ring-white/10 lg:bg-transparent lg:pb-14 lg:ring-0',
-                        'relative rounded-2xl'
-                      )}
-                    >
-                      <div className="p-8 lg:pt-12 xl:p-10 xl:pt-14">
-                        <h2
-                          id={tier.id}
-                          className={classNames(
-                            tier.featured ? 'text-gray-900' : 'text-white',
-                            'text-sm font-semibold leading-6'
-                          )}
-                        >
-                          {tier.name}
-                        </h2>
-                        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between lg:flex-col lg:items-stretch">
-                          <div className="mt-2 flex items-center gap-x-4">
-                            <p
-                              className={classNames(
-                                tier.featured ? 'text-gray-900' : 'text-white',
-                                'text-4xl font-bold tracking-tight'
-                              )}
-                            >
-                              {tier.price[frequency.value]}
-                            </p>
-                            <div className="text-sm leading-5">
-                              <p
-                                className={
-                                  tier.featured ? 'text-gray-900' : 'text-white'
-                                }
-                              ></p>
-                            </div>
-                          </div>
-                          <a
-                            //href={tier.href}
-                            onClick={
-                              tier.name === DataPricing.pricingtitle3
-                                ? () => {
-                                    handleButtonEnterprise();
-                                  }
-                                : () => {
-                                    handleCheckout({
-                                      price: tier.priceid
-                                    });
-                                  }
-                            }
-                            aria-describedby={tier.id}
-                            className={classNames(
-                              tier.featured
-                                ? 'bg-indigo-600 shadow-sm hover:bg-indigo-500 focus-visible:outline-indigo-600'
-                                : 'bg-white/10 hover:bg-white/20 focus-visible:outline-white',
-                              'rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
-                            )}
-                          >
-                            {tier.cta}
-                          </a>
-                        </div>
-                        <div className="mt-8 flow-root sm:mt-10">
-                          <ul
-                            role="list"
-                            className={classNames(
-                              tier.featured
-                                ? 'divide-gray-900/5 border-gray-900/5 text-gray-600'
-                                : 'divide-white/5 border-white/5 text-white',
-                              '-my-2 divide-y border-t text-sm leading-6 lg:border-t-0'
-                            )}
-                          >
-                            {tier.mainFeatures.map((mainFeature) => (
-                              <li
-                                key={mainFeature}
-                                className="flex gap-x-3 py-2"
-                              >
-                                <CheckIcon
-                                  className={classNames(
-                                    tier.featured
-                                      ? 'text-indigo-600'
-                                      : 'text-gray-500',
-                                    'h-6 w-5 flex-none'
-                                  )}
-                                  aria-hidden="true"
-                                />
-                                {mainFeature}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      {isModalOpen && (
+        <CheckoutForm
+          onClose={handleButtonClick}
+          amount={amount}
+          currency={currency}
+          user={user}
+        />
       )}
+      {isEnterpriseOpen && (
+        <PopUpModal isModalNeedIt={true}>
+          <ContacUsPricing onClose={handleButtonEnterprise} />
+        </PopUpModal>
+      )}
+
+      <section id="pricing" className="bg-lightColor dark:bg-darkColor">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="text-base font-semibold leading-7 text-eco2MainColor">
+              Suscripciones
+            </h2>
+            <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
+              Escoge el plan que mejor se adapte a tus necesidades.
+            </p>
+          </div>
+          <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600 dark:text-white">
+            Elige la suscripción más adecuada para ti. Puedes cambiar de plan o
+            cancelar en cualquier momento.
+          </p>
+          <div className="mt-16 flex justify-center">
+            <RadioGroup
+              value={frequency}
+              onChange={setFrequency}
+              className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
+            >
+              <RadioGroup.Label className="sr-only">
+                Frecuencia de suscripción{' '}
+              </RadioGroup.Label>
+              {plan_pricing.frequencies.map((option) => (
+                <RadioGroup.Option
+                  key={option.value}
+                  value={option}
+                  className={({ checked }) =>
+                    classNames(
+                      checked ? 'bg-green-600 text-white' : 'text-gray-500',
+
+                      'cursor-pointer rounded-full px-2.5 py-1'
+                    )
+                  }
+                >
+                  <span>{option.label}</span>
+                </RadioGroup.Option>
+              ))}
+            </RadioGroup>
+          </div>
+
+          <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0  sm:max-w-none sm:grid-cols-2 lg:grid-cols-4">
+            {plan_pricing.tiers.map((tier) => (
+              <article
+                key={tier.name}
+                className={classNames(
+                  tier.mostPopular
+                    ? 'ring-2 ring-eco2HoverColor'
+                    : 'ring-1 ring-gray-200',
+                  'rounded-3xl p-8 xl:p-10 shadow-xl flex flex-col justify-between items-center '
+                )}
+              >
+                <div className="flex items-center flex-col">
+                  <h3
+                    id={tier.id}
+                    className={classNames(
+                      tier.mostPopular
+                        ? 'text-eco2MainColor'
+                        : 'text-gray-900 dark:text-white',
+                      'text-lg font-semibold leading-8'
+                    )}
+                  >
+                    {tier.name}
+                  </h3>
+                  {tier.mostPopular ? (
+                    <p className="rounded-full bg-eco2MainColor px-2.5 py-1 text-xs font-semibold leading-5 text-white">
+                      Most popular
+                    </p>
+                  ) : null}
+                </div>
+
+                <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-white">
+                  {tier.description}
+                </p>
+                <p className="mt-6 flex items-baseline gap-x-1">
+                  <span className="text-4xl font-bold tracking-tight text-eco2MainColor">
+                    {tier.price[frequency.value]}
+                  </span>
+                  <span className="text-sm font-semibold leading-6 text-eco2HoverColor">
+                    {frequency.priceSuffix}
+                  </span>
+                </p>
+
+                <ul
+                  role="list"
+                  className="mt-8 space-y-3 text-sm leading-6 text-gray-600 xl:mt-10"
+                >
+                  {tier.mainFeatures.map((feature) => (
+                    <li key={feature} className="flex gap-x-3">
+                      <CheckIcon
+                        className="h-6 w-5 flex-none text-eco2MainColor"
+                        aria-hidden="true"
+                      />
+                      <p className="dark:text-white">{feature}</p>
+                    </li>
+                  ))}
+                </ul>
+                {tier.name === 'FREEMIUM' ? (
+                 <button disabled className=' w-full opacity-95 py-2'>
+                  Plan Freemium
+                 </button>
+                ) : (
+                  <button
+                    onClick={
+                      tier.name === 'ENTERPRISE'
+                        ? () => {
+                            handleButtonEnterprise();
+                          }
+                        : () => {
+                            handleCheckout({
+                              price: tier.priceid
+                            });
+                          }
+                    }
+                    aria-describedby={tier.id}
+                    className={classNames(
+                      tier.featured
+                        ? 'bg-darkColor dark:text-black dark:bg-lightColor dark:hover:bg-eco2MainColor text-white hover:bg-darkBgCard transition-all focus-visible:outline-eco2MainColor focus-visible:outline-2 focus-visible:outline-offset-2'
+                        : 'bg-eco2MainColor text-black hover:bg-eco2HoverColor transition-all focus-visible:outline-eco2MainColor',
+                      `cursor-pointer w-full  mt-6 block rounded-md py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2`
+                    )}
+                  >
+                    {tier.cta}
+                  </button>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }
