@@ -37,7 +37,7 @@ export default function Features() {
             <motion.img
               className="h-80 w-80 mx-auto animate-float"
               src="https://eco2.com.co/moanooch/2021/09/Eco3.gif"
-              alt=""
+              alt="features"
               loading="lazy"
             />
           </motion.div>

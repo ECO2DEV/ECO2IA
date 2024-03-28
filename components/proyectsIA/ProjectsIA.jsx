@@ -129,7 +129,7 @@ export const ProjectsIA = () => {
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
             src={IA1}
-            alt="image"
+            alt="image ia"
             width={600}
             height={600}
           />
@@ -144,7 +144,7 @@ export const ProjectsIA = () => {
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
             src={IA2}
-            alt="image"
+            alt="image ia"
             width={600}
             height={600}
           />
@@ -159,7 +159,7 @@ export const ProjectsIA = () => {
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
             src={IA4}
-            alt="image"
+            alt="image ia"
             width={600}
             height={600}
           />
@@ -174,7 +174,7 @@ export const ProjectsIA = () => {
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
             src={IA3}
-            alt="image"
+            alt="image ia"
             width={600}
             height={600}
           />
@@ -189,7 +189,7 @@ export const ProjectsIA = () => {
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
             src={IA5}
-            alt="image"
+            alt="image ia"
             width={600}
             height={600}
           />
@@ -204,7 +204,7 @@ export const ProjectsIA = () => {
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
             src={IA6}
-            alt="image"
+            alt="image ia"
             width={600}
             height={600}
           />
@@ -219,7 +219,7 @@ export const ProjectsIA = () => {
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
             src={IA8}
-            alt="image"
+            alt="image ia"
             width={600}
             height={600}
           />
@@ -234,7 +234,7 @@ export const ProjectsIA = () => {
         -z-10 h-full w-full bg-blue-950
         bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
             src={IA7}
-            alt="image"
+            alt="image ia"
             width={600}
             height={600}
           />

@@ -202,7 +202,7 @@ export default function Nosia() {
                     <div className="relative">
                       <img
                         src="https://images.unsplash.com/photo-1608306448197-e83633f1261c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                        alt=""
+                        alt="image from unsplash"
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
@@ -212,7 +212,7 @@ export default function Nosia() {
                     <div className="relative">
                       <img
                         src="https://images.unsplash.com/photo-1541560052-5e137f229371?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                        alt=""
+                        alt="image from unsplash"
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
@@ -220,7 +220,7 @@ export default function Nosia() {
                     <div className="relative">
                       <img
                         src="https://images.unsplash.com/photo-1498814217031-5a856f4a18ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                        alt=""
+                        alt="image from unsplash"
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
@@ -230,7 +230,7 @@ export default function Nosia() {
                     <div className="relative">
                       <img
                         src="https://images.unsplash.com/photo-1448932223592-d1fc686e76ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80"
-                        alt=""
+                        alt="image from unsplash"
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
@@ -238,7 +238,7 @@ export default function Nosia() {
                     <div className="relative">
                       <img
                         src="https://images.unsplash.com/photo-1603195827187-459ab02554a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                        alt=""
+                        alt="image from unsplash"
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
@@ -287,7 +287,7 @@ export default function Nosia() {
         <div className="mt-32 sm:mt-40 xl:mx-auto xl:max-w-7xl xl:px-8">
           <img
             src="https://images.unsplash.com/photo-1680584405372-defac8a5db62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1935&q=80"
-            alt=""
+            alt="image from unsplash"
             className="aspect-[5/2] w-full object-cover xl:rounded-3xl"
           />
         </div>
@@ -315,7 +315,7 @@ export default function Nosia() {
                 <div className="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end">
                   <img
                     src="https://images.unsplash.com/photo-1682099673497-b0f74a24d7ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                    alt=""
+                    alt="image from unsplash"
                     className="aspect-[14/13] w-[37rem] max-w-none rounded-2xl bg-gray-50 object-cover"
                   />
                 </div>
@@ -323,21 +323,21 @@ export default function Nosia() {
                   <div className="order-first flex w-64 flex-none justify-end self-end lg:w-auto">
                     <img
                       src="https://images.unsplash.com/photo-1681277789126-1282bdf5f046?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                      alt=""
+                      alt="image from unsplash"
                       className="aspect-[4/3] w-[24rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
                     />
                   </div>
                   <div className="flex w-96 flex-auto justify-end lg:w-auto lg:flex-none">
                     <img
                       src="https://images.unsplash.com/photo-1681801727150-24302f7c645f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=751&q=80"
-                      alt=""
+                      alt="image from unsplash"
                       className="aspect-[7/5] w-[37rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
                     />
                   </div>
                   <div className="hidden sm:block sm:w-0 sm:flex-auto lg:w-auto lg:flex-none">
                     <img
                       src="https://images.unsplash.com/photo-1682257881805-195e075c34a4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                      alt=""
+                      alt="image from unsplash"
                       className="aspect-[4/3] w-[24rem] max-w-none rounded-2xl bg-gray-50 object-cover"
                     />
                   </div>
@@ -366,7 +366,7 @@ export default function Nosia() {
               >
                 <img
                   src={post.imageUrl}
-                  alt=""
+                  alt="image from unsplash"
                   className="absolute inset-0 -z-10 h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40" />
@@ -405,7 +405,7 @@ export default function Nosia() {
             <img
               className="h-64 w-full bg-gray-50 object-cover sm:h-80 lg:absolute lg:h-full "
               src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-              alt=""
+              alt="image from unsplash"
             />
           </div>
           <PopUpModal isModalNeedIt={false}>
