@@ -43,15 +43,15 @@ export const LeftSectionCV = ({
 
       <div className="flex justify-start items-center relative">
         <div
-          title={DataEco2CV.AddProfileInfo}
+          // title={DataEco2CV.AddProfileInfo}
           onMouseEnter={() => handleToggleHover(true)}
           onMouseLeave={() => handleToggleHover(false)}
         >
           <ToggleProfileOpt setFormData={setFormData} />
         </div>
         {toggleHovered && (
-          <p className="absolute top-[-40px] left-0 bg-white p-1 rounded border border-gray-300 shadow">
-            {DataEco2CV.CompleteInfo}
+          <p className="absolute top-[-40px] left-0 text-black bg-white p-1 rounded border border-gray-300 shadow">
+            {DataEco2CV.AddProfileInfo}
           </p>
         )}
       </div>

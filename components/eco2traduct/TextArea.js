@@ -46,12 +46,12 @@ export const TextArea = ({
         disabled={type === 'to'}
         placeholder={getPlaceholder({ type, loading })}
         className={` pl-1 border-0 resize-none rounded-b-md ${
-          type === 'from' ? '' : 'border-gray-200'
+          type === 'from' ? 'bg-darkBgCard' : 'border-gray-200'
         }
       ${
         type === 'from'
-          ? 'h-[200px] sm:h-[300px] lg:h-[400px] xl:h-[410px] w-full bg-eco2MainColor text-gray-100'
-          : 'h-[200px]  sm:h-[300px] lg:h-[400px] xl:h-[410px] w-full bg-gray-200'
+          ? 'h-[200px] sm:h-[300px] lg:h-[400px] xl:h-[410px] w-full bg-darkBgCard dark:bg-darkBgCard font-semibold text-gray-200 dark:text-gray-200 '
+          : 'h-[200px]  sm:h-[300px] lg:h-[400px] xl:h-[410px] w-full bg-white font-semibold text-gray-800'
       }`}
         value={value}
         onChange={handleChange}

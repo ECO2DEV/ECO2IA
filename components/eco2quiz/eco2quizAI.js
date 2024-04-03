@@ -139,7 +139,7 @@ export const Eco2quizAI = () => {
         ) : (
           submittedData && (
             <section className="relative flex flex-col justify-center items-center">
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+              <h3 className="text-2xl font-bold text-eco2MainColor">
                 {DataEco2Quiz.QuestionGenerated}
               </h3>
               <ul className="flex flex-col justify-center items-start">
@@ -147,7 +147,7 @@ export const Eco2quizAI = () => {
                   ({ question, posibleAnswers, correctAnswer }, index) => (
                     <li key={index}>
                       <details open className="mb-1 p-4  ">
-                        <summary className="text-lg font-bold text-indigo-600 cursor-pointer transition-colors duration-300 hover:text-indigo-700">
+                        <summary className="text-lg font-bold text-gray-800 dark:text-white cursor-pointer transition-colors duration-300">
                           {question}
                         </summary>
                         <div className="flex flex-col justify-center">
@@ -161,7 +161,7 @@ export const Eco2quizAI = () => {
                                   {correctAnswer}
                                 </p>
                               ) : (
-                                <p className="text-lg font-normal text-gray-800">
+                                <p className="text-lg font-normal text-gray-800 dark:text-gray-400">
                                   {posibleAnswer}
                                 </p>
                               )}

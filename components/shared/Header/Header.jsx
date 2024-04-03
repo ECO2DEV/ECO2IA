@@ -213,34 +213,34 @@ export function ThemeToggle() {
   );
 }
 
+export function ThemeToggle2() {
+  let { resolvedTheme, setTheme } = useTheme();
+  let otherTheme = resolvedTheme === "dark" ? "light" : "dark";
+  let [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return (
+    <button
+      type="button"
+      title="Click para cambiar el tema !"
+      aria-label={mounted ? `Switch to ${otherTheme} theme` : "Toggle theme"}
+      className="group w-[45px] h-[45px] flex items-center rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+      onClick={() => setTheme(otherTheme)}
+    >
+      <SunIcon className="h-6 w-6   fill-zinc-100 stroke-zinc-900 transition group-hover:fill-zinc-100 group-hover:stroke-zinc-900 dark:hidden [@media(prefers-color-scheme:dark)]:fill-teal-50 [@media(prefers-color-scheme:dark)]:stroke-eco2MainColor [@media(prefers-color-scheme:dark)]:group-hover:fill-teal-50 [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor" />
+      <MoonIcon className="hidden h-6 w-6   fill-zinc-700 stroke-zinc-500 transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-zinc-200 [@media_not_(prefers-color-scheme:dark)]:fill-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:stroke-eco2MainColor" />
+    </button>
+  );
+}
+
 function AvatarContainer({ className, ...props }) {
   return <div className={clsx(className)} {...props} />;
 }
 
 function Avatar({ large = false, className, ...props }) {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const rootElement = document.documentElement;
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === "class") {
-          const isDark = rootElement.classList.contains("dark");
-          setIsDarkMode(isDark);
-        }
-      });
-    });
-
-    observer.observe(rootElement, {
-      attributes: true,
-    });
-
-    return () => observer.disconnect();
-
-    
-  }, []);
-  const dark = 'h-10 w-10'
-  const light = 'h-15 w-15'
   return (
     <Link
       href="/"
@@ -249,11 +249,34 @@ function Avatar({ large = false, className, ...props }) {
       {...props}
     >
       <Image
-        src={isDarkMode ? logoLight : logoLight }
+        src={logoLight}
         alt=""
         // sizes={large ? "4rem" : "2.25rem"}
         className={clsx(
           "rounded-full max-h-10 max-w-12 bg-zinc-100 object-cover dark:bg-zinc-800",
+          // large ? dark : "h-10 w-12" 
+          // large ? "h-15 w-15" : "h-10 w-12"
+        )}
+        priority
+      />
+    </Link>
+  );
+}
+
+export function Avatar2({ large = false, className, ...props }) {
+  return (
+    <Link
+      href="/"
+      aria-label="Home"
+      className={clsx(className, "pointer-events-auto group flex items-center")}
+      {...props}
+    >
+      <Image
+        src={logoLight}
+        alt=""
+        // sizes={large ? "4rem" : "2.25rem"}
+        className={clsx(
+          "rounded-full w-[45px] h-[45px] bg-zinc-100 object-cover dark:bg-zinc-800",
           // large ? dark : "h-10 w-12" 
           // large ? "h-15 w-15" : "h-10 w-12"
         )}

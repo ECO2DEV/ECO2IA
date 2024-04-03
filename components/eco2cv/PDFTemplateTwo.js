@@ -11,6 +11,7 @@ const DynamicPDFViewer = dynamic(
 );
 import { strapiUrl } from '../../constants/constans';
 
+
 export const PDFTemplateTwo = ({
   spokenLanguages,
   debouncedFormData,

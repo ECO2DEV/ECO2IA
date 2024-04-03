@@ -210,7 +210,7 @@ function LandingPage() {
                           id="name"
                           value={formData.name}
                           required
-                          className="rounded-md bg-white text-gray-700 border-green w-full"
+                          className="rounded-md bg-white text-gray-700 w-full border-none outline-none focus:border-none focus:outline-none focus:ring-0"
                         />
                       </div>
                       <div className="w-full sm:w-1/2 px-2">
@@ -224,7 +224,7 @@ function LandingPage() {
                           id="Email"
                           value={formData.Email}
                           required
-                          className="rounded-md bg-white text-gray-700 border-gray-300 w-full"
+                          className="rounded-md bg-white text-gray-700 border-gray-300 w-full custom-input"
                         />
                       </div>
                     </div>
@@ -252,7 +252,7 @@ function LandingPage() {
                         id="IADetail"
                         value={formData.IADetail}
                         required
-                        className="rounded-md bg-white text-gray-700 border-gray-300 w-full"
+                        className="rounded-md bg-white text-gray-700 border-gray-300 w-full custom-input"
                       ></textarea>
                     </div>
 

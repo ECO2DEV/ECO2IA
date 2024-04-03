@@ -100,7 +100,7 @@ const IACard = ({
           
           {iasAllowedToAccessClean.includes(title) ? (
             <Link
-              className="p-2 border-2 border-[#0b0a10] dark:border-[#f5f5f7]  rounded-full absolute z-50 top-4 right-6 lg:top-6 lg:right-8 cursor-pointer hover:scale-110 hover:bg-black hover:text-white duration-200 transition-all dark:hover:text-[#f5f5f7] duration-150 "
+              className="p-2 border-2 border-[#0b0a10] dark:border-[#f5f5f7]  rounded-full absolute z-50 top-4 right-6 lg:top-6 lg:right-8 cursor-pointer hover:scale-110 hover:bg-black hover:text-white transition-all dark:hover:text-[#f5f5f7] duration-150 "
               href={href}
               target="_blank"
               rel="noreferrer"
@@ -118,7 +118,7 @@ const IACard = ({
             <button
               title="No permitido para plan freemium 😔"
               disabled={true}
-              className="bg-red-800 p-2 border-2  rounded-full absolute z-50 top-4 right-6 lg:top-6 lg:right-8  hover:bg-red-600  duration-200 transition-all  duration-150 "
+              className="bg-red-800 p-2 border-2  rounded-full absolute z-50 top-4 right-6 lg:top-6 lg:right-8  hover:bg-red-600 transition-all  duration-150 "
             >
               <svg
                 className="h-6 w-6 text-white "

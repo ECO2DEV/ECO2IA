@@ -594,8 +594,8 @@ export function VolumenSpeakerIcon() {
       xmlns="http://www.w3.org/2000/svg"
       width="20"
       height="20"
-      fill="#21c284"
-      className="bi bi-volume-up-fill"
+      fill="#21c284a8"
+      className="bi bi-volume-up-fill dark:fill-darkBgCard"
       viewBox="0 0 16 16"
     >
       <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z" />

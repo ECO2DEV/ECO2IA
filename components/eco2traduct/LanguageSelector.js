@@ -7,7 +7,7 @@ export const LanguageSelector = ({ onChange, type, value }) => {
   };
   return (
     <select
-      className="bg-[#053220] rounded-md text-[0.70rem] leading-none sm:text-lg"
+      className="bg-darkBgCard dark:bg-darkBgCard rounded-md text-[0.70rem] leading-none sm:text-lg text-white dark:text-white"
       aria-label="Seleccione el idioma"
       onChange={handleChange}
       value={value}

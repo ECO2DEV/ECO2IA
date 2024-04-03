@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import { Nav } from './Nav';
-import { useRouter } from 'next/router';
+import { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
+import { Nav } from "./Nav";
+import { useRouter } from "next/router";
+import { ThemeToggle2, Avatar2 } from "../../shared/Header/Header";
 
-export const Header = ({children}) => {
+export const Header = ({ children }) => {
   const [isActive, setIsActive] = useState(false);
   const { pathname } = useRouter();
 
@@ -13,12 +14,12 @@ export const Header = ({children}) => {
 
   return (
     <>
-      <div className="text-[#99999] border uppercase text-xs ">
+      <div className="relative uppercase text-xs  z-[100]">
         <div
           onClick={() => {
             setIsActive(!isActive);
           }}
-          className="fixed right-0 top-0 m-[20px] z-[100] w-[45px] h-[45px] rounded-[50%] bg-[#21c284] flex items-center justify-center cursor-pointer"
+          className="fixed right-[20px] top-[16px] w-[45px] h-[45px] rounded-full bg-[#21c284] flex flex-col items-center"
         >
           {isActive ? (
             <button
@@ -45,6 +46,14 @@ export const Header = ({children}) => {
       <AnimatePresence mode="wait">
         {isActive && <Nav children={children} />}
       </AnimatePresence>
+        <div className="fixed right-[20px] top-[50px] z-[100]">
+          <div className="mt-8 rounded-full">
+            <ThemeToggle2 />
+          </div>
+          <div className="mt-6 rounded-full">
+            <Avatar2 />
+          </div>
+        </div>
     </>
   );
 };

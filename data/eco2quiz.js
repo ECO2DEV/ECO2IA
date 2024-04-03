@@ -17,7 +17,7 @@ export const DataEco2Quiz = {
   Italian: 'italiano',
   Portuguese: 'portugués',
   Easy: 'Fácil',
-  Medium: 'PROMEDIO',
+  Medium: 'Intermedio',
   Hard: 'Difícil',
   Submit: 'enviar a',
   QuestionGenerated: 'Preguntas generadas',
