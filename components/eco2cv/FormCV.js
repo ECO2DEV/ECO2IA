@@ -15,12 +15,12 @@ export const FormCV = ({ formData, setFormData }) => {
     <form className="w-full mt-8">
       <div className="mb-4 space-x-4 w-full">
         <div className="flex-1 flex flex-col">
-          <label htmlFor="fullName" className="text-eco2MainColor">
+          <label htmlFor="fullName" className="text-black dark:text-eco2MainColor">
             {' '}
             {DataEco2CV.FullName}{' '}
           </label>
           <input
-            className="flex-1 p-2 border rounded dark:text-black"
+            className="flex-1 p-2 border-white rounded custom-input bg-darkBgCard dark:bg-white text-white dark:text-black"
             type="text"
             placeholder={DataEco2CV.FullName}
             name="fullName"
@@ -31,12 +31,12 @@ export const FormCV = ({ formData, setFormData }) => {
       </div>
       <div className="mb-4 space-x-4 w-full">
         <div className="flex-1 flex flex-col">
-          <label className="text-eco2MainColor" htmlFor="jobTitle">
+          <label className="text-black dark:text-eco2MainColor" htmlFor="jobTitle">
             {' '}
             {DataEco2CV.JobTitle}{' '}
           </label>
           <input
-            className="flex-1 p-2 border rounded text-black"
+            className="flex-1 p-2 border-white rounded custom-input bg-darkBgCard dark:bg-white text-white dark:text-black"
             type="text"
             placeholder={DataEco2CV.JobTitle}
             name="jobTitle"
@@ -48,12 +48,12 @@ export const FormCV = ({ formData, setFormData }) => {
 
       <div className="flex mb-4 space-x-4">
         <div className="flex-1 flex flex-col">
-          <label className="text-eco2MainColor" htmlFor="domainOfStudy">
+          <label className="text-black dark:text-eco2MainColor" htmlFor="domainOfStudy">
             {' '}
             {DataEco2CV.DomainofStudy}{' '}
           </label>
           <input
-            className="p-2 border rounded w-full dark:text-black"
+            className="p-2 border-white rounded custom-input bg-darkBgCard dark:bg-white text-white dark:text-black w-full"
             type="text"
             placeholder={DataEco2CV.DomainofStudy}
             name="domainOfStudy"
@@ -62,12 +62,12 @@ export const FormCV = ({ formData, setFormData }) => {
           />
         </div>
         <div className="flex-1 flex flex-col">
-          <label className="text-eco2MainColor" htmlFor="nationality">
+          <label className="text-black dark:text-eco2MainColor" htmlFor="nationality">
             {' '}
             {DataEco2CV.Nationality}{' '}
           </label>
           <input
-            className="p-2 border rounded w-full dark:text-black"
+            className="p-2 border-white rounded custom-input bg-darkBgCard dark:bg-white text-white dark:text-black w-full"
             type="text"
             placeholder={DataEco2CV.Nationality}
             name="nationality"
@@ -79,12 +79,12 @@ export const FormCV = ({ formData, setFormData }) => {
 
       <div className="flex mb-4 space-x-4">
         <div className="flex-1 flex flex-col">
-          <label className="text-eco2MainColor" htmlFor="email">
+          <label className="text-black dark:text-eco2MainColor" htmlFor="email">
             {' '}
             {DataEco2CV.Email}{' '}
           </label>
           <input
-            className="p-2 border rounded w-full dark:text-black"
+            className="p-2 border-white rounded custom-input bg-darkBgCard dark:bg-white text-white dark:text-black w-full"
             type="email"
             name="email"
             value={formData?.email ? formData.email : ''}
@@ -92,12 +92,12 @@ export const FormCV = ({ formData, setFormData }) => {
           />
         </div>
         <div className="flex-1 flex flex-col">
-          <label className="text-eco2MainColor" htmlFor="phone">
+          <label className="text-black dark:text-eco2MainColor" htmlFor="phone">
             {' '}
             {DataEco2CV.Telephone}{' '}
           </label>
           <input
-            className="p-2 border rounded w-full dark:text-black"
+            className="p-2 border-white rounded custom-input bg-darkBgCard dark:bg-white text-white dark:text-black w-full"
             type="text"
             placeholder={DataEco2CV.Telephone}
             name="phone"
@@ -109,12 +109,12 @@ export const FormCV = ({ formData, setFormData }) => {
 
       <div className="flex mb-4 space-x-4">
         <div className="flex-1 flex flex-col">
-          <label className="text-eco2MainColor" htmlFor="country">
+          <label className="text-black dark:text-eco2MainColor" htmlFor="country">
             {' '}
             {DataEco2CV.Country}{' '}
           </label>
           <input
-            className="p-2 border rounded w-full dark:text-black"
+            className="p-2 border-white rounded custom-input bg-darkBgCard dark:bg-white text-white dark:text-black w-full"
             type="text"
             placeholder={DataEco2CV.Country}
             name="country"
@@ -123,12 +123,12 @@ export const FormCV = ({ formData, setFormData }) => {
           />
         </div>
         <div className="flex-1 flex flex-col">
-          <label className="text-eco2MainColor" htmlFor="city">
+          <label className="text-black dark:text-eco2MainColor" htmlFor="city">
             {' '}
             {DataEco2CV.City}{' '}
           </label>
           <input
-            className="p-2 border rounded w-full dark:text-black"
+            className="p-2 border-white rounded custom-input bg-darkBgCard dark:bg-white text-white dark:text-black w-full"
             type="text"
             placeholder={DataEco2CV.City}
             name="city"

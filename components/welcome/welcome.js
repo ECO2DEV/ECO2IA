@@ -36,10 +36,10 @@ export const Welcome = ({ setInput }) => {
         </ul>
       </div>
       <div className="flex flex-col justify-center items-center mb-24 md:mb-auto gap-3.5 flex-1">
-        <h2 className="flex justify-center flex-col justify-center  items-center gap-3 items-center m-auto text-lg font-normal md:flex-col md:gap-2">
+        <h2 className="flex flex-col justify-center gap-3 items-center m-auto text-lg font-normal md:flex-col md:gap-2">
           <WarningIcon /> {DataEco2Chat.Limitation}
         </h2>
-        <ul className="flex flex-col flex-col justify-center items-center gap-1 w-full sm:max-w-md m-auto ">
+        <ul className="flex flex-col justify-center items-center gap-1 w-full sm:max-w-md m-auto ">
           {LIMITATION.map((limitation, index) => (
             <li
               key={index}

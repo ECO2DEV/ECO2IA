@@ -184,8 +184,7 @@ const Eco2traductAI = () => {
   return (
     <>
       <section className="flex flex-col justify-center items-center gap-6 min-h-screen ">
-        {/* <h1 className='text-5xl font-semibold text-eco2MainColor dark:text-white'>María: Tu traductora personal</h1> */}
-        <h1 className="text-5xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-eco2MainColor to-darkBgCard dark:from-eco2MainColor dark:to-white">
+        <h1 className="text-5xl text-center mb-[40px] font-semibold dark:text-white">
           María: Tu traductora personal
         </h1>
         <div className="w-full max-w-5xl shadow-lg bg-eco2MainColor rounded-md">

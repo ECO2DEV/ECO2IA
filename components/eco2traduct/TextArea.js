@@ -45,7 +45,7 @@ export const TextArea = ({
         autoFocus={type === 'from'}
         disabled={type === 'to'}
         placeholder={getPlaceholder({ type, loading })}
-        className={` pl-1 border-0 resize-none rounded-b-md ${
+        className={` pl-1 border-0 resize-none rounded-b-md custom-input ${
           type === 'from' ? 'bg-darkBgCard' : 'border-gray-200'
         }
       ${

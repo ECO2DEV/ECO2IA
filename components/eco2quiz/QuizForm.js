@@ -22,7 +22,7 @@ export const QuizForm = ({
     <form onSubmit={handleSubmit} className="max-w-md mx-auto">
       <label
         htmlFor="prompt"
-        className="block text-sm font-medium text-eco2MainColor"
+        className="block text-sm font-semibold text-eco2MainColor"
       >
         Tema:
       </label>
@@ -39,7 +39,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="optionChoice"
-        className="block text-sm font-medium text-eco2MainColor mt-4"
+        className="block text-sm font-semibold text-eco2MainColor mt-4"
       >
         Seleccione una opción:
       </label>
@@ -56,7 +56,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="language"
-        className="block text-sm font-medium text-eco2MainColor mt-4"
+        className="block text-sm font-semibold text-eco2MainColor mt-4"
       >
         Idioma:
       </label>
@@ -78,7 +78,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="difficulty"
-        className="block text-sm font-medium text-eco2MainColor mt-4"
+        className="block text-sm font-semibold text-eco2MainColor mt-4"
       >
         Dificultad:
       </label>
@@ -96,7 +96,7 @@ export const QuizForm = ({
 
       <label
         htmlFor="questionQuantity"
-        className="block text-sm font-medium text-eco2MainColor mt-4"
+        className="block text-sm font-semibold text-eco2MainColor mt-4"
       >
         Cantidad de preguntas:
       </label>

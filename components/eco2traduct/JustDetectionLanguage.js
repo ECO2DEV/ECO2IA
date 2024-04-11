@@ -7,7 +7,7 @@ export const DetectionLanguage = ({ onChange, type, value }) => {
   };
   return (
     <select
-      className="bg-darkBgCard dark:bg-darkBgCard rounded-md text-[0.70rem] leading-none sm:text-lg text-white dark:text-white"
+      className="bg-darkBgCard dark:bg-darkBgCard rounded-md text-[0.70rem] leading-none sm:text-lg text-white dark:text-white custom-input"
       aria-label="Seleccione el idioma"
       onChange={handleChange}
       value={value}

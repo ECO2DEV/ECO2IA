@@ -17,7 +17,7 @@ export const DataEco2Sport = {
   FiveDays: '5 Dias',
   SixDays: '6 Dias',
   SevenDays: '7 Dias',
-  GetButton: 'enviar a',
+  GetButton: 'Generar rutina',
   LoadingButton: 'Cargando ...',
   SelectOption: 'Seleccione una opción'
 };

@@ -36,7 +36,7 @@ export const LeftSectionCV = ({
         {' '}
         {DataEco2CV.PersonalDetails}{' '}
       </h1>
-      <p className="text-xs dark:text-black">
+      <p className="text-xs text-black dark:text-white">
         {DataEco2CV.PersonalDetailsText}
       </p>
       <FormCV formData={formData} setFormData={setFormData} />

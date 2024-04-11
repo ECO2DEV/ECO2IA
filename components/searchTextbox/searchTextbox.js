@@ -20,7 +20,7 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
             id="prompt"
             autoComplete="off"
             aria-autocomplete="none"
-            className="w-full rounded-none rounded-l-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="w-full rounded-none rounded-l-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 custom-input sm:text-sm sm:leading-6"
             placeholder="¿Como puedo ayudarte hoy?"
             onChange={OnChange}
             value={prompt ? prompt : ''}

@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import { Nav } from "./Nav";
 import { useRouter } from "next/router";
 import { ThemeToggle2, Avatar2 } from "../../shared/Header/Header";
+import { HomeDashboard } from "../../icons/icons"
 
 export const Header = ({ children }) => {
   const [isActive, setIsActive] = useState(false);

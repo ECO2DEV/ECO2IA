@@ -1,16 +1,17 @@
-import { DataEco2CV } from '../../data/eco2cv';
-import { Page, Text, View, Document, Image } from '@react-pdf/renderer';
-import { Fragment } from 'react';
-import dynamic from 'next/dynamic';
-import { stylesTwo } from './TemplatesStyles';
+import { DataEco2CV } from "../../data/eco2cv";
+import { Page, Text, View, Document, Image } from "@react-pdf/renderer";
+import { Fragment } from "react";
+import dynamic from "next/dynamic";
+import { stylesTwo } from "./TemplatesStyles";
+import { useSession } from "next-auth/react";
+
 const DynamicPDFViewer = dynamic(
-  () => import('@react-pdf/renderer').then((mod) => mod.PDFViewer),
+  () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
   {
-    ssr: false
+    ssr: false,
   }
 );
-import { strapiUrl } from '../../constants/constans';
-
+import { strapiUrl } from "../../constants/constans";
 
 export const PDFTemplateTwo = ({
   spokenLanguages,
@@ -19,10 +20,12 @@ export const PDFTemplateTwo = ({
   dropdowns,
   user,
   textProfile,
-  educationFields
+  educationFields,
 }) => {
+  const { data: session } = useSession();
+
   return (
-    <DynamicPDFViewer style={{ width: '100%', height: '100%' }}>
+    <DynamicPDFViewer style={{ width: "100%", height: "100%" }}>
       <Document>
         <Page style={stylesTwo.page} wrap>
           <View style={stylesTwo.firstColumn} fixed>
@@ -87,8 +90,20 @@ export const PDFTemplateTwo = ({
             )}
           </View>
           <View style={stylesTwo.secondColumn}>
-            <View style={stylesTwo.pictureContainer}>
-              <Image src={strapiUrl + user?.avatar?.formats?.thumbnail?.url} />
+            <View style={stylesTwo.pictureContainer2}>
+              <Image
+                width={stylesTwo.widthImage}
+                height={stylesTwo.heightImage}
+                src={
+                  user?.avatar
+                    ? user?.avatar?.url
+                    : session?.picture
+                    ? session?.picture
+                    : "/empty_avatar.webp"
+                }
+                alt="Avatar preview"
+                // className={`w-full h-full mx-auto object-cover rounded-full border-none shadow-lg `}
+              />
             </View>
             {debouncedFormData.fullName && debouncedFormData.domainOfStudy && (
               <View>

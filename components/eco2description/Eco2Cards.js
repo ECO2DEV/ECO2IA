@@ -1,5 +1,5 @@
-import { useContext, useEffect } from 'react';
-import { PromptContext } from '../../context/prompts/PromptContext';
+import { useContext, useEffect } from "react";
+import { PromptContext } from "../../context/prompts/PromptContext";
 import {
   ClipboardIcon,
   InstagramIconSVG,
@@ -7,40 +7,40 @@ import {
   TwitterIconSVG,
   TelegramIconSVG,
   WhatsAppIconSVG,
-  GlobalShareIcon
-} from '../icons/icons';
+  GlobalShareIcon,
+} from "../icons/icons";
 import {
   FacebookShareButton,
   TelegramShareButton,
   WhatsappShareButton,
-  TwitterShareButton
-} from 'next-share';
-import { toast } from 'react-hot-toast';
-import { EnterCard } from './EnterCard';
-import { DataEco2Description } from '../../data/eco2description';
+  TwitterShareButton,
+} from "next-share";
+import { toast } from "react-hot-toast";
+import { EnterCard } from "./EnterCard";
+import { DataEco2Description } from "../../data/eco2description";
 
 const socialMediaIdentifiers = [
-  { keyword: 'FB', icon: <FacebookIconSVG /> },
-  { keyword: 'TW', icon: <TwitterIconSVG /> },
-  { keyword: 'TE', icon: <TelegramIconSVG /> },
-  { keyword: 'TL', icon: <TelegramIconSVG /> },
-  { keyword: 'TG', icon: <TelegramIconSVG /> },
-  { keyword: 'WA', icon: <WhatsAppIconSVG /> },
-  { keyword: 'IG', icon: <InstagramIconSVG /> },
-  { keyword: 'INSTA', icon: <InstagramIconSVG /> }
+  { keyword: "FB", icon: <FacebookIconSVG /> },
+  { keyword: "TW", icon: <TwitterIconSVG /> },
+  { keyword: "TE", icon: <TelegramIconSVG /> },
+  { keyword: "TE", icon: <TelegramIconSVG /> },
+  { keyword: "TE", icon: <TelegramIconSVG /> },
+  { keyword: "WA", icon: <WhatsAppIconSVG /> },
+  { keyword: "IG", icon: <InstagramIconSVG /> },
+  { keyword: "IG", icon: <InstagramIconSVG /> },
 ];
 export const Eco2Cards = () => {
   const { response, setResponse, activeAI, setActiveAI } =
     useContext(PromptContext);
 
   useEffect(() => {
-    if (activeAI !== 'Eco2DescriptionAI') {
+    if (activeAI !== "Eco2DescriptionAI") {
       setResponse(null);
     }
-    setActiveAI('Eco2DescriptionAI');
+    setActiveAI("Eco2DescriptionAI");
   }, []);
   const copywritings =
-    typeof response === 'string' ? response.split('\n') : null;
+    typeof response === "string" ? response.split("\n") : null;
 
   const handleCopy = (index) => {
     if (copywritings) {
@@ -62,9 +62,15 @@ export const Eco2Cards = () => {
   }
 
   return (
-    <article className="flex flex-col gap-2 sm:absolute sm:top-[8.5rem] lg:top-[4.5rem] right-0 pb-11">
-      {copywritings?.map((copy, index) =>
-        copy === '' || copy.trim().length < 10 ? null : (
+    <article className="flex flex-col gap-2 right-0 pb-11">
+      {copywritings?.map((copy, index) => {
+        // let parrafo = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+        // let nuevoParrafo = parrafo.replace(/^.{3}/, '');
+
+        // console.log(nuevoParrafo);
+        let text = copy.replace(/^.{3}/, "");
+        console.log(text);
+        return copy === "" || copy.trim().length < 10 ? null : (
           <div className="flex space-x-2 h-full" key={index}>
             {/* {console.log('copy', 'something' + copy.trim())} */}
             <div className="flex shrink-0">
@@ -84,7 +90,7 @@ export const Eco2Cards = () => {
                   <textarea
                     disabled
                     rows={6}
-                    value={copy || ''}
+                    value={text || ""}
                     name="response"
                     id="response"
                     className="overflow-y-hidden block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 dark:text-lightColor placeholder:text-gray-400 focus:ring-0 text-[0.750rem] leading-2 md:text-[0.750rem] lg:leading-6 "
@@ -110,47 +116,47 @@ export const Eco2Cards = () => {
                       >
                         <ClipboardIcon />
                         <span className="sr-only">
-                          {' '}
-                          {DataEco2Description.AttachFile}{' '}
+                          {" "}
+                          {DataEco2Description.AttachFile}{" "}
                         </span>
                       </button>
                     </div>
                     <div className="flex items-center relative group">
-                      {copy.includes('FB') ? (
+                      {copy.includes("FB") ? (
                         <FacebookShareButton
-                          url={'https://next-mattech.vercel.app'}
+                          url={"https://next-mattech.vercel.app"}
                           title={copywritings[index]}
                           quote={copywritings[index]}
-                          hashtag={'#MatDescription'}
+                          hashtag={"#MatDescription"}
                         >
                           <GlobalShareIcon />
                         </FacebookShareButton>
-                      ) : copy.includes('TW') ? (
+                      ) : copy.includes("TW") ? (
                         <TwitterShareButton
-                          url={'https://next-mattech.vercel.app'}
+                          url={"https://next-mattech.vercel.app"}
                           title={copywritings[index]}
                         >
                           <GlobalShareIcon />
                         </TwitterShareButton>
-                      ) : copy.includes('TE') ||
-                        copy.includes('TL') ||
-                        copy.includes('TG') ? (
+                      ) : copy.includes("TE") ||
+                        copy.includes("TL") ||
+                        copy.includes("TG") ? (
                         <TelegramShareButton
-                          url={'https://next-mattech.vercel.app'}
+                          url={"https://next-mattech.vercel.app"}
                           title={copywritings[index]}
                         >
                           <GlobalShareIcon />
                         </TelegramShareButton>
-                      ) : copy.includes('WA') ? (
+                      ) : copy.includes("WA") ? (
                         <WhatsappShareButton
-                          url={'https://next-mattech.vercel.app'}
+                          url={"https://next-mattech.vercel.app"}
                           title={copywritings[index]}
                           separator=":: "
                         >
                           <GlobalShareIcon />
                         </WhatsappShareButton>
                       ) : (
-                        (copy.includes('IG') || copy.includes('INSTA')) && (
+                        (copy.includes("IG") || copy.includes("INSTA")) && (
                           <GlobalShareIcon />
                         )
                       )}
@@ -163,8 +169,8 @@ export const Eco2Cards = () => {
               </form>
             </div>
           </div>
-        )
-      )}
+        );
+      })}
     </article>
   );
 };
