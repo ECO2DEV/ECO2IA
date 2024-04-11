@@ -155,9 +155,7 @@
     padding: 10px; /* Reduce el padding en dispositivos más pequeños */
   }
 
-  .w-full {
-    width: 90% !important; /* Ajusta el ancho de los inputs para que ocupen más espacio */
-  }
+
 }
 .flex-wrap {
   flex-wrap: wrap; /* Permite que los elementos hijos se ajusten y envuelvan según el ancho disponible */
@@ -348,18 +346,6 @@
   background: var(--gradient2);
 }
 
-/* .backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: #000000e1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-y: hidden;
-} */
 
 .modal {
   width: clamp(50%, 700px, 90%);
@@ -436,6 +422,104 @@
 
 .custom-select.open .custom-options {
   display: block;
+}
+
+/* scroll bar  */
+
+.scrollsidebar-color{
+  scrollbar-color: #f0fdf4 #020617;
+  scrollbar-width: thin;
+}
+
+
+.scrollsidebar-color-ligth{
+  scrollbar-color:#020617 #f0fdf4;
+  scrollbar-width: thin;
+}
+
+
+/* MobileConversationStyles */
+
+#menu-checkbox{display: none;}
+
+.menu-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16rem;
+  height: 100%;
+  z-index: 10;
+}
+
+.menu{
+  display: none;
+  max-width: 16rem;
+  animation: menuIn 250ms ;
+  
+}
+
+.rotateArrow{
+  animation: rotate180 200ms;
+}
+
+.menu-toggler{
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  width: 25px;
+  height: 35px;
+  border-radius: 10px;
+  transition: background 125ms;
+  user-select: none;
+  cursor: pointer;
+
+}
+
+
+
+#menu-checkbox:checked + .menu, .rotateArrow{
+  display: flex;
+ 
+}
+
+
+.menu a{
+  display: flex;
+  text-decoration: none;
+  color: black;
+  padding: 16px 8px;
+  border-radius: 8px;
+  transition: background 200ms;
+
+}
+
+.menu a:hover{
+  background-color: rgba(0,0,0,0.05);
+}
+
+
+@keyframes menuIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+
+  
+}
+
+@keyframes rotate180 {
+  
+  from {
+    transform: rotate(180deg)
+  }
+  to{
+    transform: rotate(5deg)
+  }
 }
 
 /* Base styles */

@@ -5,7 +5,7 @@ export default function DashboardSection(props) {
   // console.log('DashboardSection props', props?.user.IA_CARDS?.data);
 
   const iaCards = props?.user.IA_CARDS?.data;
-  const yourPlan = props?.user.user.plan ?? null;
+  const yourPlan = props?.user?.user?.plan ?? null;
 
   // console.log('yourPlan dashvoard', yourPlan);
 

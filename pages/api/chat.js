@@ -33,7 +33,7 @@ export default async function POST(req) {
   // Extract the `messages` from the body of the request
   const { messages, model } = await req.json();
 
-  console.log('model', model);
+  // console.log('model in the api sdk page/api', messages);
 
   if (model === 'gpt-3.5-turbo' || model === 'gpt-4') {
     // Request the OpenAI API for the response based on the prompt

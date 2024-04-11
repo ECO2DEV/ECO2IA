@@ -1,10 +1,5 @@
 export const storeReducer = (state, action) => {
   switch (action.type) {
-    case 'SET_SESSION_STABLISHED':
-      return {
-        ...state,
-        sessionStablished: action.payload
-      };
     case 'SET_CONVERSATIONS':
       return {
         ...state,
@@ -15,15 +10,10 @@ export const storeReducer = (state, action) => {
         ...state,
         selectedConversationId: action.payload
       };
-    case 'SET_CONTENT':
+    case 'SET_SIDEBAR_CHAT_OPEN':
       return {
         ...state,
-        content: action.payload
-      };
-    case 'ADD_MESSAGES':
-      return {
-        ...state,
-        conversations: action.payload
+        sidebarChatOpen: action.payload
       };
 
     default:

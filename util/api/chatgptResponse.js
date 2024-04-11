@@ -14,3 +14,66 @@ export const ChatgptResponse = async ({ prompt, user }) => {
     console.error(`Error getting prompt for ${strapiUrl}:`, error);
   }
 };
+
+// conversation and messages with socket.io
+
+export const createConversationSocket = async ({
+  aiMessageId,
+  userMessageId
+}) => {
+  // console.log('inside createConversationSocket', aiMessageId, userMessageId);
+  try {
+    const response = await axios.post(
+      `${strapiUrl}/api/conversations?populate=*`,
+      {
+        data: {
+          messages: [
+            {
+              id: userMessageId
+            },
+            {
+              id: aiMessageId
+            }
+          ]
+        }
+      },
+      header
+    );
+    return response;
+  } catch (error) {
+    console.log('Error creating conversation:', error);
+  }
+};
+
+export const createMessageSocket = async ({ type, content, uuid = null }) => {
+  let data;
+  // console.log('type ', type, 'content ', content);
+
+  if (type === 'user') {
+    data = {
+      aiMessage: false,
+      animate: false,
+      content: content
+    };
+  } else {
+    data = {
+      aiMessage: true,
+      animate: true,
+      content: content,
+      message_id: uuid
+    };
+  }
+
+  try {
+    const response = await axios.post(
+      `${strapiUrl}/api/messages`,
+      {
+        data
+      },
+      header
+    );
+    return response;
+  } catch (error) {
+    console.log('Error creating message:', error);
+  }
+};

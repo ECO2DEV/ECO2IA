@@ -1,6 +1,9 @@
-import { DataLoader } from "../../data/loader";
+import { DataLoader } from '../../data/loader';
 
 export default function Loader(params) {
+  const className = params.className
+    ? params.className
+    : 'w-6 h-6 mr-2 top-1 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600';
   return (
     <div role="status">
       <svg
