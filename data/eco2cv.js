@@ -69,5 +69,6 @@ export const DataEco2CV = {
   Intermediate: 'Intermedio',
   Advanced: 'Avanzado',
   Expert: 'Experto',
-  AddLanguage: 'Añadir Idioma'
+  AddLanguage: 'Añadir Idioma',
+  ResumLoren: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer euismod sapien non justo feugiat, sed posuere risus luctus. Fusce at ante eu risus lacinia tincidunt ac non lacus. Sed non libero odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi viverra est nec ante venenatis, id suscipit libero finibus. Nulla at nisi vel nulla posuere viverra non nec nulla. Integer sed tristique libero. Nullam ultricies fermentum mauris, a suscipit velit faucibus at. Sed id lectus a magna malesuada rhoncus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed vel felis eget sem volutpat vestibulum. Vivamus ullamcorper, nunc non consectetur fermentum, odio elit varius dui, in feugiat odio ante eu dolor. Donec aliquet, lacus non rhoncus fringilla, eros justo euismod purus, at aliquet tortor justo ac velit.'
 };

@@ -39,14 +39,14 @@ const SpokenLanguagesForm = ({ setSpokenLanguages }) => {
         name="name"
         value={language.name ? language.name : ''}
         onChange={handleInputChange}
-        placeholder="Language Name"
-        className="w-full mb-2 p-2 border rounded dark:text-black"
+        placeholder="Agregue el idioma"
+        className="w-full mb-2 p-2 border-white rounded custom-input bg-darkBgCard dark:bg-white text-white dark:text-black"
       />
       <select
         name="proficiency"
         value={language.proficiency ? language.proficiency : ''}
         onChange={handleInputChange}
-        className="w-full mb-2 p-2 border rounded dark:text-black"
+        className="w-full mb-2 p-2 border-white rounded custom-input bg-darkBgCard dark:bg-white text-white dark:text-black"
       >
         <option value="">{DataEco2CV.SelectProficiency}</option>
         {proficiencyLevels.map((level, index) => (

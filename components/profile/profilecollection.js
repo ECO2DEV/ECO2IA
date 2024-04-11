@@ -13,6 +13,21 @@ const domain = [
   'Periodismo y comunicación'
 ];
 
+export const domainA = {
+  none: 'Escoge tu especialidad',
+  CS: 'Ciencias de la salud',
+  CHS: 'Ciencias humanas y sociales',
+  STEM: 'Ciencias, tecnología, ingeniería y matemáticas (STEM)',
+  CN: 'Ciencias naturales',
+  D: 'Derecho',
+  NC: 'Negocios y comercio',
+  AT: 'Artes y diseño',
+  E: 'Educación',
+  ACA: 'Agricultura y ciencias ambientales',
+  ITI: 'Informática y tecnología de la información',
+  PC: 'Periodismo y comunicación'
+}
+
 const educational = [
   'Secundaria',
   'Bachillerato +1',

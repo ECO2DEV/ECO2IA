@@ -12,7 +12,7 @@ export const DataEco2Description = {
   ProductText:
     'Cuéntenos sobre el producto, por ejemplo: Eco2, la solución a sus preocupaciones de batería baja, que le permite permanecer conectado en cualquier momento y en cualquier lugar.',
   Submit: 'enviar a',
-  MattDescriptionIA: 'MATTDESCRIPCIÓN impulsado por IA',
+  MattDescriptionIA: 'Maria: Descripciones personalizadas e inteligentes con IA',
   PlatformEnable: 'La plataforma te permite',
   Captivanting: 'Crea contenido cautivador sin esfuerzo',
   TargetAudience: 'engancha a tu público objetivo',
@@ -27,7 +27,7 @@ export const DataEco2Description = {
   ResponseExample:
     'Ejemplo: Descubra la innovación con Mattech. Con nuestras soluciones de software descubrirá un mundo de posibilidades para mejorar su productividad y rendimiento. Nuestras últimas tecnologías le permiten dar un salto hacia el futuro con una eficiencia sin precedentes.',
   AttachFile: 'Adjuntar un archivo',
-  Our: 'Nuestro',
+  Our: '',
   Share: 'Compartir',
   ConversationDeleted: 'La conversación se ha eliminado correctamente.'
 };

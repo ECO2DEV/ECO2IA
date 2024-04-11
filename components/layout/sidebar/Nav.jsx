@@ -92,7 +92,7 @@ export const Nav = ({ children }) => {
                 >
                   <ArrowLeftIcon className="h-6 w-6 " />
                 </button>
-                <ThemeToggle />
+                {/* <ThemeToggle /> */}
               </div>
             </div>
           </article>

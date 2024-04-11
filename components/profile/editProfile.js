@@ -1,18 +1,18 @@
-import { useState, useEffect, Fragment, useRef } from 'react';
-import { useRouter } from 'next/router';
-import { Dialog, Transition } from '@headlessui/react';
-import { UserPlusIcon } from '@heroicons/react/24/outline';
-import { updateUserById } from '../../util/api/user';
-import { toast } from 'react-hot-toast';
+import { useState, useEffect, Fragment, useRef } from "react";
+import { useRouter } from "next/router";
+import { Dialog, Transition } from "@headlessui/react";
+import { UserPlusIcon } from "@heroicons/react/24/outline";
+import { updateUserById } from "../../util/api/user";
+import { toast } from "react-hot-toast";
 import {
   educational,
   domain,
   activity,
   sport,
   transport,
-  nationality
-} from './profilecollection';
-import { DataProfile } from '../../data/profile';
+  nationality,
+} from "./profilecollection";
+import { DataProfile } from "../../data/profile";
 
 export default function EditProfile({ onClose, user }) {
   // console.log("Response:", user);
@@ -22,7 +22,7 @@ export default function EditProfile({ onClose, user }) {
 
   // estado para controlar si el campo de texto adicional está activo.
   const [additionalFieldActive, setAdditionalFieldActive] = useState(false);
-  const [additionalFieldValue, setAdditionalFieldValue] = useState(''); // Estado para el valor del campo de texto adicional.
+  const [additionalFieldValue, setAdditionalFieldValue] = useState(""); // Estado para el valor del campo de texto adicional.
 
   // Función para activar el campo de texto adicional.
   const activateAdditionalField = () => {
@@ -79,7 +79,7 @@ export default function EditProfile({ onClose, user }) {
     nacionality: user.nacionality,
     age: user.age,
     height: user.height,
-    weight: user.weight
+    weight: user.weight,
     // about: ''
   });
 
@@ -90,11 +90,11 @@ export default function EditProfile({ onClose, user }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
-      formData.Name === '' ||
-      formData.LastName === '' ||
-      formData.email === '' ||
-      formData.numberTelephone === '' ||
-      formData.country === ''
+      formData.Name === "" ||
+      formData.LastName === "" ||
+      formData.email === "" ||
+      formData.numberTelephone === "" ||
+      formData.country === ""
       // || formData.about === ''
     ) {
       toast.error(DataProfile.PleaseFill);
@@ -114,7 +114,7 @@ export default function EditProfile({ onClose, user }) {
     }
 
     // Validar el campo de texto adicional si está activo.
-    if (additionalFieldActive && additionalFieldValue === '') {
+    if (additionalFieldActive && additionalFieldValue === "") {
       toast.error(DataProfile.ErrorAdditionalField);
       return;
     }
@@ -130,14 +130,14 @@ export default function EditProfile({ onClose, user }) {
       const response = await updateUserById({
         formData: formData,
         id: user.id,
-        additionalField: additionalFieldValue
+        additionalField: additionalFieldValue,
       });
       toast.success(DataProfile.ProfileUpdated);
-      router.push('/profile');
+      router.push("/profile");
       onClose();
     } catch (error) {
       toast.error(DataProfile.ErrorUpdating);
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -197,7 +197,7 @@ export default function EditProfile({ onClose, user }) {
                         className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
                         style={{
                           clipPath:
-                            'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+                            "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
                         }}
                       />
                     </div>
@@ -216,7 +216,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <input
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.Name ? formData.Name : ''}
+                              value={formData.Name ? formData.Name : ""}
                               type="text"
                               name="Name"
                               id="Name"
@@ -235,7 +235,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <input
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.LastName ? formData.LastName : ''}
+                              value={formData.LastName ? formData.LastName : ""}
                               type="text"
                               name="LastName"
                               id="LastName"
@@ -254,7 +254,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <input
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.email ? formData.email : ''}
+                              value={formData.email ? formData.email : ""}
                               type="email"
                               name="email"
                               id="email"
@@ -275,7 +275,7 @@ export default function EditProfile({ onClose, user }) {
                             value={
                               formData.numberTelephone
                                 ? formData.numberTelephone
-                                : ''
+                                : ""
                             }
                             type="number"
                             name="numberTelephone"
@@ -294,7 +294,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <input
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.country ? formData.country : ''}
+                              value={formData.country ? formData.country : ""}
                               type="text"
                               name="country"
                               id="country"
@@ -312,7 +312,7 @@ export default function EditProfile({ onClose, user }) {
                             <select
                               onChange={(e) => handleProfileChange(e)}
                               value={
-                                formData.nacionality ? formData.nacionality : ''
+                                formData.nacionality ? formData.nacionality : ""
                               }
                               name="nacionality"
                               id="nacionality"
@@ -331,7 +331,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <select
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.sex ? formData.sex : ''}
+                              value={formData.sex ? formData.sex : ""}
                               name="sex"
                               id="sex"
                               autoComplete="sex"
@@ -352,7 +352,7 @@ export default function EditProfile({ onClose, user }) {
                               <div className="mt-2.5">
                                 <input
                                   onChange={(e) => handleProfileChange(e)}
-                                  value={formData.age ? formData.age : ''}
+                                  value={formData.age ? formData.age : ""}
                                   type="number"
                                   name="age"
                                   id="age"
@@ -370,7 +370,7 @@ export default function EditProfile({ onClose, user }) {
                               <div className="mt-2.5">
                                 <input
                                   onChange={(e) => handleProfileChange(e)}
-                                  value={formData.height ? formData.height : ''}
+                                  value={formData.height ? formData.height : ""}
                                   type="number"
                                   name="height"
                                   id="height"
@@ -388,7 +388,7 @@ export default function EditProfile({ onClose, user }) {
                               <div className="mt-2.5">
                                 <input
                                   onChange={(e) => handleProfileChange(e)}
-                                  value={formData.weight ? formData.weight : ''}
+                                  value={formData.weight ? formData.weight : ""}
                                   type="number"
                                   name="weight"
                                   id="weight"
@@ -406,11 +406,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <select
                               onChange={(e) => handleProfileChange(e)}
-                              value={
-                                formData.domainofstudy
-                                  ? formData.domainofstudy
-                                  : ''
-                              }
+                              value={formData.domainofstudy}
                               name="domainofstudy"
                               id="domainofstudy"
                               autoComplete="domainofstudy"
@@ -418,7 +414,7 @@ export default function EditProfile({ onClose, user }) {
                             >
                               {domainSelect}
                             </select>
-                            <label
+                            {/* <label
                               htmlFor="additionalField"
                               className="block text-sm font-semibold leading-6 text-gray-900"
                             >
@@ -433,7 +429,7 @@ export default function EditProfile({ onClose, user }) {
                                   value={
                                     additionalFieldValue
                                       ? additionalFieldValue
-                                      : ''
+                                      : ""
                                   }
                                   type="text"
                                   name="additionalField"
@@ -448,7 +444,7 @@ export default function EditProfile({ onClose, user }) {
                                   Agregar
                                 </button>
                               )}
-                            </div>
+                            </div> */}
                           </div>
                           <label
                             htmlFor="educationallevel"
@@ -462,7 +458,7 @@ export default function EditProfile({ onClose, user }) {
                               value={
                                 formData.educationallevel
                                   ? formData.educationallevel
-                                  : ''
+                                  : ""
                               }
                               name="educationallevel"
                               id="educationallevel"
@@ -486,7 +482,7 @@ export default function EditProfile({ onClose, user }) {
                                   value={
                                     additionalFieldValue
                                       ? additionalFieldValue
-                                      : ''
+                                      : ""
                                   }
                                   type="text"
                                   name="additionalField"
@@ -515,7 +511,7 @@ export default function EditProfile({ onClose, user }) {
                               value={
                                 formData.activityarea
                                   ? formData.activityarea
-                                  : ''
+                                  : ""
                               }
                               name="activityarea"
                               id="activityarea"
@@ -539,7 +535,7 @@ export default function EditProfile({ onClose, user }) {
                                   value={
                                     additionalFieldValue
                                       ? additionalFieldValue
-                                      : ''
+                                      : ""
                                   }
                                   type="text"
                                   name="additionalField"
@@ -565,7 +561,7 @@ export default function EditProfile({ onClose, user }) {
                           <div className="mt-2.5">
                             <select
                               onChange={(e) => handleProfileChange(e)}
-                              value={formData.sport ? formData.sport : ''}
+                              value={formData.sport ? formData.sport : ""}
                               name="sport"
                               id="sport"
                               autoComplete="sport"
@@ -588,7 +584,7 @@ export default function EditProfile({ onClose, user }) {
                                   value={
                                     additionalFieldValue
                                       ? additionalFieldValue
-                                      : ''
+                                      : ""
                                   }
                                   type="text"
                                   name="additionalField"
@@ -615,7 +611,7 @@ export default function EditProfile({ onClose, user }) {
                             <select
                               onChange={(e) => handleProfileChange(e)}
                               value={
-                                formData.transport ? formData.transport : ''
+                                formData.transport ? formData.transport : ""
                               }
                               name="transport"
                               id="transport"
@@ -639,7 +635,7 @@ export default function EditProfile({ onClose, user }) {
                                   value={
                                     additionalFieldValue
                                       ? additionalFieldValue
-                                      : ''
+                                      : ""
                                   }
                                   type="text"
                                   name="additionalField"

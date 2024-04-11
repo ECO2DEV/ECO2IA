@@ -13,10 +13,19 @@
   font-size: 1rem;
 }
 
+.custom-input:focus {
+  border-color: #21c284;
+  outline: 2px solid #21c284;
+  box-shadow: 0 0 0 3px #21c284;
+}
 
+.line-through {
+  text-decoration: line-through;
+}
 
 .tags-input-container {
-  border: 2px solid #2520207c;
+  /* 2520207c */
+  border: 2px solid #21c284;
   padding: 0.5em;
   border-radius: 10px;
   width: 100%;
@@ -36,7 +45,8 @@
 .tag-item .close {
   height: 20px;
   width: 20px;
-  background-color: rgb(48, 48, 48);
+  /* rgb(48, 48, 48) */
+  background-color: #21c284;
   color: #fff;
   border-radius: 50%;
   display: inline-flex;
@@ -59,6 +69,15 @@
   outline: none;
   box-shadow: none;
 }
+
+.exercise-image {
+  width: 50px; /* Ajusta a un tamaño más pequeño */
+  height: 50px; /* Haz la altura igual al ancho para que sea un círculo perfecto */
+  border-radius: 50%; /* Esto hará que la imagen sea redonda */
+  object-fit: cover; /* Esto asegura que la imagen cubra completamente el área sin distorsionarse */
+  margin-right: 10px;
+}
+
 
 /* Contenedor para bloques de código */
 .markdown-content pre code {
@@ -351,7 +370,7 @@
 @layer components {
 	.bg-glass {
 		@apply bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 
-		hover:bg-gray-600/10 border-green-800 border text-white;
+		hover:bg-lime-500 border-green-800 border text-white;
 	}
 }
 
@@ -418,3 +437,60 @@
 .custom-select.open .custom-options {
   display: block;
 }
+
+/* Base styles */
+.article-content {
+  flex-direction: column;
+  gap: 2rem;
+}
+
+
+/* @media (max-width: 768px) {
+  .description-form {
+    width: 100%;
+    position: static;
+  }
+
+  .article-content {
+    position: static;
+    order: 2;
+  }
+} */
+
+/* @media (min-width: 1024px) { 
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+} */
+
+.flex-item {
+  flex-grow: 1; /* The item will grow to take up any available space */
+}
+
+.flex-row > * {
+  flex: 1; /* Both children will be set to take up equal space */
+}
+
+
+/* Base mobile-first styles */
+.container {
+  display: flex;
+  justify-content: center; /* This centers your container */
+}
+
+/* Flex children (form and cards) will stack vertically on small screens */
+/* .container > div {
+  flex-direction: column;
+} */
+
+.flex-row > :first-child { /* Assuming DescriptionForm is the first child */
+  flex: 2; /* Takes double the space of its sibling */
+}
+
+.flex-row > :last-child { /* Assuming Eco2Cards is the second child */
+  flex: 3; /* Takes three times the space of its sibling */
+}
+
+
+/* As the screen gets larger, adjust padding for spacing */

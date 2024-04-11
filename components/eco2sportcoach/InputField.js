@@ -10,7 +10,7 @@ export const InputField = ({ label, id, value, onChange, type = "text" }) => {
         value={value}
         onChange={onChange}
         required
-        className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm dark:text-black"
+        className="block w-full rounded-md border-eco2MainColor dark:border-white custom-input bg-white dark:bg-darkBgCard px-3.5 py-2 text-black dark:text-white shadow-sm ring-1 sm:text-sm sm:leading-6"
       />
     </div>
   );

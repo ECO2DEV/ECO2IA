@@ -1,62 +1,58 @@
-import { useContext } from 'react';
-import { PromptContext } from '../../context/prompts/PromptContext';
-import { SunIcon, ZapIcon, WarningIcon } from '../icons/icons';
+import { useContext } from "react";
+import { PromptContext } from "../../context/prompts/PromptContext";
+import { SunIcon, ZapIcon, WarningIcon } from "../icons/icons";
 import {
   DataSportHelpExample,
   DataSportHelpCapabilities,
-  DataSportHelpLimitation
-} from '../../data/sporthelper';
+  DataSportHelpLimitation,
+} from "../../data/sporthelper";
+import { SportCoachIA } from "./Eco2SportCoachIA";
 
-export const WelcomeSportCoach = () => {
+export const WelcomeSportCoach = (props) => {
   const { setPrompt } = useContext(PromptContext);
 
+  // flex flex-col gap-1 w-full sm:max-w-md m-auto
+
   return (
-    <div className="md:flex items-start text-center gap-3.5 md:mt-6 xl:mt-6">
-      <div className="flex flex-col mb-2 md:mb-auto gap-3.5 flex-1">
-        <ul className="flex flex-col gap-1 w-full sm:max-w-md m-auto ">
-          <h2 className="mb-2.5 flex gap-3 items-center m-auto text-lg font-normal md:flex-col md:gap-2 ">
-            <SunIcon /> Pasos
-          </h2>
-          {DataSportHelpExample.map((DataSportHelpExample, index) => (
-            <li
-              key={index}
-              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-eco2MainColor"
-            >
-              {DataSportHelpExample} →
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="flex flex-col mb-2 md:mb-auto gap-3.5 flex-1">
-        <h2 className="flex gap-3 items-center m-auto text-lg font-normal md:flex-col md:gap-2">
-          <ZapIcon /> Capacidades
-        </h2>
-        <ul className="flex flex-col gap-1 w-full sm:max-w-md m-auto ">
-          {DataSportHelpCapabilities.map((DataSportHelpCapabilities, index) => (
-            <li
-              key={index}
-              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-eco2MainColor"
-            >
-              {DataSportHelpCapabilities}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="flex flex-col mb-24 md:mb-auto gap-3.5 flex-1">
-        <h2 className="flex gap-3 items-center m-auto text-lg font-normal md:flex-col md:gap-2">
-          <WarningIcon /> Limitaciones
-        </h2>
-        <ul className="flex flex-col gap-1 w-full sm:max-w-md m-auto ">
-          {DataSportHelpLimitation.map((DataSportHelpLimitation, index) => (
-            <li
-              key={index}
-              className="text-xs md:text-base w-full p-1 rounded-md text-gray-50 bg-eco2MainColor"
-            >
-              {DataSportHelpLimitation}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+<div className="p-6 md:p-10 lg:p-14 bg-darkBg"> {/* Consider adding a background class if necessary */}
+<div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
+  {/* Each column container */}
+  <div className="space-y-6">
+    <h2 className="text-xl text-gray-900 dark:text-white font-semibold mb-4 flex justify-center items-center gap-2">
+      <SunIcon /> Pasos
+    </h2>
+    {/* Steps list */}
+    {DataSportHelpExample.map((step, index) => (
+      <p key={index} className="text-sm text-center md:text-base p-3 rounded-md bg-eco2MainColor">
+        {step} →
+      </p>
+    ))}
+  </div>
+  <div className="space-y-6">
+    <h2 className="text-xl text-gray-900 dark:text-white font-semibold mb-4 flex justify-center items-center gap-2">
+      <ZapIcon /> Capacidades
+    </h2>
+    {/* Capabilities list */}
+    {DataSportHelpCapabilities.map((capability, index) => (
+      <p key={index} className="text-sm text-center md:text-base p-3 rounded-md bg-eco2MainColor">
+        {capability}
+      </p>
+    ))}
+  </div>
+  <div className="space-y-6">
+    <h2 className="text-xl text-gray-900 dark:text-white font-semibold mb-4 flex justify-center items-center gap-2">
+      <WarningIcon /> Limitaciones
+    </h2>
+    {/* Limitations list */}
+    {DataSportHelpLimitation.map((limitation, index) => (
+      <p key={index} className="text-sm text-center md:text-base p-3 rounded-md bg-eco2MainColor">
+        {limitation}
+      </p>
+    ))}
+  </div>
+</div>
+</div>
   );
 };
+
+
