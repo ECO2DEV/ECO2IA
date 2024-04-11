@@ -1,7 +1,10 @@
 import { io } from 'socket.io-client';
 
 let socket;
-export const connectWithSocketServer = () => {
+export const connectWithSocketServer = (
+  addMessages,
+  setConversationHistory
+) => {
   socket = io('http://localhost:1337');
 
   socket.on('connect', () => {
@@ -15,15 +18,29 @@ export const connectWithSocketServer = () => {
 
     socket.on('session-details', (data) => {
       const { sessionId, conversations } = data;
-      console.log('session details', data);
+      console.log('sessionId inside sessiondatails front', data);
 
       localStorage.setItem('sessionId', sessionId);
-      console.log('sessionId', sessionId);
-      // setMessages(conversations);
+      // console.log('sessionId inside sessiondatails front', sessionId);
+      addMessages(conversations);
+    });
+
+    socket.on('conversation-details', (conversation) => {
+      setConversationHistory(conversation);
     });
   });
 };
 
 export const sendConversationMessage = (message, conversationId) => {
-  socket.emit('conversation-message', { message, conversationId });
+  socket.emit('conversation-message', {
+    sessionId: localStorage.getItem('sessionId'),
+    message,
+    conversationId
+  });
+};
+
+export const deleteConversations = () => {
+  socket.emit('delete-conversations', {
+    sessionId: localStorage.getItem('sessionId')
+  });
 };

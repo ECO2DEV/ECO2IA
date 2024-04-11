@@ -1,63 +1,41 @@
 import { useReducer } from 'react';
 import { StoreContext } from './StoreContext';
 import { storeReducer } from './storeReducer';
+import { useChatSocket } from '../../hooks/useChatSocket';
 
 const storeInitialState = {
-  content: '',
-  sessionStablished: false,
-  conversations: [],
+  sidebarChatOpen: false,
+  setSidebarChatOpen: () => {},
   selectedConversationId: null,
-  setContent: () => {},
   setSelectedConversarionId: () => {},
-  setConversations: () => {},
-  setSessionStablished: () => {},
-  addMessages: () => {}
+  setConversations: () => {}
 };
 
 export const StoreProvider = ({ children }) => {
+  const { updateChat } = useChatSocket();
   const [state, dispatch] = useReducer(storeReducer, storeInitialState);
 
-  const setMessages = (conversations) => {
-    dispatch({
-      type: 'ADD_MESSAGES',
-      payload: conversations
-    });
-  };
-
-  const setConversations = ({ message, conversationId }) => {
-    const existingConversationIndex = state.conversations.findIndex(
-      (conv) => conv.id === conversationId
-    );
-
-    let updatedConversations;
-
-    if (existingConversationIndex !== -1) {
-      // If conversation exists, update its messages by appending the new message
-      updatedConversations = state.conversations.map((conv) => {
-        if (conv.id === conversationId) {
-          return { ...conv, messages: [...conv.messages, message] };
-        }
-        return conv;
+  const setConversations = async ({
+    aiMessageId,
+    userMessageId,
+    conversationId
+  }) => {
+    try {
+      const resUpdateChat = await updateChat({
+        conveId: conversationId,
+        aiMessageId,
+        userMessageId
       });
-    } else {
-      // Create a new conversation if it doesn't exist
-      updatedConversations = [
-        ...state.conversations,
-        { id: conversationId, messages: [message] }
-      ];
+      console.log('resUpdateChat', resUpdateChat);
+    } catch (error) {
+      console.error('error updating chat', error);
     }
-
-    dispatch({
-      type: 'SET_CONVERSATIONS',
-      payload: updatedConversations
-    });
-    // console.log('state.conversations', state.conversations);
   };
 
-  const setSessionStablished = (sessionStablished) => {
+  const setSidebarChatOpen = (isOpen) => {
     dispatch({
-      type: 'SET_SESSION_STABLISHED',
-      payload: sessionStablished
+      type: 'SET_SIDEBAR_CHAT_OPEN',
+      payload: isOpen
     });
   };
 
@@ -68,22 +46,13 @@ export const StoreProvider = ({ children }) => {
     });
   };
 
-  const setContent = (content) => {
-    dispatch({
-      type: 'SET_CONTENT',
-      payload: content
-    });
-  };
-
   return (
     <StoreContext.Provider
       value={{
         ...state,
         setSelectedConversarionId,
         setConversations,
-        setSessionStablished,
-        setContent,
-        setMessages
+        setSidebarChatOpen
       }}
     >
       {children}

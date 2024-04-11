@@ -29,7 +29,7 @@ export function useChat(userId = 1) {
 
       mutate(); // Update the data by calling the mutate function
     } catch (error) {
-      // console.log('Error deleting chat:', error);
+      console.error('Error deleting chat:', error);
     }
   };
 

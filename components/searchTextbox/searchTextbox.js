@@ -2,7 +2,8 @@ import { useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import Loader from '../loader/loader';
 
-import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
+import { UsersIcon } from '@heroicons/react/20/solid';
+import { ChatSendIcon, MagicAiIcon } from '../icons/icons';
 
 export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
   const { promptTokens } = useContext(PromptContext);
@@ -28,18 +29,20 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
         </div>
         <button
           type="submit"
-          className="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold bg-eco2MainColor hover:bg-eco2HoverColor text-white ring-1 ring-inset ring-gray-300"
+          className="relative pr-2 inline-flex items-center gap-x-1.5 rounded-r-md pl-2 py-2 text-sm font-semibold bg-eco2MainColor hover:bg-eco2HoverColor text-white ring-1 ring-inset ring-gray-300"
           disabled={loading}
         >
-          <BarsArrowUpIcon className="-ml-0.5 h-5 w-5 text-white" />
-          <span className="hidden md:flex">Enviar</span>
+          {loading ? (
+            <Loader className="w-6 h-6 mr-2 top-1 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600 -mr-[1px]" />
+          ) : (
+            <MagicAiIcon className="text-black w-5 h-5" />
+          )}
         </button>
       </form>
       <div className="flex justify-start">
         <span className=" bottom-4 text-eco2MainColor">
           Tokens utilizados para la pregunta: {promptTokens}&nbsp;&nbsp;
         </span>
-        <span>{loading && <Loader />}</span>
       </div>
     </div>
   );

@@ -1,28 +1,37 @@
-import { useContext, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useContext, useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-import { PromptContext } from "../../context/prompts/PromptContext";
-import { UserContext } from "../../context/user/UserContext";
+import { PromptContext } from '../../context/prompts/PromptContext';
+import { UserContext } from '../../context/user/UserContext';
 
-import axios from "axios";
-import SearchTextbox from "../searchTextbox/searchTextbox";
-import { Welcome } from "../welcome/welcome";
-import { Conversations } from "./conversations";
-import { useChat } from "../../hooks/useChat";
-import { ButtonHelper } from "../welcome/buttonHelper";
-import ButtonHelperHistory from "../welcome/ButtonHelperHistory";
-import { useChat as useChatReact } from "ai/react";
-import { header, strapiUrl, modelOptions } from "../../constants/constans";
-import HistoryChat from "./HistoryChat";
-import { countTokens } from "../../util/helpers/count_tokens";
-import { SelectModel } from "../ui/SelectModel";
-
+import axios from 'axios';
+import SearchTextbox from '../searchTextbox/searchTextbox';
+import { Welcome } from '../welcome/welcome';
+import { Conversations } from './conversations';
+import { useChat } from '../../hooks/useChat';
+import { useChatSocket } from '../../hooks/useChatSocket';
+import { ButtonHelper } from '../welcome/buttonHelper';
+import ButtonHelperHistory from '../welcome/ButtonHelperHistory';
+import { useChat as useChatReact } from 'ai/react';
+import { header, strapiUrl, modelOptions } from '../../constants/constans';
+import HistoryChat from './HistoryChat';
+// import { countTokens } from '../../util/helpers/count_tokens';
+import { SelectModel } from '../ui/SelectModel';
+import {
+  createConversationSocket,
+  createMessageSocket
+} from '../../util/api/chatgptResponse';
+import { StoreContext } from '../../context/store/StoreContext';
+import { SidebarChat } from '../chatsocket/SidebarChat';
+import useDeviceDetection from '../../hooks/useDeviceDetection';
 export const config = {
-  runtime: "edge",
+  runtime: 'edge'
 };
 
 export default function ChatGpt() {
   const [responseModelMap, setResponseModelMap] = useState({});
+  const [showHelpMessage, setShowHelpMessage] = useState(false);
+
   const {
     setOpenHelpers,
     setSelectedModel,
@@ -30,7 +39,7 @@ export default function ChatGpt() {
     setModalOpen,
     selectedModel,
     modalOpen,
-    user,
+    user
   } = useContext(UserContext);
 
   const handleModelChange = (option) => {
@@ -38,12 +47,21 @@ export default function ChatGpt() {
   };
 
   const { setResponse, setActiveAI } = useContext(PromptContext);
+  const {
+    selectedConversationId,
+    setConversations,
+    setSelectedConversarionId
+  } = useContext(StoreContext);
 
   const { mutate } = useChat(user?.id);
+  const { mutate: mutateSocket } = useChatSocket();
+  const device = useDeviceDetection();
+
+  // console.log('data', data);
 
   useEffect(() => {
-    setActiveAI("ChatGpt");
-    setSelectedModel("gpt-3.5-turbo");
+    setActiveAI('ChatGpt');
+    setSelectedModel('gpt-3.5-turbo');
   }, []);
 
   const {
@@ -53,9 +71,9 @@ export default function ChatGpt() {
     handleInputChange,
     handleSubmit,
     isLoading,
-    setMessages,
+    setMessages
   } = useChatReact({
-    api: "/api/chat",
+    api: '/api/chat',
     onFinish: async (message) => {
       try {
         const res = await axios.post(
@@ -63,11 +81,51 @@ export default function ChatGpt() {
           {
             prompt: input,
             aiResponse: message.content,
-            users_permissions_user: user,
+            users_permissions_user: user
           },
           header
         );
-        const reqId = res.data.reqId;
+        // console.log('looking messages', messages);
+        const newMessageId = uuidv4();
+        const userPromise = await createMessageSocket({
+          type: 'user',
+          content: input
+        });
+
+        const aiPromise = await createMessageSocket({
+          type: 'ai',
+          content: message.content,
+          uuid: newMessageId
+        });
+
+        // Ejecutar las promesas en paralelo y esperar a que todas se resuelvan
+        try {
+          const [resUser, resAI] = await Promise.all([userPromise, aiPromise]);
+          // console.log('resUser', resUser.data.data.id, 'resAI', resAI);
+
+          if (
+            selectedConversationId === 'new' ||
+            selectedConversationId === null
+          ) {
+            // If there is no conversationId  or if the conversation is new, create a new conversation
+            const conveCreated = await createConversationSocket({
+              aiMessageId: resUser.data.data.id,
+              userMessageId: resAI.data.data.id
+            });
+
+            setSelectedConversarionId(conveCreated.data.data.id);
+          } else {
+            // else update the conversation selected with the new messages(user,ai)
+            setConversations({
+              aiMessageId: resUser.data.data.id,
+              userMessageId: resAI.data.data.id,
+              conversationId: selectedConversationId
+            });
+          }
+        } catch (error) {
+          console.error('Al menos una de las promesas falló:', error);
+        }
+        // const reqId = res.data.reqId;
 
         // setMessages((prevMessages) => {
         //   const updatedMessages = prevMessages.map((msg) => {
@@ -82,9 +140,6 @@ export default function ChatGpt() {
         //   return updatedMessages;
         // });
 
-
-        const newMessageId = uuidv4()
-
         const newMessage = {
           content: message.content,
           model: selectedModel,
@@ -95,41 +150,40 @@ export default function ChatGpt() {
 
         setMessages((prevMessages) => {
           const updatedMessages = prevMessages.map((msg) => {
-            if (msg.role === "assistant" && msg.id === message.id) {
+            if (msg.role === 'assistant' && msg.id === message.id) {
               return { ...msg, id: newMessageId };
             }
             return msg;
           });
           return updatedMessages;
         });
-  
-        setResponseModelMap(prevMap => ({
+
+        setResponseModelMap((prevMap) => ({
           ...prevMap,
           [newMessage.id]: selectedModel
         }));
         // console.log('set response model map:', setResponseModelMap)
-        
-        
 
         setResponse(newMessage.content + input);
         // console.log("response + input", setResponse);
 
         mutate();
+        mutateSocket();
       } catch (error) {
         // Handle error here
-        console.error("Error:", error);
+        console.error('Error:', error);
         setMessages((prevMessages) => [
           ...prevMessages,
-
-          { role: "assistant", content: "¡Se ha producido un error!" },
+          { role: 'assistant', content: '¡Se ha producido un error!' }
         ]);
       } finally {
+        setShowHelpMessage(true);
         setOpenHelpers(false);
       }
     },
     body: {
-      model: selectedModel,
-    },
+      model: selectedModel
+    }
   });
 
   // useEffect(() => {
@@ -143,13 +197,26 @@ export default function ChatGpt() {
 
   return (
     <>
-      <section className="dark:bg-darkColor bg-lightColor h-screen sm:w-full">
-        {messages.length === 0 ? (
+      <section className="dark:bg-darkColor bg-lightColor h-screen w-svw sm:w-full">
+        {messages.length === 0 && showHelpMessage === false ? (
           <Welcome setInput={setInput} />
         ) : openHelpers ? (
           <Welcome setInput={setInput} />
         ) : (
-          <Conversations messages={messages} responseModelMap={responseModelMap} />
+          <div
+            className={`${
+              device === 'Desktop' || device === 'Tablet'
+                ? 'flex w-full h-[90vh] lg:h-[90vh]'
+                : 'w-full h-[90vh] lg:h-[90vh] '
+            }`}
+          >
+            <SidebarChat />
+            <Conversations
+              setMessages={setMessages}
+              messages={messages}
+              responseModelMap={responseModelMap}
+            />
+          </div>
         )}
         <div className="flex justify-center flex-col-reverse md:flex-row items-center fixed bottom-3 w-[92%]  xl:w-[88%] 2xl:max-w-[77rem]">
           <SearchTextbox
