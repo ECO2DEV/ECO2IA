@@ -128,8 +128,9 @@ export const SportCoachResults = ({ user }) => {
   const getExerciseImageUrl = (exerciseName) => {
     const imageName =
       exerciseName.toLowerCase().replace(/ /g, "_").replace(/ñ/g, "n") + ".jpg";
+      return `https://res.cloudinary.com/dqz5veusy/image/upload/${imageName}`;
     // La ruta comienza con "/", que significa que es relativa a la raíz del dominio
-    return `/image_sportcoach/${imageName}`;
+    // return `/image_sportcoach/${imageName}`;
   };
 
   return (
@@ -183,7 +184,8 @@ export const SportCoachResults = ({ user }) => {
                     <Image
                       width={100}
                       height={100}
-                      src="/image_sportcoach/default.jpeg"
+                      src={getExerciseImageUrl(exercise.name) || "/image_sportcoach/default.jpeg"}
+                      // src="/image_sportcoach/default.jpeg"
                       alt={exercise.name}
                       // onError={(e) => {
                       //   e.target.onerror = null;
