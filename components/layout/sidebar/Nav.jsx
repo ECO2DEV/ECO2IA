@@ -40,7 +40,7 @@ export const Nav = ({ children }) => {
     <Image
       className="inline-block rounded-full "
       src={children.props.user.avatar.url}
-      alt={children?.props?.user?.username}
+      alt={children?.props?.user?.username || "user avatar"}
       width={80}
       height={80}
     />
@@ -48,7 +48,7 @@ export const Nav = ({ children }) => {
     <Image
       className="inline-block rounded-full "
       src={session.picture}
-      alt={children?.props?.user?.username}
+      alt={children?.props?.user?.username || "user avatar"}
       width={80}
       height={80}
     />

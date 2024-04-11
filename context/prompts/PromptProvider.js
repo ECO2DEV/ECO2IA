@@ -15,7 +15,7 @@ const promptInitialState = {
   plan: [],
   promptTokens: 0,
   responseTokens: 0,
-  iasAllowedToAccess: ['Eco2Dalle', 'Eco2Chat'],
+  iasAllowedToAccess: [],
   setIasAllowedToAccess: () => {},
   setActiveAI: () => {},
   setResponseTokens: () => {},

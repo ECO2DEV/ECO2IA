@@ -10,6 +10,7 @@ import axios from 'axios';
 import { DataPricing } from '../../data/pricing';
 import { stripePromise } from '../../constants/constans';
 import PricingPlans from './PricingPlans';
+import { createStripeUser } from '../../util/api/user';
 
 const frequencies = [
   { value: 'monthly', label: 'Mensuel', priceSuffix: '' }
@@ -33,7 +34,10 @@ export default function Pricing({ user }) {
     } else {
       try {
         const stripe = await stripePromise;
-        const customerid = user.customer_id;
+
+        const stripeUserResponse = await createStripeUser({email: user.email, name: user.name})
+        const customerid = stripeUserResponse.data.id;
+        // const customerid = user.customer_id;
         const userId = user.id;
 
         const checkoutSession = await axios.post('/api/create-subscription', {

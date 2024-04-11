@@ -9,6 +9,7 @@ import CheckoutForm from '../payment/CheckoutForm'
 import { ContacUsPricing } from '../contact_us/contactUsPricing'
 import { PopUpModal } from '../modal/popUpModal'
 import axios from 'axios'
+import { createStripeUser } from '../../util/api/user';
 
 
 export default function PricingPlans() {
@@ -29,17 +30,20 @@ export default function PricingPlans() {
     } else {
       try {
         const stripe = await stripePromise;
-        const customerid = user.customer_id;
+        // const customerid = user.customer_id;
+        const stripeUserResponse = await createStripeUser({email: user.email, name: user.Name})
+      
+        const customerid = stripeUserResponse.data.id;
         const userId = user.id;
 
-        console.log("inside the handleCheckout", price, customerid, userId)
+        // console.log("inside the handleCheckout", price, customerid, userId)
 
         const checkoutSession = await axios.post('/api/create-subscription', {
           price,
           customerid,
           userId
         });
-        console.log("hey cjeckout session",checkoutSession);
+        console.log("hey checkout session",checkoutSession);
 
         const result = await stripe.redirectToCheckout({
           sessionId: checkoutSession.data.sessionId
