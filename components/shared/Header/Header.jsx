@@ -249,8 +249,8 @@ function Avatar({ large = false, className, ...props }) {
       {...props}
     >
       <Image
-        src={isDarkMode ? logoLight : logoLight }
-        alt=""
+        src={isDarkMode ? logoDark : logoLight }
+        alt="eco2 logo"
         // sizes={large ? "4rem" : "2.25rem"}
         className={clsx(
           "rounded-full max-h-10 max-w-12 bg-zinc-100 object-cover dark:bg-zinc-800",

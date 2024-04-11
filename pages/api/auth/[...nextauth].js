@@ -110,18 +110,18 @@ export const authOptions = {
               // Create a new user in Strapi backend
               // console.log('viendo el token en el create user', token);
               const resPlan = await setFreemiumPlan();
-              const dataStripe = { email: user.email, name: user.name };
-              const resStripe = await axios.post(
-                `${strapiUrl}/api/payment/createUser`,
-                dataStripe,
-                header
-              );
+              // const dataStripe = { email: user.email, name: user.name };
+              // const resStripe = await axios.post(
+              //   `${strapiUrl}/api/payment/createUser`,
+              //   dataStripe,
+              //   header
+              // );
 
               const newUserResponse = await createUserForProvider({
                 username: user.name,
                 email: user.email,
                 password: 'encrypter',
-                customer_id: resStripe.data.id,
+                // customer_id: resStripe.data.id,
                 plan: {
                   id: resPlan.data.data.id
                 }
