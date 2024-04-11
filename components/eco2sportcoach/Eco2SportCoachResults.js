@@ -167,7 +167,8 @@ export const SportCoachResults = ({ user }) => {
           {responseObj?.resp?.map((day, index) => (
             <div
               key={`day-${index}`}
-              className="bg-eco2HoverColor dark:bg-darkBgCard rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+              className="bg-eco2HoverColor dark:bg-darkBgCard rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden
+              border-2 dark:border-white border-eco2MainColor"
             >
               <div className="p-4">
                 <h3 className="text-lg font-bold mb-2">{day.day}</h3>
