@@ -22,9 +22,9 @@ export const QuizForm = ({
     <form onSubmit={handleSubmit} className="max-w-md mx-auto">
       <label
         htmlFor="prompt"
-        className="block text-sm font-medium text-eco2MainColor"
+        className="block text-sm font-semibold text-eco2MainColor"
       >
-        Prompt:
+        Tema:
       </label>
       <textarea
         id="prompt"
@@ -34,20 +34,20 @@ export const QuizForm = ({
         placeholder={DataEco2Quiz.PromptMain}
         value={prompt ? prompt : ''}
         onChange={handlePropmtChange}
-        className="w-full px-4 py-2 border rounded-lg resize-none text-black mt-1"
+        className="w-full px-4 py-2 border rounded-lg custom-input resize-none text-black mt-1"
       />
 
       <label
         htmlFor="optionChoice"
-        className="block text-sm font-medium text-eco2MainColor mt-4"
+        className="block text-sm font-semibold text-eco2MainColor mt-4"
       >
-        Option Choice:
+        Seleccione una opción:
       </label>
       <select
         name="optionChoice"
         value={formState.optionChoice}
         onChange={handleChange}
-        className="w-full mt-1 px-4 py-2 border rounded-lg text-black"
+        className="w-full mt-1 px-4 py-2 border custom-input rounded-lg text-black"
       >
         <option value="multipleChoice"> {DataEco2Quiz.MultipleChoise} </option>
         <option value="trueFalse"> {DataEco2Quiz.TrueFalse} </option>
@@ -56,16 +56,16 @@ export const QuizForm = ({
 
       <label
         htmlFor="language"
-        className="block text-sm font-medium text-eco2MainColor mt-4"
+        className="block text-sm font-semibold text-eco2MainColor mt-4"
       >
-        Language:
+        Idioma:
       </label>
       <select
         id="language"
         name="language"
         value={formState.language}
         onChange={handleChange}
-        className="w-full mt-1 px-4 py-2 border rounded-lg text-black"
+        className="w-full mt-1 px-4 py-2 border custom-input rounded-lg text-black"
       >
         <option value="Auto"> {DataEco2Quiz.Auto} </option>
         <option value="En"> {DataEco2Quiz.English} </option>
@@ -78,16 +78,16 @@ export const QuizForm = ({
 
       <label
         htmlFor="difficulty"
-        className="block text-sm font-medium text-eco2MainColor mt-4"
+        className="block text-sm font-semibold text-eco2MainColor mt-4"
       >
-        Difficulty:
+        Dificultad:
       </label>
       <select
         id="difficulty"
         name="difficulty"
         value={formState.difficulty}
         onChange={handleChange}
-        className="w-full mt-1 px-4 py-2 border rounded-lg text-black"
+        className="w-full mt-1 px-4 py-2 border custom-input rounded-lg text-black"
       >
         <option value="easy"> {DataEco2Quiz.Easy} </option>
         <option value="medium"> {DataEco2Quiz.Medium} </option>
@@ -96,9 +96,9 @@ export const QuizForm = ({
 
       <label
         htmlFor="questionQuantity"
-        className="block text-sm font-medium text-eco2MainColor mt-4"
+        className="block text-sm font-semibold text-eco2MainColor mt-4"
       >
-        Question Quantity:
+        Cantidad de preguntas:
       </label>
       <input
         type="number"
@@ -107,7 +107,7 @@ export const QuizForm = ({
         placeholder={DataEco2Quiz.NumberQuestions}
         value={formState.questionQuantity}
         onChange={handleChange}
-        className="w-full mt-1 px-4 py-2 border rounded-lg text-black"
+        className="w-full mt-1 px-4 py-2 border custom-input rounded-lg text-black"
       />
 
       <button

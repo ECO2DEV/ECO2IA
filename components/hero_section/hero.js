@@ -48,7 +48,7 @@ export default function Hero({ user }) {
           variants={textVariants}
           className="text-center sm:mb-8 sm:flex sm:justify-center"
         >
-          <p className="text-lg leading-8 text-eco2MainColor">
+          <p className="text-lg leading-8 dark:text-lightColor text-darkColor">
             {DataHero.hero_description}
           </p>
         </motion.div>
@@ -60,7 +60,7 @@ export default function Hero({ user }) {
           variants={textVariants}
           className="text-center"
         >
-          <h1 className="text-4xl font-bold tracking-tight text-eco2MainColor sm:text-6xl">
+          <h1 className="text-4xl font-bold tracking-tight dark:text-lightColor text-darkColor sm:text-6xl">
             {DataHero.hero_maintext}
           </h1>
         </motion.div>
@@ -73,7 +73,7 @@ export default function Hero({ user }) {
         >
           <a
             href={"/about"}
-            className="font-semibold text-eco2MainColor hover:text-green-300"
+            className="font-semibold dark:text-lightColor text-darkColor hover:dark:text-eco2HoverColor hover:text-darkHoverColor"
           >
             <span className="absolute inset-0" aria-hidden="true" />
             {DataHero.hero_readmore}
@@ -85,7 +85,7 @@ export default function Hero({ user }) {
           className="z-10 bg-transparent"
         >
           <motion.button
-            className="mx-auto mt-8 relative border hover:border-eco2MainColor duration-500 group cursor-pointer text-sky-50 overflow-hidden h-14 w-56 rounded-md bg-eco2MainColor p-2 flex justify-center items-center font-extrabold"
+            className="mx-auto mt-8 relative border dark:hover:border-lightColor hover:border-darkColor duration-500 group cursor-pointer dark:text-lightColor text-darkColor overflow-hidden h-14 w-56 rounded-md bg-eco2MainColor borde p-2 flex justify-center items-center font-extrabold"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

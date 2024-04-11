@@ -9,11 +9,11 @@ import {
 
 function ShareModal({ generateTrainingPlanContent }) {
   return (
-    <div className="relative flex flex-col gap-2 bottom-[9rem] left-[4rem] w-14 items-center bg-gray-100 rounded-lg shadow p-4">
+    <div className="absolute right-0 translate-y-[-100%] mr-24 mt-[120px] flex flex-col items-center gap-2 bg-white rounded-lg shadow p-3">
       <FacebookShareButton
         title={generateTrainingPlanContent()}
         url={"https://next-mattech.vercel.app"}
-        quote={generateTrainingPlanContent}
+        // quote={generateTrainingPlanContent}
         hashtag={"#SportCoach"}
       >
         <FacebookIcon size={32} round={true} />

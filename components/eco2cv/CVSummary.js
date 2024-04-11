@@ -112,7 +112,7 @@ export default function CVSummary({ onClose, setTextProfile }) {
                       <div className="flex space-x-2 mt-2">
                         <input
                           type="text"
-                          className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200 dark:text-black"
+                          className="w-1/2 px-4 py-2 border  rounded-lg custom-input dark:text-black"
                           placeholder={DataEco2CV.Role}
                           value={formProfile.role ? formProfile.role : ''}
                           name="role"
@@ -121,7 +121,7 @@ export default function CVSummary({ onClose, setTextProfile }) {
                         <input
                           type="text"
                           name="market"
-                          className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200 dark:text-black"
+                          className="w-1/2 px-4 py-2 border rounded-lg custom-input dark:text-black"
                           placeholder={DataEco2CV.Market}
                           value={formProfile.market ? formProfile.market : ''}
                           onChange={handleChange}
@@ -139,7 +139,7 @@ export default function CVSummary({ onClose, setTextProfile }) {
                       <div className="flex justify-end items-center gap-2 m-2">
                         <button
                           type="submit"
-                          className="px-4 py-2 bg-indigo-600 text-white rounded-lg "
+                          className="px-4 py-2 bg-eco2MainColor hover:bg-eco2HoverColor text-white rounded-lg "
                         >
                           {loading ? DataEco2CV.Loading : DataEco2CV.Generate}
                         </button>

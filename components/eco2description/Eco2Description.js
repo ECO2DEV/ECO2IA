@@ -5,14 +5,17 @@ import { Eco2Cards } from './Eco2Cards';
 
 export const Eco2Description = () => {
   const [showMatDescription, setShowMatDescription] = useState(false);
+
   return (
     <section className="flex justify-center min-h-screen pb-4 pt-10">
       {!showMatDescription ? (
         <DescriptionHeader setShowMatDescription={setShowMatDescription} />
       ) : (
-        <div className="flex flex-col sm:flex-row w-full gap-2 relative">
-          <DescriptionForm />
-          <Eco2Cards />
+        <div className="">
+          <div className="flex flex-col justify-around md:flex-row md:justify-around w-full">
+            <DescriptionForm />
+            <Eco2Cards />
+          </div>
         </div>
       )}
     </section>

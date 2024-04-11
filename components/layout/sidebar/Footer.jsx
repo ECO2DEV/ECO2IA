@@ -24,7 +24,7 @@ function AIIconsDirectFooter() {
           <Link key={card.id} href={card.href}>
             <img
             title={card.title}
-              className="hover:scale-110 mx-auto hover:scale-125 hover:opacity-70 transition cursor-pointer rounded-lg border border-darkColor"
+              className="hover:scale-110 mx-auto hover:opacity-70 transition cursor-pointer rounded-lg border border-darkColor"
               width={40}
               height={40}
               src={card.icon}

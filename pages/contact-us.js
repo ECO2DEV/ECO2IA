@@ -232,7 +232,7 @@ export default function contactUs() {
                     value={formData.name}
                     required
                     autoComplete="given-name"
-                    className="block w-full rounded-md border-white bg-darkBgCard px-3.5 py-2 text-white shadow-sm ring-1 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-white custom-input bg-darkBgCard px-3.5 py-2 text-white shadow-sm ring-1 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
@@ -252,7 +252,7 @@ export default function contactUs() {
                     value={formData.Email}
                     required
                     autoComplete="email"
-                    className="block w-full rounded-md border-white bg-darkBgCard px-3.5 py-2 text-white shadow-sm sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-white custom-input bg-darkBgCard px-3.5 py-2 text-white shadow-sm sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
@@ -277,7 +277,7 @@ export default function contactUs() {
                     value={formData.IADetail}
                     required
                     rows={4}
-                    className="block w-full rounded-md border-white bg-darkBgCard px-3.5 py-2 text-white shadow-sm ring-1 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-white custom-input bg-darkBgCard px-3.5 py-2 text-white shadow-sm ring-1 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>

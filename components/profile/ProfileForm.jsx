@@ -16,9 +16,9 @@ export function ProfileForm({ user }) {
     numberTelephone: user.numberTelephone,
     country: user.country,
     sex: user.sex,
-    domainofstudy: domain[0],
-    sport: sport[0],
-    nacionality: nationality[0],
+    domainofstudy: user.domainofstudy,
+    sport: user.sport,
+    nacionality: user.nacionality,
     age: user.age,
     height: user.height,
     weight: user.weight
@@ -105,7 +105,7 @@ export function ProfileForm({ user }) {
             autoComplete="off"
             aria-autocomplete="none"
             placeholder="Maria"
-            className="block w-full rounded-md py-1.5 focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
+            className="block w-full rounded-md py-1.5 focus:outline-none bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white custom-input"
           />
         </div>
       </div>
@@ -127,7 +127,7 @@ export function ProfileForm({ user }) {
             autoComplete="off"
             placeholder="Perez"
             aria-autocomplete="none"
-            className="block w-full rounded-md py-1.5 focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
+            className="block w-full rounded-md py-1.5 focus:outline-none custom-input bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
           />
         </div>
       </div>
@@ -149,7 +149,7 @@ export function ProfileForm({ user }) {
             placeholder="mariaritificial@hotmail.com "
             autoComplete="off"
             aria-autocomplete="none"
-            className="block w-full rounded-md py-1.5 focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
+            className="block w-full rounded-md py-1.5 focus:outline-none custom-input bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
           />
         </div>
       </div>
@@ -173,7 +173,7 @@ export function ProfileForm({ user }) {
             placeholder="3154785123"
             autoComplete="off"
             aria-autocomplete="none"
-            className="block w-full rounded-md py-1.5 focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
+            className="block w-full rounded-md py-1.5 focus:outline-none custom-input bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
           />
         </div>
       </div>
@@ -195,7 +195,7 @@ export function ProfileForm({ user }) {
             placeholder="Colombia"
             autoComplete="off"
             aria-autocomplete="none"
-            className="block w-full rounded-md py-1.5 focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
+            className="block w-full rounded-md py-1.5 focus:outline-none custom-input bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
           />
         </div>
       </div>
@@ -214,7 +214,7 @@ export function ProfileForm({ user }) {
             id="nacionality"
             autoComplete="off"
             aria-autocomplete="none"
-            className="block w-full rounded-md py-1.5 focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
+            className="block w-full rounded-md py-1.5 focus:outline-none custom-input bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
           >
             {nacionalitySelect}
           </select>
@@ -235,7 +235,7 @@ export function ProfileForm({ user }) {
             id="sex"
             autoComplete="off"
             aria-autocomplete="none"
-            className="block w-full rounded-md py-1.5 focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
+            className="block w-full rounded-md py-1.5 focus:outline-none custom-input bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
           >
             <option value="hombre">Hombre</option>
             <option value="mujer">Mujer</option>
@@ -260,7 +260,7 @@ export function ProfileForm({ user }) {
             placeholder="25"
             autoComplete="off"
             aria-autocomplete="none"
-            className="block w-full rounded-md py-1.5 focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
+            className="block w-full rounded-md py-1.5 focus:outline-none custom-input bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
           />
         </div>
       </div>
@@ -282,7 +282,7 @@ export function ProfileForm({ user }) {
             autoComplete="off"
             aria-autocomplete="none"
             placeholder="1.70"
-            className="block w-full rounded-md py-1.5 focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
+            className="block w-full rounded-md py-1.5 focus:outline-none custom-input bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
           />
         </div>
       </div>
@@ -304,7 +304,7 @@ export function ProfileForm({ user }) {
             autoComplete="off"
             aria-autocomplete="none"
             placeholder="70"
-            className="block w-full rounded-md py-1.5 focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
+            className="block w-full rounded-md py-1.5 focus:outline-none custom-input bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
           />
         </div>
       </div>
@@ -323,7 +323,7 @@ export function ProfileForm({ user }) {
             id="domainofstudy"
             autoComplete="off"
             aria-autocomplete="none"
-            className="block w-full rounded-md py-1.5 focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
+            className="block w-full rounded-md py-1.5 focus:outline-none custom-input bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
           >
             {domainSelect}
           </select>
@@ -344,7 +344,7 @@ export function ProfileForm({ user }) {
             id="sport"
             autoComplete="off"
             aria-autocomplete="none"
-            className="block w-full rounded-md py-1.5 focus:outline-none  bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
+            className="block w-full rounded-md py-1.5 focus:outline-none custom-input bg-darkBgCard text-white sm:text-sm sm:leading-6 shadow-none der der-white  white/5 focus:bg-darkColor us:border-white er:border-white "
           >
             {sportSelect}
           </select>

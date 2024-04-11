@@ -62,6 +62,7 @@ export const Conversations = ({ messages, responseModelMap, setMessages }) => {
   if (isLoading) {
     return <LoadingChatgpt />;
   }
+
   useEffect(() => {
     if (messages) {
       document.querySelectorAll('pre code').forEach((block) => {
@@ -118,6 +119,7 @@ export const Conversations = ({ messages, responseModelMap, setMessages }) => {
               ))}
           </>
         )}
+
         <div ref={messagesEndRef}></div>
       </section>
       {deleteModalOpen && (

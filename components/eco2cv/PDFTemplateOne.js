@@ -3,6 +3,8 @@ import { Fragment } from 'react';
 import { Page, Text, View, Document, Image, PDFDownloadLink } from '@react-pdf/renderer';
 import dynamic from 'next/dynamic';
 import { stylesOne } from './TemplatesStyles';
+import { useSession } from 'next-auth/react';
+
 const DynamicPDFViewer = dynamic(
   () => import('@react-pdf/renderer').then((mod) => mod.PDFViewer),
   {
@@ -20,6 +22,8 @@ export const PDFTemplateOne = ({
   dropdowns,
   educationFields
 }) => {
+  const { data: session } = useSession();
+
   return (
     <DynamicPDFViewer style={{ width: '100%', height: '100%' }}>
       <Document>
@@ -87,9 +91,19 @@ export const PDFTemplateOne = ({
           </View>
           <View style={stylesOne.secondColumn}>
             <View style={stylesOne.pictureContainer}>
-              <Image
-                src={strapiUrl + user?.avatar?.formats?.thumbnail?.url}
-              />
+            <Image
+              width={200}
+              height={200}
+              src={
+                user?.avatar
+                  ? user?.avatar?.url
+                  : session?.picture
+                  ? session?.picture
+                  : '/empty_avatar.webp'
+              }
+              alt="Avatar preview"
+              // className={`w-full h-full mx-auto object-cover rounded-full border-none shadow-lg `}
+            />
             </View>
             {debouncedFormData.fullName && debouncedFormData.domainOfStudy && (
               <View>
@@ -114,10 +128,10 @@ export const PDFTemplateOne = ({
             )}
             {spokenLanguages.length > 0 && (
               <View>
-                <Text style={stylesOne.heading}>Langues</Text>
+                <Text style={stylesOne.subtitle}>Idiomas</Text>
                 {spokenLanguages.map((language, index) => (
                   <Fragment key={index}>
-                    <Text style={stylesOne.thirdTitle}>
+                    <Text style={stylesOne.profileText}>
                       {`${language.name} - ${language.proficiency}`}
                     </Text>
                   </Fragment>

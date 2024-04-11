@@ -34,16 +34,27 @@ module.exports = {
       },
     },
   },
-    extend: {
-      colors: {
-        eco2MainColor: '#21c284', // eco2-green
-        eco2HoverColor: '#21c284a8',
-        lightColor: '#f0fdf4', // bg-green-50
-        lightBgCard: '#fee2e2', // bg-red-100
-        darkColor: '#020617', // bg-slate-950 // background
-        darkBgCard: '#1f2937' // bg-slate-800
-      }
+  extend: {
+    colors: {
+      eco2MainColor: '#3500e4',
+      eco2HoverColor: '#007297',
+      darkHoverColor: '#9ca3af', // Un color para hover en modo claro
+      lightColor: '#ffff', // Usar este color para texto sobre fondos oscuros
+      darkColor: '#281e4b', // Usar este color para texto sobre fondos claros
+      darkBgCard: '#00384b',
+      // Agregar cualquier nuevo color que necesites aquí
     }
+  }
+    // extend: {
+    //   colors: {
+    //     eco2MainColor: '#3500e4',
+    //     eco2HoverColor: '#007297',
+    //     lightColor: '#ffff',
+    //     lightBgCard: '#fee2e2',
+    //     darkColor: '#281e4b',
+    //     darkBgCard: '#00384b'
+    //   }
+    // }
   },
   plugins: [require('@tailwindcss/forms')]
 };
