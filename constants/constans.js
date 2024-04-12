@@ -1,35 +1,33 @@
-import { loadStripe } from "@stripe/stripe-js";
-import { DataPricing } from "../data/pricing";
-import { HomeIcon } from "@heroicons/react/24/outline";
-import { DataAbout } from "../data/about";
-import { DataDashboard } from "../data/dashboard";
-import eco2chat from "../public/eco2chat.webp";
-import eco2resume from "../public/eco2resume.webp";
-import eco2image from "../public/eco2image.webp";
-import eco2rad from "../public/eco2rad.webp";
-import eco2sport from "../public/eco2sport.webp";
-import eco2quiz from "../public/eco2quiz.webp";
-import eco2desc from "../public/eco2desc.webp";
-import eco2cv from "../public/eco2cv.webp";
+import { loadStripe } from '@stripe/stripe-js';
+import { DataPricing } from '../data/pricing';
+import { HomeIcon } from '@heroicons/react/24/outline';
+import { DataAbout } from '../data/about';
+import { DataDashboard } from '../data/dashboard';
+import eco2chat from '../public/eco2chat.webp';
+import eco2resume from '../public/eco2resume.webp';
+import eco2image from '../public/eco2image.webp';
+import eco2rad from '../public/eco2rad.webp';
+import eco2sport from '../public/eco2sport.webp';
+import eco2quiz from '../public/eco2quiz.webp';
+import eco2desc from '../public/eco2desc.webp';
+import eco2cv from '../public/eco2cv.webp';
 
-import Photo1 from "../public/Photo1.webp";
-import Photo2 from "../public/Photo2.webp";
-import Photo3 from "../public/Photo3.webp";
-import Photo4 from "../public/Photo4.webp";
+import Photo1 from '../public/Photo1.webp';
+import Photo2 from '../public/Photo2.webp';
+import Photo3 from '../public/Photo3.webp';
+import Photo4 from '../public/Photo4.webp';
 
-import IA1 from "../public/screenshot/chat_eco2.webp";
-import IA2 from "../public/screenshot/sport_eco2.webp";
-import IA3 from "../public/screenshot/quiz_eco2.webp";
-import IA4 from "../public/screenshot/desc_eco2.webp";
-import IA5 from "../public/screenshot/resum_eco2.webp";
-import IA6 from "../public/screenshot/cv_eco2.webp";
+import IA1 from '../public/screenshot/chat_eco2.webp';
+import IA2 from '../public/screenshot/sport_eco2.webp';
+import IA3 from '../public/screenshot/quiz_eco2.webp';
+import IA4 from '../public/screenshot/desc_eco2.webp';
+import IA5 from '../public/screenshot/resum_eco2.webp';
+import IA6 from '../public/screenshot/cv_eco2.webp';
 
-
-import gpt3image from "../public/ias/gpt3image.png";
-import gpt3 from "../public/ias/chatgpt3-icon.svg";
-import gpt4 from "../public/ias/GPT-4_Logo.svg";
-import gemini from "../public/ias/google-gemini-icon.svg";
-
+import gpt3image from '../public/ias/gpt3image.png';
+import gpt3 from '../public/ias/chatgpt3-icon.svg';
+import gpt4 from '../public/ias/GPT-4_Logo.svg';
+import gemini from '../public/ias/google-gemini-icon.svg';
 
 import {
   domain,
@@ -76,9 +74,9 @@ export const navigation = [
 ];
 
 export const modelOptions = [
-  { value: 'gpt-3.5-turbo', label: 'gpt-3-turbo', icon: gpt3 },
+  { value: 'gpt-3.5-turbo', label: 'gpt-3', icon: gpt3 },
   { value: 'gpt-4', label: 'gpt-4', icon: gpt4 },
-  { value: 'gemini-pro', label: 'Gemini-pro', icon: gemini }
+  { value: 'gemini-pro', label: 'Gemini', icon: gemini }
   // { value: 'claude-1', label: 'Claude' }
 
   // Add more AI models as needed

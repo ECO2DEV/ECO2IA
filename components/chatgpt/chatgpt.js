@@ -218,14 +218,14 @@ export default function ChatGpt() {
             />
           </div>
         )}
-        <div className="flex justify-center flex-col-reverse md:flex-row items-center fixed bottom-3 w-[92%]  xl:w-[88%] 2xl:max-w-[77rem]">
+        <div className="flex justify-center  items-center fixed bottom-3 w-[92%] md:left-[32%] md:w-[60%] xl:left-1/4 xl:w-[68%] 2xl:max-w-[77rem]">
           <SearchTextbox
             OnChange={handleInputChange}
             Fetch={handleSubmit}
             loading={isLoading}
             prompt={input}
           />
-          <div className="hidden md:flex justify-between items-center gap-2 mb-4">
+          <div className="flex justify-between items-center gap-2 mb-4">
             <ButtonHelper onClick={() => setOpenHelpers(!openHelpers)} />
             <ButtonHelperHistory onClick={() => setModalOpen(!modalOpen)} />
             <SelectModel

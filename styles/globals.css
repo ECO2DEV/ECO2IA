@@ -369,7 +369,7 @@
 .custom-select-wrapper {
   position: relative;
   user-select: none;
-  width: 160px;
+  width: 100px;
 }
 
 .custom-select {
@@ -444,11 +444,12 @@
 
 .menu-container{
   position: absolute;
-  top: 0;
+  top: 2.5%;
   left: 0;
   width: 16rem;
   height: 100%;
   z-index: 10;
+  animation: menuIn 200ms;
 }
 
 .menu{
@@ -464,14 +465,14 @@
 
 .menu-toggler{
   position: sticky;
-  top: 0;
+  top: 2.5%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 800;
-  width: 25px;
-  height: 35px;
-  border-radius: 10px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
   transition: background 125ms;
   user-select: none;
   cursor: pointer;
