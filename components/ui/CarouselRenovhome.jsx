@@ -3,7 +3,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion";
 import { wrap } from "popmotion";
 import { DropdownPoints } from "../ui/DropdownPoints";
-
+import {ArrowLeft, ArrowRigth} from "../icons/icons";
 
 const variants = {
   enter: (direction) => {
@@ -38,6 +38,8 @@ const swipePower = (offset, velocity) => {
 };
 
 export const Carousel = ({images = []}) => {
+
+  // console.log("images", images)
   
   const [[page, direction], setPage] = useState([0, 0]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -53,7 +55,7 @@ export const Carousel = ({images = []}) => {
   };
 
   return (
-    <div className="w-screen h-screen relative flex justify-center md:items-center">
+    <div className="w-screen h-screen relative flex justify-center md:items-center relative">
       <AnimatePresence initial={false} custom={direction}>
         <motion.img
           className="absolute max-w-[100vw] max-h-[100vh]"
@@ -74,7 +76,7 @@ export const Carousel = ({images = []}) => {
           }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
+          dragElastic={0.5}
           onDragEnd={(e, { offset, velocity }) => {
             const swipe = swipePower(offset.x, velocity.x);
 
@@ -94,11 +96,11 @@ export const Carousel = ({images = []}) => {
         </div>
       </AnimatePresence>
 
-      <div className="next" onClick={() => paginate(1)}>
-        {'‣'}
+      <div className="next z-20 cursor-pointer hover:opacity-80 transition-opacity absolute top-1/2 right-[2%] md:right-[10%] bg-black dark:bg-white w-10 h-10 rounded-full text-white dark:text-black flex justify-center items-center text-2xl" onClick={() => paginate(1)}>
+        <ArrowRigth/>
       </div>
-      <div className="prev" onClick={() => paginate(-1)}>
-        {'‣'}
+      <div className="prev z-20 cursor-pointer hover:opacity-80 transition-opacity absolute top-1/2 left-[2%] md:left-[10%] bg-black dark:bg-white w-10 h-10 rounded-full text-white dark:text-black flex justify-center items-center text-2xl" onClick={() => paginate(-1)}>
+        <ArrowLeft />
       </div>
     </div>
   );
