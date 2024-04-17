@@ -1,5 +1,5 @@
 export const DataEco2Traduct = {
-  ButtonDetectLanguage: 'Detección de idioma',
+  ButtonDetectLanguage: 'Detectar idioma',
   Entertext: 'Introduce el texto',
   Translation: 'Traducción',
   Loading: 'Cargando...',

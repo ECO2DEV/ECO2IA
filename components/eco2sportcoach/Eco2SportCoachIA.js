@@ -1,23 +1,27 @@
 //components/sport_coach/sportCoach.js
-import { useContext, useState } from "react";
-import { InputField } from "./InputField";
-import { SportButtonHelper } from "./Eco2SportCoachHelper";
-import { PromptContext } from "../../context/prompts/PromptContext";
-import { sendTrainingPlanRequest } from "../../util/api/sendTrainingPlanRequest";
-import { SportCoachResults } from "./Eco2SportCoachResults";
-import { useSportCoach } from "../../hooks/useSportCoach";
-import { WelcomeSportCoach } from "./welcomeSportCoach";
-import { DataEco2Sport } from "../../data/eco2sport";
-import { toast } from "react-hot-toast";
-import Loader from "../loader/loader";
+import { useContext, useState } from 'react';
+import { InputField } from './InputField';
+import { SportButtonHelper } from './Eco2SportCoachHelper';
+import { PromptContext } from '../../context/prompts/PromptContext';
+import { sendTrainingPlanRequest } from '../../util/api/sendTrainingPlanRequest';
+import { SportCoachResults } from './Eco2SportCoachResults';
+import { useSportCoach } from '../../hooks/useSportCoach';
+import { WelcomeSportCoach } from './welcomeSportCoach';
+import { DataEco2Sport } from '../../data/eco2sport';
+import { toast } from 'react-hot-toast';
+import Loader from '../loader/loader';
+import { fetchDataExerciseDB } from '../../util/api/SportFetch';
+import { ExerciseContext } from '../../context/exercise/ExerciseContext';
+import { exerciseUrl } from '../../util/api/SportFetch';
+
 export const SportCoachIA = (props) => {
   // Estados para almacenar los datos del formulario
-  const [weight, setWeight] = useState("");
-  const [age, setAge] = useState("");
+  const [weight, setWeight] = useState('');
+  const [age, setAge] = useState('');
   // const [goal, setGoal] = useState("");
-  const [trainingDays, setTrainingDays] = useState("1");
+  const [trainingDays, setTrainingDays] = useState('1');
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [showResults, setShowResults] = useState(false);
   // estado para mostrar o no el componente de ayuda
   const [showWelcome, setShowWelcome] = useState(true);
@@ -30,18 +34,31 @@ export const SportCoachIA = (props) => {
   const { prompt, setPrompt, setResponse, promptTokens } =
     useContext(PromptContext);
 
+  const { isExercise, setExercise, setIsExercise, exercise } =
+    useContext(ExerciseContext);
+
   // Manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     await fetchData();
-    // setShowResults(false);
+
+    if (!isExercise) {
+      const respo = await fetchDataExerciseDB(
+        `${exerciseUrl}/exercises?limit=1300`
+      );
+
+      setExercise(respo);
+      setIsExercise(true);
+    }
   };
+
+  // console.log('is exercise', data);
 
   // Función para enviar la solicitud de plan de entrenamiento
   const fetchData = async () => {
     if (!prompt) {
       // console.log(setPromptTokens);
-      setError("Por favor, escriba algo antes de enviar");
+      setError('Por favor, escriba algo antes de enviar');
     } else {
       setSubmitting(true);
       // Realiza la llamada a la API para enviar la solicitud de plan de entrenamiento
@@ -50,9 +67,9 @@ export const SportCoachIA = (props) => {
         weight: weight,
         age: age,
         goal: prompt,
-        language: "Spanish",
+        language: 'Spanish',
         trainingDays: trainingDays,
-        user: user,
+        user: user
       })
         .then((response) => {
           setResponse(response?.data?.data);
@@ -61,7 +78,7 @@ export const SportCoachIA = (props) => {
         })
         .catch((error) => {
           console.log(error);
-          setError("Se produjo un error al recuperar los datos");
+          setError('Se produjo un error al recuperar los datos');
         })
         .finally(() => {
           setSubmitting(false);
@@ -72,7 +89,7 @@ export const SportCoachIA = (props) => {
   const handlePromptChange = (e) => {
     const { value } = e.target;
     if (value === DataEco2Sport.SelectOption) {
-      toast.error("Por favor, seleccione un objetivo");
+      toast.error('Por favor, seleccione un objetivo');
       return;
     }
     setPrompt(value);
@@ -82,7 +99,7 @@ export const SportCoachIA = (props) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "trainingDays") {
+    if (name === 'trainingDays') {
       setTrainingDays(value);
     }
   };
@@ -91,6 +108,7 @@ export const SportCoachIA = (props) => {
     setShowWelcome(true);
     setShowResults(false);
   };
+  // console.log('result', data);
 
   return (
     <>
@@ -170,7 +188,7 @@ export const SportCoachIA = (props) => {
                   <option value={prompt}>{DataEco2Sport.SelectOption}</option>
 
                   <option value="weight loss">
-                    {" "}
+                    {' '}
                     {DataEco2Sport.WeightLoss}
                   </option>
                   <option value="muscle building">
@@ -205,15 +223,13 @@ export const SportCoachIA = (props) => {
                 </select>
               </fieldset>
             </div>
-            <div className="text-start md:text-center">
-              <button
-                type="submit"
-                disabled={submitting}
-                className="h-10 text-white text-center bg-eco2MainColor  dark:hover:bg-eco2HoverColor hover:bg-eco2HoverColor rounded-full w-full lg:w-auto px-10 py-2"
-              >
-                {submitting ? <Loader /> : DataEco2Sport.GetButton}
-              </button>
-            </div>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="flex justify-center items-center h-10 text-white text-center bg-eco2MainColor  dark:hover:bg-eco2HoverColor hover:bg-eco2HoverColor rounded-full w-full lg:w-auto px-10 py-2"
+            >
+              {submitting ? <Loader /> : DataEco2Sport.GetButton}
+            </button>
           </form>
           <div className="flex items-center justify-center mr-36">
             {/* <SportButtonHelper onClick={handleOpenHelpers} /> */}

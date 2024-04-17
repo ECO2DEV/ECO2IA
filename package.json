@@ -31,6 +31,7 @@
     "highlight.js": "11.9.0",
     "mammoth": "1.6.0",
     "marked": "11.2.0",
+    "moment-timezone": "^0.5.45",
     "next": "latest",
     "next-auth": "4.24.5",
     "next-share": "0.27.0",

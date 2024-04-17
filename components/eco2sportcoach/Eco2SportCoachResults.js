@@ -1,23 +1,23 @@
-import { useEffect, useState, useReducer } from "react";
-import { useSportCoach } from "../../hooks/useSportCoach";
-// import {} from "../../public/image_sportcoach"
-import { LoadingIndicator } from "./LoadingIndicator";
-import ExportPDF from "./ExportPDF";
-import dynamic from "next/dynamic";
-import ShareModal from "./ShareModal";
-import { toast } from "react-hot-toast";
+import { useEffect, useState, useReducer, useContext } from 'react';
+import { useSportCoach } from '../../hooks/useSportCoach';
+import { ExerciseContext } from '../../context/exercise/ExerciseContext';
+import { LoadingIndicator } from './LoadingIndicator';
+import ExportPDF from './ExportPDF';
+import dynamic from 'next/dynamic';
+import ShareModal from './ShareModal';
+import { toast } from 'react-hot-toast';
 import {
   ShareIcon,
   DocumentArrowDownIcon,
-  // DocumentIcon,
-  CheckIcon,
-} from "@heroicons/react/24/solid";
-import Image from "next/image";
+  CheckIcon
+} from '@heroicons/react/24/solid';
+
+import { GiftSport } from './GiftSport';
 
 const PDFDownloadLinkDynamic = dynamic(
-  () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
+  () => import('@react-pdf/renderer').then((mod) => mod.PDFDownloadLink),
   {
-    ssr: false,
+    ssr: false
   }
 );
 
@@ -26,15 +26,15 @@ const exercisesReducer = (state, action) => {
     return state;
   }
   switch (action.type) {
-    case "TOGGLE_EXERCISE":
+    case 'TOGGLE_EXERCISE':
       return {
         ...state,
         [action.dayIndex]: {
           ...state[action.dayIndex],
           exercises: state[action.dayIndex].exercises.map((completed, index) =>
             index === action.exerciseIndex ? !completed : completed
-          ),
-        },
+          )
+        }
       };
 
     default:
@@ -45,12 +45,12 @@ const exercisesReducer = (state, action) => {
 export const SportCoachResults = ({ user }) => {
   // const { user } = useContext(UserContext);
   const { data, isLoading, error } = useSportCoach(user);
-  const [responseObj, setResponseObj] = useState(null);
+  const { responseObj, setResponseObj } = useContext(ExerciseContext);
   // console.log('the data', data);
   useEffect(() => {
     if (!data || data?.data[0]?.attributes?.payload_out === undefined) {
       toast.error(
-        "Se ha producido un error al recuperar los datos, por favor, inténtelo de nuevo"
+        'Se ha producido un error al recuperar los datos, por favor, inténtelo de nuevo'
       );
       return;
     }
@@ -60,9 +60,6 @@ export const SportCoachResults = ({ user }) => {
     // console.log('respuesta ya parseada: ', parsedResponse);
     setResponseObj(parsedResponse);
   }, [data]);
-
-  // Estado para controlar el índice del día activo
-  const [activeIndex, setActiveIndex] = useState(0);
   // Estado para mostrar u ocultar los botones de compartir
   const [showShareButtons, setShowShareButtons] = useState(false);
   // Estado para realizar un seguimiento de los ejercicios completados
@@ -70,11 +67,13 @@ export const SportCoachResults = ({ user }) => {
     ? responseObj.resp.map((day) => {
         if (day.exercises) {
           return {
-            exercises: day.exercises.map(() => false),
+            day: day.day, // Add the day property
+            exercises: day.exercises.map(() => false)
           };
         } else {
           return {
-            exercises: [],
+            day: day.day, // Add the day property
+            exercises: []
           };
         }
       })
@@ -92,9 +91,9 @@ export const SportCoachResults = ({ user }) => {
   // Maneja el clic en un ejercicio para marcarlo como completado
   const handleExerciseClick = (dayIndex, exerciseIndex) => {
     dispatch({
-      type: "TOGGLE_EXERCISE",
+      type: 'TOGGLE_EXERCISE',
       dayIndex,
-      exerciseIndex,
+      exerciseIndex
     });
   };
 
@@ -110,7 +109,7 @@ export const SportCoachResults = ({ user }) => {
 
   // formato para compartir el plan de entrenamiento a pdf y a las redes sociales
   const generateTrainingPlanContent = () => {
-    let content = "¡Hola! Comparto mi plan de entrenamiento :\n\n";
+    let content = '¡Hola! Comparto mi plan de entrenamiento :\n\n';
     if (responseObj) {
       responseObj?.resp?.forEach((day) => {
         content += `${day.day}:\n`;
@@ -118,23 +117,16 @@ export const SportCoachResults = ({ user }) => {
           day.exercises.forEach((exercise) => {
             content += `${exercise.name}: ${exercise.description}\n`;
           });
-          content += "\n";
+          content += '\n';
         }
       });
     }
     return content;
   };
 
-  const getExerciseImageUrl = (exerciseName) => {
-    const imageName =
-      exerciseName.toLowerCase().replace(/ /g, "_").replace(/ñ/g, "n") + ".jpg";
-    // La ruta comienza con "/", que significa que es relativa a la raíz del dominio
-    return `/image_sportcoach/${imageName}`;
-  };
-
   return (
     <div className="relative  mt-4 md:mt-8 lg:max-w-[60rem] xl:max-w-[90rem] mx-auto p-6 bg-cardBackground rounded-lg shadow-md">
-      <div className="absolute top-0 left-0 mt-[-30px] ml-4 z-40">
+      <section className="absolute top-0 left-0 mt-[-30px] ml-4 z-40">
         <div className="flex space-x-2">
           <button
             onClick={handleShareClick}
@@ -161,9 +153,9 @@ export const SportCoachResults = ({ user }) => {
             generateTrainingPlanContent={generateTrainingPlanContent}
           />
         )}
-      </div>
+      </section>
       {responseObj ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {responseObj?.resp?.map((day, index) => (
             <div
               key={`day-${index}`}
@@ -173,68 +165,50 @@ export const SportCoachResults = ({ user }) => {
                 <h3 className="text-lg font-bold mb-2">{day.day}</h3>
               </div>
               <ol className="list-disc space-y-2 p-4">
-                {day?.exercises?.map((exercise, exerciseIndex) => (
-                  <li
-                    key={`${day.id}-${exerciseIndex}`}
-                    className="flex items-center justify-start cursor-pointer"
-                    onClick={() => handleExerciseClick(index, exerciseIndex)}
-                  >
-                    <Image
-                      width={100}
-                      height={100}
-                      src="/image_sportcoach/default.jpeg"
-                      alt={exercise.name}
-                      // onError={(e) => {
-                      //   e.target.onerror = null;
-                      //   e.target.src = "/image_sportcoach/default.jpeg";
-                      // }}
-                      className="exercise-image"
-                    />
-
-                    {/* <span
-                      className={`ml-4 flex min-w-0 flex-col ${
-                        completedExercises[index]?.exercises[exerciseIndex]
-                          ? "line-through"
-                          : ""
-                      }`}
+                {day?.exercises?.map((exce, exerciseIndex) => {
+                  // console.log('exce', day.exerciseEnglishNames[exerciseIndex]);
+                  return (
+                    <li
+                      key={`${day.id}-${exerciseIndex}`}
+                      className="flex items-center justify-center cursor-pointer"
+                      onClick={() => handleExerciseClick(index, exerciseIndex)}
                     >
-                      <span className="text-sm font-medium">
-                        {exercise.name}
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        {exercise.description}
-                      </span>
-                    </span> */}
+                      <GiftSport
+                        key={day.id}
+                        exceName={day.exerciseEnglishNames[exerciseIndex]}
+                      />
 
-                    <span className="flex-grow ml-4 text-sm">
-                      <span className="font-medium">{exercise.name}</span><br/>
-                      <span className="text-gray-500">
-                        {exercise.description}
-                      </span>
-                    </span>
+                      <article className="flex-1 ml-4 text-sm">
+                        <span className="font-medium">{exce.name}</span>
+                        <br />
+                        <span className="dark:text-gray-500">
+                          {exce.description}
+                        </span>
+                      </article>
 
-                    <span className="flex h-9 items-center">
-                      {completedExercises[index]?.exercises[exerciseIndex] ? (
-                        <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
-                          <CheckIcon
-                            className="h-5 w-5 text-white"
-                            aria-hidden="true"
-                          />
-                        </span>
-                      ) : (
-                        <span className="relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
-                          <span className="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" />
-                        </span>
-                      )}
-                    </span>
-                  </li>
-                ))}
+                      <footer className="flex h-9 items-center">
+                        {completedExercises[index]?.exercises[exerciseIndex] ? (
+                          <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-eco2MainColor-600 group-hover:bg-eco2MainColor-800">
+                            <CheckIcon
+                              className="h-5 w-5 text-white"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        ) : (
+                          <span className="relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
+                            <span className="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" />
+                          </span>
+                        )}
+                      </footer>
+                    </li>
+                  );
+                })}
               </ol>
             </div>
           ))}
-        </div>
+        </section>
       ) : (
-        <div>Intentar de nuevo</div>
+        <section>Intentar de nuevo</section>
       )}
     </div>
   );
