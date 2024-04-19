@@ -128,8 +128,9 @@ export const SportCoachResults = ({ user }) => {
   const getExerciseImageUrl = (exerciseName) => {
     const imageName =
       exerciseName.toLowerCase().replace(/ /g, "_").replace(/ñ/g, "n") + ".jpg";
+      return `https://res.cloudinary.com/dqz5veusy/image/upload/${imageName}`;
     // La ruta comienza con "/", que significa que es relativa a la raíz del dominio
-    return `/image_sportcoach/${imageName}`;
+    // return `/image_sportcoach/${imageName}`;
   };
 
   return (
@@ -167,7 +168,8 @@ export const SportCoachResults = ({ user }) => {
           {responseObj?.resp?.map((day, index) => (
             <div
               key={`day-${index}`}
-              className="bg-eco2HoverColor dark:bg-darkBgCard rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+              className="bg-eco2HoverColor dark:bg-darkBgCard rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden
+              border-2 dark:border-white border-eco2MainColor"
             >
               <div className="p-4">
                 <h3 className="text-lg font-bold mb-2">{day.day}</h3>
@@ -182,7 +184,8 @@ export const SportCoachResults = ({ user }) => {
                     <Image
                       width={100}
                       height={100}
-                      src="/image_sportcoach/default.jpeg"
+                      src={getExerciseImageUrl(exercise.name) || "/image_sportcoach/default.jpeg"}
+                      // src="/image_sportcoach/default.jpeg"
                       alt={exercise.name}
                       // onError={(e) => {
                       //   e.target.onerror = null;
