@@ -12,11 +12,6 @@ import eco2quiz from '../public/eco2quiz.webp';
 import eco2desc from '../public/eco2desc.webp';
 import eco2cv from '../public/eco2cv.webp';
 
-import Photo1 from '../public/Photo1.webp';
-import Photo2 from '../public/Photo2.webp';
-import Photo3 from '../public/Photo3.webp';
-import Photo4 from '../public/Photo4.webp';
-
 import IA1 from '../public/screenshot/chat_eco2.webp';
 import IA2 from '../public/screenshot/sport_eco2.webp';
 import IA3 from '../public/screenshot/quiz_eco2.webp';
@@ -399,33 +394,6 @@ export const values = [
   }
 ];
 
-export const team = [
-  {
-    name: DataAbout.aboutteam1,
-    role: DataAbout.aboutteam1jobtitle,
-    image: Photo1,
-    imageClass: 'centered-image'
-  },
-  {
-    name: DataAbout.aboutteam2,
-    role: DataAbout.aboutteam2jobtitle,
-    image: Photo2,
-    imageClass: 'centered-image'
-  },
-  {
-    name: DataAbout.aboutteam3,
-    role: DataAbout.aboutteam3jobtitle,
-    image: Photo3
-  },
-  {
-    name: DataAbout.aboutteam4,
-    role: DataAbout.aboutteam4jobtitle,
-    image: Photo4,
-    imageClass: 'centered-image'
-  }
-  // More people...
-];
-
 export const stats = [
   { label: DataAbout.aboutfounded, value: '2023' },
   { label: DataAbout.aboutteam, value: '+10' },
@@ -526,74 +494,78 @@ export const steps = [
   {
     id: 1,
     name: 'imageStep',
-    title: 'Upload Image',
+    title: 'Subir imagen',
     component: ImageStep,
     status: 'current'
   },
   {
     id: 2,
     name: 'maskImageStep',
-    title: 'Mask Image',
+    title: 'Máscara zona de interés',
     component: MaskImageStep,
     status: 'upcoming'
   },
   {
     id: 3,
     name: 'formStep',
-    title: 'Provide Details',
+    title: 'Datos del nuevo diseño',
     component: FormStep,
     status: 'upcoming'
   },
   {
     id: 4,
     name: 'outputImgStep',
-    title: 'Output Image',
+    title: 'Resultado final',
     component: OutputImgStep,
     status: 'upcoming'
   }
 ];
 
 export const roomOptions = [
-  { value: 'Living-room', label: 'Living room' },
-  { value: 'Bedroom', label: 'Bedroom' },
-  { value: 'Bathroom', label: 'Bathroom' },
-  { value: 'Study-Room', label: 'Study Room' },
-  { value: 'Kitchen', label: 'Kitchen' },
-  { value: 'Dining-Room', label: 'Dining Room' },
-  { value: 'Office', label: 'Office' },
-  { value: 'Outdoor', label: 'Outdoor' }
+  { value: 'Sala-de-estar', label: 'Sala de estar' },
+  { value: 'Dormitorio', label: 'Dormitorio' },
+  { value: 'Baño', label: 'Baño' },
+  { value: 'Sala-de-estudio', label: 'Sala de estudio' },
+  { value: 'Cocina', label: 'Cocina' },
+  { value: 'Comedor', label: 'Comedor' },
+  { value: 'Oficina', label: 'Oficina' },
+  { value: 'Exterior', label: 'Exterior' }
 ];
 
 export const aiInterventionOptions = [
-  { value: 'high-AI-Intervention', label: 'Extrema AI Intervention' },
-  { value: 'Medium-Intervention', label: 'Medium Intervention' },
-  { value: 'Low-AI-Intervention', label: 'Low AI Intervention' },
-  { value: 'Very-Low-AI-Intervention', label: 'Very Low AI Intervention' }
+  { value: 'Alta-Intervención-de-AI', label: 'Intervención Extrema de IA' },
+  { value: 'Intervención-Media', label: 'Intervención Media' },
+  { value: 'Baja-Intervención-de-AI', label: 'Intervención Baja de IA' },
+  { value: 'Muy-Baja-Intervención-de-AI', label: 'Intervención Muy Baja de IA' }
 ];
+
 export const aiModeOptions = [
-  { value: 'beautiful-redesign', label: 'Beautiful Redesign' },
-  { value: 'creative-redesign', label: 'Creative Redesign' },
-  { value: 'fill-the-room', label: 'Fill The Room' },
-  { value: 'eclectic', label: 'Eclectic' },
-  { value: 'minimalist', label: 'Minimalist' },
-  { value: 'vibrant-oasis', label: 'Vibrant Oasis' },
-  { value: 'urban-chic', label: 'Urban Chic' },
-  { value: 'cozy-retreat', label: 'Cozy Retreat' },
-  { value: 'modern-elegance', label: 'Modern Elegance' },
-  { value: 'rustic-charm', label: 'Rustic Charm' }
+  { value: 'Rediseño-bello', label: 'Rediseño Hermoso' },
+  { value: 'Rediseño-creativo', label: 'Rediseño Creativo' },
+  { value: 'Llenar-la-habitación', label: 'Llenar la Habitación' },
+  { value: 'Ecléctico', label: 'Ecléctico' },
+  { value: 'Minimalista', label: 'Minimalista' },
+  { value: 'Oasis-vibrante', label: 'Oasis Vibrante' },
+  { value: 'Chic-urbano', label: 'Chic Urbano' },
+  { value: 'Refugio-acogedor', label: 'Refugio Acogedor' },
+  { value: 'Elegancia-moderna', label: 'Elegancia Moderna' },
+  { value: 'Encanto-rústico', label: 'Encanto Rústico' }
 ];
 
 export const designStyleOptions = [
-  { value: 'contemporary', label: 'Contemporary' },
-  { value: 'traditional', label: 'Traditional' },
-  { value: 'mid-century-modern', label: 'Mid-Century Modern' },
-  { value: 'industrial', label: 'Industrial' },
-  { value: 'bohemian', label: 'Bohemian' },
-  { value: 'scandinavian', label: 'Scandinavian' },
-  { value: 'farmhouse', label: 'Farmhouse' },
-  { value: 'vintage', label: 'Vintage' },
-  { value: 'coastal', label: 'Coastal' },
-  { value: 'transitional', label: 'Transitional' }
+  { value: 'Contemporáneo', label: 'Contemporáneo' },
+  { value: 'Tradicional', label: 'Tradicional' },
+  {
+    value: 'Moderno-de-mediados-de-siglo',
+    label: 'Moderno de Mediados de Siglo'
+  },
+  { value: 'Industrial', label: 'Industrial' },
+  { value: 'Bohemio', label: 'Bohemio' },
+  { value: 'Escandinavo', label: 'Escandinavo' },
+  { value: 'Rústico', label: 'Rústico' },
+  { value: 'Vintage', label: 'Vintage' },
+  { value: 'Costero', label: 'Costero' },
+  { value: 'Transicional', label: 'Transicional' }
 ];
 
 export const numberDesignsOptions = [

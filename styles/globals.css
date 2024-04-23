@@ -275,7 +275,7 @@
 
 
  .bg-image {
-  background-image: url('/renovhome/renov_04.webp');
+  background-image: url('/renovhome/bg-renovhome.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -444,7 +444,7 @@
 
 .menu-container{
   position: absolute;
-  top: 2.5%;
+  top: 0;
   left: 0;
   width: 16rem;
   height: 100%;
