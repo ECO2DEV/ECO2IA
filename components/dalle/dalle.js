@@ -81,7 +81,7 @@ export default function DalleIA() {
   };
 
   return (
-    <section className="h-screen">
+    <section className="h-screen m-4">
       {imageSrc.firstImage === '' ? (
         <WelcomeDalle />
       ) : openHelpers ? (

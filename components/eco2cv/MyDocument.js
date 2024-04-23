@@ -65,7 +65,7 @@ const MyDocument = ({ formData, setFormData }) => {
               />
             </MobilePopUp>
           )}
-          <section className="w-full hidden lg:block md:w-[35%] lg:w-[41%] lg:fixed lg:right-0 h-full dark:bg-darkColor bg-lightColor">
+          <section className="w-full hidden lg:block md:w-[35%] lg:w-[50%] lg:fixed lg:right-1 h-full dark:bg-darkColor bg-lightColor">
             <PDFTemplateTwo
               spokenLanguages={spokenLanguages}
               dropdowns={dropdowns}
@@ -79,7 +79,7 @@ const MyDocument = ({ formData, setFormData }) => {
         </>
       ) : (
         <>
-          <section className="w-full hidden lg:block md:w-[35%] lg:w-[41%] lg:fixed lg:right-0 h-full dark:bg-darkColor bg-lightColor">
+          <section className="w-full hidden lg:block md:w-[35%] lg:w-[50%] lg:fixed lg:right-1 h-full dark:bg-darkColor bg-lightColor">
             {showPreview && !isBisScreen && (
               <MobilePopUp isModalNeedIt={true}>
                 <PDFTemplateOne

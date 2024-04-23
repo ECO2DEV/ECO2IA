@@ -4,7 +4,8 @@ import { steps } from '../../constants/constans';
 
 export default function TimeLine() {
   return (
-    <nav className="absolute top-44 left-[38%] xl:top-56" aria-label="Progress">
+    <nav className="absolute top-44 left-[38%] xl:top-56 z-10" aria-label="Progress">
+      <div className="absolute -top-10 -right-12 -z-[1] m-auto w-full rounded-full bg-black/50 blur-2xl md:size-[350px]"/>
       <ol role="list" className="space-y-4">
         {steps.map((step) => (
           <motion.li
@@ -16,11 +17,11 @@ export default function TimeLine() {
             className="md:flex-1"
           >
             {step.status === 'complete' ? (
-              <div className="group flex flex-col border-l-8 border-green-500 py-2 pl-4 hover:border-green-700 ">
-                <span className="text-sm font-bold text-white group-hover:text-gray-700">
+              <div className="group flex flex-col border-l-8 border-eco2MainColor py-2 pl-4 ">
+                <span className="text-sm font-bold text-white group-hover:text-gray-100">
                   {step.id}
                 </span>
-                <span className="text-sm font-bold text-cyan-900 ">
+                <span className="text-sm font-bold text-cyan-100 ">
                   {step.title}
                 </span>
               </div>
@@ -39,7 +40,7 @@ export default function TimeLine() {
                 <span className="text-sm font-bold text-white group-hover:text-gray-700">
                   {step.id}
                 </span>
-                <span className="text-gray-200 text-sm font-bold">
+                <span className="text-white text-sm font-bold">
                   {step.title}
                 </span>
               </div>

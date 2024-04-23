@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect,  useState } from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,71 +6,12 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Popover, Transition } from "@headlessui/react";
 import clsx from "clsx";
-
+import {CloseIcon, ChevronDownIcon, SunIconHome, MoonIcon } from "../../icons/icons"
 import { Container } from "../../Container";
-import logoLight from "../../../public/LogoECO2Verde.png";
-import logoDark from "../../../public/LogoECO2Blanco.png";
+import logoLight from "../../../public/logosColorNegro.png";
+import logoDark from "../../../public/logosColorBlanco.png";
 
-function CloseIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="m17.25 6.75-10.5 10.5M6.75 6.75l10.5 10.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
-function ChevronDownIcon(props) {
-  return (
-    <svg viewBox="0 0 8 6" aria-hidden="true" {...props}>
-      <path
-        d="M1.75 1.75 4 4.25l2.25-2.5"
-        fill="none"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function SunIcon(props) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path d="M8 12.25A4.25 4.25 0 0 1 12.25 8v0a4.25 4.25 0 0 1 4.25 4.25v0a4.25 4.25 0 0 1-4.25 4.25v0A4.25 4.25 0 0 1 8 12.25v0Z" />
-      <path
-        d="M12.25 3v1.5M21.5 12.25H20M18.791 18.791l-1.06-1.06M18.791 5.709l-1.06 1.06M12.25 20v1.5M4.5 12.25H3M6.77 6.77 5.709 5.709M6.77 17.73l-1.061 1.061"
-        fill="none"
-      />
-    </svg>
-  );
-}
-
-function MoonIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="M17.25 16.22a6.937 6.937 0 0 1-9.47-9.47 7.451 7.451 0 1 0 9.47 9.47ZM12.75 7C17 7 17 2.75 17 2.75S17 7 21.25 7C17 7 17 11.25 17 11.25S17 7 12.75 7Z"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 function MobileNavItem({ href, children }) {
   return (
@@ -195,6 +136,7 @@ export function ThemeToggle() {
   let otherTheme = resolvedTheme === "dark" ? "light" : "dark";
   let [mounted, setMounted] = useState(false);
 
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -207,40 +149,19 @@ export function ThemeToggle() {
       className="group flex items-center rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
       onClick={() => setTheme(otherTheme)}
     >
-      <SunIcon className="h-6 w-6   fill-zinc-100 stroke-zinc-900 transition group-hover:fill-zinc-100 group-hover:stroke-zinc-900 dark:hidden [@media(prefers-color-scheme:dark)]:fill-teal-50 [@media(prefers-color-scheme:dark)]:stroke-eco2MainColor [@media(prefers-color-scheme:dark)]:group-hover:fill-teal-50 [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor" />
-      <MoonIcon className="hidden h-6 w-6   fill-zinc-700 stroke-zinc-500 transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-zinc-200 [@media_not_(prefers-color-scheme:dark)]:fill-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:stroke-eco2MainColor" />
+      <SunIconHome className="h-6 w-6 fill-zinc-100 stroke-zinc-900 transition group-hover:fill-zinc-100 group-hover:stroke-zinc-900 dark:hidden [@media(prefers-color-scheme:dark)]:fill-teal-50 [@media(prefers-color-scheme:dark)]:stroke-eco2MainColor [@media(prefers-color-scheme:dark)]:group-hover:fill-teal-50 [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor" />
+      <MoonIcon className="hidden h-6 w-6 fill-zinc-700 stroke-zinc-500 transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-zinc-200 [@media_not_(prefers-color-scheme:dark)]:fill-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:stroke-eco2MainColor" />
     </button>
   );
 }
 
-export function ThemeToggle2() {
-  let { resolvedTheme, setTheme } = useTheme();
-  let otherTheme = resolvedTheme === "dark" ? "light" : "dark";
-  let [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  return (
-    <button
-      type="button"
-      title="Click para cambiar el tema !"
-      aria-label={mounted ? `Switch to ${otherTheme} theme` : "Toggle theme"}
-      className="group w-[45px] h-[45px] flex items-center rounded-full bg-zinc-800 dark:bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:ring-white/10 dark:hover:ring-white/20"
-      onClick={() => setTheme(otherTheme)}
-    >
-      <SunIcon className="h-6 w-6   fill-slate-800 stroke-zinc-900 transition group-hover:fill-slate-800 group-hover:stroke-zinc-900 dark:hidden [@media(prefers-color-scheme:dark)]:fill-slate-800 [@media(prefers-color-scheme:dark)]:stroke-eco2MainColor [@media(prefers-color-scheme:dark)]:group-hover:fill-slate-800 [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor" />
-      <MoonIcon className="hidden h-6 w-6   fill-eco2MainColor stroke-eco2MainColor transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:fill-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:stroke-eco2MainColor" />
-    </button>
-  );
-}
 
 function AvatarContainer({ className, ...props }) {
   return <div className={clsx(className)} {...props} />;
 }
 
 function Avatar({ large = false, className, ...props }) {
+  const { resolvedTheme} = useTheme()
   return (
     <Link
       href="/"
@@ -249,19 +170,50 @@ function Avatar({ large = false, className, ...props }) {
       {...props}
     >
       <Image
-        src={logoLight}
-        alt=""
-        // sizes={large ? "4rem" : "2.25rem"}
+        src={resolvedTheme === "dark"? logoDark :logoLight }
+        alt="Logo Maria inteligencia"
+        width={120}
+        height={120}
         className={clsx(
-          "rounded-full max-h-10 max-w-12 bg-zinc-100 object-cover dark:bg-zinc-800"
-          // large ? dark : "h-10 w-12"
-          // large ? "h-15 w-15" : "h-10 w-12"
+          "rounded-full  object-cover "
         )}
         priority
       />
     </Link>
   );
 }
+
+
+export const Header = () => {
+  return (
+    <>
+      <header className="z-50 flex flex-none flex-col sticky top-0">
+        <div className="top-0 z-10 h-16 pt-6">
+          <Container>
+            <div className="flex justify-start">
+              <AvatarContainer />
+              <Avatar
+              
+              />
+              <div className="flex flex-1" />
+              <div className="flex flex-1 justify-end md:justify-center">
+                <MobileNavigation className="pointer-events-auto md:hidden" />
+                <DesktopNavigation className="pointer-events-auto hidden md:block" />
+              </div>
+              <div className="flex justify-end md:flex-1">
+                <div className="pointer-events-auto">
+                  <ThemeToggle />
+                </div>
+              </div>
+            </div>
+          </Container>
+        </div>
+      </header>
+  
+    </>
+  );
+};
+
 
 export function Avatar2({ large = false, className, ...props }) {
   return (
@@ -287,38 +239,26 @@ export function Avatar2({ large = false, className, ...props }) {
   );
 }
 
-export const Header = () => {
+
+export function ThemeToggle2() {
+  let { resolvedTheme, setTheme } = useTheme();
+  let otherTheme = resolvedTheme === "dark" ? "light" : "dark";
+  let [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <>
-      <header className="z-50 flex flex-none flex-col sticky top-0">
-        <div className="top-0 z-10 h-16 pt-6">
-          <Container>
-            <div className="flex justify-start">
-              <AvatarContainer />
-              <Avatar
-                // large
-                className="block w-16 origin-left"
-              />
-              <div className="flex flex-1" />
-              <div className="flex flex-1 justify-end md:justify-center">
-                <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="pointer-events-auto hidden md:block" />
-              </div>
-              <div className="flex justify-end md:flex-1">
-                <div className="pointer-events-auto">
-                  <ThemeToggle />
-                </div>
-              </div>
-            </div>
-          </Container>
-        </div>
-      </header>
-      {/* {isHomePage && (
-        <div
-          className="flex-none"
-          style={{ height: 'var(--content-offset)' }}
-        />
-      )} */}
-    </>
+    <button
+      type="button"
+      title="Click para cambiar el tema !"
+      aria-label={mounted ? `Switch to ${otherTheme} theme` : "Toggle theme"}
+      className="group w-[45px] h-[45px] flex items-center rounded-full bg-zinc-800 dark:bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:ring-white/10 dark:hover:ring-white/20"
+      onClick={() => setTheme(otherTheme)}
+    >
+      <SunIconHome className="h-6 w-6   fill-slate-800 stroke-zinc-900 transition group-hover:fill-slate-800 group-hover:stroke-zinc-900 dark:hidden [@media(prefers-color-scheme:dark)]:fill-slate-800 [@media(prefers-color-scheme:dark)]:stroke-eco2MainColor [@media(prefers-color-scheme:dark)]:group-hover:fill-slate-800 [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor" />
+      <MoonIcon className="hidden h-6 w-6   fill-eco2MainColor stroke-eco2MainColor transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:fill-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:stroke-eco2MainColor" />
+    </button>
   );
-};
+}

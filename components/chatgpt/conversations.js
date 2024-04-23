@@ -81,8 +81,8 @@ export const Conversations = ({ messages, responseModelMap, setMessages }) => {
   }, [selectedConversationId]);
 
   return (
-    <div className="mr-3 sm:mr-0 w-svw h-[80vh] lg:h-[75vh] sm:flex-1 bg-lightColor dark:bg-darkColor">
-      <section className="flex flex-col text-sm h-[90vh] lg:h-[90vh] overflow-y-hidden hover:overflow-y-scroll  overflow-x-hidden scrollsidebar-color dark:scrollsidebar-color-ligth">
+    <div className="mr-3 sm:pr-0 sm:mr-0 w-svw h-full sm:flex-1 bg-lightColor dark:bg-darkColor">
+      <section className="flex flex-col text-sm h-full overflow-y-scroll  overflow-x-hidden scrollsidebar-color dark:scrollsidebar-color-ligth">
         {selectedConversationId === 'new' || selectedConversationId === null ? (
           <>
             {/* if the conversation is new or null, show the messages directly from vercel sdk */}

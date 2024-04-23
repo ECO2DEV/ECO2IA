@@ -1,19 +1,17 @@
-import { useState, useContext, useEffect } from "react";
-import { UserContext } from "../../context/user/UserContext";
+import { useState, useContext, useEffect } from 'react';
+import { UserContext } from '../../context/user/UserContext';
 import {
-  ClipboardIcon,
   InstagramIconSVGCheck,
   FacebookIconSVGCheck,
   TwitterIconSVGCheck,
   TelegramIconSVGCheck,
-  WhatsAppIconSVGCheck,
-  GlobalShareIcon,
-} from "../icons/icons";
-import { Eco2DescriptionResp } from "../../util/api/Eco2DescriptionResp";
-import { PromptContext } from "../../context/prompts/PromptContext";
-import Loader from "../loader/loader";
-import { toast } from "react-hot-toast";
-import { DataEco2Description } from "../../data/eco2description";
+  WhatsAppIconSVGCheck
+} from '../icons/icons';
+import { Eco2DescriptionResp } from '../../util/api/Eco2DescriptionResp';
+import { PromptContext } from '../../context/prompts/PromptContext';
+import Loader from '../loader/loader';
+import { toast } from 'react-hot-toast';
+import { DataEco2Description } from '../../data/eco2description';
 
 const DescriptionForm = () => {
   const { user } = useContext(UserContext);
@@ -24,30 +22,30 @@ const DescriptionForm = () => {
     activeAI,
     setActiveAI,
     prompt,
-    promptTokens,
+    promptTokens
   } = useContext(PromptContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
-    product: "",
-    company: "",
-    field: "",
+    product: '',
+    company: '',
+    field: '',
     socialMedia: [],
-    language: "",
+    language: ''
   });
 
   useEffect(() => {
-    if (activeAI !== "Eco2DescriptionAI") {
-      setPrompt("");
+    if (activeAI !== 'Eco2DescriptionAI') {
+      setPrompt('');
       setPromptTokens(0);
     }
-    setActiveAI("Eco2DescriptionAI");
+    setActiveAI('Eco2DescriptionAI');
   }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    if (type === "checkbox") {
+    if (type === 'checkbox') {
       // For checkboxes, create an array of selected options.
 
       const updatedSocialMedia = checked
@@ -56,20 +54,20 @@ const DescriptionForm = () => {
 
       setFormData({
         ...formData,
-        [name]: updatedSocialMedia,
+        [name]: updatedSocialMedia
       });
     } else {
       // For other inputs, update the value normally
       setFormData({
         ...formData,
-        [name]: value,
+        [name]: value
       });
     }
   };
 
   const handlePromptChange = (e) => {
     setPrompt(e.target.value);
-    if (e.target.value === "") {
+    if (e.target.value === '') {
       setPromptTokens(0);
     }
   };
@@ -89,14 +87,14 @@ const DescriptionForm = () => {
       field: formData.field,
       socialMedia: formData.socialMedia,
       language: formData.language,
-      user: user,
+      user: user
     })
       .then((result) => {
         // console.log('result is:', result?.data?.copywriting);
         setResponse(result.data.copywriting);
       })
       .catch((error) => {
-        setError("An error occurred while fetching data.");
+        setError('An error occurred while fetching data.');
         toast.error(DataEco2Description.ConversationDeleted);
         console.error(error);
       })
@@ -111,10 +109,7 @@ const DescriptionForm = () => {
       {/* <h1 className="text-5xl text-center mt-[-30px]  font-semibold dark:text-white">
         {DataEco2Description.MattDescriptionIA}
       </h1> */}
-      <form
-        onSubmit={handleSubmit}
-        className="w-full md:order-1 md:w-[40%] lg:w-[30%]"
-      >
+      <form onSubmit={handleSubmit} className="w-full md:order-1 flex-1">
         <div className="mb-4">
           <label
             htmlFor="fullName"
@@ -173,7 +168,7 @@ const DescriptionForm = () => {
             <option value="german"> {DataEco2Description.Deutsch} </option>
             <option value="italian"> {DataEco2Description.Italian} </option>
             <option value="portuguese">
-              {DataEco2Description.Portuguese}{" "}
+              {DataEco2Description.Portuguese}{' '}
             </option>
           </select>
         </div>
@@ -189,7 +184,7 @@ const DescriptionForm = () => {
             type="text"
             id="prompt"
             name="prompt"
-            value={prompt ? prompt : ""}
+            value={prompt ? prompt : ''}
             onChange={handlePromptChange}
             className="w-full text-xs p-2 border-white rounded custom-input bg-darkBgCard dark:bg-white text-white dark:text-black"
             placeholder={DataEco2Description.ProductText}
@@ -198,16 +193,13 @@ const DescriptionForm = () => {
         </div>
         <div className="mb-4">
           <div className="flex justify-center items-center space-x-4">
-            <label
-              htmlFor="socialMediaFacebook"
-              className="flex items-center"
-            >
+            <label htmlFor="socialMediaFacebook" className="flex items-center">
               <input
                 type="checkbox"
                 id="socialMediaFacebook"
                 name="socialMedia"
                 value="facebook"
-                checked={formData.socialMedia.includes("facebook")}
+                checked={formData.socialMedia.includes('facebook')}
                 onChange={handleChange}
                 className="mx-2 text-eco2MainColor border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
               />
@@ -215,54 +207,54 @@ const DescriptionForm = () => {
             </label>
 
             <label htmlFor="socialMediaInstagram" className="flex items-center">
-            <input
-              type="checkbox"
-              id="socialMediaInstagram"
-              name="socialMedia"
-              value="instagram"
-              checked={formData.socialMedia.includes("instagram")}
-              onChange={handleChange}
-              className="mx-2 text-eco2MainColor border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
-            />
+              <input
+                type="checkbox"
+                id="socialMediaInstagram"
+                name="socialMedia"
+                value="instagram"
+                checked={formData.socialMedia.includes('instagram')}
+                onChange={handleChange}
+                className="mx-2 text-eco2MainColor border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
+              />
               <InstagramIconSVGCheck />
             </label>
 
             <label htmlFor="socialMediaTwitter" className="flex items-center">
-            <input
-              type="checkbox"
-              id="socialMediaTwitter"
-              name="socialMedia"
-              value="twitter"
-              checked={formData.socialMedia.includes("twitter")}
-              onChange={handleChange}
-              className="mx-2 text-eco2MainColor border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
-            />
+              <input
+                type="checkbox"
+                id="socialMediaTwitter"
+                name="socialMedia"
+                value="twitter"
+                checked={formData.socialMedia.includes('twitter')}
+                onChange={handleChange}
+                className="mx-2 text-eco2MainColor border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
+              />
               <TwitterIconSVGCheck />
             </label>
 
             <label htmlFor="socialMediaTelegram" className="flex items-center">
-            <input
-              type="checkbox"
-              id="socialMediaTelegram"
-              name="socialMedia"
-              value="telegram"
-              checked={formData.socialMedia.includes("telegram")}
-              onChange={handleChange}
-              className="mx-2 text-eco2MainColor border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
-            />
+              <input
+                type="checkbox"
+                id="socialMediaTelegram"
+                name="socialMedia"
+                value="telegram"
+                checked={formData.socialMedia.includes('telegram')}
+                onChange={handleChange}
+                className="mx-2 text-eco2MainColor border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
+              />
               <TelegramIconSVGCheck />
             </label>
 
             <label htmlFor="socialMediaWhatsApp" className="flex items-center">
-            <input
-              type="checkbox"
-              id="socialMediaWhatsApp"
-              name="socialMedia"
-              value="whatsapp"
-              checked={formData.socialMedia.includes("whatsapp")}
-              onChange={handleChange}
-              className="mx-2 text-eco2MainColor border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
-            />
+              <input
+                type="checkbox"
+                id="socialMediaWhatsApp"
+                name="socialMedia"
+                value="whatsapp"
+                checked={formData.socialMedia.includes('whatsapp')}
+                onChange={handleChange}
+                className="mx-2 text-eco2MainColor border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 focus:ring-2"
+              />
               <WhatsAppIconSVGCheck />
             </label>
           </div>
@@ -273,8 +265,8 @@ const DescriptionForm = () => {
           type="submit"
           className={`${
             isLoading || !prompt
-              ? "text-white bg-eco2HoverColor text-center custom-input py-2 px-4 rounded-full"
-              : "  bg-eco2MainColor hover:bg-eco2HoverColor text-white font-semibold py-2 px-4 rounded-full my-8"
+              ? 'text-white bg-eco2HoverColor text-center custom-input py-2 px-4 rounded-full'
+              : '  bg-eco2MainColor hover:bg-eco2HoverColor text-white font-semibold py-2 px-4 rounded-full my-8'
           } w-full mt-4 px-4 py-2 `}
         >
           {isLoading ? (
@@ -282,12 +274,12 @@ const DescriptionForm = () => {
               <Loader />
             </div>
           ) : (
-            "Enviar"
+            'Enviar'
           )}
         </button>
-        <span className=" flex justify-center items-center dark:text-gray-100 text-gray-900">
+        {/* <span className=" flex justify-center items-center dark:text-gray-100 text-gray-900">
           Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
-        </span>
+        </span> */}
       </form>
     </>
   );

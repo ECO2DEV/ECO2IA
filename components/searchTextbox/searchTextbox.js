@@ -1,17 +1,17 @@
-import { useContext } from 'react';
-import { PromptContext } from '../../context/prompts/PromptContext';
+// import { useContext } from 'react';
+// import { PromptContext } from '../../context/prompts/PromptContext';
 import Loader from '../loader/loader';
 
 import { UsersIcon } from '@heroicons/react/20/solid';
 import { ChatSendIcon, MagicAiIcon } from '../icons/icons';
 
 export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
-  const { promptTokens } = useContext(PromptContext);
+  // const { promptTokens } = useContext(PromptContext);
 
   return (
-    <div className="w-full">
+    <div className="w-full my-auto">
       <form onSubmit={Fetch} className="mt-2 flex rounded-md shadow-sm">
-        <div className="relative flex flex-grow items-stretch focus-within:z-10">
+        <div className="relative flex  flex-grow items-stretch focus-within:z-50">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <UsersIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
           </div>
@@ -33,17 +33,17 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
           disabled={loading}
         >
           {loading ? (
-            <Loader className="w-6 h-6 mr-2 top-1 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600 -mr-[1px]" />
+            <Loader className="w-6 h-6 mr-2 top-1 text-gray-200 animate-spin dark:text-gray-600  -mr-[1px]" />
           ) : (
             <MagicAiIcon className="text-black w-5 h-5" />
           )}
         </button>
       </form>
-      <div className="flex justify-start">
+      {/* <div className="flex justify-start">
         <span className=" bottom-4 text-eco2MainColor">
           Tokens utilizados para la pregunta: {promptTokens}&nbsp;&nbsp;
         </span>
-      </div>
+      </div> */}
     </div>
   );
 }

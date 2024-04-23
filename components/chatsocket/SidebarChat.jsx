@@ -23,7 +23,7 @@ export const SidebarChat = () => {
   if (device === 'Desktop' || device === 'Tablet') {
     return (
       <aside
-        className={` hover:overflow-y-scroll overflow-x-hidden dark:scrollsidebar-color scrollsidebar-color-ligth sm:flex flex-col max-w-64 h-full bg-darkColor dark:bg-lightColor  rounded-l-xl `}
+        className={` hover:overflow-y-scroll overflow-x-hidden dark:scrollsidebar-color scrollsidebar-color-ligth sm:flex flex-col max-w-64 h-full bg-darkColor dark:bg-lightColor  `}
       >
         <NewChatButton handleSetSelectedChat={handleSetSelectedChat} />
         {data?.data &&

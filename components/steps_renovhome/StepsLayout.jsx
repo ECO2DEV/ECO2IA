@@ -138,6 +138,10 @@ export default function StepsLayout() {
 
   return (
     <>
+     <h1 className="text-5xl text-center  font-semibold dark:text-white">
+        Renov Maria 
+      </h1>
+      <h2 className="text-xl text-center mt-2 font-medium dark:text-white">Tu Asistente de Transformación de Interiores</h2>
      <RenovNavbar setCurrentStep={setCurrentStep} />
       <form onSubmit={onHandleSubmit} className='py-10'>
         <StepComponent
