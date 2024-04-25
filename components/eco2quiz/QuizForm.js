@@ -10,7 +10,7 @@ export const QuizForm = ({
   formState,
   setFormState
 }) => {
-  const { prompt, promptTokens } = useContext(PromptContext);
+  const { prompt } = useContext(PromptContext);
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState((prevState) => ({
@@ -127,10 +127,10 @@ export const QuizForm = ({
           'Enviar'
         )}
       </button>
-
+      {/* 
       <span className="flex justify-center items-center text-eco2MainColor">
         Tokens utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
-      </span>
+      </span> */}
     </form>
   );
 };

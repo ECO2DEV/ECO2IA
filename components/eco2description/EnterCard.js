@@ -11,14 +11,14 @@ export const EnterCard = ({ response, handleCopy }) => {
         </div>
         <div className="w-[20rem] md:w-[25rem] xl:w-[35rem] flex-1">
           <form className="relative">
-            <div className="overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300">
+            <div className="overflow-hidden rounded-lg shadow-sm ring-1 ring-inset  ring-darkHoverColor dark:ring-gray-300">
               <textarea
                 disabled
                 rows={5}
                 value={response || ''}
                 name="response"
                 id="response"
-                className="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                className="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900  placeholder:text-darkColor dark:placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                 placeholder={DataEco2Description.ResponseExample}
               />
 

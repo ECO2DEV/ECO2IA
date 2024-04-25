@@ -35,25 +35,15 @@ module.exports = {
     },
     extend: {
       colors: {
-        eco2MainColor: '#00974B',
-        eco2HoverColor: '#007297',
-        darkHoverColor: '#9ca3af', // Un color para hover en modo claro
+        eco2MainColor: '#01c38d',
+        eco2HoverColor: '#696e79',
+        darkHoverColor: '#132d46', // Un color para hover en modo claro
         lightColor: '#ffff', // Usar este color para texto sobre fondos oscuros
-        darkColor: '#281e4b', // Usar este color para texto sobre fondos claros
+        darkColor: '#191e29', // Usar este color para texto sobre fondos claros
         darkBgCard: '#00384b'
         // Agregar cualquier nuevo color que necesites aquí
       }
     }
-    // extend: {
-    //   colors: {
-    //     eco2MainColor: '#3500e4',
-    //     eco2HoverColor: '#007297',
-    //     lightColor: '#ffff',
-    //     lightBgCard: '#fee2e2',
-    //     darkColor: '#281e4b',
-    //     darkBgCard: '#00384b'
-    //   }
-    // }
   },
   plugins: [require('@tailwindcss/forms')]
 };

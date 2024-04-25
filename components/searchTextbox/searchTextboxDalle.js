@@ -5,7 +5,7 @@ import Loader from '../loader/loader';
 import { BarsArrowUpIcon, UsersIcon } from '@heroicons/react/20/solid';
 
 export default function SearchTextboxDalle({ OnChange, Fetch, loading }) {
-  const { promptTokens, prompt } = useContext(PromptContext);
+  const { prompt } = useContext(PromptContext);
 
   return (
     <div className="flex-1">
@@ -41,9 +41,9 @@ export default function SearchTextboxDalle({ OnChange, Fetch, loading }) {
         </button>
       </form>
       <div className="flex justify-start">
-        <span className=" bottom-4 text-eco2MainColor">
+        {/* <span className=" bottom-4 text-eco2MainColor">
           Tokens utilizados en la pregunta: {promptTokens}&nbsp;&nbsp;
-        </span>
+        </span> */}
         <span>{loading && <Loader />}</span>
       </div>
     </div>

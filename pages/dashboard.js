@@ -10,7 +10,7 @@ export default function Dashboard(props) {
     // <div className="my-10 pb-10">
     //   {props?.user?.plan ? <DashboardSection /> : <Modal user={props.user} />}
     // </div>
-    <div className="m-2 bg-lightColor dark:bg-darkColor">
+    <div className="p-2 bg-no-repeat aspect-video w-full bg-cover bg-center bg-[url('/bgLight.svg')] dark:bg-[url('/bgDark.svg')]">
       <DashboardSection user={props} />
     </div>
   );

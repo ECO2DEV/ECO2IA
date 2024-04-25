@@ -9,7 +9,7 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
   // const { promptTokens } = useContext(PromptContext);
 
   return (
-    <div className="w-full my-auto">
+    <div className="w-screen ">
       <form onSubmit={Fetch} className="mt-2 flex rounded-md shadow-sm">
         <div className="relative flex  flex-grow items-stretch focus-within:z-50">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -29,13 +29,13 @@ export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
         </div>
         <button
           type="submit"
-          className="relative pr-2 inline-flex items-center gap-x-1.5 rounded-r-md pl-2 py-2 text-sm font-semibold bg-eco2MainColor hover:bg-eco2HoverColor text-white ring-1 ring-inset ring-gray-300"
+          className="relative pr-2 inline-flex items-center gap-x-1.5 rounded-r-md pl-2 py-2 text-sm font-semibold bg-eco2MainColor hover:bg-darkColor hover:text-lightColor text-white ring-1 ring-inset ring-gray-300"
           disabled={loading}
         >
           {loading ? (
             <Loader className="w-6 h-6 mr-2 top-1 text-gray-200 animate-spin dark:text-gray-600  -mr-[1px]" />
           ) : (
-            <MagicAiIcon className="text-black w-5 h-5" />
+            <MagicAiIcon className=" w-5 h-5 " />
           )}
         </button>
       </form>

@@ -64,12 +64,8 @@ export const Eco2Cards = () => {
   return (
     <article className="flex flex-col gap-2 right-0 pb-11">
       {copywritings?.map((copy, index) => {
-        // let parrafo = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-        // let nuevoParrafo = parrafo.replace(/^.{3}/, '');
-
-        // console.log(nuevoParrafo);
         let text = copy.replace(/^.{3}/, '');
-        console.log(text);
+
         return copy === '' || copy.trim().length < 10 ? null : (
           <div className="flex space-x-2 h-full" key={index}>
             {/* {console.log('copy', 'something' + copy.trim())} */}

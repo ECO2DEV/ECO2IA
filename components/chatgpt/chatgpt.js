@@ -197,7 +197,7 @@ export default function ChatGpt() {
 
   return (
     <>
-      <section className="dark:bg-darkColor bg-lightColor h-full w-svw sm:w-full">
+      <section className="h-screen sm:w-full ">
         {messages.length === 0 && showHelpMessage === false ? (
           <Welcome setInput={setInput} />
         ) : openHelpers ? (
@@ -206,8 +206,8 @@ export default function ChatGpt() {
           <div
             className={`${
               device === 'Desktop' || device === 'Tablet'
-                ? 'flex w-full h-full'
-                : 'w-full h-full '
+                ? 'flex w-full h-screen'
+                : 'w-full h-screen '
             }`}
           >
             <SidebarChat />
