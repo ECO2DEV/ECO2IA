@@ -4,14 +4,14 @@
 
 
 
-:root {
+/* :root {
   --dark: #020617;
   --light: #f0fdf4;
   --gradient: linear-gradient(10deg, #ffaa00, #ff6a00);
   --gradient2: linear-gradient(15deg, #04ea00, #00d17d);
   --gradient3: linear-gradient(15deg, #b648ff, #ef5dff);
   font-size: 1rem;
-}
+} */
 
 .custom-input:focus {
   border-color: #21c284;
@@ -275,7 +275,7 @@
 
 
  .bg-image {
-  background-image: url('/renovhome/renov_04.webp');
+  background-image: url('/renovhome/bg-renovhome.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -369,7 +369,7 @@
 .custom-select-wrapper {
   position: relative;
   user-select: none;
-  width: 160px;
+  width: 100px;
 }
 
 .custom-select {
@@ -449,6 +449,7 @@
   width: 16rem;
   height: 100%;
   z-index: 10;
+  animation: menuIn 200ms;
 }
 
 .menu{
@@ -464,14 +465,14 @@
 
 .menu-toggler{
   position: sticky;
-  top: 0;
+  top: 2.5%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 800;
-  width: 25px;
-  height: 35px;
-  border-radius: 10px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
   transition: background 125ms;
   user-select: none;
   cursor: pointer;
@@ -529,24 +530,6 @@
 }
 
 
-/* @media (max-width: 768px) {
-  .description-form {
-    width: 100%;
-    position: static;
-  }
-
-  .article-content {
-    position: static;
-    order: 2;
-  }
-} */
-
-/* @media (min-width: 1024px) { 
-  .container {
-    display: flex;
-    justify-content: space-between;
-  }
-} */
 
 .flex-item {
   flex-grow: 1; /* The item will grow to take up any available space */
@@ -563,10 +546,7 @@
   justify-content: center; /* This centers your container */
 }
 
-/* Flex children (form and cards) will stack vertically on small screens */
-/* .container > div {
-  flex-direction: column;
-} */
+
 
 .flex-row > :first-child { /* Assuming DescriptionForm is the first child */
   flex: 2; /* Takes double the space of its sibling */
@@ -577,4 +557,4 @@
 }
 
 
-/* As the screen gets larger, adjust padding for spacing */
+

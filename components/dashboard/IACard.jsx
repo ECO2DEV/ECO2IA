@@ -46,7 +46,7 @@ const IACard = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: quantity * 0.1, duration: 0.3 }}
       viewport={{ once: true }}
-      className={`relative flex flex-col rounded-3xl bg-eco2HoverColor p-6 gap-3 border-2  overflow-hidden col-span-8 row-span-1 sm:row-span-2 md:row-span-3  dark:bg-darkBgCard md:p-8  ${
+      className={`relative flex flex-col rounded-3xl bg-darkColor p-6 gap-3 border-2  overflow-hidden col-span-8 row-span-1 sm:row-span-2 md:row-span-3  dark:bg-darkColor md:p-8  ${
         index % 2 === 0
           ? 'md:row-span-4 lg:col-span-4'
           : 'md:row-span-3 lg:col-span-4'
@@ -77,9 +77,9 @@ const IACard = ({
             )}
           </AnimatePresence>
 
-          <p className="font-semibold uppercase">
+          <p className="font-semibold uppercase text-lightColor">
             Votos{' '}
-            <span className="text-slate-950 dark:text-eco2MainColor text-lg font-semibold">
+            <span className="text-lightColor dark:text-eco2MainColor text-lg font-semibold">
               {' '}
               {score?.length}
             </span>
@@ -90,7 +90,7 @@ const IACard = ({
               {plan.typo === 'Premium' ? (
                 <button
                   title="Eres cliente Premium 😍"
-                  className="font-semibold uppercase dark:text-amber-500 transition-all "
+                  className="font-semibold uppercase text-lightColor dark:text-amber-500 transition-all "
                   disabled
                 >
                   Premium ✨
@@ -98,7 +98,7 @@ const IACard = ({
               ) : (
                 <Link
                   title="Vuelvete cliente premium 😍"
-                  className="font-semibold uppercase hover:scale-110 dark:hover:text-amber-500 transition-all "
+                  className="font-semibold uppercase hover:scale-110 text-lightColor dark:hover:text-amber-500 transition-all "
                   href="/#pricing"
                 >
                   Upgrade⚡
@@ -106,14 +106,14 @@ const IACard = ({
               )}
               {iasAllowedToAccess.includes(title) ? (
                 <Link
-                  className="p-2 border-2 border-[#0b0a10] dark:border-[#f5f5f7]  rounded-full absolute z-50 top-4 right-6 lg:top-6 lg:right-8 cursor-pointer hover:scale-110 hover:bg-black hover:text-white duration-200 transition-all dark:hover:text-[#f5f5f7] duration-150 "
+                  className="p-2 border-2 border-lightColor dark:border-lightColor  rounded-full absolute z-50 top-4 right-6 lg:top-6 lg:right-8 cursor-pointer hover:scale-110 hover:bg-darkColor hover:text-white duration-200 transition-all dark:hover:text-[#f5f5f7] duration-150 "
                   href={href}
                   target="_blank"
                   rel="noreferrer"
                   title={`Ir a ${title} 🤖`}
                 >
                   <svg
-                    className="h-6 w-6 dark:text-white hover:text-eco2MainColor"
+                    className="h-6 w-6 text-lightColor dark:text-white hover:text-eco2MainColor"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -137,23 +137,23 @@ const IACard = ({
 
         <div className="flex flex-col gap-1 z-[1]">
           <h3
-            className={`${isModalOpen ? 'opacity-5' : ''} text-2xl font-bold`}
+            className={`${isModalOpen ? 'opacity-5' : ''} text-2xl font-bold text-lightColor`}
           >
             {title}
           </h3>
-          <p className={`${isModalOpen ? 'opacity-5' : ''} text-base `}>
+          <p className={`${isModalOpen ? 'opacity-5' : ''} text-base text-lightColor`}>
             {description}
           </p>
-          <div className="flex items-center gap-2 opacity-90 font-medium">
+          <div className="flex items-center gap-2 opacity-90 font-medium ">
             {arrKeywords.map((keyword) => (
               <span
                 key={keyword}
-                className={`${isModalOpen ? 'opacity-5' : ''} text-sm`}
+                className={`${isModalOpen ? 'opacity-5' : ''} text-sm text-lightColor`}
               >
                 {keyword}
               </span>
             ))}
-          </div>
+          </div> 
         </div>
         <img
           className={`${

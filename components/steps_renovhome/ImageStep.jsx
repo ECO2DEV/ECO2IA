@@ -1,7 +1,11 @@
 
 import Bento from '../ui/Bento';
 import { motion } from "framer-motion";
+
+
 export default function ImageStep({ formData, uploadImage }) {
+
+  // console.log("formData", formData)
   return (
     <motion.div
     className='px-4'
@@ -25,9 +29,9 @@ export default function ImageStep({ formData, uploadImage }) {
         }`}
       >
         {formData?.selectFile ? (
-          <p>Already image selected</p>
+          <p>Ya has seleccionado una imagen !</p>
         ) : (
-          <p>Click here, select a png image below to 4mb 👇</p>
+          <p>Click aquí, selecciona una imagen formato <strong>PNG,</strong>  menor a 4mb 👇</p>
         )}
 
         <input

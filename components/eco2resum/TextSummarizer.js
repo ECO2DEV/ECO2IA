@@ -46,7 +46,7 @@ function TextSummarizerPage() {
     prompt,
     setResponse,
     setPromptTokens,
-    promptTokens,
+
     activeAI,
     setActiveAI
   } = useContext(PromptContext);
@@ -60,7 +60,7 @@ function TextSummarizerPage() {
   useEffect(() => {
     if (activeAI !== 'TextSummarizerAI') {
       setPrompt('');
-      setPromptTokens(0);
+      // setPromptTokens(0);
     }
     setActiveAI('TextSummarizerAI');
   }, []);
@@ -276,11 +276,11 @@ function TextSummarizerPage() {
             ) : null}
             {DataEco2Resume.CreateResume}
           </button>
-          <div className="flex justify-center items-center my-2 text-eco2MainColor">
+          {/* <div className="flex justify-center items-center my-2 text-eco2MainColor">
             <span>
               Tokens utilizados en la pregunta : {promptTokens}&nbsp;&nbsp;
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="w-full md:w-6/12 px-4 mt-4 md:mt-0">

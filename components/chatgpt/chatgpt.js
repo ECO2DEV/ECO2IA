@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { PromptContext } from '../../context/prompts/PromptContext';
 import { UserContext } from '../../context/user/UserContext';
-
+import { twMerge } from 'tailwind-merge';
 import axios from 'axios';
 import SearchTextbox from '../searchTextbox/searchTextbox';
 import { Welcome } from '../welcome/welcome';
@@ -197,7 +197,7 @@ export default function ChatGpt() {
 
   return (
     <>
-      <section className="dark:bg-darkColor bg-lightColor h-screen w-svw sm:w-full">
+      <section className="h-screen sm:w-full ">
         {messages.length === 0 && showHelpMessage === false ? (
           <Welcome setInput={setInput} />
         ) : openHelpers ? (
@@ -206,8 +206,8 @@ export default function ChatGpt() {
           <div
             className={`${
               device === 'Desktop' || device === 'Tablet'
-                ? 'flex w-full h-[90vh] lg:h-[90vh]'
-                : 'w-full h-[90vh] lg:h-[90vh] '
+                ? 'flex w-full h-screen'
+                : 'w-full h-screen '
             }`}
           >
             <SidebarChat />
@@ -218,14 +218,23 @@ export default function ChatGpt() {
             />
           </div>
         )}
-        <div className="flex justify-center flex-col-reverse md:flex-row items-center fixed bottom-3 w-[92%]  xl:w-[88%] 2xl:max-w-[77rem]">
+        <div
+          className={twMerge(
+            'ml-3 sm:ml-0 flex flex-col sm:flex-row sm:items-center sm:justify-center fixed bottom-3 w-[92%]  xl:left-[10%] xl:w-[80%]',
+            messages.length === 0 && showHelpMessage === false
+              ? 'md:left-[10%] md:w-[75%]'
+              : openHelpers
+              ? 'md:left-[10%] md:w-[75%]'
+              : 'md:left-[32%] md:w-[60%] xl:left-1/4 xl:w-[68%] 2xl:max-w-[77rem]'
+          )}
+        >
           <SearchTextbox
             OnChange={handleInputChange}
             Fetch={handleSubmit}
             loading={isLoading}
             prompt={input}
           />
-          <div className="hidden md:flex justify-between items-center gap-2 mb-4">
+          <div className="flex justify-between items-center pt-6 gap-2 mb-4 ">
             <ButtonHelper onClick={() => setOpenHelpers(!openHelpers)} />
             <ButtonHelperHistory onClick={() => setModalOpen(!modalOpen)} />
             <SelectModel

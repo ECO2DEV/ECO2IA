@@ -210,7 +210,7 @@ export const PromptProvider = ({ children }) => {
       type: 'SET_IAS_ALLOWED_TO_ACCESS',
       payload: iasAllowedToAccessClean
     });
-    console.log('this is the iasAllowedToAccessClean', user.plan);
+    // console.log('this is the iasAllowedToAccessClean', user.plan);
   }, [user?.plan]);
 
   // Este useEffect cada vez que se actualiza el response, resta a

@@ -7,15 +7,13 @@ export const Eco2Description = () => {
   const [showMatDescription, setShowMatDescription] = useState(false);
 
   return (
-    <section className="flex justify-center min-h-screen pb-4 pt-10">
+    <section className="flex justify-center min-h-screen mx-10 pt-10">
       {!showMatDescription ? (
         <DescriptionHeader setShowMatDescription={setShowMatDescription} />
       ) : (
-        <div className="">
-          <div className="flex flex-col justify-around md:flex-row md:justify-around w-full">
-            <DescriptionForm />
-            <Eco2Cards />
-          </div>
+        <div className="flex flex-col justify-between md:flex-row md:justify-between w-full gap-8">
+          <DescriptionForm />
+          <Eco2Cards />
         </div>
       )}
     </section>

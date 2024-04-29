@@ -1,24 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from 'react';
 import {
   BuildingOffice2Icon,
   EnvelopeIcon,
-  PhoneIcon,
-} from "@heroicons/react/24/outline";
-import { toast } from "react-hot-toast";
+  PhoneIcon
+} from '@heroicons/react/24/outline';
+import { toast } from 'react-hot-toast';
 
-import { createIAContactMessage } from "../util/api/iaContact";
-import { DataNosIA } from "../data/nosia";
-import { FileUpload } from "../components/files/FileUpload";
+import { createIAContactMessage } from '../util/api/iaContact';
+import { DataNosIA } from '../data/nosia';
+import { FileUpload } from '../components/files/FileUpload';
 
 export default function contactUs() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [confirmationMessage, setConfirmationMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    Email: "",
+    name: '',
+    Email: '',
     ImageIAS: [],
-    IADetail: "",
+    IADetail: ''
   });
   const [files, setFiles] = useState([]);
 
@@ -27,31 +25,13 @@ export default function contactUs() {
     setFormData({ ...formData, [name]: value });
   };
 
-  useEffect(() => {
-    const rootElement = document.documentElement;
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === "class") {
-          const isDark = rootElement.classList.contains("dark");
-          setIsDarkMode(isDark);
-        }
-      });
-    });
-
-    observer.observe(rootElement, {
-      attributes: true,
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     if (
-      formData.name === "" ||
-      formData.Email === "" ||
-      formData.IADetail === ""
+      formData.name === '' ||
+      formData.Email === '' ||
+      formData.IADetail === ''
     ) {
       toast.error(DataNosIA.NosIAPleaseFill);
       setLoading(false);
@@ -82,18 +62,16 @@ export default function contactUs() {
       console.log(response);
       if (response.status === 200) {
         toast.success(DataNosIA.NosIAMessageSent);
-        setConfirmationMessage(
-          "Info enviada, nos pondremos en contacto contigo en breve."
-        );
+
         setFormData({
-          name: "",
-          Email: "",
+          name: '',
+          Email: '',
           ImageIAS: [],
-          IADetail: "",
+          IADetail: ''
         });
         setFiles([]);
       } else {
-        toast.error("Hubo un problema al enviar los datos.");
+        toast.error('Hubo un problema al enviar los datos.');
       }
     } catch (error) {
       console.error(error);
@@ -105,7 +83,7 @@ export default function contactUs() {
 
   return (
     <section
-      className={`relative isolate bg-lightColor dark:bg-darkColor`}
+      className={`relative isolate bg-no-repeat aspect-video w-full bg-cover bg-center bg-[url('/bgLight.svg')] dark:bg-[url('/bgDark.svg')] -my-16`}
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
         <section className="relative px-3 pb-5 pt-5 sm:pt-20 lg:static lg:px-8 lg:py-20">
@@ -149,7 +127,7 @@ export default function contactUs() {
                   className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-br from-[#80caff] to-[#4f46e5] opacity-20"
                   style={{
                     clipPath:
-                      "polygon(74.1% 56.1%, 100% 38.6%, 97.5% 73.3%, 85.5% 100%, 80.7% 98.2%, 72.5% 67.7%, 60.2% 37.8%, 52.4% 32.2%, 47.5% 41.9%, 45.2% 65.8%, 27.5% 23.5%, 0.1% 35.4%, 17.9% 0.1%, 27.6% 23.5%, 76.1% 2.6%, 74.1% 56.1%)",
+                      'polygon(74.1% 56.1%, 100% 38.6%, 97.5% 73.3%, 85.5% 100%, 80.7% 98.2%, 72.5% 67.7%, 60.2% 37.8%, 52.4% 32.2%, 47.5% 41.9%, 45.2% 65.8%, 27.5% 23.5%, 0.1% 35.4%, 17.9% 0.1%, 27.6% 23.5%, 76.1% 2.6%, 74.1% 56.1%)'
                   }}
                 />
               </div>
@@ -185,7 +163,10 @@ export default function contactUs() {
                   />
                 </dt>
                 <dd>
-                  <a className="dark:hover:text-white" href="tel:+57 316 8259610">
+                  <a
+                    className="dark:hover:text-white"
+                    href="tel:+57 316 8259610"
+                  >
                     +57 316 8259610
                   </a>
                 </dd>
@@ -257,7 +238,10 @@ export default function contactUs() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold leading-6 dark:text-white" htmlFor="ImageIAS">
+                <label
+                  className="block text-sm font-semibold leading-6 dark:text-white"
+                  htmlFor="ImageIAS"
+                >
                   Imagenes
                 </label>
                 <FileUpload files={files} setFiles={setFiles} />
@@ -284,10 +268,11 @@ export default function contactUs() {
             </div>
             <div className="mt-8 flex justify-end">
               <button
+                disabled={loading}
                 type="submit"
-                className="rounded-md bg-eco2MainColor px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-eco2HoverColor"
+                className="rounded-md bg-eco2MainColor px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-darkHoverColor dark:hover:bg-lightColor  dark:hover:text-black"
               >
-                Enviar 🍃
+                {loading ? 'Enviando...' : 'Enviar'}
               </button>
             </div>
           </div>

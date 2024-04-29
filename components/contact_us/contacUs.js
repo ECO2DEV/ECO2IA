@@ -82,7 +82,6 @@ export const ContacUs = ({ onClose = () => {} }) => {
           router.reload();
         }, 1500);
       }
-
     } catch (error) {
       toast.error(DataNosIA.NosIASomethingWrong);
     } finally {

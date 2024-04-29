@@ -8,6 +8,7 @@ import { SWRConfig } from 'swr';
 import { UserProvider } from '../context/user/UserProvider';
 import { Providers } from '../util/providers/providers';
 import { StoreProvider } from '../context/store/StoreProvider';
+import { ExerciseProvider } from '../context/exercise/ExerciseProvider';
 // import { Elements } from '@stripe/react-stripe-js';
 // import { stripePromise } from '../constants/constans';
 // console.log(stripePromise);
@@ -28,7 +29,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       <SessionProvider session={session}>
         <UserProvider>
           <StoreProvider>
-            <Component {...pageProps} />
+            <ExerciseProvider>
+              <Component {...pageProps} />
+            </ExerciseProvider>
           </StoreProvider>
         </UserProvider>
       </SessionProvider>
@@ -40,7 +43,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       <SessionProvider session={session}>
         <UserProvider>
           <StoreProvider>
-            <Component {...pageProps} />
+            <ExerciseProvider>
+              <Component {...pageProps} />
+            </ExerciseProvider>
           </StoreProvider>
         </UserProvider>
       </SessionProvider>
@@ -68,13 +73,15 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           <UserProvider>
             <StoreProvider>
               <PromptProvider>
-                <SWRConfig value={{}}>
-                  {/* <Elements stripe={stripePromise} options={options}> */}
-                  <LayoutUser {...pageProps}>
-                    <Component {...pageProps} />
-                  </LayoutUser>
-                  {/* </Elements> */}
-                </SWRConfig>
+                <ExerciseProvider>
+                  <SWRConfig value={{}}>
+                    {/* <Elements stripe={stripePromise} options={options}> */}
+                    <LayoutUser {...pageProps}>
+                      <Component {...pageProps} />
+                    </LayoutUser>
+                    {/* </Elements> */}
+                  </SWRConfig>
+                </ExerciseProvider>
               </PromptProvider>
             </StoreProvider>
           </UserProvider>
@@ -88,9 +95,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         <UserProvider>
           <StoreProvider>
             {/* <Elements stripe={stripePromise} options={options}> */}
-            <Layout router={router.pathname}>
-              <Component {...pageProps} />
-            </Layout>
+            <ExerciseProvider>
+              <Layout router={router.pathname}>
+                <Component {...pageProps} />
+              </Layout>
+            </ExerciseProvider>
             {/* </Elements> */}
           </StoreProvider>
         </UserProvider>

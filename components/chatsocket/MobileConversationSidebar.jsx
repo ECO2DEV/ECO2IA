@@ -30,7 +30,7 @@ export const MobileConversationSidebar = () => {
       <input type="checkbox" id="menu-checkbox" />
       <div className="menu">
         <aside
-          className={` hover:overflow-y-scroll overflow-x-hidden dark:scrollsidebar-color scrollsidebar-color-ligth  max-w-64 h-full bg-darkColor dark:bg-lightColor  rounded-l-xl `}
+          className={`hover:overflow-y-scroll overflow-x-hidden dark:scrollsidebar-color scrollsidebar-color-ligth  max-w-64 h-full bg-darkColor dark:bg-lightColor  rounded-l-xl `}
         >
           <NewChatButton handleSetSelectedChat={handleSetSelectedChat} />
           {data?.data &&

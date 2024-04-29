@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Image from "next/image";
+import { useState } from 'react';
+import Image from 'next/image';
 
 export const SelectModel = ({ modelOptions, onChange }) => {
   const [selectedOption, setSelectedOption] = useState(modelOptions[0]);
@@ -17,15 +17,17 @@ export const SelectModel = ({ modelOptions, onChange }) => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="custom-select-wrapper">
+    <div className="custom-select-wrapper ">
       <div
-        className={`custom-select ${isOpen ? "open" : ""}`}
+        className={`custom-select ${isOpen ? 'open' : ''}`}
         tabIndex={0}
         onClick={toggleDropdown}
       >
-        {" "}
+        {' '}
         <div className="custom-select__trigger">
-          <span className="text-black">{selectedOption.label}</span>
+          <span className="text-black text-sm font-thin">
+            {selectedOption.label}
+          </span>
           <Image
             className="icon"
             src={selectedOption.icon}
@@ -36,7 +38,7 @@ export const SelectModel = ({ modelOptions, onChange }) => {
         </div>
         {isOpen && (
           <div className="custom-options">
-            {" "}
+            {' '}
             {modelOptions.map((option) => (
               <div
                 key={option.value}
@@ -45,7 +47,7 @@ export const SelectModel = ({ modelOptions, onChange }) => {
                   handleSelect(option);
                 }}
                 className={`custom-option ${
-                  selectedOption.value === option.value ? "selected" : ""
+                  selectedOption.value === option.value ? 'selected' : ''
                 }`}
               >
                 {/* {option.icon} */}
