@@ -4,15 +4,6 @@
 
 
 
-/* :root {
-  --dark: #020617;
-  --light: #f0fdf4;
-  --gradient: linear-gradient(10deg, #ffaa00, #ff6a00);
-  --gradient2: linear-gradient(15deg, #04ea00, #00d17d);
-  --gradient3: linear-gradient(15deg, #b648ff, #ef5dff);
-  font-size: 1rem;
-} */
-
 .custom-input:focus {
   border-color: #21c284;
   outline: 2px solid #21c284;
@@ -78,29 +69,6 @@
   margin-right: 10px;
 }
 
-
-/* Contenedor para bloques de código */
-.markdown-content pre code {
-  position: relative;
-
-  background-color: #282c34; /* color de fondo oscuro */
-  color: #abb2bf; /* color de texto claro */
-  padding: 1em;
-  border-radius: 10px;
-  overflow-x: auto;
-  font-family: "Consolas", "Monaco", "Courier New", monospace;
-  display: block;
-  white-space: pre-wrap;
-}
-
-.markdown-content pre {
-  margin: 0.5em 0;
-  position: relative;
-}
-
-/* .img-light-mode {
-  filter: sepia(1) hue-rotate(90deg) brightness(0.9) saturate(1.5);
-} */
 
 .img-filter-green {
   filter: brightness(0.5) saturate(1.6) hue-rotate(120deg);
@@ -442,18 +410,34 @@
 
 #menu-checkbox{display: none;}
 
+
+
+#menu-checkbox:checked + .menu, .rotateArrow{
+  display: flex;
+  z-index: 2;
+ 
+}
+.menu-container #menu-checkbox:not(:checked) {
+  display: none;
+  position: relative;
+  z-index: 0;
+ 
+}
+
+
 .menu-container{
-  position: absolute;
+ position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
   width: 16rem;
   height: 100%;
-  z-index: 10;
   animation: menuIn 200ms;
 }
 
 .menu{
   display: none;
+
   max-width: 16rem;
   animation: menuIn 250ms ;
   
@@ -466,6 +450,7 @@
 .menu-toggler{
   position: sticky;
   top: 2.5%;
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -477,13 +462,6 @@
   user-select: none;
   cursor: pointer;
 
-}
-
-
-
-#menu-checkbox:checked + .menu, .rotateArrow{
-  display: flex;
- 
 }
 
 

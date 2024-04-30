@@ -42,8 +42,8 @@ export default function StepsLayout() {
       // Opcional: redondear el tamaño del archivo a 2 decimales
       const roundedFileSizeInKB = Math.round(fileSizeInKB * 100) / 100;
 
-      console.log('Tamaño de la imagen:', roundedFileSizeInKB, 'KB');
-      console.log('Formato de la imagen:', file.type);
+      // console.log('Tamaño de la imagen:', roundedFileSizeInKB, 'KB');
+      // console.log('Formato de la imagen:', file.type);
 
       if (roundedFileSizeInKB > 4096) {
         toast.error('La imagen debe ser menor a 4MB');

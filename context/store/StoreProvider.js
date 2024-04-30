@@ -26,7 +26,7 @@ export const StoreProvider = ({ children }) => {
         aiMessageId,
         userMessageId
       });
-      console.log('resUpdateChat', resUpdateChat);
+      // console.log('resUpdateChat', resUpdateChat);
     } catch (error) {
       console.error('error updating chat', error);
     }

@@ -1,5 +1,3 @@
-import { extractCodeFromMarkdown } from './MarkdownCode';
-
 export const handleCopy = (resp, index, setCopied) => {
   navigator.clipboard
     .writeText(resp)
@@ -23,9 +21,7 @@ export const handleCopy = (resp, index, setCopied) => {
 };
 
 export const handleCopyCode = (text, index, setCopiedCode) => {
-  const codeToCopy = text.includes('```')
-    ? extractCodeFromMarkdown(text)
-    : text;
+  const codeToCopy = text;
 
   navigator.clipboard
     .writeText(codeToCopy)

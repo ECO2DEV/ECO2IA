@@ -56,12 +56,12 @@ export const Search = ({ iaCards, setFilterData }) => {
   }, [debouncedSearch, selectedOption, iaCards, setFilterData]);
 
   return (
-    <div className="flex justify-start items-center gap-4">
+    <div className="flex justify-center items-center gap-4">
       <DropdownFilter
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
       />
-      <div className="flex rounded-md shadow-sm">
+      <div className="flex rounded-md shadow-sm w-96">
         <div className="relative flex flex-grow items-stretch focus-within:z-10">
           <input
             value={search}
@@ -71,7 +71,7 @@ export const Search = ({ iaCards, setFilterData }) => {
             type="text"
             name="search"
             id="search"
-            className="pr-10 bg-darkColor text-white dark:text-black dark:bg-lightColor rounded-full border-none outline-none focus:border-none focus:outline-none focus:ring-0"
+            className="pr-10 bg-darkColor text-white dark:text-black dark:bg-lightColor rounded-full border-none outline-none focus:border-none focus:outline-none focus:ring-0 w-full"
             placeholder=" Deporte, Copys, Diseño..."
           />
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">

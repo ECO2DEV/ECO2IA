@@ -1,15 +1,18 @@
-import { useState,useContext } from 'react'
+import { useState, useContext } from 'react';
 import { UserContext } from '../../context/user/UserContext';
-import { useRouter } from 'next/router'
-import { RadioGroup } from '@headlessui/react'
-import { CheckIcon } from '@heroicons/react/20/solid'
-import {classNames, plan_pricing, stripePromise} from '../../constants/constans'
+import { useRouter } from 'next/router';
+import { RadioGroup } from '@headlessui/react';
+import { CheckIcon } from '@heroicons/react/20/solid';
+import {
+  classNames,
+  plan_pricing,
+  stripePromise
+} from '../../constants/constans';
 // import {frequencies, tiers} from '../../constants/PricingConstans'
-import CheckoutForm from '../payment/CheckoutForm'
-import { ContacUsPricing } from '../contact_us/contactUsPricing'
-import { PopUpModal } from '../modal/popUpModal'
-import axios from 'axios'
-
+import CheckoutForm from '../payment/CheckoutForm';
+import { ContacUsPricing } from '../contact_us/contactUsPricing';
+import { PopUpModal } from '../modal/popUpModal';
+import axios from 'axios';
 
 export default function PricingPlans() {
   const { user } = useContext(UserContext);
@@ -32,14 +35,14 @@ export default function PricingPlans() {
         const customerid = user.customer_id;
         const userId = user.id;
 
-        console.log("inside the handleCheckout", price, customerid, userId)
+        // console.log("inside the handleCheckout", price, customerid, userId)
 
         const checkoutSession = await axios.post('/api/create-subscription', {
           price,
           customerid,
           userId
         });
-        console.log("hey cjeckout session",checkoutSession);
+        console.log('hey cjeckout session', checkoutSession);
 
         const result = await stripe.redirectToCheckout({
           sessionId: checkoutSession.data.sessionId
@@ -180,9 +183,9 @@ export default function PricingPlans() {
                   ))}
                 </ul>
                 {tier.name === 'FREEMIUM' ? (
-                 <button disabled className=' w-full opacity-95 py-2'>
-                  Plan Freemium
-                 </button>
+                  <button disabled className=" w-full opacity-95 py-2">
+                    Plan Freemium
+                  </button>
                 ) : (
                   <button
                     onClick={
