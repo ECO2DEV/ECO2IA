@@ -22,6 +22,7 @@ export const LeftSectionCV = ({
 }) => {
   const [toggleHovered, setToggleHovered] = useState(false);
 
+
   const handleToggleHover = (isHovered) => {
     setToggleHovered(isHovered);
   };
@@ -48,6 +49,8 @@ export const LeftSectionCV = ({
           onMouseLeave={() => handleToggleHover(false)}
         >
           <ToggleProfileOpt setFormData={setFormData} />
+          {/* <ToggleProfileOpt setEducationData={setEducationData} /> */}
+
         </div>
         {toggleHovered && (
           <p className="absolute top-[-40px] left-0 text-black bg-white p-1 rounded border border-gray-300 shadow">
