@@ -58,7 +58,7 @@ export default function LayoutUser({ children }) {
       {/* Removing the scroll for let chatGpt to scroll with his own scrollbar (overflow-y-hidden h-screen)*/}
 
       <Header children={children} />
-      <main>{children}</main>
+      <main className="overflow-y-auto h-screen">{children}</main>
 
       <Toaster position="top-center" />
     </>

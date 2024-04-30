@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import { Nav } from "./Nav";
 import { useRouter } from "next/router";
 import { ThemeToggle2, Avatar2 } from "../../shared/Header/Header";
-import { HomeDashboard } from "../../icons/icons"
+
 
 export const Header = ({ children }) => {
   const [isActive, setIsActive] = useState(false);
@@ -13,6 +13,8 @@ export const Header = ({ children }) => {
     if (isActive) setIsActive(false);
   }, [pathname]);
 
+
+
   return (
     <>
       <div className="relative uppercase text-xs  z-[100]">
@@ -20,7 +22,7 @@ export const Header = ({ children }) => {
           onClick={() => {
             setIsActive(!isActive);
           }}
-          className="fixed right-[20px] top-[16px] w-[45px] h-[45px] rounded-full bg-[#21c284] flex flex-col items-center"
+          className="fixed right-[20px] top-[16px] w-[45px] h-[45px] rounded-full bg-eco2MainColor flex flex-col items-center"
         >
           {isActive ? (
             <button

@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 
-import { RenderMarkdown } from '../../util/helpers/MarkdownCode';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
 import { handleCopy, handleCopyCode } from '../../util/helpers/handleCopy';
@@ -64,13 +63,13 @@ export const Conversations = ({ messages, responseModelMap, setMessages }) => {
   }
 
   useEffect(() => {
-    if (messages) {
+    if (messages || messagesSorted) {
       document.querySelectorAll('pre code').forEach((block) => {
         hljs.highlightElement(block);
       });
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [messages]);
+  }, [messages, messagesSorted]);
 
   useEffect(() => {
     if (selectedConversationId === 'new') {
@@ -81,8 +80,8 @@ export const Conversations = ({ messages, responseModelMap, setMessages }) => {
   }, [selectedConversationId]);
 
   return (
-    <div className="mr-3 sm:pr-0 sm:mr-0 w-svw h-screen sm:flex-1 bg-lightColor dark:bg-darkColor">
-      <section className="flex flex-col text-sm h-screen overflow-y-scroll  overflow-x-hidden scrollsidebar-color dark:scrollsidebar-color-ligth">
+    <div className="mr-3 sm:pr-0 sm:mr-0 w-svw h-screen sm:flex-1 z-1 sm:z-0">
+      <section className="flex flex-col text-sm  h-[85vh] sm:h-[90vh] overflow-y-scroll  overflow-x-hidden scrollsidebar-color dark:scrollsidebar-color-ligth">
         {selectedConversationId === 'new' || selectedConversationId === null ? (
           <>
             {/* if the conversation is new or null, show the messages directly from vercel sdk */}
@@ -93,7 +92,6 @@ export const Conversations = ({ messages, responseModelMap, setMessages }) => {
                   item={item}
                   handleCopy={handleCopy}
                   handleCopyCode={handleCopyCode}
-                  RenderMarkdown={RenderMarkdown}
                   responseModelMap={responseModelMap}
                   getModelIcon={getModelIcon}
                   index={index}
@@ -111,15 +109,12 @@ export const Conversations = ({ messages, responseModelMap, setMessages }) => {
                   item={item}
                   handleCopy={handleCopy}
                   handleCopyCode={handleCopyCode}
-                  RenderMarkdown={RenderMarkdown}
-                  responseModelMap={responseModelMap}
                   getModelIcon={getModelIcon}
                   index={index}
                 />
               ))}
           </>
         )}
-
         <div ref={messagesEndRef}></div>
       </section>
       {deleteModalOpen && (

@@ -4,7 +4,7 @@ export  const NewChatButton = ({ handleSetSelectedChat }) => {
   };
   return (
     <div
-      className="flex items-center gap-2 text-white dark:text-black dark:border-gray-900 m-2 w-60 cursor-pointer h-11 border border-gray-200 rounded-lg transition hover:opacity-70"
+      className="flex items-center gap-2 text-white dark:text-black dark:border-gray-900 m-2 w-[90%] cursor-pointer h-11 border border-gray-200 rounded-lg transition hover:opacity-70"
       onClick={handleChooseNewChat}
     >
       <svg
