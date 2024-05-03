@@ -1,7 +1,7 @@
 export const DataDalleHelpExample = [
   'Genera una imagen de un gato con alas de mariposa.',
   'Crea una representación artística de un paisaje urbano futurista.',
-  "Dessine un portrait d'une personne ayant l'apparence d'un célèbre acteurDibuja un retrato de una persona con la apariencia de un actor famoso."
+  'Dibuja un retrato de un personaje de fantasía, como un elfo o un dragón de fuego o hielo o un unicornio.'
 ];
 
 export const DataDalleHelpCapabilities = [

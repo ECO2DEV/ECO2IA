@@ -1,7 +1,6 @@
-//components/sport_coach/sportCoach.js
 import { useContext, useState } from 'react';
 import { InputField } from './InputField';
-import { SportButtonHelper } from './Eco2SportCoachHelper';
+
 import { PromptContext } from '../../context/prompts/PromptContext';
 import { sendTrainingPlanRequest } from '../../util/api/sendTrainingPlanRequest';
 import { SportCoachResults } from './Eco2SportCoachResults';
@@ -13,6 +12,7 @@ import Loader from '../loader/loader';
 import { fetchDataExerciseDB } from '../../util/api/SportFetch';
 import { ExerciseContext } from '../../context/exercise/ExerciseContext';
 import { exerciseUrl } from '../../util/api/SportFetch';
+import { MagicAiIcon } from '../icons/icons';
 
 export const SportCoachIA = (props) => {
   // Estados para almacenar los datos del formulario
@@ -23,18 +23,15 @@ export const SportCoachIA = (props) => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [showResults, setShowResults] = useState(false);
-  // estado para mostrar o no el componente de ayuda
-  const [showWelcome, setShowWelcome] = useState(true);
 
   const user = props.user;
 
   // Obtener los datos del entrenador deportivo personalizado
   const { data, mutate } = useSportCoach(user);
   // inicializamos el estado del prompt con el valor "Select an option"
-  const { prompt, setPrompt, setResponse, promptTokens } =
-    useContext(PromptContext);
+  const { prompt, setPrompt, setResponse } = useContext(PromptContext);
 
-  const { isExercise, setExercise, setIsExercise, exercise } =
+  const { isExercise, setExercise, setIsExercise } =
     useContext(ExerciseContext);
 
   // Manejar el envío del formulario
@@ -103,12 +100,6 @@ export const SportCoachIA = (props) => {
       setTrainingDays(value);
     }
   };
-
-  const handleOpenHelpers = () => {
-    setShowWelcome(true);
-    setShowResults(false);
-  };
-  // console.log('result', data);
 
   return (
     <>
@@ -228,19 +219,26 @@ export const SportCoachIA = (props) => {
               disabled={submitting}
               className="flex justify-center items-center h-10 text-white text-center bg-eco2MainColor  dark:hover:bg-eco2HoverColor hover:bg-eco2HoverColor rounded-full w-full lg:w-auto px-10 py-2"
             >
-              {submitting ? <Loader /> : DataEco2Sport.GetButton}
+              {submitting ? (
+                <Loader />
+              ) : (
+                <div className="flex justify-center items-center gap-2">
+                  {DataEco2Sport.GetButton}
+                  <MagicAiIcon />
+                </div>
+              )}
             </button>
           </form>
           <div className="flex items-center justify-center mr-36">
             {/* <SportButtonHelper onClick={handleOpenHelpers} /> */}
           </div>
         </div>
-
+        {/* 
         <div className="flex justify-center items-center text-eco2MainColor font-medium dark:text-gray-100 mb-4">
           <span>
             Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
           </span>
-        </div>
+        </div> */}
 
         {error && <h4 className="text-red-500 text-center">{error}</h4>}
       </div>

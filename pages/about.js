@@ -4,7 +4,7 @@ import { features, classNames } from '../constants/constans';
 
 export default function About() {
   return (
-    <div className="bg-no-repeat aspect-video w-full bg-cover bg-center bg-[url('/bgLight.svg')] dark:bg-[url('/bgDark.svg')] -mt-16">
+    <div className="bg-no-repeat aspect-video w-full bg-cover bg-center bg-[url('/darkWaves.webp')] -mt-16">
       <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <motion.h2

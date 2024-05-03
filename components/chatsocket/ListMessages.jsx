@@ -66,7 +66,7 @@ const ListMessages = ({
               <div className="  relative">
                 {messageIcon && (
                   <Image
-                    src={messageIcon ? messageIcon : '/logosColorBlanco.png'}
+                    src={messageIcon ? messageIcon : '/empty_avatar.webp'}
                     alt="AI model icon"
                     width={200}
                     height={200}

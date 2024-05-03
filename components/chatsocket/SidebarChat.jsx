@@ -26,7 +26,7 @@ export const SidebarChat = ({setShowHelpMessage}) => {
   if (device === 'Desktop' || device === 'Tablet') {
     return (
       <aside
-        className={` overflow-y-auto overflow-x-hidden dark:scrollsidebar-color scrollsidebar-color-ligth sm:flex flex-col max-w-64 h-full bg-no-repeat aspect-video w-full bg-cover bg-center bg-[url('/bgDark.svg')] dark:bg-[url('/bgLight.svg')] `}
+        className={` overflow-y-auto overflow-x-hidden dark:scrollsidebar-color scrollsidebar-color-ligth sm:flex flex-col max-w-64 h-full w-full bg-darkColor dark:bg-lightColor`}
       >
         <NewChatButton handleSetSelectedChat={handleSetSelectedChat} />
         {data?.data &&

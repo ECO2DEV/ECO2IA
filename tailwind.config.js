@@ -35,12 +35,12 @@ module.exports = {
     },
     extend: {
       colors: {
-        eco2MainColor: '#01c38d',
+        eco2MainColor: '#01c38e',
         eco2HoverColor: '#696e79',
         darkHoverColor: '#132d46', // Un color para hover en modo claro
         lightColor: '#ffff', // Usar este color para texto sobre fondos oscuros
-        darkColor: '#191e29', // Usar este color para texto sobre fondos claros
-        darkBgCard: '#00384b'
+        darkColor: '#030919', // Usar este color para texto sobre fondos claros
+        darkBgCard: '#1a1e29'
         // Agregar cualquier nuevo color que necesites aquí
       }
     }

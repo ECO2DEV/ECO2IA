@@ -77,7 +77,7 @@ const Aside = ({setIsActive,setShowHelpMessage}) => {
   };
   return (
     <aside
-      className={`h-screen  fixed left-0 top-0 z-40  overflow-y-auto overflow-x-hidden dark:scrollsidebar-color scrollsidebar-color-ligth rounded-l-xl bg-no-repeat aspect-video w-[75%] bg-cover bg-center bg-[url('/bgDark.svg')] dark:bg-[url('/bgLight.svg')]`}
+      className={`h-screen  fixed left-0 top-0 z-40  overflow-y-auto overflow-x-hidden dark:scrollsidebar-color scrollsidebar-color-ligth rounded-l-xl w-[75%] bg-darkColor dark:bg-lightColor')]`}
     >
       <div className="mt-16">
 

@@ -82,9 +82,7 @@ export default function contactUs() {
   };
 
   return (
-    <section
-      className={`relative isolate bg-no-repeat aspect-video w-full bg-cover bg-center bg-[url('/bgLight.svg')] dark:bg-[url('/bgDark.svg')] -my-16`}
-    >
+    <section className={`relative isolate  -my-16`}>
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
         <section className="relative px-3 pb-5 pt-5 sm:pt-20 lg:static lg:px-8 lg:py-20">
           <header className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">

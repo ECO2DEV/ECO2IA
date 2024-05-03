@@ -173,7 +173,7 @@ function Avatar({ large = false, className, ...props }) {
         src={resolvedTheme === "dark"? logoDark :logoLight }
         alt="Logo Maria inteligencia"
         width={120}
-        height={120}
+        height="auto"
         className={clsx(
           "rounded-full  object-cover "
         )}

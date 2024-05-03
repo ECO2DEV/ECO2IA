@@ -14,7 +14,7 @@ const Eco2cvIA = () => {
   });
 
   return (
-    <div className="dark:bg-darkColor bg-lightColor md:h-[215vh] px-8">
+    <div className="dark:bg-darkColor bg-lightColor md:h-full px-8">
       <MyDocument formData={formData} setFormData={setFormData} />
     </div>
   );

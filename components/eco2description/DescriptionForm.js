@@ -5,7 +5,8 @@ import {
   FacebookIconSVGCheck,
   TwitterIconSVGCheck,
   TelegramIconSVGCheck,
-  WhatsAppIconSVGCheck
+  WhatsAppIconSVGCheck,
+  MagicAiIcon
 } from '../icons/icons';
 import { Eco2DescriptionResp } from '../../util/api/Eco2DescriptionResp';
 import { PromptContext } from '../../context/prompts/PromptContext';
@@ -274,7 +275,10 @@ const DescriptionForm = () => {
               <Loader />
             </div>
           ) : (
-            'Enviar'
+            <div className="flex justify-center items-center gap-2">
+              <p>Enviar</p>
+              <MagicAiIcon />
+            </div>
           )}
         </button>
         {/* <span className=" flex justify-center items-center dark:text-gray-100 text-gray-900">

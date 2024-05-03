@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { PromptContext } from '../../context/prompts/PromptContext';
 import { DataEco2Quiz } from '../../data/eco2quiz';
 import Loader from '../loader/loader';
+import { MagicAiIcon } from '../icons/icons';
 
 export const QuizForm = ({
   handleSubmit,
@@ -124,7 +125,10 @@ export const QuizForm = ({
             <Loader />
           </div>
         ) : (
-          'Enviar'
+          <div className="flex justify-center items-center gap-2">
+            <p>Enviar</p>
+            <MagicAiIcon className=" shrink-0 w-6 h-6" />
+          </div>
         )}
       </button>
       {/* 

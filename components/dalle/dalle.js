@@ -12,6 +12,7 @@ import { DropdownDalle } from './dropdown_dalle';
 import { ButtonLatestImg } from './buttonLatestImg';
 import SearchTextboxDalle from '../searchTextbox/searchTextboxDalle';
 import { DataEco2Image } from '../../data/eco2image';
+import { twMerge } from 'tailwind-merge';
 
 export default function DalleIA() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -81,7 +82,18 @@ export default function DalleIA() {
   };
 
   return (
-    <section className="h-screen m-4">
+    <section
+      className={twMerge(
+        'h-screen flex p-4 flex-col mx-auto',
+        imageSrc?.firstImage === ''
+          ? ''
+          : openHelpers
+          ? 'flex'
+          : openLastestImages
+          ? 'flex'
+          : 'flex-col'
+      )}
+    >
       {imageSrc.firstImage === '' ? (
         <WelcomeDalle />
       ) : openHelpers ? (
@@ -144,14 +156,14 @@ export default function DalleIA() {
         ) : null}
       </div>
 
-      <div className="fixed bottom-3 w-full">
+      <div className="fixed right-0 sm:right-auto lg:left-[5%] 2xl:left-[13%] bottom-3 w-full">
         <div className="flex justify-center   w-[92%]  xl:w-[88%] 2xl:max-w-[77rem] mx-auto md:mx-0">
           <SearchTextboxDalle
             OnChange={handleChange}
             Fetch={FetchData}
             loading={loading}
           />
-          <div className="flex justify-center items-center gap-2 mb-4">
+          <div className="flex justify-center items-center gap-2 pt-2">
             <ButtonHelper onClick={() => setOpenHelpers((prev) => !prev)} />
             <ButtonLatestImg
               onClick={() => setOpenLastestImages((prev) => !prev)}

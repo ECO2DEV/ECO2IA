@@ -25,7 +25,7 @@ export default function DashboardSection(props) {
           setFilterData={setFilterData}
           filterData={filterData}
         />
-        <section className="w-full grid auto-rows-[380px] lg:auto-rows-[140px] grid-cols-8 gap-2 mx-auto bg-no-repeat aspect-video w-full bg-cover bg-center bg-[url('/bgLight.svg')] dark:bg-[url('/bgDark.svg')]">
+        <section className="w-full grid auto-rows-[380px] lg:auto-rows-[140px] grid-cols-8 gap-2 mx-auto">
           {filterData.length > 0 ? (
             filterData.map((ia, index) => (
               <IACard

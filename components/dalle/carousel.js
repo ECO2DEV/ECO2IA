@@ -63,7 +63,6 @@ export const Carousel = ({ setImageSrc }) => {
   const { data, isLoading, isError: error } = useDalle(user?.id);
 
   const handleImageClick = (firstImageSrc, secondImageSrc) => {
-
     setImageSrc(() => ({
       firstImage: firstImageSrc,
       secondImage: secondImageSrc
@@ -85,7 +84,7 @@ export const Carousel = ({ setImageSrc }) => {
 
   return (
     <div className="sm:mt-10 sm:mb-20 relative">
-      <h2 className="absolute hidden sm:contents left-10 top-0 sm:text-xl lg:text-1xl text-gray-800">
+      <h2 className="absolute hidden sm:contents left-10 top-0 sm:text-xl lg:text-1xl text-gray-800 dark:text-gray-200">
         {DataHistory.LatestImages}
       </h2>
       {data?.data && (

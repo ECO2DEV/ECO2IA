@@ -1,8 +1,8 @@
 // components/mattraduct/optionsMattraduct.js
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { DataEco2Traduct } from '../../data/eco2traduct';
-import { PromptContext } from '../../context/prompts/PromptContext';
+
 import ShareModal from './ShareModal';
 import {
   MinusIcon,
@@ -20,7 +20,7 @@ const PDFDownloadLinkDynamic = dynamic(
   }
 );
 
-import { HistoryIcon, VolumenSpeakerIcon } from '../icons/icons';
+import { HistoryIcon } from '../icons/icons';
 import ExportPDF from './ExportPDF';
 
 const Transcription = dynamic(() => import('./transcript'), { ssr: false });
@@ -40,10 +40,10 @@ export default function OptionsMattraduct({
 
   const [showShare, setShowShare] = useState(false);
   // console.log("language" + language)
-  const { promptTokens } = useContext(PromptContext);
+
   return (
     <div>
-      <nav className="flex justify-center" aria-label="Breadcrumb">
+      <nav className="flex justify-center mb-2" aria-label="Breadcrumb">
         <ol
           role="list"
           className="flex space-x-2 rounded-md bg-eco2MainColor dark:bg-white px-3 py-2 sm:px-6 shadow"
@@ -85,7 +85,6 @@ export default function OptionsMattraduct({
                   <DocumentArrowDownIcon
                     className=" mr-2 h-4 w-4 text-white dark:text-gray-800 hover:text-gray-400 sm:hover:text-gray-400"
                     aria-hidden="true"
-                    
                   />
                   <span className="hidden sm:contents">
                     {' '}
@@ -227,11 +226,11 @@ export default function OptionsMattraduct({
           </li>
         </ol>
       </nav>
-      <div className="flex justify-center items-center my-2">
+      {/* <div className="flex justify-center items-center my-2">
         <span className=" bottom-4 text-gray-900 dark:text-gray-100">
           Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
         </span>
-      </div>
+      </div> */}
     </div>
   );
 }

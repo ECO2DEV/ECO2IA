@@ -6,7 +6,7 @@ import { PromptContext } from '../../context/prompts/PromptContext';
 import { UserContext } from '../../context/user/UserContext';
 import { DataEco2Resume } from '../../data/eco2resume';
 import { Eco2ResumResp } from '../../util/api/Eco2ResumResp';
-import { ClipboardIcon } from '../icons/icons';
+import { ClipboardIcon, MagicAiIcon } from '../icons/icons';
 import { ButtonHistory } from './ButtonHistory';
 import HistoryResum from './HistoryResum';
 import ExportPDF from './ExportPDF';
@@ -273,8 +273,12 @@ function TextSummarizerPage() {
                   ></path>
                 </svg>
               </span>
-            ) : null}
-            {DataEco2Resume.CreateResume}
+            ) : (
+              <div className="flex justify-center items-center gap-2">
+                {DataEco2Resume.CreateResume}
+                <MagicAiIcon />
+              </div>
+            )}
           </button>
           {/* <div className="flex justify-center items-center my-2 text-eco2MainColor">
             <span>
