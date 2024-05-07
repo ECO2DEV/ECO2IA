@@ -3,7 +3,7 @@ import { updateUserById } from '../../util/api/user';
 import { DataProfile } from '../../data/profile';
 import { toast } from 'react-hot-toast';
 import { domainSelect, nacionalitySelect, sportSelect } from '../../constants/constans';
-import {domain, nationality, sport  } from "./profilecollection"
+import {domain, nationality, sport  } from "../../constants/profilecollection"
 import { isValidEmail } from '../../util/helpers/valid_email';
 
 export function ProfileForm({ user }) {
@@ -74,7 +74,7 @@ export function ProfileForm({ user }) {
       });
       toast.success(DataProfile.ProfileUpdated);
       // router.push('/profile');
-      console.log('thhis is the response', response);
+      // console.log('thhis is the response', response);
     } catch (error) {
       toast.error(DataProfile.ErrorUpdating);
       console.error('Error:', error);
@@ -101,7 +101,7 @@ export function ProfileForm({ user }) {
             value={formData.Name ? formData.Name : ''}
             type="text"
             name="Name"
-            id="Name"
+            id="first-name"
             autoComplete="off"
             aria-autocomplete="none"
             placeholder="Maria"
@@ -123,7 +123,7 @@ export function ProfileForm({ user }) {
             value={formData.LastName ? formData.LastName : ''}
             type="text"
             name="LastName"
-            id="LastName"
+            id="last-name"
             autoComplete="off"
             placeholder="Perez"
             aria-autocomplete="none"
