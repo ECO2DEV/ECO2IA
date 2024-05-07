@@ -19,16 +19,12 @@ import IA4 from '../public/screenshot/desc_eco2.webp';
 import IA5 from '../public/screenshot/resum_eco2.webp';
 import IA6 from '../public/screenshot/cv_eco2.webp';
 
-import gpt3image from '../public/ias/gpt3image.png';
+import metaIcon from '../public/ias/meta-icon.webp';
 import gpt3 from '../public/ias/chatgpt3-icon.svg';
 import gpt4 from '../public/ias/GPT-4_Logo.svg';
 import gemini from '../public/ias/google-gemini-icon.svg';
 
-import {
-  domain,
-  sport,
-  nationality
-} from '../components/profile/profilecollection';
+import { domain, sport, nationality } from './profilecollection';
 
 import {
   AcademicCapIcon,
@@ -71,7 +67,9 @@ export const navigation = [
 export const modelOptions = [
   { value: 'gpt-3.5-turbo', label: 'gpt-3', icon: gpt3 },
   { value: 'gpt-4-turbo', label: 'gpt-4', icon: gpt4 },
-  { value: 'gemini-pro', label: 'Gemini', icon: gemini }
+  { value: 'gemini-pro', label: 'Gemini', icon: gemini },
+  { value: 'llama-v2-70b-chat', label: 'Llama', icon: metaIcon }
+  // { value: 'llama-v2-13b-code', label: 'Code', icon: metaIcon }
   // { value: 'claude-1', label: 'Claude' }
 
   // Add more AI models as needed
