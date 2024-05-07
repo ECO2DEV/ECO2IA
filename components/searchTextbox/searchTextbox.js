@@ -1,16 +1,28 @@
 // import { useContext } from 'react';
 // import { PromptContext } from '../../context/prompts/PromptContext';
 import Loader from '../loader/loader';
-
+import { toast } from 'react-hot-toast';
 import { UsersIcon } from '@heroicons/react/20/solid';
 import { MagicAiIcon } from '../icons/icons';
 
 export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
   // const { promptTokens } = useContext(PromptContext);
 
+  function handleSubmitStream(e) {
+    e.preventDefault();
+    if (prompt === '') return toast.error('Por favor ingrese una pregunta');
+    if (prompt.length < 5)
+      return toast.error('Por favor ingrese una pregunta más larga');
+
+    return Fetch(e);
+  }
+
   return (
-    <div className="w-svw pb-4">
-      <form onSubmit={Fetch} className="mt-2 flex rounded-md shadow-sm">
+    <div className="pb-2 w-full">
+      <form
+        onSubmit={(e) => handleSubmitStream(e)}
+        className="mt-2 flex rounded-md shadow-sm"
+      >
         <div className="relative flex  flex-grow items-stretch focus-within:z-50">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <UsersIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
