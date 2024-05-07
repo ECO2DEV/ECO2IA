@@ -24,6 +24,24 @@ export const PDFTemplateTwo = ({
 }) => {
   const { data: session } = useSession();
 
+  const demoAcademicData = [
+    {
+      titulo_academico: "Ejemplo: Ingeniería de Sistemas",
+      universidad: "Universidad de Ejemplo",
+      fecha_ini_academica: "2010-01-01",
+      fecha_fin_academica: "2014-01-01",
+      ciudad_uni: "Ciudad Ejemplo",
+    },
+    {
+      titulo_academico: "Ejemplo: Master en Ciencias de Datos",
+      universidad: "Instituto de Tecnología de Ejemplo",
+      fecha_ini_academica: "2015-01-01",
+      fecha_fin_academica: "2017-01-01",
+      ciudad_uni: "Ciudad Ejemplo",
+    },
+  ]
+  const academicRecords = user?.academic_informations.length > 0 ? user.academic_informations : demoAcademicData;
+  
   return (
     <DynamicPDFViewer style={{ width: "100%", height: "100%" }}>
       <Document>
@@ -71,18 +89,18 @@ export const PDFTemplateTwo = ({
                 ))}
               </View>
             )}
-            {educationFields.length > 0 && (
+            {academicRecords.length > 0 && (
               <View>
                 <Text style={stylesTwo.subtitle}>
-                  {DataEco2CV.EducationBackgrounde}
+                  {DataEco2CV.EducationBackground}
                 </Text>
-                {educationFields.map((education, index) => (
+                {academicRecords.map((record, index) => (
                   <Fragment key={index}>
                     <Text style={stylesTwo.thirdTitle}>
-                      {`${education.degree}, ${education.institution}, ${education.city}`}
+                      {`${record.titulo_academico}, ${record.universidad}, ${record.ciudad_uni}`}
                     </Text>
                     <Text style={stylesTwo.profileText}>
-                      {`${education.startDate} - ${education.endDate}`}
+                      {`${record.fecha_ini_academica} - ${record.fecha_fin_academica}`}
                     </Text>
                   </Fragment>
                 ))}
