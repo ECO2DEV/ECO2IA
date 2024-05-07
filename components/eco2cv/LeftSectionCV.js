@@ -32,7 +32,7 @@ export const LeftSectionCV = ({
   };
 
   return (
-    <section className="md-w-[45%] lg:w-[50%] lg:absolute lg:-left-4 dark:bg-darkColor bg-lightColor">
+    <section className="lg:w-[50%] lg:absolute lg:-left-4 dark:bg-darkColor bg-lightColor h-full">
       <h1 className="text-xl font-bold text-eco2MainColor">
         {' '}
         {DataEco2CV.PersonalDetails}{' '}

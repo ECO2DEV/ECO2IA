@@ -11,7 +11,7 @@ export const WelcomeDalle = () => {
   const { setPrompt } = useContext(PromptContext);
 
   return (
-    <div className="md:flex items-start text-center gap-3.5 md:mt-16 xl:mt-24">
+    <div className="md:flex md:justify-center items-center-center gap-3.5 md:mt-16 xl:mt-24 2xl:max-w-7xl">
       <div className="flex flex-col justify-center items-center mb-2 md:mb-auto gap-3.5 ">
         <ul className="flex flex-col justify-center items-center gap-1 w-full sm:max-w-md m-auto ">
           <h2 className="mb-2.5 flex gap-3 items-center m-auto text-lg font-normal md:flex-col md:gap-2 ">

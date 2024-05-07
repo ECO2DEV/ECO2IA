@@ -5,7 +5,7 @@ import { Header } from '../shared/Header/Header';
 export default function Layout({ children, router }) {
   return (
     <>
-      <div className="bg-no-repeat aspect-video w-full bg-cover bg-center bg-[url('/bgLight.svg')] dark:bg-[url('/bgDark.svg')]  ">
+      <div className="bg-no-repeat aspect-video w-full bg-cover bg-center bg-[url('/darkWaves.webp')]  overflow-y-scroll h-screen">
         <Header router={router} user={children.props.user} />
         <Head>
           <title>ECO²</title>

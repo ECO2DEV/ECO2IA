@@ -70,7 +70,7 @@ export const navigation = [
 
 export const modelOptions = [
   { value: 'gpt-3.5-turbo', label: 'gpt-3', icon: gpt3 },
-  { value: 'gpt-4', label: 'gpt-4', icon: gpt4 },
+  { value: 'gpt-4-turbo', label: 'gpt-4', icon: gpt4 },
   { value: 'gemini-pro', label: 'Gemini', icon: gemini }
   // { value: 'claude-1', label: 'Claude' }
 

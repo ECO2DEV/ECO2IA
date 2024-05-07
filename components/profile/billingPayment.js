@@ -1,29 +1,29 @@
-import React, { useRef, useState } from "react";
-import Image from "next/image";
-import { InformationCircleIcon } from "@heroicons/react/20/solid";
-import toast from "react-hot-toast";
+import React, { useRef, useState } from 'react';
+import Image from 'next/image';
+import { InformationCircleIcon } from '@heroicons/react/20/solid';
+import toast from 'react-hot-toast';
 
-import { createBillingInfo } from "../../util/api/billingAndPayment";
-import { DataProfile } from "../../data/profile";
+import { createBillingInfo } from '../../util/api/billingAndPayment';
+import { DataProfile } from '../../data/profile';
 
-import visa from "../../public/creditCard/visa.svg";
-import amex from "../../public/creditCard/amex.svg";
-import mastercard from "../../public/creditCard/Mastercard.svg";
+import visa from '../../public/creditCard/visa.svg';
+import amex from '../../public/creditCard/amex.svg';
+import mastercard from '../../public/creditCard/Mastercard.svg';
 
 export function BillingAndPayment() {
   const [showTooltip, setShowTooltip] = useState(false);
   const [formData, setFormData] = useState({
-    CreditCard: "",
-    Name: "",
-    LastName: "",
-    ExpirationMonth: "",
-    ExpirationYear: "",
-    SecurityCode: "",
-    Country: "CO",
-    Address: "",
-    AddressOptional: "",
-    City: "",
-    PostalCode: "",
+    CreditCard: '',
+    Name: '',
+    LastName: '',
+    ExpirationMonth: '',
+    ExpirationYear: '',
+    SecurityCode: '',
+    Country: 'CO',
+    Address: '',
+    AddressOptional: '',
+    City: '',
+    PostalCode: ''
   });
   const yearInputRef = useRef(null);
 
@@ -78,7 +78,7 @@ export function BillingAndPayment() {
     const currentYear = new Date().getFullYear();
     const formattedExpirationMonth = `${formData.ExpirationMonth.padStart(
       2,
-      "0"
+      '0'
     )}/1/${currentYear}`;
 
     const formattedExpirationYear = `1/1/20${formData.ExpirationYear}`;
@@ -86,15 +86,15 @@ export function BillingAndPayment() {
     const submitData = {
       ...formData,
       ExpirationMonth: formattedExpirationMonth,
-      ExpirationYear: formattedExpirationYear,
+      ExpirationYear: formattedExpirationYear
     };
     try {
       const response = await createBillingInfo({ formData: submitData });
       toast.success(DataProfile.ProfileUpdated);
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       toast.error(DataProfile.ErrorUpdating);
-      console.error("Error enviando el formulario:", error);
+      console.error('Error enviando el formulario:', error);
     }
   };
 
@@ -327,7 +327,7 @@ export function BillingAndPayment() {
                 htmlFor="address-street2"
                 className="block text-sm font-medium leading-6 text-black"
               >
-                Línea de dirección 2{" "}
+                Línea de dirección 2{' '}
                 <span className="text-gray-500">(opcional)</span>
               </label>
               <input
@@ -365,7 +365,7 @@ export function BillingAndPayment() {
                   htmlFor="address-zip"
                   className="block text-sm font-medium leading-6 text-black"
                 >
-                  Código postal{" "}
+                  Código postal{' '}
                   <span className="text-gray-500">(opcional)</span>
                 </label>
                 <input

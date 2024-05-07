@@ -3,20 +3,20 @@
 import Loader from '../loader/loader';
 
 import { UsersIcon } from '@heroicons/react/20/solid';
-import { ChatSendIcon, MagicAiIcon } from '../icons/icons';
+import { MagicAiIcon } from '../icons/icons';
 
 export default function SearchTextbox({ OnChange, Fetch, loading, prompt }) {
   // const { promptTokens } = useContext(PromptContext);
 
   return (
-    <div className="w-screen ">
+    <div className="w-svw pb-4">
       <form onSubmit={Fetch} className="mt-2 flex rounded-md shadow-sm">
         <div className="relative flex  flex-grow items-stretch focus-within:z-50">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <UsersIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
           </div>
           <input
-            type="text"
+            type="search"
             name="prompt"
             id="prompt"
             autoComplete="off"

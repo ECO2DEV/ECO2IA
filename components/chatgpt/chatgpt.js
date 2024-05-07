@@ -15,7 +15,6 @@ import ButtonHelperHistory from '../welcome/ButtonHelperHistory';
 import { useChat as useChatReact } from 'ai/react';
 import { header, strapiUrl, modelOptions } from '../../constants/constans';
 import HistoryChat from './HistoryChat';
-// import { countTokens } from '../../util/helpers/count_tokens';
 import { SelectModel } from '../ui/SelectModel';
 import {
   createConversationSocket,
@@ -24,6 +23,7 @@ import {
 import { StoreContext } from '../../context/store/StoreContext';
 import { SidebarChat } from '../chatsocket/SidebarChat';
 import useDeviceDetection from '../../hooks/useDeviceDetection';
+import { MobileConversationSidebar } from '../chatsocket/MobileConversationSidebar';
 export const config = {
   runtime: 'edge'
 };
@@ -95,7 +95,8 @@ export default function ChatGpt() {
         const aiPromise = await createMessageSocket({
           type: 'ai',
           content: message.content,
-          uuid: newMessageId
+          uuid: newMessageId,
+          model: selectedModel
         });
 
         // Ejecutar las promesas en paralelo y esperar a que todas se resuelvan
@@ -186,46 +187,37 @@ export default function ChatGpt() {
     }
   });
 
-  // useEffect(() => {
-  //   if (input === '') {
-  //     setPromptTokens(0);
-  //     return;
-  //   }
-  //   const tokens = countTokens(input);
-  //   setPromptTokens(tokens);
-  // }, [input]);
-
   return (
     <>
-      <section className="h-screen sm:w-full ">
-        {messages.length === 0 && showHelpMessage === false ? (
-          <Welcome setInput={setInput} />
-        ) : openHelpers ? (
-          <Welcome setInput={setInput} />
-        ) : (
-          <div
-            className={`${
-              device === 'Desktop' || device === 'Tablet'
-                ? 'flex w-full h-screen'
-                : 'w-full h-screen '
-            }`}
-          >
-            <SidebarChat />
+      <section className="h-full sm:w-full ">
+        <div
+          className={twMerge(
+            ' w-full h-full absolute',
+            device === 'Desktop' || device === 'Tablet' ? 'flex' : ''
+          )}
+        >
+          {device === 'Desktop' || device === 'Tablet' ? (
+            <SidebarChat setShowHelpMessage={setShowHelpMessage} />
+          ) : (
+            <MobileConversationSidebar
+              setShowHelpMessage={setShowHelpMessage}
+            />
+          )}
+          {showHelpMessage === false ? (
+            <Welcome setInput={setInput} />
+          ) : openHelpers ? (
+            <Welcome setInput={setInput} />
+          ) : (
             <Conversations
               setMessages={setMessages}
               messages={messages}
               responseModelMap={responseModelMap}
             />
-          </div>
-        )}
+          )}
+        </div>
         <div
           className={twMerge(
-            'ml-3 sm:ml-0 flex flex-col sm:flex-row sm:items-center sm:justify-center fixed bottom-3 w-[92%]  xl:left-[10%] xl:w-[80%]',
-            messages.length === 0 && showHelpMessage === false
-              ? 'md:left-[10%] md:w-[75%]'
-              : openHelpers
-              ? 'md:left-[10%] md:w-[75%]'
-              : 'md:left-[32%] md:w-[60%] xl:left-1/4 xl:w-[68%] 2xl:max-w-[77rem]'
+            'fixed bottom-0 z-0 ml-2 sm:ml-0 flex flex-col sm:flex-row sm:items-center sm:justify-center  sm:w-[92%]  xl:left-[10%] xl:w-[80%] md:left-[32%] md:w-[60%] xl:left-1/4 xl:w-[68%] 2xl:max-w-[77rem]'
           )}
         >
           <SearchTextbox
@@ -234,8 +226,10 @@ export default function ChatGpt() {
             loading={isLoading}
             prompt={input}
           />
-          <div className="flex justify-between items-center pt-6 gap-2 mb-4 ">
-            <ButtonHelper onClick={() => setOpenHelpers(!openHelpers)} />
+          <div className="flex justify-between items-center p-2 gap-2 pb-5">
+            <ButtonHelper
+              onClick={() => setShowHelpMessage(!showHelpMessage)}
+            />
             <ButtonHelperHistory onClick={() => setModalOpen(!modalOpen)} />
             <SelectModel
               modelOptions={modelOptions}

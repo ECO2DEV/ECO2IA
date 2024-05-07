@@ -3,9 +3,10 @@ import { PromptContext } from '../../context/prompts/PromptContext';
 import {
   ClipboardIcon,
   DeleteIconWhite,
-  SendIcon,
+  MagicAiIcon,
   VolumenSpeakerIcon
 } from '../icons/icons';
+import { twMerge } from 'tailwind-merge';
 import Loader from '../loader/loader';
 import { DataEco2Traduct } from '../../data/eco2traduct';
 
@@ -39,9 +40,17 @@ export const TextArea = ({
     setPrompt(event.target.value);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent the default Enter behavior (new line)
+      onHandleTraduct(); // Execute translation function
+    }
+  };
+
   return (
     <div className="relative w-full">
       <textarea
+        onKeyDown={handleKeyDown}
         autoFocus={type === 'from'}
         disabled={type === 'to'}
         placeholder={getPlaceholder({ type, loading })}
@@ -76,21 +85,26 @@ export const TextArea = ({
       {type === 'from' && (
         <>
           <button
+            title="Eliminar texto"
             className="absolute bottom-2 right-10 focus:outline-none"
             onClick={onHandleClean}
           >
             <DeleteIconWhite />
           </button>
           <button
-            className="absolute bottom-2 right-1 focus:outline-none"
+            title="Traducir"
+            className={twMerge(
+              'absolute focus:outline-none hover:text-eco2MainColor ',
+              fetchLoading ? 'bottom-3 right-1' : 'bottom-3 right-3'
+            )}
             onClick={onHandleTraduct}
           >
             {fetchLoading ? (
-              <div className="mb-1">
+              <div className="ml-2">
                 <Loader />
               </div>
             ) : (
-              <SendIcon />
+              <MagicAiIcon className="icon-sm shrink-0 text-white hover:text-eco2MainColor transition-colors duration-500 ease-in-out " />
             )}
           </button>
         </>

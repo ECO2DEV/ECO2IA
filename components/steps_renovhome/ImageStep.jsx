@@ -37,7 +37,7 @@ export default function ImageStep({ formData, uploadImage }) {
         <input
           className="sr-only"
           type="file"
-          accept="image/*"
+          accept=".png"
           id="canvas"
           name="originalImage"
           onChange={uploadImage}

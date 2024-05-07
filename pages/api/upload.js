@@ -19,7 +19,7 @@ export default async function POST(req) {
     maskImg
   } = imageData;
 
-  console.log('aqui esta todo el body', imageData);
+  // console.log('aqui esta todo el body', imageData);
   const imagePath = path.join(process.cwd(), 'public', 'original.png');
   const imageMaskPath = path.join(process.cwd(), 'public', 'maskimage.png');
 

@@ -45,7 +45,12 @@ export const createConversationSocket = async ({
   }
 };
 
-export const createMessageSocket = async ({ type, content, uuid = null }) => {
+export const createMessageSocket = async ({
+  type,
+  content,
+  uuid = null,
+  model = null
+}) => {
   let data;
   // console.log('type ', type, 'content ', content);
 
@@ -60,7 +65,8 @@ export const createMessageSocket = async ({ type, content, uuid = null }) => {
       aiMessage: true,
       animate: true,
       content: content,
-      message_id: uuid
+      message_id: uuid,
+      model: model
     };
   }
 
