@@ -1,4 +1,4 @@
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+
 import { ProfileForm } from './ProfileForm';
 import { ProfileFormAcademica } from './ProfileFormAcademica';
 import { EditAvatar } from './editAvatar';
