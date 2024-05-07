@@ -10,7 +10,12 @@ const Eco2cvIA = () => {
     email: ' ',
     phone: ' ',
     country: ' ',
-    city: ' '
+    city: ' ',
+    titulo_academico: ' ',
+    universidad: ' ',
+    fecha_ini_academica: ' ',
+    fecha_fin_academica: ' ',
+    ciudad_uni: ' ',
   });
 
   return (
