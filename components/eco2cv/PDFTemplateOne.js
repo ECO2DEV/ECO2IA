@@ -1,14 +1,21 @@
-import { DataEco2CV } from '../../data/eco2cv';
-import { Fragment } from 'react';
-import { Page, Text, View, Document, Image, PDFDownloadLink } from '@react-pdf/renderer';
-import dynamic from 'next/dynamic';
-import { stylesOne } from './TemplatesStyles';
-import { useSession } from 'next-auth/react';
+import { DataEco2CV } from "../../data/eco2cv";
+import { Fragment } from "react";
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  Image,
+  PDFDownloadLink,
+} from "@react-pdf/renderer";
+import dynamic from "next/dynamic";
+import { stylesOne } from "./TemplatesStyles";
+import { useSession } from "next-auth/react";
 
 const DynamicPDFViewer = dynamic(
-  () => import('@react-pdf/renderer').then((mod) => mod.PDFViewer),
+  () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
   {
-    ssr: false
+    ssr: false,
   }
 );
 import { strapiUrl } from "../../constants/constans";
@@ -20,12 +27,33 @@ export const PDFTemplateOne = ({
   user,
   textProfile,
   dropdowns,
-  educationFields
+  educationFields,
 }) => {
   const { data: session } = useSession();
 
+  const hasProfileEducation =
+    user?.titulo_academico &&
+    user?.universidad &&
+    user?.fecha_ini_academica &&
+    user?.fecha_fin_academica &&
+    user?.ciudad_uni;
+
+  // Añadir la información académica del perfil del usuario al principio de educationFields si existe
+  const combinedEducationFields = hasProfileEducation
+    ? [
+        {
+          degree: user.titulo_academico,
+          institution: user.universidad,
+          startDate: user.fecha_ini_academica,
+          endDate: user.fecha_fin_academica,
+          city: user.ciudad_uni,
+        },
+        ...educationFields,
+      ]
+    : educationFields;
+
   return (
-    <DynamicPDFViewer style={{ width: '100%', height: '100%' }}>
+    <DynamicPDFViewer style={{ width: "100%", height: "100%" }}>
       <Document>
         <Page style={stylesOne.page} wrap>
           <View style={stylesOne.firstColumn} fixed>
@@ -71,12 +99,12 @@ export const PDFTemplateOne = ({
                 ))}
               </View>
             )}
-            {educationFields.length > 0 && (
+            {combinedEducationFields.length > 0 && (
               <View>
                 <Text style={stylesOne.subtitle}>
-                  {DataEco2CV.EducationBackground}{' '}
+                  {DataEco2CV.EducationBackground}
                 </Text>
-                {educationFields.map((education, index) => (
+                {combinedEducationFields.map((education, index) => (
                   <Fragment key={index}>
                     <Text style={stylesOne.thirdTitle}>
                       {`${education.degree}, ${education.institution}, ${education.city}`}
@@ -91,19 +119,18 @@ export const PDFTemplateOne = ({
           </View>
           <View style={stylesOne.secondColumn}>
             <View style={stylesOne.pictureContainer}>
-            <Image
-              width={200}
-              height={200}
-              src={
-                user?.avatar
-                  ? user?.avatar?.url
-                  : session?.picture
-                  ? session?.picture
-                  : '/empty_avatar.webp'
-              }
-              alt="Avatar preview"
-              // className={`w-full h-full mx-auto object-cover rounded-full border-none shadow-lg `}
-            />
+              <Image
+                width={200}
+                height={200}
+                src={
+                  user?.avatar
+                    ? user?.avatar?.url
+                    : session?.picture
+                    ? session?.picture
+                    : "/empty_avatar.webp"
+                }
+                alt="Avatar preview"
+              />
             </View>
             {debouncedFormData.fullName && debouncedFormData.domainOfStudy && (
               <View>
@@ -143,5 +170,4 @@ export const PDFTemplateOne = ({
       </Document>
     </DynamicPDFViewer>
   );
-
 };

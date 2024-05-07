@@ -10,36 +10,25 @@ export default function ToggleProfileOpt({ setFormData }) {
   const { user } = useContext(UserContext);
   const [enabled, setEnabled] = useState(true);
 
-  // const updateFormDataWithProfile = () => {
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     fullName: user.Name + " " + user.LastName,
-  //     jobTitle: user.activityarea,
-  //     domainOfStudy: user.domainofstudy,
-  //     nationality: user.nacionality,
-  //     email: user.email,
-  //     phone: user.numberTelephone,
-  //     country: user.country,
-  //     city: "",
-  //   }));
-  // };
-
   useEffect(() => {
-    // Solo actualizar la forma si 'user' no es null y el Switch está habilitado
     if (user && enabled) {
-      setFormData(prev => ({
-        ...prev,
-        fullName: user.Name + " " + user.LastName,
-        jobTitle: user.activityarea,
-        domainOfStudy: user.domainofstudy,
-        nationality: user.nacionality,
-        email: user.email,
-        phone: user.numberTelephone,
-        country: user.country,
-        city: user.city, // Asegúrate de que 'user' contenga 'city'
-      }));
+        setFormData((prev) => ({
+            ...prev,
+            fullName: user.Name + " " + user.LastName,
+            jobTitle: user.activityarea,
+            domainOfStudy: user.domainofstudy,
+            nationality: user.nacionality,
+            email: user.email,
+            phone: user.numberTelephone,
+            country: user.country,
+            titulo_academico: user.titulo_academico,
+            universidad: user.universidad,
+            fecha_ini_academica: user.fecha_ini_academica,
+            fecha_fin_academica: user.fecha_fin_academica,
+            ciudad_uni: user.ciudad_uni
+        }));
     }
-  }, [user, enabled, setFormData]);
+}, [user, enabled, setFormData]);
 
   const handleToggle = () => {
     setEnabled((prev) => !prev);
@@ -53,16 +42,17 @@ export default function ToggleProfileOpt({ setFormData }) {
         email: user.email,
         phone: user.numberTelephone,
         country: user.country,
+        titulo_academico: user?.titulo_academico,
+        universidad: user.universidad,
+        fecha_ini_academica: user.fecha_ini_academica,
+        fecha_fin_academica: user.fecha_fin_academica,
+        ciudad_uni: user.ciudad_uni,
         city: "",
       }));
     }
   };
 
-  // useEffect(() => {
-  //   if (enabled) {
-  //     updateFormDataWithProfile();
-  //   }
-  // }, []);
+
 
   return (
     <Switch
