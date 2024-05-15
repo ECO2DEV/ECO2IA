@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import IACard from './IACard';
+
+import CardDashboard from './CardDashboard';
 import Head from 'next/head';
 import { Search } from './Search';
 import { IANotFound } from './IANotFound';
@@ -9,8 +10,6 @@ export default function DashboardSection(props) {
   const iaCards = props?.user.IA_CARDS?.data;
   const [filterData, setFilterData] = useState(iaCards);
   const yourPlan = props?.user?.user?.plan ?? null;
-
-  // console.log('yourPlan dashvoard', iaCards);
 
   return (
     <>
@@ -25,10 +24,11 @@ export default function DashboardSection(props) {
           setFilterData={setFilterData}
           filterData={filterData}
         />
-        <section className="w-full grid auto-rows-[380px] lg:auto-rows-[140px] grid-cols-8 gap-2 mx-auto">
+
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-2">
           {filterData.length > 0 ? (
             filterData.map((ia, index) => (
-              <IACard
+              <CardDashboard
                 plan={yourPlan}
                 key={ia.id}
                 id={ia.id}
@@ -45,7 +45,7 @@ export default function DashboardSection(props) {
           ) : (
             <IANotFound />
           )}
-        </section>
+        </ul>
       </div>
     </>
   );

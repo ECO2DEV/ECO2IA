@@ -71,7 +71,7 @@ export const Search = ({ iaCards, setFilterData }) => {
             type="text"
             name="search"
             id="search"
-            className="pr-10 bg-darkColor text-white dark:text-black dark:bg-lightColor rounded-full border-none outline-none focus:border-none focus:outline-none focus:ring-0 w-full"
+            className="pr-10 bg-darkHoverColor text-white dark:text-black dark:bg-lightColor rounded-full border-none outline-none focus:border-none focus:outline-none focus:ring-0 w-full"
             placeholder=" Deporte, Copys, Diseño..."
           />
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
