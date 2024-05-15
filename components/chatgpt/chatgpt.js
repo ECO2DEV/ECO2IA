@@ -24,6 +24,7 @@ import { StoreContext } from '../../context/store/StoreContext';
 import { SidebarChat } from '../chatsocket/SidebarChat';
 import useDeviceDetection from '../../hooks/useDeviceDetection';
 import { MobileConversationSidebar } from '../chatsocket/MobileConversationSidebar';
+
 export const config = {
   runtime: 'edge'
 };
@@ -126,20 +127,6 @@ export default function ChatGpt() {
         } catch (error) {
           console.error('Al menos una de las promesas falló:', error);
         }
-        // const reqId = res.data.reqId;
-
-        // setMessages((prevMessages) => {
-        //   const updatedMessages = prevMessages.map((msg) => {
-        //     if (msg.role === "assistant") {
-        //       if (msg.reqId === message.reqId) {
-        //         return { ...msg, reqId };
-        //       }
-        //     }
-        //     return msg;
-        //   });
-
-        //   return updatedMessages;
-        // });
 
         const newMessage = {
           content: message.content,
@@ -217,7 +204,12 @@ export default function ChatGpt() {
         </div>
         <div
           className={twMerge(
-            'fixed bottom-0 z-0 ml-2 sm:ml-0 flex flex-col sm:flex-row sm:items-center sm:justify-center  sm:w-[92%]  xl:left-[10%] xl:w-[80%] md:left-[32%] md:w-[60%] xl:left-1/4 xl:w-[68%] 2xl:max-w-[77rem]'
+            'fixed ml-2 sm:ml-0 flex flex-col sm:flex-row sm:items-center sm:justify-center  sm:w-[92%]  xl:left-[10%] xl:w-[80%] md:left-[32%] md:w-[60%] xl:left-1/4 xl:w-[68%] 2xl:max-w-[77rem]',
+            device === 'Desktop'
+              ? 'bottom-0 top-auto sm:flex-row sm:items-center sm:justify-center  sm:w-[92%]  xl:left-[10%] xl:w-[80%] md:left-[32%] md:w-[60%] xl:left-1/4 xl:w-[68%] 2xl:max-w-[77rem]'
+              : device === 'Tablet'
+              ? ''
+              : 'fixed top-[85%] w-10/12 ml-10'
           )}
         >
           <SearchTextbox
@@ -226,7 +218,7 @@ export default function ChatGpt() {
             loading={isLoading}
             prompt={input}
           />
-          <div className="flex justify-between items-center p-2 gap-2 pb-5">
+          <div className="flex justify-evenly gap-2 items-center pb-1">
             <ButtonHelper
               onClick={() => setShowHelpMessage(!showHelpMessage)}
             />

@@ -18,6 +18,7 @@ const ListMessages = ({
   const isCodeBlock =
     item.attributes.content.includes('```') ||
     item.attributes.content.includes('**') ||
+    item.attributes.content.includes('`') ||
     item.attributes.content.includes('*');
   
   

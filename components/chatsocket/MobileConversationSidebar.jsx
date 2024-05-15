@@ -9,10 +9,13 @@ import { useRouter } from "next/router";
 
 import { AnimatePresence } from "framer-motion";
 import { UserContext } from '../../context/user/UserContext';
+import { twMerge } from 'tailwind-merge';
+import useDeviceDetection from '../../hooks/useDeviceDetection';
 
 export const MobileConversationSidebar = ({ setShowHelpMessage}) => {
   const [isActive, setIsActive] = useState(false);
   const { pathname } = useRouter();
+
 
   useEffect(() => {
     if (isActive) setIsActive(false);
@@ -63,6 +66,8 @@ export const MobileConversationSidebar = ({ setShowHelpMessage}) => {
 
 const Aside = ({setIsActive,setShowHelpMessage}) => {
   const { data } = useChatSocket();
+  const device = useDeviceDetection();
+ 
 
   // console.log('data', data?.data, 'and loading', isLoading);
   const { setSelectedConversarionId } = useContext(StoreContext);
@@ -77,7 +82,9 @@ const Aside = ({setIsActive,setShowHelpMessage}) => {
   };
   return (
     <aside
-      className={`h-screen  fixed left-0 top-0 z-40  overflow-y-auto overflow-x-hidden dark:scrollsidebar-color scrollsidebar-color-ligth rounded-l-xl w-[75%] bg-darkColor dark:bg-lightColor')]`}
+      className={twMerge(`h-screen  fixed left-0 top-0 z-40  overflow-y-auto overflow-x-hidden dark:scrollsidebar-color scrollsidebar-color-ligth rounded-l-xl w-[75%] bg-darkColor dark:bg-lightColor`,
+        device === 'Tablet' && 'w-[65%]'
+      )}
     >
       <div className="mt-16">
 

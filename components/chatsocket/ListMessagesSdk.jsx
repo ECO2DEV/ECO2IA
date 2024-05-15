@@ -20,6 +20,7 @@ const ListMessagesSdk = ({
   const isCodeBlock =
     item.content.includes('```') ||
     item.content.includes('**') ||
+    item.content.includes('`') ||
     item.content.includes('*');
   
   const modelForThisMessage = responseModelMap[item.id];
