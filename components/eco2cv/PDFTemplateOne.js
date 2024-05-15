@@ -31,26 +31,26 @@ export const PDFTemplateOne = ({
 }) => {
   const { data: session } = useSession();
 
-  const hasProfileEducation =
-    user?.titulo_academico &&
-    user?.universidad &&
-    user?.fecha_ini_academica &&
-    user?.fecha_fin_academica &&
-    user?.ciudad_uni;
 
-  // Añadir la información académica del perfil del usuario al principio de educationFields si existe
-  const combinedEducationFields = hasProfileEducation
-    ? [
-        {
-          degree: user.titulo_academico,
-          institution: user.universidad,
-          startDate: user.fecha_ini_academica,
-          endDate: user.fecha_fin_academica,
-          city: user.ciudad_uni,
-        },
-        ...educationFields,
-      ]
-    : educationFields;
+  // const academicRecords = user?.academic_informations || [];
+  const demoAcademicData = [
+    {
+      titulo_academico: "Ejemplo: Ingeniería de Sistemas",
+      universidad: "Universidad de Ejemplo",
+      fecha_ini_academica: "2010-01-01",
+      fecha_fin_academica: "2014-01-01",
+      ciudad_uni: "Ciudad Ejemplo",
+    },
+    {
+      titulo_academico: "Ejemplo: Master en Ciencias de Datos",
+      universidad: "Instituto de Tecnología de Ejemplo",
+      fecha_ini_academica: "2015-01-01",
+      fecha_fin_academica: "2017-01-01",
+      ciudad_uni: "Ciudad Ejemplo",
+    },
+  ]
+  const academicRecords = user?.academic_informations.length > 0 ? user.academic_informations : demoAcademicData;
+
 
   return (
     <DynamicPDFViewer style={{ width: "100%", height: "100%" }}>
@@ -99,18 +99,18 @@ export const PDFTemplateOne = ({
                 ))}
               </View>
             )}
-            {combinedEducationFields.length > 0 && (
+            {academicRecords.length > 0 && (
               <View>
                 <Text style={stylesOne.subtitle}>
                   {DataEco2CV.EducationBackground}
                 </Text>
-                {combinedEducationFields.map((education, index) => (
+                {academicRecords.map((record, index) => (
                   <Fragment key={index}>
                     <Text style={stylesOne.thirdTitle}>
-                      {`${education.degree}, ${education.institution}, ${education.city}`}
+                      {`${record.titulo_academico}, ${record.universidad}, ${record.ciudad_uni}`}
                     </Text>
                     <Text style={stylesOne.profileText}>
-                      {`${education.startDate} - ${education.endDate}`}
+                      {`${record.fecha_ini_academica} - ${record.fecha_fin_academica}`}
                     </Text>
                   </Fragment>
                 ))}
