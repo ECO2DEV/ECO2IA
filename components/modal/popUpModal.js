@@ -2,7 +2,7 @@ import { useState, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Toaster } from 'react-hot-toast';
 
-export const PopUpModal = ({ children, isModalNeedIt }) => {
+export const PopUpModal = ({ children, isModalNeedIt, onClose }) => {
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
 
@@ -13,9 +13,9 @@ export const PopUpModal = ({ children, isModalNeedIt }) => {
           <Transition.Root show={open} as={Fragment}>
             <Dialog
               as="div"
-              className="relative z-10"
+              className="relative z-[1000]"
               initialFocus={cancelButtonRef}
-              onClose={setOpen}
+              onClose={onClose}
             >
               <Transition.Child
                 as={Fragment}
@@ -26,11 +26,11 @@ export const PopUpModal = ({ children, isModalNeedIt }) => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                <div className="fixed inset-0 bg-gray-500 bg-opacity-70  transition-opacity" />
               </Transition.Child>
 
               <div className="fixed inset-0 z-10 overflow-y-auto">
-                <div className="flex w-full justify-center p-4 text-center sm:items-center sm:p-0">
+                <div className="flex w-full justify-center h-full p-4 text-center items-center sm:p-0">
                   <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -40,11 +40,11 @@ export const PopUpModal = ({ children, isModalNeedIt }) => {
                     leaveFrom="opacity-100 translate-y-0 "
                     leaveTo="opacity-0 translate-y-4 "
                   >
-                    <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-1 pb-1 pt-1 text-left shadow-xl transition-all sm:my-8">
+                    <Dialog.Panel className="relative transform overflow-hidden rounded-lg dark:bg-white bg-black px-1 pb-1 pt-1 text-left shadow-xl transition-all sm:my-8">
                       <div>
                         <div className="isolate bg-white">
                           <div
-                            className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]" 
+                            className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
                             aria-hidden="true"
                           >
                             <div

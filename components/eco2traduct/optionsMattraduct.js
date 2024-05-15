@@ -1,4 +1,3 @@
-// components/mattraduct/optionsMattraduct.js
 import { useState } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { DataEco2Traduct } from '../../data/eco2traduct';
@@ -9,8 +8,9 @@ import {
   PlusIcon,
   ShareIcon,
   DocumentArrowDownIcon
-  // DocumentIcon,
 } from '@heroicons/react/20/solid';
+
+import { SeparateIcon } from '../icons/icons';
 import dynamic from 'next/dynamic';
 // Import PDFDownloadLink separately before the component definition
 const PDFDownloadLinkDynamic = dynamic(
@@ -48,16 +48,14 @@ export default function OptionsMattraduct({
           role="list"
           className="flex space-x-2 rounded-md bg-eco2MainColor dark:bg-white px-3 py-2 sm:px-6 shadow"
         >
-          <li className="flex" title="Historial">
+          <li className="flex group" title="Historial">
             <div className="flex items-center">
-              <button
-                onClick={onClick}
-                // className="text-white hover:text-gray-500"
-              >
-                <HistoryIcon className="h-4 w-4 flex-shrink-" />
+              <button onClick={onClick}>
+                <HistoryIcon className="h-5 w-5 text-white dark:text-gray-900 hover:scale-110 transition-all duration-150" />
               </button>
             </div>
           </li>
+
           <PDFDownloadLinkDynamic
             className={
               !translationResponse ? 'opacity-90 pointer-events-none' : ''
@@ -70,20 +68,12 @@ export default function OptionsMattraduct({
             }
             fileName="MATTRANSLATE.pdf"
           >
-            <li className="flex items-center">
-              <svg
-                className="h-full text-xs w-5 flex-shrink-0 text-white dark:text-gray-900"
-                viewBox="0 0 24 44"
-                preserveAspectRatio="none"
-                fill="#ffff"
-                aria-hidden="true"
-              >
-                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-              </svg>
-              <button className="ml-4 text-sm font-medium text-white dark:text-gray-800 hover:text-gray-400">
+            <li className="flex items-center group">
+              <SeparateIcon />
+              <button className="ml-4 text-sm font-medium text-white dark:text-gray-900 hover:scale-110 transition-all duration-150">
                 <div className="flex justify-center items-center">
                   <DocumentArrowDownIcon
-                    className=" mr-2 h-4 w-4 text-white dark:text-gray-800 hover:text-gray-400 sm:hover:text-gray-400"
+                    className=" mr-2 h-4 w-4 text-white dark:text-gray-900 hover:scale-110 transition-all duration-150 sm:hover:text-gray-400"
                     aria-hidden="true"
                   />
                   <span className="hidden sm:contents">
@@ -94,39 +84,9 @@ export default function OptionsMattraduct({
               </button>
             </li>
           </PDFDownloadLinkDynamic>
-          {/* <li className="flex items-center">
-            <svg
-              className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
-              viewBox="0 0 24 44"
-              preserveAspectRatio="none"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
-            <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
-              <div className="flex justify-center items-center">
-                <DocumentIcon
-                  className=" mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
-                  aria-hidden="true"
-                />
-                <span className="hidden sm:contents">
-                  {" "}
-                  {DataEco2Traduct.ButtonWord}{" "}
-                </span>
-              </div>
-            </button>
-          </li> */}
-          <li className="flex items-center">
-            <svg
-              className="h-full text-xs w-5 flex-shrink-0 text-white dark:text-gray-900"
-              viewBox="0 0 24 44"
-              preserveAspectRatio="none"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
+
+          <li className="flex items-center group">
+            <SeparateIcon />
             <Popover
               className={
                 !translationResponse ? 'opacity-80 pointer-events-none' : ''
@@ -136,11 +96,11 @@ export default function OptionsMattraduct({
                 <>
                   <Popover.Button
                     onClick={toggleShare}
-                    className="ml-4 text-sm font-medium text-white dark:text-gray-800 hover:text-gray-400"
+                    className="ml-4 text-sm font-medium text-white dark:text-gray-900 hover:scale-110 transition-all duration-150"
                   >
                     <div className="flex justify-center items-center">
                       <ShareIcon
-                        className="mr-2 h-4 w-4 text-white dark:text-gray-800 hover:text-gray-400 sm:hover:text-gray-400"
+                        className="mr-2 h-4 w-4 text-white dark:text-gray-900 hover:scale-110 transition-all duration-150"
                         aria-hidden="true"
                       />
                       <span className="hidden sm:contents">
@@ -164,19 +124,11 @@ export default function OptionsMattraduct({
               )}
             </Popover>
           </li>
-          <li className="flex items-center">
-            <svg
-              className="h-full text-xs w-5 flex-shrink-0 text-white dark:text-gray-900"
-              viewBox="0 0 24 44"
-              preserveAspectRatio="none"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
+          <li className="flex items-center group">
+            <SeparateIcon />
             <button
               onClick={handleShowThirdTextarea}
-              className="ml-4 text-sm font-medium text-white dark:text-gray-800 hover:text-gray-100"
+              className="ml-4 text-sm font-medium text-white dark:text-gray-900 hover:scale-110 transition-all duration-150 "
             >
               {showThirdTextarea ? (
                 <div className="flex">
@@ -203,21 +155,13 @@ export default function OptionsMattraduct({
               )}
             </button>
           </li>
-          <li className="flex items-center">
-            <svg
-              className="h-full text-xs w-5 flex-shrink-0 text-white dark:text-gray-900"
-              viewBox="0 0 24 44"
-              preserveAspectRatio="none"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
+          <li className="flex items-center group">
+            <SeparateIcon />
 
-            <div className="ml-4 text-sm font-medium text-gray-800 hover:text-gray-400">
+            <div className="ml-4 text-sm font-medium text-white dark:text-gray-900 hover:scale-125 transition-all duration-150">
               <div className="flex justify-center items-center">
                 <Transcription
-                  className=" mr-2 h-4 w-4 text-white dark:text-gray-800 hover:text-gray-800 sm:hover:text-gray-600"
+                  className=" mr-2 h-4 w-4 text-white dark:text-gray-900 hover:scale-110 transition-all duration-150"
                   aria-hidden="true"
                   language={language}
                 />

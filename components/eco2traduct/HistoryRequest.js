@@ -31,7 +31,7 @@ export default function HistoryRequest({
         as="div"
         className="relative z-10"
         initialFocus={cancelButtonRef}
-        onClose={setOpen}
+        onClose={onClose}
       >
         <Transition.Child
           as={Fragment}
