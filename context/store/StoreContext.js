@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 
 export const StoreContext = createContext({
-  sidebarChatOpen: false,
-  setSidebarChatOpen: () => {},
+  dashModalOpen: false,
+  setdashModalOpen: () => {},
   selectedConversationId: null,
   setSelectedConversarionId: () => {},
   setConversations: () => {}

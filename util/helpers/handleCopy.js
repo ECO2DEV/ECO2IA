@@ -1,3 +1,19 @@
+import { toast } from 'react-hot-toast';
+import { DataEco2Traduct } from '../../data/eco2traduct';
+
+export const handleCopyClipboard = ({ text }) => {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      text.length > 0
+        ? toast.success(DataEco2Traduct.CopiedSuccess)
+        : toast.error(DataEco2Traduct.NoText);
+    })
+    .catch(() => {
+      toast.error(DataEco2Traduct.CopiedFailed);
+    });
+};
+
 export const handleCopy = (resp, index, setCopied) => {
   navigator.clipboard
     .writeText(resp)
