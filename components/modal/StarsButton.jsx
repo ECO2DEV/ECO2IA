@@ -4,6 +4,7 @@ import { Star, StarFill } from "../icons/icons";
 
 export const StarsButton = ({isModalOpen,setIsModalOpen, score, title}) => {
 
+
   const close = () => setIsModalOpen(false);
   const open = () => setIsModalOpen(true);
   const [average, setAverage] = useState(0);
@@ -36,7 +37,8 @@ export const StarsButton = ({isModalOpen,setIsModalOpen, score, title}) => {
         title={`Califica a ${title} 👍`}
  
         onClick={() => (isModalOpen ? close() : open())}
-        className="flex items-center gap-1 p-2 bg-darkBgCard dark:bg-darkBgCard rounded-lg hover:text-none"
+        className={`flex items-center gap-1 p-1 border border-eco2MainColor dark:bg-darkColor dark:border-none font-extrabold rounded-lg ${isModalOpen ? '' : 'opacity-50'}`}
+     
       >
        {stars}  
       

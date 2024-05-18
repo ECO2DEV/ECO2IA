@@ -21,23 +21,26 @@ export const FramerModal = ({handleClose, id_ia, title, score}) => {
     
   }
   return (
-    <Backdrop onClick={handleClose}>
-      <motion.section
-        onClick={(e) => e.stopPropagation()}
-        className="modal dark:bg-white dark:bg-opacity-100 z-[100] bg-white opacity-100  m-auto py-0 px-8 border-[12px] flex flex-col items-center"
-        variants={flip}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-      >
-        <h2 className="bg-gradient-to-r from-red-500 via-eco2MainColor to-slate-800 inline-block dark:text-transparent bg-clip-text font-extrabold text-xl">Califica {title}</h2>
+    // <Backdrop onClick={handleClose}>
+      // <motion.section
+      //   onClick={(e) => e.stopPropagation()}
+      //   className="modal dark:bg-white  z-[100] bg-black  m-auto py-0 px-8 border-[12px] flex flex-col items-center"
+      //   variants={flip}
+      //   initial="hidden"
+      //   animate="visible"
+      //   exit="exit"
+      // >    
+      <section className="h-64 w-full dark:bg-white  bg-black  m-auto py-0 px-8  flex flex-col items-center justify-center">
+        <h2 className="text-white dark:text-black font-extrabold text-xl mt-6">Califica {title}</h2>
         <StarsRate filledStars={filledStars} setFilledStars={setFilledStars} score={score} />
         <footer className="flex justify-evenly gap-4">
           <ModalButton onClick={handleSendScore} label="Enviar" />
           <ModalButton onClick={handleClose} label="Cerrar" />
         </footer>
-      </motion.section>
-    </Backdrop>
+      </section>  
+        
+      // </motion.section>
+    // </Backdrop>
   );
 }
 
@@ -80,7 +83,7 @@ const dropIn = {
 const flip = {
   hidden: {
     transform: "scale(0) rotateX(-360deg)",
-    opacity: 0,
+    // opacity: 0,
     transition: {
       delay: 0.3,
     },
@@ -94,7 +97,7 @@ const flip = {
   },
   exit: {
     transform: "scale(0) rotateX(360deg)",
-    opacity: 0,
+    // opacity: 0,
     transition: {
       duration: 0.5,
     },

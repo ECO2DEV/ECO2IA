@@ -6,12 +6,13 @@ import { PromptContext } from '../../context/prompts/PromptContext';
 import { UserContext } from '../../context/user/UserContext';
 import { DataEco2Resume } from '../../data/eco2resume';
 import { Eco2ResumResp } from '../../util/api/Eco2ResumResp';
-import { ClipboardIcon, MagicAiIcon } from '../icons/icons';
+import { ClipboardIcon, DownloadICon, MagicAiIcon } from '../icons/icons';
 import { ButtonHistory } from './ButtonHistory';
 import HistoryResum from './HistoryResum';
 import ExportPDF from './ExportPDF';
-import mammoth from 'mammoth';
+import { ConvertDocToPlainText } from '../../util/helpers/ConvertDocToPlainText';
 import ShareModal from './ShareModal';
+import { handleCopyClipboard } from '../../util/helpers/handleCopy';
 
 import {
   DocumentArrowDownIcon,
@@ -41,15 +42,8 @@ function TextSummarizerPage() {
   const [showShare, setShowShare] = useState(false);
 
   // Contextos utilizados
-  const {
-    setPrompt,
-    prompt,
-    setResponse,
-    setPromptTokens,
-
-    activeAI,
-    setActiveAI
-  } = useContext(PromptContext);
+  const { setPrompt, prompt, setResponse, activeAI, setActiveAI } =
+    useContext(PromptContext);
   const { user } = useContext(UserContext); // Contexto del usuario
 
   // Handler para cambiar el estado de showShare
@@ -112,8 +106,12 @@ function TextSummarizerPage() {
       const reader = new FileReader();
       reader.onload = async (event) => {
         const arrayBuffer = event.target.result;
-        const result = await convertDocToPlainText(arrayBuffer);
+        const result = await ConvertDocToPlainText(arrayBuffer);
         setFileContent(result);
+
+        // Activar desplazamiento automáticamente después de cargar el archivo
+        const textarea = document.getElementById('textarea');
+        textarea.style.overflowY = 'scroll'; // Activar desplazamiento
       };
 
       reader.readAsArrayBuffer(file);
@@ -123,26 +121,6 @@ function TextSummarizerPage() {
     } finally {
       setIsUploading(false);
     }
-  };
-
-  // extraer el texto plano del archivo .doc
-  const convertDocToPlainText = async (arrayBuffer) => {
-    return new Promise((resolve, reject) => {
-      const options = {
-        convertImage: mammoth.images.imgElement(function (image) {
-          return image.read('base64');
-        })
-      };
-
-      mammoth
-        .extractRawText({ arrayBuffer }, options)
-        .then((result) => {
-          resolve(result.value);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
   };
 
   // Manejador de la solicitud de resumen
@@ -173,24 +151,8 @@ function TextSummarizerPage() {
     setModalOpen((prev) => !prev);
   };
 
-  // Manejador de copia del resumen al portapapeles
-  const handleCopy = () => {
-    if (summaryText) {
-      navigator.clipboard
-        .writeText(summaryText)
-        .then(() => {
-          toast.success(DataEco2Resume.CopiedSuccess);
-        })
-        .catch(() => {
-          toast.error(DataEco2Resume.CopiedFailed);
-        });
-    } else {
-      toast.error(DataEco2Resume.NoText);
-    }
-  };
-
   // Configuración del useDropzone
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps } = useDropzone({
     onDrop: handleDrop,
     accept: {
       'application/msword': ['.docx', '.doc']
@@ -200,9 +162,12 @@ function TextSummarizerPage() {
   return (
     <div className="flex flex-col md:flex-row">
       <div className="w-full md:w-6/12 h-full flex-grow -mr-1">
-        <div className="dark:bg-zinc-800 rounded-lg shadow-lg p-6 h-full">
+        <div className="rounded-lg  p-6 h-full">
           <textarea
-            className="w-full p-4 rounded border-emerald-800 focus:outline-none dark:text-zinc-900 focus:ring-2 focus:ring-emerald-600 h-20"
+            id="textarea"
+            className={`${
+              fileContent ? 'min-h-96' : 'min-h-64'
+            }  w-full p-4 rounded border-emerald-800 focus:outline-none dark:text-zinc-900 focus:ring-2 focus:ring-emerald-600 `}
             value={fileContent || inputText}
             onChange={handleTextChange}
             placeholder={DataEco2Resume.WriteText}
@@ -214,14 +179,7 @@ function TextSummarizerPage() {
             className="w-full h-40 flex flex-col items-center justify-center text-zinc-100 px-4 py-6 rounded-lg shadow-lg tracking-wide uppercase border border-eco2MainColor hover:bg-eco2HoverColor cursor-pointer hover:text-white"
             {...getRootProps()}
           >
-            <svg
-              className="w-8 h-8"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-            </svg>
+            <DownloadICon />
             <p className="text-zinc-800 dark:text-white">
               {DataEco2Resume.DropField}
             </p>
@@ -298,7 +256,10 @@ function TextSummarizerPage() {
           />
           {summaryText && (
             <div className="absolute bottom-[1rem] right-[1.5rem]">
-              <button className="text-white rounded" onClick={handleCopy}>
+              <button
+                className="text-white rounded"
+                onClick={() => handleCopyClipboard({ text: summaryText })}
+              >
                 <ClipboardIcon />
               </button>
             </div>
@@ -350,29 +311,7 @@ function TextSummarizerPage() {
                   </button>
                 </li>
               </PDFDownloadLink>
-              {/* <li className="flex items-center">
-                    <svg
-                      className="h-full text-xs w-5 flex-shrink-0 text-gray-200"
-                      viewBox="0 0 24 44"
-                      preserveAspectRatio="none"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-                    </svg>
-                    <button className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-800">
-                      <div className="flex justify-center items-center">
-                        <DocumentIcon
-                          className="mr-2 h-4 w-4 text-gray-500 hover:text-gray-800 sm:hover:text-gray-500"
-                          aria-hidden="true"
-                        />
-                        <span className="hidden sm:contents">
-                          {' '}
-                          {DataEco2Resume.WordButton}{' '}
-                        </span>
-                      </div>
-                    </button>
-                  </li> */}
+
               <li className="flex items-center">
                 <svg
                   className="h-full text-xs w-5 flex-shrink-0 text-gray-500"

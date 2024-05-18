@@ -9,6 +9,7 @@ import {
 import { twMerge } from 'tailwind-merge';
 import Loader from '../loader/loader';
 import { DataEco2Traduct } from '../../data/eco2traduct';
+import { Dropfile } from './Dropfile';
 
 const getPlaceholder = ({ type, loading }) => {
   if (type === 'from') return DataEco2Traduct.TextArea1;
@@ -86,11 +87,12 @@ export const TextArea = ({
         <>
           <button
             title="Eliminar texto"
-            className="absolute bottom-2 right-10 focus:outline-none"
+            className="absolute bottom-4 right-11 focus:outline-none"
             onClick={onHandleClean}
           >
             <DeleteIconWhite />
           </button>
+          <Dropfile />
           <button
             title="Traducir"
             className={twMerge(

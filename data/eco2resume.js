@@ -31,6 +31,6 @@ export const DataEco2Resume = {
   FileDoc: 'Archivo docx',
   PleaseTypeSomething: 'Por favor escribe algo',
   AnErrorOcurred: 'Ocurrió un error',
-  MustBeFileError: 'Debe ser un archivo',
+  MustBeFileError: 'Debe ser un archivo .docx',
   PickError: 'Debe seleccionar un archivo'
 };

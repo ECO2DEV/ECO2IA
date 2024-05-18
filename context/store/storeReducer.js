@@ -13,7 +13,7 @@ export const storeReducer = (state, action) => {
     case 'SET_SIDEBAR_CHAT_OPEN':
       return {
         ...state,
-        sidebarChatOpen: action.payload
+        dashModalOpen: action.payload
       };
 
     default:

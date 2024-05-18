@@ -12,7 +12,7 @@ const DropdownFilter = ({selectedOption, setSelectedOption}) => {
 
   return (
     <select
-    className="bg-darkColor text-gray-500  dark:bg-lightColor rounded-full border-none outline-none focus:border-none focus:outline-none focus:ring-0"
+    className="bg-darkHoverColor text-gray-500  dark:bg-lightColor rounded-full border-none outline-none focus:border-none focus:outline-none focus:ring-0"
     value={selectedOption}
     onChange={handleOptionChange}
     

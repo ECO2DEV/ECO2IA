@@ -4,8 +4,8 @@ import { storeReducer } from './storeReducer';
 import { useChatSocket } from '../../hooks/useChatSocket';
 
 const storeInitialState = {
-  sidebarChatOpen: false,
-  setSidebarChatOpen: () => {},
+  dashModalOpen: false,
+  setdashModalOpen: () => {},
   selectedConversationId: null,
   setSelectedConversarionId: () => {},
   setConversations: () => {}
@@ -32,7 +32,7 @@ export const StoreProvider = ({ children }) => {
     }
   };
 
-  const setSidebarChatOpen = (isOpen) => {
+  const setdashModalOpen = (isOpen) => {
     dispatch({
       type: 'SET_SIDEBAR_CHAT_OPEN',
       payload: isOpen
@@ -52,7 +52,7 @@ export const StoreProvider = ({ children }) => {
         ...state,
         setSelectedConversarionId,
         setConversations,
-        setSidebarChatOpen
+        setdashModalOpen
       }}
     >
       {children}

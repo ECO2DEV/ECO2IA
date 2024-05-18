@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../context/user/UserContext';
 import { Eco2traductResponse } from '../../util/api/Eco2traductResponse';
-import { toast } from 'react-hot-toast';
+
 import { LanguageSelector } from './LanguageSelector';
 import { TextArea } from './TextArea';
 import { useLangStorage } from '../../hooks/useLangStorage';
@@ -10,8 +10,9 @@ import { PromptContext } from '../../context/prompts/PromptContext';
 import { useEco2traduct } from '../../hooks/useEco2traduct';
 import HistoryRequest from './HistoryRequest';
 import { VOICE_FOR_LANGUAGE } from '../../constants/constans';
-import { DataEco2Traduct } from '../../data/eco2traduct';
+
 import { DetectionLanguage } from './JustDetectionLanguage';
+import { handleCopyClipboard } from '../../util/helpers/handleCopy';
 
 const Eco2traductAI = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -53,31 +54,6 @@ const Eco2traductAI = () => {
     setActiveAI('Eco2traductAI');
   }, []);
 
-  const handleClipboardOne = () => {
-    navigator.clipboard
-      .writeText(result)
-      .then(() => {
-        result.length > 0
-          ? toast.success(DataEco2Traduct.CopiedSuccess)
-          : toast.error(DataEco2Traduct.NoText);
-      })
-      .catch(() => {
-        toast.error(DataEco2Traduct.CopiedFailed);
-      });
-  };
-
-  const handleClipboardTwo = () => {
-    navigator.clipboard
-      .writeText(secondResult)
-      .then(() => {
-        result.length > 0
-          ? toast.success(DataEco2Traduct.CopiedSuccess)
-          : toast.error(DataEco2Traduct.NoText);
-      })
-      .catch(() => {
-        toast.error(DataEco2Traduct.CopiedFailed);
-      });
-  };
   const handleMatTraduct = () => {
     if (!prompt || activeAI !== 'Eco2traductAI') return;
     setIsLoading(true);
@@ -222,7 +198,7 @@ const Eco2traductAI = () => {
               type="to"
               value={result}
               onChange={setResult}
-              onClick={handleClipboardOne}
+              onClick={() => handleCopyClipboard({ text: result })}
               handlePlayAudio={handlePlayAudio}
             />
 
@@ -232,7 +208,7 @@ const Eco2traductAI = () => {
                 type="to"
                 value={secondResult}
                 onChange={setSecondResult}
-                onClick={handleClipboardTwo}
+                onClick={() => handleCopyClipboard({ text: secondResult })}
                 handlePlayAudio={handlePlayAudioTwo}
               />
             )}

@@ -40,6 +40,28 @@ export const ArrowRigth = ({
   );
 };
 
+export const UploadIcon = ({ className = '' }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`icon icon-tabler icons-tabler-outline icon-tabler-upload ${className}`}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+      <path d="M7 9l5 -5l5 5" />
+      <path d="M12 4l0 12" />
+    </svg>
+  );
+};
+
 export const ArrowLeft = (
   className = 'icon icon-tabler icons-tabler-outline icon-tabler-arrow-badge-left'
 ) => {
@@ -150,7 +172,7 @@ export const MessageIcon = ({ className }) => {
 export const BlockIANavigation = () => {
   return (
     <svg
-      className="h-6 w-6 text-white "
+      className="h-3 w-3 text-white "
       viewBox="0 0 219.328 219.328"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -171,9 +193,9 @@ export function Star() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="icon icon-tabler icon-tabler-star text-white hover:text-amber-300"
-      width="24"
-      height="24"
+      className="icon icon-tabler icon-tabler-star font-extrabold text-white hover:text-amber-500"
+      width="19"
+      height="19"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
@@ -191,9 +213,9 @@ export function StarFill() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="icon icon-tabler icon-tabler-star-filled dark:text-amber-300 text-amber-600"
-      width="24"
-      height="24"
+      className="icon icon-tabler icon-tabler-star-filled  text-amber-600"
+      width="19"
+      height="19"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
@@ -265,6 +287,17 @@ export function ChatGPTLogo() {
     </svg>
   );
 }
+
+export const DownloadICon = () => (
+  <svg
+    className="w-8 h-8 text-zinc-800 dark:text-white mb-2"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 20 20"
+  >
+    <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+  </svg>
+);
 
 export const ChevronDown = () => (
   <svg
@@ -400,7 +433,7 @@ export const DeleteIcon = () => (
     ></path>
   </svg>
 );
-export const DeleteIconWhite = () => (
+export const DeleteIconWhite = ({ classname = '' }) => (
   <svg
     fill="none"
     stroke="currentColor"
@@ -408,7 +441,7 @@ export const DeleteIconWhite = () => (
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true"
-    className="w-7 h-7 text-white transition duration-200 m-1 group-hover:bg-red-700 group-hover:text-white rounded-full p-1"
+    className="w-[22px] h-[22px] text-white hover:text-red-800 transition-colors duration-200 rounded-full "
   >
     <path
       strokeLinecap="round"
@@ -417,10 +450,53 @@ export const DeleteIconWhite = () => (
     ></path>
   </svg>
 );
-export const HistoryIcon = () => (
-  <svg width="18" height="28" viewBox="0 0 24 24" focusable="false">
-    <path d="M4 4v2.01C5.83 3.58 8.73 2 12.01 2 17.53 2 22 6.48 22 12s-4.47 10-9.99 10C6.48 22 2 17.52 2 12h2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8C9.04 4 6.47 5.61 5.09 8H8v2H2V4h2z"></path>
-    <path d="M13 12V6h-2v7l4.97 3.49 1.26-1.55z"></path>
+
+export const ClipIcon = ({ className = '' }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={`icon icon-tabler icons-tabler-outline icon-tabler-paperclip ${className}`}
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" />
+  </svg>
+);
+
+export const SeparateIcon = () => (
+  <svg
+    className="h-full text-xs w-5 flex-shrink-0 text-white dark:text-gray-900"
+    viewBox="0 0 24 44"
+    preserveAspectRatio="none"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+  </svg>
+);
+
+export const HistoryIcon = ({ className = '' }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={`icon icon-tabler icons-tabler-outline icon-tabler-history ${className}"`}
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 8l0 4l2 2" />
+    <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />
   </svg>
 );
 
