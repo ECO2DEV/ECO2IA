@@ -40,6 +40,13 @@ import ImageStep from '../components/steps_renovhome/ImageStep';
 import MaskImageStep from '../components/steps_renovhome/MaskImageStep';
 import FormStep from '../components/steps_renovhome/FormStep';
 import { OutputImgStep } from '../components/steps_renovhome/OutputImgStep';
+import {
+  Age,
+  Days,
+  Goal,
+  Height,
+  Weight
+} from '../components/eco2sportcoach/steps';
 
 const PUBLICABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_KEY;
 // console.log(PUBLICABLE_KEY);
@@ -516,6 +523,54 @@ export const steps = [
     title: 'Resultado final',
     component: OutputImgStep,
     status: 'upcoming'
+  }
+];
+
+export const stepsGym = [
+  {
+    id: 1,
+    step: 'Step 1',
+    name: '¿Cuál es tu peso(kgs) ?',
+    component: Weight,
+    phare: `"No pain, no gain."`,
+    status: 'current',
+    image: '/gym/workout.webp'
+  },
+  {
+    id: 2,
+    step: 'step 2',
+    name: '¿Cuál es tu edad ?',
+    component: Age,
+    phare: `"Hazlo posible."`,
+    image: '/gym/workout.webp',
+    status: 'upcoming'
+  },
+  {
+    id: 3,
+    step: 'Step 3',
+    name: '¿Cuanto mides (mts) ?',
+    component: Height,
+    phare: `"El dolor es temporal, el orgullo es para siempre."`,
+    status: 'upcoming',
+    image: '/gym/workout.webp'
+  },
+  {
+    id: 4,
+    step: 'Step 4',
+    name: '¿Cuál es tu objetivo ?',
+    component: Goal,
+    phare: `"No cuentes los días, haz que los días cuenten."`,
+    status: 'upcoming',
+    image: '/gym/workout.webp'
+  },
+  {
+    id: 5,
+    step: 'Step 5',
+    name: '¿De cuantos días quieres la rutina ?',
+    component: Days,
+    phare: `"El único mal entrenamiento es el que no se hace."`,
+    status: 'upcoming',
+    image: '/gym/workout.webp'
   }
 ];
 
