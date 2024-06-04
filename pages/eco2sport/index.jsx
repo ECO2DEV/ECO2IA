@@ -1,6 +1,6 @@
-import { SportCoachIA } from '../components/eco2sportcoach/Eco2SportCoachIA';
-import Modal from '../components/modal/modal';
-import { getUser } from '../util/api/user';
+import { SportCoachIA } from '../../components/eco2sportcoach/Eco2SportCoachIA';
+import Modal from '../../components/modal/modal';
+import { getUser } from '../../util/api/user';
 import Head from 'next/head';
 
 export default function SportCoach(props) {
