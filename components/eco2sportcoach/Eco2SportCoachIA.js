@@ -1,246 +1,196 @@
-import { useContext, useState } from 'react';
-import { InputField } from './InputField';
+import { useState, useEffect } from 'react';
 
-import { PromptContext } from '../../context/prompts/PromptContext';
 import { sendTrainingPlanRequest } from '../../util/api/sendTrainingPlanRequest';
 import { SportCoachResults } from './Eco2SportCoachResults';
-import { useSportCoach } from '../../hooks/useSportCoach';
-import { WelcomeSportCoach } from './welcomeSportCoach';
-import { DataEco2Sport } from '../../data/eco2sport';
+
 import { toast } from 'react-hot-toast';
-import Loader from '../loader/loader';
+
 import { fetchDataExerciseDB } from '../../util/api/SportFetch';
-import { ExerciseContext } from '../../context/exercise/ExerciseContext';
 import { exerciseUrl } from '../../util/api/SportFetch';
-import { MagicAiIcon } from '../icons/icons';
+
+import { useLocalStorageWithExpiration } from '../../hooks/useLocalStorageWithExpiration';
+import StepGym from './StepGym';
+import { stepsGym } from '../../constants/constans';
+import { RightSection } from './steps/RightSection';
+import { LeftSimpleIcon } from '../icons/icons';
 
 export const SportCoachIA = (props) => {
-  // Estados para almacenar los datos del formulario
-  const [weight, setWeight] = useState('');
-  const [age, setAge] = useState('');
-  // const [goal, setGoal] = useState("");
-  const [trainingDays, setTrainingDays] = useState('1');
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState('');
-  const [showResults, setShowResults] = useState(false);
+  const [formData, setFormData] = useState({
+    weight: '',
+    height: '',
+    age: '',
+    trainingDays: '1',
+    goal: '',
+    submitting: false,
+    error: ''
+  });
 
   const user = props.user;
 
-  // Obtener los datos del entrenador deportivo personalizado
-  const { data, mutate } = useSportCoach(user);
-  // inicializamos el estado del prompt con el valor "Select an option"
-  const { prompt, setPrompt, setResponse } = useContext(PromptContext);
+  const [storedValue, setStoredValue] = useLocalStorageWithExpiration({
+    key: 'exercises',
+    initialValue: null
+  });
 
-  const { isExercise, setExercise, setIsExercise } =
-    useContext(ExerciseContext);
+  console.log('storedValue', storedValue);
+  const [currentStep, setCurrentStep] = useState(1);
+  const StepComponent = stepsGym[currentStep - 1].component;
 
-  // Manejar el envío del formulario
+  const handleNext = () => {
+    if (currentStep < 5) {
+      setCurrentStep(currentStep + 1);
+    }
+    if (currentStep === 1) {
+      stepsGym[0].status = 'complete';
+      stepsGym[1].status = 'current';
+    }
+    if (currentStep === 2) {
+      stepsGym[1].status = 'complete';
+      stepsGym[2].status = 'current';
+    }
+    if (currentStep === 3) {
+      stepsGym[2].status = 'complete';
+      stepsGym[3].status = 'current';
+    }
+    if (currentStep === 4) {
+      stepsGym[3].status = 'complete';
+      stepsGym[4].status = 'current';
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+    if (currentStep === 2) {
+      stepsGym[0].status = 'current';
+      stepsGym[1].status = 'upcoming';
+    }
+    if (currentStep === 3) {
+      stepsGym[1].status = 'current';
+      stepsGym[2].status = 'upcoming';
+    }
+    if (currentStep === 4) {
+      stepsGym[2].status = 'current';
+      stepsGym[3].status = 'upcoming';
+    }
+    if (currentStep === 5) {
+      stepsGym[3].status = 'current';
+      stepsGym[4].status = 'upcoming';
+    }
+  };
+
+  const [responseObj, setResponseObj] = useState(null);
+
+  useEffect(() => {
+    const localStore = localStorage.getItem('execResponse');
+    if (localStore) {
+      const parseResponse = JSON.parse(localStore);
+      setResponseObj(parseResponse);
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     await fetchData();
 
-    if (!isExercise) {
+    if (!storedValue) {
       const respo = await fetchDataExerciseDB(
         `${exerciseUrl}/exercises?limit=1300`
       );
-
-      setExercise(respo);
-      setIsExercise(true);
+      setStoredValue(respo);
     }
   };
 
-  // console.log('is exercise', data);
-
-  // Función para enviar la solicitud de plan de entrenamiento
-  const fetchData = async () => {
-    if (!prompt) {
-      // console.log(setPromptTokens);
-      setError('Por favor, escriba algo antes de enviar');
+  async function fetchData() {
+    if (
+      !formData.goal ||
+      !formData.weight ||
+      !formData.height ||
+      !formData.age
+    ) {
+      setFormData({
+        ...formData,
+        error: 'Por favor, complete todos los campos'
+      });
+      toast.error('Por favor, complete todos los campos');
     } else {
-      setSubmitting(true);
-      // Realiza la llamada a la API para enviar la solicitud de plan de entrenamiento
+      setFormData({ ...formData, submitting: true });
       sendTrainingPlanRequest({
-        prompt: prompt,
-        weight: weight,
-        age: age,
-        goal: prompt,
+        weight: formData.weight,
+        age: formData.age,
+        height: formData.height,
+        goal: formData.goal,
+        trainingDays: formData.trainingDays,
         language: 'Spanish',
-        trainingDays: trainingDays,
-        user: user
+        user
       })
         .then((response) => {
-          setResponse(response?.data?.data);
-          mutate({ data: [...data.data, response?.data], ...data });
-          setShowResults(true);
+          setResponseObj(response?.data?.data);
+          if (response?.data?.data) {
+            localStorage.setItem(
+              'execResponse',
+              JSON.stringify(response?.data?.data)
+            );
+          }
         })
         .catch((error) => {
           console.log(error);
-          setError('Se produjo un error al recuperar los datos');
+          setFormData({
+            ...formData,
+            error: 'Se produjo un error al recuperar los datos'
+          });
         })
         .finally(() => {
-          setSubmitting(false);
+          setFormData({ ...formData, submitting: false });
         });
     }
-  };
-
-  const handlePromptChange = (e) => {
-    const { value } = e.target;
-    if (value === DataEco2Sport.SelectOption) {
-      toast.error('Por favor, seleccione un objetivo');
-      return;
-    }
-    setPrompt(value);
-  };
-
-  // Manejar cambios en los campos del formulario
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    if (name === 'trainingDays') {
-      setTrainingDays(value);
-    }
-  };
+  }
 
   return (
     <>
-      <div className="relative mt-4 md:mt-8 lg:max-w-[60rem] xl:max-w-[90rem] mx-auto p-6 bg-cardBackground rounded-lg shadow-md">
-        {/* text-5xl text-center mb-[40px] font-semibold bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-yellow-400 via-green-400 to-blue-400 via-indigo-400 to-purple-500 */}
+      <div className="relative mt-4 md:mt-8 lg:max-w-[60rem] xl:max-w-[90rem] mx-auto p-6  rounded-lg ">
         <h1 className="text-5xl text-center mb-[40px] font-semibold dark:text-white">
           María: Tu entrenadora personal
         </h1>
-        {!showResults ? (
-          <WelcomeSportCoach className="mb-8 bg-eco2MainColor" />
+        {!responseObj || !storedValue ? (
+          <StepGym setCurrentStep={setCurrentStep} />
         ) : (
-          (
-            <div className="flex justify-center h-[60rem]">
-              <div className="md:mt-8 lg:max-w-xl xl:max-w-2xl">
-                <SportCoachResults
-                  weight={weight}
-                  age={age}
-                  goal={prompt}
-                  trainingDays={trainingDays}
-                  user={user}
-                />
-              </div>
+          <div className="flex justify-center h-fit">
+            <div className="md:mt-8 w-full h-fit">
+              <SportCoachResults user={user} responseObj={responseObj} />
             </div>
-          ) && <SportCoachResults user={user} />
+          </div>
         )}
 
-        <div className="rounded-lg shadow-md p-4 mt-10 max-w-4xl w-full mx-auto">
-          <form onSubmit={handleSubmit} className="grid gap-4 ">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <fieldset className="flex flex-col">
-                <label
-                  htmlFor=""
-                  className="mb-1 text-gray-900 dark:text-white font-semibold "
-                >
-                  {DataEco2Sport.Weight}
-                </label>
-                <InputField
-                  name="weight"
-                  value={weight}
-                  onChange={(e) => setWeight(e.target.value)}
-                  type="text"
-                  placeholder="Peso"
-                  className=""
-                />
-              </fieldset>
-              <fieldset className="flex flex-col">
-                <label
-                  htmlFor=""
-                  className="mb-1 text-gray-900 dark:text-white font-semibold"
-                >
-                  {DataEco2Sport.Age}
-                </label>
-                <InputField
-                  name="age"
-                  value={age}
-                  onChange={(e) => setAge(e.target.value)}
-                  type="text"
-                  placeholder="Edad"
-                />
-              </fieldset>
-
-              <fieldset className="flex flex-col">
-                <label
-                  htmlFor="prompt"
-                  className="mb-1 text-gray-900 dark:text-white font-semibold"
-                >
-                  {DataEco2Sport.Goal}
-                </label>
-                <select
-                  id="prompt"
-                  name="prompt"
-                  // value={""}
-                  defaultValue={prompt}
-                  onChange={handlePromptChange}
-                  className="block w-full rounded-md border-eco2MainColor dark:border-white custom-input bg-white dark:bg-darkBgCard px-3.5 py-2 text-black dark:text-white shadow-sm ring-1 sm:text-sm sm:leading-6"
-                >
-                  <option value={prompt}>{DataEco2Sport.SelectOption}</option>
-
-                  <option value="weight loss">
-                    {' '}
-                    {DataEco2Sport.WeightLoss}
-                  </option>
-                  <option value="muscle building">
-                    {DataEco2Sport.MuscleBuilding}
-                  </option>
-                  <option value="mass"> {DataEco2Sport.Mass} </option>
-                  <option value="crossfit"> {DataEco2Sport.Crossfit} </option>
-                  <option value="dry"> {DataEco2Sport.Dry} </option>
-                </select>
-              </fieldset>
-              <fieldset className="flex flex-col">
-                <label
-                  htmlFor="trainingDays"
-                  className="mb-1 text-gray-900 dark:text-white font-semibold"
-                >
-                  {DataEco2Sport.NumberofTrainigns}
-                </label>
-                <select
-                  id="trainingDays"
-                  name="trainingDays"
-                  value={trainingDays}
-                  onChange={handleChange}
-                  className="block w-full rounded-md border-eco2MainColor dark:border-white custom-input bg-white dark:bg-darkBgCard px-3.5 py-2 text-black dark:text-white shadow-sm ring-1 sm:text-sm sm:leading-6"
-                >
-                  <option value="1"> {DataEco2Sport.OneDay} </option>
-                  <option value="2"> {DataEco2Sport.TwoDays} </option>
-                  <option value="3"> {DataEco2Sport.ThreeDays} </option>
-                  <option value="4"> {DataEco2Sport.FourDays} </option>
-                  <option value="5"> {DataEco2Sport.FiveDays} </option>
-                  <option value="6"> {DataEco2Sport.SixDays} </option>
-                  <option value="7"> {DataEco2Sport.SevenDays} </option>
-                </select>
-              </fieldset>
-            </div>
-            <button
-              type="submit"
-              disabled={submitting}
-              className="flex justify-center items-center h-10 text-white text-center bg-eco2MainColor  dark:hover:bg-eco2HoverColor hover:bg-eco2HoverColor rounded-full w-full lg:w-auto px-10 py-2"
+        <div className="rounded-lg  p-4 mt-10 max-w-4xl w-full mx-auto">
+          <section className="flex flex-col sm:flex-row  sm:justify-center gap-8 relative">
+            <form
+              onSubmit={handleSubmit}
+              className="w-full  flex justify-center"
             >
-              {submitting ? (
-                <Loader />
-              ) : (
-                <div className="flex justify-center items-center gap-2">
-                  {DataEco2Sport.GetButton}
-                  <MagicAiIcon />
-                </div>
-              )}
-            </button>
-          </form>
-          <div className="flex items-center justify-center mr-36">
-            {/* <SportButtonHelper onClick={handleOpenHelpers} /> */}
-          </div>
-        </div>
-        {/* 
-        <div className="flex justify-center items-center text-eco2MainColor font-medium dark:text-gray-100 mb-4">
-          <span>
-            Puntos utilizados para la pregunta : {promptTokens}&nbsp;&nbsp;
-          </span>
-        </div> */}
+              <StepComponent
+                formData={formData}
+                setFormData={setFormData}
+                handleNext={handleNext}
+                currentStep={currentStep}
+              />
+            </form>
 
-        {error && <h4 className="text-red-500 text-center">{error}</h4>}
+            <RightSection currentStep={currentStep} handleNext={handleNext} />
+            <div
+              className="absolute top-10 left-0 sm:top-0"
+              onClick={handleBack}
+            >
+              <LeftSimpleIcon
+                className={`w-10 h-10 hover:animate-pulse cursor-pointer hover:scale-125 transition-all duration-200 ${
+                  currentStep === 1 && 'hidden'
+                }`}
+              />
+            </div>
+          </section>
+        </div>
       </div>
     </>
   );
