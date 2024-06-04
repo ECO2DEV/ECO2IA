@@ -15,6 +15,34 @@ export const ChatgptResponse = async ({ prompt, user }) => {
   }
 };
 
+export const ChatgptResForSportDescr = async ({ prompt, user }) => {
+  try {
+    const response = await axios.post(
+      `${strapiUrl}/api/openai/chatia`,
+      { prompt: prompt, users_permissions_user: user },
+      header
+    );
+
+    return response;
+  } catch (error) {
+    console.error(`Error getting prompt for ${strapiUrl}:`, error);
+  }
+};
+
+export const ChatgptResForSportMeals = async ({ prompt, user }) => {
+  try {
+    const response = await axios.post(
+      `${strapiUrl}/api/openai/chatia`,
+      { prompt: prompt, users_permissions_user: user },
+      header
+    );
+
+    return response;
+  } catch (error) {
+    console.error(`Error getting prompt for ${strapiUrl}:`, error);
+  }
+};
+
 // conversation and messages with socket.io
 
 export const createConversationSocket = async ({

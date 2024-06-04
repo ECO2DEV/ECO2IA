@@ -32,3 +32,21 @@ export const fetchDataExerciseDB = async (url) => {
   }
 };
 export const exerciseUrl = process.env.NEXT_PUBLIC_EXERCISE_URL;
+
+export const fetchExerciseSlug = async (slug) => {
+  console.log('slug inside utils', slug);
+  try {
+    const response = await axios.get(`${exerciseUrl}/exercises/name/${slug}`, {
+      headers: {
+        'X-RapidAPI-Key': process.env.NEXT_PUBLIC_EXERCISE_API_KEY,
+        'X-RapidAPI-Host': process.env.NEXT_PUBLIC_EXERCISE_API_HOST
+      }
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('error in exercise', error);
+    console.log('error in fetchExerciseSlug:', error);
+    throw error;
+  }
+};
