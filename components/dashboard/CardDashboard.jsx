@@ -90,7 +90,7 @@ const CardDashboard = ({
       <dl className="-my-3 divide-y divide-gray-800 dark:divide-gray-100 px-6 py-4 text-sm leading-6">
         <article className="flex justify-between gap-x-4 py-3">
           <dt className="text-gray-500">
-            {plan.typo === 'Premium' ? (
+            {plan?.typo === 'Premium' ? (
               <button
                 title="Eres cliente Premium 😍"
                 className="font-semibold uppercase text-darkHoverColor dark:text-amber-500 transition-all "
@@ -112,11 +112,11 @@ const CardDashboard = ({
             
             <div
               className={classNames(
-                planStatus[plan.typo],
+                planStatus[plan?.typo],
                 'rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset'
               )}
             >
-              {plan.typo}
+              {plan?.typo}
             </div>
           </dd>
         </article>

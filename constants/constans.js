@@ -41,6 +41,11 @@ import MaskImageStep from '../components/steps_renovhome/MaskImageStep';
 import FormStep from '../components/steps_renovhome/FormStep';
 import { OutputImgStep } from '../components/steps_renovhome/OutputImgStep';
 import {
+  Consult,
+  FileComponent,
+  ResultComponent
+} from '../components/eco2diagnose/steps';
+import {
   Age,
   Days,
   Goal,
@@ -571,6 +576,30 @@ export const stepsGym = [
     phare: `"El único mal entrenamiento es el que no se hace."`,
     status: 'upcoming',
     image: '/gym/workout.webp'
+  }
+];
+
+export const stepsDiagnose = [
+  {
+    id: 1,
+    name: 'Consulta',
+    title: 'Consulta médica',
+    component: Consult,
+    status: '1%'
+  },
+  {
+    id: 2,
+    name: 'Archivo',
+    title: 'Cargar archivo',
+    component: FileComponent,
+    status: '50%'
+  },
+  {
+    id: 3,
+    name: 'Resultado',
+    title: 'Resultado final',
+    component: ResultComponent,
+    status: '100%'
   }
 ];
 

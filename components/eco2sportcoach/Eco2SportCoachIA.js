@@ -32,7 +32,11 @@ export const SportCoachIA = (props) => {
     initialValue: null
   });
 
-  console.log('storedValue', storedValue);
+  const [localStoreValue, setLocalStoreValue] = useLocalStorageWithExpiration({
+    key: 'execResponse',
+    initialValue: null
+  });
+
   const [currentStep, setCurrentStep] = useState(1);
   const StepComponent = stepsGym[currentStep - 1].component;
 
@@ -83,12 +87,10 @@ export const SportCoachIA = (props) => {
   const [responseObj, setResponseObj] = useState(null);
 
   useEffect(() => {
-    const localStore = localStorage.getItem('execResponse');
-    if (localStore) {
-      const parseResponse = JSON.parse(localStore);
-      setResponseObj(parseResponse);
+    if (localStoreValue) {
+      setResponseObj(localStoreValue);
     }
-  }, []);
+  }, [localStoreValue]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -129,10 +131,7 @@ export const SportCoachIA = (props) => {
         .then((response) => {
           setResponseObj(response?.data?.data);
           if (response?.data?.data) {
-            localStorage.setItem(
-              'execResponse',
-              JSON.stringify(response?.data?.data)
-            );
+            setLocalStoreValue(response?.data?.data);
           }
         })
         .catch((error) => {
@@ -154,7 +153,7 @@ export const SportCoachIA = (props) => {
         <h1 className="text-5xl text-center mb-[40px] font-semibold dark:text-white">
           María: Tu entrenadora personal
         </h1>
-        {!responseObj || !storedValue ? (
+        {!responseObj ? (
           <StepGym setCurrentStep={setCurrentStep} />
         ) : (
           <div className="flex justify-center h-fit">

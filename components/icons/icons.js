@@ -188,6 +188,54 @@ export const ArrowLeftSidebar = ({ className = '' }) => {
   );
 };
 
+export const ArrowBigRight = ({ className = '', onClick = () => {} }) => {
+  return (
+    <svg
+      onClick={onClick}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={twMerge(
+        'icon icon-tabler icons-tabler-outline icon-tabler-arrow-big-right',
+        className
+      )}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M4 9h8v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1z" />
+    </svg>
+  );
+};
+
+export const ArrowBigLeft = ({ className = '', onClick = () => {} }) => {
+  return (
+    <svg
+      onClick={onClick}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={twMerge(
+        'icon icon-tabler icons-tabler-outline icon-tabler-arrow-big-left',
+        className
+      )}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M20 15h-8v3.586a1 1 0 0 1 -1.707 .707l-6.586 -6.586a1 1 0 0 1 0 -1.414l6.586 -6.586a1 1 0 0 1 1.707 .707v3.586h8a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1z" />
+    </svg>
+  );
+};
+
 export const ChatSendIcon = (className = '') => {
   return (
     <svg
@@ -372,9 +420,9 @@ export function ChatGPTLogo() {
   );
 }
 
-export const DownloadICon = () => (
+export const DownloadICon = ({ className = '' }) => (
   <svg
-    className="w-8 h-8 text-zinc-800 dark:text-white mb-2"
+    className={twMerge('w-8 h-8 text-zinc-800 dark:text-white mb-2', className)}
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"

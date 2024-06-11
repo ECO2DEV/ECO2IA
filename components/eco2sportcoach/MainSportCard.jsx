@@ -8,7 +8,7 @@ export const MainSportCard = ({ day, index, user }) => {
 
   const router = useRouter();
   function handleExerciseClick(exce) {
-    return router.push(`/eco2sport/${exce.name}?userId=${user}`);
+    return router.push(`/eco2sport/${exce?.name}?userId=${user}`);
   }
 
   // console.log("allExercises", allExercises)

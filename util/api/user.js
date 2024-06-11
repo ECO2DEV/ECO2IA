@@ -258,7 +258,7 @@ export const setPremiumPlan = async () => {
           max_imagens: 75,
           value: 10,
           ias_access:
-            'Eco2Dalle, Eco2Chat, Eco2CV, Eco2Quiz, Eco2Traduct, Eco2Sport,Eco2Desc, Eco2Resume,Eco2Renov',
+            'Eco2Dalle, Eco2Chat, Eco2CV, Eco2Quiz, Eco2Traduct, Eco2Sport,Eco2Desc, Eco2Resume,Eco2Renov, Eco2Diagnose',
           planRequestLimit: 1000
         }
       },
