@@ -1,11 +1,12 @@
-import axios from "axios";
-import { strapiUrl, header } from "../../constants/constans";
+import axios from 'axios';
+import { strapiUrl, header } from '../../constants/constans';
 
 // Función asincrónica para enviar una solicitud de plan de entrenamiento
 export const sendTrainingPlanRequest = async ({
-  prompt,
+  // prompt,
   weight,
   age,
+  height,
   goal,
   trainingDays,
   language,
@@ -16,8 +17,9 @@ export const sendTrainingPlanRequest = async ({
     const response = await axios.post(
       `${strapiUrl}/api/openai/sportcoach`,
       {
-        prompt: prompt,
+        // prompt: prompt,
         weight: weight,
+        height: height,
         age: age,
         goal: goal,
         language: language,

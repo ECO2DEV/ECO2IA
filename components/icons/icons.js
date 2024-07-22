@@ -1,7 +1,35 @@
+import { twMerge } from 'tailwind-merge';
+
+export function MealIcons({ className = '' }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={twMerge(
+        'icon icon-tabler icons-tabler-outline icon-tabler-meat',
+        className
+      )}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M13.62 8.382l1.966 -1.967a2 2 0 1 1 3.414 -1.415a2 2 0 1 1 -1.413 3.414l-1.82 1.821" />
+      <path d="M5.904 18.596c2.733 2.734 5.9 4 7.07 2.829c1.172 -1.172 -.094 -4.338 -2.828 -7.071c-2.733 -2.734 -5.9 -4 -7.07 -2.829c-1.172 1.172 .094 4.338 2.828 7.071z" />
+      <path d="M7.5 16l1 1" />
+      <path d="M12.975 21.425c3.905 -3.906 4.855 -9.288 2.121 -12.021c-2.733 -2.734 -8.115 -1.784 -12.02 2.121" />
+    </svg>
+  );
+}
+
 export function ArrowLeftIcon({ className = '' }) {
   return (
     <svg
-      className={className}
+      className={twMerge('', className)}
       fill="none"
       strokeWidth={1.5}
       stroke="currentColor"
@@ -17,6 +45,35 @@ export function ArrowLeftIcon({ className = '' }) {
     </svg>
   );
 }
+
+export const GymIcon = ({ className = '' }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={twMerge(
+        'icon icon-tabler icons-tabler-outline icon-tabler-dumbbell',
+        className
+      )}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M2 12h1" />
+      <path d="M6 8h-2a1 1 0 0 0 -1 1v6a1 1 0 0 0 1 1h2" />
+      <path d="M6 7v10a1 1 0 0 0 1 1h1a1 1 0 0 0 1 -1v-10a1 1 0 0 0 -1 -1h-1a1 1 0 0 0 -1 1z" />
+      <path d="M9 12h6" />
+      <path d="M15 7v10a1 1 0 0 0 1 1h1a1 1 0 0 0 1 -1v-10a1 1 0 0 0 -1 -1h-1a1 1 0 0 0 -1 1z" />
+      <path d="M18 8h2a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-2" />
+      <path d="M22 12h-1" />
+    </svg>
+  );
+};
 
 export const ArrowRigth = ({
   className = 'icon icon-tabler icons-tabler-outline icon-tabler-arrow-badge-right'
@@ -62,9 +119,7 @@ export const UploadIcon = ({ className = '' }) => {
   );
 };
 
-export const ArrowLeft = (
-  className = 'icon icon-tabler icons-tabler-outline icon-tabler-arrow-badge-left'
-) => {
+export const ArrowLeft = (className = '') => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +131,10 @@ export const ArrowLeft = (
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={twMerge(
+        'icon icon-tabler icons-tabler-outline icon-tabler-arrow-badge-left',
+        className
+      )}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M11 17h6l-4 -5l4 -5h-6l-4 5z" />
@@ -84,7 +142,7 @@ export const ArrowLeft = (
   );
 };
 
-export const ArrowLeftSidebar = () => {
+export const LeftSimpleIcon = ({ className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -96,10 +154,84 @@ export const ArrowLeftSidebar = () => {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="rotateArrow dark:text-black text-white icon icon-tabler icons-tabler-outline icon-tabler-arrow-badge-right"
+      className={twMerge(
+        'icon icon-tabler icons-tabler-outline icon-tabler-chevron-left',
+        className
+      )}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M15 6l-6 6l6 6" />
+    </svg>
+  );
+};
+
+export const ArrowLeftSidebar = ({ className = '' }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={twMerge(
+        'rotateArrow dark:text-black text-white icon icon-tabler icons-tabler-outline icon-tabler-arrow-badge-right',
+        className
+      )}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M13 7h-6l4 5l-4 5h6l4 -5z" />
+    </svg>
+  );
+};
+
+export const ArrowBigRight = ({ className = '', onClick = () => {} }) => {
+  return (
+    <svg
+      onClick={onClick}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={twMerge(
+        'icon icon-tabler icons-tabler-outline icon-tabler-arrow-big-right',
+        className
+      )}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M4 9h8v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1z" />
+    </svg>
+  );
+};
+
+export const ArrowBigLeft = ({ className = '', onClick = () => {} }) => {
+  return (
+    <svg
+      onClick={onClick}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={twMerge(
+        'icon icon-tabler icons-tabler-outline icon-tabler-arrow-big-left',
+        className
+      )}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M20 15h-8v3.586a1 1 0 0 1 -1.707 .707l-6.586 -6.586a1 1 0 0 1 0 -1.414l6.586 -6.586a1 1 0 0 1 1.707 .707v3.586h8a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1z" />
     </svg>
   );
 };
@@ -288,9 +420,9 @@ export function ChatGPTLogo() {
   );
 }
 
-export const DownloadICon = () => (
+export const DownloadICon = ({ className = '' }) => (
   <svg
-    className="w-8 h-8 text-zinc-800 dark:text-white mb-2"
+    className={twMerge('w-8 h-8 text-zinc-800 dark:text-white mb-2', className)}
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
@@ -1015,14 +1147,14 @@ export function MoonIcon(props) {
   );
 }
 
-export const MagicAiIcon = ({ className = 'icon-sm shrink-0' }) => {
+export const MagicAiIcon = ({ className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
       fill="none"
-      className={className}
+      className={twMerge('icon-sm shrink-0', className)}
     >
       <path
         fill="currentColor"
