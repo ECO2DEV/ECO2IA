@@ -79,8 +79,12 @@ export const authOptions = {
     // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   callbacks: {
-    async redirect({ url, baseUrl = 'http://localhost:3000' }) {
-      // console.log(baseUrl + "/dashboard");
+    async redirect({ url, baseUrl }) {
+      baseUrl =
+        process.env.NODE_ENV === 'development'
+          ? 'http://localhost:3000'
+          : 'https://eco-2-ia.vercel.app';
+      console.log(baseUrl + '/dashboard');
       return baseUrl + '/dashboard';
     },
     async jwt({ token, account, user }) {
