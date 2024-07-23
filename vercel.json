@@ -2,7 +2,8 @@
   "version": 2,
   "builds": [
     {
-      "src": "pages/_app.js"
+      "src": "next.config.js",
+      "use": "@vercel/next"
     }
   ],
   "build": {
