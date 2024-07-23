@@ -84,7 +84,7 @@ export const authOptions = {
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:3000'
           : 'https://eco-2-ia.vercel.app';
-      console.log(baseUrl + '/dashboard');
+      // console.log(process.env.NODE_ENV + '/dashboard');
       return baseUrl + '/dashboard';
     },
     async jwt({ token, account, user }) {
