@@ -59,7 +59,8 @@
     "tailwind-merge": "^2.2.2",
     "typewriter-effect": "2.21.0",
     "uuid": "^9.0.1",
-    "voice-activity-detection": "0.0.5"
+    "voice-activity-detection": "0.0.5",
+    "cloudinary": "^1.27.0"
   },
   "devDependencies": {
     "@tailwindcss/forms": "0.5.7",
