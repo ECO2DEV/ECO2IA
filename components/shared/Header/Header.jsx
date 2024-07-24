@@ -257,7 +257,7 @@ export function ThemeToggle2() {
       className="group w-[45px] h-[45px] flex items-center rounded-full bg-zinc-800 dark:bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:ring-white/10 dark:hover:ring-white/20"
       onClick={() => setTheme(otherTheme)}
     >
-      <SunIconHome className="h-6 w-6   fill-slate-800 stroke-zinc-900 transition group-hover:fill-slate-800 group-hover:stroke-zinc-900 dark:hidden [@media(prefers-color-scheme:dark)]:fill-slate-800 [@media(prefers-color-scheme:dark)]:stroke-eco2MainColor [@media(prefers-color-scheme:dark)]:group-hover:fill-slate-800 [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor" />
+      <SunIconHome className="h-6 w-6   fill-eco2MainColor stroke-eco2MainColor transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:fill-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:stroke-eco2MainColor" />
       <MoonIcon className="hidden h-6 w-6   fill-eco2MainColor stroke-eco2MainColor transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:fill-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:stroke-eco2MainColor" />
     </button>
   );
