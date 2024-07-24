@@ -75,7 +75,7 @@ function MobileNavigation(props) {
                   <MobileNavItem href="/dashboard">Dashboard</MobileNavItem>
                 ) : (
                   <>
-                    <MobileNavItem href="/auth/signin">Inicio de Sesión</MobileNavItem>
+                    <MobileNavItem href="/auth/signin">Login</MobileNavItem>
                   </>
                 )}
               </ul>
@@ -123,7 +123,7 @@ function DesktopNavigation(props) {
           <NavItem href="/dashboard">Dashboard</NavItem>
         ) : (
           <>
-            <NavItem href="/auth/signin">Inicio de Sesion</NavItem>
+            <NavItem href="/auth/signin">Login</NavItem>
           </>
         )}
       </ul>
