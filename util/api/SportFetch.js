@@ -27,7 +27,7 @@ export const fetchDataExerciseDB = async (url) => {
     // console.log('response', response);
     return response.data; // Return response data
   } catch (error) {
-    console.error('error in exercise', error);
+    console.error('error getting exercises gift', error);
     throw error; // Throw error to handle it elsewhere if needed
   }
 };
