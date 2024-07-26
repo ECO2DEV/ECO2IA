@@ -67,15 +67,15 @@ function MobileNavigation(props) {
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-lightColor">
-                <MobileNavItem href="/">Home</MobileNavItem>
-                <MobileNavItem href="/about">About</MobileNavItem>
+                <MobileNavItem href="/">Inicio</MobileNavItem>
+                <MobileNavItem href="/about">Nosotros</MobileNavItem>
                 <MobileNavItem href="/contact-us">Contactanos</MobileNavItem>
 
                 {session ? (
                   <MobileNavItem href="/dashboard">Dashboard</MobileNavItem>
                 ) : (
                   <>
-                    <MobileNavItem href="/auth/signin">Login</MobileNavItem>
+                    <MobileNavItem href="/auth/signin">Acceder</MobileNavItem>
                   </>
                 )}
               </ul>
@@ -116,14 +116,14 @@ function DesktopNavigation(props) {
   return (
     <nav {...props}>
       <ul className="flex ml-15 mr-16  mx-auto rounded-full bg-white/90  text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <NavItem href="/">Home</NavItem>
-        <NavItem href="/about">About</NavItem>
+        <NavItem href="/">Inicio</NavItem>
+        <NavItem href="/about">Nosotros</NavItem>
         <NavItem href="/contact-us">Contactanos</NavItem>
         {session ? (
           <NavItem href="/dashboard">Dashboard</NavItem>
         ) : (
           <>
-            <NavItem href="/auth/signin">Login</NavItem>
+            <NavItem href="/auth/signin">Acceder</NavItem>
           </>
         )}
       </ul>
@@ -172,7 +172,7 @@ function Avatar({ large = false, className, ...props }) {
       <Image
         src={resolvedTheme === "dark"? logoDark :logoLight }
         alt="Logo Maria inteligencia"
-        width={120}
+        width={160}
         height="auto"
         className={clsx(
           "rounded-full  object-cover "
@@ -225,12 +225,10 @@ export function Avatar2({ large = false, className, ...props }) {
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
+        stroke="currentColor"
         viewBox="0 0 24 24"
-        fill="#ffff"
-        className="group w-[45px] h-[45px] flex items-center rounded-full bg-zinc-800 dark:fill-black dark:bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:ring-white/10 dark:hover:ring-white/20"
-        // className="icon icon-tabler icons-tabler-filled icon-tabler-home rounded-full max-h-10 max-w-12 bg-zinc-100 object-cover dark:bg-zinc-800"
+        fill="currentColor"
+        className="group w-7 h-7 flex items-center rounded-full group-hover:text-eco2MainColor text-white dark:text-black tramition-all duration-200"
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M12.707 2.293l9 9c.63 .63 .184 1.707 -.707 1.707h-1v6a3 3 0 0 1 -3 3h-1v-7a3 3 0 0 0 -2.824 -2.995l-.176 -.005h-2a3 3 0 0 0 -3 3v7h-1a3 3 0 0 1 -3 -3v-6h-1c-.89 0 -1.337 -1.077 -.707 -1.707l9 -9a1 1 0 0 1 1.414 0m.293 11.707a1 1 0 0 1 1 1v7h-4v-7a1 1 0 0 1 .883 -.993l.117 -.007z" />
@@ -253,12 +251,20 @@ export function ThemeToggle2() {
     <button
       type="button"
       title="Click para cambiar el tema !"
-      aria-label={mounted ? `Switch to ${otherTheme} theme` : "Toggle theme"}
-      className="group w-[45px] h-[45px] flex items-center rounded-full bg-zinc-800 dark:bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:ring-white/10 dark:hover:ring-white/20"
+      aria-label={mounted ? `Switch to ${otherTheme} theme` : 'Toggle theme'}
+      className="group w-[45px] h-[45px] flex items-center rounded-full px-2 py-2 bg-zinc-800 dark:bg-white/90 hover:scale-105 transition-all duration-200 shadow-md shadow-black/20"
       onClick={() => setTheme(otherTheme)}
     >
-      <SunIconHome className="h-6 w-6   fill-slate-800 stroke-zinc-900 transition group-hover:fill-slate-800 group-hover:stroke-zinc-900 dark:hidden [@media(prefers-color-scheme:dark)]:fill-slate-800 [@media(prefers-color-scheme:dark)]:stroke-eco2MainColor [@media(prefers-color-scheme:dark)]:group-hover:fill-slate-800 [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor" />
-      <MoonIcon className="hidden h-6 w-6   fill-eco2MainColor stroke-eco2MainColor transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:fill-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:stroke-eco2MainColor" />
+      {resolvedTheme === 'dark' ? (
+        <MoonIcon className="text-black text-center group-hover:text-eco2MainColor transition-all duration-200" />
+      ) : (
+        <SunIconHome className=" text-white group-hover:text-eco2MainColor transition-all duration-200 " />
+      )}
     </button>
   );
 }
+
+
+{/* <SunIconHome className=" dark:hidden fill-slate-800 stroke-zinc-900 transition group-hover:fill-slate-800 group-hover:stroke-zinc-900 [@media(prefers-color-scheme:dark)]:fill-slate-800 [@media(prefers-color-scheme:dark)]:stroke-eco2MainColor [@media(prefers-color-scheme:dark)]:group-hover:fill-slate-800 [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor" />
+<MoonIcon className="hidden dark:block fill-eco2MainColor stroke-eco2MainColor transition  [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:fill-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:stroke-eco2MainColor" />
+  */}

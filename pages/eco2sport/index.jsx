@@ -1,4 +1,5 @@
 import { SportCoachIA } from '../../components/eco2sportcoach/Eco2SportCoachIA';
+import ErrorBoundary from '../../components/ErrorBoundary';
 import Modal from '../../components/modal/modal';
 import { getUser } from '../../util/api/user';
 import Head from 'next/head';
@@ -24,7 +25,9 @@ export default function SportCoach(props) {
       ) : +props?.user?.plan?.max_tokens <= 0 ? (
         <Modal user={props?.user} />
       ) : (
-        <SportCoachIA user={props.user.id} />
+        <ErrorBoundary>
+          <SportCoachIA user={props.user.id} />
+        </ErrorBoundary>
       )}
     </div>
   );
