@@ -4,16 +4,13 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { useTheme } from 'next-themes';
-import logoLight from "../../public/logosColorNegro.png";
-import logoDark from "../../public/logosColorBlanco.png";
+
 import { DataSignin } from '../../data/signin';
 import {
   GithubSignInButton,
   GoogleSignInButton
 } from '../authbutton/authButtons';
-import { twMerge } from 'tailwind-merge';
+
 
 
 
@@ -22,9 +19,7 @@ export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const { resolvedTheme} = useTheme();
+  const [error] = useState(null);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -71,13 +66,7 @@ export const LoginForm = () => {
     <section className="flex dark:bg-darkColor w-auto -z-10 flex-col items-center justify-center h-screen">
       <div className="w-full sm:max-w-md ">
         <header className="flex items-center justify-center flex-col">
-          <Image
-            className={twMerge(
-              'h-24 w-36',
-              resolvedTheme === 'dark' ? logoLight : logoDark
-            )}
-            alt="Maria logo"
-          />
+        
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-eco2MainColor">
             {DataSignin.signintitle}
           </h2>
