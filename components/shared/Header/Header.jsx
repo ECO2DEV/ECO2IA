@@ -265,6 +265,3 @@ export function ThemeToggle2() {
 }
 
 
-{/* <SunIconHome className=" dark:hidden fill-slate-800 stroke-zinc-900 transition group-hover:fill-slate-800 group-hover:stroke-zinc-900 [@media(prefers-color-scheme:dark)]:fill-slate-800 [@media(prefers-color-scheme:dark)]:stroke-eco2MainColor [@media(prefers-color-scheme:dark)]:group-hover:fill-slate-800 [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor" />
-<MoonIcon className="hidden dark:block fill-eco2MainColor stroke-eco2MainColor transition  [@media(prefers-color-scheme:dark)]:group-hover:stroke-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:fill-eco2MainColor [@media_not_(prefers-color-scheme:dark)]:stroke-eco2MainColor" />
-  */}
