@@ -10,7 +10,6 @@ import { ClipboardIcon } from '../icons/icons';
 const ListMessages = ({
   item,
   handleCopy,
-  handleCopyCode,
   getModelIcon,
   index
 }) => {
@@ -86,7 +85,7 @@ const ListMessages = ({
                           {item.attributes?.content}
                         </ReactMarkdown>
                       </div>
-                      <button
+                      {/* <button
                         onClick={() =>
                           handleCopyCode(
                            isCodeBlock
@@ -99,21 +98,21 @@ const ListMessages = ({
                         className="absolute top-2 right-2 text-xs text-gray-300 bg-gray-600 hover:bg-gray-500 rounded px-2 py-1"
                       >
                         Copiar Código
-                      </button>
+                      </button> */}
                     </div>
                   ) : (
                     <div>{item.attributes?.content}</div>
                   )}
                 </div>
               </div>
-              <div className="absolute right-0 top-5 flex flex-col items-end ">
+              <div className="absolute right-[75px] top-4 flex flex-col items-end ">
                 <button
                   className="p-1"
                   onClick={() =>
                     handleCopy(item.attributes?.content, index, setCopied)
                   }
                 >
-                  <div className="w-6 h-6 text-gray-100 bg-gray-100 transition duration-200 m-1 group-hover:bg-cyan-700 group-hover:text-black rounded-full ">
+                  <div className="w-6 h-6 text-gray-100 bg-gray-100 transition duration-200 m-1  group-hover:text-black rounded-full ">
                     <ClipboardIcon />
                   </div>
                 </button>

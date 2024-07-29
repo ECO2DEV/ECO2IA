@@ -17,7 +17,7 @@ export const Header = ({ children }) => {
 
   return (
     <>
-      <div className="relative uppercase text-xs  z-[100]">
+      <div  className="relative uppercase text-xs z-[100]">
         <div
           onClick={() => {
             setIsActive(!isActive);
@@ -53,7 +53,7 @@ export const Header = ({ children }) => {
           <div className="mt-8 rounded-full">
             <ThemeToggle2 />
           </div>
-          <div className="mt-6 rounded-full">
+          <div className="mt-6 group rounded-full px-2 py-2 bg-zinc-800 dark:bg-white/90 dark:text-black  hover:scale-105 transition-all duration-200 shadow-md shadow-black/20">
             <Avatar2 />
           </div>
         </div>

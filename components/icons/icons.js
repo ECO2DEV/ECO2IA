@@ -1115,15 +1115,16 @@ export function ChevronDownIcon(props) {
   );
 }
 
-export function SunIconHome(props) {
+export function SunIconHome({ className = '' }) {
   return (
     <svg
       viewBox="0 0 24 24"
       strokeWidth="1.5"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
-      {...props}
+      className={twMerge('h-7 w-7', className)}
     >
       <path d="M8 12.25A4.25 4.25 0 0 1 12.25 8v0a4.25 4.25 0 0 1 4.25 4.25v0a4.25 4.25 0 0 1-4.25 4.25v0A4.25 4.25 0 0 1 8 12.25v0Z" />
       <path
@@ -1134,9 +1135,15 @@ export function SunIconHome(props) {
   );
 }
 
-export function MoonIcon(props) {
+export function MoonIcon({ className = '' }) {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      fill="currentColor"
+      aria-hidden="true"
+      className={twMerge('h-6 w-6', className)}
+    >
       <path
         d="M17.25 16.22a6.937 6.937 0 0 1-9.47-9.47 7.451 7.451 0 1 0 9.47 9.47ZM12.75 7C17 7 17 2.75 17 2.75S17 7 21.25 7C17 7 17 11.25 17 11.25S17 7 12.75 7Z"
         strokeWidth="1.5"

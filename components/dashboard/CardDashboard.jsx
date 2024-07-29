@@ -8,30 +8,26 @@ import { StarsButton } from '../modal/StarsButton';
 import { FramerModal } from '../modal/FramerModal';
 import { classNames } from '../../constants/constans';
 import { PopUpModal } from '../modal/popUpModal';
+import { DashboardComponents } from '../icons/DashboardIcons';
 
 const planStatus = {
   Premium: 'text-amber-700 bg-amber-50 ring-amber-600/20',
   Freemium: 'text-gray-600 bg-gray-50 ring-gray-500/10',
   Standard: 'text-green-700 bg-green-50 ring-green-600/10',
-  Enterprise: 'text-purple-700 bg-purple-50 ring-purple-600/20',
-}
-
+  Enterprise: 'text-purple-700 bg-purple-50 ring-purple-600/20'
+};
 
 const CardDashboard = ({
   id,
   title,
   description,
   href,
-  screenShoot,
   keywords,
   quantity,
   score,
-  index,
   plan
 }) => {
-
-
-  const [ref, hovering] = useHover();
+  const [ref] = useHover();
 
   const { iasAllowedToAccess } = useContext(PromptContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,6 +35,13 @@ const CardDashboard = ({
   function handleClose() {
     setIsModalOpen((prev) => !prev);
   }
+
+  const getIconByTitle = (title) => {
+    const component = DashboardComponents.find((item) => item.title === title);
+    return component ? component.icon : null;
+  };
+
+  const IconComponent = getIconByTitle(title);
   return (
     <motion.li
       ref={ref}
@@ -46,14 +49,12 @@ const CardDashboard = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: quantity * 0.1, duration: 0.3 }}
       viewport={{ once: true }}
-      className="relative overflow-hidden rounded-xl border border-gray-900 dark:border-gray-100"
+      className="relative overflow-hidden rounded-xl border border-gray-900 dark:border-gray-100 shadow-lg dark:shadow-2xl bg-darkColor "
     >
       <div className="flex items-center gap-x-4 bg-darkHoverColor dark:bg-eco2HoverColor p-6">
-        <img
-          src={screenShoot}
-          alt={title}
-          className="h-12 w-12 flex-none rounded-lg object-cover ring-1 ring-gray-900/10"
-        />
+        {IconComponent && (
+          <IconComponent customClasses="h-10 w-10 text-white flex-none rounded-lg object-cover p-1 ring-1 ring-gray-100 dark:ring-1 dark:ring-gray-100" />
+        )}
         <div className="flex flex-col justify-start items-start">
           <div className="text-lg  font-normal leading-6 text-white dark:text-black">
             {title}
@@ -93,7 +94,7 @@ const CardDashboard = ({
             {plan?.typo === 'Premium' ? (
               <button
                 title="Eres cliente Premium 😍"
-                className="font-semibold uppercase text-darkHoverColor dark:text-amber-500 transition-all "
+                className="font-semibold uppercase text-amber-500 transition-all "
                 disabled
               >
                 Premium ✨
@@ -109,7 +110,6 @@ const CardDashboard = ({
             )}
           </dt>
           <dd className="flex items-start gap-x-2">
-            
             <div
               className={classNames(
                 planStatus[plan?.typo],
@@ -125,14 +125,14 @@ const CardDashboard = ({
           <dd className="relative">
             {iasAllowedToAccess.includes(title) ? (
               <Link
-                className="p-2 border-2 border-darkColor group dark:border-lightColor  rounded-full absolute z-10 -top-1 right-0  cursor-pointer hover:scale-110 hover:bg-darkColor  duration-200 transition-all dark:hover:text-[#f5f5f7] duration-150 "
+                className="p-2 border-2 group border-lightColor  rounded-full absolute z-10 -top-1 right-0  cursor-pointer hover:scale-110 hover:bg-darkColor  duration-200 transition-all dark:hover:text-[#f5f5f7] duration-150 "
                 href={href}
                 target="_blank"
                 rel="noreferrer"
                 title={`Ir a ${title} ✨`}
               >
                 <svg
-                  className="h-3 w-3 text-black dark:text-white group-hover:text-eco2MainColor"
+                  className="h-3 w-3 text-white group-hover:text-eco2MainColor"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -155,13 +155,14 @@ const CardDashboard = ({
           <dt className="text-gray-500">{description} </dt>
         </article>
         <article className="flex justify-between gap-x-4 py-3">
-          <dt className="text-gray-500">{
-            keywords.split(",").map((keyword, index) => (
+          <dt className="text-gray-500">
+            {keywords.split(',').map((keyword, index) => (
               <span key={index} className="dark:text-gray-500 ">
-                {' - '}{keyword}
+                {' - '}
+                {keyword}
               </span>
-            ))
-          } </dt>
+            ))}{' '}
+          </dt>
         </article>
       </dl>
     </motion.li>

@@ -246,9 +246,9 @@ function TextSummarizerPage() {
         </div>
       </div>
       <div className="w-full md:w-6/12 px-4 mt-4 md:mt-0">
-        <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-4 relative dark:text-zinc-900">
+        <div className="bg-white dark:bg-zinc-800  rounded-lg shadow-lg p-4 relative dark:text-zinc-900">
           <textarea
-            className="w-full text-justify p-4 rounded border-none focus:outline-none focus:ring-2 dark:bg-zinc-700 resize-none placeholder-gray-400"
+            className="w-full text-justify dark:text-white p-4 rounded border-none focus:outline-none focus:ring-2 dark:bg-zinc-700 resize-none placeholder-gray-400"
             style={{ minHeight: '44rem' }}
             value={summaryText}
             readOnly

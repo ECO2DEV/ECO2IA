@@ -3,14 +3,14 @@ import { DataPricing } from '../data/pricing';
 import { HomeIcon } from '@heroicons/react/24/outline';
 import { DataAbout } from '../data/about';
 import { DataDashboard } from '../data/dashboard';
-import eco2chat from '../public/eco2chat.webp';
-import eco2resume from '../public/eco2resume.webp';
-import eco2image from '../public/eco2image.webp';
-import eco2rad from '../public/eco2rad.webp';
-import eco2sport from '../public/eco2sport.webp';
-import eco2quiz from '../public/eco2quiz.webp';
-import eco2desc from '../public/eco2desc.webp';
-import eco2cv from '../public/eco2cv.webp';
+import eco2chat from '../public/iconografia/eco2chat.webp';
+import eco2resume from '../public/iconografia/eco2resume.webp';
+import eco2image from '../public/iconografia/eco2image.webp';
+import eco2rad from '../public/iconografia/eco2rad.webp';
+import eco2sport from '../public/iconografia/eco2sport.webp';
+import eco2quiz from '../public/iconografia/eco2quiz.webp';
+import eco2desc from '../public/iconografia/eco2desc.webp';
+import eco2cv from '../public/iconografia/eco2cv.webp';
 
 import IA1 from '../public/screenshot/chat_eco2.webp';
 import IA2 from '../public/screenshot/sport_eco2.webp';
@@ -18,6 +18,8 @@ import IA3 from '../public/screenshot/quiz_eco2.webp';
 import IA4 from '../public/screenshot/desc_eco2.webp';
 import IA5 from '../public/screenshot/resum_eco2.webp';
 import IA6 from '../public/screenshot/cv_eco2.webp';
+import IA7 from '../public/screenshot/home.webp';
+import IA8 from '../public/screenshot/diagnose.webp';
 
 import metaIcon from '../public/ias/meta-icon.webp';
 import gpt3 from '../public/ias/chatgpt3-icon.svg';
@@ -91,45 +93,65 @@ export const features = [
   {
     name: 'Eco2-chat',
     description:
-      'Sumérgete en un mundo de respuestas rápidas y precisas. Aquí, despejamos tus dudas con la velocidad de un destello y la certeza de un reloj suizo. Cada pregunta es recibida con entusiasmo y respondida con la agilidad de la maestría, fusionando la simplicidad con la excelencia para proporcionarte soluciones que son tan rápidas como exactas. Bienvenido a nuestro santuario de conocimiento, donde la claridad reina y las respuestas son gemas de sabiduría ofrecidas con la velocidad y eficacia que buscas.',
+      'Tu acceso instantáneo a respuestas perfectas.Disfruta de respuestas rápidas y precisas, siempre. Cada pregunta es recibida y contestada con maestría, combinando simplicidad y excelencia para ofrecer soluciones rápidas y exactas. Bienvenido a nuestro santuario de conocimiento, donde la claridad y la eficacia son la norma.',
     imageSrc: IA1,
     imageAlt:
-      'White canvas laptop sleeve with gray felt interior, silver zipper, and tan leather zipper pull.'
+      'Acceso instantáneo a respuestas perfectas con un diseño elegante y preciso.'
   },
   {
     name: 'Eco2-SportCoach',
     description:
-      'Descubre la puerta de entrada a tu viaje fitness con nuestro entrenador personal impulsado por inteligencia artificial. ¿Perdido en el inicio de tu ruta de ejercicios? Permítenos guiarte con planes de entrenamiento diseñados específicamente para ti, basados en tu información física. Abre la puerta a una experiencia de entrenamiento personalizada y eficiente, donde la tecnología se une a tu bienestar para brindarte la dirección que necesitas. ¡Comienza tu viaje fitness hoy mismo con la guía experta de nuestra IA impulsada por la excelencia en el cuidado de tu cuerpo!',
+      'Comienza tu viaje fitness con planes de entrenamiento personalizados, diseñados específicamente para ti. Nuestra IA fusiona tecnología y bienestar, guiándote hacia tus metas con precisión y eficacia. ¡Inicia hoy con la excelencia en el cuidado de tu cuerpo!',
     imageSrc: IA2,
-    imageAlt: 'Detail of zipper pull with tan leather and silver rivet.'
+    imageAlt:
+      'Tu entrenador personal de IA para un viaje fitness eficiente y personalizado.'
   },
   {
     name: 'Eco2-Quiz',
     description:
-      'Simplifica la preparación para tus exámenes con nuestra herramienta impulsada por inteligencia artificial. ¿Te enfrentas a la tarea de crear preguntas para un examen o simplemente necesitas practicar? Únete a nosotros y aprovecha nuestra IA para generar preguntas y respuestas adaptadas a tus necesidades. Facilitamos el proceso al proporcionarte distintas configuraciones, permitiéndote practicar de manera efectiva y enfocada. Deja que nuestra tecnología te guíe en el camino hacia el éxito académico, facilitándote la tarea de preparación con una herramienta personalizada y eficiente.',
+      'Enfrenta tus exámenes con confianza. Nuestra IA genera preguntas y respuestas adaptadas a tus necesidades, haciendo tu preparación más efectiva y enfocada. Deja que la tecnología te guíe hacia el éxito académico con una herramienta personalizada y eficiente.',
     imageSrc: IA3,
-    imageAlt: 'Detail of zipper pull with tan leather and silver rivet.'
+    imageAlt:
+      'Simplifica tu estudio con IA para una preparación de exámenes efectiva y personalizada.'
   },
   {
     name: 'Eco2-Description',
     description:
-      'Supera los obstáculos en tu estrategia de marketing con nuestra herramienta de inteligencia artificial especializada en la creación de copys para productos. ¿Te sientes bloqueado al intentar promocionar un producto? Descubre la solución perfecta con nuestra IA, diseñada para generar copys cautivadores y efectivos. Comparte de manera sencilla en tus redes sociales los mensajes persuasivos y atractivos que nuestra tecnología puede crear para destacar las características únicas de tu producto. Simplifica tu tarea de marketing y despierta el interés de tu audiencia con copys personalizados y convincentes que resonarán en el mundo digital. ¡Potencia tu presencia en línea con la creatividad impulsada por la inteligencia artificial!',
+      'Supera bloqueos creativos y promociona tus productos con copys cautivadores y efectivos. Nuestra IA genera mensajes persuasivos y personalizados que destacan las características únicas de tus productos. Simplifica tu marketing y despierta el interés de tu audiencia con creatividad impulsada por inteligencia artificial.',
     imageSrc: IA4,
-    imageAlt: 'Detail of zipper pull with tan leather and silver rivet.'
+    imageAlt:
+      'Potencia tu marketing con IA para copys cautivadores y personalizados.'
   },
   {
     name: 'Eco2-Resum',
     description:
-      'Desata el poder de la síntesis con nuestra innovadora herramienta: un genio literario digital que transforma tus textos y documentos en resúmenes brillantes. Ingresa tu contenido o carga documentos, y en un abrir y cerrar de ojos, nuestra herramienta desentraña la esencia, destilando la esencia de tus palabras en resúmenes concisos y poderosos. Descubre la magia de la simplicidad informativa, donde cada palabra cuenta y cada idea brilla. Simplifica tu lectura, maximiza tu comprensión y libera tu tiempo con la herramienta definitiva para resumir.',
+      'Transforma tus textos y documentos en resúmenes concisos y poderosos. Ingresa tu contenido y en segundos, nuestra IA desentraña y destila la esencia de tus palabras. Descubre la magia de la simplicidad informativa y maximiza tu comprensión. Libera tu tiempo con la herramienta definitiva para resumir.',
     imageSrc: IA5,
-    imageAlt: 'Detail of zipper pull with tan leather and silver rivet.'
+    imageAlt: 'Simplifica y brilla con IA para resúmenes concisos y poderosos.'
   },
   {
     name: 'Eco2-CV',
     description:
-      'Desata tu potencial profesional con nuestra herramienta de creación de currículums respaldada por inteligencia artificial. Simplifica el proceso con un toque creativo: simplemente ingresa tu información y deja que la magia de la IA transforme tus habilidades y experiencia en un currículum impactante. Diseñar tu trayectoria profesional nunca fue tan fácil ni tan innovador. ¡Destaca con un currículum que refleja tu brillantez y deja que la inteligencia artificial potencie tu camino hacia el éxito laboral!',
+      'Transforma tu información en un currículum impactante con la ayuda de nuestra IA. Simplifica el proceso y destaca tus habilidades y experiencia con un toque creativo e innovador. ¡Destaca en el mercado laboral con un currículum que refleja tu brillantez y deja que la inteligencia artificial impulse tu éxito profesional!',
     imageSrc: IA6,
-    imageAlt: 'Detail of zipper pull with tan leather and silver rivet.'
+    imageAlt:
+      'Potencia tu carrera con IA para currículums impactantes y creativos.'
+  },
+  {
+    name: 'Renovhome',
+    description:
+      'Transforma tu espacio con el poder de la inteligencia artificial. RenovHome te ofrece un diseño de interiores innovador y personalizado, adaptado a tus gustos y necesidades. Desde la renovación de espacios hasta la selección de detalles decorativos, nuestra IA simplifica el proceso y da vida a tus ideas. Redefine tu hogar con estilo y precisión, y disfruta de un ambiente único y perfectamente diseñado.',
+    imageSrc: IA7,
+    imageAlt:
+      'Transforma tu espacio con el poder de la inteligencia artificial.'
+  },
+  {
+    name: 'Eco2-Diagnose',
+    description:
+      'Transforma la lectura de fórmulas médicas y el diagnóstico de enfermedades con nuestra avanzada IA. Analiza documentos y datos médicos con precisión y rapidez, obteniendo diagnósticos y recomendaciones informadas al instante. Simplifica el proceso médico y mejora la precisión en cada diagnóstico con la tecnología de inteligencia artificial de vanguardia.',
+    imageSrc: IA8,
+    imageAlt:
+      'Transforma la lectura de fórmulas médicas y el diagnóstico de enfermedades con nuestra avanzada IA.'
   }
 ];
 
@@ -162,7 +184,7 @@ export const IA_CARDS = [
     href: '/eco2chat',
     description:
       'Chatbot especializado en interacción con usuarios, resolver dudas y preguntas frecuentes sobre cualquier tema',
-    icon: './eco2chat.webp',
+    icon: '/iconografia/eco2chat.webp',
     screenShot: '/screenshot/chat_eco2.webp',
 
     classNames: true,
@@ -175,7 +197,7 @@ export const IA_CARDS = [
     href: '/eco2image',
     description:
       'Creación de imágenes y edición de fotos con inteligencia artificial',
-    icon: './eco2image.webp',
+    icon: '/iconografia/eco2image.webp',
     screenShot: '/screenshot/dalle_eco2.webp',
 
     classNames: false,
@@ -187,7 +209,7 @@ export const IA_CARDS = [
     title: 'Eco2Traduct',
     href: '/eco2traduct',
     description: 'Traductor de idiomas con inteligencia artificial',
-    icon: './eco2rad.webp',
+    icon: '/iconografia/eco2rad.webp',
     screenShot: '/screenshot/trad_eco2.webp',
 
     classNames: false,
@@ -199,7 +221,7 @@ export const IA_CARDS = [
     title: 'Eco2Sport',
     href: '/eco2sport',
     description: 'Entrenador personal con inteligencia artificial',
-    icon: './eco2sport.webp',
+    icon: '/iconografia/eco2sport.webp',
     screenShot: '/screenshot/sport_eco2.webp',
 
     classNames: true,
@@ -212,7 +234,7 @@ export const IA_CARDS = [
     href: '/eco2quiz',
     description:
       'Creador de cuestionarios, quizzes con inteligencia artificial',
-    icon: './eco2quiz.webp',
+    icon: '/iconografia/eco2quiz.webp',
     screenShot: '/screenshot/quiz_eco2.webp',
 
     classNames: true,
@@ -225,7 +247,7 @@ export const IA_CARDS = [
     href: '/eco2description',
     description:
       'Creación de copys, descripciones para productos y servicio | marketing digital con inteligencia artificial',
-    icon: './eco2desc.webp',
+    icon: '/iconografia/eco2desc.webp',
     screenShot: '/screenshot/desc_eco2.webp',
 
     classNames: false,
@@ -238,7 +260,7 @@ export const IA_CARDS = [
     href: '/eco2resum',
     description:
       'Genarador de resumenes, resumenes de texto con inteligencia artificial',
-    icon: './eco2resume.webp',
+    icon: '/iconografia/eco2resume.webp',
     screenShot: '/screenshot/resum_eco2.webp',
 
     classNames: false,
@@ -251,7 +273,7 @@ export const IA_CARDS = [
     href: '/eco2cv',
     description:
       'Creación de curriculum vitae, hojas de vida con inteligencia artificial',
-    icon: './eco2cv.webp',
+    icon: '/iconografia/eco2cv.webp',
     screenShot: '/screenshot/cv_eco2.webp',
 
     classNames: false,
@@ -264,12 +286,20 @@ export const IA_CARDS = [
     href: '/renovhome',
     description:
       'Renovhome es una aplicación que utiliza inteligencia artificial para ayudar a los usuarios a rediseñar sus espacios',
-    icon: './eco2cv.webp',
-    screenShot: '/screenshot/cv_eco2.webp',
+    icon: '/iconografia/renovicon.webp',
+    screenShot: '/screenshot/home.webp',
 
     classNames: false,
     index: 9,
     keywords: ['Renovhome', 'rediseñar', 'espacios', 'casa', 'hogar']
+  },
+  {
+    id: crypto.randomBytes(16).toString('hex'),
+    title: 'Eco2Diagnose',
+    href: '/eco2diagnose',
+    description:
+      'Eco2Diagnose es una aplicación que utiliza inteligencia artificial para ayudar a los usuarios a diagnosticar enfermedades',
+    icon: '/iconografia/diagnoseicon.webp'
   }
 ];
 export const actions = [

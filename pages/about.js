@@ -19,7 +19,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-4 dark:text-lightColor text-md"
+            className="mt-4 dark:text-lightColor text-xl lg:text-2xl"
           >
             Descubre nuestros proyectos innovadores desarrollados con
             inteligencia artificial que impulsarán tu negocio y agilizarán
