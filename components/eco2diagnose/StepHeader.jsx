@@ -41,7 +41,7 @@ export default function StepHeader({ currentStep, handleNext, handleBack }) {
       
         </div>
         <p className="text-4xl text-center font-bold dark:text-gray-100 text-gray-900">
-          Eco2 Diagnose
+          MarIA Pre-Diagnostico 
         </p>
         <div title="siguiente">
           {
