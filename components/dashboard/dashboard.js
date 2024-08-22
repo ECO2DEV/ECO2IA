@@ -16,7 +16,7 @@ export default function DashboardSection(props) {
       <Head>
         <title>Dashboard</title>
         <meta name="description" content="Ai Ecosystem dashboard" />
-        <link rel="Eco2 icon" href="/eco2it_logo.jpeg" />
+        <link rel="Eco2 icon" href="/iconografia/eco2it_logo.jpeg" />
       </Head>
       <div className="flex flex-col justify-center gap-10 py-10">
         <Search
