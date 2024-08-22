@@ -569,7 +569,7 @@ export const stepsGym = [
     component: Weight,
     phare: `"No pain, no gain."`,
     status: 'current',
-    image: '/gym/workout.webp'
+    image: '/gym/01.webp'
   },
   {
     id: 2,
@@ -577,7 +577,7 @@ export const stepsGym = [
     name: '¿Cuál es tu edad ?',
     component: Age,
     phare: `"Hazlo posible."`,
-    image: '/gym/workout.webp',
+    image: '/gym/03.webp',
     status: 'upcoming'
   },
   {
@@ -587,7 +587,7 @@ export const stepsGym = [
     component: Height,
     phare: `"El dolor es temporal, el orgullo es para siempre."`,
     status: 'upcoming',
-    image: '/gym/workout.webp'
+    image: '/gym/04.webp'
   },
   {
     id: 4,
@@ -596,7 +596,7 @@ export const stepsGym = [
     component: Goal,
     phare: `"No cuentes los días, haz que los días cuenten."`,
     status: 'upcoming',
-    image: '/gym/workout.webp'
+    image: '/gym/02.webp'
   },
   {
     id: 5,

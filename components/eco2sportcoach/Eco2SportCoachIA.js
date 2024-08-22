@@ -37,6 +37,11 @@ export const SportCoachIA = (props) => {
     initialValue: null
   });
 
+  const [userDetails, setUserDetails] = useLocalStorageWithExpiration({
+    key: 'userDetails',
+    initialValue: null
+  });
+
   const [currentStep, setCurrentStep] = useState(1);
   const StepComponent = stepsGym[currentStep - 1].component;
 
@@ -119,6 +124,13 @@ export const SportCoachIA = (props) => {
       toast.error('Por favor, complete todos los campos');
     } else {
       setFormData({ ...formData, submitting: true });
+      setUserDetails({
+        weight: formData.weight,
+        height: formData.height,
+        age: formData.age,
+        goal: formData.goal,
+        trainingDays: formData.trainingDays
+      });
       sendTrainingPlanRequest({
         weight: formData.weight,
         age: formData.age,
@@ -159,6 +171,29 @@ export const SportCoachIA = (props) => {
           <div className="flex justify-center h-fit">
             <div className="md:mt-8 w-full h-fit">
               <SportCoachResults user={user} responseObj={responseObj} />
+              {userDetails?.goal && (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2  items-center pl-6 [&>p]:bg-darkColor [&>p]:dark:bg-opacity-0 [&>p]:dark:border [&>p]:dark:border-lightColor [&>p]:text-white [&>p]:rounded-2xl [&>p]:p-2">
+                  <h2 className="uppercase p-2 rounded-xl text-left bg-eco2MainColor">
+                    Datos de usuario
+                  </h2>
+                  <p>
+                    Peso: <span>{userDetails.height}</span>
+                  </p>
+                  <p>
+                    Altura: <span>{userDetails.weight}</span>
+                  </p>
+                  <p>
+                    Edad: <span>{userDetails.age}</span>
+                  </p>
+                  <p>
+                    Días de entrenamiento:{' '}
+                    <span>{userDetails.trainingDays}</span>
+                  </p>
+                  <p>
+                    <span>{userDetails.goal}</span>
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}
