@@ -26,11 +26,11 @@ export const Goal = ({ formData, setFormData, currentStep }) => {
           className="block w-full rounded-md border-eco2MainColor dark:border-white custom-input bg-white dark:bg-darkBgCard px-3.5 py-2 text-black dark:text-white shadow-sm ring-1 sm:text-sm sm:leading-6"
         >
           <option value="">{DataEco2Sport.SelectOption}</option>
-          <option value="weight loss">{DataEco2Sport.WeightLoss}</option>
-          <option value="muscle building">
+          <option value="perdida peso">{DataEco2Sport.WeightLoss}</option>
+          <option value="fortalecimiento muscular">
             {DataEco2Sport.MuscleBuilding}
           </option>
-          <option value="mass">{DataEco2Sport.Mass}</option>
+          <option value="aumento peso">{DataEco2Sport.Mass}</option>
           <option value="crossfit">{DataEco2Sport.Crossfit}</option>
           <option value="pliométrico">{DataEco2Sport.pliométrico}</option>
           {/* <option value="yoga">{DataEco2Sport.yoga}</option> */}

@@ -1,13 +1,13 @@
-import { useContext, Fragment, useRef, useState } from "react";
-import Image from "next/image";
-import { Dialog, Transition } from "@headlessui/react";
-import { UserContext } from "../../context/user/UserContext";
-import { useEco2Resume } from "../../hooks/useEco2Resume";
-import { strapiUrl } from "../../constants/constans";
-import { DeleteIcon, ClipboardIcon, EmptyAvatar } from "../icons/icons";
-import ModalDelete from "./ModalDelete";
-import { toast } from "react-hot-toast";
-import { DataEco2Resume } from "../../data/eco2resume";
+import { useContext, Fragment, useRef, useState } from 'react';
+import Image from 'next/image';
+import { Dialog, Transition } from '@headlessui/react';
+import { UserContext } from '../../context/user/UserContext';
+import { useEco2Resume } from '../../hooks/useEco2Resume';
+import { strapiUrl } from '../../constants/constans';
+import { DeleteIcon, ClipboardIcon, EmptyAvatar } from '../icons/icons';
+import ModalDelete from './ModalDelete';
+import { toast } from 'react-hot-toast';
+import { DataEco2Resume } from '../../data/eco2resume';
 
 export default function HistoryResum({ onClose }) {
   const cancelButtonRef = useRef(null);
@@ -119,7 +119,7 @@ export default function HistoryResum({ onClose }) {
                                 <div className="flex p-4 gap-4 text-base md:gap-6 md:max-w-4xl lg:max-w-5xl  md:py-6 lg:px-0 m-auto">
                                   <div className="flex-shrink-0 ml-2 flex flex-col relative items-end w-[30px]">
                                     <Image
-                                      src="/eco2it_logo.jpeg"
+                                      src="/iconografia/eco2it_logo.jpeg"
                                       alt="Eco2IA logo"
                                       width={30}
                                       height={30}

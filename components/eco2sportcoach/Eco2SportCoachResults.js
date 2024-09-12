@@ -35,7 +35,7 @@ export const SportCoachResults = ({ user, responseObj }) => {
             onClick={handleShareClick}
             className="flex items-center justify-center border-white bg-eco2MainColor hover:bg-eco2HoverColor text-white font-bold py-2 px-4 rounded-full transition-colors duration-200 ease-in-out"
           >
-            <ShareIcon className="h-5 w-5 mr-2" />
+            <ShareIcon className="h-5 w-5 mx-2" />
           </button>
 
           <PDFDownloadLinkDynamic
@@ -43,7 +43,7 @@ export const SportCoachResults = ({ user, responseObj }) => {
             fileName="MARIASPORT.pdf"
           >
             <button className="flex items-center justify-center border-white bg-eco2MainColor hover:bg-eco2HoverColor text-white font-bold py-2 px-4 rounded-full transition-colors duration-200 ease-in-out">
-              <DocumentArrowDownIcon className="h-5 w-5 mr-2" />
+              <DocumentArrowDownIcon className="h-5 w-5 mx-2" />
             </button>
           </PDFDownloadLinkDynamic>
         </div>
